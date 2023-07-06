@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavigationDto } from 'src/app/@shared/dto/navigation.dto';
+import { AuthService } from 'src/app/@shared/security/auth.service';
 
 /**
  * AppComponent
@@ -17,12 +18,12 @@ export class LayoutComponent implements OnInit {
   /* ************************************ Instance Fields ********************************* */
   public opened = true;
   public menus = [] as NavigationDto[]; // [] as Array<NavigationDto>;
-
   @ViewChild('sidenav', { static: true })
   sidenav!: MatSidenav;
 
   /* ************************************* Constructors ******************************************** */
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private authService: AuthService) {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
         this._menuChange(val.urlAfterRedirects); // val.url or val.urlAfterRedirects
@@ -54,6 +55,11 @@ export class LayoutComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  public logout() {
+    this.authService.signOut();
+    this.router.navigate(['/signin']);
   }
 
   /* ************************************* Private Methods ******************************************** */

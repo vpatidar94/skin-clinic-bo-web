@@ -1,0 +1,34 @@
+/* Wait indicator */
+.loading-indicator {
+  background-color: rgba(0, 0, 0, 0.7);
+  bottom: 0px;
+  color: #1F2021;
+  font-size: 13px;
+  left: 0px;
+  line-height: 20px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 1060;
+}
+
+.loading-indicator-body {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+}
+
+.section-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+}
