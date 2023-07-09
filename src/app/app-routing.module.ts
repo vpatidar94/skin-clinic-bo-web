@@ -22,12 +22,20 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'booking',
-        loadChildren: () => import('./@app/pages/booking/booking.module').then(m => m.BookingModule)
+        path: 'user',
+        loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
       },
       {
         path: 'dashboard',
         loadChildren: () => import('./@app/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'support',
+        loadChildren: () => import('./@app/pages/support/support.module').then(m => m.SupportModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./@app/pages/profile/profile.module').then(m => m.ProfileModule)
       },
     ]
   }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-tx-history',
-  templateUrl: './tx-history.component.html',
-  styleUrls: ['./tx-history.component.scss']
+  selector: 'app-org',
+  templateUrl: './org.component.html',
+  styleUrls: ['./org.component.scss']
 })
-export class TxHistoryComponent implements OnInit {
+export class OrgComponent implements OnInit {
 
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
