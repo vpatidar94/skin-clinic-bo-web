@@ -2,18 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { ApiResponse, UserAuthDto } from 'aayam-clinic-core';
+import { ApiResponse, OrgVo, UserAuthDto } from 'aayam-clinic-core';
+import { URL } from '../../const/url';
 
 @Injectable()
-export class AuthApi {
+export class OrgApi {
 
     /* ************************************ Constructors ************************************ */
     constructor(private http: HttpClient) {
     }
 
     /* ************************************ Public Methods ************************************ */
-    public authenticate(userAuthDto: UserAuthDto): Observable<ApiResponse<string>> {
-        return this.http.post<ApiResponse<string>>(environment.apiUrl + '/api/core/v1/auth/login', userAuthDto);
+    public addUpdateOrg(org: OrgVo): Observable<ApiResponse<OrgVo>> {
+        return this.http.post<ApiResponse<OrgVo>>(environment.apiUrl + URL.ADD_UPDATE_ORG, org);
+    }
+
+    public getOrgList(): Observable<ApiResponse<OrgVo[]>> {
+        return this.http.get<ApiResponse<OrgVo[]>>(environment.apiUrl + URL.ORG_LIST);
     }
 }
 

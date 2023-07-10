@@ -1,9 +1,11 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
+import { OrgVo, ROLE } from 'aayam-clinic-core';
 import { NavigationDto } from 'src/app/@shared/dto/navigation.dto';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 /**
  * AppComponent
@@ -22,9 +24,13 @@ export class LayoutComponent implements OnInit {
   @ViewChild('sidenav', { static: true })
   sidenav!: MatSidenav;
 
+  isSupportUser!: boolean;
+  org!: OrgVo | null;
+
   /* ************************************* Constructors ******************************************** */
   constructor(private router: Router,
     private globalEmitterService: GlobalEmitterService,
+    private keyValueStorageService: KeyValueStorageService,
     private authService: AuthService) {
     this.globalEmitterService.getAclChangedEmitter().subscribe(() => {
       this._init();
@@ -61,6 +67,12 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['/signin']);
   }
 
+  public resetOrg() {
+    this.keyValueStorageService.saveOrgId('CLINIC');
+    this.keyValueStorageService.removeOrg();
+    this.globalEmitterService.emitAclChangedEmitter();
+  }
+
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     if (window.innerWidth < 768) {
@@ -70,5 +82,9 @@ export class LayoutComponent implements OnInit {
       this.sidenav.fixedTopGap = 55;
       this.opened = true;
     }
+    const role = this.keyValueStorageService.getRole();
+    this.isSupportUser = this.keyValueStorageService.getRole() == ROLE.SUPER_ADMIN
+    // FIXME should be in valueSerice
+    this.org = this.keyValueStorageService.getOrg();
   }
 }

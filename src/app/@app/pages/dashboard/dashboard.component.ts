@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthAPi } from '../../service/remote/auth.api';
 import { UserAuthDto } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
+import { AuthApi } from '../../service/remote/auth.api';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   /* ************************************* Instance Field ******************************************** */
 
   /* ************************************* Constructors ******************************************** */
-  constructor(private authApi: AuthAPi,
+  constructor(private authApi: AuthApi,
   private authService: AuthService) { }
 
   /* ************************************* Public Methods ******************************************** */

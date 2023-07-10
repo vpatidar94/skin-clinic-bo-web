@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth, } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { JwtClaimDto, ResponseStatus, UserAuthDto } from 'aayam-clinic-core';
-import { AuthAPi } from 'src/app/@app/service/remote/auth.api';
-import { KeyValueStorageService } from '../../service/key-value-storage.service';
-import { AngularFireAuth, } from '@angular/fire/compat/auth';
 import jwt_decode from 'jwt-decode';
 import { GlobalEmitterService } from '../../service/global-emitter.service';
+import { KeyValueStorageService } from '../../service/key-value-storage.service';
 
 @Component({
   selector: 'app-signin',
@@ -19,8 +18,7 @@ export class SigninComponent implements OnInit {
   userAuth: UserAuthDto = {} as UserAuthDto;
 
   /* ************************************* Constructors ******************************************** */
-  constructor(private authApi: AuthAPi,
-    private keyValueStorageService: KeyValueStorageService,
+  constructor(private keyValueStorageService: KeyValueStorageService,
     private angularFireAuth: AngularFireAuth,
     private glabalEmitterService: GlobalEmitterService,
     private router: Router) {
@@ -41,7 +39,7 @@ export class SigninComponent implements OnInit {
           this.keyValueStorageService.saveOrgId(userAccess?.userAccess?.orgId ?? '');
           this.router.navigate(['/dashboard']);
           this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatus[ResponseStatus.SUCCESS]);
-        }); 
+        });
       }
     });
   }

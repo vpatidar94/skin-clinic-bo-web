@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { AuthAPi } from './auth.api';
+import { AuthApi } from './auth.api';
+import { OrgApi } from './org.api';
 
 @NgModule({
   imports: [],
   declarations: [],
   providers: [
-    AuthAPi
+    AuthApi, OrgApi
   ],
   exports: []
 })

@@ -1,3 +1,106 @@
-<section class="section-staff">
-    ORG Coming Soon
+<section class="section-org">
+
+
+    <section fxLayout="column" [hidden]="!showSectionOrgList">
+
+        <div fxLayout="column">
+            <button mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+        <div>
+            <br />
+            <div fxLayout="row">
+                <mat-form-field fxFlex="100%">
+                    <mat-label>{{'Search'}}</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
+                </mat-form-field>
+            </div>
+
+            <mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef>{{'logo'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <img class="avatar" src="../../../../../assets/icon/basic_picture_light.svg" />
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <span class="text-ellipsis">{{row?.name}}</span>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.type}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ph">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Cell</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span
+                            class="text-ellipsis">{{formatPhoneNumber(row.ph)}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'email'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.email}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'status'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.status}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button (click)="manageOrg(row)" mat-button>Manage</button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
+                    [ngClass]="{rowgray: odd}"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </section>
+
+    <section *ngIf="showSectionOrgEdit">
+
+        <!-- <div>
+            <app-pos-org-edit [(orgBr)]="orgBr" (pubSub)="formChangeOrg($event)"></app-pos-org-edit>
+        </div> -->
+
+        <div fxLayout="row" fxLayoutGap="1%">
+            <!-- <button mat-raised-button color="primary" (click)="saveOrg()" [disabled]="invalidFormOrg">{{'save'}}</button> -->
+            <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+        </div>
+    </section>
+
+    <section *ngIf="showSectionOrgDetail">
+        <!-- <div>
+            <app-pos-org-detail [orgBr]="orgBr"></app-pos-org-detail>
+        </div>
+        <br />
+        <hr />
+        <div fxLayout="row" fxLayoutGap="1%">
+            <button mat-raised-button color="primary" (click)="editOrg()">{{'edit'}}</button>
+            <button mat-raised-button color="primary" (click)="addPhotoOrg()">{{'photo'}}</button>
+            <button mat-raised-button color="primary" (click)="addBranchOrg()">{{'branch.manage'}}</button>
+            <button *ngIf="showActivate" mat-raised-button color="primary" (click)="activateEnt()">{{'activate' |
+                translate}}</button>
+            <button *ngIf="showDeactivate" mat-raised-button color="warn" (click)="deactivateEnt()">{{'deactivate' |
+                translate}}</button>
+            <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+        </div> -->
+    </section>
 </section>

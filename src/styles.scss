@@ -179,6 +179,13 @@ mat-grid-tile {
     background-color: #fff;
 }
 
+.avatar {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+}
+
 @media (max-width: 1024px) {
     .inner-wrapper mat-card {
         width: 100%;
@@ -202,5 +209,4 @@ mat-grid-tile {
     }
 }
 
-@media (max-width: 767px) {
-}
+@media (max-width: 767px) {}

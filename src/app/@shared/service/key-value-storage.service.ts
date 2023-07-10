@@ -36,6 +36,8 @@ export class KeyValueStorageService {
     this._insertOrUpdate(DbKey.ORG, JSON.stringify(entity));
   }
 
+
+
   /* ************************************ GET Methods ************************************ */
   public getJwtToken(): string | null {
     return this._get(DbKey.TOKEN_JWT, '');
@@ -58,11 +60,15 @@ export class KeyValueStorageService {
   }
 
   public getOrg(): OrgVo | null {
-    const org = this._get(DbKey.SUB_ROLE, null);
+    const org = this._get(DbKey.ORG, null);
     if (org && !FnUtility.isEmpty(org)) {
       return JSON.parse(org);
     }
     return null;
+  }
+
+  public removeOrg(): void { 
+    this.clear(DbKey[DbKey.ORG]);
   }
 
   public clear(key: string): void {

@@ -37,8 +37,8 @@ export class GlobalEmitterService {
     this.userSignInEmitter.emit(status);
   }
 
-  public emitAclChangedEmitter(acl: any): void {
-    this.aclChangedEmitter.emit(acl);
+  public emitAclChangedEmitter(): void {
+    this.aclChangedEmitter.emit();
   }
 
   // public emitProfileChangedEmitter(status: string): void {
