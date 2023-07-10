@@ -6,6 +6,8 @@ import { User } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { auth } from '../firebase/firebase';
 import { KeyValueStorageService } from '../service/key-value-storage.service';
+import { JwtClaimDto } from 'aayam-clinic-core';
+import jwt_decode from 'jwt-decode';
 
 /*
  Note: rxjs/Rx removed from import-blacklist in tslint.json
@@ -23,7 +25,7 @@ import { KeyValueStorageService } from '../service/key-value-storage.service';
 export class AuthService {
 
   private user?: User | any;
-
+  private claim?: JwtClaimDto;
   /*
     static UNKNOWN_USER = new AuthInfo(null);
 
@@ -37,16 +39,12 @@ export class AuthService {
   constructor(private router: Router,
     private angularFireAuth: AngularFireAuth,
     private keyValueStorageService: KeyValueStorageService) {
-    // this.user = JSON.parse(this.keyValueStorageService.getFbUser() ?? '');
-    // onAuthStateChanged(auth, (user) => {
-    //   console.log('xxx xx  xx called auth service ');
-    //   if (user) {
-    //     this.user = user;
-    //   }
-    // });
-    this.angularFireAuth.authState.subscribe((user) => {
+    this.angularFireAuth.authState.subscribe((user: User | any) => {
       if (user) {
         this.user = user;
+        user.getIdToken().then((token: string) => { 
+          this.claim = jwt_decode(token);
+        });
       }
     });
   }
@@ -69,10 +67,19 @@ export class AuthService {
     return this.user;
   }
 
+   get getClaim(): JwtClaimDto | null {
+    // return this.authenticated ? this.user : null;
+     return this.claim as JwtClaimDto;
+  }
+
   // Returns current user UID
   get currentUserId(): string {
     // return this.authenticated ? (this.user?.uid ?? '') : '';
     return this.user?.uid ?? '';
+  }
+
+  getRole(): string { 
+    return this.claim?.userAccess.role ?? '';
   }
 
   signOut(): void {

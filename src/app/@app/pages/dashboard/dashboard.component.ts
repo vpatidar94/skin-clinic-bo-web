@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthAPi } from '../../service/remote/auth.api';
 import { UserAuthDto } from 'aayam-clinic-core';
+import { AuthService } from 'src/app/@shared/security/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
   /* ************************************* Instance Field ******************************************** */
 
   /* ************************************* Constructors ******************************************** */
-  constructor(private authApi: AuthAPi) { }
+  constructor(private authApi: AuthAPi,
+  private authService: AuthService) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -24,9 +26,10 @@ export class DashboardComponent implements OnInit {
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
+    // console.log('xx xx xx this ', this.authService.currentUserAccess);
     const auth = {
-      email: 'super@test.com',
-      password: 'test123'
+      email: 'superadmin@test.com',
+      password: '8989529107'
     } as UserAuthDto;
     this.authApi.authenticate(auth).subscribe();
   }

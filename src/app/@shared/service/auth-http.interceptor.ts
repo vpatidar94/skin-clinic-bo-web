@@ -30,29 +30,35 @@ export class AuthHttpInterceptor implements HttpInterceptor {
           const authRequest = this._addToken(request, token);
 
           next.handle(authRequest)
-            .subscribe(newEvent => {
-              if (newEvent instanceof HttpResponse) {
+            .subscribe({
+              next: (newEvent) => {
+                if (newEvent instanceof HttpResponse) {
+                  this.globalEmitterService.stopSpinner();
+                  this._interceptResponse(newEvent.status, newEvent.body.msg);
+                  subscriber.next(newEvent);
+                  subscriber.complete();
+                }
+              },
+              error: (error) => {
                 this.globalEmitterService.stopSpinner();
-                this._interceptResponse(newEvent.status, newEvent.body.msg);
-                subscriber.next(newEvent);
-                subscriber.complete();
+                subscriber.error(error);
               }
-            }, error => {
-              this.globalEmitterService.stopSpinner();
-              subscriber.error(error);
             });
         });
       } else {
         next.handle(request)
-          .subscribe((event: HttpEvent<any>) => {
-            if (event instanceof HttpResponse) {
-              subscriber.next(event);
-              subscriber.complete();
+          .subscribe({
+            next: (event) => {
+              if (event instanceof HttpResponse) {
+                subscriber.next(event);
+                subscriber.complete();
+              }
+            },
+            error: (error) => {
+              subscriber.error(error);
             }
-          }, error => {
-            subscriber.error(error);
           });
-      }
+      } 
     });
   }
 
@@ -91,7 +97,6 @@ export class AuthHttpInterceptor implements HttpInterceptor {
       return new Observable<string>((observer) => {
         try {
           this.angularFireAuth.authState.subscribe(user => {
-            console.log('xxx xx xx  this.authService.currentUser ', this.authService.currentUser);
 
             if (user) {
               user.getIdToken().then((token: string) => {

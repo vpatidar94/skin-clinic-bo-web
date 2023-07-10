@@ -11,29 +11,7 @@
   <!-- Sidenav -->
   <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
     [fixedTopGap]>
-    <mat-nav-list>
-      <mat-nav-list>
-        <ng-container>
-          <div mat-subheader>Hospitals/Clinics</div>
-          <mat-list-item [routerLink]="'/tx-history'">
-            <mat-icon>receipt_long</mat-icon>
-            <span class="menu-title">Hospitals/Clinics</span>
-          </mat-list-item>
-        </ng-container>
-        <ng-container>
-          <div mat-subheader>User Management</div>
-          <mat-list-item [routerLink]="'/tx-history'">
-            <mat-icon>receipt_long</mat-icon>
-            <span class="menu-title">Staff</span>
-          </mat-list-item>
-          <mat-list-item [routerLink]="'/tx-history'">
-            <mat-icon>receipt_long</mat-icon>
-            <span class="menu-title">Phamacy</span>
-          </mat-list-item>
-        </ng-container>
-        
-      </mat-nav-list>
-    </mat-nav-list>
+    <app-eg-side-menu></app-eg-side-menu>
   </mat-sidenav>
 
   <!-- Main content -->

@@ -7,6 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { SideMenuModule } from "../../@shared/component/side-menu/side-menu.module";
 
 
 const COMMON_MODULE = [CommonModule, RouterModule];
@@ -20,9 +21,9 @@ const MATERIAL_MODULE = [
 const EG_COMPONENT = [LayoutComponent];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE],
-  declarations: [...EG_COMPONENT],
-  exports: [...EG_COMPONENT]
+    declarations: [...EG_COMPONENT],
+    exports: [...EG_COMPONENT],
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SideMenuModule]
 })
 export class LayoutModule {
 }

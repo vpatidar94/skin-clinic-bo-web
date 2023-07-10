@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAuthDto } from 'aayam-clinic-core';
+import { JwtClaimDto, ResponseStatus, UserAuthDto } from 'aayam-clinic-core';
 import { AuthAPi } from 'src/app/@app/service/remote/auth.api';
 import { KeyValueStorageService } from '../../service/key-value-storage.service';
 import { AngularFireAuth, } from '@angular/fire/compat/auth';
+import jwt_decode from 'jwt-decode';
+import { GlobalEmitterService } from '../../service/global-emitter.service';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -19,15 +22,8 @@ export class SigninComponent implements OnInit {
   constructor(private authApi: AuthAPi,
     private keyValueStorageService: KeyValueStorageService,
     private angularFireAuth: AngularFireAuth,
+    private glabalEmitterService: GlobalEmitterService,
     private router: Router) {
-    // angularFireAuth.
-    // onAuthStateChanged(auth, (user) => {
-    //   if (user) {
-    //     this.keyValueStorageService.saveFbUser(JSON.stringify(user));
-    //     // this.keyValueStorageService.saveFbUser();
-    //   }
-    // });
-
   }
 
   /* ************************************* Public Methods ******************************************** */
@@ -38,9 +34,14 @@ export class SigninComponent implements OnInit {
   public login(): void {
     this.angularFireAuth.signInWithEmailAndPassword(this.userAuth.email, this.userAuth.password).then((result) => {
       if (result.user) {
-        // console.log('xxx xx xx navigate ');
-        // this.keyValueStorageService.saveFbUser(JSON.stringify(result.user));
-        this.router.navigate(['/dashboard']);
+        result.user.getIdToken().then((token: string) => {
+          const userAccess = jwt_decode(token) as JwtClaimDto;
+          this.keyValueStorageService.saveRole(userAccess?.userAccess?.role ?? '');
+          this.keyValueStorageService.saveSubRole(userAccess?.userAccess?.subRole ?? '');
+          this.keyValueStorageService.saveOrgId(userAccess?.userAccess?.orgId ?? '');
+          this.router.navigate(['/dashboard']);
+          this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatus[ResponseStatus.SUCCESS]);
+        }); 
       }
     });
   }

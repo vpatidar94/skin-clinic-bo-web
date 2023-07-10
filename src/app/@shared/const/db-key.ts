@@ -20,6 +20,11 @@ export enum DbKey {
   TOKEN_IID, /* iid - FirebaseInstanceId - String */
   TOKEN_JWT, /* JWT - String */
   FB_USER,
+  ROLE,
+  ORG_ID,
+  SUB_ROLE,
+  ORG,
+  USER_ACCESS_LIST,
   // DEVICE,
   // NAVIGATION, /* Array */
 

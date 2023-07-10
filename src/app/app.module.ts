@@ -16,6 +16,7 @@ import { AuthGuard } from './@shared/security/auth.guard';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from 'src/environments/environment';
+import { SvgUtility } from './@shared/utility/svg.utility';
 
 @NgModule({
   declarations: [

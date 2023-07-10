@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FnUtility, OrgVo } from 'aayam-clinic-core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DbKey } from '../const/db-key';
 
@@ -19,6 +20,22 @@ export class KeyValueStorageService {
     this._insertOrUpdate(DbKey.FB_USER, entity);
   }
 
+  public saveRole(entity: string): void {
+    this._insertOrUpdate(DbKey.ROLE, entity);
+  }
+
+  public saveOrgId(entity: string): void {
+    this._insertOrUpdate(DbKey.ORG_ID, entity);
+  }
+
+  public saveSubRole(entity: string): void {
+    this._insertOrUpdate(DbKey.SUB_ROLE, entity);
+  }
+
+  public saveOrg(entity: OrgVo): void {
+    this._insertOrUpdate(DbKey.ORG, JSON.stringify(entity));
+  }
+
   /* ************************************ GET Methods ************************************ */
   public getJwtToken(): string | null {
     return this._get(DbKey.TOKEN_JWT, '');
@@ -26,6 +43,26 @@ export class KeyValueStorageService {
 
   public getFbUser(): string | null {
     return this._get(DbKey.FB_USER, null);
+  }
+
+  public getRole(): string | null {
+    return this._get(DbKey.ROLE, null);
+  }
+
+  public getOrgId(): string | null {
+    return this._get(DbKey.ORG_ID, null);
+  }
+
+  public getSubRole(): string | null {
+    return this._get(DbKey.SUB_ROLE, null);
+  }
+
+  public getOrg(): OrgVo | null {
+    const org = this._get(DbKey.SUB_ROLE, null);
+    if (org && !FnUtility.isEmpty(org)) {
+      return JSON.parse(org);
+    }
+    return null;
   }
 
   public clear(key: string): void {

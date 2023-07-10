@@ -37,9 +37,9 @@ export class GlobalEmitterService {
     this.userSignInEmitter.emit(status);
   }
 
-  // public emitAclChangedEmitter(acl: AclDetailDto): void {
-  //   this.aclChangedEmitter.emit(acl);
-  // }
+  public emitAclChangedEmitter(acl: any): void {
+    this.aclChangedEmitter.emit(acl);
+  }
 
   // public emitProfileChangedEmitter(status: string): void {
   //   this.profileChangedEmitter.emit(status);
@@ -128,9 +128,9 @@ export class GlobalEmitterService {
     return this.userSignInEmitter;
   }
 
-  // public getAclChangedEmitter(): EventEmitter<any> {
-  //   return this.aclChangedEmitter;
-  // }
+  public getAclChangedEmitter(): EventEmitter<any> {
+    return this.aclChangedEmitter;
+  }
 
   // public getProfileChangedEmitter(): EventEmitter<any> {
   //   return this.profileChangedEmitter;
