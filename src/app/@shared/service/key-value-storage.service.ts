@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FnUtility, OrgVo } from 'aayam-clinic-core';
+import { FnUtility, OrgVo, UserAccessDto } from 'aayam-clinic-core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DbKey } from '../const/db-key';
 
@@ -36,7 +36,13 @@ export class KeyValueStorageService {
     this._insertOrUpdate(DbKey.ORG, JSON.stringify(entity));
   }
 
+  public saveCurrentAccess(entity: UserAccessDto): void {
+    this._insertOrUpdate(DbKey.CURRENT_ACCESS, JSON.stringify(entity));
+  }
 
+  public saveAllAccess(entity: UserAccessDto[]): void {
+    this._insertOrUpdate(DbKey.ALL_ACCESS, JSON.stringify(entity));
+  }
 
   /* ************************************ GET Methods ************************************ */
   public getJwtToken(): string | null {

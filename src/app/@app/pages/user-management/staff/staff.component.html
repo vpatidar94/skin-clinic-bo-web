@@ -1,3 +1,98 @@
-<section class="section-staff">
-    Staff Coming Soon
+<section class="section-org">
+
+
+    <section class="row" *ngIf="showSectionStaffList">
+
+        <div class="row">
+            <button (click)="addStaff()" mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+        <div>
+            <br />
+            <div class="row">
+                <mat-form-field class="search-input col-3 ">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target)" placeholder="Search">
+                </mat-form-field>
+            </div>
+
+            <mat-table class="row" [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef>{{'logo'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <img class="avatar" src="../../../../../assets/icon/user_circle.svg" />
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <span class="text-ellipsis">{{row?.nameF}} {{row?.nameL}}</span>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="gender">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{genderName[row.gender]}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span
+                            class="text-ellipsis">{{row.email}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="cell">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Cell</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.cell}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="role">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{getRole(row.emp)}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="subRole">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{getSubRole(row.emp)}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-button>Edit</button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
+                    [ngClass]="{rowgray: odd}"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </section>
+
+    <section *ngIf="showSectionStaffEdit">
+
+        <div>
+            <app-staff-edit [(staff)]="staff" (pubSub)="formChangeOrg($event)"></app-staff-edit>
+        </div>
+
+        <div class="row">
+            <div class="col-1">
+                <button mat-raised-button color="primary" (click)="saveStaff()"
+                    [disabled]="invalidFormStaff">{{'save'}}</button>
+            </div>
+            <div class="col-1">
+                <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+            </div>
+        </div>
+    </section>
 </section>

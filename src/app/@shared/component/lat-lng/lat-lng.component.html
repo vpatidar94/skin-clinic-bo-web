@@ -1,0 +1,31 @@
+<section class="section-lat-lng">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group row">
+                <label class="form-label" for="email">{{placeholder}}</label>
+                <div>
+                    <input class="form-control" matInput placeholder="Search Address" [(ngModel)]="formattedAddress"
+                        ngx-gp-autocomplete [options]='optionsGooglePlaces' #placesRef="ngx-places"
+                        (onAddressChange)="handleAddressChange($event)"
+                        autocomplete="off" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div [hidden]="!showMap" class="col-12" fxLayoutGap="8px">
+        <div class="note">
+            <div>
+                <strong>Note:</strong>
+            </div>
+            <div>Pin Set</div>
+        </div>
+
+        <div #map id="map"></div>
+        <div fxLayout="row" fxLayoutGap="1%" class="btn-padding">
+            <button (click)="pinSet()">{{'set.pin'}}</button>
+            <button (click)="cancel()">{{'Close Map'}}</button>
+        </div>
+    </div> -->
+
+</section>

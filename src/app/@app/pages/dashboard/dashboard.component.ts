@@ -28,10 +28,10 @@ export class DashboardComponent implements OnInit {
   private _init(): void {
     // console.log('xx xx xx this ', this.authService.currentUserAccess);
     const auth = {
-      email: 'superadmin@test.com',
+      email: 'rach@test.com',
       password: '8989529107'
     } as UserAuthDto;
-    this.authApi.authenticate(auth).subscribe();
+    // this.authApi.authenticate(auth).subscribe();
   }
 }
 

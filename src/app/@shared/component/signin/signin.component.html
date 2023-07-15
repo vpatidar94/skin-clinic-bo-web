@@ -1,66 +1,61 @@
-<section class="section-tx-history">
+<section class="section-sigin">
     <section>
-        <div class="container d-flex flex-column">
+        <h1 className="bg-h1" [ngClass]="'typing-effect'">
+            Welcome to AAYAM
+        </h1>
+        <div class="row g-0">
             <div class="row align-items-center justify-content-center gx-0 min-vh-100">
-                <div class="col-12 col-md-6 col-lg-4 py-8 py-md-11">
-    
-                    <!-- Heading -->
-                    <h1 class="mb-0 fw-bold">
-                        Welcome
-                    </h1>
-    
-                    <!-- Text -->
-                    <p class="mb-6 text-muted">
-                        Sign in to your OPAAC account
-                    </p>
-    
-                    <!-- Form -->
-                    <form class="mb-6" #loginForm="ngForm">
-    
-                        <!-- Email -->
-                        <div class="form-group">
-                            <label class="form-label" for="email">
-                                Email Address
-                            </label>
-                            <input type="email" class="form-control" name="email" [(ngModel)]="userAuth.email"
-                                placeholder="name@address.com" required>
-                        </div>
-    
-                        <!-- Password -->
-                        <div class="form-group mb-5">
-                            <label class="form-label" for="password">
-                                Password
-                            </label>
-                            <input type="password" class="form-control" name="password" [(ngModel)]="userAuth.password"
-                                placeholder="Enter your password" required>
-                        </div>
-    
-                        <!-- Submit -->
-                        <button [disabled]="loginForm.invalid" (click)="login()" class="btn w-100 btn-primary"
-                            type="submit">
-                            Sign in
-                        </button>
-    
-                    </form>
-    
-                    <!-- Text -->
-    
+                <div class="col-12 login-style">
+                    <!-- new added img jitu -->
+                    <img src="https://aayamskinclinic.com/images/about-dr.jpg" class="img-style" />
+                    <!-- new added jitu -->
+                    <mat-card class="login-card">
+                        <img src="https://aayamskinclinic.com/images/logo.jpg" class="logo-style" />
+                        <mat-card-header class="login-heading">
+                            <mat-card-title class="title-style">Login</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <form class="example-form mb-6" #loginForm="ngForm">
+                                <table class="example-full-width" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <label class="form-label input-lable" for="email">
+                                                Email Address
+                                            </label>
+                                            <mat-form-field class="input-style">
+                                                <input matInput type="email" class="form-control" name="email"
+                                                    [(ngModel)]="userAuth.email" placeholder="name@address.com"
+                                                    required>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="form-label input-lable" for="password">
+                                                Password
+                                            </label>
+                                            <mat-form-field class="input-style">
+                                                <input matInput type="password" class="form-control" name="password"
+                                                    [(ngModel)]="userAuth.password" placeholder="Enter your password"
+                                                    required>
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </mat-card-content>
+                        <mat-card-actions class="login-btn">
+                            <button [disabled]="loginForm.invalid" (click)="login()" mat-raised-button
+                                class="btn w-100 btn-dangerous" type="submit" color="primary">
+                                Sign in
+                            </button>
+                        </mat-card-actions>
+                        <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+                        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+                        <p>forgot password?</p>
+                    </mat-card>
                 </div>
-                <div class="col-lg-7 offset-lg-1 align-self-stretch d-none d-lg-block">
-    
-                    <!-- Image -->
-                    <div class="h-100 w-cover bg-cover" style="background-image: url(../assets/img/cover-14.jpg);">
-                    </div>
-    
-                    <!-- Shape -->
-                    <div class="shape shape-start shape-fluid-y text-white">
-                        <!-- {{> angles/angle-start}} -->
-                        <svg viewBox="0 0 100 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h100v386l-50 772v386H0V0z" fill="currentColor" />
-                        </svg>
-                    </div>
-    
-                </div>
+                
             </div> <!-- / .row -->
         </div> <!-- / .container -->
     </section>

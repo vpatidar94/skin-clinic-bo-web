@@ -1,0 +1,37 @@
+<section class="section-view-address">
+  <div fxLayout="column" *ngIf="address">
+    <div fxLayout="row">
+      <div fxFlex="100px" class="title">{{'address.name'}}</div>
+      <div>
+        <div *ngIf="address.street1">{{address.street1}},</div>
+        <div *ngIf="address.street2">{{address.street2}},</div>
+        <div *ngIf="address.landmark">{{address.landmark}},</div>
+        <div><span *ngIf="address.city">{{address.city}}</span> <span *ngIf="address.zip"> - {{address.zip}},</span></div>
+        <div *ngIf="address.state">{{ 'state.' + address.state | lowercase }}</div>
+        <div *ngIf="address.email">
+          <!-- <mat-icon>email</mat-icon> -->
+          <a href="mailto:{{address.email}}">{{address.email}}</a>
+        </div>
+        <div *ngIf="address.ph">
+          <!-- <mat-icon>phone</mat-icon> -->
+          {{address.ph}}
+        </div>
+        <div *ngIf="address.ph2">
+          <!-- <mat-icon>phone</mat-icon> -->
+          {{address.ph2}}
+        </div>
+        <div *ngIf="address.cell">
+          <!-- <mat-icon>stay_primary_portrait</mat-icon> -->
+          {{address.cell}}
+        </div>
+        <div *ngIf="address.web">
+          <!-- <mat-icon>language</mat-icon> -->
+          <a [href]="address.web">{{address.web}}</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

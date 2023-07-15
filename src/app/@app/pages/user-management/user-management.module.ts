@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -19,6 +19,10 @@ import { MatTableModule } from "@angular/material/table";
 import { StaffComponent } from './staff/staff.component';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { CustomerComponent } from './customer/customer.component';
+import { StaffEditComponent } from './staff/staff-edit/staff-edit.component';
+import { AddressModule } from "../../../@shared/component/address/address.module";
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 
 const MATERIAL_MODULE = [
@@ -34,15 +38,32 @@ const MATERIAL_MODULE = [
   MatSlideToggleModule,
   MatCardModule,
   MatDatepickerModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatListModule
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];
+const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL'
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY'
+  }
+};
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule],
-  providers: [],
+  providers: [
+    DatePipe,
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ],
   exports: [],
-  declarations: [StaffComponent, CustomerComponent]
+  declarations: [StaffComponent, CustomerComponent, StaffEditComponent],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule, AddressModule],
+
 })
 export class UserManagementModule { }

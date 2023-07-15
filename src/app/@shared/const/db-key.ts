@@ -25,6 +25,8 @@ export enum DbKey {
   SUB_ROLE,
   ORG,
   USER_ACCESS_LIST,
+  CURRENT_ACCESS,
+  ALL_ACCESS,
   // DEVICE,
   // NAVIGATION, /* Array */
 

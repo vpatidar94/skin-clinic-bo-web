@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, OrgVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, ApiRunStatus, OrgVo, ResponseStatus } from 'aayam-clinic-core';
+import { APP_CONST } from 'src/app/@app/const/app.const';
+import { ORG_STATUS } from 'src/app/@app/const/org-status.const';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
+import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -21,6 +24,10 @@ export class OrgComponent implements OnInit {
   showSectionOrgEdit!: boolean;
 
   orgList!: Array<OrgVo> | null;
+  org!: OrgVo;
+
+  invalidFormOrg!: boolean;
+
 
   displayedColumns: string[] = ['image', 'name', 'type', 'ph', 'email', 'status', 'action'];
   dataSource!: MatTableDataSource<OrgVo>;
@@ -61,13 +68,31 @@ export class OrgComponent implements OnInit {
     this.globalEmitterService.emitAclChangedEmitter();
   }
 
-  // public formChangeOrg(event: UiActionDto<boolean>): void {
-  //   switch (event.action) {
-  //     case 'CHANGE_FORM_ORG':
-  //       this.invalidFormOrg = event.data;
-  //       break;
-  //   }
-  // }
+  public addOrg(): void {
+    const org = {} as OrgVo;
+    org.created = new Date();
+    org.address = ({} as AddressVo);
+    org.appId = APP_CONST.CLINIC;
+    org.appName = APP_CONST.CLINIC;
+    org.status = ORG_STATUS.ACTIVE;
+    this._addEditOrg(org);
+  }
+
+  public formChangeOrg(event: UiActionDto<boolean>): void {
+    switch (event.action) {
+      case 'CHANGE_FORM_ORG':
+        this.invalidFormOrg = event.data;
+        break;
+    }
+  }
+
+  public saveOrg(): void {
+    this.orgApi.addUpdateOrg(this.org).subscribe((res: ApiResponse<OrgVo>) => {
+      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+        this._init();
+      }
+    });
+  }
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
@@ -95,6 +120,12 @@ export class OrgComponent implements OnInit {
     this.dataSource = new MatTableDataSource(orgList);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  private _addEditOrg(org: OrgVo): void {
+    this.org = org;
+    this._resetSection();
+    this.showSectionOrgEdit = true;
   }
 }
 

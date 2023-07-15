@@ -1,24 +1,24 @@
 <section class="section-org">
 
 
-    <section fxLayout="column" [hidden]="!showSectionOrgList">
+    <section class="row" *ngIf="showSectionOrgList">
 
-        <div fxLayout="column">
-            <button mat-fab color="primary">
+        <div class="row">
+            <button (click)="addOrg()" mat-fab color="primary">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
 
         <div>
             <br />
-            <div fxLayout="row">
-                <mat-form-field fxFlex="100%">
+            <div class="row">
+                <mat-form-field class="search-input col-3 ">
                     <mat-label>{{'Search'}}</mat-label>
                     <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
                 </mat-form-field>
             </div>
 
-            <mat-table [dataSource]="dataSource" matSort>
+            <mat-table class="row" [dataSource]="dataSource" matSort>
 
                 <ng-container matColumnDef="image">
                     <mat-header-cell *matHeaderCellDef>{{'logo'}}</mat-header-cell>
@@ -38,7 +38,7 @@
 
                 <ng-container matColumnDef="type">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.type}}</span></mat-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.type | titlecase}}</span></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="ph">
@@ -76,13 +76,19 @@
 
     <section *ngIf="showSectionOrgEdit">
 
-        <!-- <div>
-            <app-pos-org-edit [(orgBr)]="orgBr" (pubSub)="formChangeOrg($event)"></app-pos-org-edit>
-        </div> -->
+        <div>
+            <app-org-edit [(orgBr)]="org" (pubSub)="formChangeOrg($event)"></app-org-edit>
+        </div>
 
-        <div fxLayout="row" fxLayoutGap="1%">
-            <!-- <button mat-raised-button color="primary" (click)="saveOrg()" [disabled]="invalidFormOrg">{{'save'}}</button> -->
-            <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+        <div class="row">
+            <div class="col-1">
+                <button mat-raised-button color="primary" (click)="saveOrg()"
+                    [disabled]="invalidFormOrg">{{'save'}}</button>
+            </div>
+            <div class="col-1">
+                <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+
+            </div>
         </div>
     </section>
 

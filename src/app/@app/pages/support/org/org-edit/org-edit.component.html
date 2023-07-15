@@ -1,0 +1,85 @@
+<section class="section-org-edit">
+
+    <form #orgForm="ngForm">
+        <mat-list class="row">
+
+            <mat-list-item class="section-title">
+                Org Info
+            </mat-list-item>
+
+            <div class="row g-0">
+                <div class="col-md">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Hospital/Clinic Name</mat-label>
+                        <input matInput placeholder="Hospital/Clinic Name" name="name" [(ngModel)]="orgBr.name" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Type</mat-label>
+                        <mat-select [(ngModel)]="orgBr.type" name="food">
+                            <mat-option *ngFor="let t of orgTypeList" [value]="t.id">
+                                {{t.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tax Payer Id</mat-label>
+                        <input matInput placeholder="{{'id.taxpayer'}}" name="taxpayerId"
+                            [(ngModel)]="orgBr.taxpayerId">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Domain</mat-label>
+                        <input matInput placeholder="Domain" name="domain" [(ngModel)]="orgBr.domain">
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tagline</mat-label>
+                        <input matInput placeholder="Tagline" name="tagline" [(ngModel)]="orgBr.tagline">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline" fxFlex="32">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="orgBr.email"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cell</mat-label>
+                        <input maxlength="10" minlength="10" matInput type="cell" placeholder="Cell" name="cell" [(ngModel)]="orgBr.ph" required appNumberOnly>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <mat-list-item class="section-title">
+                Address
+            </mat-list-item>
+
+            <div class="row g-0">
+                <app-eg-edit-address-form [(address)]="orgBr.address"
+                    (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
+            </div>
+
+
+        </mat-list>
+
+    </form>
+
+</section>

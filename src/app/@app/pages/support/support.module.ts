@@ -19,6 +19,9 @@ import { MatTableModule } from "@angular/material/table";
 import { SupportRoutingModule } from './support-routing.module';
 import { OrgComponent } from './org/org.component';
 import { OrgNetworkComponent } from './org-network/org-network.component';
+import { OrgEditComponent } from './org/org-edit/org-edit.component';
+import { AddressModule } from "../../../@shared/component/address/address.module";
+import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 
 
 const MATERIAL_MODULE = [
@@ -40,9 +43,9 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SupportRoutingModule],
-  providers: [],
-  exports: [],
-  declarations: [OrgComponent, OrgNetworkComponent]
+    providers: [],
+    exports: [],
+    declarations: [OrgComponent, OrgNetworkComponent, OrgEditComponent],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SupportRoutingModule, AddressModule, SharedDirectiveModule]
 })
 export class SupportModule { }

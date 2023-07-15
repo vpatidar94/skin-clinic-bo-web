@@ -54,7 +54,10 @@ export const URL = {
     // ******************************************************************
     // Org API endpoint
     ADD_UPDATE_USER: MJR_ORG + ADD_UPDATE,
-   
+    STAFF_LIST: MJR_USER + '/staff-list',
+    ADD_UPDATE_STAFF: MJR_USER + '/staff-add-update',
+    ACCESS_LIST: MJR_USER + '/access-list',
+
 
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'

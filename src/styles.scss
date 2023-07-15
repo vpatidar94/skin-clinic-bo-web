@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+
 html,
 body {
     height: 100%;
@@ -186,6 +188,45 @@ mat-grid-tile {
     border-radius: 50%;
 }
 
+mat-list-item.section-title {
+    background-color: #EEEEEE !important; //#C3E8F8;
+    margin-bottom: 16px !important;
+
+    mat-list-item-content {
+        font-weight: 500 !important;
+    }
+}
+
+//  ------------------------------------ flex css classes start  ------------------------------------ //
+.flex-row {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.flex-column {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+pl-left-0 {
+    padding-left: 0 !important;
+}
+
+mat-form-field {
+    padding-left: 0 !important;
+    width: 100% !important;
+}
+
+.pad-l-1 {
+    padding-left: 10px !important;
+}
+
+.pad-r-1 {
+    padding-right: 10px !important;
+}
+
+//  ------------------------------------ flex css classes end  ------------------------------------ //
+
 @media (max-width: 1024px) {
     .inner-wrapper mat-card {
         width: 100%;
@@ -210,3 +251,13 @@ mat-grid-tile {
 }
 
 @media (max-width: 767px) {}
+
+@media (min-width: 768px) {
+    .pad-l-md-1 {
+        padding-left: 1rem !important;
+    }
+
+    .pad-r-md-1 {
+        padding-right: 1rem !important;
+    }
+}
