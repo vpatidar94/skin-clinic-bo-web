@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { Message, MessageValue } from 'aayam-clinic-core';
+import { AlertMessage } from '../dto/alert-message';
 
 
 /**
@@ -20,6 +21,8 @@ export class GlobalEmitterService {
   // private vehicleChangedEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   private messageEmitter: EventEmitter<any> = new EventEmitter<any>();
+  private alertMessageEmitter: EventEmitter<any> = new EventEmitter<any>();
+
   // private authSuccessEmitter: EventEmitter<any> = new EventEmitter<any>();
   // private authFailedEmitter: EventEmitter<any> = new EventEmitter<any>();
 
@@ -73,6 +76,10 @@ export class GlobalEmitterService {
 
   public addMsg(msg: Array<Message>): void {
     this._addMsg(msg);
+  }
+
+  public addAlerMsg(msg: AlertMessage): void {
+    this._addAlertMsg(msg);
   }
 
   public startSpinner(): void {
@@ -152,6 +159,10 @@ export class GlobalEmitterService {
     return this.messageEmitter;
   }
 
+  public getAlertMessageEmitter(): EventEmitter<any> {
+    return this.alertMessageEmitter;
+  }
+
   public getApiProgressEmitter(): EventEmitter<any> {
     return this.apiProgressEmitter;
   }
@@ -188,6 +199,14 @@ export class GlobalEmitterService {
     }, 6000);
   }
 
+  private _addAlertMsg(msg: AlertMessage): void {
+    // process message if needed
+    this._emitAlertMessage(msg);
+    setTimeout(() => {
+      this._emitAlertMessage(undefined);
+    }, 6000);
+  }
+
   // private _addVmMsg(msg: string): void {
   //   // process message if needed
   //   this._emitVmMessage(msg);
@@ -198,6 +217,10 @@ export class GlobalEmitterService {
 
   private _emitMessage(message: Message[] | undefined): void {
     this.messageEmitter.emit(message);
+  }
+
+  private _emitAlertMessage(message: AlertMessage | undefined): void {
+    this.alertMessageEmitter.emit(message);
   }
 
   // private _emitVmMessage(message: string): void {

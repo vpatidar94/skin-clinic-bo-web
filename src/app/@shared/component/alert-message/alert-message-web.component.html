@@ -1,10 +1,7 @@
-<section class="section-alert-message alert-msg text-center" *ngIf="messages">
-  <div *ngFor="let messageList of messages">
-    <mat-card [ngClass]="messageList.type">
-      <p class="msg" *ngFor="let message of messageList.value">
-        <strong *ngIf="message.title">{{message.title}} : </strong>
-        <span *ngIf="message.text">{{message.text }}</span>
-      </p>
+<section class="section-alert-message" *ngIf="message">
+    <mat-card [ngClass]="message.type">
+      <div class="msg">
+        <span *ngIf="message.text">{{message.text}}</span>
+      </div>
     </mat-card>
-  </div>
 </section>

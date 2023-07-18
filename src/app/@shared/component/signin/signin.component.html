@@ -36,8 +36,6 @@
                         <button [disabled]="loginForm.invalid" (click)="login()" mat-raised-button class="btn w-100"
                             type="submit" color="primary">Sign in</button>
                     </mat-card-actions>
-                    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-                    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
                     <p>forgot password?</p>
                 </mat-card>
             </div>

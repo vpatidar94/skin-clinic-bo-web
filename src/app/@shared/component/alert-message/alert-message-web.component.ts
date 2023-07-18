@@ -16,7 +16,7 @@ export class AlertMessageWebComponent {
   /* ************************************ Static Fields ************************************ */
   /* ************************************ Instance Fields ************************************ */
   @Output()
-  messages: any;
+  message: any;
 
   /* ************************************ Constructors ************************************ */
   constructor(private globalEmitterService: GlobalEmitterService,
@@ -26,8 +26,8 @@ export class AlertMessageWebComponent {
 
   /* ************************************ Private Methods ************************************ */
   private _getMessageEmitter(): void {
-    this.globalEmitterService.getMessageEmitter().subscribe(msg => {
-      this.messages = msg;
+    this.globalEmitterService.getAlertMessageEmitter().subscribe(msg => {
+      this.message = msg;
     });
   }
 }

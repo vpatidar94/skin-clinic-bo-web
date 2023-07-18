@@ -1,7 +1,39 @@
-:host ::ng-deep .section-alert-message {
+.section-alert-message {
   position: absolute;
   top: 80px;
   width: 64%;
   z-index: 999;
   margin-left: 18%;
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  mat-card.SUCCESS {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+  }
+
+  mat-card.INFO {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+  }
+
+  mat-card.WARNING {
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    color: #8a6d3b;
+  }
+
+  mat-card.ERROR {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+  }
 }

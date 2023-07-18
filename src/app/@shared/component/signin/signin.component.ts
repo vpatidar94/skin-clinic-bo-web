@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth, } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { ApiResponse, JwtClaimDto, ResponseStatus, UserAccessDetailDto, UserAuthDto } from 'aayam-clinic-core';
+import { ApiResponse, JwtClaimDto, Message, MessageType, MessageValue, ResponseStatus, UserAccessDetailDto, UserAuthDto } from 'aayam-clinic-core';
 import jwt_decode from 'jwt-decode';
 import { GlobalEmitterService } from '../../service/global-emitter.service';
 import { KeyValueStorageService } from '../../service/key-value-storage.service';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { AlertMessage } from '../../dto/alert-message';
 
 @Component({
   selector: 'app-signin',
@@ -17,8 +18,6 @@ export class SigninComponent implements OnInit {
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
   userAuth: UserAuthDto = {} as UserAuthDto;
-  successMessage: string = '';
-  errorMessage: string = '';
 
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
@@ -34,15 +33,20 @@ export class SigninComponent implements OnInit {
   }
 
   public login(): void {
-    this.angularFireAuth.signInWithEmailAndPassword(this.userAuth.email, this.userAuth.password).then((result) => {
-      if (result.user) {
-        result.user.getIdToken().then((token: string) => {
-          this._getUserAllAccessList(token);
-        });
-      } else {
-        this.errorMessage="Invalid credentials";
-      }
-    });
+    this.angularFireAuth.signInWithEmailAndPassword(this.userAuth.email, this.userAuth.password)
+      .then((result) => {
+        if (result.user) {
+          result.user.getIdToken().then((token: string) => {
+            this._getUserAllAccessList(token);
+          });
+        }
+      })
+      .catch((error) => {
+        const message = {} as AlertMessage;
+        message.type = MessageType[MessageType.ERROR];
+        message.text = 'Invalid credentials';
+        this.glabalEmitterService.addAlerMsg(message);
+      });
   }
 
 
@@ -66,7 +70,10 @@ export class SigninComponent implements OnInit {
         this.router.navigate(['/dashboard']);
         this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatus[ResponseStatus.SUCCESS]);
         this.glabalEmitterService.emitAclChangedEmitter();
-        this.successMessage = "Sign in Successfully"
+        const message = {} as AlertMessage;
+        message.type = MessageType[MessageType.SUCCESS];
+        message.text = 'Sign in Successfully';
+        this.glabalEmitterService.addAlerMsg(message);
       }
     });
   }
