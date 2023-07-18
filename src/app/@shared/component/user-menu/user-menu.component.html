@@ -1,0 +1,49 @@
+<section class="section-user-menu">
+  <mat-list class="user-menu-holder" [matMenuTriggerFor]="appMenu">
+    <mat-list-item>
+      <img matListAvatar src="../../../../assets/icon/user_circle.svg" />
+      <div mat-line>
+        <div *ngIf="user">
+          <span>Mr</span>
+          {{ "Super" | titlecase }} {{ "Admin" | titlecase }}
+        </div>
+      </div>
+      <mat-icon class="mat-24">expand_more</mat-icon>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-menu #appMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+    <mat-divider aria-orientation="horizontal" role="separator"></mat-divider>
+
+    <!-- <app-eg-user-account-selector></app-eg-user-account-selector> -->
+
+    <!-- <app-eg-lang-selector></app-eg-lang-selector> -->
+
+    <mat-divider aria-orientation="horizontal" role="separator"></mat-divider>
+
+    <button mat-menu-item (click)="routerTo('/profile')">
+      <mat-icon svgIcon="ic_user"></mat-icon>
+      {{ "Vinay" }}
+    </button>
+    <!--
+    <button mat-menu-item (click)="routerTo('/setting')">
+      <mat-icon svgIcon="ic_gear"></mat-icon>
+      {{'settings' }}
+    </button>
+    -->
+    <button mat-menu-item (click)="routerTo('/help')">
+      <mat-icon svgIcon="ic_life_buoy"></mat-icon>
+      Help
+    </button>
+    <!--
+    <button mat-menu-item (click)="routerTo('/about-us')">
+      <mat-icon svgIcon="ic_info"></mat-icon>
+      {{'about.us' }}
+    </button>
+-->
+    <button mat-menu-item (click)="signOut()">
+      <mat-icon svgIcon="ic_lock"></mat-icon>
+      <span>Sign Out</span>
+    </button>
+  </mat-menu>
+</section>

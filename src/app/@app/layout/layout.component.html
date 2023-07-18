@@ -5,9 +5,9 @@
   </button>
   <div class="large-shadow-text" fxHide.lt-sm mat-line>
     <span *ngIf="!org">Aayam Clinic Diary</span>
-    <span *ngIf="org">{{org.name}}</span>
+    <span *ngIf="org">{{ org.name }}</span>
   </div>
-  
+
   <div *ngIf="isSupportUser && org">
     <button (click)="resetOrg()" mat-icon-button>
       <mat-icon class="mat-24" svgIcon="ic_remove"></mat-icon>
@@ -15,22 +15,26 @@
   </div>
   <!-- <span>&nbsp;Aayam Clinic Diary</span> -->
   <button (click)="logout()">Logout</button>
+  <!-- <app-eg-user-menu></app-eg-user-menu> -->
 </mat-toolbar>
 
 <mat-sidenav-container>
   <!-- Sidenav -->
-  <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
-    [fixedTopGap]>
+  <mat-sidenav
+    #sidenav
+    [mode]="isBiggerScreen() ? 'over' : 'side'"
+    [(opened)]="opened"
+    [fixedInViewport]="true"
+    [fixedTopGap]
+  >
     <app-eg-side-menu></app-eg-side-menu>
   </mat-sidenav>
 
   <!-- Main content -->
   <mat-sidenav-content>
-
     <!-- Applying the mat-tyography class adds styles for native elements. -->
     <section class="app-container">
       <router-outlet></router-outlet>
     </section>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

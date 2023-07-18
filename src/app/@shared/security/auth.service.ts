@@ -88,6 +88,7 @@ export class AuthService {
     // FIXME this.keyValueSessionStorageService.clearAll();
     this.user = null;
     auth.signOut().then(r => { });
+    this.keyValueStorageService.clearAll();
     console.log('successful sign-out');
   }
 

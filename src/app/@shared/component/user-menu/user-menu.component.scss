@@ -1,0 +1,16 @@
+.section-user-menu {
+  .user-menu-holder {
+    cursor: pointer;
+  }
+
+  .mat-list {
+    padding-top: 0;
+
+    .mat-list-text {
+      padding-left: 8px;
+    }
+  }
+}
+.mat-menu-content {
+  padding: 8px;
+}
