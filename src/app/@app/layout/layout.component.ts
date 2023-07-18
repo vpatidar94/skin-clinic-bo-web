@@ -83,7 +83,7 @@ export class LayoutComponent implements OnInit {
       this.opened = true;
     }
     const role = this.keyValueStorageService.getRole();
-    this.isSupportUser = this.keyValueStorageService.getRole() == ROLE.SUPER_ADMIN
+    this.isSupportUser = role == ROLE.SUPER_ADMIN
     // FIXME should be in valueSerice
     this.org = this.keyValueStorageService.getOrg();
   }

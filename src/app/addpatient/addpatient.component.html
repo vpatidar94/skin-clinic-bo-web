@@ -1,0 +1,217 @@
+<mat-tab-group>
+    <mat-tab label="Profile"> <mat-card class="login-card">
+            <!-- <img src="https://aayamskinclinic.com/images/logo.jpg" class="logo-style" /> -->
+            <mat-card-header class="login-heading">
+                <mat-card-title class="title-style">Add Patient</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form class="example-form mb-6" #loginForm="ngForm">
+                    <table class="example-full-width" cellspacing="0">
+                        <div class="row-style">
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Appointment No:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Appointment No</mat-label>
+                                        <input matInput placeholder="pat@example.com" class="input-style"
+                                            [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Date:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Date:</mat-label>
+                                        <input matInput type='date' placeholder="pat@example.com" [formControl]="email"
+                                            required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="row-style">
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                First Name: 
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>First Name</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Last Name:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Last Name</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="row-style">
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Contact No:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Contact No.</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Other Contact No:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Other Contact No.</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="row-style">
+
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Address:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Address</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Doctor's Name:
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Doctor Name</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="row-style">
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Email Address
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Services</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- <label class="form-label input-lable" for="email">
+                                Email Address
+                            </label> -->
+                                    <mat-form-field>
+                                        <mat-label>Referred By</mat-label>
+                                        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </div>
+                        <p class="form-label input-lable" for="">
+                            Patient Details
+                        </p>
+                        <tr>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>Weight</mat-label>
+                                    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+
+                            </td>
+                        </tr>
+                        <td>
+                            <!-- <label class="form-label input-lable" for="email">
+                            Email Address
+                        </label> -->
+                            <mat-form-field>
+                                <mat-label>Height</mat-label>
+                                <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </td>
+                        <tr>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>B.P.</mat-label>
+                                    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>Temperature</mat-label>
+                                    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <!-- <mat-form-field>
+                        <mat-label>Select</mat-label>
+                        <mat-select>
+                          <mat-option value="one">First option</mat-option>
+                          <mat-option value="two">Second option</mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                    </table>
+                    <p class="form-label input-lable" for="">
+                        Patient Details
+                    </p>
+                </form>
+            </mat-card-content>
+            <!-- <button class='btn-style' mat-raised-button (click)="login()" color="primary">Login</button> -->
+            <button [disabled]="loginForm.invalid" mat-raised-button class="btn w-100 btn-dangerous" type="submit"
+                color="primary">
+                Add
+            </button>
+        </mat-card> </mat-tab>
+    <mat-tab label="Services"> Content 2 </mat-tab>
+    <mat-tab label="Investigation"> Content 3 </mat-tab>
+    <mat-tab label="Prescription"> Content 3 </mat-tab>
+    <mat-tab label="Billing"> Content 3 </mat-tab>
+
+
+</mat-tab-group>

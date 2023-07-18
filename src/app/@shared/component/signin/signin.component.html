@@ -1,62 +1,46 @@
 <section class="section-sigin">
-    <section>
-        <h1 className="bg-h1" [ngClass]="'typing-effect'">
-            Welcome to AAYAM
-        </h1>
-        <div class="row g-0">
-            <div class="row align-items-center justify-content-center gx-0 min-vh-100">
-                <div class="col-12 login-style">
-                    <!-- new added img jitu -->
-                    <img src="https://aayamskinclinic.com/images/about-dr.jpg" class="img-style" />
-                    <!-- new added jitu -->
-                    <mat-card class="login-card">
-                        <img src="https://aayamskinclinic.com/images/logo.jpg" class="logo-style" />
-                        <mat-card-header class="login-heading">
-                            <mat-card-title class="title-style">Login</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <form class="example-form mb-6" #loginForm="ngForm">
-                                <table class="example-full-width" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <label class="form-label input-lable" for="email">
-                                                Email Address
-                                            </label>
-                                            <mat-form-field class="input-style">
-                                                <input matInput type="email" class="form-control" name="email"
-                                                    [(ngModel)]="userAuth.email" placeholder="name@address.com"
-                                                    required>
-                                            </mat-form-field>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="form-label input-lable" for="password">
-                                                Password
-                                            </label>
-                                            <mat-form-field class="input-style">
-                                                <input matInput type="password" class="form-control" name="password"
-                                                    [(ngModel)]="userAuth.password" placeholder="Enter your password"
-                                                    required>
-                                            </mat-form-field>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </mat-card-content>
-                        <mat-card-actions class="login-btn">
-                            <button [disabled]="loginForm.invalid" (click)="login()" mat-raised-button
-                                class="btn w-100 btn-dangerous" type="submit" color="primary">
-                                Sign in
-                            </button>
-                        </mat-card-actions>
-                        <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-                        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-                        <p>forgot password?</p>
-                    </mat-card>
-                </div>
-                
-            </div> <!-- / .row -->
-        </div> <!-- / .container -->
-    </section>
+    <h1 class="mb-3" [ngClass]="'typing-effect'">
+        Welcome to AAYAM
+    </h1>
+    <div class="container  g-0">
+        <div class="row align-items-center justify-content-center min-vh-100">
+            <div class="col-lg-6">
+                <!-- Image -->
+                <img src="https://aayamskinclinic.com/images/about-dr.jpg" class="img-style" />
+            </div>
+            <div class="col-lg-6">
+                <!-- Form -->
+                <mat-card class="login-card">
+                    <img src="https://aayamskinclinic.com/images/logo.jpg" class="logo-style" />
+                    <mat-card-header class="login-heading">
+                        <mat-card-title class="title-style">Login</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <form #loginForm="ngForm">
+                            <!-- Email Address -->
+                            <mat-form-field>
+                                <mat-label class="form-label" for="email">Email Address</mat-label>
+                                <input matInput type="email" class="form-control" name="email"
+                                    [(ngModel)]="userAuth.email" placeholder="name@address.com" required>
+                            </mat-form-field>
+
+                            <!-- Password -->
+                            <mat-form-field>
+                                <mat-label class="form-label" for="password">Password</mat-label>
+                                <input matInput type="password" class="form-control" name="password"
+                                    [(ngModel)]="userAuth.password" placeholder="Enter your password" required>
+                            </mat-form-field>
+                        </form>
+                    </mat-card-content>
+                    <mat-card-actions class="login-btn">
+                        <button [disabled]="loginForm.invalid" (click)="login()" mat-raised-button class="btn w-100"
+                            type="submit" color="primary">Sign in</button>
+                    </mat-card-actions>
+                    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+                    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+                    <p>forgot password?</p>
+                </mat-card>
+            </div>
+        </div>
+    </div>
 </section>
