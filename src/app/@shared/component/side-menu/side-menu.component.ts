@@ -136,6 +136,11 @@ export class SideMenuComponent {
 
             if (OrgUtility.hasOrgAccess(this.orgId)) {
                 sub = [];
+                sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
+                sub.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', []));
+                navList.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', sub));
+
+                sub = [];
                 sub.push(new NavigationDto('Staff', '/user/staff', 'ic_user_circle', []));
                 sub.push(new NavigationDto('Customer', '/user/customer', 'ic_users_m_f', []));
                 navList.push(new NavigationDto('User Management', '/user/staff', 'ic_users_m_f', sub));
@@ -147,6 +152,12 @@ export class SideMenuComponent {
     private _getNavigationAdmin(navList: NavigationDto[]): Array<NavigationDto> {
         if (OrgUtility.hasOrgAccess(this.orgId) && OrgUtility.hasAdminAccess(this.role)) {
             let sub: Array<NavigationDto>;
+
+            sub = [];
+            sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
+            sub.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', []));
+            navList.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', sub));
+
             sub = [];
             sub.push(new NavigationDto('Staff', '/user/staff', 'ic_user_circle', []));
             sub.push(new NavigationDto('Customer', '/user/customer', 'ic_users_m_f', []));
@@ -158,6 +169,10 @@ export class SideMenuComponent {
     private _getNavigationEmp(navList: NavigationDto[]): Array<NavigationDto> {
         if (OrgUtility.hasOrgAccess(this.orgId) && OrgUtility.hasEmpAccess(this.role)) {
             let sub: Array<NavigationDto>;
+            sub = [];
+            sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
+            sub.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', []));
+            navList.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', sub));
             // sub = [];
             // sub.push(new NavigationDto('Customer', '/user/customer', 'ic_users_m_f', []));
             // navList.push(new NavigationDto('User Management', '/user/customer', 'ic_users_m_f', sub));
