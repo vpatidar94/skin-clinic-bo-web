@@ -23,6 +23,8 @@ import { StaffEditComponent } from './staff/staff-edit/staff-edit.component';
 import { AddressModule } from "../../../@shared/component/address/address.module";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ServiceItemComponent } from './service-item/service-item.component';
+import { ServiceItemEditComponent } from './service-item/service-item-edit/service-item-edit.component';
 
 
 const MATERIAL_MODULE = [
@@ -62,7 +64,7 @@ const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
   exports: [],
-  declarations: [StaffComponent, CustomerComponent, StaffEditComponent],
+  declarations: [StaffComponent, CustomerComponent, StaffEditComponent, ServiceItemComponent,ServiceItemEditComponent],
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule, AddressModule],
 
 })

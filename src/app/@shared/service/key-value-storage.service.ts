@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FnUtility, OrgVo, UserAccessDto } from 'aayam-clinic-core';
+import { FnUtility, OrgVo, UserAccessDto,ItemVo } from 'aayam-clinic-core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { DbKey } from '../const/db-key';
 
@@ -28,12 +28,20 @@ export class KeyValueStorageService {
     this._insertOrUpdate(DbKey.ORG_ID, entity);
   }
 
+  public saveServiceItemId(entity: string): void {
+    this._insertOrUpdate(DbKey.SERVICE_ITEM_ID, entity);
+  }
+
   public saveSubRole(entity: string): void {
     this._insertOrUpdate(DbKey.SUB_ROLE, entity);
   }
 
   public saveOrg(entity: OrgVo): void {
     this._insertOrUpdate(DbKey.ORG, JSON.stringify(entity));
+  }
+
+  public saveServiceItem(entity: ItemVo): void {
+    this._insertOrUpdate(DbKey.SERVICE_ITEM, JSON.stringify(entity));
   }
 
   public saveCurrentAccess(entity: UserAccessDto): void {

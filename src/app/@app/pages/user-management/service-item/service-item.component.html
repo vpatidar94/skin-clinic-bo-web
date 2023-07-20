@@ -1,0 +1,115 @@
+<section class="section-org">
+
+
+    <section class="row" *ngIf="showSectionServiceItemList">
+
+         <div class="row">
+            <button (click)="addOrg()" mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+         <div>
+            <br />
+            <div class="row">
+                <mat-form-field class="search-input col-3 ">
+                    <mat-label>{{'Search'}}</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
+                </mat-form-field>
+            </div>
+
+            <mat-table class="row" [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef>{{'logo'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <img class="avatar" src="../../../../../assets/icon/basic_picture_light.svg" />
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <span class="text-ellipsis">{{row?.name}}</span>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="doctor name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.user.nameF + " " + row?.user.nameL}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let row"><span
+                            class="text-ellipsis">{{formatPhoneNumber(row.ph)}}</span></mat-cell> -->
+                            <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.price}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.description}}</span></mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'status'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.status}}</span></mat-cell>
+                </ng-container> -->
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button (click)="manageOrg(row)" mat-button>Manage</button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
+                    [ngClass]="{rowgray: odd}"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
+
+        </div>
+        
+    </section>
+
+    <section *ngIf="showSectionServiceItemEdit">
+
+        <div>
+            <h1>service item edit working</h1>
+            <app-service-item-edit [(serviceItemBr)]="serviceItem" (pubSub)="formChangeServiceItem($event)"></app-service-item-edit>
+        </div>
+
+        <div class="row">
+            <div class="col-1">
+                <button mat-raised-button color="primary" (click)="saveServiceItem()"
+                    [disabled]="invalidFormServiceItem">{{'save'}}</button>
+            </div>
+            <div class="col-1">
+                <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+
+            </div>
+        </div>
+    </section>
+
+    <section *ngIf="showSectionServiceItemDetail">
+        <!-- <div>
+            <app-pos-org-detail [orgBr]="orgBr"></app-pos-org-detail>
+        </div>
+        <br />
+        <hr />
+        <div fxLayout="row" fxLayoutGap="1%">
+            <button mat-raised-button color="primary" (click)="editOrg()">{{'edit'}}</button>
+            <button mat-raised-button color="primary" (click)="addPhotoOrg()">{{'photo'}}</button>
+            <button mat-raised-button color="primary" (click)="addBranchOrg()">{{'branch.manage'}}</button>
+            <button *ngIf="showActivate" mat-raised-button color="primary" (click)="activateEnt()">{{'activate' |
+                translate}}</button>
+            <button *ngIf="showDeactivate" mat-raised-button color="warn" (click)="deactivateEnt()">{{'deactivate' |
+                translate}}</button>
+            <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+        </div> -->
+    </section>
+</section>

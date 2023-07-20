@@ -40,6 +40,7 @@ const BASE_CORE = ENV_URL + '/api/core/v1';
 // major operations  /api/commerce/v1/...
 const MJR_ORG = BASE_CORE + '/org';
 const MJR_USER = BASE_CORE + '/user';
+const MJR_SERVICE_ITEM = BASE_CORE + '/service-item'
 
 /**
  * END_POINT URL URL
@@ -50,6 +51,8 @@ export const URL = {
     // Org API endpoint
     ADD_UPDATE_ORG: MJR_ORG + ADD_UPDATE,
     ORG_LIST: MJR_ORG + LIST,
+    ADD_UPDATE_SERVICE_ITEM: MJR_SERVICE_ITEM + ADD_UPDATE,
+    SERVICE_ITEM_LIST: MJR_SERVICE_ITEM + LIST,
 
     // ******************************************************************
     // Org API endpoint
