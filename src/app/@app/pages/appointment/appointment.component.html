@@ -1,3 +1,94 @@
-<section class="section-tx-history">
-    Dashbord
+<section class="section-org">
+
+
+    <section class="row" *ngIf="showSectionAppointmentList">
+
+        <div class="row">
+            <button (click)="addAppointment()" mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+
+        <!-- <div>
+            <br />
+            <div class="row">
+                <mat-form-field class="search-input col-3 ">
+                    <mat-label>{{'Search'}}</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
+                </mat-form-field>
+            </div>
+
+            <mat-table class="row" [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef>{{'logo'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <img class="avatar" src="../../../../../assets/icon/basic_picture_light.svg" />
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <span class="text-ellipsis">{{row?.name}}</span>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.type | titlecase}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ph">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Cell</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span
+                            class="text-ellipsis">{{formatPhoneNumber(row.ph)}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'email'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.email}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'status'}}</mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.status}}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button (click)="manageOrg(row)" mat-button>Manage</button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
+                    [ngClass]="{rowgray: odd}"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
+
+        </div> -->
+    </section>
+
+    <section *ngIf="showSectionAppointmentEdit">
+
+        <div>
+            <app-appointment-edit [(booking)]="booking"></app-appointment-edit>
+        </div>
+
+        <div class="row">
+            <!-- <div class="col-1">
+                <button mat-raised-button color="primary" (click)="saveOrg()"
+                    [disabled]="invalidFormOrg">{{'save'}}</button>
+            </div>
+            <div class="col-1">
+                <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
+
+            </div> -->
+        </div>
+    </section>
 </section>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AddressVo, MessageService, MessageType, OrgVo, ItemVo } from 'aayam-clinic-core';
+import { AddressVo, MessageService, MessageType, OrgVo, ItemVo, UserVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { ORG_TYPE_LIST } from '../../../../const/org-type.const'

@@ -18,10 +18,15 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTableModule } from "@angular/material/table";
 import { AppointmentComponent } from './appointment.component';
 import { AppointmentRoutingModule } from './appointment-routing.module';
+import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { PatientEditComponent } from './appointment-edit/patient-edit/patient-edit.component';
+import { AddressModule } from 'src/app/@shared/component/address/address.module';
 
 
 const MATERIAL_MODULE = [
   MatButtonModule,
+  MatButtonToggleModule,
   MatFormFieldModule,
   MatIconModule,
   MatTableModule,
@@ -39,9 +44,9 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule],
   providers: [],
   exports: [],
-  declarations: [AppointmentComponent]
+  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent]
 })
 export class AppointmentModule { }

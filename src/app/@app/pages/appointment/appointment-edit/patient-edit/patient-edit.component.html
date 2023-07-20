@@ -1,0 +1,75 @@
+<section class="section-org-edit">
+
+    <form #patientForm="ngForm">
+        <mat-list class="row">
+
+            <mat-list-item class="section-title">
+                Patient Info
+            </mat-list-item>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="First Name" name="nameF" [(ngModel)]="patient.nameF" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Last Name" name="nameL" [(ngModel)]="patient.nameL" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Gender</mat-label>
+                        <mat-select [(ngModel)]="patient.gender" name="gender">
+                            <mat-option *ngFor="let g of genderList" [value]="g.id">
+                                {{g.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" name="email" [(ngModel)]="patient.email" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contact No</mat-label>
+                        <input maxlength="10" minlength="10" matInput type="cell" placeholder="Cell" name="cell1"
+                            [(ngModel)]="patient.cell" required appNumberOnly>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contact No 2</mat-label>
+                        <input maxlength="10" minlength="10" matInput type="cell" placeholder="Cell" name="cell1"
+                            [(ngModel)]="patient.cell2" appNumberOnly>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <mat-list-item class="section-title">
+                Address
+            </mat-list-item>
+
+            <div class="row g-0">
+                <app-eg-edit-address-form [(address)]="patient.address"
+                    (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
+            </div>
+
+
+        </mat-list>
+
+    </form>
+
+</section>

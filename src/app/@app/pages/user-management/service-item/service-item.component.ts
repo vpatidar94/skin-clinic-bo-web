@@ -2,10 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddressVo, ApiResponse, ApiRunStatus,ItemVo,  AclVo, OrgVo, ROLE, ROLE_NAME, ResponseStatus, UserEmpDto, UserVo } from 'aayam-clinic-core';
-import { APP_CONST } from 'src/app/@app/const/app.const';
-import { ORG_STATUS } from 'src/app/@app/const/org-status.const';
-import { OrgApi } from 'src/app/@app/service/remote/org.api';
+import { ApiResponse, ItemDetailDto, ItemVo } from 'aayam-clinic-core';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
@@ -25,14 +22,14 @@ export class ServiceItemComponent implements OnInit {
   showSectionServiceItemDetail!: boolean;
   showSectionServiceItemEdit!: boolean;
 
-  serviceItemList!: Array<ItemVo> | null;
+  serviceItemList!: Array<ItemDetailDto> | null;
   serviceItem!: ItemVo;
 
   invalidFormServiceItem!: boolean;
 
 
   displayedColumns: string[] = ['image', 'name', 'doctor name', 'price', 'description', 'action'];
-  dataSource!: MatTableDataSource<ItemVo>;
+  dataSource!: MatTableDataSource<ItemDetailDto>;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
@@ -41,7 +38,7 @@ export class ServiceItemComponent implements OnInit {
     private serviceItemApi: ServiceItemApi,
     private keyValueStorageService: KeyValueStorageService,
     private globalEmitterService: GlobalEmitterService,
-  ){ } 
+  ) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -60,24 +57,27 @@ export class ServiceItemComponent implements OnInit {
     this.showSectionServiceItemList = true;
   }
 
-//   public formatPhoneNumber(cell: string): string {
-//     // TODO: Add phone util in npm
-//     return cell;
-//   }
+  //   public formatPhoneNumber(cell: string): string {
+  //     // TODO: Add phone util in npm
+  //     return cell;
+  //   }
 
-  public manageOrg(serviceItem: ItemVo): void { 
-    this.keyValueStorageService.saveServiceItemId(serviceItem._id);
-    this.keyValueStorageService.saveServiceItem(serviceItem);
-    this.globalEmitterService.emitAclChangedEmitter();
+  public editOrg(serviceItem: ItemDetailDto): void {
+    console.log('ss ss sss ', serviceItem);
+    this._addEditOrg(serviceItem.item);
+    // this.keyValueStorageService.saveServiceItemId(serviceItem._id);
+    // this.keyValueStorageService.saveServiceItem(serviceItem);
+    // this.globalEmitterService.emitAclChangedEmitter();
   }
 
   public addOrg(): void {
     const orgId = this.keyValueStorageService.getOrgId();
     const serviceItem = {} as ItemVo;
+    if (orgId) {
+      serviceItem.orgId = orgId;
+      serviceItem.brId = orgId;
+    }
     serviceItem.active = true;
-    
-   
-    
     this._addEditOrg(serviceItem);
   }
 
@@ -90,13 +90,13 @@ export class ServiceItemComponent implements OnInit {
   }
 
   public saveServiceItem(): void {
-    console.log("xx",this.serviceItem)
+    console.log("xx", this.serviceItem)
     const orgId = this.keyValueStorageService.getOrgId();
     this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
-    //   if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-        console.log("xxx",res.status)
-        // this._init();
-    //   }
+      //   if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+      console.log("xxx", res.status)
+      // this._init();
+      //   }
     });
   }
 
@@ -122,14 +122,14 @@ export class ServiceItemComponent implements OnInit {
     if (!serviceItemId) {
       return;
     }
-    console.log(",,,",serviceItemId);
-    this.serviceItemApi.getServiceItemList(serviceItemId).subscribe((apiResponse: ApiResponse<ItemVo[]>) => {
-      this.serviceItemList = apiResponse.body ?? [] as Array<ItemVo>;
+    console.log(",,,", serviceItemId);
+    this.serviceItemApi.getServiceItemList(serviceItemId).subscribe((apiResponse: ApiResponse<ItemDetailDto[]>) => {
+      this.serviceItemList = apiResponse.body ?? [] as Array<ItemDetailDto>;
       this._initServiceItemTable(this.serviceItemList);
     });
   }
 
-  private _initServiceItemTable(serviceItemList: Array<ItemVo>): void {
+  private _initServiceItemTable(serviceItemList: Array<ItemDetailDto>): void {
     this.dataSource = new MatTableDataSource(serviceItemList);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

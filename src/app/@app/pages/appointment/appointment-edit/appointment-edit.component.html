@@ -1,0 +1,34 @@
+<section class="section-appointment-edit">
+    <mat-button-toggle-group [(ngModel)]="tabValue" aria-label="Font Style">
+        <mat-button-toggle (change)="tabChange()" value="PATIENT">Patient Detail</mat-button-toggle>
+        <mat-button-toggle (change)="tabChange()" value="OBSERVATION">Observation</mat-button-toggle>
+        <mat-button-toggle (change)="tabChange()" value="SERVICE">Services</mat-button-toggle>
+        <mat-button-toggle (change)="tabChange()" value="TEST">Test</mat-button-toggle>
+        <mat-button-toggle (change)="tabChange()" value="PRESCRIPTION">Prescription</mat-button-toggle>
+        <mat-button-toggle (change)="tabChange()" value="BILLING">Billing</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <div *ngIf="showSectionPatient">
+        <app-patient-edit [(patient)]="booking.user"></app-patient-edit>
+    </div>
+
+    <div *ngIf="showSectionObservation">
+        showSectionObservation
+    </div>
+
+    <div *ngIf="showSectionService">
+        showSectionService
+    </div>
+
+    <div *ngIf="showSectionTest">
+        showSectionTest
+    </div>
+
+    <div *ngIf="showSectionPrescription">
+        showSectionPrescription
+    </div>
+
+    <div *ngIf="showSectionBilling">
+        showSectionBilling
+    </div>
+</section>

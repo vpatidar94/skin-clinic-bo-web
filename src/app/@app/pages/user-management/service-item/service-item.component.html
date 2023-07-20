@@ -32,7 +32,7 @@
                         Name
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <span class="text-ellipsis">{{row?.name}}</span>
+                        <span class="text-ellipsis">{{row?.item?.name}}</span>
                     </mat-cell>
                 </ng-container>
 
@@ -45,12 +45,12 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
                     <!-- <mat-cell *matCellDef="let row"><span
                             class="text-ellipsis">{{formatPhoneNumber(row.ph)}}</span></mat-cell> -->
-                            <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.price}}</span></mat-cell>
+                            <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.item?.price}}</span></mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="description">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.description}}</span></mat-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.item?.description}}</span></mat-cell>
                 </ng-container>
 
                 <!-- <ng-container matColumnDef="status">
@@ -61,7 +61,7 @@
                 <ng-container matColumnDef="action">
                     <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <button (click)="manageOrg(row)" mat-button>Manage</button>
+                        <button (click)="editOrg(row)" mat-button>Edit</button>
                     </mat-cell>
                 </ng-container>
 
