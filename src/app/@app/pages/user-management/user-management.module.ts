@@ -2,7 +2,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -64,7 +63,7 @@ const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
   exports: [],
-  declarations: [StaffComponent, CustomerComponent, StaffEditComponent, ServiceItemComponent,ServiceItemEditComponent],
+  declarations: [StaffComponent, CustomerComponent, StaffEditComponent, ServiceItemComponent, ServiceItemEditComponent],
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule, AddressModule],
 
 })

@@ -53,6 +53,7 @@ export const URL = {
     ORG_LIST: MJR_ORG + LIST,
     ADD_UPDATE_SERVICE_ITEM: MJR_SERVICE_ITEM + ADD_UPDATE,
     SERVICE_ITEM_LIST: MJR_SERVICE_ITEM + LIST,
+    DOCTOR_ITEM_LIST: MJR_USER + '/staff-subrole-list',
 
     // ******************************************************************
     // Org API endpoint

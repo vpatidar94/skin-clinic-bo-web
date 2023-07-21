@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { ApiResponse, OrgVo, ItemVo, UserAuthDto, ItemDetailDto } from 'aayam-clinic-core';
+import { ApiResponse, OrgVo, ItemVo, UserAuthDto, ItemDetailDto, UserVo } from 'aayam-clinic-core';
 import { URL } from '../../const/url';
 
 @Injectable()

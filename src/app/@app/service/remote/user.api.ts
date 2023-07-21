@@ -24,5 +24,9 @@ export class UserApi {
     public getUserAllAccessList(): Observable<ApiResponse<UserAccessDetailDto>> {
         return this.http.get<ApiResponse<UserAccessDetailDto>>(environment.apiUrl + URL.ACCESS_LIST);
     }
+
+    public getDoctorList(orgId: string, subRole: string): Observable<ApiResponse<UserVo[]>> {
+        return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl + URL.DOCTOR_ITEM_LIST, { params: { orgId, subRole } });
+    }
 }
 

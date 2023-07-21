@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, ItemDetailDto, ItemVo } from 'aayam-clinic-core';
+import { ApiResponse, ItemDetailDto, ItemVo, ResponseStatus, UserVo } from 'aayam-clinic-core';
+import { SUB_ROLE } from 'src/app/@app/const/sub-role.const';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -26,6 +28,7 @@ export class ServiceItemComponent implements OnInit {
   serviceItem!: ItemVo;
 
   invalidFormServiceItem!: boolean;
+  doctorList!: Array<UserVo>;
 
 
   displayedColumns: string[] = ['image', 'name', 'doctor name', 'price', 'description', 'action'];
@@ -35,6 +38,7 @@ export class ServiceItemComponent implements OnInit {
 
   /* ************************************* Constructors ******************************************** */
   constructor(
+    private userApi: UserApi,
     private serviceItemApi: ServiceItemApi,
     private keyValueStorageService: KeyValueStorageService,
     private globalEmitterService: GlobalEmitterService,
@@ -57,17 +61,9 @@ export class ServiceItemComponent implements OnInit {
     this.showSectionServiceItemList = true;
   }
 
-  //   public formatPhoneNumber(cell: string): string {
-  //     // TODO: Add phone util in npm
-  //     return cell;
-  //   }
-
   public editOrg(serviceItem: ItemDetailDto): void {
     console.log('ss ss sss ', serviceItem);
     this._addEditOrg(serviceItem.item);
-    // this.keyValueStorageService.saveServiceItemId(serviceItem._id);
-    // this.keyValueStorageService.saveServiceItem(serviceItem);
-    // this.globalEmitterService.emitAclChangedEmitter();
   }
 
   public addOrg(): void {
@@ -93,18 +89,17 @@ export class ServiceItemComponent implements OnInit {
     console.log("xx", this.serviceItem)
     const orgId = this.keyValueStorageService.getOrgId();
     this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
-      //   if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-      console.log("xxx", res.status)
-      // this._init();
-      //   }
+         if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+       this._init();
+         }
     });
   }
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
-    // this.showSectionServiceItemList = true;
     this._getServiceItemList();
+    this._getDoctorList();
   }
 
   private _resetSection(): void {
@@ -115,7 +110,6 @@ export class ServiceItemComponent implements OnInit {
 
 
   private _getServiceItemList(): void {
-    // console.log("vvvv");
     this.showSectionServiceItemList = true;
     this.serviceItemList = null;
     const serviceItemId = this.keyValueStorageService.getOrgId();
@@ -128,6 +122,18 @@ export class ServiceItemComponent implements OnInit {
       this._initServiceItemTable(this.serviceItemList);
     });
   }
+
+  private _getDoctorList(): void {
+    this.doctorList = [] as Array<UserVo>;
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
+      this.doctorList = apiResponse.body ?? [] as Array<UserVo>;
+    });
+  }
+
 
   private _initServiceItemTable(serviceItemList: Array<ItemDetailDto>): void {
     this.dataSource = new MatTableDataSource(serviceItemList);

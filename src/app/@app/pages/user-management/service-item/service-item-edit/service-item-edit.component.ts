@@ -20,6 +20,9 @@ export class ServiceItemEditComponent implements OnInit {
     @Output()
     serviceItemBrChange = new EventEmitter<ItemVo>();
 
+    @Input()
+    doctorList!: Array<UserVo>;
+
     @Output()
     pubSub = new EventEmitter<any>();
 
@@ -27,13 +30,6 @@ export class ServiceItemEditComponent implements OnInit {
     serviceItemForm!: NgForm;
 
     orgTypeList = ORG_TYPE_LIST;
-
-    // orgTypes: Array<string> = TYPE_VAL.orgTypes;
-    // titleItems: any = TYPE_VAL.titleItems;
-    // orgServices: Array<string> = TYPE_VAL.orgServices;
-
-    // selectedServices: Array<string> = [];
-    // initialCountry = APP_CONSTANT.TEL_COUNTRY;
 
     isDbaAndOrgAddressSame!: boolean;
 
@@ -68,18 +64,8 @@ export class ServiceItemEditComponent implements OnInit {
         }
     }
 
-    // public getNumber(cell: string): void {
-    //     this.serviceItemBr.name = cell;
-    //     this.serviceItemBrChange.emit(this.serviceItemBr);
-    // }
-
     public telInputObject(): void {
-        // if (this.org.ph) {
-        //   iti.intlTelInput('setNumber', this.org.ph);
-        // }
-        // [ng2TelInputOptions]='{initialCountry: 'us'}'
-        // this.iti.intlTelInput('setCountry', 'us');
-        // this.iti.intlTelInput('setNumber', '+919922193380');
+
     }
 
     public onCountryChange(e: any): void {
@@ -87,12 +73,7 @@ export class ServiceItemEditComponent implements OnInit {
     }
 
     public getSelectedServiceToServer(): void {
-        // this.orgBr.org.service = this._getSelectedServiceToServer(this.selectedServices);
     }
-
-    // public setDbaAddress(): void {
-    //     this.serviceItemBr.address = "";
-    // }
 
     /* ************************************ Cell Methods End ************************************ */
 
