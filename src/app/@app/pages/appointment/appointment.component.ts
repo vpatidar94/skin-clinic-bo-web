@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookingVo, ObservationVo, PrescriptionVo, UserVo } from 'aayam-clinic-core';
+import { BookingVo, ObservationVo, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { AuthApi } from '../../service/remote/auth.api';
@@ -16,7 +16,7 @@ export class AppointmentComponent implements OnInit {
   showSectionAppointmentList!: boolean;
   showSectionAppointmentEdit!: boolean;
 
-  booking!: BookingVo;
+  userBooking!: UserBookingDto;
 
   /* ************************************* Constructors ******************************************** */
   constructor(private authApi: AuthApi,
@@ -29,9 +29,8 @@ export class AppointmentComponent implements OnInit {
   }
 
   public addAppointment(): void {
+    const userBooking = {} as UserBookingDto;
     const booking = {} as BookingVo;
-    booking.user = {} as UserVo;
-    booking.dr = {} as UserVo;
     booking.observation = {} as ObservationVo;
     booking.prescription = [] as PrescriptionVo[];
     booking.instruction = [] as string[];
@@ -41,7 +40,9 @@ export class AppointmentComponent implements OnInit {
       booking.orgId = orgId;
       booking.brId = orgId;
     }
-    this._addEditOrg(booking);
+    userBooking.booking = booking;
+    userBooking.user = {} as UserVo;
+    this._addEditOrg(userBooking);
   }
 
   /* ************************************* Private Methods ******************************************** */
@@ -55,8 +56,8 @@ export class AppointmentComponent implements OnInit {
     this.showSectionAppointmentList = false;
   }
 
-  private _addEditOrg(booking: BookingVo): void {
-    this.booking = booking;
+  private _addEditOrg(userBooking: UserBookingDto): void {
+    this.userBooking = userBooking;
     this._resetSection();
     this.showSectionAppointmentEdit = true;
   }

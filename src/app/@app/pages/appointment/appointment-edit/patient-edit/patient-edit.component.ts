@@ -14,7 +14,7 @@ export class PatientEditComponent implements OnInit {
     inValidAddressForm!: boolean;
 
     @Input()
-    patient!: any;
+    patient!: UserVo;
     @Output()
     patientChange = new EventEmitter<UserVo>();
 

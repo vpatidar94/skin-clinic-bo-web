@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BookingVo, ObservationVo, PrescriptionVo, UserVo } from 'aayam-clinic-core';
+import { BookingVo, ObservationVo, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -23,9 +23,9 @@ export class AppointmentEditComponent implements OnInit {
   tabValue!: string;
 
   @Input()
-  booking!: BookingVo;
+  userBooking!: UserBookingDto;
   @Output()
-  bookingChange = new EventEmitter<BookingVo>();
+  userBookingChange = new EventEmitter<UserBookingDto>();
 
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService) { }
