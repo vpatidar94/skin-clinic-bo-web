@@ -63,7 +63,7 @@ const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
   exports: [],
-  declarations: [StaffComponent, CustomerComponent, StaffEditComponent, ServiceItemComponent, ServiceItemEditComponent],
+  declarations: [StaffComponent, CustomerComponent, StaffEditComponent, ServiceItemComponent, ServiceItemEditComponent,],
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule, AddressModule],
 
 })

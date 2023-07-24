@@ -27,6 +27,10 @@ export class LayoutComponent implements OnInit {
   isSupportUser!: boolean;
   org!: OrgVo | null;
 
+  showOptions = false;
+
+  
+
   /* ************************************* Constructors ******************************************** */
   constructor(private router: Router,
     private globalEmitterService: GlobalEmitterService,
@@ -73,6 +77,10 @@ export class LayoutComponent implements OnInit {
     this.globalEmitterService.emitAclChangedEmitter();
   }
 
+  public openOptions() {
+    this.showOptions = !this.showOptions;
+  }
+
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     if (window.innerWidth < 768) {
@@ -87,4 +95,7 @@ export class LayoutComponent implements OnInit {
     // FIXME should be in valueSerice
     this.org = this.keyValueStorageService.getOrg();
   }
+
+
+  
 }

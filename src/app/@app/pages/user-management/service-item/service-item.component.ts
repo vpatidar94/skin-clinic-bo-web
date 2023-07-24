@@ -62,7 +62,6 @@ export class ServiceItemComponent implements OnInit {
   }
 
   public editOrg(serviceItem: ItemDetailDto): void {
-    console.log('ss ss sss ', serviceItem);
     this._addEditOrg(serviceItem.item);
   }
 
@@ -86,7 +85,6 @@ export class ServiceItemComponent implements OnInit {
   }
 
   public saveServiceItem(): void {
-    console.log("xx", this.serviceItem)
     const orgId = this.keyValueStorageService.getOrgId();
     this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
          if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
@@ -116,7 +114,6 @@ export class ServiceItemComponent implements OnInit {
     if (!serviceItemId) {
       return;
     }
-    console.log(",,,", serviceItemId);
     this.serviceItemApi.getServiceItemList(serviceItemId).subscribe((apiResponse: ApiResponse<ItemDetailDto[]>) => {
       this.serviceItemList = apiResponse.body ?? [] as Array<ItemDetailDto>;
       this._initServiceItemTable(this.serviceItemList);
