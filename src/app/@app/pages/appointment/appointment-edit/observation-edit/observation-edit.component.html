@@ -1,0 +1,60 @@
+<section class="section-org-edit">
+
+    <form #observationForm="ngForm">
+        <mat-list class="row">
+
+            <mat-list-item class="section-title">
+                Observations
+            </mat-list-item>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Weight</mat-label>
+                        <input matInput placeholder="Patient Weight" name="weight" [(ngModel)]="observation.weight"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Height</mat-label>
+                        <input matInput placeholder="Patient Height" name="height" [(ngModel)]="observation.height"
+                            required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Blood Pressure(Min)</mat-label>
+                        <input matInput [(ngModel)]="observation.bpMin" name="bpMin" placeholder="Min B.P." />
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Blood Pressure (Max)</mat-label>
+                        <input matInput placeholder="Max B.P" name="bpMax" [(ngModel)]="observation.bpMax" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-0">
+                <div class="col-md pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Temperature</mat-label>
+                        <input matInput placeholder="Patient Body Temp" name="temprature"
+                            [(ngModel)]="observation.temprature" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md pad-l-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Other</mat-label>
+                        <input matInput placeholder="Other Details" name="other" [(ngModel)]="observation.other"
+                            required>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-list>
+    </form>
+</section>

@@ -24,6 +24,7 @@ import { PatientEditComponent } from './appointment-edit/patient-edit/patient-ed
 import { AddressModule } from 'src/app/@shared/component/address/address.module';
 import { ServiceItemComponent } from './service-item/service-item.component';
 import { ServiceItemEditComponent } from './service-item/service-item-edit/service-item-edit.component';
+import { ObservationEditComponent } from './appointment-edit/observation-edit/observation-edit.component';
 
 
 const MATERIAL_MODULE = [
@@ -49,6 +50,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule],
   providers: [],
   exports: [],
-  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent]
+  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent]
 })
 export class AppointmentModule { }

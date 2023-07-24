@@ -95,7 +95,4 @@ export class LayoutComponent implements OnInit {
     // FIXME should be in valueSerice
     this.org = this.keyValueStorageService.getOrg();
   }
-
-
-  
 }
