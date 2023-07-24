@@ -30,8 +30,8 @@
                 </ng-container>
                 <ng-container matColumnDef="doctor name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.user.nameF + " " +
-                            row?.user.nameL}}</span></mat-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.user && row?.user?.nameF ?? '' + " " +
+                            row?.user?.nameL ?? ''}}</span></mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="price">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
@@ -57,7 +57,6 @@
     </section>
     <section *ngIf="showSectionServiceItemEdit">
         <div>
-            <h1>service item edit working</h1>
             <app-service-item-edit [(serviceItemBr)]="serviceItem" [doctorList]="doctorList"
                 (pubSub)="formChangeServiceItem($event)"></app-service-item-edit>
         </div>

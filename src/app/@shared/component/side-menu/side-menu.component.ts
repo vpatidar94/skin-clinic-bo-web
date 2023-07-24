@@ -32,14 +32,12 @@ export class SideMenuComponent {
         });
 
         this.globalEmitterService.getAclChangedEmitter().subscribe(() => {
-            console.log('xx xxx xx xUser');
             this._init();
             const url = this.router.routerState.snapshot.url;
             this._menuChange(url);
         });
 
         this.globalEmitterService.getUserSignInEmitter().subscribe(() => {
-            console.log('xx xxx xx xUser');
             this._init();
             const url = this.router.routerState.snapshot.url;
             this._menuChange(url);

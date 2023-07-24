@@ -22,6 +22,8 @@ import { AppointmentEditComponent } from './appointment-edit/appointment-edit.co
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { PatientEditComponent } from './appointment-edit/patient-edit/patient-edit.component';
 import { AddressModule } from 'src/app/@shared/component/address/address.module';
+import { ServiceItemComponent } from './service-item/service-item.component';
+import { ServiceItemEditComponent } from './service-item/service-item-edit/service-item-edit.component';
 
 
 const MATERIAL_MODULE = [
@@ -47,6 +49,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule],
   providers: [],
   exports: [],
-  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent]
+  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent]
 })
 export class AppointmentModule { }
