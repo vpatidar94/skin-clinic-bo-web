@@ -4,10 +4,10 @@ import { ObservationVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
-    selector: 'app-test-edit',
-    templateUrl: './test-edit.component.html'
+    selector: 'app-appointment-test-edit',
+    templateUrl: './appointment-test-edit.component.html'
 })
-export class TestEditComponent implements OnInit {
+export class AppointmentTestEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
 
