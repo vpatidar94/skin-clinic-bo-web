@@ -43,7 +43,6 @@ export class AppointmentTestEditComponent implements OnInit {
 
     public removeTestSuggestion(index: number): void {
         this.test.splice(index, 1);
-        console.log("index", index);
     }
 
     public trackByIndex(index: number, obj: any): any {

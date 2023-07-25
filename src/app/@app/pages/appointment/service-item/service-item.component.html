@@ -35,7 +35,7 @@
                 </ng-container>
                 <ng-container matColumnDef="price">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.item?.price}}</span></mat-cell>
+                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.item?.price | currency}}</span></mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="description">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>

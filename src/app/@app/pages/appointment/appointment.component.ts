@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BookingVo, ObservationVo, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { AuthApi } from '../../service/remote/auth.api';
+import { ServiceItemApi } from '../../service/remote/service-item.api';
 
 @Component({
   selector: 'app-appointment',
@@ -18,9 +19,12 @@ export class AppointmentComponent implements OnInit {
 
   userBooking!: UserBookingDto;
 
+  serviceItemList!: ItemDetailDto[];
+
   /* ************************************* Constructors ******************************************** */
   constructor(private authApi: AuthApi,
     private keyValueStorageService: KeyValueStorageService,
+    private serviceItemApi: ServiceItemApi,
     private authService: AuthService) { }
 
   /* ************************************* Public Methods ******************************************** */
@@ -49,6 +53,7 @@ export class AppointmentComponent implements OnInit {
   private _init(): void {
     this._resetSection();
     this.showSectionAppointmentList = true;
+    this._getServiceList()
   }
 
   private _resetSection(): void {
@@ -60,6 +65,20 @@ export class AppointmentComponent implements OnInit {
     this.userBooking = userBooking;
     this._resetSection();
     this.showSectionAppointmentEdit = true;
+  }
+
+  private _getServiceList(): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.serviceItemApi.getServiceItemList(orgId).subscribe((res: ApiResponse<ItemDetailDto[]>) => {
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
+        if (res.body && res.body?.length > 0) {
+          this.serviceItemList = res.body;
+        }
+      }
+    });
   }
 }
 

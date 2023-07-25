@@ -1,0 +1,70 @@
+<section class="section-org-edit">
+
+    <form #serviceForm="ngForm">
+        <mat-list class="row">
+
+            <mat-list-item class="section-title">
+                Service Info
+            </mat-list-item>
+
+            <div class="row g-0">
+                <div class="col-md-6 pad-r-md-1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Refered By</mat-label>
+                        <input matInput placeholder="Refered By" name="nameF" [(ngModel)]="booking.referedBy" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <mat-label>Select Item</mat-label>
+                <div class="row">
+                    <br>
+
+                    <mat-form-field class="search-input col-3 ">
+                        <mat-label>{{'Search'}}</mat-label>
+                        <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
+                    </mat-form-field>
+                </div>
+                <mat-table class="row" [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Name
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <span class="text-ellipsis">{{row?.item?.name}}</span>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="doctorName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.user && row?.user?.nameF ??
+                                '' + " " +
+                                row?.user?.nameL ?? ''}}</span></mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+                        <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.item?.price |
+                                currency}}</span></mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="description">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                        <mat-cell *matCellDef="let row"><span
+                                class="text-ellipsis">{{row?.item?.description}}</span></mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef>Select Items</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-checkbox (change)="setOrderItem($event, row)"></mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
+                        [ngClass]="{rowgray: odd}"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-list>
+
+    </form>
+
+</section>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -40,7 +40,8 @@ import { AppComponent } from './app.component';
       useClass: AuthHttpInterceptor,
       multi: true
     },
-    AuthService, AuthGuard
+    AuthService, AuthGuard,
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'INR' }
   ],
   bootstrap: [AppComponent]
 })
