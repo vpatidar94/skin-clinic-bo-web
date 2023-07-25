@@ -27,6 +27,7 @@ import { ServiceItemComponent } from './service-item/service-item.component';
 import { ObservationEditComponent } from './appointment-edit/observation-edit/observation-edit.component';
 import { AppointmentTestEditComponent } from './appointment-edit/appointment-test-edit/appointment-test-edit.component';
 import { AppointmentServiceEditComponent } from './appointment-edit/appointment-service-edit/appointment-service-edit.component';
+import { PrescriptionEditComponent } from './appointment-edit/prescription-edit/prescription-edit.component';
 
 
 const MATERIAL_MODULE = [
@@ -52,6 +53,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule],
   providers: [],
   exports: [],
-  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent]
+  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent,PrescriptionEditComponent]
 })
 export class AppointmentModule { }
