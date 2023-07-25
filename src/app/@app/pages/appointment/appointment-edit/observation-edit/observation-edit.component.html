@@ -10,15 +10,15 @@
             <div class="row g-0">
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Weight</mat-label>
-                        <input matInput placeholder="Patient Weight" name="weight" [(ngModel)]="observation.weight"
+                        <mat-label>Weight(Kg)</mat-label>
+                        <input matInput placeholder="Weight in Kg" name="weight" [(ngModel)]="observation.weight"
                             required>
                     </mat-form-field>
                 </div>
                 <div class="col-md pad-l-md-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Height</mat-label>
-                        <input matInput placeholder="Patient Height" name="height" [(ngModel)]="observation.height"
+                        <mat-label>Height(cm)</mat-label>
+                        <input matInput placeholder="Height in cm" name="height" [(ngModel)]="observation.height"
                             required>
                     </mat-form-field>
                 </div>
@@ -28,13 +28,13 @@
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
                         <mat-label>Blood Pressure(Min)</mat-label>
-                        <input matInput [(ngModel)]="observation.bpMin" name="bpMin" placeholder="Min B.P." />
+                        <input matInput [(ngModel)]="observation.bpMin" name="bpMin" placeholder="Min Blood Pressure." />
                     </mat-form-field>
                 </div>
                 <div class="col-md pad-l-md-1">
                     <mat-form-field appearance="outline">
                         <mat-label>Blood Pressure (Max)</mat-label>
-                        <input matInput placeholder="Max B.P" name="bpMax" [(ngModel)]="observation.bpMax" required>
+                        <input matInput placeholder="Max Blood Pressure" name="bpMax" [(ngModel)]="observation.bpMax" required>
                     </mat-form-field>
                 </div>
             </div>
@@ -42,16 +42,15 @@
             <div class="row g-0">
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Temperature</mat-label>
-                        <input matInput placeholder="Patient Body Temp" name="temprature"
+                        <mat-label>Temperature(&deg;F)</mat-label>
+                        <input matInput placeholder="Body Temperature in Fahrenheit" name="temprature"
                             [(ngModel)]="observation.temprature" required>
                     </mat-form-field>
                 </div>
                 <div class="col-md pad-l-md-1">
                     <mat-form-field appearance="outline">
                         <mat-label>Other</mat-label>
-                        <input matInput placeholder="Other Details" name="other" [(ngModel)]="observation.other"
-                            required>
+                        <input matInput placeholder="Other Details" name="other" [(ngModel)]="observation.other">
                     </mat-form-field>
                 </div>
             </div>

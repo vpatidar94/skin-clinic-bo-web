@@ -1,0 +1,24 @@
+<section class="section-org-edit">
+    <form #testForm="ngForm">
+        <mat-list class="row">
+            <mat-list-item class="section-title">
+                Test Suggestions
+            </mat-list-item>
+            <div class="row mb-5">
+                <button (click)="addTestSuggestion()" mat-fab color="primary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <div class="row g-0">
+                <div *ngFor="let item of test; let i = index; trackBy:trackByIndex;" class="col-md-8 d-flex ">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput type="text" [name]="'test'+ i" [(ngModel)]="test[i]" />
+                    </mat-form-field>
+                    <div class="col-md-6 ms-3">
+                        <button (click)="removeTestSuggestion(i)" mat-fab><mat-icon>delete</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+        </mat-list>
+    </form>
+</section>
