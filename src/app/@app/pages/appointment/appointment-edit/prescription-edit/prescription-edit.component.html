@@ -11,20 +11,29 @@
         </div>
         <!-- Loop through each prescription suggestion -->
         <div class="col-md-12 mt-5" *ngFor="let prescriptionItem of prescription; let index = index">
-            <form #prescriptionForm="ngForm" >
+            <form #prescriptionForm="ngForm">
+                <mat-list-item class="section-title">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="me-5">Medicine: {{index+1}}</p>
+                        <!-- Button to remove the current prescription suggestion -->
+                        <button type="button" (click)="removePrescription(index)">
+                            X
+                        </button>
+                    </div>
+                </mat-list-item>
                 <div class="row">
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Medicine Name</mat-label>
-                            <input matInput type="text" placeholder="Medicine name" name="name{{ index }}" [(ngModel)]="prescriptionItem.name"
-                                required>
+                            <input matInput type="text" placeholder="Medicine name" name="name{{ index }}"
+                                [(ngModel)]="prescriptionItem.name" required>
                         </mat-form-field>
                     </div>
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Medicine Type</mat-label>
-                            <input matInput type="text" placeholder="Medicine type" name="type{{ index }}" [(ngModel)]="prescriptionItem.type"
-                                required>
+                            <input matInput type="text" placeholder="Medicine type" name="type{{ index }}"
+                                [(ngModel)]="prescriptionItem.type" required>
                         </mat-form-field>
                     </div>
                 </div>
@@ -33,15 +42,15 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Power</mat-label>
-                            <input matInput type="text" placeholder="Power" name="power{{ index }}" [(ngModel)]="prescriptionItem.power"
-                                required>
+                            <input matInput type="text" placeholder="Power" name="power{{ index }}"
+                                [(ngModel)]="prescriptionItem.power" required>
                         </mat-form-field>
                     </div>
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Medicine Brand</mat-label>
-                            <input matInput type="text" placeholder="Medicine brand" name="brand{{ index }}" [(ngModel)]="prescriptionItem.brand"
-                                required>
+                            <input matInput type="text" placeholder="Medicine brand" name="brand{{ index }}"
+                                [(ngModel)]="prescriptionItem.brand" required>
                         </mat-form-field>
                     </div>
                 </div>
@@ -49,8 +58,8 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Medicine Dosage</mat-label>
-                            <input matInput type="text" placeholder="Medicine dosage" name="dosage{{ index }}" [(ngModel)]="prescriptionItem.dosage"
-                                required>
+                            <input matInput type="text" placeholder="Medicine dosage" name="dosage{{ index }}"
+                                [(ngModel)]="prescriptionItem.dosage" required>
                         </mat-form-field>
                     </div>
                     <div class="col-md-6">
@@ -74,10 +83,6 @@
                         <mat-checkbox [(ngModel)]="prescriptionItem.beforeMeal">Before Meal</mat-checkbox>
                     </div>
                 </div>
-                <!-- Button to remove the current prescription suggestion -->
-                <button type="button" (click)="removePrescription(index)">
-                    X
-                </button>
             </form>
             <hr>
         </div>

@@ -75,6 +75,10 @@ export class AppointmentServiceEditComponent implements OnInit {
         console.log(booking.subTotal);
     }
 
+    public showTotal(): void {
+        console.log("xxxx total is :")
+    }
+
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
         this.booking.items = [] as OrderItemVo[];

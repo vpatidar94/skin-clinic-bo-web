@@ -17,14 +17,19 @@
             </div>
 
             <div>
-                <mat-label>Select Item</mat-label>
+                <mat-list-item class="section-title">Select Item</mat-list-item>
+                
                 <div class="row">
-                    <br>
-
-                    <mat-form-field class="search-input col-3 ">
-                        <mat-label>{{'Search'}}</mat-label>
-                        <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
-                    </mat-form-field>
+                    <div class="col-4">
+                        <mat-form-field class="search-input w-100">
+                            <mat-label>{{'Search'}}</mat-label>
+                            <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <!-- Your button code here -->
+                        <button type="button" (click)="showTotal()" class="btn btn-primary">show Total</button>
+                    </div>
                 </div>
                 <mat-table class="row" [dataSource]="dataSource" matSort>
                     <ng-container matColumnDef="name">
@@ -64,7 +69,5 @@
                 <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
             </div>
         </mat-list>
-
     </form>
-
 </section>
