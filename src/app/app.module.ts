@@ -32,7 +32,7 @@ import { AppComponent } from './app.component';
     AlertMessageModule,
     NgxWebstorageModule.forRoot(),
     SharedServiceModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     {

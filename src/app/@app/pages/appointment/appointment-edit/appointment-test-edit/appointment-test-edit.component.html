@@ -15,7 +15,7 @@
                         <input matInput type="text" placeholder="Enter the test name" [name]="'test'+ i" [(ngModel)]="test[i]" />
                     </mat-form-field>
                     <div class="col-md-6 ms-3">
-                        <button  (click)="removeTestSuggestion(i)"><mat-icon>delete</mat-icon></button>
+                        <span (click)="removeTestSuggestion(i)"><mat-icon class=" remove-button" color="accent">clear</mat-icon></span>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ObservationVo } from 'aayam-clinic-core';
+import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
     selector: 'app-appointment-test-edit',
-    templateUrl: './appointment-test-edit.component.html'
+    templateUrl: './appointment-test-edit.component.html',
+    styleUrls: ['./appointment-test-edit.component.scss']
 })
 export class AppointmentTestEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
@@ -25,7 +28,7 @@ export class AppointmentTestEditComponent implements OnInit {
 
 
     /* ************************************ Constructors ************************************ */
-    constructor() {
+    constructor(private dialog: MatDialog) {
     }
 
     /* ************************************ Public Methods ************************************ */
@@ -42,7 +45,7 @@ export class AppointmentTestEditComponent implements OnInit {
     }
 
     public removeTestSuggestion(index: number): void {
-        this.test.splice(index, 1);
+        this._confirmRemoveItem(index);
     }
 
     public trackByIndex(index: number, obj: any): any {
@@ -52,6 +55,19 @@ export class AppointmentTestEditComponent implements OnInit {
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
+    }
+
+    private _confirmRemoveItem(index: number): void {
+        const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+            width: '250px',
+            data: { key: 'test' }
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.test.splice(index, 1);
+            }
+        });
     }
 
     private _formChanged(): void {

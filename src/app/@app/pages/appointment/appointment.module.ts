@@ -28,6 +28,8 @@ import { ObservationEditComponent } from './appointment-edit/observation-edit/ob
 import { AppointmentTestEditComponent } from './appointment-edit/appointment-test-edit/appointment-test-edit.component';
 import { AppointmentServiceEditComponent } from './appointment-edit/appointment-service-edit/appointment-service-edit.component';
 import { PrescriptionEditComponent } from './appointment-edit/prescription-edit/prescription-edit.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 
 
 const MATERIAL_MODULE = [
@@ -44,13 +46,14 @@ const MATERIAL_MODULE = [
   MatSlideToggleModule,
   MatCardModule,
   MatDatepickerModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule],
   providers: [],
   exports: [],
   declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent,PrescriptionEditComponent]
