@@ -5,7 +5,8 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
     selector: 'app-prescription-edit',
-    templateUrl: './prescription-edit.component.html'
+    templateUrl: './prescription-edit.component.html',
+    styleUrls: ['./prescription-edit.component.scss']
 })
 export class PrescriptionEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
@@ -32,7 +33,7 @@ export class PrescriptionEditComponent implements OnInit {
     public ngOnInit(): void {
         this._init();
         // @ts-ignore
-        this.prescriptionForm.valueChanges.subscribe(() => {
+        this.prescriptionForm?.valueChanges?.subscribe(() => {
             this._formChanged();
         });
     }
