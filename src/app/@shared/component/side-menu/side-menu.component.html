@@ -7,7 +7,7 @@
 
   <mat-nav-list>
     <ng-container *ngFor="let menu of menus">
-      <a mat-list-item [routerLink]="menu?.link">
+      <a disableRipple="true" mat-list-item [routerLink]="menu?.link" [routerLinkActive]="'is-active'">
         <mat-icon mat-list-icon svgIcon="{{menu?.icon}}"></mat-icon> {{menu?.label}}
       </a>
       <mat-divider></mat-divider>

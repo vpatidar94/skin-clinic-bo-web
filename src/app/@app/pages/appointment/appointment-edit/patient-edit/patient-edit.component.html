@@ -9,10 +9,15 @@
 
             <div class="row g-0">
                 <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
+                    <!-- <mat-form-field appearance="outline">
                         <mat-label>First Name</mat-label>
                         <input matInput placeholder="First Name" name="nameF" [(ngModel)]="patient.nameF" required>
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First Name</label>
+                        <input type="nameF" class="form-control" name="nameF" [(ngModel)]="patient.nameF" required
+                            placeholder="First Name">
+                    </div>
                 </div>
                 <div class="col-md pad-l-md-1">
                     <mat-form-field appearance="outline">

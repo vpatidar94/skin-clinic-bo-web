@@ -1,6 +1,6 @@
 <!-- Toolbar -->
-<mat-toolbar color="accent" class="header">
-  <button (click)="sidenav.toggle()" mat-icon-button>
+<mat-toolbar color="primary" class="header">
+  <button class="color-white" (click)="sidenav.toggle()" mat-icon-button>
     <mat-icon class="mat-24">menu</mat-icon>
   </button>
   <div class="large-shadow-text" fxHide.lt-sm mat-line>
@@ -14,30 +14,26 @@
     </button>
   </div>
   <!-- <span>&nbsp;Aayam Clinic Diary</span> -->
-  <div class="logout-btn-menu" >
-  <img src="../../../../../assets/icon/basic_picture_light.svg" (click)="openOptions()" class="menu-icon" alt="Menu" />
-</div>
+  <div class="logout-btn-menu">
+    <img src="../../../../../assets/icon/user_circle.svg" (click)="openOptions()" class="menu-icon"
+      alt="Menu" />
+  </div>
   <div *ngIf="showOptions" class="options-container">
     <!-- Add logout and more option here -->
     <mat-action-list>
       <button mat-list-item (click)="logout()" class="options">Logout</button>
-      <button mat-list-item >Help</button>
+      <button mat-list-item>Help</button>
     </mat-action-list>
     <!-- Add other options if needed -->
   </div>
-  
+
   <!-- <app-eg-user-menu></app-eg-user-menu> -->
 </mat-toolbar>
 
 <mat-sidenav-container>
   <!-- Sidenav -->
-  <mat-sidenav
-    #sidenav
-    [mode]="isBiggerScreen() ? 'over' : 'side'"
-    [(opened)]="opened"
-    [fixedInViewport]="true"
-    [fixedTopGap]
-  >
+  <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+    [fixedTopGap]>
     <app-eg-side-menu></app-eg-side-menu>
   </mat-sidenav>
 
@@ -49,3 +45,7 @@
     </section>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- <div class="footer" color="primary">
+  xx xxx xx
+</div> -->

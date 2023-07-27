@@ -11,7 +11,7 @@
             </div>
             <div class="row g-0">
                 <div *ngFor="let item of test; let i = index; trackBy:trackByIndex;" class="col-md-8 d-flex ">
-                    <mat-form-field appearance="outline" class="w-100">
+                    <mat-form-field appearance="outline" class="w-100 custom-form-field">
                         <input matInput type="text" placeholder="Enter the test name" [name]="'test'+ i" [(ngModel)]="test[i]" />
                     </mat-form-field>
                     <div class="col-md-6 ms-3">

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "./variable.scss";
 
 html,
 body {
@@ -40,9 +41,9 @@ body {
     padding: 15px 0;
 }
 
-// .mat-list-item.active {
-//     background: rgba(0, 0, 0, 0.04);
-// }
+.mat-list-item.active {
+    background: rgba(0, 0, 0, 0.04);
+}
 
 .mat-sidenav-content {
     padding: 25px 40px 0;
@@ -196,7 +197,12 @@ mat-list-item.section-title {
         font-weight: 500 !important;
     }
 }
-
+.is-active {
+    background-color: $lightBrown !important;
+}
+.is-active {
+    background-color: $lightBrown !important;
+}
 //  ------------------------------------ flex css classes start  ------------------------------------ //
 .flex-row {
     display: flex !important;

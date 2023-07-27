@@ -1,0 +1,174 @@
+@use '@angular/material' as mat;
+
+
+$pink_palette: (
+    50 : #fef5f5,
+    100 : #fce6e6,
+    200 : #fad5d6,
+    300 : #f8c4c6,
+    400 : #f7b8b9,
+    500 : #f5abad,
+    600 : #f4a4a6,
+    700 : #f29a9c,
+    800 : #f09193,
+    900 : #ee8083,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #fff6f6,
+    contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$grey_palette: (
+    50 : #f6f5f4,
+    100 : #e9e5e4,
+    200 : #dad4d3,
+    300 : #cbc3c1,
+    400 : #bfb6b3,
+    500 : #b4a9a6,
+    600 : #ada29e,
+    700 : #a49895,
+    800 : #9c8f8b,
+    900 : #8c7e7b,
+    A100 : #ffffff,
+    A200 : #fde9e3,
+    A400 : #ffbfae,
+    A700 : #ffab95,
+    contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$brown_palette: (
+    50 : #f0ecec,
+    100 : #d9d1cf,
+    200 : #bfb2af,
+    300 : #a5938f,
+    400 : #927b77,
+    500 : #7f645f,
+    600 : #775c57,
+    700 : #6c524d,
+    800 : #624843,
+    900 : #4f3632,
+    A100 : #ffada0,
+    A200 : #ff826d,
+    A400 : #ff563a,
+    A700 : #ff4020,
+    contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+$dark_pink_palette: (
+    50 : #fef1f2,
+    100 : #fbddde,
+    200 : #f9c6c9,
+    300 : #f7afb3,
+    400 : #f59da2,
+    500 : #f38c92,
+    600 : #f1848a,
+    700 : #ef797f,
+    800 : #ed6f75,
+    900 : #ea5c63,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffebec,
+    A700 : #ffd2d4,
+    contrast: (50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$custom-primary: mat.define-palette($pink_palette);
+//$custom-accent: mat-palette($mat-orange, A200, A100, A400);
+$custom-accent: mat.define-palette($grey_palette);
+
+// The warn palette is optional (defaults to red).
+$custom-warn: mat.define-palette($dark_pink_palette);
+$custom-secondary: mat.define-palette($brown_palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$custom-theme: mat.define-light-theme((color: (primary: $custom-primary,
+                accent: $custom-accent,
+                warn: $custom-warn )));
+//Changing to Material Design Dark Theming
+//$custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($custom-theme);
+/*
+.dark-theme {
+  // theme colors
+  $primary-dark: mat-palette($mat-pink, 700);
+  $accent-dark: mat-palette($mat-green);
+  $warn-dark: mat-palette($mat-red);
+
+  $theme-dark: mat-dark-theme($primary-dark, $accent-dark, $warn-dark);
+
+  // create theme from palettes
+  @include angular-material-theme($theme-dark);
+}
+*/
+
+
+// primary - #f5abad
+// secondary- #b4a9a6
+// #f38c92
+// #7f645f
+// #b4a9a6
+
+.color-white {
+    color: #ffffff !important;
+}
