@@ -152,14 +152,14 @@ export class SideMenuComponent {
             let sub: Array<NavigationDto>;
 
             sub = [];
-            sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
-            sub.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', []));
+            // sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
+            // sub.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', []));
             navList.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', sub));
 
-            sub = [];
-            sub.push(new NavigationDto('Staff', '/user/staff', 'ic_user_circle', []));
-            sub.push(new NavigationDto('Customer', '/user/customer', 'ic_users_m_f', []));
-            navList.push(new NavigationDto('User Management', '/user/staff', 'ic_users_m_f', sub));
+            // sub = [];
+            // sub.push(new NavigationDto('Staff', '/user/staff', 'ic_user_circle', []));
+            // sub.push(new NavigationDto('Customer', '/user/customer', 'ic_users_m_f', []));
+            // navList.push(new NavigationDto('User Management', '/user/staff', 'ic_users_m_f', sub));
         }
         return navList;
     }

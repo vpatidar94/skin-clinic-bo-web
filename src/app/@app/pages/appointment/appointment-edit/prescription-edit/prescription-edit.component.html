@@ -13,7 +13,7 @@
         <form #prescriptionForm="ngForm" class="g-0">
             <div class="col-md-12 mt-2 g-0" *ngFor="let prescriptionItem of prescription; let index = index">
                 <mat-list-item class="section-title">
-                    <span class="d-flex"><mat-icon (click)="removePrescription(index)" class="remove-button"
+                    <span class="d-flex align-item-center"><mat-icon (click)="removePrescription(index)" class="remove-button"
                             color="accent">clear</mat-icon>&nbsp;&nbsp;&nbsp; Medicine: {{index+1}}</span>
                 </mat-list-item>
                 <div class="row">
