@@ -28,7 +28,7 @@ import {MatTab, MatTabsModule} from '@angular/material/tabs';
   templateUrl: 'addpatient.component.html',
   styleUrls: ['addpatient.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, MatButtonModule, MatButtonModule, MatCardModule, MatInputModule, MatTableModule,MatTabsModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, MatButtonModule, MatButtonModule, MatCardModule, MatInputModule, MatTableModule,MatTabsModule,]
 })
 export class AddPatientComponent {
   email = new FormControl('', [Validators.required, Validators.email]);

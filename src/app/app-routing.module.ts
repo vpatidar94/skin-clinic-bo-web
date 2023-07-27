@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './@app/layout/layout.component';
 import { SigninComponent } from './@shared/component/signin/signin.component';
 import { AuthGuard } from './@shared/security/auth.guard';
+import { LabelComponent } from './@shared/component/label/label.component';
+import { AddPatientComponent } from './addpatient/addpatient.component';
 
 const routes: Routes = [
   {

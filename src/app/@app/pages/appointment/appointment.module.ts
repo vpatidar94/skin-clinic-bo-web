@@ -31,6 +31,7 @@ import { PrescriptionEditComponent } from './appointment-edit/prescription-edit/
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { BillingComponent } from 'src/app/@shared/component/billing/billing.component';
+import { LabelModule } from 'src/app/@shared/component/label/label.module';
 
 
 const MATERIAL_MODULE = [
@@ -54,7 +55,7 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule, LabelModule],
   providers: [],
   exports: [],
   declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent,PrescriptionEditComponent, BillingComponent]
