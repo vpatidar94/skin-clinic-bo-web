@@ -6,6 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { MatDialog } from '@angular/material/dialog';
+import { BillingComponent } from 'src/app/@shared/component/billing/billing.component';
+
 
 @Component({
     selector: 'app-appointment-service-edit',
@@ -35,8 +38,12 @@ export class AppointmentServiceEditComponent implements OnInit {
     @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
     @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
+
+    orderItemsList: Array<OrderItemVo> = [];
+    bookingItemsList!: BookingVo; 
+
     /* ************************************ Constructors ************************************ */
-    constructor() {
+    constructor(private dialog: MatDialog) {
     }
 
     /* ************************************ Public Methods ************************************ */
@@ -46,6 +53,10 @@ export class AppointmentServiceEditComponent implements OnInit {
         this.serviceForm.valueChanges.subscribe(() => {
             this._formChanged();
         });
+
+        this.orderItemsList = this.booking.items;
+        this.bookingItemsList = this.booking;
+
     }
 
     public addressFormChange(event: UiActionDto<boolean>): void {
@@ -77,6 +88,8 @@ export class AppointmentServiceEditComponent implements OnInit {
 
     public showTotal(): void {
         console.log("xxxx total is :")
+        this._confirmRemoveItem();
+
     }
 
     /* ************************************ Private Methods ************************************ */
@@ -97,6 +110,22 @@ export class AppointmentServiceEditComponent implements OnInit {
         this.dataSource = new MatTableDataSource(serviceItemList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+    }
+
+    private _confirmRemoveItem(): void {
+        this.orderItemsList = this.booking.items;
+        this.bookingItemsList = this.booking;
+        const dialogRef = this.dialog.open(BillingComponent, {
+            width: '50%',
+            data: { bookingItemsList: this.bookingItemsList, orderItemsList: this.orderItemsList }
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            // if (result) {
+            //     this.test.splice(index, 1);
+            // }
+            console.log('xxxxclosed')
+        });
     }
 
 }

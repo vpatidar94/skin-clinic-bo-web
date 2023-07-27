@@ -1,0 +1,21 @@
+  <section class="section-role-selector">
+    <h1 mat-dialog-title>Bill Details</h1>
+    <div mat-dialog-content>
+      <ul>
+        <li *ngFor="let order of orderItemsList">
+          <span>{{ order.item.name }} :  {{ order.item.price }} </span>
+        </li>
+      </ul>
+      <hr/>
+      <span>Sub Total = {{bookingItemsList.subTotal}}</span>
+      <hr/>
+      <span>Discount = {{bookingItemsList.discountCash}}</span>
+      <hr/>
+      <span>Total Due = {{bookingItemsList.totalDue}}</span>
+    </div>
+  
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>
+  </section>
+  
