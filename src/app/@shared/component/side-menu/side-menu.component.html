@@ -5,29 +5,46 @@
     </div>
   -->
 
-  <mat-nav-list class="nav-list primary" *ngFor="let menu of menus" [routerLinkActive]="'is-active'" [routerLinkActiveOptions]="{exact:true}">
-    <mat-list-item class="nav-main" [routerLink]="menu?.link">
-      <mat-icon mat-list-icon svgIcon="{{menu?.icon}}"></mat-icon>
-      <span class="menu-title">{{menu.label}}</span>
+  <mat-nav-list>
+    <ng-container *ngFor="let menu of menus">
+      <a mat-list-item [routerLink]="menu?.link">
+        <mat-icon mat-list-icon svgIcon="{{menu?.icon}}"></mat-icon> {{menu?.label}}
+      </a>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-nav-list>
 
-      <!--<mat-chip-list *ngIf="menu?.chip?.value">
+  <!-- <mat-nav-list class="nav-list primary" *ngFor="let menu of menus" [routerLinkActive]="'is-active'"
+    [routerLinkActiveOptions]="{exact:true}"> -->
+  <!-- <mat-list-item class="nav-main" [routerLink]="menu?.link"> -->
+  <!-- <mat-list-item class="nav-sub" *ngFor="let subMenu of menu?.nav" [routerLink]="subMenu?.link"
+        [routerLinkActive]="'is-active'">
+        <mat-icon mat-list-icon svgIcon="{{menu?.icon}}"></mat-icon>
+
+        <mat-icon mat-list-icon svgIcon="{{subMenu?.icon}}"></mat-icon>
+        {{menu.label}}
+      </mat-list-item>
+  </mat-nav-list> -->
+  <!-- <span class="menu-title">{{menu.label}}</span> -->
+
+  <!--<mat-chip-list *ngIf="menu?.chip?.value">
         <mat-chip selected="true" [color]='menu?.chip?.color'>{{menu?.chip?.value}}</mat-chip>
       </mat-chip-list>-->
-      <mat-icon *ngIf="menu?.nav?.length > 1" mat-icon-button [ngClass]="{'open':menu?.open,'close':!menu?.open}">
+  <!-- <mat-icon *ngIf="menu?.nav?.length > 1" mat-icon-button [ngClass]="{'open':menu?.open,'close':!menu?.open}">
         keyboard_arrow_down
       </mat-icon>
       <mat-icon *ngIf="menu?.nav?.length > 1" mat-icon-button [ngClass]="{'open':!menu?.open,'close':menu?.open}">
         keyboard_arrow_right
-      </mat-icon>
-    </mat-list-item>
+      </mat-icon> -->
+  <!-- </mat-list-item> -->
 
-    <mat-nav-list class="secondarymenu" [ngClass]="{'open':menu?.open,'close':!menu?.open}">
+  <!-- <mat-nav-list class="secondarymenu" [ngClass]="{'open':menu?.open,'close':!menu?.open}">
       <mat-list-item class="nav-sub" *ngFor="let subMenu of menu?.nav" [routerLink]="subMenu?.link" [routerLinkActive]="'is-active'">
         <mat-icon mat-list-icon svgIcon="{{subMenu?.icon}}"></mat-icon>
         {{subMenu.label}}
       </mat-list-item>
     </mat-nav-list>
-  </mat-nav-list>
+  </mat-nav-list> -->
 
 </section>
 
