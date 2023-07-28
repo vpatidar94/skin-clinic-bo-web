@@ -17,14 +17,15 @@ const MATERIAL_MODULE = [
   MatIconModule,
   MatSidenavModule,
   MatListModule,
-  MatToolbarModule, 
+  MatToolbarModule,
+   
 ];
 const EG_COMPONENT = [LayoutComponent];
 
 @NgModule({
     declarations: [...EG_COMPONENT],
     exports: [...EG_COMPONENT],
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SideMenuModule, UserMenuModule]
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SideMenuModule, UserMenuModule,]
 })
 export class LayoutModule {
 }

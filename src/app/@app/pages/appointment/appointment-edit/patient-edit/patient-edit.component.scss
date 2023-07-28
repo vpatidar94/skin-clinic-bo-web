@@ -1,5 +1,6 @@
+@import '../../../../../../variable.scss';
 .selcet-style{
     height:50px;
-    border:none;
-    border-radius:4px;
+    border-radius:6px;
+    border-color:$lightGray;
 }

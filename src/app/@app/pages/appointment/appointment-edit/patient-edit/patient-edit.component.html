@@ -12,8 +12,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="patientNumber" class="form-control app-input" name="patientNumber"
-                                    required>
+                                <input type="patientNumber" class="form-control app-input" name="patientNumber" required>
                             </div>
                         </div>
                     </div>
@@ -32,7 +31,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <!-- First Name -->
@@ -186,7 +184,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select name="gender" class="selcet-style w-100">
+                                <select name="gender" class="selcet-style w-100" [(ngModel)]="patient.booking.type">
                                     <option>OPD</option>
                                     <option>Appointment</option>
                                     <option>Admission</option>
@@ -210,7 +208,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="doctorName" class="form-control app-input" name="doctorName" required>
+                                <input type="doctorName" class="form-control app-input" name="doctorName" [(ngModel)]="patient.booking.dr" required>
                             </div>
                         </div>
                     </div>
@@ -224,8 +222,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="referredBy" class="form-control app-input" name="referredBy"
-                                    [(ngModel)]="patient.booking.referedBy" required>
+                                <input type="referredBy" class="form-control app-input" name="referredBy" [(ngModel)]="patient.booking.referedBy" required>
                             </div>
                         </div>
                     </div>
@@ -241,7 +238,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="complaint" class="form-control app-input" name="complaint" required>
+                                <input type="complaint" class="form-control app-input" name="complaint" [(ngModel)]="patient.booking.complaint" required>
                             </div>
                         </div>
                     </div>
@@ -255,14 +252,14 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="timeSlot" class="form-control app-input" name="timeSlot" required>
+                                <input type="timeSlot" class="form-control app-input" name="timeSlot" [(ngModel)]="patient.booking.timeSlot" required>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <app-label>Adress Details</app-label>
-            <div class="row g-0">
+            <div class="row">
                 <app-eg-edit-address-form [(address)]="patient.user.address"
                     (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
             </div>

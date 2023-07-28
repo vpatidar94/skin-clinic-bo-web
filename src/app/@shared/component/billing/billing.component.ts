@@ -8,14 +8,14 @@ import { OrderItemVo, ItemVo, BookingVo } from 'aayam-clinic-core';
 })
 export class BillingComponent implements OnInit {
 @Input() orderItemsList: Array<OrderItemVo> = [];
-@Input() bookingItemsList!: BookingVo;
+@Input() booking!: BookingVo;
 
 
   constructor(public dialogRef: MatDialogRef<BillingComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
-    if (this.data && this.data.bookingItemsList) {
-      this.bookingItemsList = this.data.bookingItemsList;
+    if (this.data && this.data.booking) {
+      this.booking = this.data.booking;
       this.orderItemsList = this.data.orderItemsList;
     }
   }
