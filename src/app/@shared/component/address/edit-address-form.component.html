@@ -4,23 +4,8 @@
             <div class="row g-0">
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Street 1</mat-label>
-                        <input matInput name="street1" placeholder="Street 1" [(ngModel)]="address.street1" required="">
-                    </mat-form-field>
-                </div>
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Street 2</mat-label>
-                        <input matInput name="street2" placeholder="Street 2" [(ngModel)]="address.street2">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Landmark</mat-label>
-                        <input matInput name="landmark" placeholder="Landmark" [(ngModel)]="address.landmark">
+                        <mat-label>Address</mat-label>
+                        <input matInput name="street1" placeholder="Street 1" [(ngModel)]="address.address" required="">
                     </mat-form-field>
                 </div>
                 <div class="col-md pad-r-md-1">
@@ -34,15 +19,15 @@
             <div class="row g-0">
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Zip</mat-label>
-                        <input matInput name="zip" placeholder="Zip" [(ngModel)]="address.zip" minlength="6"
-                            maxlength="6" appNumberOnly required>
+                        <mat-label>District</mat-label>
+                        <input matInput name="district" placeholder="District" [(ngModel)]="address.district">
                     </mat-form-field>
                 </div>
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
                         <mat-label>State</mat-label>
-                        <input matInput name="state" [(ngModel)]="address.state" placeholder="State" required>
+                        <input matInput name="state" placeholder="State" [(ngModel)]="address.state" minlength="6"
+                            maxlength="6" appNumberOnly required>
                     </mat-form-field>
                 </div>
             </div>
