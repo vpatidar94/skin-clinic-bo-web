@@ -2,79 +2,270 @@
 
     <form #patientForm="ngForm">
         <mat-list class="row">
-
-            <mat-list-item class="section-title">
-                Patient Info
-            </mat-list-item>
-
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <!-- <mat-form-field appearance="outline">
-                        <mat-label>First Name</mat-label>
-                        <input matInput placeholder="First Name" name="nameF" [(ngModel)]="patient.nameF" required>
-                    </mat-form-field> -->
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">First Name</label>
-                        <input type="nameF" class="form-control" name="nameF" [(ngModel)]="patient.nameF" required
-                            placeholder="First Name">
+            <app-label>Personal Information</app-label>
+            <div class="row">
+                <!-- Patient Number -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Patient Id</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="patientNumber" class="form-control app-input" name="patientNumber"
+                                    required>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md pad-l-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Last Name</mat-label>
-                        <input matInput placeholder="Last Name" name="nameL" [(ngModel)]="patient.nameL" required>
-                    </mat-form-field>
+
+                <!-- Date -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Date</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <!-- First Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label app-input">First Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="nameF" class="form-control app-input" name="nameF"
+                                    [(ngModel)]="patient.user.nameF" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Last Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="nameL" class="form-control app-input" name="nameL"
+                                    [(ngModel)]="patient.user.nameL" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Gender</mat-label>
-                        <mat-select [(ngModel)]="patient.gender" name="gender">
-                            <mat-option *ngFor="let g of genderList" [value]="g.id">
-                                {{g.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+            <div class="row">
+                <!-- Gender -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3 mt-3">
+                        <div class="col-md-3">
+                            <label class="label" class="app-label">Gender</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline" *ngFor="let g of genderList">
+                                <input class="form-check-input" type="radio" name="gender" [value]="g.id"
+                                    [(ngModel)]="patient.user.gender">
+                                <label class="form-check-label">{{ g.name }}</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md pad-l-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Email</mat-label>
-                        <input matInput placeholder="Email" name="email" [(ngModel)]="patient.email" required>
-                    </mat-form-field>
+
+                <!-- Fathers Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Father's Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="fatherName" class="form-control app-input" name="fatherName" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Contact No</mat-label>
-                        <input maxlength="10" minlength="10" matInput type="cell" placeholder="Cell" name="cell1"
-                            [(ngModel)]="patient.cell" required appNumberOnly>
-                    </mat-form-field>
+            <div class="row">
+                <!-- Email -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Email</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="email" class="form-control app-input" name="email"
+                                    [(ngModel)]="patient.user.email" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md pad-l-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Contact No 2</mat-label>
-                        <input maxlength="10" minlength="10" matInput type="cell" placeholder="Cell" name="cell1"
-                            [(ngModel)]="patient.cell2" appNumberOnly>
-                    </mat-form-field>
+
+                <!-- Contact No -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Contact Number</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="cell1" class="form-control app-input" name="cell1"
+                                    [(ngModel)]="patient.user.cell" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <mat-list-item class="section-title">
-                Address
-            </mat-list-item>
+            <div class="row">
+                <!-- Date of Birth -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Date of Birth</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="dateOfBirth"
+                                    [(ngModel)]="patient.user.doB" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Age -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Age</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="age" class="form-control app-input" name="age"
+                                    [(ngModel)]="patient.user.age" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Alternate Number-->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Alternate Number</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="cell2" class="form-control app-input" name="cell2"
+                                    [(ngModel)]="patient.user.cell2" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- Type -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Patient's Type</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <select name="gender" class="selcet-style w-100">
+                                    <option>OPD</option>
+                                    <option>Appointment</option>
+                                    <option>Admission</option>
+                                    <option>Investigation</option>
+                                    <option>Emergency</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-label>Doctor Details</app-label>
+
+            <div class="row">
+                <!-- Doctor's Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Doctor's Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="doctorName" class="form-control app-input" name="doctorName" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refered By-->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Referred By</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="referredBy" class="form-control app-input" name="referredBy"
+                                    [(ngModel)]="patient.booking.referedBy" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Complaint -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Complaint</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="complaint" class="form-control app-input" name="complaint" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Slot -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Time Slot</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="timeSlot" class="form-control app-input" name="timeSlot" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-label>Adress Details</app-label>
             <div class="row g-0">
-                <app-eg-edit-address-form [(address)]="patient.address"
+                <app-eg-edit-address-form [(address)]="patient.user.address"
                     (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
             </div>
-
-
         </mat-list>
-
     </form>
-
 </section>

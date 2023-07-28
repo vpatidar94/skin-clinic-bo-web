@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild,} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ROLE, UserVo } from 'aayam-clinic-core';
+import { BookingVo, ROLE, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
     selector: 'app-patient-edit',
-    templateUrl: './patient-edit.component.html'
+    templateUrl: './patient-edit.component.html',
+    styleUrls: ['./patient-edit.component.scss'],
 })
 export class PatientEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
@@ -14,9 +15,15 @@ export class PatientEditComponent implements OnInit {
     inValidAddressForm!: boolean;
 
     @Input()
-    patient!: UserVo;
+    // patient!: UserVo;
+    patient! : UserBookingDto;
+
+    
+
     @Output()
-    patientChange = new EventEmitter<UserVo>();
+    // patientChange = new EventEmitter<UserVo>();
+    patientChange = new EventEmitter<UserBookingDto>();
+
 
     @Output()
     pubSub = new EventEmitter<any>();

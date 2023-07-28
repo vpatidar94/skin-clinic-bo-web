@@ -231,6 +231,16 @@ mat-form-field {
     padding-right: 10px !important;
 }
 
+// style for input box of forms
+.app-input{
+    height:50px;
+}
+
+//style for label of forms 
+.app-label{
+    font-size: 18px;
+}
+
 //  ------------------------------------ flex css classes end  ------------------------------------ //
 
 @media (max-width: 1024px) {

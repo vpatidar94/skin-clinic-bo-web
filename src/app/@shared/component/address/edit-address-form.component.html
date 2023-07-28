@@ -1,36 +1,67 @@
 <section class="section-edit-address">
     <form #addressForm="ngForm">
         <div *ngIf="address">
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Address</mat-label>
-                        <input matInput name="street1" placeholder="Street 1" [(ngModel)]="address.address" required="">
-                    </mat-form-field>
-                </div>
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>City</mat-label>
-                        <input matInput name="city" placeholder="City" [(ngModel)]="address.city" required>
-                    </mat-form-field>
-                </div>
-            </div>
+            <!-- <div class="row"> -->
+                <div class="row">
+                    <!-- Address -->
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="exampleInputEmail1" class="app-label">Address</label>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <input type="address" name="address" class="form-control app-input" [(ngModel)]="address.address" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>District</mat-label>
-                        <input matInput name="district" placeholder="District" [(ngModel)]="address.district">
-                    </mat-form-field>
+                    <!-- City -->
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="exampleInputEmail1" class="app-label">City</label>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <input type="city" class="form-control app-input" name="city" [(ngModel)]="address.city" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>State</mat-label>
-                        <input matInput name="state" placeholder="State" [(ngModel)]="address.state" minlength="6"
-                            maxlength="6" appNumberOnly required>
-                    </mat-form-field>
+
+                <div class="row">
+                    <!-- District -->
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="exampleInputEmail1" class="app-label">District</label>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <input name="district" class="form-control app-input" type="district" [(ngModel)]="address.district">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State -->
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="exampleInputEmail1" class="app-label">State</label>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <input matInput name="state" class="form-control app-input" type="state" [(ngModel)]="address.state">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </form>
 </section>
