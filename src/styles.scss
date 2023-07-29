@@ -244,7 +244,7 @@ mat-form-field {
     font-size: 18px;
 }
 
-//style for multiselect
+//************************* select css start *************************//
 .multiselect-dropdown {
     .dropdown-btn {
         height: 50px;
@@ -265,12 +265,13 @@ mat-form-field {
 
 }
 
-//style for single select
 .app-single-select-dropdown {
     height: 50px;
     border-radius: 6px;
     border-color: $lightGray;
 }
+
+//************************* multiselect css end *************************//
 
 //************************* mat expansion panel css start *************************//
 
