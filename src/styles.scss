@@ -197,12 +197,15 @@ mat-list-item.section-title {
         font-weight: 500 !important;
     }
 }
+
 .is-active {
     background-color: $lightBrown !important;
 }
+
 .is-active {
     background-color: $lightBrown !important;
 }
+
 //  ------------------------------------ flex css classes start  ------------------------------------ //
 .flex-row {
     display: flex !important;
@@ -232,13 +235,33 @@ mat-form-field {
 }
 
 // style for input box of forms
-.app-input{
-    height:50px;
+.app-input {
+    height: 50px;
 }
 
 //style for label of forms 
-.app-label{
+.app-label {
     font-size: 18px;
+}
+
+//style for multiselect
+.multiselect-dropdown {
+    .dropdown-btn {
+        height: 50px;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        font-size: 1rem !important;
+        font-weight: 400 !important;
+        color: #212529 !important;
+        background-clip: padding-box !important;
+        border: solid 1px #dee2e6 !important;
+        border-radius: 0.375em !important;
+    }
+
+    .dropdown-multiselect__caret {
+        height: 50px !important;
+    }
 }
 
 //  ------------------------------------ flex css classes end  ------------------------------------ //

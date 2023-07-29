@@ -16,6 +16,7 @@ import { AuthHttpInterceptor } from './@shared/service/auth-http.interceptor';
 import { SharedServiceModule } from './@shared/service/shared-service.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AppComponent } from './app.component';
     AlertMessageModule,
     NgxWebstorageModule.forRoot(),
     SharedServiceModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
     {
