@@ -1,16 +1,5 @@
 @import 'src/variable.scss';
-.remove-button {
-    cursor: pointer;
-    height: 56px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
 
-.test-info{
-    background-color: $secondary; 
-}
-
-.download-button{
+.download-button {
     background-color: $warn;
 }

@@ -262,7 +262,7 @@ mat-form-field {
     .dropdown-multiselect__caret {
         height: 50px !important;
     }
-    
+
 }
 
 //style for single select
@@ -271,6 +271,34 @@ mat-form-field {
     border-radius: 6px;
     border-color: $lightGray;
 }
+
+//************************* mat expansion panel css start *************************//
+
+.app-expansion {
+    background-color: $secondary;
+
+    .app-expansion-title {
+        margin-top: auto;
+        color: $white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
+.mat-expansion-panel-header:hover,
+.mat-expansion-panel-header.mat-expanded,
+.mat-expansion-panel-header.mat-expanded:hover,
+.mat-expansion-panel-header.mat-expanded:focus {
+    background-color: $warn !important;
+}
+
+.mat-expansion-indicator,
+.mat-expansion-indicator:after {
+    color: $white !important;
+}
+
+//************************* mat expansion panel css end *************************//
 
 //  ------------------------------------ flex css classes end  ------------------------------------ //
 

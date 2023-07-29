@@ -47,13 +47,13 @@
         <app-label>Investigations</app-label>
         <mat-accordion>
             <mat-expansion-panel class="my-3" *ngFor="let item of patientTests;let i=index">
-                <mat-expansion-panel-header class="test-info">
-                    <div class=" col-md-12 d-flex justify-content-around align-items-center">
-                        <p>Patient ID: <span>0812</span></p>
-                        <p>Booking ID: <span>{{item.booking_id}}</span></p>
-                        <p>First Name: <span>Jitu</span></p>
-                        <p>Doctor's Name: <span>Jitendra</span></p>
-                        <p>Date: <span>02/08/23</span></p>
+                <mat-expansion-panel-header class="app-expansion">
+                    <div class="app-expansion-title col-md-12">
+                        <span>Patient ID: <span>0812</span></span>
+                        <span>Booking ID: <span>{{item.booking_id}}</span></span>
+                        <span>First Name: <span>Jitu</span></span>
+                        <span>Doctor's Name: <span>Jitendra</span></span>
+                        <span>Date: <span>02/08/23</span></span>
                     </div>
                 </mat-expansion-panel-header>
                 <div class="border border-info rounded p-3 mt-4">
@@ -65,8 +65,8 @@
                     <div class="  d-flex justify-content-between" *ngFor="let item of patientTests; let i=index">
                         <p class=" border border-info rounded p-1 px-2">{{i+1}}</p>
                         <p class="col-md-8 border border-info rounded p-1 ">{{item.testsArray[i]}}</p>
-                        <button class=" download-button btn btn-info h-25">Preview</button>
-                        <button class=" download-button btn btn-info h-25">Download</button>
+                        <button class="warn-button btn btn-info h-25">Preview</button>
+                        <button class="download-button btn btn-info h-25">Download</button>
                     </div>
                 </div>
             </mat-expansion-panel>
