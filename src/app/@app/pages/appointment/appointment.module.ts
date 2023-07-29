@@ -59,6 +59,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent,PrescriptionEditComponent, BillingComponent]
+  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent,PrescriptionEditComponent, BillingComponent,]
 })
 export class AppointmentModule { }

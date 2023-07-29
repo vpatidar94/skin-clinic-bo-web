@@ -22,6 +22,7 @@ import { OrgNetworkComponent } from './org-network/org-network.component';
 import { OrgEditComponent } from './org/org-edit/org-edit.component';
 import { AddressModule } from "../../../@shared/component/address/address.module";
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
+import { LabelModule } from 'src/app/@shared/component/label/label.module';
 
 
 const MATERIAL_MODULE = [
@@ -46,6 +47,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
     providers: [],
     exports: [],
     declarations: [OrgComponent, OrgNetworkComponent, OrgEditComponent],
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SupportRoutingModule, AddressModule, SharedDirectiveModule]
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SupportRoutingModule, AddressModule, SharedDirectiveModule, LabelModule]
 })
 export class SupportModule { }

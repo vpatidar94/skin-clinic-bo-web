@@ -262,6 +262,14 @@ mat-form-field {
     .dropdown-multiselect__caret {
         height: 50px !important;
     }
+    
+}
+
+//style for single select
+.app-single-select-dropdown {
+    height: 50px;
+    border-radius: 6px;
+    border-color: $lightGray;
 }
 
 //  ------------------------------------ flex css classes end  ------------------------------------ //

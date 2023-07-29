@@ -4,6 +4,7 @@ import { BookingVo, ROLE, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
+
 @Component({
     selector: 'app-patient-edit',
     templateUrl: './patient-edit.component.html',
