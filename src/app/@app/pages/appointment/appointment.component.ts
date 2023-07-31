@@ -6,6 +6,7 @@ import { AuthApi } from '../../service/remote/auth.api';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
 import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
+import { BookingApi } from '../../service/remote/booking.api';
 
 @Component({
   selector: 'app-appointment',
@@ -28,7 +29,7 @@ export class AppointmentComponent implements OnInit {
   constructor(private userApi: UserApi,
     private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
-    private authService: AuthService) { }
+    private bookingApi: BookingApi) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -42,6 +43,9 @@ export class AppointmentComponent implements OnInit {
     booking.prescription = [] as PrescriptionVo[];
     booking.instruction = [] as string[];
     booking.test = [] as string[];
+    booking.bookingDate = new Date();
+    booking.complaint = [] as string[];
+    booking.diagnosis = [] as string[];
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {
       booking.orgId = orgId;
@@ -50,6 +54,16 @@ export class AppointmentComponent implements OnInit {
     userBooking.booking = booking;
     userBooking.user = {} as UserVo;
     this._addEditOrg(userBooking);
+  }
+
+  public cancel(): void {
+    this._init();
+  }
+
+  public saveBooking(): void {
+    this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
+      console.log(this.userBooking);
+    });
   }
 
   /* ************************************* Private Methods ******************************************** */

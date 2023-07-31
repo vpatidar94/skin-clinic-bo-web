@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BookingVo, ROLE, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { BOOKING_TYPE_LIST, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -31,23 +31,18 @@ export class PatientEditComponent implements OnInit, OnChanges {
     docterList!: UserVo[];
 
     genderList = GENDER_LIST;
+    patientTypeList = BOOKING_TYPE_LIST;
 
-    dropdownList = [
-        { item_id: 1, item_text: 'Mumbai' },
-        { item_id: 2, item_text: 'Bangaluru' },
-        { item_id: 3, item_text: 'Pune' },
-        { item_id: 4, item_text: 'Navsari' },
-        { item_id: 5, item_text: 'New Delhi' }
-    ];
-    selectedItems = [];
+    docSelectList!: Array<any>;
+    selectedDocs = [];
     dropdownSettings = {
         singleSelection: false,
         idField: 'item_id',
         textField: 'item_text',
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
         itemsShowLimit: 3,
-        allowSearchFilter: true
+        allowSearchFilter: true,
+        enableCheckAll: false,
+        maxHeight: 50
     };
 
 
@@ -68,6 +63,9 @@ export class PatientEditComponent implements OnInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes['docterList']) {
             this.docterList = changes['docterList'].currentValue;
+            this.docSelectList = this.docterList.map((user: UserVo) => {
+                return { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
+            });
         }
     }
 
@@ -81,11 +79,9 @@ export class PatientEditComponent implements OnInit, OnChanges {
     }
 
     // multiple select
-    onItemSelect(item: any) {
-        console.log(item);
-    }
-    onSelectAll(items: any) {
-        console.log(items);
+    onDocSelect(item: any) {
+        this.userBooking.booking.dr = this.selectedDocs.map((doc: any) => doc.item_id);
+        this.userBookingChange.emit(this.userBooking);
     }
 
     /* ************************************ Private Methods ************************************ */
@@ -99,5 +95,4 @@ export class PatientEditComponent implements OnInit, OnChanges {
         } as UiActionDto<boolean>;
         this.pubSub.emit(actionDto);
     }
-
 }

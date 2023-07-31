@@ -40,7 +40,8 @@ const BASE_CORE = ENV_URL + '/api/core/v1';
 // major operations  /api/commerce/v1/...
 const MJR_ORG = BASE_CORE + '/org';
 const MJR_USER = BASE_CORE + '/user';
-const MJR_SERVICE_ITEM = BASE_CORE + '/service-item'
+const MJR_SERVICE_ITEM = BASE_CORE + '/service-item';
+const MJR_BOOKING = BASE_CORE + '/booking';
 
 /**
  * END_POINT URL URL
@@ -56,11 +57,16 @@ export const URL = {
     DOCTOR_ITEM_LIST: MJR_USER + '/staff-subrole-list',
 
     // ******************************************************************
-    // Org API endpoint
+    // User API endpoint
     ADD_UPDATE_USER: MJR_ORG + ADD_UPDATE,
     STAFF_LIST: MJR_USER + '/staff-list',
     ADD_UPDATE_STAFF: MJR_USER + '/staff-add-update',
     ACCESS_LIST: MJR_USER + '/access-list',
+
+    // ******************************************************************
+    // Booking API endpoint
+    ADD_UPDATE_BOOKING: MJR_BOOKING + ADD_UPDATE,
+    BOOKING_LIST: MJR_BOOKING + LIST,
 
 
     // ************************************************************************************************
