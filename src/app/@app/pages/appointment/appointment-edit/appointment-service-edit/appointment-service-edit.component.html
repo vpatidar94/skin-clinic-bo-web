@@ -1,73 +1,42 @@
 <section class="section-org-edit">
-
-    <form #serviceForm="ngForm">
-        <mat-list class="row">
-
-            <mat-list-item class="section-title">
-                Service Info
-            </mat-list-item>
-
-            <div class="row g-0">
-                <div class="col-md-6 pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Refered By</mat-label>
-                        <input matInput placeholder="Refered By" name="nameF" [(ngModel)]="booking.referedBy" required>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div>
-                <mat-list-item class="section-title">Select Item</mat-list-item>
-                
-                <div class="row">
-                    <div class="col-4">
-                        <mat-form-field class="search-input w-100">
-                            <mat-label>{{'Search'}}</mat-label>
-                            <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
-                        </mat-form-field>
+    <mat-list class="row">
+        <app-label>Services</app-label>
+        <mat-accordion>
+            <mat-expansion-panel class="my-3">
+                <mat-expansion-panel-header class="app-expansion ">
+                    <div class="app-expansion-title col-md-12">
+                        <span>Patient ID: <span>0812</span></span>
+                        <span>Booking ID: <span>1021</span></span>
+                        <span>First Name: <span>Maynak</span></span>
+                        <span>Doctor's Name: <span>M. Patidar</span></span>
                     </div>
-                    <div class="col-3">
-                        <!-- Your button code here -->
-                        <button type="button" (click)="showTotal()" class="btn btn-primary">show Total</button>
+                </mat-expansion-panel-header>
+                <div class="border border-info rounded p-3 mt-4">
+                    <div class="row">
+                        <div class="col-md-1"><strong>Sno.</strong></div>
+                        <div class="col-md-4"><strong>Service</strong></div>
+                        <div class="col-md-2"><strong>Total Amount</strong></div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-1 pres-input text-center">
+                            <p class="border border-info rounded p-1 text-align-center">1</p>
+                        </div>
+                        <!-- Service -->
+                        <div class="form-group col-md-4">
+                            <input type="patientNumber" class="form-control pres-input w-100" n>
+                        </div>
+                        <!--Total Amount  -->
+                        <div class="form-group col-md-2">
+                            <input type="patientNumber" class="form-control pres-input w-100" n>
+                        </div>
+                        
+                        <div class="col-md-1">
+                        <mat-icon class="add-icon">add_circle_outline</mat-icon></div>
+                            <div class="col-md-1"><mat-icon class="add-icon">delete</mat-icon></div>
                     </div>
                 </div>
-                <mat-table class="row" [dataSource]="dataSource" matSort>
-                    <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Name
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                            <span class="text-ellipsis">{{row?.item?.name}}</span>
-                        </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="doctorName">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</mat-header-cell>
-                        <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.user && row?.user?.nameF ??
-                                '' + " " +
-                                row?.user?.nameL ?? ''}}</span></mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="price">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
-                        <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.item?.price |
-                                currency}}</span></mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="description">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
-                        <mat-cell *matCellDef="let row"><span
-                                class="text-ellipsis">{{row?.item?.description}}</span></mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="action">
-                        <mat-header-cell *matHeaderCellDef>Select Items</mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                            <mat-checkbox (change)="setOrderItem($event, row)"></mat-checkbox>
-                        </mat-cell>
-                    </ng-container>
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
-                        [ngClass]="{rowgray: odd}"></mat-row>
-                </mat-table>
-                <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
-            </div>
-        </mat-list>
-    </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-list>
 </section>

@@ -80,6 +80,7 @@ export class AppointmentComponent implements OnInit {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.serviceItemList = res.body;
+          console.log("xxxservices",this.serviceItemList);
         }
       }
     });

@@ -48,6 +48,8 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['docterList']) {
       this.docterList = changes['docterList'].currentValue as UserVo[];
+      console.log("vvvv",this.docterList);
+
     }
   }
 
