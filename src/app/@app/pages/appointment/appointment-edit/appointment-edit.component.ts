@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BookingVo, ItemDetailDto, ObservationVo, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -8,7 +8,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
   templateUrl: './appointment-edit.component.html',
   styleUrls: ['./appointment-edit.component.scss']
 })
-export class AppointmentEditComponent implements OnInit {
+export class AppointmentEditComponent implements OnInit, OnChanges {
 
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
@@ -30,6 +30,9 @@ export class AppointmentEditComponent implements OnInit {
   @Input()
   serviceItemList!: ItemDetailDto[];
 
+  @Input()
+  docterList!: UserVo[];
+
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService) { }
 
@@ -40,6 +43,12 @@ export class AppointmentEditComponent implements OnInit {
 
   public tabChange(): void {
     this._tabChange(this.tabValue);
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['docterList']) {
+      this.docterList = changes['docterList'].currentValue as UserVo[];
+    }
   }
 
   /* ************************************* Private Methods ******************************************** */

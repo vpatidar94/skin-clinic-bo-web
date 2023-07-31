@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { AuthApi } from '../../service/remote/auth.api';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
+import { UserApi } from '../../service/remote/user.api';
+import { SUB_ROLE } from '../../const/sub-role.const';
 
 @Component({
   selector: 'app-appointment',
@@ -20,9 +22,10 @@ export class AppointmentComponent implements OnInit {
   userBooking!: UserBookingDto;
 
   serviceItemList!: ItemDetailDto[];
+  doctorList!: UserVo[];
 
   /* ************************************* Constructors ******************************************** */
-  constructor(private authApi: AuthApi,
+  constructor(private userApi: UserApi,
     private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
     private authService: AuthService) { }
@@ -53,7 +56,8 @@ export class AppointmentComponent implements OnInit {
   private _init(): void {
     this._resetSection();
     this.showSectionAppointmentList = true;
-    this._getServiceList()
+    this._getServiceList();
+    this._getDoctorList();
   }
 
   private _resetSection(): void {
@@ -79,6 +83,21 @@ export class AppointmentComponent implements OnInit {
         }
       }
     });
+  }
+
+  private _getDoctorList(): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
+        if (res.body && res.body?.length > 0) {
+          this.doctorList = res.body;
+        }
+      }
+    }
+    );
   }
 }
 

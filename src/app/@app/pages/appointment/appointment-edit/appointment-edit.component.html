@@ -9,11 +9,11 @@
     </mat-button-toggle-group>
 
     <div *ngIf="showSectionPatient">
-        <app-patient-edit [(patient)]="userBooking"></app-patient-edit>
+        <app-patient-edit [docterList]="docterList" [(userBooking)]="userBooking"></app-patient-edit>
     </div>
 
     <div *ngIf="showSectionObservation">
-        <app-observation-edit [(observation)]="userBooking.booking.observation"></app-observation-edit>
+        <app-observation-edit></app-observation-edit>
     </div>
 
     <div *ngIf="showSectionService">

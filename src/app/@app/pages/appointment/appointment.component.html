@@ -77,18 +77,16 @@
     <section *ngIf="showSectionAppointmentEdit">
 
         <div>
-            <app-appointment-edit [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-appointment-edit>
+            <app-appointment-edit [docterList]="doctorList" [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-appointment-edit>
         </div>
 
-        <div class="row">
-            <!-- <div class="col-1">
-                <button mat-raised-button color="primary" (click)="saveOrg()"
-                    [disabled]="invalidFormOrg">{{'save'}}</button>
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <div class="col-1">
+                <button mat-raised-button color="primary" >{{'save'}}</button>
             </div>
             <div class="col-1">
-                <button mat-raised-button (click)="cancel()">{{'cancel'}}</button>
-
-            </div> -->
+                <button mat-raised-button>{{'cancel'}}</button>
+            </div>
         </div>
     </section>
 </section>

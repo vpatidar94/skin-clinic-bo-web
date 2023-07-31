@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild,} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BookingVo, ROLE, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
@@ -10,21 +10,16 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
     templateUrl: './patient-edit.component.html',
     styleUrls: ['./patient-edit.component.scss'],
 })
-export class PatientEditComponent implements OnInit {
+export class PatientEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     inValidAddressForm!: boolean;
 
     @Input()
-    // patient!: UserVo;
-    patient! : UserBookingDto;
-
-    
+    userBooking!: UserBookingDto;
 
     @Output()
-    // patientChange = new EventEmitter<UserVo>();
-    patientChange = new EventEmitter<UserBookingDto>();
-
+    userBookingChange = new EventEmitter<UserBookingDto>();
 
     @Output()
     pubSub = new EventEmitter<any>();
@@ -32,9 +27,11 @@ export class PatientEditComponent implements OnInit {
     @ViewChild('patientForm', { static: true })
     patientForm!: NgForm;
 
+    @Input()
+    docterList!: UserVo[];
+
     genderList = GENDER_LIST;
 
-    //multiple select
     dropdownList = [
         { item_id: 1, item_text: 'Mumbai' },
         { item_id: 2, item_text: 'Bangaluru' },
@@ -66,6 +63,12 @@ export class PatientEditComponent implements OnInit {
         this.patientForm.valueChanges.subscribe(() => {
             this._formChanged();
         });
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['docterList']) {
+            this.docterList = changes['docterList'].currentValue;
+        }
     }
 
     public addressFormChange(event: UiActionDto<boolean>): void {

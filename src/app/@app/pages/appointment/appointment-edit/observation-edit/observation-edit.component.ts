@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ObservationVo } from 'aayam-clinic-core';
+import { BookingVo, ObservationVo, UserBookingDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -10,11 +10,13 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 export class ObservationEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
+    @Input()
+    booking!: UserBookingDto;
+    @Output()
+    observationChange = new EventEmitter<UserBookingDto>();
 
     @Input()
-    observation!: ObservationVo;
-    @Output()
-    observationChange = new EventEmitter<ObservationVo>();
+    pastBookingList!: Array<UserBookingDto>;
 
     @Output()
     pubSub = new EventEmitter<any>();
