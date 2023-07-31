@@ -1,59 +1,16 @@
-<!-- <section class="section-org-edit"> -->
-<!-- <form #testForm="ngForm">
-        <mat-list class="row">
-            <mat-list-item class="section-title">
-                Test Suggestions
-            </mat-list-item>
-            <div class="row mb-5">
-                <button (click)="addTestSuggestion()" mat-fab color="primary">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-
-            <div class="row g-0">
-                <div *ngFor="let item of test; let i = index; trackBy:trackByIndex;" class="col-md-8 d-flex ">
-                    <mat-form-field appearance="outline" class="w-100 custom-form-field">
-                        <input matInput type="text" placeholder="Enter the test name" [name]="'test'+ i"
-                            [(ngModel)]="test[i]" />
-                    </mat-form-field>
-                    <div class="col-md-6 ms-3">
-                        <span (click)="removeTestSuggestion(i)"><mat-icon class=" remove-button"
-                                color="accent">clear</mat-icon></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div *ngFor="let item of test; let i = index; trackBy:trackByIndex;"
-                    class="col-md-8 d-flex align-items-center">
-                    <div class="col-md-3">
-                        <label for="exampleInputEmail1">Test Name</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Enter the test name" [name]="'test'+ i" [(ngModel)]="test[i]"
-                            required placeholder="Last Name">
-                    </div>
-                    <div class="col-md-6 ms-3">
-                        <span (click)="removeTestSuggestion(i)"><mat-icon class=" remove-button"
-                                color="accent">clear</mat-icon></span>
-                    </div>
-                </div>
-            </div>
-
-        </mat-list>
-    </form> -->
-<div class="container">
+<section class="section-org-edit">
+    <div class="container">
     <div class="row mt-4">
         <app-label>Investigations</app-label>
         <mat-accordion>
-            <mat-expansion-panel class="my-3" *ngFor="let item of patientTests;let i=index">
+            <mat-expansion-panel class="my-3" *ngFor="let item of invest;let i=index">
                 <mat-expansion-panel-header class="app-expansion">
                     <div class="app-expansion-title col-md-12">
-                        <span>Patient ID: <span>0812</span></span>
-                        <span>Booking ID: <span>{{item.booking_id}}</span></span>
-                        <span>First Name: <span>Jitu</span></span>
-                        <span>Doctor's Name: <span>Jitendra</span></span>
-                        <span>Date: <span>02/08/23</span></span>
+                        <span>Patient ID: <span>{{item.patientId}}</span></span>
+                        <span>Booking ID: <span>{{item.bookingId}}</span></span>
+                        <span>First Name: <span>{{item.name}}</span></span>
+                        <span>Doctor's Name: <span>{{item.dr}}</span></span>
+                        <span>Date: <span>{{item.date}}</span></span>
                     </div>
                 </mat-expansion-panel-header>
                 <div class="border border-info rounded p-3 mt-4">
@@ -62,9 +19,9 @@
                         <p class="col-md-8"><strong>Investigations</strong></p>
                         <p class="col-md-2"></p>
                     </div>
-                    <div class="  d-flex justify-content-between" *ngFor="let item of patientTests; let i=index">
-                        <p class=" border border-info rounded p-1 px-2">{{i+1}}</p>
-                        <p class="col-md-8 border border-info rounded p-1 ">{{item.testsArray[i]}}</p>
+                    <div class="d-flex justify-content-between" *ngFor="let test of item.testsArray; let j = index">
+                        <p class=" border border-info rounded p-1 px-2">{{j+1}}</p>
+                        <p class="col-md-8 border border-info rounded p-1 ">{{test}}</p>
                         <button class="warn-button btn btn-info h-25">Preview</button>
                         <button class="download-button btn btn-info h-25">Download</button>
                     </div>
@@ -73,4 +30,4 @@
         </mat-accordion>
     </div>
 </div>
-<!-- </section> -->
+</section>
