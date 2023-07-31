@@ -236,7 +236,7 @@ mat-form-field {
 
 // style for input box of forms
 .app-input {
-    height: 50px;
+    height: 40px;
 }
 // style for input box of prescription forms
 .pres-input {
@@ -244,13 +244,13 @@ mat-form-field {
 }
 //style for label of forms 
 .app-label {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 //************************* select css start *************************//
 .multiselect-dropdown {
     .dropdown-btn {
-        height: 50px;
+        height: 40px;
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
@@ -263,7 +263,7 @@ mat-form-field {
     }
 
     .dropdown-multiselect__caret {
-        height: 50px !important;
+        height: 40px !important;
     }
 
 }
@@ -302,6 +302,9 @@ mat-form-field {
     color: $white !important;
 }
 
+.download-button {
+    background-color: $warn;
+}
 //************************* mat expansion panel css end *************************//
 
 //  ------------------------------------ flex css classes end  ------------------------------------ //
