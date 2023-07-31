@@ -238,7 +238,10 @@ mat-form-field {
 .app-input {
     height: 50px;
 }
-
+// style for input box of prescription forms
+.pres-input {
+    height: 40px;
+}
 //style for label of forms 
 .app-label {
     font-size: 18px;
@@ -266,7 +269,7 @@ mat-form-field {
 }
 
 .app-single-select-dropdown {
-    height: 50px;
+    height: 40px;
     border-radius: 6px;
     border-color: $lightGray;
 }

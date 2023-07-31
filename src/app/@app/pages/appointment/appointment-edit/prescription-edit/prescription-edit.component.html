@@ -1,88 +1,138 @@
 <section class="section-org-edit">
     <mat-list class="row">
-
-        <mat-list-item class="section-title">
-            Prescriptions
-        </mat-list-item>
-        <div class="row mb-5 g-0">
-            <button (click)="addPrescription()" mat-fab color="primary">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-        <!-- Loop through each prescription suggestion -->
-        <form #prescriptionForm="ngForm" class="g-0">
-            <div class="col-md-12 mt-2 g-0" *ngFor="let prescriptionItem of prescription; let index = index">
-                <mat-list-item class="section-title">
-                    <span class="d-flex align-item-center"><mat-icon (click)="removePrescription(index)" class="remove-button"
-                            color="accent">clear</mat-icon>&nbsp;&nbsp;&nbsp; Medicine: {{index+1}}</span>
-                </mat-list-item>
-                <div class="row">
-                    <div class="col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Medicine Name</mat-label>
-                            <input matInput type="text" placeholder="Medicine name" name="name{{ index }}"
-                                [(ngModel)]="prescriptionItem.name" required>
-                        </mat-form-field>
+        <app-label>Prescription</app-label>
+        <mat-accordion>
+            <mat-expansion-panel class="my-3">
+                <mat-expansion-panel-header class="app-expansion">
+                    <div class="app-expansion-title col-md-12">
+                        <span>Patient ID: <span>0812</span></span>
+                        <span>Booking ID: <span>booking_id</span></span>
+                        <span>First Name: <span>Jitu</span></span>
+                        <span>Doctor's Name: <span>Jitendra</span></span>
+                        <span>Date: <span>02/08/23</span></span>
                     </div>
-                    <div class="col-md-6">
-                        <!-- <mat-form-field appearance="outline">
-                            <mat-label>Medicine Type</mat-label>
-                            <input matInput type="text" placeholder="Medicine type" name="type{{ index }}"
-                                [(ngModel)]="prescriptionItem.type" required>
-                        </mat-form-field> -->
+                </mat-expansion-panel-header>
+                <div class="mt-4">
+                    <span>Patient Complaints</span>
+                    <div class="border border-info rounded p-3 ">
+                        <div class=" d-flex justify-content-between">
+                            <p class=""><strong>Sno.</strong></p>
+                            <p class="col-md-8"><strong>Details</strong></p>
+                            <p class="col-md-2"></p>
+                        </div>
+                        <div class="  d-flex justify-content-between">
+                            <p class=" border border-info rounded p-1 px-2">1</p>
+
+                            <!-- Patient Number -->
+                            <div class="col-md-10 form-group">
+                                <input type="patientNumber" class="form-control pres-input" name="patientNumber"
+                                    required>
+                            </div>
+                            <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                            <mat-icon class="add-icon">delete</mat-icon>
+                        </div>
                     </div>
                 </div>
+                <div class="mt-4">
+                    <span>Diagnosis</span>
+                    <div class="border border-info rounded p-3 ">
+                        <div class=" d-flex justify-content-between">
+                            <p class=""><strong>Sno.</strong></p>
+                            <p class="col-md-8"><strong>Details</strong></p>
+                            <p class="col-md-2"></p>
+                        </div>
+                        <div class="  d-flex justify-content-between">
+                            <p class=" border border-info rounded p-1 px-2">1</p>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <!-- <mat-form-field appearance="outline">
-                            <mat-label>Power</mat-label>
-                            <input matInput type="text" placeholder="Power" name="power_{{ index }}"
-                                [(ngModel)]="prescriptionItem.power" required>
-                        </mat-form-field> -->
-                    </div>
-                    <div class="col-md-6">
-                        <!-- <mat-form-field appearance="outline">
-                            <mat-label>Medicine Brand</mat-label>
-                            <input matInput type="text" placeholder="Medicine brand" name="brand_{{ index }}"
-                                [(ngModel)]="prescriptionItem.brand" required>
-                        </mat-form-field> -->
+                            <!-- Patient Number -->
+                            <div class="col-md-10 form-group">
+                                <input type="patientNumber" class="form-control pres-input" name="patientNumber"
+                                    required>
+                            </div>
+                            <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                            <mat-icon class="add-icon">delete</mat-icon>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Medicine Dosage</mat-label>
-                            <input matInput type="text" placeholder="Medicine dosage" name="dosage_{{ index }}"
-                                [(ngModel)]="prescriptionItem.dosage" required>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Instruction</mat-label>
-                            <input matInput type="text" placeholder="Instruction" name="instruction_{{ index }}"
-                                [(ngModel)]="prescriptionItem.instruction">
-                        </mat-form-field>
+                <div class="mt-4">
+                    <span>Rx</span>
+                    <div class="border border-info rounded p-3">
+                        <div class="row">
+                            <div class="col-md-1"><strong>Sno.</strong></div>
+                            <div class="col-md-3"><strong>Medicine</strong></div>
+                            <div class="col-md-2"><strong>Dosage</strong></div>
+                            <div class="col-md-2"><strong>Duration</strong></div>
+                            <div class="col-md-2"><strong>Remark</strong></div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-1 pres-input text-center">
+                                <p class="border border-info rounded p-1 text-align-center">1</p>
+                            </div>
+                            <!-- Medicine Type -->
+                            <div class="form-group d-flex justify-content-between align-items-center col-md-3">
+                                <select name="patientType" class="app-single-select-dropdown w-75">
+                                    <option>Acifin P</option>
+                                    <option>Appointment</option>
+                                    <option>Admission</option>
+                                    <option>Investigation</option>
+                                    <option>Emergency</option>
+                                </select>
+                                <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                            </div>
+                            <!-- Dosage -->
+                            <div class="form-group col-md-2">
+                                <select name="dosage" class="app-single-select-dropdown w-100">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>other</option>
+                                </select>
+                            </div>
+                            <!-- Duration -->
+                            <div class="form-group col-md-2">
+                                <select name="duration" class="app-single-select-dropdown w-100">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>Emergency</option>
+                                </select>
+                            </div>
+                            <!-- Remark -->
+                            <div class="form-group col-md-2">
+                                <input type="patientNumber" class="form-control pres-input w-100" n>
+                                <!-- Add options for Remark here -->
+                            </div>
+
+                            <div class=" d-flex col-md-2 justify-content-around ">
+                                <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                                <mat-icon class="add-icon">delete</mat-icon>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <!-- <mat-form-field appearance="outline">
-                            <mat-label>Quantity</mat-label>
-                            <input matInput type="number" placeholder="Quantity" name="quantity_{{ index }}"
-                                [(ngModel)]="prescriptionItem.quantity" required>
-                        </mat-form-field> -->
+                <div class="mt-4 row align-items-center">
+                    <div class="col-md-3">
+                        <span>Investigation</span>
+                        <input type="patientNumber" class="form-control pres-input" name="patientNumber">
                     </div>
-                    <div class="col-md-6">
-                        <!-- <mat-checkbox name="before_meal_{{index}}" [(ngModel)]="prescriptionItem.beforeMeal">Before
-                            Meal</mat-checkbox> -->
+                    <div class="col-md-3">
+                        <span>Remark</span>
+                        <input type="patientNumber" class="form-control pres-input" name="patientNumber">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="checkbox" class="me-1">
+                        <span>Next Visit</span>
+                        <input type="patientNumber" class="form-control pres-input" name="patientNumber">
                     </div>
                 </div>
-                <hr>
-
-            </div>
-
-        </form>
+                <div class="mt-2 d-flex justify-content-end">
+                    <button class="btn btn-info ms-2">Save</button>
+                    <button class="btn btn-info ms-2">Add New</button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
     </mat-list>
 </section>
