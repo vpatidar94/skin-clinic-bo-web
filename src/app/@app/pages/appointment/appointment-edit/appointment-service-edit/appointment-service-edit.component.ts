@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild,SimpleChanges,OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,9 +12,10 @@ import { BillingComponent } from 'src/app/@shared/component/billing/billing.comp
 
 @Component({
     selector: 'app-appointment-service-edit',
-    templateUrl: './appointment-service-edit.component.html'
+    templateUrl: './appointment-service-edit.component.html',
+    styleUrls: ['./appointment-service-edit.component.scss']
 })
-export class AppointmentServiceEditComponent implements OnInit {
+export class AppointmentServiceEditComponent implements OnInit,OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     inValidServiceEditForm!: boolean;
@@ -42,6 +43,27 @@ export class AppointmentServiceEditComponent implements OnInit {
     orderItemsList: Array<OrderItemVo> = [];
     bookingItemsList!: BookingVo; 
 
+    // dropdownList = [
+    //     { item_id: 1, item_text: 'Therapy' },
+    //     { item_id: 2, item_text: 'Consultation' },
+    //     { item_id: 3, item_text: 'Pune' },
+    //     { item_id: 4, item_text: 'Navsari' },
+    //     { item_id: 5, item_text: 'New Delhi' }
+    // ];
+   
+
+    serviceSelectList!: Array<any>;
+    selectedServices = [];
+    dropdownSettings = {
+        singleSelection: false,
+        idField: 'item_id',
+        textField: 'item_text',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+        enableCheckAll: false,
+        maxHeight: 500
+    };
+
     /* ************************************ Constructors ************************************ */
     constructor(private dialog: MatDialog) {
     }
@@ -56,7 +78,17 @@ export class AppointmentServiceEditComponent implements OnInit {
 
         this.orderItemsList = this.booking.items;
         this.bookingItemsList = this.booking;
+        console.log(";;;;;",this.serviceItemList)
 
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['serviceItemList']) {
+            this.serviceItemList = changes['serviceItemList'].currentValue;
+            this.serviceSelectList = this.serviceItemList.map((item:ItemDetailDto) => {
+                return { item_id: item.item._id, item_text: `${item.item.name}` };
+            });
+        }
     }
 
     public addressFormChange(event: UiActionDto<boolean>): void {
@@ -90,6 +122,20 @@ export class AppointmentServiceEditComponent implements OnInit {
         console.log("xxxx total is :")
         this._confirmRemoveItem();
 
+    }
+
+
+    onItemSelect(item: any) {
+        console.log(item);
+    }
+    onSelectAll(items: any) {
+        console.log(items);
+    }
+
+    onDocSelect(item: any) {
+        // this.user.booking.dr = this.selectedServices.map((doc: any) => doc.item_id);
+        // this.userBookingChange.emit(this.userBooking);
+        
     }
 
     /* ************************************ Private Methods ************************************ */

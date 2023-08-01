@@ -247,7 +247,7 @@ mat-form-field {
 
 // style for input box of forms
 .app-input {
-    height: 40px;
+    height: 50px;
 }
 // style for input box of prescription forms
 .pres-input {
@@ -255,7 +255,7 @@ mat-form-field {
 }
 //style for label of forms 
 .app-label {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 //************************* select css start *************************//
@@ -285,6 +285,7 @@ mat-form-field {
     border-color: $lightGray;
 }
 
+
 //************************* multiselect css end *************************//
 
 //************************* mat expansion panel css start *************************//
@@ -313,9 +314,6 @@ mat-form-field {
     color: $white !important;
 }
 
-.download-button {
-    background-color: $warn;
-}
 //************************* mat expansion panel css end *************************//
 
 //  ------------------------------------ flex css classes end  ------------------------------------ //
