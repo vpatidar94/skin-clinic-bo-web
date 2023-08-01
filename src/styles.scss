@@ -206,6 +206,17 @@ mat-list-item.section-title {
     background-color: $lightBrown !important;
 }
 
+.common-button {
+    background-color: $secondary;
+    color: $white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+.common-button:hover{
+    background-color:$warn;
+}
 //  ------------------------------------ flex css classes start  ------------------------------------ //
 .flex-row {
     display: flex !important;
