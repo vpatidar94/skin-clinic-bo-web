@@ -34,7 +34,7 @@ import { BillingComponent } from 'src/app/@shared/component/billing/billing.comp
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BillingEditComponent } from './billing-edit/billing-edit.component';
-
+import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -57,7 +57,7 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),SharedDirectiveModule],
   providers: [],
   exports: [],
   declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent,PrescriptionEditComponent, BillingComponent,BillingEditComponent]
