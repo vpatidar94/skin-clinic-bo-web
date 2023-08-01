@@ -60,6 +60,10 @@ export class AppointmentComponent implements OnInit {
     this._init();
   }
 
+  public save(): void {
+    console.log("other",this.userBooking.booking.drExt);
+  }
+
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       console.log(this.userBooking);

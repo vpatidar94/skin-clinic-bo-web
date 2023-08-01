@@ -221,7 +221,21 @@
                     </div>
                 </div>
 
-                <!-- Refered By-->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Other Doctor</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="otherDoctor" class="form-control app-input" name="otherDoctor" [(ngModel)]="userBooking.booking.drExt">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Refered By
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
@@ -234,7 +248,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="row">
@@ -268,6 +282,22 @@
                     </div>
                 </div>
             </div>
+            <!-- Refered By-->
+            <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label for="exampleInputEmail1" class="app-label">Referred By</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="referredBy" class="form-control app-input" name="referredBy"
+                                [(ngModel)]="userBooking.booking.referedBy" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
             <app-label>Adress Details</app-label>
             <div class="row">
                 <app-eg-edit-address-form [(address)]="userBooking.user.address"
