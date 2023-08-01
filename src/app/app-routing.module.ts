@@ -3,13 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './@app/layout/layout.component';
 import { SigninComponent } from './@shared/component/signin/signin.component';
 import { AuthGuard } from './@shared/security/auth.guard';
+import { UsersComponent } from './@app/pages/users/users.component';
 
 const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent
   },
+  {
+    path: 'users',
+    component: UsersComponent,
   
+  },
 
   {
     path: '',

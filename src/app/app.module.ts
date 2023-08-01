@@ -17,12 +17,14 @@ import { SharedServiceModule } from './@shared/service/shared-service.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { UsersModule } from './@app/pages/users/users.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    UsersModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

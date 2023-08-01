@@ -1,0 +1,272 @@
+<section class="section-org-edit">
+
+    <form #patientForm="ngForm">
+        <mat-list class="row">
+            <app-label>Personal Information</app-label>
+            <div class="row">
+                <!-- User Id -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">User Id</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="userId" class="form-control app-input" name="userId" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Date</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input class="form-control app-input" name="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- First Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label app-input">First Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="nameF" class="form-control app-input" name="nameF" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Last Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="nameL" class="form-control app-input" name="nameL" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Gender -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3 mt-3">
+                        <div class="col-md-3">
+                            <label class="label" class="app-label">Gender</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline" *ngFor="let g of genderList">
+                                <input class="form-check-input" type="radio" name="gender" [value]="g.id">
+                                <label class="form-check-label">{{ g.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Age -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Age</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="age" class="form-control app-input" name="age" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <!-- Contact No -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Contact Number</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="cell1" class="form-control app-input" name="cell1" required maxlength="10"
+                                    minlength="10" appNumberOnly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Email</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="email" class="form-control app-input" name="email" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <!-- Date of Birth -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Date of Birth</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="dateOfBirth" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--User Type -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">User Type</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <select name="userType" class="app-single-select-dropdown w-100" required>
+                                    <option>a</option>
+                                    <option>b</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Fathers Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Father's Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="fatherName" class="form-control app-input" name="fatherName" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Alternate Number-->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Alternate Number</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="cell2" class="form-control app-input" name="cell2" required maxlength="10"
+                                    minlength="10" appNumberOnly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Deparment -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Deparment</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="department" class="form-control app-input" name="department" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Designation -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label"> Designation</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input class="form-control app-input" name="designation" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Add Photo -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Add Photo</label>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-md-5">
+                                <input class="form-control app-input" name="addPhoto" required>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="common-button">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- upload Id Proof -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label"> Upload Id Proof</label>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-md-5">
+                                <input class="form-control app-input" name="uploadIdProof" required>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="common-button">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+   <!-- Address Section -->
+            <app-label>Address Details</app-label>
+            <div class="row">
+                <app-eg-edit-address-form></app-eg-edit-address-form>
+            </div>
+        </mat-list>
+
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <div class="col-1">
+                <button class="common-button">{{'save'}}</button>
+            </div>
+            <div class="col-2">
+                <button class="common-button">{{'Generate Id Card'}}</button>
+            </div>
+        </div>
+    </form>
+</section>

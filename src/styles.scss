@@ -212,10 +212,32 @@ mat-list-item.section-title {
     padding: 5px 20px;
     border-radius: 10px;
     border: none;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     transition: background-color 0.3s ease;
 }
 .common-button:hover{
     background-color:$warn;
+}
+.cancel-button {
+    background-color: $white;
+    color: $black;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    transition: background-color 0.3s ease;
+}
+.cancel-button:hover{
+    background-color:$warn;
+}
+//---------------------------------------TAB STYLES ---------------------------------------------//
+.tab-style{
+    height:40px;
+    width:60%;
+}
+
+.tab-content{
+    width:16.66%;
 }
 //  ------------------------------------ flex css classes start  ------------------------------------ //
 .flex-row {
