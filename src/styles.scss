@@ -280,6 +280,16 @@ mat-form-field {
     font-size: 18px;
 }
 
+// style for add and delete icon 
+.add-icon{
+    cursor: pointer;
+    align-self: center;
+    // font-size: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
 //************************* select css start *************************//
 .multiselect-dropdown {
     .dropdown-btn {

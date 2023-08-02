@@ -4,7 +4,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo } from 'aayam-clinic-core';
+import { BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { MatDialog } from '@angular/material/dialog';
 import { BillingComponent } from 'src/app/@shared/component/billing/billing.component';
@@ -51,6 +51,40 @@ export class AppointmentServiceEditComponent implements OnInit,OnChanges {
     //     { item_id: 5, item_text: 'New Delhi' }
     // ];
    
+
+    // newly added today
+    serviceCount = 1;
+    services: any[] = [{ count: 1 }];
+
+//   addNewService() {
+//     this.serviceCount++;
+//     this.services.push({ id: this.serviceCount });
+//   }
+
+//   removeService(serviceId: number) {
+//     if (this.services.length > 1) {
+//       const index = this.services.findIndex((service) => service.id === serviceId);
+//       if (index !== -1) {
+//         this.services.splice(index, 1);
+//       }
+//     }
+//   }
+addNewService() {
+    this.serviceCount++;
+    // this.services.push({ count: this.serviceCount });
+    this.services.push([] as ItemDetailDto[]);
+
+  }
+
+//   removeService() {
+//     if (this.services.length > 1) {
+//       this.services.pop();
+//     }
+//   }
+
+  public removeService(index: number): void {
+    this.services.splice(index, 1);
+}
 
     serviceSelectList!: Array<any>;
     selectedServices = [];
@@ -133,8 +167,11 @@ export class AppointmentServiceEditComponent implements OnInit,OnChanges {
     }
 
     onDocSelect(item: any) {
-        // this.user.booking.dr = this.selectedServices.map((doc: any) => doc.item_id);
+        // this.userBooking.booking.dr = this.selectedServices.map((doc: any) => doc.item_id);
         // this.userBookingChange.emit(this.userBooking);
+        // this.serviceItemList = this.selectedServices.map((doc: any) => doc.item_id);
+
+
         
     }
 

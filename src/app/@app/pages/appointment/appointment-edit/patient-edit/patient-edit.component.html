@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input  class="form-control app-input" name="date"
+                                <input class="form-control app-input" name="date"
                                     [(ngModel)]="userBooking.booking.bookingDate" required>
                             </div>
                         </div>
@@ -124,7 +124,8 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="cell1" class="form-control app-input" name="cell1"
-                                    [(ngModel)]="userBooking.user.cell" required maxlength="10" minlength="10"  appNumberOnly>
+                                    [(ngModel)]="userBooking.user.cell" required maxlength="10" minlength="10"
+                                    appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -173,7 +174,8 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="cell2" class="form-control app-input" name="cell2"
-                                    [(ngModel)]="userBooking.user.cell2" required maxlength="10" minlength="10" appNumberOnly>
+                                    [(ngModel)]="userBooking.user.cell2" required maxlength="10" minlength="10"
+                                    appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -208,13 +210,10 @@
                             <label for="exampleInputEmail1" class="app-label">Doctor</label>
                         </div>
                         <div class="col-md-7">
-                            <!-- <div class="form-group">
-                                <input type="doctorName" class="form-control app-input" name="doctorName"
-                                    [(ngModel)]="userBooking.booking.dr" required>
-                            </div> -->
                             <div class="form-group">
-                                <ng-multiselect-dropdown [name]="'doctorName'" [placeholder]="'Select Doctor'" [settings]="dropdownSettings" [data]="docSelectList"
-                                    [(ngModel)]="selectedDocs" (onDeSelect)="onDocSelect($event)" (onSelect)="onDocSelect($event)">
+                                <ng-multiselect-dropdown [name]="'doctorName'" [placeholder]="'Select Doctor'"
+                                    [settings]="dropdownSettings" [data]="docSelectList" [(ngModel)]="selectedDocs"
+                                    (onDeSelect)="onDocSelect($event)" (onSelect)="onDocSelect($event)">
                                 </ng-multiselect-dropdown>
                             </div>
                         </div>
@@ -228,27 +227,12 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="otherDoctor" class="form-control app-input" name="otherDoctor" [(ngModel)]="userBooking.booking.drExt">
+                                <input type="otherDoctor" class="form-control app-input" name="otherDoctor"
+                                    [(ngModel)]="userBooking.booking.drExt">
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <!-- Refered By
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Referred By</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="referredBy" class="form-control app-input" name="referredBy"
-                                    [(ngModel)]="userBooking.booking.referedBy" required>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
             <div class="row">
@@ -284,20 +268,20 @@
             </div>
             <!-- Refered By-->
             <div class="row">
-            <div class="col-md-6">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="col-md-3">
-                        <label for="exampleInputEmail1" class="app-label">Referred By</label>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <input type="referredBy" class="form-control app-input" name="referredBy"
-                                [(ngModel)]="userBooking.booking.referedBy" required>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Referred By</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="referredBy" class="form-control app-input" name="referredBy"
+                                    [(ngModel)]="userBooking.booking.referedBy" required>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
             <app-label>Adress Details</app-label>
             <div class="row">
                 <app-eg-edit-address-form [(address)]="userBooking.user.address"

@@ -36,6 +36,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BillingEditComponent } from './billing-edit/billing-edit.component';
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 
+// newly added 
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
 const MATERIAL_MODULE = [
   MatButtonModule,
   MatButtonToggleModule,
@@ -51,7 +56,8 @@ const MATERIAL_MODULE = [
   MatCardModule,
   MatDatepickerModule,
   MatPaginatorModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSortModule,
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];

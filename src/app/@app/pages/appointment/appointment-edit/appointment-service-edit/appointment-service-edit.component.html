@@ -11,36 +11,40 @@
                         <span>Doctor's Name: <span>M. Patidar</span></span>
                     </div>
                 </mat-expansion-panel-header>
-                <div class="border border-info rounded p-3 mt-4 container-style">
+                <div class="border border-info rounded p-3 mt-4">
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
                         <div class="col-md-4"><strong>Service</strong></div>
                         <div class="col-md-2"><strong>Total Amount</strong></div>
                         <div class="col-md"></div>
                     </div>
-                    <div class="row align-items-center">
-                        <div class="col-md-1 pres-input text-center">
-                            <p class="border border-info rounded p-1 text-align-center">1</p>
-                        </div>
-                        <!-- Service -->
-                        <div class="form-group col-md-4">
-                            <ng-multiselect-dropdown [name]="'name'" [placeholder]="'Select Service'"
-                                [settings]="dropdownSettings" [data]="serviceSelectList" [(ngModel)]="selectedServices"
-                                (onDeSelect)="onDocSelect($event)" (onSelect)="onDocSelect($event)">
-                            </ng-multiselect-dropdown>
-                        </div>
+                    <div *ngFor="let service of services; let j = index" class="row align-items-center mt-3">
 
-                        <!--Total Amount  -->
-                        <div class="form-group col-md-2">
-                            <input type="patientNumber" class="form-control pres-input w-100" n>
-                        </div>
+                        <div class="row align-items-center">
+                            <!-- <div *ngFor="let service of services" class="row align-items-center mt-3"> -->
+                            <div class="col-md-1 pres-input text-center">
+                                <p class="border border-info rounded p-1 text-align-center">{{j+1 }}</p>
+                            </div>
+                            <!-- Service -->
+                            <div class="form-group col-md-4">
+                                <ng-multiselect-dropdown [name]="'name'" [placeholder]="'Select Service'"
+                                    [settings]="dropdownSettings" [data]="serviceSelectList"
+                                    [(ngModel)]="selectedServices" (onDeSelect)="onDocSelect($event)"
+                                    (onSelect)="onDocSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
 
-                        <div class="col-md-1">
-                            <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                            <!--Total Amount  -->
+                            <div class="form-group col-md-2">
+                                <input readonly type="patientNumber" class="form-control pres-input w-100">
+                            </div>
+                            <div class="col-md-2">
+                                <mat-icon class="add-icon me-4" (click)="addNewService()">add_circle_outline</mat-icon>
+                                <mat-icon class="add-icon" (click)="removeService(1)">delete</mat-icon>
+                            </div>
                         </div>
-                        <div class="col-md-1"><mat-icon class="add-icon">delete</mat-icon></div>
+                        </div>
                     </div>
-                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </mat-list>

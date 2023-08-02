@@ -24,6 +24,18 @@ export class PrescriptionEditComponent implements OnInit {
     prescriptionForm!: NgForm;
 
 
+    // newly added  for complaint section
+    complaintsCount = 1;
+    complaints: any[] = [{ count: 1 }];
+
+    //newly added for diagnosis section
+    diagnosisCount=1;
+    diagnosis: any[] = [{ count:1 }];
+
+    // newly added for Rx section
+    RxCount=1;
+    Rx: any[] = [{ count:1 }];
+
 
     /* ************************************ Constructors ************************************ */
     constructor() {
@@ -50,6 +62,43 @@ export class PrescriptionEditComponent implements OnInit {
     //     return index;
     // }
 
+
+
+    // newly added for compllaints section
+    addComplaints() {
+        this.complaintsCount++;
+        this.complaints.push({ count: this.complaintsCount });
+      }
+    
+      removeComplaints() {
+        if (this.complaints.length > 1) {
+          this.complaints.pop();
+        }
+      }
+
+    // newly added for diagnosis section
+    addDiagnosis() {
+        this.diagnosisCount++;
+        this.diagnosis.push({ count: this.diagnosisCount });
+      }
+    
+      removeDiagnosis() {
+        if (this.diagnosis.length > 1) {
+          this.diagnosis.pop();
+        }
+      }
+
+      //newly added for Rx section
+      addRx() {
+        this.RxCount++;
+        this.Rx.push({ count: this.RxCount });
+      }
+    
+      removeRx() {
+        if (this.Rx.length > 1) {
+          this.Rx.pop();
+        }
+      }
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
