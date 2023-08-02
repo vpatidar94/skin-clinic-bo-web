@@ -77,15 +77,16 @@
     <section *ngIf="showSectionAppointmentEdit">
 
         <div>
-            <app-appointment-edit [docterList]="doctorList" [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-appointment-edit>
+            <app-appointment-edit [docterList]="doctorList" [serviceItemList]="serviceItemList"
+                [(userBooking)]="userBooking"></app-appointment-edit>
         </div>
 
         <div class="d-flex align-items-center justify-content-center mb-4">
             <div class="col-1">
-                <button  (click)="save()" class="common-button" >{{'save'}}</button>
+                <button (click)="saveBooking()" class="common-button">{{'save'}}</button>
             </div>
             <div class="col-1">
-                <button (click)="cancel()" class="cancel-button" >{{'cancel'}}</button>
+                <button (click)="cancel()" class="cancel-button">{{'cancel'}}</button>
             </div>
         </div>
     </section>

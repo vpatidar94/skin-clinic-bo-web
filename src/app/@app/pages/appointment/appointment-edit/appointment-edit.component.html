@@ -13,7 +13,7 @@
     </div>
 
     <div *ngIf="showSectionObservation">
-        <app-observation-edit></app-observation-edit>
+        <app-observation-edit [(userBooking)]="userBooking"></app-observation-edit>
     </div>
 
     <div *ngIf="showSectionService">

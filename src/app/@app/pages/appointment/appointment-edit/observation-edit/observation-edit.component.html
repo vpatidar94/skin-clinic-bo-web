@@ -4,115 +4,78 @@
         <div class="row mt-4">
             <app-label>Observations</app-label>
             <div class="col-md-2">
-                <button class="common-button">Add New</button>
+                <button (click)="addNewObservation()" [disabled]="showSectionAdd" class="common-button">Add New</button>
             </div>
             <mat-accordion>
-                <mat-expansion-panel class="my-3" *ngFor="let b of pastBookingList">
-                    <mat-expansion-panel-header class="app-expansion">
-                        <div class="app-expansion-title col-md-12">
-                            <span>Patient ID: <span>{{b.booking.patientNo}}</span></span>
-                            <span>Booking ID: <span>{{b.booking.no}}</span></span>
-                            <span>First Name: <span>{{b.user.nameF}}</span></span>
-                            <span>Doctor's Name: <span>Jitendra</span></span>
-                            <span>Date: <span>{{b.booking.bookingDate}}</span></span>
-                        </div>
-                    </mat-expansion-panel-header>
-                    <div class="border border-info rounded p-3 mt-4">
-                        <!-- <div class=" d-flex justify-content-between">
-                            <p class=""><strong>Sno.</strong></p>
-                            <p class="col-md-8"><strong>Investigations</strong></p>
-                            <p class="col-md-2"></p>
-                        </div>
-                        <div class="  d-flex justify-content-between" *ngFor="let item of patientTests; let i=index">
-                            <p class=" border border-info rounded p-1 px-2">{{i+1}}</p>
-                            <p class="col-md-8 border border-info rounded p-1 ">{{item.testsArray[i]}}</p>
-                            <button class="warn-button btn btn-info h-25">Preview</button>
-                            <button class="download-button btn btn-info h-25">Download</button>
-                        </div> -->
-                    </div>
-                </mat-expansion-panel>
                 <mat-expansion-panel class="my-3">
                     <mat-expansion-panel-header class="app-expansion">
                         <div class="app-expansion-title col-md-12">
-                            <span>Patient ID: <span>{{booking.booking.patientNo}}</span></span>
-                            <span>Booking ID: <span>{{booking.booking.no}}</span></span>
-                            <span>First Name: <span>{{booking.user.nameF}}</span></span>
-                            <span>Doctor's Name: <span>Jitendra</span></span>
-                            <span>Date: <span>{{booking.booking.bookingDate}}</span></span>
+                            <span>Patient ID: <span>1122</span></span>
+                            <span>Booking ID: <span>23333</span></span>
+                            <span>First Name: <span>James D</span></span>
+                            <span>Doctor's Name: <span>Ram</span></span>
+                            <span>Date: <span></span></span>
                         </div>
                     </mat-expansion-panel-header>
                     <div class="border border-info rounded p-3 mt-4">
-                        <!-- <div class=" d-flex justify-content-between">
-                                            <p class=""><strong>Sno.</strong></p>
-                                            <p class="col-md-8"><strong>Investigations</strong></p>
-                                            <p class="col-md-2"></p>
+
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-accordion *ngIf="showSectionAdd">
+                <mat-expansion-panel class="my-3">
+                    <mat-expansion-panel-header class="app-expansion">
+                        <div class="app-expansion-title col-md-12">
+                            <span>Patient ID: <span>1122</span></span>
+                            <span>Booking ID: <span>23333</span></span>
+                            <span>First Name: <span>James D</span></span>
+                            <span>Doctor's Name: <span>Ram</span></span>
+                            <span>Date: <span></span></span>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <div class="border border-info rounded p-3 mt-4 min-height-300">
+                        <form #observationForm="ngForm">
+                            <div class="row">
+                                <!-- Doctor's Name -->
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="col-md-5">
+                                            <label for="exampleInputEmail1" class="app-label">Select Health
+                                                Parameter</label>
                                         </div>
-                                        <div class="  d-flex justify-content-between" *ngFor="let item of patientTests; let i=index">
-                                            <p class=" border border-info rounded p-1 px-2">{{i+1}}</p>
-                                            <p class="col-md-8 border border-info rounded p-1 ">{{item.testsArray[i]}}</p>
-                                            <button class="warn-button btn btn-info h-25">Preview</button>
-                                            <button class="download-button btn btn-info h-25">Download</button>
-                                        </div> -->
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <ng-multiselect-dropdown [name]="'doctorName'"
+                                                    [placeholder]="'Select Doctor'" [settings]="dropdownSettings"
+                                                    (onDeSelect)="onParamSelect($event)"
+                                                    (onSelect)="onParamSelect($event)" [data]="paramSelectList"
+                                                    [(ngModel)]="selectedParams">
+                                                </ng-multiselect-dropdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" *ngFor="let in of userBooking.booking.observation.healthParams">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="col-md-4">
+                                            <label for="exampleInputEmail1" class="app-label">{{in.name}}</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control app-input" [name]="in.key"
+                                                    [(ngModel)]="in.value" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
     </div>
-
-    <!-- <form #observationForm="ngForm">
-        <mat-list class="row">
-
-            <mat-list-item class="section-title">
-                Observations
-            </mat-list-item>
-
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Weight(Kg)</mat-label>
-                        <input matInput placeholder="Weight in Kg" name="weight" [(ngModel)]="observation.weight"
-                            required>
-                    </mat-form-field>
-                </div>
-                <div class="col-md pad-l-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Height(cm)</mat-label>
-                        <input matInput placeholder="Height in cm" name="height" [(ngModel)]="observation.height"
-                            required>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Blood Pressure(Min)</mat-label>
-                        <input matInput [(ngModel)]="observation.bpMin" name="bpMin" placeholder="Min Blood Pressure." required/>
-                    </mat-form-field>
-                </div>
-                <div class="col-md pad-l-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Blood Pressure (Max)</mat-label>
-                        <input matInput placeholder="Max Blood Pressure" name="bpMax" [(ngModel)]="observation.bpMax" required>
-                    </mat-form-field>
-                </div>
-            </div> -->
-
-    <!-- <div class="row g-0">
-                <div class="col-md pad-r-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Temperature(&deg;F)</mat-label>
-                        <input matInput placeholder="Body Temperature in Fahrenheit" name="temprature"
-                            [(ngModel)]="observation.temprature" required>
-                    </mat-form-field>
-                </div>
-                <div class="col-md pad-l-md-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Other</mat-label>
-                        <input matInput placeholder="Other Details" name="other" [(ngModel)]="observation.other">
-                    </mat-form-field>
-                </div>
-            </div> -->
-    <!-- </mat-list> -->
-    <!-- </form> -->
 </section>

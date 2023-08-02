@@ -17,7 +17,6 @@ export class PatientEditComponent implements OnInit, OnChanges {
 
     @Input()
     userBooking!: UserBookingDto;
-
     @Output()
     userBookingChange = new EventEmitter<UserBookingDto>();
 
@@ -74,6 +73,7 @@ export class PatientEditComponent implements OnInit, OnChanges {
             case 'CHANGE_FORM_ADDRESS':
                 this.inValidAddressForm = event.data;
                 this._formChanged();
+                this.userBookingChange.emit(this.userBooking);
                 break;
         }
     }

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
-import { AuthService } from 'src/app/@shared/security/auth.service';
+import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-import { AuthApi } from '../../service/remote/auth.api';
-import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
+import { ServiceItemApi } from '../../service/remote/service-item.api';
+import { UserApi } from '../../service/remote/user.api';
 
 @Component({
   selector: 'app-appointment',
@@ -40,6 +38,8 @@ export class AppointmentComponent implements OnInit {
     const userBooking = {} as UserBookingDto;
     const booking = {} as BookingVo;
     booking.observation = {} as ObservationVo;
+    booking.observation.date = new Date();
+    booking.observation.healthParams = [] as Array<KeyValueVo>
     booking.prescription = [] as PrescriptionVo[];
     booking.instruction = [] as string[];
     booking.test = [] as string[];
@@ -53,6 +53,7 @@ export class AppointmentComponent implements OnInit {
     }
     userBooking.booking = booking;
     userBooking.user = {} as UserVo;
+    userBooking.user.address = {} as AddressVo;
     this._addEditOrg(userBooking);
   }
 
@@ -60,13 +61,9 @@ export class AppointmentComponent implements OnInit {
     this._init();
   }
 
-  public save(): void {
-    console.log("other",this.userBooking.booking.drExt);
-  }
-
   public saveBooking(): void {
+    console.log(this.userBooking);
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
-      console.log(this.userBooking);
     });
   }
 
@@ -98,7 +95,7 @@ export class AppointmentComponent implements OnInit {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.serviceItemList = res.body;
-          console.log("xxxservices",this.serviceItemList);
+          console.log("xxxservices", this.serviceItemList);
         }
       }
     });
