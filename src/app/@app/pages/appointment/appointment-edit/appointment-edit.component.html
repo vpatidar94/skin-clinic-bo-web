@@ -17,7 +17,7 @@
     </div>
 
     <div *ngIf="showSectionService">
-        <app-appointment-service-edit [serviceItemList]="serviceItemList" [(booking)]="userBooking.booking"></app-appointment-service-edit>
+        <app-appointment-service-edit [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-appointment-service-edit>
     </div>
 
     <div *ngIf="showSectionTest">
