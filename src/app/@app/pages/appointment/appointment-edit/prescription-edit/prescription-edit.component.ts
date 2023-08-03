@@ -22,7 +22,7 @@ export class PrescriptionEditComponent implements OnInit {
 
   @ViewChild('prescriptionForm', { static: true })
   prescriptionForm!: NgForm;
-
+ 
   // newly added 
   // @Input()
   // userbooking!: BookingVo;
@@ -33,20 +33,24 @@ export class PrescriptionEditComponent implements OnInit {
   showSectionAdd = false;
 
   // newly added  for complaint section
-  complaintsCount = 1;
-  complaints: any[] = [{ count: 1 }];
+  // complaintsCount = 1;
+  // complaints: any[] = [{ count: 1 }];
+  complaints: BookingVo["complaint"] = [" "]
 
   //newly added for diagnosis section
-  diagnosisCount = 1;
-  diagnosis: any[] = [{ count: 1 }];
+  
+  diagnosis: BookingVo["diagnosis"]  = [" "];
 
   // newly added for Rx section
   RxCount = 1;
   Rx: any[] = [{ count: 1 }];
 
+  rxPrescription!: Array<PrescriptionVo>;
+
 
   /* ************************************ Constructors ************************************ */
   constructor() {
+    // console.log("xxcc",this.diagnosis)
   }
 
   /* ************************************ Public Methods ************************************ */
@@ -73,28 +77,28 @@ export class PrescriptionEditComponent implements OnInit {
 
 
   // newly added for compllaints section
-  addComplaints() {
-    this.complaintsCount++;
-    this.complaints.push({ count: this.complaintsCount });
-  }
+  // addComplaints() {
+  //   this.complaintsCount++;
+  //   this.complaints.push({ count: this.complaintsCount });
+  // }
 
-  removeComplaints() {
-    if (this.complaints.length > 1) {
-      this.complaints.pop();
-    }
-  }
+  // removeComplaints() {
+  //   if (this.complaints.length > 1) {
+  //     this.complaints.pop();
+  //   }
+  // }
 
   // newly added for diagnosis section
-  addDiagnosis() {
-    this.diagnosisCount++;
-    this.diagnosis.push({ count: this.diagnosisCount });
-  }
+  // addDiagnosis() {
+  //   this.diagnosisCount++;
+  //   this.diagnosis.push({ count: this.diagnosisCount });
+  // }
 
-  removeDiagnosis() {
-    if (this.diagnosis.length > 1) {
-      this.diagnosis.pop();
-    }
-  }
+  // removeDiagnosis() {
+  //   if (this.diagnosis.length > 1) {
+  //     this.diagnosis.pop();
+  //   }
+  // }
 
   //newly added for Rx section
   addRx() {
@@ -132,10 +136,9 @@ export class PrescriptionEditComponent implements OnInit {
 
     // this.userBooking.booking.diagnosis = [];
 
-    const diagnosisItem = "";
-    this.userBooking?.booking?.diagnosis.push(diagnosisItem);
-    this.diagnosis.push(diagnosisItem);
-    console.log("xx xx xx", this.diagnosis.length);
+    // this.userBooking?.booking?.diagnosis.push(diagnosisItem);
+    this.diagnosis.push("abc");
+    console.log("xx xx xx", this.diagnosis.length, "ccc",this.diagnosis);
 
 
   }
@@ -157,8 +160,8 @@ export class PrescriptionEditComponent implements OnInit {
     // this.userBooking.booking.items.push(orderItem);
     // this.userBookingChange.emit(this.userBooking);
 
-    const complaintItem = "";
-    this.complaints.push(complaintItem);
+    
+    this.complaints.push(" ");
     console.log("xx xx xx", this.complaints.length);
 
 
@@ -179,9 +182,15 @@ export class PrescriptionEditComponent implements OnInit {
     // orderItem.amount = 0;
     // this.userBooking.booking.items.push(orderItem);
     // this.userBookingChange.emit(this.userBooking);
+    const rxItem = {} as PrescriptionVo;
+    rxItem.dosage = "";
+    rxItem.duration = 1;
+    rxItem.instruction = "";
+    rxItem.name = "";
 
-    const rxItem = "";
-    this.Rx.push(rxItem);
+
+    // const rxItem = "";
+    this.Rx.push("");
     // console.log("xx xx xx",this.complaints.length);
 
 
@@ -193,7 +202,7 @@ export class PrescriptionEditComponent implements OnInit {
     // this.userBookingChange.emit(this.userBooking);
     // console.log(this.userBooking);
     // console.log("item has removed");
-    this.Rx.splice(index, 1);
+    this.rxPrescription.splice(index, 1);
   }
 
 

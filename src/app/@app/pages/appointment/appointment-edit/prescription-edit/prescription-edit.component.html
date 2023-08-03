@@ -66,6 +66,7 @@
                                                 class="add-icon clickable">delete</mat-icon>
                                             &nbsp;&nbsp;
                                             <mat-icon (click)="addComplaintItem()"
+                                            *ngIf="(i+1) === complaints?.length"
                                                 class="add-icon clickable">add_circle_outline</mat-icon>
                                         </div>
                                     </div>
@@ -81,7 +82,7 @@
                                             <p class="col-md-8"><strong>Details</strong></p>
                                             <p class="col-md-2"></p>
                                         </div>
-                                        <div *ngFor="let diagnosis of diagnosis; let i = index;"
+                                        <div *ngFor="let diagnos of diagnosis; let i = index;"
                                             class="row align-items-center">
 
                                             <!-- <div class="d-flex"> -->
@@ -104,8 +105,9 @@
                                                     <mat-icon (click)="removeDiagnosisItem(i)"
                                                         class="add-icon clickable">delete</mat-icon>
                                                     &nbsp;&nbsp;
-                                                    <mat-icon (click)="addDiagnosisItem()"
                                                     
+                                                    <mat-icon (click)="addDiagnosisItem()"
+                                                        *ngIf="(i+1) === diagnosis?.length"
                                                         class="add-icon clickable">add_circle_outline</mat-icon>
                                                 </div>
                                             </div>
@@ -123,7 +125,7 @@
                                             <div class="col-md-2"><strong>Remark</strong></div>
                                             <div class="col-md-2"></div>
                                         </div>
-                                        <div *ngFor="let Rx of Rx; let i = index;" class="row align-items-center">
+                                        <div *ngFor="let item of Rx; let i = index;" class="row align-items-center">
 
                                             <div class="row align-items-center">
                                                 <div class="col-md-1 pres-input text-center">
@@ -180,6 +182,7 @@
                                                         class="add-icon clickable">delete</mat-icon>
                                                     &nbsp;&nbsp;
                                                     <mat-icon (click)="addRxItem()"
+                                                    
                                                         class="add-icon clickable">add_circle_outline</mat-icon>
                                                 </div>
                                             </div>
