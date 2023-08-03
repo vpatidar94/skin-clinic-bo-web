@@ -1,34 +1,15 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
-import { AuthService } from 'src/app/@shared/security/auth.service';
+import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingDto, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-import { AuthApi } from '../../service/remote/auth.api';
-import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
+import { ServiceItemApi } from '../../service/remote/service-item.api';
+import { UserApi } from '../../service/remote/user.api';
 //newly added to show table
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-// newly added to show table
-export interface PeriodicElement {
-  AppNo: number;
-  Date: string;
-  PatientName: string;
-  Type: string;
-  DoctorsName: string;
-  Time: string;
-  Action: string;
-}
-
-// newly added to show table
-const ELEMENT_DATA: PeriodicElement[] = [
-  { AppNo: 1, Date: '01-08-2023', PatientName: 'Mayank Patidar', Type: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Time: '11:20', Action: "View Details | Delete | Booking" },
-  { AppNo: 2, Date: '01-08-2023', PatientName: 'Mayank Patidar', Type: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Time: '11:20', Action: "View Details | Delete | Booking" },
-  { AppNo: 3, Date: '01-08-2023', PatientName: 'Mayank Patidar', Type: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Time: '11:20', Action: "View Details | Delete | Booking" },
-  { AppNo: 4, Date: '01-08-2023', PatientName: 'Mayank Patidar', Type: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Time: '11:20', Action: "View Details | Delete | Booking" },
-]
+import { catchError, map, startWith, switchMap, of as observableOf } from 'rxjs';
 
 @Component({
   selector: 'app-appointment',
@@ -44,12 +25,15 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   userBooking!: UserBookingDto;
 
+  resultsLength = 0;
   serviceItemList!: ItemDetailDto[];
   doctorList!: UserVo[];
 
+  bookingList!: OrgBookingDto[]
+
   // newly added to show table
   displayedColumns: string[] = ['AppNo', 'Date', 'PatientName', 'Type', 'DoctorsName', "Time", "Action"];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<OrgBookingDto>([] as OrgBookingDto[]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -101,12 +85,35 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   // newly added to show table
   public ngAfterViewInit() {
-    this.paginator.showFirstLastButtons  = false;
-    this.paginator.hidePageSize = false;
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          return this.bookingApi.getOrgBookingList(
+            orgId,
+            this.paginator.pageIndex + 1,
+            this.paginator.pageSize
+          ).pipe(catchError(() => observableOf()));
+        }),
+        map((res: ApiResponse<OrgBookingDto[]>) => {
+          this.resultsLength = 4;
+          return res.body;
+        })
+      )
+      .subscribe((empData) => {
+        this.bookingList = empData ?? [] as OrgBookingDto[];
+        this.dataSource = new MatTableDataSource(this.bookingList);
+      });
+
   }
-// newly added to show table
+  
+  // newly added to show table
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -115,6 +122,23 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  public getBookingList(pageNumber: number, maxRecord: number) {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.bookingApi.getOrgBookingList(orgId, pageNumber, maxRecord).subscribe((res: ApiResponse<OrgBookingDto[]>) => {
+      this.bookingList = res.body ?? [] as OrgBookingDto[];
+      this.resultsLength = this.bookingList.length;
+      this._initBookingTable(this.bookingList);
+    })
+  }
+
+  // onPageChange(event: PageEvent) {
+  //   this.getBookingList(event.pageIndex + 1, event.pageSize);
+  // }
+
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
@@ -144,7 +168,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.serviceItemList = res.body;
-          console.log("xxxservices", this.serviceItemList);
         }
       }
     });
@@ -163,6 +186,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       }
     }
     );
+  }
+
+  private _initBookingTable(bookingList: Array<OrgBookingDto>): void {
+    // this.dataSource = new MatTableDataSource(bookingList);
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
   }
 }
 

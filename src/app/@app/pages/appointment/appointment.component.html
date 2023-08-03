@@ -16,47 +16,47 @@
             </div>
 
             <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort>
+                <table mat-table [dataSource]="bookingList" matSort>
                     <!-- App No -->
                     <ng-container matColumnDef="AppNo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> App.No. </th>
-                        <td mat-cell *matCellDef="let row"> {{row.AppNo}} </td>
+                        <td mat-cell *matCellDef="let row"> {{row.booking.no}} </td>
                     </ng-container>
 
                     <!-- Date -->
                     <ng-container matColumnDef="Date">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.Date}} </td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.bookingDate | date}} </td>
                     </ng-container>
 
                     <!-- Patient -->
                     <ng-container matColumnDef="PatientName">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.PatientName}} </td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patient.nameF ?? ''}} {{row.patient.nameL ?? ''}}</td>
                     </ng-container>
 
                     <!-- Type -->
                     <ng-container matColumnDef="Type">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.Type}} </td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.type}} </td>
                     </ng-container>
 
                     <!-- Doctor Name -->
                     <ng-container matColumnDef="DoctorsName">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctors Name </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.DoctorsName}}</td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.drList[0].nameF}}</td>
                     </ng-container>
 
                     <!-- Time -->
                     <ng-container matColumnDef="Time">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Time </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.Time}} </td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.slot}} </td>
                     </ng-container>
 
                     <!-- Action -->
                     <ng-container matColumnDef="Action">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                        <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">{{row.Action}}</td>
+                        <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">View Details | Delete | Booking</td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -68,7 +68,7 @@
                     </tr>
                 </table>
 
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                <mat-paginator [length]="resultsLength" pageSize="1" [hidePageSize]="true" [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator>
             </div>
         </mat-card>
 

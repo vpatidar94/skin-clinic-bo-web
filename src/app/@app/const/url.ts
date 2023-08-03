@@ -67,6 +67,7 @@ export const URL = {
     // Booking API endpoint
     ADD_UPDATE_BOOKING: MJR_BOOKING + ADD_UPDATE,
     BOOKING_LIST: MJR_BOOKING + LIST,
+    ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
 
 
     // ************************************************************************************************

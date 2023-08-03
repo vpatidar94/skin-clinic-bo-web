@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse, OrgVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ApiResponse, OrgBookingDto, OrgVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { URL } from '../../const/url';
@@ -19,6 +19,10 @@ export class BookingApi {
 
     public getBookingList(userId: string, orgId: string): Observable<ApiResponse<UserBookingInvestigationDto>> {
         return this.http.get<ApiResponse<UserBookingInvestigationDto>>(environment.apiUrl + URL.BOOKING_LIST, { params: { userId, orgId } });
+    }
+
+    public getOrgBookingList(orgId: string, pageNumber: number, maxRecord: number): Observable<ApiResponse<OrgBookingDto[]>> {
+        return this.http.get<ApiResponse<OrgBookingDto[]>>(environment.apiUrl + URL.ORG_BOOKING_LIST, { params: { orgId, pageNumber, maxRecord } });
     }
 }
 
