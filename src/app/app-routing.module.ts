@@ -3,19 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './@app/layout/layout.component';
 import { SigninComponent } from './@shared/component/signin/signin.component';
 import { AuthGuard } from './@shared/security/auth.guard';
-import { UsersComponent } from './@app/pages/users/users.component';
 
 const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent
   },
-  {
-    path: 'users',
-    component: UsersComponent,
-  
-  },
-
   {
     path: '',
     component: LayoutComponent,
@@ -28,12 +21,12 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'user',
-        loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./@app/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'user',
+        loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
       },
       {
         path: 'support',
@@ -46,8 +39,32 @@ const routes: Routes = [
       {
         path: 'appointment',
         loadChildren: () => import('./@app/pages/appointment/appointment.module').then(m => m.AppointmentModule)
-        
-      }
+
+      },
+      {
+        path: 'master',
+        redirectTo: '/master/services',
+        pathMatch: 'full'
+      },
+      
+      {
+        path: 'master',
+        // component: MasterComponent,
+        loadChildren: () => import('./@app/pages/master/master.module').then(m => m.MasterModule)
+
+      },
+      {
+        path: 'users',
+        redirectTo: '/users/user',
+        pathMatch: 'full'
+      },
+      
+      {
+        path: 'users',
+        loadChildren: () => import('./@app/pages/users/users.module').then(m => m.UsersModule)
+    
+      },
+      
     ]
   }
 ];

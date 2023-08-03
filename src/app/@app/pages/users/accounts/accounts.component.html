@@ -1,30 +1,233 @@
 <section class="section-org-edit">
-<app-label>Salary Detail</app-label>
-<div class="app-expansion ">
-    <div class="app-expansion-title col-md-12">
-        <span>User ID: <span></span></span>
-        <span>First Name: <span>jitu</span></span>
-        <span>Department: <span>Lab</span></span>
-        <span>Designation: <span>Assitant</span></span>
-    </div>
-</div>
-<form>
-<div class="row">
-    <!-- Total amount -->
-    <div class="col-md-6">
-        <div class="d-flex align-items-center mb-3">
-            <div class="col-md-3">
-                <label class="app-label"><strong>Total</strong></label>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input type="totalAmount" class="form-control app-input" name="totalAmount" required>
-                </div>
-            </div>
+    <app-label>Salary Detail</app-label>
+    <div class="app-expansion col-md-10">
+        <div class="app-expansion-title  p-2">
+            <span>User ID: <span></span></span>
+            <span>First Name: <span>jitu</span></span>
+            <span>Department: <span>Lab</span></span>
+            <span>Designation: <span>Assitant</span></span>
         </div>
     </div>
-</div>
-</form>
-<app-label>Banking Detail</app-label>
+    <form>
+        <mat-list class="row">
+            <div class="row">
+                <!-- Salary Type -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3 mt-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Salary Type</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="salaryType" value="fixed">
+                                <label class="form-check-label">Fixed Pay</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="salaryType" value="commission">
+                                <label class="form-check-label">Comnission Pay</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Income Column -->
+                <div class="col-md-6">
+                    <div class="col-md-3">
+                        <label class="app-label app-input"><strong>Income</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="basicSalary" class="app-label">Basic Salary</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="basicSalary" name="basicSalary">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="da" class="app-label">DA</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control " id="da" name="da">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="hra" class="app-label">HRA</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control " id="hra" name="hra">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="others" class="app-label">Others</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="others" name="others">
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Deductions Column -->
+                <div class="col-md-6">
+                    <label class="app-label app-input"><strong>Deductions</strong></label>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="tds" class="app-label">TDS</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="tds" name="tds">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="pf" class="app-label">PF</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="pf" name="pf">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="professionalTax" class="app-label">Professional Tax</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="professionalTax" name="professionalTax">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="leaveDeduction" class="app-label">Leave Deduction</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="leaveDeduction" name="leaveDeduction">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <strong class="app-label">Total</strong>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="name" class="form-control app-input" name="total" required readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </mat-list>
+    </form>
+    <app-label>Banking Detail</app-label>
+
+    <form #patientForm="ngForm">
+        <mat-list class="row">
+            <div class="row">
+                <!-- Bank Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label app-input">Bank Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="bankName" class="form-control app-input" name="bankName" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account No. -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Account No.</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="" class="form-control app-input" name="accountNo" required appNumberOnly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Account Type -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3 mt-3">
+                        <div class="col-md-3">
+                            <label class="label" class="app-label">Account Type</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="accountType" value="saving">
+                                <label class="form-check-label">Saving</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="accountType" value="current">
+                                <label class="form-check-label">Current</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Account Holder Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Acc Holder Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="name" class="form-control app-input" name="accountHolderName" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <!-- IFSC -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">IFSC</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="IFSC" class="form-control app-input" name="" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bank Branch -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Branch</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="name" class="form-control app-input" name="branch" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-list>
+    </form>
+    <div class="d-flex align-items-center justify-content-center mb-5">
+        <div class="col-1">
+            <button  class="common-button" >save</button>
+        </div>
+    </div>
 </section>

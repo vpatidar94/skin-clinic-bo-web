@@ -14,19 +14,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTableModule } from "@angular/material/table";
-import { UsersComponent } from './users.component';
-import { UsersRoutingModule } from './users-routing.module';
+import { MasterRoutingModule } from './master-routing.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddressModule } from 'src/app/@shared/component/address/address.module'
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { UserProfileComponent } from './userprofile/userprofile.component';
-import { AccountComponent } from './accounts/accounts.component';
+
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { ServicesComponent } from './services/services.component';
+import { MasterComponent } from './master.component';
+import { ServiceTypeComponent } from './service-type/service-type.component';
 
 
 
@@ -55,9 +55,9 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, UsersRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, MasterRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [UsersComponent, UserProfileComponent, AccountComponent]
+  declarations: [MasterComponent, ServicesComponent, ServiceTypeComponent ]
 })
-export class UsersModule { }
+export class MasterModule { }
