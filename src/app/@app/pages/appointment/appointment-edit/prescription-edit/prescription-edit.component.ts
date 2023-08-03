@@ -23,18 +23,13 @@ export class PrescriptionEditComponent implements OnInit {
   @ViewChild('prescriptionForm', { static: true })
   prescriptionForm!: NgForm;
  
-  // newly added 
-  // @Input()
-  // userbooking!: BookingVo;
   @Input()
   userBooking!: UserBookingDto;
   
   
   showSectionAdd = false;
-
+ 
   // newly added  for complaint section
-  // complaintsCount = 1;
-  // complaints: any[] = [{ count: 1 }];
   complaints: BookingVo["complaint"] = [" "]
 
   //newly added for diagnosis section
@@ -42,14 +37,12 @@ export class PrescriptionEditComponent implements OnInit {
   diagnosis: BookingVo["diagnosis"]  = [" "];
 
   // newly added for Rx section
-  RxCount = 1;
-  Rx: any[] = [{ count: 1 }];
-
-  rxPrescription!: Array<PrescriptionVo>;
+  rxPrescription: Array<PrescriptionVo>= [];
 
 
   /* ************************************ Constructors ************************************ */
   constructor() {
+    this.addRxItem();
     // console.log("xxcc",this.diagnosis)
   }
 
@@ -75,133 +68,41 @@ export class PrescriptionEditComponent implements OnInit {
   // }
 
 
-
-  // newly added for compllaints section
-  // addComplaints() {
-  //   this.complaintsCount++;
-  //   this.complaints.push({ count: this.complaintsCount });
-  // }
-
-  // removeComplaints() {
-  //   if (this.complaints.length > 1) {
-  //     this.complaints.pop();
-  //   }
-  // }
-
-  // newly added for diagnosis section
-  // addDiagnosis() {
-  //   this.diagnosisCount++;
-  //   this.diagnosis.push({ count: this.diagnosisCount });
-  // }
-
-  // removeDiagnosis() {
-  //   if (this.diagnosis.length > 1) {
-  //     this.diagnosis.pop();
-  //   }
-  // }
-
-  //newly added for Rx section
-  addRx() {
-    this.RxCount++;
-    this.Rx.push({ count: this.RxCount });
-  }
-
-  removeRx() {
-    if (this.Rx.length > 1) {
-      this.Rx.pop();
-    }
-  }
-
-
   public addNewService(): void {
     this.showSectionAdd = true;
-    // this.userBooking.booking.items = [] as OrderItemVo[];
-    // const orderItem = {} as OrderItemVo;
-    // orderItem.amount = 0;
-    // orderItem.item = {} as ItemVo;
-    // this.userBooking.booking.items.push(orderItem);
-    // this.userBookingChange.emit(this.userBooking);
     this.prescription.push({} as PrescriptionVo);
 
   }
 
   public addDiagnosisItem(): void {
-    // const orderItem = {} as OrderItemVo;
-    // orderItem.item = {} as ItemVo;
-    // orderItem.amount = 0;
-    // this.userBooking.booking.items.push(orderItem);
-    // this.userBookingChange.emit(this.userBooking);
-
-
-
-    // this.userBooking.booking.diagnosis = [];
-
-    // this.userBooking?.booking?.diagnosis.push(diagnosisItem);
     this.diagnosis.push("abc");
     console.log("xx xx xx", this.diagnosis.length, "ccc",this.diagnosis);
-
-
   }
 
   public removeDiagnosisItem(index: number): void {
-    // this.userBooking.booking.items.splice(index, 1);
-    // BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
-    // this.userBookingChange.emit(this.userBooking);
-    // console.log(this.userBooking);
     console.log("item has removed");
-    // this.userBooking?.booking?.diagnosis.splice(index,1);
     this.diagnosis.splice(index, 1);
   }
 
   public addComplaintItem(): void {
-    // const orderItem = {} as OrderItemVo;
-    // orderItem.item = {} as ItemVo;
-    // orderItem.amount = 0;
-    // this.userBooking.booking.items.push(orderItem);
-    // this.userBookingChange.emit(this.userBooking);
-
-    
     this.complaints.push(" ");
-    console.log("xx xx xx", this.complaints.length);
-
-
   }
 
   public removeComplaintItem(index: number): void {
-    // this.userBooking.booking.items.splice(index, 1);
-    // BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
-    // this.userBookingChange.emit(this.userBooking);
-    // console.log(this.userBooking);
     console.log("item has removed");
     this.complaints.splice(index, 1);
   }
 
   public addRxItem(): void {
-    // const orderItem = {} as OrderItemVo;
-    // orderItem.item = {} as ItemVo;
-    // orderItem.amount = 0;
-    // this.userBooking.booking.items.push(orderItem);
-    // this.userBookingChange.emit(this.userBooking);
     const rxItem = {} as PrescriptionVo;
     rxItem.dosage = "";
     rxItem.duration = 1;
     rxItem.instruction = "";
     rxItem.name = "";
-
-
-    // const rxItem = "";
-    this.Rx.push("");
-    // console.log("xx xx xx",this.complaints.length);
-
-
+    this.rxPrescription.push(rxItem);
   }
 
   public removeRxItem(index: number): void {
-    // this.userBooking.booking.items.splice(index, 1);
-    // BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
-    // this.userBookingChange.emit(this.userBooking);
-    // console.log(this.userBooking);
-    // console.log("item has removed");
     this.rxPrescription.splice(index, 1);
   }
 
