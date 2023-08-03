@@ -3,6 +3,11 @@
 
         <mat-list class="row">
             <app-label>Prescription</app-label>
+
+            <div class="col-md-2">
+                <button (click)="addNewService()" [disabled]="showSectionAdd" class="common-button">Add New</button>
+            </div>
+
             <div *ngFor="let prescription of prescription" class="row align-items-center mt-4">
 
                 <mat-accordion>
@@ -16,146 +21,200 @@
                                 <span>Date: <span>02/08/23</span></span>
                             </div>
                         </mat-expansion-panel-header>
-                        <!-- <div class="mt-4"> -->
-                        <!-- <div *ngFor="let item of prescription" class="row align-items-center mt-4"> -->
-
-                        <span>Patient Complaints</span>
-                        <div class="border border-info rounded p-3 ">
-                            <div class=" d-flex justify-content-between">
-                                <p class=""><strong>Sno.</strong></p>
-                                <p class="col-md-8"><strong>Details</strong></p>
-                                <p class="col-md-2"></p>
-                            </div>
-                            <div *ngFor="let complaint of complaints" class="row align-items-center mt-4">
-
-                                <div class="  d-flex justify-content-between">
-                                    <p class=" border border-info rounded p-1 px-2">{{ complaint.count }}</p>
-
-                                    <!-- Patient Number -->
-                                    <div class="col-md-10 form-group">
-                                        <input type="patientNumber" class="form-control pres-input" name="patientNumber"
-                                            required>
-                                    </div>
-                                    <mat-icon class="add-icon" (click)="addComplaints()">add_circle_outline</mat-icon>
-                                    <mat-icon class="add-icon" (click)="removeComplaints()">delete</mat-icon>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- </div> -->
                         <div class="mt-4">
-                            <span>Diagnosis</span>
+                            <!-- <div *ngFor="let item of prescription" class="row align-items-center mt-4"> -->
+
+                            <span class="prescription-heading">Patient Complaints</span>
                             <div class="border border-info rounded p-3 ">
-                                <div class=" d-flex justify-content-between">
-                                    <p class=""><strong>Sno.</strong></p>
+                                <!-- <div class=" d-flex justify-content-between"> -->
+                                <div class="row">
+                                    <p class="col-md-1"><strong>Sno.</strong></p>
                                     <p class="col-md-8"><strong>Details</strong></p>
                                     <p class="col-md-2"></p>
                                 </div>
-                                <div *ngFor="let diagnosis of diagnosis" class="row align-items-center mt-4">
+                                <div *ngFor="let complaint of complaints; let i = index;"
+                                    class="row align-items-center">
 
-                                    <div class="  d-flex justify-content-between">
-                                        <p class=" border border-info rounded p-1 px-2">{{diagnosis.count}}</p>
-
-                                        <!-- Patient Number -->
+                                    <!-- <div class="  d-flex justify-content-between">
+                                        <p class=" border border-info rounded p-1 px-2">{{ complaint.count }}</p>
+                                    
+                                        
                                         <div class="col-md-10 form-group">
                                             <input type="patientNumber" class="form-control pres-input"
                                                 name="patientNumber" required>
                                         </div>
                                         <mat-icon class="add-icon"
-                                            (click)="addDiagnosis()">add_circle_outline</mat-icon>
-                                        <mat-icon class="add-icon" (click)="removeDiagnosis()">delete</mat-icon>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <span>Rx</span>
-                            <div class="border border-info rounded p-3">
-                                <div class="row">
-                                    <div class="col-md-1"><strong>Sno.</strong></div>
-                                    <div class="col-md-3"><strong>Medicine</strong></div>
-                                    <div class="col-md-2"><strong>Dosage</strong></div>
-                                    <div class="col-md-2"><strong>Duration</strong></div>
-                                    <div class="col-md-2"><strong>Remark</strong></div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div *ngFor="let Rx of Rx" class="row align-items-center mt-4">
-
+                                            (click)="addComplaints()">add_circle_outline</mat-icon>
+                                        <mat-icon class="add-icon" (click)="removeComplaints()">delete</mat-icon>
+                                    </div> -->
                                     <div class="row align-items-center">
                                         <div class="col-md-1 pres-input text-center">
-                                            <p class="border border-info rounded p-1 text-align-center">{{Rx.count}}</p>
-                                        </div>
-                                        <!-- Medicine Type -->
-                                        <div
-                                            class="form-group d-flex justify-content-between align-items-center col-md-3">
-                                            <select name="patientType" class="app-single-select-dropdown w-75">
-                                                <option>Acifin P</option>
-                                                <option>Appointment</option>
-                                                <option>Admission</option>
-                                                <option>Investigation</option>
-                                                <option>Emergency</option>
-                                            </select>
-                                            <mat-icon class="add-icon">add_circle_outline</mat-icon>
-                                        </div>
-                                        <!-- Dosage -->
-                                        <div class="form-group col-md-2">
-                                            <select name="dosage" class="app-single-select-dropdown w-100">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>other</option>
-                                            </select>
-                                        </div>
-                                        <!-- Duration -->
-                                        <div class="form-group col-md-2">
-                                            <select name="duration" class="app-single-select-dropdown w-100">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>Emergency</option>
-                                            </select>
-                                        </div>
-                                        <!-- Remark -->
-                                        <div class="form-group col-md-2">
-                                            <input type="patientNumber" class="form-control pres-input w-100" n>
-                                            <!-- Add options for Remark here -->
+
+                                            <p class="border border-info rounded p-1 text-align-center">{{i+1}}</p>
                                         </div>
 
+                                        <!-- diagnosis details -->
+                                        <div class="col-md-8 form-group">
+                                            <input type="patientNumber" class="form-control pres-input"
+                                                name="patientNumber" required>
+                                        </div>
+                                        <!-- <mat-icon class="add-icon "
+                                            (click)="addDiagnosis()">add_circle_outline</mat-icon>
+                                        <mat-icon class="add-icon" (click)="removeDiagnosis()">delete</mat-icon> -->
                                         <div class="col-md-2">
-                                            <mat-icon class="add-icon me-5"
-                                                (click)="addRx()">add_circle_outline</mat-icon>
-                                            <mat-icon class="add-icon" (click)="removeRx()">delete</mat-icon>
+                                            <mat-icon (click)="removeComplaintItem(i)"
+                                                class="add-icon clickable">delete</mat-icon>
+                                            &nbsp;&nbsp;
+                                            <mat-icon (click)="addComplaintItem()"
+                                                class="add-icon clickable">add_circle_outline</mat-icon>
                                         </div>
                                     </div>
                                 </div>
+                                </div>
+                                <!-- </div> -->
+                                <div class="mt-4">
+                                    <span class="prescription-heading">Diagnosis</span>
+                                    <div class="border border-info rounded p-3 ">
+                                        <!-- <div class=" d-flex justify-content-between"> -->
+                                        <div class="row">
+                                            <p class="col-md-1"><strong>Sno.</strong></p>
+                                            <p class="col-md-8"><strong>Details</strong></p>
+                                            <p class="col-md-2"></p>
+                                        </div>
+                                        <div *ngFor="let diagnosis of diagnosis; let i = index;"
+                                            class="row align-items-center">
+
+                                            <!-- <div class="d-flex"> -->
+                                            <div class="row align-items-center">
+                                                <div class="col-md-1 pres-input text-center">
+
+                                                    <p class="border border-info rounded p-1 text-align-center">{{i+1}}
+                                                    </p>
+                                                </div>
+
+                                                <!-- diagnosis details -->
+                                                <div class="col-md-8 form-group">
+                                                    <input type="patientNumber" class="form-control pres-input"
+                                                        name="patientNumber" required>
+                                                </div>
+                                                <!-- <mat-icon class="add-icon "
+                                                (click)="addDiagnosis()">add_circle_outline</mat-icon>
+                                            <mat-icon class="add-icon" (click)="removeDiagnosis()">delete</mat-icon> -->
+                                                <div class="col-md-2">
+                                                    <mat-icon (click)="removeDiagnosisItem(i)"
+                                                        class="add-icon clickable">delete</mat-icon>
+                                                    &nbsp;&nbsp;
+                                                    <mat-icon (click)="addDiagnosisItem()"
+                                                    
+                                                        class="add-icon clickable">add_circle_outline</mat-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <span class="prescription-heading">Rx</span>
+                                    <div class="border border-info rounded p-3">
+                                        <div class="row">
+                                            <div class="col-md-1"><strong>Sno.</strong></div>
+                                            <div class="col-md-3"><strong>Medicine</strong></div>
+                                            <div class="col-md-2"><strong>Dosage</strong></div>
+                                            <div class="col-md-2"><strong>Duration</strong></div>
+                                            <div class="col-md-2"><strong>Remark</strong></div>
+                                            <div class="col-md-2"></div>
+                                        </div>
+                                        <div *ngFor="let Rx of Rx; let i = index;" class="row align-items-center">
+
+                                            <div class="row align-items-center">
+                                                <div class="col-md-1 pres-input text-center">
+                                                    <p class="border border-info rounded p-1 text-align-center">
+                                                        {{i+1}}
+                                                    </p>
+                                                </div>
+                                                <!-- Medicine Type -->
+                                                <div
+                                                    class="form-group d-flex justify-content-between align-items-center col-md-3">
+                                                    <select name="patientType" class="app-single-select-dropdown w-75">
+                                                        <option>Acifin P</option>
+                                                        <option>Appointment</option>
+                                                        <option>Admission</option>
+                                                        <option>Investigation</option>
+                                                        <option>Emergency</option>
+                                                    </select>
+                                                    <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                                                </div>
+                                                <!-- Dosage -->
+                                                <div class="form-group col-md-2">
+                                                    <select name="dosage" class="app-single-select-dropdown w-100">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>other</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Duration -->
+                                                <div class="form-group col-md-2">
+                                                    <select name="duration" class="app-single-select-dropdown w-100">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>Emergency</option>
+                                                    </select>
+                                                </div>
+                                                <!-- Remark -->
+                                                <div class="form-group col-md-2">
+                                                    <input type="patientNumber" class="form-control pres-input w-100" n>
+                                                    <!-- Add options for Remark here -->
+                                                </div>
+
+                                                <!-- <div class="col-md-2">
+                                                    <mat-icon class="add-icon me-5"
+                                                        (click)="addRx()">add_circle_outline</mat-icon>
+                                                    <mat-icon class="add-icon" (click)="removeRx()">delete</mat-icon>
+                                                </div> -->
+
+                                                <div class="col-md-2">
+                                                    <mat-icon (click)="removeRxItem(i)"
+                                                        class="add-icon clickable">delete</mat-icon>
+                                                    &nbsp;&nbsp;
+                                                    <mat-icon (click)="addRxItem()"
+                                                        class="add-icon clickable">add_circle_outline</mat-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 row align-items-center">
+                                    <div class="col-md-3">
+                                        <span class="prescription-heading">Investigation</span>
+                                        <input type="patientNumber" class="form-control pres-input"
+                                            name="patientNumber">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="prescription-heading">Remark</span>
+                                        <input type="patientNumber" class="form-control pres-input"
+                                            name="patientNumber">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="checkbox" class="me-1">
+                                        <span class="prescription-heading">Next Visit</span>
+                                        <input type="patientNumber" class="form-control pres-input"
+                                            name="patientNumber">
+                                    </div>
+                                </div>
+                                <div class="mt-2 d-flex justify-content-end">
+                                    <button class="common-button">Save</button>
+                                    <button class="common-button ms-2">Add New</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-4 row align-items-center">
-                            <div class="col-md-3">
-                                <span>Investigation</span>
-                                <input type="patientNumber" class="form-control pres-input" name="patientNumber">
-                            </div>
-                            <div class="col-md-3">
-                                <span>Remark</span>
-                                <input type="patientNumber" class="form-control pres-input" name="patientNumber">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="checkbox" class="me-1">
-                                <span>Next Visit</span>
-                                <input type="patientNumber" class="form-control pres-input" name="patientNumber">
-                            </div>
-                        </div>
-                        <div class="mt-2 d-flex justify-content-end">
-                            <button class="common-button">Save</button>
-                            <button class="common-button ms-2">Add New</button>
-                        </div>
                     </mat-expansion-panel>
                 </mat-accordion>
                 <!-- <button class="common-button ms-2" (click)="addPrescription()">Add New</button> -->
 
             </div>
-            <button class="common-button ms-2" (click)="addPrescription()">Add New</button>
+            <!-- <button class="common-button ms-2" (click)="addPrescription()">Add New</button> -->
 
         </mat-list>
     </form>

@@ -62,7 +62,7 @@ export class PatientEditComponent implements OnInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes['docterList']) {
             this.docterList = changes['docterList'].currentValue;
-            this.docSelectList = this.docterList.map((user: UserVo) => {
+            this.docSelectList = this.docterList?.map((user: UserVo) => {
                 return { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
             });
         }
