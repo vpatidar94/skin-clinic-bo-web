@@ -36,15 +36,14 @@
 
                                         <!-- complaint details -->
                                         <div class="col-md-8 form-group">
-                                            <input type="complaint" class="form-control pres-input"
-                                                name="complaint" [(ngModel)]="complaints[i]" required>
+                                            <input type="complaint" class="form-control pres-input" name="complaint"
+                                                [(ngModel)]="complaints[i]" required>
                                         </div>
                                         <div class="col-md-2">
                                             <mat-icon (click)="removeComplaintItem(i)"
                                                 class="add-icon clickable">delete</mat-icon>
                                             &nbsp;&nbsp;
-                                            <mat-icon (click)="addComplaintItem()" 
-                                            *ngIf="(i+1) === complaints?.length"
+                                            <mat-icon (click)="addComplaintItem()" *ngIf="(i+1) === complaints?.length"
                                                 class="add-icon clickable">add_circle_outline</mat-icon>
                                         </div>
                                     </div>
@@ -109,7 +108,8 @@
                                             <!-- Medicine Type -->
                                             <div
                                                 class="form-group d-flex justify-content-between align-items-center col-md-3">
-                                                <select name="patientType" class="app-single-select-dropdown w-75">
+                                                <select name="patientType" class="app-single-select-dropdown w-75"
+                                                    [(ngModel)]="rxPrescription[i].name">
                                                     <option>Acifin P</option>
                                                     <option>Appointment</option>
                                                     <option>Admission</option>
@@ -120,7 +120,8 @@
                                             </div>
                                             <!-- Dosage -->
                                             <div class="form-group col-md-2">
-                                                <select name="dosage" class="app-single-select-dropdown w-100">
+                                                <select name="dosage" class="app-single-select-dropdown w-100"
+                                                    [(ngModel)]="rxPrescription[i].dosage">
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -130,7 +131,8 @@
                                             </div>
                                             <!-- Duration -->
                                             <div class="form-group col-md-2">
-                                                <select name="duration" class="app-single-select-dropdown w-100">
+                                                <select name="duration" class="app-single-select-dropdown w-100"
+                                                    [(ngModel)]="rxPrescription[i].duration">
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -140,7 +142,8 @@
                                             </div>
                                             <!-- Remark -->
                                             <div class="form-group col-md-2">
-                                                <input type="patientNumber" class="form-control pres-input w-100" n>
+                                                <input type="patientNumber" class="form-control pres-input w-100"
+                                                    [(ngModel)]="rxPrescription[i].instruction">
                                                 <!-- Add options for Remark here -->
                                             </div>
 
