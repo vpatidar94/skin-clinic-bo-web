@@ -106,7 +106,7 @@ export class PrescriptionEditComponent implements OnInit {
     this.rxPrescription.splice(index, 1);
   }
 
-
+  
 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {

@@ -27,20 +27,33 @@
                         </div>
                         <!-- Date -->
                         <div class="form-group d-flex justify-content-between align-items-center col-md-2">
-                            <input type="patientNumber" class="form-control pres-input w-100" n>
+                            <input type="patientNumber" class="form-control pres-input w-100">
                         </div>
                         <!-- Service -->
                         <div class="form-group col-md-4">
-                            <input type="patientNumber" class="form-control pres-input w-100" n>
+                            <input type="patientNumber" class="form-control pres-input w-100">
                         </div>
                         <!--Total Amount  -->
                         <div class="form-group col-md-2">
-                            <input type="patientNumber" class="form-control pres-input w-100" n>
+                            <input type="patientNumber" class="form-control pres-input w-100">
                         </div>
-                        <!-- Payment Mode -->
+
+                        <!-- payment mode -->
                         <div class="form-group col-md-2">
-                            <input type="patientNumber" class="form-control pres-input w-100" n>
+                            <!-- <input type="paymentMode" class="form-control pres-input w-100"> -->
+                            <select name="paymentMode" class="app-single-select-dropdown w-100" (change)="onPaymentModeChange($event)" required>
+                                <option>cash</option>
+                                <option>Online</option>
+                                <option>UPI</option>
+                                <option>Card</option>
+                                <option>Cheque</option>
+                            </select>
+                        
+                            <div *ngIf="showChequeInbox">
+                                <input name="cheque" type="cheque" placeholder="cheque number">
+                            </div>
                         </div>
+                        
                         <!-- pay btn -->
                         <span class=" col-md download-button btn btn-info h-25">Pay</span>
                     </div>

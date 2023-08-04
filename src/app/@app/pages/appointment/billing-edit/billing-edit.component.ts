@@ -28,6 +28,8 @@ export class BillingEditComponent implements OnInit {
 
     panelOpenState = false;
 
+    showChequeInbox: boolean = false;
+
     /* ************************************ Constructors ************************************ */
     constructor(private dialog: MatDialog) {
 
@@ -91,4 +93,10 @@ export class BillingEditComponent implements OnInit {
             "testsArray": ["blood Test", "x-ray"]
         }]
     }
+
+   
+    onPaymentModeChange(event: Event) {
+        const selectElement = event.target as HTMLSelectElement;
+        this.showChequeInbox = selectElement.value === 'Cheque';
+      }
 }
