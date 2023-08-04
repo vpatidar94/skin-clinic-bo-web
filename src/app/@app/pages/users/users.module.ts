@@ -21,9 +21,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddressModule } from 'src/app/@shared/component/address/address.module';
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
-import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AccountComponent } from './accounts/accounts.component';
-import { UserProfileComponent } from './userprofile/userprofile.component';
+import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 
