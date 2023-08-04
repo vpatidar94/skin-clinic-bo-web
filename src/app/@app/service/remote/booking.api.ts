@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse, OrgBookingDto, OrgVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ApiResponse, OrgBookingDto, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { URL } from '../../const/url';

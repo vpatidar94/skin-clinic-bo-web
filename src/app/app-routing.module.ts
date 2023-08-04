@@ -43,26 +43,11 @@ const routes: Routes = [
       },
       {
         path: 'master',
-        redirectTo: '/master/services',
-        pathMatch: 'full'
-      },
-      
-      {
-        path: 'master',
-        // component: MasterComponent,
         loadChildren: () => import('./@app/pages/master/master.module').then(m => m.MasterModule)
-
       },
       {
-        path: 'users',
-        redirectTo: '/users/user',
-        pathMatch: 'full'
-      },
-      
-      {
-        path: 'users',
+        path: 'manage-user',
         loadChildren: () => import('./@app/pages/users/users.module').then(m => m.UsersModule)
-    
       },
       
     ]

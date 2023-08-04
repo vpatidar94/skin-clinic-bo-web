@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
 @Component({
@@ -8,17 +7,17 @@ import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
     styleUrls: ['./userprofile.component.scss']
 })
 
-export class UserProfileComponent{
+export class UserProfileComponent {
 
     genderList = GENDER_LIST;
-     /* ************************************ Constructors ************************************ */
-     
-    
+    /* ************************************ Constructors ************************************ */
 
-     /* ************************************ Public Methods ************************************ */
-     
 
-    
+
+    /* ************************************ Public Methods ************************************ */
+
+
+
     /* ************************************ Private Methods ************************************ */
-    
+
 }

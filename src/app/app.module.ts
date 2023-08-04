@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { environment } from 'src/environments/environment';
 import { LayoutModule } from './@app/layout/layout.module';
+import { UsersModule } from './@app/pages/users/users.module';
 import { AlertMessageModule } from './@shared/component/alert-message/alert-message.module';
 import { SigninModule } from './@shared/component/signin/signin.module';
 import { SpinnerModule } from './@shared/component/spinner/spinner.module';
@@ -16,8 +17,6 @@ import { AuthHttpInterceptor } from './@shared/service/auth-http.interceptor';
 import { SharedServiceModule } from './@shared/service/shared-service.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { UsersModule } from './@app/pages/users/users.module';
 
 @NgModule({
   declarations: [

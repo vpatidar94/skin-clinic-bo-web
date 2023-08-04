@@ -6,12 +6,9 @@ import { ServiceTypeComponent } from './service-type/service-type.component';
 
 
 const routes = [
-  { path: '', component: MasterComponent, 
-    children :[
-      { path: 'services', component: ServicesComponent },
-      { path: 'servicetype', component: ServiceTypeComponent },
-    ]
-},
+  { path: '', component: MasterComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'service-type', component: ServiceTypeComponent },
 ];
 
 @NgModule({

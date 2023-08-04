@@ -6,10 +6,10 @@ import { BookingApi } from '../../service/remote/booking.api';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
 import { UserApi } from '../../service/remote/user.api';
 //newly added to show table
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { catchError, map, startWith, switchMap, of as observableOf } from 'rxjs';
+import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-appointment',
@@ -112,7 +112,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       });
 
   }
-  
+
   // newly added to show table
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

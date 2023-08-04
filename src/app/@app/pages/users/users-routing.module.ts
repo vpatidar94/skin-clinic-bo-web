@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 import { UsersComponent } from './users.component';
 
 const routes = [
-  { path: 'user', component: UsersComponent }
+  { path: '', component: UsersComponent },
+  { path: 'abc', component: UsersComponent }
 ];
 
 @NgModule({
