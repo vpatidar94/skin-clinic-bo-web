@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo,UserBookingDto } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -12,42 +12,31 @@ export class PrescriptionEditComponent implements OnInit {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
 
+
   @Input()
-  prescription!: Array<PrescriptionVo>;
+  userBooking!: UserBookingDto;
+
   @Output()
-  prescriptionChange = new EventEmitter<Array<PrescriptionVo>>();
+  userBookingChange = new EventEmitter<UserBookingDto>();
 
   @Output()
   pubSub = new EventEmitter<any>();
 
   @ViewChild('prescriptionForm', { static: true })
   prescriptionForm!: NgForm;
- 
-  @Input()
-  userBooking!: UserBookingDto;
-  
-  
+
   showSectionAdd = false;
- 
-  // newly added  for complaint section
-  complaints: BookingVo["complaint"] = [" "]
-
-  //newly added for diagnosis section
-  
-  diagnosis: BookingVo["diagnosis"]  = [" "];
-
-  // newly added for Rx section
-  rxPrescription: Array<PrescriptionVo>= [];
 
 
   /* ************************************ Constructors ************************************ */
   constructor() {
-    this.addRxItem();
+    // this.addRxItem();
     // console.log("xxcc",this.diagnosis)
   }
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
+    // console.log(this.userBooking['booking']);
     this._init();
     // @ts-ignore
     this.prescriptionForm?.valueChanges?.subscribe(() => {
@@ -55,58 +44,62 @@ export class PrescriptionEditComponent implements OnInit {
     });
   }
 
-  public addPrescription(): void {
-    this.prescription.push({} as PrescriptionVo);
-  }
-
-  public removePrescription(index: number): void {
-    this.prescription.splice(index, 1);
-  }
 
   // public trackByIndex(index: number, obj: any): any {
   //     return index;
   // }
 
 
-  public addNewService(): void {
+  public addNewPrescription(): void {
     this.showSectionAdd = true;
-    this.prescription.push({} as PrescriptionVo);
-
+    this.userBooking.booking.prescription = [] as PrescriptionVo[];
+    const prescriptionItem = {} as PrescriptionVo;
+    prescriptionItem.name = "";
+    prescriptionItem.dosage = "";
+    prescriptionItem.duration = 1;
+    prescriptionItem.instruction = "";
+    this.userBooking.booking.prescription.push(prescriptionItem);
+    // console.log("kkk",this.userBooking.booking.prescription)
+    this.userBooking.booking.complaint = [" "];
+    this.userBooking.booking.diagnosis = [" "];
+    // console.log("//////",this.userBooking);
+    this.userBookingChange.emit(this.userBooking);
   }
 
+
   public addDiagnosisItem(): void {
-    this.diagnosis.push("abc");
-    console.log("xx xx xx", this.diagnosis.length, "ccc",this.diagnosis);
+    this.userBooking.booking.diagnosis.push(" ");
+    // console.log("userBooking.booking.diagnosis", this.userBooking.booking.diagnosis.length, "nn",this.userBooking.booking.diagnosis)
   }
 
   public removeDiagnosisItem(index: number): void {
-    console.log("item has removed");
-    this.diagnosis.splice(index, 1);
+    // console.log("item has removed");
+    this.userBooking.booking.diagnosis.splice(index, 1);
   }
 
   public addComplaintItem(): void {
-    this.complaints.push(" ");
+    this.userBooking.booking.complaint.push(" ");
   }
 
+
   public removeComplaintItem(index: number): void {
-    console.log("item has removed");
-    this.complaints.splice(index, 1);
+    // console.log("item has removed");
+    this.userBooking.booking.complaint.splice(index, 1);
   }
 
   public addRxItem(): void {
-    const rxItem = {} as PrescriptionVo;
-    rxItem.dosage = "";
-    rxItem.duration = 1;
-    rxItem.instruction = "";
-    rxItem.name = "";
-    this.rxPrescription.push(rxItem);
+    const prescriptionItem = {} as PrescriptionVo;
+    prescriptionItem.dosage = "";
+    prescriptionItem.duration = 1;
+    prescriptionItem.instruction = "";
+    prescriptionItem.name = "";
+    this.userBooking.booking.prescription.push(prescriptionItem);
+    this.userBookingChange.emit(this.userBooking);
   }
 
   public removeRxItem(index: number): void {
-    this.rxPrescription.splice(index, 1);
+    this.userBooking.booking.prescription.splice(index, 1)
   }
-
-  
 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {

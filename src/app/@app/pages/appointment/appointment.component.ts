@@ -80,6 +80,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       console.log(this.userBooking);
+      console.log("XX xX XX xx",this.userBooking);
+      console.log("xx xxxxx",this.userBooking.booking.observation.healthParams);
+      // console.log("XXXXXX XXXXXX serviceItem",this.serviceItemList);
+      // console.log(".......",this.bookingList);
     });
   }
 

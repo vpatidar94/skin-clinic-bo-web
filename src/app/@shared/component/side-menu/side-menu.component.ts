@@ -180,7 +180,7 @@ export class SideMenuComponent {
 
     private _getNavigationCommon(navList: Array<NavigationDto>): Array<NavigationDto> {
         navList.push(new NavigationDto('Profile', '/profile', 'ic_user', []));
+        navList.push(new NavigationDto('Master', '/master', 'ic_user', []));
         return navList;
     }
 }
-
