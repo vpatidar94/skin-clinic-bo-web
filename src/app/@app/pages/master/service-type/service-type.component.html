@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-7">
                 <div class="form-group">
-                    <input type="text" class="form-control app-input" name="serviceTypeName"
+                    <input type="text" class="form-control app-input" name="serviceTypeName" [(ngModel)]="addServiceType.serviceType" 
                          required>
                 </div>
             </div>
@@ -96,7 +96,7 @@
             </div>
             <div class="col-md-7">
                 <div class="form-group">
-                    <input class="form-control app-input" name="depatment"
+                    <input type ="text" class="form-control app-input" name="depatment" [(ngModel)]="addServiceType.department"
                        required>
                 </div>
             </div>
@@ -109,14 +109,20 @@
                 <label class="label" class="app-label">Doctor Associated</label>
             </div>
             <div class="col-md-8">
-                <div class="form-check form-check-inline">
+                <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="doctorAssociated" value="saving">
                     <label class="form-check-label">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="doctorAssociated" value="current">
                     <label class="form-check-label">No</label>
-                </div>
+                </div> -->
+                
+                <div class="form-check form-check-inline" *ngFor="let g of yesNoList">
+                  <input class="form-check-input" type="radio" name="yesNo" [value]="g.id"
+                      [(ngModel)]="addServiceType.drAssociated">
+                  <label class="form-check-label">{{ g.name }}</label>
+              </div>
             </div>
         </div>
     </div>
@@ -124,7 +130,7 @@
 
 <div class="d-flex align-items-center  mt-5">
     <div class="col-1">
-        <button  class="common-button" >save</button>
+        <button  class="common-button" (click)="saveIt()">save</button>
     </div>
 </div>
 </section>
