@@ -16,9 +16,11 @@
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
                         <div class="col-md-2"><strong>Date</strong></div>
-                        <div class="col-md-4"><strong>Service</strong></div>
+                        <div class="col-md-3"><strong>Service</strong></div>
                         <div class="col-md-2"><strong>Total Amount</strong></div>
-                        <div class="col-md-2"><strong>Payment Mode</strong></div>
+                        <!-- <div class="col-md-2"><strong>Payment Mode</strong></div> -->
+                        <div class="col-md-2"><strong>Discount</strong></div>
+                        <div class="col-md-2"><strong>Total Due</strong></div>
                         <div class="col-md"></div>
                     </div>
                     <div class="row align-items-center">
@@ -34,7 +36,7 @@
                             <input *ngFor="let service of userBooking.booking.items; let i=index;" type="patientNumber" class="form-control pres-input w-100"  [(ngModel)]="userBooking.booking.items[i].name">
                         </div> --> 
                         <!-- due to above approach the service names will come in different different input boxes but we want in a single input box with comma seperated so use the below approach -->
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <input type="text" class="form-control pres-input w-100"
                                 [value]="getCommaSeparatedServices()" readonly>
                         </div>
@@ -42,10 +44,25 @@
                         <!--Total Amount  -->
                         <div class="form-group col-md-2">
                             <input type="" class="form-control pres-input w-100" name="totalAmount" readonly
-                                [(ngModel)]="userBooking.booking.subTotal">
+                                [(ngModel)]="userBooking.booking.subTotal" readOnly>
                         </div>
 
+                        <div class="form-group col-md-2">
+                            <input type="" class="form-control pres-input w-100" name="discount"
+                                [(ngModel)]="userBooking.booking.discount"  (change)="applyDiscount()">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <input type="" class="form-control pres-input w-100" name="totaldue"
+                                [(ngModel)]="userBooking.booking.totalDue" readonly>
+                        </div>
+
+                        <div class="row d-flex justify-content-center mt-4" >
+                            <div class="col-md-2"><strong>Payment Mode</strong></div>
+                            <div class="col-md-1"></div>
+                        </div>
                         <!-- payment mode -->
+                        <div class="d-flex justify-content-center">
                         <div class="form-group col-md-2">
                             <!-- <input type="paymentMode" class="form-control pres-input w-100"> -->
                             <select name="paymentMode" class="app-single-select-dropdown w-100"
@@ -63,8 +80,9 @@
                         </div>
 
                         <!-- pay btn -->
-                        <span class=" col-md download-button btn btn-info h-25">Pay</span>
+                        <span class=" col-md-1 download-button btn btn-info h-25 ms-2">Pay</span>
                     </div>
+                </div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
