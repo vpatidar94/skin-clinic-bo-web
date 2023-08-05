@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
 import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -34,14 +35,31 @@ const ELEMENT_DATA: PeriodicElement[] = [
     templateUrl: './services.component.html',
 })
 
-export class ServicesComponent implements AfterViewInit {
+export class ServicesComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
+    addService!: AddServiceVo;
+    
+    ngOnInit(): void {
+        const serviceItem ={} as AddServiceVo
+        serviceItem.serviceCode = '';
+        serviceItem.serviceName ='';
+        serviceItem.serviceType = '';
+        serviceItem.department = '';
+        serviceItem.associatedDoctor = '';
+        serviceItem.feeType = '';
+        serviceItem.fee = 0;
+        serviceItem.feeDistribution = '';
+        this.addService = serviceItem;
+    }
     showAddServiceSection: boolean = false;
-    toggleAddServiceSection() {
+    toggleAddServiceSection(): void {
         console.log('Toggle function called');
         this.showAddServiceSection = !this.showAddServiceSection;
+      }
+      onSave() : void{
+        console.log(this.addService)
       }
 
     // newly added to show table
@@ -52,7 +70,9 @@ export class ServicesComponent implements AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() { }
+    constructor() {
+        
+     }
 
     /* ************************************* Public Methods ******************************************** */
     // newly added to show table

@@ -87,7 +87,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <input type="" class="form-control app-input" name="serviceCode" required>
+              <input type="" class="form-control app-input" name="serviceCode"  [(ngModel)]="addService.serviceCode" required>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <input type="text" class="form-control app-input" name="serviceName" required>
+              <input type="text" class="form-control app-input" name="serviceName"  [(ngModel)]="addService.serviceName" required>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <select name="serviceType" class="app-single-select-dropdown w-100" required>
+              <select name="serviceType" class="app-single-select-dropdown w-100"  [(ngModel)]="addService.serviceType" required>
                 <option value="">Select</option>
                 <option value="opd">OPD</option>
                 <option value="percentage">Investigation</option>
@@ -137,7 +137,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <input class="form-control app-input" name="department" required>
+              <input class="form-control app-input" name="department"  [(ngModel)]="addService.department" required>
             </div>
           </div>
         </div>
@@ -152,7 +152,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <input type="text" class="form-control app-input" name="associatedDoctor" required>
+              <input type="text" class="form-control app-input" name="associatedDoctor"  [(ngModel)]="addService.associatedDoctor" required>
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <select name="feeType" class="app-single-select-dropdown w-100" required>
+              <select name="feeType" class="app-single-select-dropdown w-100"  [(ngModel)]="addService.feeType" required>
                 <option value="">Select</option>
                 <option value="Fixed">Fixed</option>
                 <option value="Commissioned">Commissioned</option>
@@ -185,7 +185,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <input type="" class="form-control app-input" name="fee" required appAmountOnly>
+              <input type="" class="form-control app-input" name="fee"  [(ngModel)]="addService.fee" required appAmountOnly>
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <select name="feeDistribution" class="app-single-select-dropdown w-100" required>
+              <select name="feeDistribution" class="app-single-select-dropdown w-100"  [(ngModel)]="addService.feeDistribution" required>
                 <option value="">Select</option>
                 <option value="Fixed">Fixed</option>
                 <option value="Percentage">Percentage</option>
@@ -219,7 +219,7 @@
             </div>
             <div class="col-md-5">
               <div class="form-group">
-                <input type="" class="form-control app-input" name="doctorFee" required appAmountOnly>
+                <input type="" class="form-control app-input" name="doctorFee" required  [(ngModel)]="addService.doctorFee" appAmountOnly>
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@
             </div>
             <div class="col-md-5">
               <div class="form-group">
-                <input type="" class="form-control app-input" name="orgFee" required appAmountOnly>
+                <input type="" class="form-control app-input" name="orgFee" required  [(ngModel)]="addService.orgFee" appAmountOnly>
               </div>
             </div>
           </div>
@@ -244,7 +244,7 @@
   </form>
   <div class="d-flex align-items-center justify-content-center mb-5">
     <div class="col-1">
-      <button class="common-button">save</button>
+      <button class="common-button" (click)="onSave()">save</button>
     </div>
   </div>
 </section>
