@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+// import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ObservationVo } from 'aayam-clinic-core';
+import { ObservationVo,UserBookingDto } from 'aayam-clinic-core';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -20,6 +20,12 @@ export class BillingEditComponent implements OnInit {
     @Output()
     billingChange = new EventEmitter<Array<string>>();
 
+    @Input()
+    userBooking!: UserBookingDto;
+  
+    @Output()
+    userBookingChange = new EventEmitter<UserBookingDto>();
+
     @Output()
     pubSub = new EventEmitter<any>();
 
@@ -30,8 +36,10 @@ export class BillingEditComponent implements OnInit {
 
     showChequeInbox: boolean = false;
 
+    
+
     /* ************************************ Constructors ************************************ */
-    constructor(private dialog: MatDialog) {
+    constructor() {
 
     }
 
@@ -82,21 +90,17 @@ export class BillingEditComponent implements OnInit {
     //     this.pubSub.emit(actionDto);
     // }
 
-    bill: any = []
     public ngOnInit(): void {
-        this.bill = [{
-            "booking_id": 1021,
-            "testsArray": ["Lipid", "blood Test"]
-        },
-        {
-            "booking_id": 1022,
-            "testsArray": ["blood Test", "x-ray"]
-        }]
+        
     }
 
-   
     onPaymentModeChange(event: Event) {
+        
         const selectElement = event.target as HTMLSelectElement;
         this.showChequeInbox = selectElement.value === 'Cheque';
+      }
+
+      getCommaSeparatedServices(): string {
+        return this.userBooking.booking.items.map((item) => item.name).join(', ');
       }
 }

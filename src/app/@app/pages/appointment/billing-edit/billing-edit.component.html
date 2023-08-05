@@ -8,8 +8,8 @@
                     <div class="app-expansion-title col-md-12">
                         <span>Patient ID: <span>0812</span></span>
                         <!-- <span>Booking ID: <span>1021</span></span> -->
-                        <span>First Name: <span>Jitu</span></span>
-                        <span>Doctor's Name: <span>Jitendra</span></span>
+                        <span>First Name: <span>Mayank</span></span>
+                        <span>Doctor's Name: <span>M.Patidar</span></span>
                     </div>
                 </mat-expansion-panel-header>
                 <div class="border border-info rounded p-3 mt-4">
@@ -27,33 +27,41 @@
                         </div>
                         <!-- Date -->
                         <div class="form-group d-flex justify-content-between align-items-center col-md-2">
-                            <input type="patientNumber" class="form-control pres-input w-100">
+                            <input type="" class="form-control pres-input w-100" name="date" [(ngModel)]="userBooking.booking.bookingDate">
                         </div>
                         <!-- Service -->
+                        <!-- <div class="form-group col-md-4" >
+                            <input *ngFor="let service of userBooking.booking.items; let i=index;" type="patientNumber" class="form-control pres-input w-100"  [(ngModel)]="userBooking.booking.items[i].name">
+                        </div> --> 
+                        <!-- due to above approach the service names will come in different different input boxes but we want in a single input box with comma seperated so use the below approach -->
                         <div class="form-group col-md-4">
-                            <input type="patientNumber" class="form-control pres-input w-100">
+                            <input type="text" class="form-control pres-input w-100"
+                                [value]="getCommaSeparatedServices()" readonly>
                         </div>
+
                         <!--Total Amount  -->
                         <div class="form-group col-md-2">
-                            <input type="patientNumber" class="form-control pres-input w-100">
+                            <input type="" class="form-control pres-input w-100" name="totalAmount" readonly
+                                [(ngModel)]="userBooking.booking.subTotal">
                         </div>
 
                         <!-- payment mode -->
                         <div class="form-group col-md-2">
                             <!-- <input type="paymentMode" class="form-control pres-input w-100"> -->
-                            <select name="paymentMode" class="app-single-select-dropdown w-100" (change)="onPaymentModeChange($event)" required>
+                            <select name="paymentMode" class="app-single-select-dropdown w-100"
+                                (change)="onPaymentModeChange($event)" required>
                                 <option>cash</option>
                                 <option>Online</option>
                                 <option>UPI</option>
                                 <option>Card</option>
                                 <option>Cheque</option>
                             </select>
-                        
+
                             <div *ngIf="showChequeInbox">
                                 <input name="cheque" type="cheque" placeholder="cheque number">
                             </div>
                         </div>
-                        
+
                         <!-- pay btn -->
                         <span class=" col-md download-button btn btn-info h-25">Pay</span>
                     </div>
