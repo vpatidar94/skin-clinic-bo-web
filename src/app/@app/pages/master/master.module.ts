@@ -27,6 +27,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ServicesComponent } from './services/services.component';
 import { MasterComponent } from './master.component';
 import { ServiceTypeComponent } from './service-type/service-type.component';
+import { AddServiceTypeComponent } from './add-service-type/add-service-type.componrnt';
+import { AddServiceComponent } from './add-service/add-service.component';
+import { ProductsComponent } from './products/products.component';
 
 
 
@@ -58,6 +61,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, MasterRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [MasterComponent, ServicesComponent, ServiceTypeComponent ]
+  declarations: [MasterComponent, ServicesComponent, ServiceTypeComponent, ProductsComponent, AddServiceTypeComponent, AddServiceComponent ]
 })
 export class MasterModule { }

@@ -1,0 +1,58 @@
+.table-card-style{
+    // background-color:azure;
+    padding:20px;
+    margin-top:20px;
+  }
+  
+  table {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 100%;
+    margin-bottom:20px;
+    // margin-top:20px;
+    /* text-align: center; */
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    min-width: 25%;
+    max-width:50%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    /* text-align: center;
+    align-self: center; */
+  }
+  
+  .filter-input-style{
+    margin-top: 20px;
+    margin-bottom:10px;
+    background-color: transparent;
+    width:10%;
+    padding-top: 10px;
+    color: transparent;
+    margin-left:20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:black;
+  }
+  
+  .action-style{
+    color:blue;
+    font-size: 14px;
+  }
+  .search-input-style{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+    
+    height:30px;
+  }
+  .input-style{
+    border-radius: 12px;
+  }

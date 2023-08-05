@@ -10,42 +10,41 @@ import { MatTableDataSource } from '@angular/material/table';
 
 // newly added to show table
 export interface PeriodicElement {
-    ServiceCode: number;
-    ServiceName: string;
-    ServiceType: string;
-    DoctorsName: string;
-    Fee: string;
+    ProductCode: number;
+    ProductName: string;
+    ProductType: string;
+    Price: string;
     Action: string;
 }
 
 // newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
-    { ServiceCode: 1, ServiceName: 'OPD', ServiceType: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 2, ServiceName: 'Dressing', ServiceType: 'Dressing', DoctorsName: 'Dr.aayam', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 3, ServiceName: 'Blood Test', ServiceType: '', DoctorsName: 'Dr.Atharv', Fee: '11:20', Action: "Edit | Delete" },
-    { ServiceCode: 4, ServiceName: '', ServiceType: '', DoctorsName: 'Dr.Aman', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 5, ServiceName: '', ServiceType: 'z', DoctorsName: 'Dr.aayam', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 6, ServiceName: '', ServiceType: '', DoctorsName: 'Dr.Atharv', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 7, ServiceName: '', ServiceType: 'kat', DoctorsName: 'Dr.Aman', Fee: '1120', Action: "Edit | Delete" },
+    { ProductCode: 1, ProductName: 'OPD', ProductType: 'OPD', Price: '1120', Action: "Edit | Delete" },
+    { ProductCode: 2, ProductName: 'Dressing', ProductType: 'Dressing', Price: '1120', Action: "Edit | Delete" },
+    { ProductCode: 3, ProductName: 'Blood Test', ProductType: '', Price: '11:20', Action: "Edit | Delete" },
+    { ProductCode: 4, ProductName: '', ProductType: '', Price: '1110', Action: "Edit | Delete" },
+    { ProductCode: 5, ProductName: '', ProductType: 'z', Price: '1100', Action: "Edit | Delete" },
+    { ProductCode: 6, ProductName: '', ProductType: '', Price: '120', Action: "Edit | Delete" },
+    { ProductCode: 7, ProductName: '', ProductType: 'kat', Price: '100', Action: "Edit | Delete" },
 ]
 @Component({
-    selector: 'app-services',
-    styleUrls: ['./services.component.scss'],
-    templateUrl: './services.component.html',
+    selector: 'app-products',
+    styleUrls: ['./products.component.scss'],
+    templateUrl: './products.component.html',
 })
 
-export class ServicesComponent implements AfterViewInit {
+export class ProductsComponent implements AfterViewInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
-    showAddServiceSection: boolean = false;
-    toggleAddServiceSection() {
+    showAddProductsSection: boolean = false;
+    toggleAddProductsSection() {
         console.log('Toggle function called');
-        this.showAddServiceSection = !this.showAddServiceSection;
-      }
+        this.showAddProductsSection = !this.showAddProductsSection;
+    }
 
     // newly added to show table
-    displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'DoctorsName', "Fee", "Action"];
+    displayedColumns: string[] = ['Product Code', 'Product Name', 'Product Type', "Price", "Action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

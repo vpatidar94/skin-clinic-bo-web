@@ -37,13 +37,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
-  showSectionAppointmentList!: boolean;
-  showSectionAppointmentEdit!: boolean;
+  showAddServiceTypeSection: boolean = false;
+  toggleAddServiceTypeSection() {
+      console.log('Toggle function called');
+      this.showAddServiceTypeSection = !this.showAddServiceTypeSection;
+    }
 
-  userBooking!: UserBookingDto;
-
-  serviceItemList!: ItemDetailDto[];
-  doctorList!: UserVo[];
 
   // newly added to show table
   displayedColumns: string[] = ['Serial No', 'Service Type', 'DoctorsName', "Department", "Action"];

@@ -181,6 +181,10 @@ export class SideMenuComponent {
     private _getNavigationCommon(navList: Array<NavigationDto>): Array<NavigationDto> {
         navList.push(new NavigationDto('Profile', '/profile', 'ic_user', []));
         navList.push(new NavigationDto('Master', '/master', 'ic_user', []));
+        navList.push(new NavigationDto('Services', '/master/services', '', []));
+        navList.push(new NavigationDto('Service Type', '/master/service-type', '', []));
+        navList.push(new NavigationDto('Products', '/master/products', '', []));
+        navList.push(new NavigationDto('Users', '/abc', 'ic_user', []));
         return navList;
     }
 }
