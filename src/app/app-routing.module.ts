@@ -49,6 +49,10 @@ const routes: Routes = [
         path: 'manage-user',
         loadChildren: () => import('./@app/pages/users/users.module').then(m => m.UsersModule)
       },
+      {
+        path: 'pharmacy',
+        loadChildren: () => import('./@app/pages/pharmacy/pharmacy.module').then(m => m.PharmacyModule)
+      },
       
     ]
   }

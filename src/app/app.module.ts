@@ -18,9 +18,10 @@ import { SharedServiceModule } from './@shared/service/shared-service.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     UsersModule,
