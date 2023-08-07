@@ -7,7 +7,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { ProductVo } from 'src/app/@shared/dto/product.dto';
 // newly added to show table
 export interface PeriodicElement {
     ProductCode: number;
@@ -33,10 +33,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
     templateUrl: './products.component.html',
 })
 
-export class ProductsComponent implements AfterViewInit {
+export class ProductsComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
+    product!:ProductVo;
+
     showAddProductsSection: boolean = false;
     toggleAddProductsSection() {
         console.log('Toggle function called');
@@ -71,6 +73,25 @@ export class ProductsComponent implements AfterViewInit {
         }
     }
 
+    public ngOnInit(): void {
+       const productDetails = {} as ProductVo;
+       productDetails.productCode=123;
+       productDetails.purchaseDate= new Date();
+       productDetails.productName="";
+       productDetails.drug="";
+       productDetails.company="";
+       productDetails.productType="";
+       productDetails.qtyPerStrip=0;
+       productDetails.pricePerStrip=0;
+       productDetails.price=0;
+       productDetails.expiryDate=new Date();
+
+       this.product=productDetails;
+    }
+
+    public saveIt(): void {
+        console.log("XX product",this.product);
+    }
     /* ************************************* Private Methods ******************************************** */
 
 

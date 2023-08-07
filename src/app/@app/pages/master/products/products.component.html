@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="" class="form-control app-input" name="productCode" required>
+                            <input type="" class="form-control app-input" name="productCode" [(ngModel)]="product.productCode" required>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="Date" class="form-control app-input" name="purchaseDate" required>
+                            <input type="Date" class="form-control app-input" name="purchaseDate" [(ngModel)]="product.purchaseDate" required>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="productName" required>
+                            <input type="text" class="form-control app-input" name="productName" [(ngModel)]="product.productName" required>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="drug" required>
+                            <input type="text" class="form-control app-input" name="drug" [(ngModel)]="product.drug" required>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="company" required>
+                            <input type="text" class="form-control app-input" name="company" [(ngModel)]="product.company" required>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select name="ProductType" class="app-single-select-dropdown w-100" required>
+                            <select name="ProductType" class="app-single-select-dropdown w-100" [(ngModel)]="product.productType" required>
                                 <option value="">Select</option>
                                 <option value="opd">Tablet</option>
                                 <option value="percentage">Capsule</option>
@@ -177,7 +177,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input class="form-control app-input" name="qtyPerStrip" required appNumberOnly>
+                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerStrip" required appNumberOnly>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="" class="form-control app-input" name="pricePerStrip" required appAmountOnly>
+                            <input type="" class="form-control app-input" name="pricePerStrip" [(ngModel)]="product.pricePerStrip" required appAmountOnly>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
 
         </div>
         <div class="row">
-            <!-- Price-->
+            <!-- Price -->
             <div class="col-md-6">
                 <div class="d-flex align-items-center mb-3">
                     <div class="col-md-3">
@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="" class="form-control app-input" name="price" required appAmountOnly>
+                            <input type="" class="form-control app-input" name="price" [(ngModel)]="product.price" required appAmountOnly>
                         </div>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="date" class="form-control app-input" name="expiryDate" required>
+                            <input type="date" class="form-control app-input" name="expiryDate" [(ngModel)]="product.expiryDate" required>
                         </div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
     </form>
     <div class="d-flex align-items-center justify-content-center mb-5">
         <div class="col-1">
-            <button class="common-button">save</button>
+            <button class="common-button" (click)="saveIt()">save</button>
         </div>
     </div>
 </section>
