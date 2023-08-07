@@ -75,16 +75,16 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
     public ngOnInit(): void {
        const productDetails = {} as ProductVo;
-       productDetails.productCode=123;
-       productDetails.purchaseDate= new Date();
-       productDetails.productName="";
-       productDetails.drug="";
-       productDetails.company="";
-       productDetails.productType="";
-       productDetails.qtyPerStrip=0;
-       productDetails.pricePerStrip=0;
-       productDetails.price=0;
-       productDetails.expiryDate=new Date();
+       productDetails.productCode = 123;
+       productDetails.purchaseDate = new Date();
+       productDetails.productName = "";
+       productDetails.drug = "";
+       productDetails.company = "";
+       productDetails.productType = "";
+       productDetails.qtyPerStrip = 0;
+       productDetails.pricePerStrip = 0;
+       productDetails.price = 0;
+       productDetails.expiryDate = new Date();
 
        this.product=productDetails;
     }

@@ -184,7 +184,13 @@ export class SideMenuComponent {
         navList.push(new NavigationDto('Services', '/master/services', '', []));
         navList.push(new NavigationDto('Service Type', '/master/service-type', '', []));
         navList.push(new NavigationDto('Products', '/master/products', '', []));
+        navList.push(new NavigationDto('Department', '/master/add-department', '', []));
+        navList.push(new NavigationDto('User Type', '/master/add-user-type', '', []));
+
+
         navList.push(new NavigationDto('Users', '/abc', 'ic_user', []));
+
+
         return navList;
     }
 }

@@ -29,7 +29,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   serviceItemList!: ItemDetailDto[];
   doctorList!: UserVo[];
 
-  bookingList!: OrgBookingDto[]
+  bookingList!: OrgBookingDto[];
 
   // newly added to show table
   displayedColumns: string[] = ['AppNo', 'Date', 'PatientName', 'Type', 'DoctorsName', "Time", "Action"];
