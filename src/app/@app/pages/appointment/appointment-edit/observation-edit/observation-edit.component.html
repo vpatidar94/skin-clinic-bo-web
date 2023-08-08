@@ -58,15 +58,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6" *ngFor="let in of userBooking.booking.observation.healthParams">
+                                <div class="col-md-6" *ngFor="let in of userBooking.booking.observation.healthParams; let i = index;">
                                     <div class="d-flex align-items-center mb-3">
                                         <div class="col-md-4">
                                             <label for="exampleInputEmail1" class="app-label">{{in.name}}</label>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="form-group">
-                                                <input type="text" class="form-control app-input" [name]="in.key"
-                                                    [(ngModel)]="in.value" required>
+                                                <input type="text" class="form-control app-input" [name]="userBooking.booking.observation.healthParams[i].key"
+                                                    [(ngModel)]="userBooking.booking.observation.healthParams[i].value" required>
                                             </div>
                                         </div>
                                     </div>

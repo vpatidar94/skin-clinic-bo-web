@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingDto, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, BOOKING_TYPE, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingDto, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -53,6 +53,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   public addAppointment(): void {
     const userBooking = {} as UserBookingDto;
     const booking = {} as BookingVo;
+    booking.type = BOOKING_TYPE.PATIENT; // TODO change if appointment
     booking.observation = {} as ObservationVo;
     booking.observation.date = new Date();
     booking.observation.healthParams = [] as Array<KeyValueVo>
@@ -79,11 +80,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
-      console.log(this.userBooking);
-      console.log("XX xX XX xx",this.userBooking);
-      console.log("xx xxxxx",this.userBooking.booking.observation.healthParams);
-      // console.log("XXXXXX XXXXXX serviceItem",this.serviceItemList);
-      // console.log(".......",this.bookingList);
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+        this.userBooking = res.body
+      }
     });
   }
 

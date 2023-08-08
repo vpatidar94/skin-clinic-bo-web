@@ -64,6 +64,7 @@ export class ObservationEditComponent implements OnInit {
                 value: ''
             } as KeyValueVo;
         });
+        this.userBookingChange.emit(this.userBooking);
     }
 
 

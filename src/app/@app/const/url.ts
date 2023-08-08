@@ -55,6 +55,7 @@ export const URL = {
     ADD_UPDATE_SERVICE_ITEM: MJR_SERVICE_ITEM + ADD_UPDATE,
     SERVICE_ITEM_LIST: MJR_SERVICE_ITEM + LIST,
     DOCTOR_ITEM_LIST: MJR_USER + '/staff-subrole-list',
+    LAST_ORDER_NO: MJR_ORG + '/last-order-no',
 
     // ******************************************************************
     // User API endpoint

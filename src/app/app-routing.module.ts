@@ -24,10 +24,10 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./@app/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      {
-        path: 'user',
-        loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
-      },
+      // {
+      //   path: 'user',
+      //   loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
+      // },
       {
         path: 'support',
         loadChildren: () => import('./@app/pages/support/support.module').then(m => m.SupportModule)

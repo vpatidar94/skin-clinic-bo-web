@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { BookingVo, ItemDetailDto, ObservationVo, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, OrgOrderNoDto, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -34,7 +35,9 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
   docterList!: UserVo[];
 
   /* ************************************* Constructors ******************************************** */
-  constructor(private keyValueStorageService: KeyValueStorageService) { }
+  constructor(private orgApi: OrgApi,
+    private keyValueStorageService: KeyValueStorageService
+  ) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -48,8 +51,6 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['docterList']) {
       this.docterList = changes['docterList'].currentValue as UserVo[];
-      console.log("vvvv",this.docterList);
-
     }
   }
 
@@ -57,6 +58,16 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
   private _init(): void {
     this.tabValue = 'PATIENT'
     this.tabChange();
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (orgId) {
+      this.orgApi.getLastOrderNo(orgId).subscribe((res: ApiResponse<OrgOrderNoDto>) => {
+        if (res.body) {
+          this.userBooking.booking.no = String(res.body.no + 1);
+          this.userBooking.booking.patientNo = String(res.body.patientNo + 1);
+          this.userBookingChange.emit(this.userBooking);
+        }
+      });
+    }
   }
 
   private _tabChange(tabValue: string): void {

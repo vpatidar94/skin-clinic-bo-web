@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BOOKING_TYPE_LIST, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { PATIENT_TYPE_LIST, SHIFT_LIST, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -30,7 +30,8 @@ export class PatientEditComponent implements OnInit, OnChanges {
     docterList!: UserVo[];
 
     genderList = GENDER_LIST;
-    patientTypeList = BOOKING_TYPE_LIST;
+    patientTypeList = PATIENT_TYPE_LIST;
+    shiftList = SHIFT_LIST;
 
     docSelectList!: Array<any>;
     selectedDocs = [];

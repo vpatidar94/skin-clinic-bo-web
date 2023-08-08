@@ -24,12 +24,8 @@ import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AccountComponent } from './accounts/accounts.component';
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
-import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
-
-
-
-
+import { UsersRoutingModule } from './users-routing.module';
 
 const MATERIAL_MODULE = [
   MatButtonModule,

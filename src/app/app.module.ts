@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { environment } from 'src/environments/environment';
 import { LayoutModule } from './@app/layout/layout.module';
-import { UsersModule } from './@app/pages/users/users.module';
 import { AlertMessageModule } from './@shared/component/alert-message/alert-message.module';
 import { SigninModule } from './@shared/component/signin/signin.module';
 import { SpinnerModule } from './@shared/component/spinner/spinner.module';
@@ -24,7 +23,6 @@ import { AppComponent } from './app.component';
     AppComponent,
   ],
   imports: [
-    UsersModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

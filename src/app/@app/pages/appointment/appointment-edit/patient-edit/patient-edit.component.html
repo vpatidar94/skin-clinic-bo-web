@@ -12,8 +12,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="patientNumber" class="form-control app-input" name="patientNumber"
-                                    [(ngModel)]="userBooking.booking.no" required>
+                                <input readonly class="form-control app-input" name="patientNumber"
+                                    [(ngModel)]="userBooking.booking.patientNo" required>
                             </div>
                         </div>
                     </div>
@@ -27,8 +27,9 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input class="form-control app-input" name="date"
-                                    [(ngModel)]="userBooking.booking.bookingDate" required>
+                                <input type="date" class="form-control app-input" name="date"
+                                    [ngModel]="userBooking.booking.bookingDate | date:'yyyy-MM-dd'" required
+                                    (ngModelChange)="userBooking.booking.bookingDate = $event">
                             </div>
                         </div>
                     </div>
@@ -43,8 +44,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="nameF" class="form-control app-input" name="nameF"
-                                    [(ngModel)]="userBooking.user.nameF" required>
+                                <input class="form-control app-input" name="nameF" [(ngModel)]="userBooking.user.nameF"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="nameL" class="form-control app-input" name="nameL"
+                                <input type="text" class="form-control app-input" name="nameL"
                                     [(ngModel)]="userBooking.user.nameL" required>
                             </div>
                         </div>
@@ -91,7 +92,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="fatherName" class="form-control app-input" name="fatherName"
+                                <input type="text" class="form-control app-input" name="fatherName"
                                     [(ngModel)]="userBooking.user.fatherName" required>
                             </div>
                         </div>
@@ -108,7 +109,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="email" class="form-control app-input" name="email"
+                                <input type="text" class="form-control app-input" name="email"
                                     [(ngModel)]="userBooking.user.email" required>
                             </div>
                         </div>
@@ -123,7 +124,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="cell1" class="form-control app-input" name="cell1"
+                                <input type="text" class="form-control app-input" name="cell1"
                                     [(ngModel)]="userBooking.user.cell" required maxlength="10" minlength="10"
                                     appNumberOnly>
                             </div>
@@ -156,7 +157,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="age" class="form-control app-input" name="age"
+                                <input type="text" class="form-control app-input" name="age"
                                     [(ngModel)]="userBooking.user.age" required>
                             </div>
                         </div>
@@ -173,7 +174,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="cell2" class="form-control app-input" name="cell2"
+                                <input type="text" class="form-control app-input" name="cell2"
                                     [(ngModel)]="userBooking.user.cell2" required maxlength="10" minlength="10"
                                     appNumberOnly>
                             </div>
@@ -190,7 +191,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <select name="patientType" class="app-single-select-dropdown w-100"
-                                    [(ngModel)]="userBooking.booking.type" required>
+                                    [(ngModel)]="userBooking.booking.subType" required>
                                     <option *ngFor="let type of patientTypeList;" [value]="type.id">{{type.name}}
                                     </option>
                                 </select>
@@ -227,7 +228,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="otherDoctor" class="form-control app-input" name="otherDoctor"
+                                <input type="text" class="form-control app-input" name="otherDoctor"
                                     [(ngModel)]="userBooking.booking.drExt">
                             </div>
                         </div>
@@ -244,7 +245,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="complaint" class="form-control app-input" name="complaint"
+                                <input type="text" class="form-control app-input" name="complaint"
                                     [(ngModel)]="userBooking.booking.complaint[0]" required>
                             </div>
                         </div>
@@ -253,14 +254,14 @@
 
                 <!-- Time Slot -->
                 <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
+                    <div class="d-flex align-items-center mb-3 mt-3">
                         <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Time Slot</label>
+                            <label for="exampleInputEmail1" class="app-label">Shift</label>
                         </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="timeSlot" class="form-control app-input" name="timeSlot"
-                                    [(ngModel)]="userBooking.booking.timeSlot" required>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline" *ngFor="let shift of shiftList">
+                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id" [(ngModel)]="userBooking.booking.shift">
+                                <label class="form-check-label">{{ shift.name }}</label>
                             </div>
                         </div>
                     </div>
@@ -275,12 +276,26 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="referredBy" class="form-control app-input" name="referredBy"
+                                <input type="text" class="form-control app-input" name="referredBy"
                                     [(ngModel)]="userBooking.booking.referedBy" required>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Time Slot</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="timeSlot" [(ngModel)]="userBooking.booking.timeSlot"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <app-label>Adress Details</app-label>
             <div class="row">
