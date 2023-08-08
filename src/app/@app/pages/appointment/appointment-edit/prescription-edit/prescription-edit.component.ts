@@ -26,7 +26,7 @@ export class PrescriptionEditComponent implements OnInit {
   prescriptionForm!: NgForm;
 
   showSectionAdd = false;
-
+  isNextVisitChecked: boolean = false;
 
   /* ************************************ Constructors ************************************ */
   constructor() {
@@ -44,11 +44,9 @@ export class PrescriptionEditComponent implements OnInit {
     });
   }
 
-
   // public trackByIndex(index: number, obj: any): any {
   //     return index;
   // }
-
 
   public addNewPrescription(): void {
     this.showSectionAdd = true;
@@ -56,11 +54,12 @@ export class PrescriptionEditComponent implements OnInit {
     const prescriptionItem = {} as PrescriptionVo;
     this.userBooking.booking.prescription.push(prescriptionItem);
     this.userBookingChange.emit(this.userBooking);
+    this.userBooking.booking.diagnosis = [" "];
   }
 
 
   public addDiagnosisItem(): void {
-    this.userBooking.booking.diagnosis.push("");
+    this.userBooking.booking.diagnosis.push(" ");
     // console.log("userBooking.booking.diagnosis", this.userBooking.booking.diagnosis.length, "nn",this.userBooking.booking.diagnosis)
   }
 
@@ -72,7 +71,6 @@ export class PrescriptionEditComponent implements OnInit {
   public addComplaintItem(): void {
     this.userBooking.booking.complaint.push("");
   }
-
 
   public removeComplaintItem(index: number): void {
     // console.log("item has removed");
