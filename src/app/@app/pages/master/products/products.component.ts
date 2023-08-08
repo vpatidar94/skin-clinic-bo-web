@@ -38,6 +38,8 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
     product!:ProductVo;
+    
+    isQtyPerStripActive: boolean = false;
 
     showAddProductsSection: boolean = false;
     toggleAddProductsSection() {
@@ -91,6 +93,11 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
     public saveIt(): void {
         console.log("XX product",this.product);
+    }
+
+
+    public onProductTypeChange() {
+        this.isQtyPerStripActive = this.product.productType === 'opd' || this.product.productType === 'percentage';
     }
     /* ************************************* Private Methods ******************************************** */
 

@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select name="ProductType" class="app-single-select-dropdown w-100" [(ngModel)]="product.productType" required>
+                            <select name="ProductType" class="app-single-select-dropdown w-100" [(ngModel)]="product.productType" (change)="onProductTypeChange()" required>
                                 <option value="">Select</option>
                                 <option value="opd">Tablet</option>
                                 <option value="percentage">Capsule</option>
@@ -177,7 +177,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerStrip" required appNumberOnly>
+                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerStrip" [disabled]="!isQtyPerStripActive" required appNumberOnly>
                         </div>
                     </div>
                 </div>
