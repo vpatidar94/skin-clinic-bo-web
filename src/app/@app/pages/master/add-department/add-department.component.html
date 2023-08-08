@@ -2,7 +2,7 @@
 <section class="section-org-edit" *ngIf="!showAddDepartmentSection">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
-            <h2>Products</h2>
+            <h2>Department List</h2>
             <button class="common-button" (click)="toggleAddProductsSection()">Add Department</button>
         </div>
     </div>
@@ -62,19 +62,6 @@
 
     <form>
         <div class="row">
-            <!-- Department Code-->
-            <!-- <div class="col-md-6">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="col-md-3">
-                        <label class="app-label">Department Code</label>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <input type="" class="form-control app-input" name="DepartmentCode" [(ngModel)]="department[0].departmentCode" required>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <!-- Department Name -->
             <div class="col-md-6">
                 <div class="d-flex align-items-center mb-3">
@@ -83,12 +70,11 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="departmentName" [(ngModel)]="departmentArray[0].departmentName" required>
+                            <input type="text" class="form-control app-input" name="departmentName" [(ngModel)]="department[department.length-1].departmentName" required>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
     </form>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild,EventEmitter, Input, Output } from '@angular/core';
 import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -16,9 +16,9 @@ const ELEMENT_DATA: AddDepartmentVo[] = [
     { departmentCode: 2, departmentName: 'Dressing', action: "Edit | Delete" },
     { departmentCode: 3, departmentName: 'Blood Test', action: "Edit | Delete" },
     { departmentCode: 4, departmentName: '', action: "Edit | Delete" },
-    { departmentCode: 5, departmentName: '', action: "Edit | Delete" },
-    { departmentCode: 6, departmentName: '', action: "Edit | Delete" },
-    { departmentCode: 7, departmentName: '', action: "Edit | Delete" },
+    // { departmentCode: 5, departmentName: '', action: "Edit | Delete" },
+    // { departmentCode: 6, departmentName: '', action: "Edit | Delete" },
+    // { departmentCode: 7, departmentName: '', action: "Edit | Delete" },
 ]
 @Component({
     selector: 'app-add-department',
@@ -32,8 +32,13 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
     /* ************************************* Instance Field ******************************************** */
     department!: Array<AddDepartmentVo>; //to show the content of ELEMENT_DATA
 
-    departmentArray = [] as AddDepartmentVo[]; //to push the content of the department form
+    // departmentArray = [] as AddDepartmentVo[]; //to push the content of the department form
     
+    // @Input()
+    // department!: Array<AddDepartmentVo>;
+    // @Output()
+    // departmentChange = new EventEmitter<Array<AddDepartmentVo>>();
+
     showAddDepartmentSection: boolean = false;
     toggleAddProductsSection() {
         console.log('Toggle function called');
@@ -69,17 +74,17 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
     }
 
     public ngOnInit(): void {
-        //     this.department = ELEMENT_DATA;
-        //    const departmentDetails = {} as AddDepartmentVo;
-        //    departmentDetails.departmentCode = 123;
-        //    departmentDetails.departmentName = "";
-        //    departmentDetails.action = "Edit | Delete"
-
-
-        // this.department.push(departmentDetails);
-        //    console.log("kkk",this.department);
+        this.department = ELEMENT_DATA;
+        const departmentDetails = {} as AddDepartmentVo;
+        departmentDetails.departmentCode = 123;
+        departmentDetails.departmentName = "";
+        departmentDetails.action = "Edit | Delete"
+        this.department.push(departmentDetails);
+        console.log("XX XX XX,department", this.department);
         // this.departmentArray.push(departmentDetails);
-        // console.log("hhhh",this.departmentArray);
+        // console.log("XX XX departmentArray", this.departmentArray);
+        // this.departmentChange.emit(this.department);
+
         
     }
 
@@ -90,18 +95,8 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
         departmentDetails.departmentName = "";
         departmentDetails.action = "Edit | Delete"
         this.department.push(departmentDetails);
+        // this.departmentChange.emit(this.department);
         console.log("XX XX XX,department", this.department);
-        
-        
-        this.departmentArray.push(departmentDetails);
-        console.log("XX XX departmentArray", this.departmentArray);
-
-        // console.log("XX department", ELEMENT_DATA);
-        // console.log("mmm", this.departmentArray);
-
     }
     /* ************************************* Private Methods ******************************************** */
-
-
-
 }

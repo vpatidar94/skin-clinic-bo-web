@@ -21,11 +21,11 @@ import { UserTypeVo } from 'src/app/@shared/dto/user-type.dto';
 const ELEMENT_DATA: UserTypeVo[] = [
     { userTypeCode: 1, userTypeName: 'OPD', department: "", action: "Edit | Delete" },
     { userTypeCode: 2, userTypeName: 'Dressing', department: "", action: "Edit | Delete" },
-    { userTypeCode: 3, userTypeName: 'Blood Test', department: "", action: "Edit | Delete" },
-    { userTypeCode: 4, userTypeName: '', department: "", action: "Edit | Delete" },
-    { userTypeCode: 5, userTypeName: '', department: "", action: "Edit | Delete" },
-    { userTypeCode: 6, userTypeName: '', department: "", action: "Edit | Delete" },
-    { userTypeCode: 7, userTypeName: '', department: "", action: "Edit | Delete" },
+    // { userTypeCode: 3, userTypeName: 'Blood Test', department: "", action: "Edit | Delete" },
+    // { userTypeCode: 4, userTypeName: '', department: "", action: "Edit | Delete" },
+    // { userTypeCode: 5, userTypeName: '', department: "", action: "Edit | Delete" },
+    // { userTypeCode: 6, userTypeName: '', department: "", action: "Edit | Delete" },
+    // { userTypeCode: 7, userTypeName: '', department: "", action: "Edit | Delete" },
 ]
 @Component({
     selector: 'app-add-user-type',
@@ -39,7 +39,7 @@ export class AddUserTypeComponent implements AfterViewInit, OnInit {
     /* ************************************* Instance Field ******************************************** */
     userType!: Array<UserTypeVo>; // to show ELEMENT_DATA right now will remove it. 
 
-    userTypeArray = [] as UserTypeVo[]; // to show the empty array so that data of user-type form will be pushed here
+    // userTypeArray = [] as UserTypeVo[]; // to show the empty array so that data of user-type form will be pushed here
 
     showAddUserTypeSection: boolean = false;
     toggleAddProductsSection() {
@@ -83,6 +83,8 @@ export class AddUserTypeComponent implements AfterViewInit, OnInit {
         userTypeDetails.department = "";
         userTypeDetails.action = "Edit | Delete"
         this.userType.push(userTypeDetails);
+        // this.userTypeArray.push(userTypeDetails);
+
         console.log("kkk", this.userType);
     }
 
@@ -94,10 +96,8 @@ export class AddUserTypeComponent implements AfterViewInit, OnInit {
         userTypeDetails.action = "Edit | Delete"
         this.userType.push(userTypeDetails);
         console.log("XX XX XX,userType", this.userType);
-
-
-        this.userTypeArray.push(userTypeDetails);
-        console.log("XX XX userTypeArray", this.userTypeArray);
+        // this.userTypeArray.push(userTypeDetails);
+        // console.log("XX XX userTypeArray", this.userTypeArray);
 
     }
     /* ************************************* Private Methods ******************************************** */

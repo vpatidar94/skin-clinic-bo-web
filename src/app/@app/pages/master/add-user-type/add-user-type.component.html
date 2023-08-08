@@ -2,7 +2,7 @@
 <section class="section-org-edit" *ngIf="!showAddUserTypeSection">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
-            <h2>User Type</h2>
+            <h2>User Type List</h2>
             <button class="common-button" (click)="toggleAddProductsSection()">Add User Type</button>
         </div>
     </div>
@@ -60,8 +60,8 @@
 <section class="section-org-edit" *ngIf="showAddUserTypeSection">
     <div class="row mb-3">
         <div class=" d-flex justify-content-between">
-            <h2>Add Department</h2>
-            <button class="common-button" (click)="toggleAddProductsSection()">Go To Department</button>
+            <h2> Add User Type</h2>
+            <button class="common-button" (click)="toggleAddProductsSection()">Go To User Type List</button>
         </div>
     </div>
 
@@ -75,12 +75,15 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="userType" [(ngModel)]="userTypeArray[0].userTypeName" required>
+                            <input type="text" class="form-control app-input" name="userType" [(ngModel)]="userType[userType.length-1].userTypeName" required>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- Department Name -->
+        <div class="row">
+
             <div class="col-md-6">
                 <div class="d-flex align-items-center mb-3">
                     <div class="col-md-3">
@@ -88,7 +91,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="departmentName" [(ngModel)]="userTypeArray[0].department" required>
+                            <input type="text" class="form-control app-input" name="departmentName" [(ngModel)]="userType[userType.length-1].department" required>
                         </div>
                     </div>
                 </div>
@@ -97,7 +100,7 @@
         </div>
 
     </form>
-    <div class="d-flex align-items-center justify-content-center mb-5">
+    <div class="d-flex align-items-start justify-content-center">
         <div class="col-1">
             <button class="common-button" (click)="saveIt()">save</button>
         </div>
