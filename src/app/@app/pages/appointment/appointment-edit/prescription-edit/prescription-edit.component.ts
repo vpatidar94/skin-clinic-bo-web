@@ -54,21 +54,13 @@ export class PrescriptionEditComponent implements OnInit {
     this.showSectionAdd = true;
     this.userBooking.booking.prescription = [] as PrescriptionVo[];
     const prescriptionItem = {} as PrescriptionVo;
-    prescriptionItem.name = "";
-    prescriptionItem.dosage = "";
-    prescriptionItem.duration = 1;
-    prescriptionItem.instruction = "";
     this.userBooking.booking.prescription.push(prescriptionItem);
-    // console.log("kkk",this.userBooking.booking.prescription)
-    this.userBooking.booking.complaint = [" "];
-    this.userBooking.booking.diagnosis = [" "];
-    // console.log("//////",this.userBooking);
     this.userBookingChange.emit(this.userBooking);
   }
 
 
   public addDiagnosisItem(): void {
-    this.userBooking.booking.diagnosis.push(" ");
+    this.userBooking.booking.diagnosis.push("");
     // console.log("userBooking.booking.diagnosis", this.userBooking.booking.diagnosis.length, "nn",this.userBooking.booking.diagnosis)
   }
 
@@ -78,7 +70,7 @@ export class PrescriptionEditComponent implements OnInit {
   }
 
   public addComplaintItem(): void {
-    this.userBooking.booking.complaint.push(" ");
+    this.userBooking.booking.complaint.push("");
   }
 
 
