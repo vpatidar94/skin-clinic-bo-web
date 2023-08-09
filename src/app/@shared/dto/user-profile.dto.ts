@@ -1,5 +1,6 @@
 import { EmailValidator } from "@angular/forms";
 import { AddressVo } from "aayam-clinic-core";
+import { ServiceTimingVo } from "./service-timing.dto";
 
 export interface UserProfileVo {
     userId: string;
@@ -22,6 +23,7 @@ export interface UserProfileVo {
     city: string;
     district: string;
     state: string;
+    serviceTiming:Array<ServiceTimingVo>;
 
 
 

@@ -29,8 +29,9 @@
                             <div class="form-group">
                                 <!-- <input class="form-control app-input" name="date" [(ngModel)]="userProfile.date"
                                     required> -->
-                                    <input type="date" class="form-control app-input" name="date" [ngModel]="userProfile.date | date:'yyyy-MM-dd'"
-                                    (ngModelChange)="userProfile.date = $event" required> 
+                                <input type="date" class="form-control app-input" name="date"
+                                    [ngModel]="userProfile.date | date:'yyyy-MM-dd'"
+                                    (ngModelChange)="userProfile.date = $event" required>
                             </div>
                         </div>
                     </div>
@@ -226,6 +227,55 @@
                                 <input type="text" class="form-control app-input" name="designation"
                                     [(ngModel)]="userProfile.designation" required>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Service Timing -->
+                <label class="app-label">Service Timing</label>
+
+                <div class="col-md-12 align-style" *ngFor="let timing of userProfile.serviceTiming; let i = index">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Slot-{{i+1}}</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group d-flex">
+                                <div class="d-flex align-items-center col-md-5">
+                                    <div class="input-with-dropdown">
+                                        <input type="text" class="form-control app-input time-input"
+                                            [(ngModel)]="timing.serviceTime" name="service_time_{{ i }}"
+                                            placeholder="HH:MM">
+                                        <select class="form-control app-input dropdown-select" [(ngModel)]="timing.ampm"
+                                            name="ampm_{{ i }}">
+                                            <option value="am">AM</option>
+                                            <option value="pm">PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="col-md-2 d-flex  align-items-center app-label">To</span>
+                                <div class="d-flex align-items-center mt-2 col-md-5">
+                                    <div class="input-with-dropdown">
+                                        <input type="text" class="form-control app-input time-input"
+                                            [(ngModel)]="timing.serviceTimeEnd" name="service_time_end_{{ i }}"
+                                            placeholder="HH:MM">
+                                        <select class="form-control app-input dropdown-select"
+                                            [(ngModel)]="timing.ampmEnd" name="ampm_end_{{ i }}">
+                                            <option value="am">AM</option>
+                                            <option value="pm">PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <mat-icon class="add-icon clickable" (click)="removeServiceTiming(i)">delete</mat-icon>
+                            &nbsp;&nbsp;
+                            <mat-icon class="add-icon clickable" *ngIf="(i+1)==userProfile.serviceTiming.length"
+                                (click)="addServiceTiming()">add_circle_outline</mat-icon>
                         </div>
                     </div>
                 </div>

@@ -85,6 +85,21 @@ export class PatientEditComponent implements OnInit, OnChanges {
         this.userBookingChange.emit(this.userBooking);
     }
 
+    calculateAge() {
+        const dob = this.userBooking.user.doB;
+        if (dob) {
+            const today = new Date();
+            const birthDate = new Date(dob);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            this.userBooking.user.age = age;
+        }
+    }
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
     }
