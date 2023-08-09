@@ -2,121 +2,123 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { NgForm } from '@angular/forms';
 // import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ObservationVo,UserBookingDto,BookingUtility } from 'aayam-clinic-core';
+import { ObservationVo, UserBookingDto, BookingUtility } from 'aayam-clinic-core';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
-    selector: 'app-billing-edit',
-    templateUrl: './billing-edit.component.html',
-    styleUrls: ['./billing-edit.component.scss'],
+  selector: 'app-billing-edit',
+  templateUrl: './billing-edit.component.html',
+  styleUrls: ['./billing-edit.component.scss'],
 })
 export class BillingEditComponent implements OnInit {
-    /* ********************************* Static Field *************************************** */
-    /* *********************************** Instance Field *********************************** */
+  /* ********************************* Static Field *************************************** */
+  /* *********************************** Instance Field *********************************** */
 
-    // @Input()
-    // billing!: Array<string>;
-    // @Output()
-    // billingChange = new EventEmitter<Array<string>>();
+  // @Input()
+  // billing!: Array<string>;
+  // @Output()
+  // billingChange = new EventEmitter<Array<string>>();
 
-    @Input()
-    userBooking!: UserBookingDto;
-  
-    @Output()
-    userBookingChange = new EventEmitter<UserBookingDto>();
+  @Input()
+  userBooking!: UserBookingDto;
 
-    @Output()
-    pubSub = new EventEmitter<any>();
+  @Output()
+  userBookingChange = new EventEmitter<UserBookingDto>();
 
-    @ViewChild('billingForm', { static: true })
-    billingForm!: NgForm;
+  @Output()
+  pubSub = new EventEmitter<any>();
 
-    panelOpenState = false;
+  @ViewChild('billingForm', { static: true })
+  billingForm!: NgForm;
 
-    showChequeInbox: boolean = false;
+  panelOpenState = false;
 
-    
-
-    /* ************************************ Constructors ************************************ */
-    constructor() {
-
-    }
-
-    /* ************************************ Public Methods ************************************ */
-    // public ngOnInit(): void {
-    //     this._init();
-    //     // @ts-ignore
-    //     this.testForm.valueChanges.subscribe(() => {
-    //         this._formChanged();
-    //     });
-    // }
-
-    // public addTestSuggestion(): void {
-    //     this.test.push("");
-    // }
-
-    // public removeTestSuggestion(index: number): void {
-    //     this._confirmRemoveItem(index);
-    // }
-
-    // public trackByIndex(index: number, obj: any): any {
-    //     return index;
-    // }
+  showChequeInbox: boolean = false;
 
 
-    // /* ************************************ Private Methods ************************************ */
-    // private _init(): void {
-    // }
 
-    // private _confirmRemoveItem(index: number): void {
-    //     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
-    //         width: '250px',
-    //         data: { key: 'test' }
-    //     });
+  /* ************************************ Constructors ************************************ */
+  constructor() {
 
-    //     dialogRef.afterClosed().subscribe(result => {
-    //         if (result) {
-    //             this.test.splice(index, 1);
-    //         }
-    //     });
-    // }
+  }
 
-    // private _formChanged(): void {
-    //     const actionDto = {
-    //         action: 'CHANGE_FORM_TEST',
-    //         data: this.testForm.invalid
-    //     } as UiActionDto<boolean>;
-    //     this.pubSub.emit(actionDto);
-    // }
+  /* ************************************ Public Methods ************************************ */
+  // public ngOnInit(): void {
+  //     this._init();
+  //     // @ts-ignore
+  //     this.testForm.valueChanges.subscribe(() => {
+  //         this._formChanged();
+  //     });
+  // }
 
-    public ngOnInit(): void {
-        
-    }
+  // public addTestSuggestion(): void {
+  //     this.test.push("");
+  // }
 
-    onPaymentModeChange(event: Event) {
-        
-        const selectElement = event.target as HTMLSelectElement;
-        this.showChequeInbox = selectElement.value === 'Cheque';
-      }
+  // public removeTestSuggestion(index: number): void {
+  //     this._confirmRemoveItem(index);
+  // }
 
-      getCommaSeparatedServices(): string {
-        return this.userBooking.booking.items.map((item) => item.name).join(', ');
-      }
-
-      applyDiscount(): void {
-        BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
-        this.userBookingChange.emit(this.userBooking);
-        console.log("llll",this.userBooking);
-      }
+  // public trackByIndex(index: number, obj: any): any {
+  //     return index;
+  // }
 
 
-      private _formChanged(): void {
-        const actionDto = {
-            action: 'CHANGE_FORM_PATIENT',
-            data: this.billingForm.invalid
-        } as UiActionDto<boolean>;
-        this.pubSub.emit(actionDto);
-    }
+  // /* ************************************ Private Methods ************************************ */
+  // private _init(): void {
+  // }
+
+  // private _confirmRemoveItem(index: number): void {
+  //     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+  //         width: '250px',
+  //         data: { key: 'test' }
+  //     });
+
+  //     dialogRef.afterClosed().subscribe(result => {
+  //         if (result) {
+  //             this.test.splice(index, 1);
+  //         }
+  //     });
+  // }
+
+  // private _formChanged(): void {
+  //     const actionDto = {
+  //         action: 'CHANGE_FORM_TEST',
+  //         data: this.testForm.invalid
+  //     } as UiActionDto<boolean>;
+  //     this.pubSub.emit(actionDto);
+  // }
+
+  /* ************************************ Public Methods ************************************ */
+  public ngOnInit(): void {
+
+  }
+
+  public onPaymentModeChange(event: Event) {
+
+    const selectElement = event.target as HTMLSelectElement;
+    this.showChequeInbox = selectElement.value === 'Cheque';
+  }
+
+  public getCommaSeparatedServices(): string {
+    return this.userBooking.booking.items.map((item) => item.name).join(', ');
+  }
+
+  public applyDiscount(): void {
+    BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
+    this.userBookingChange.emit(this.userBooking);
+    console.log("llll", this.userBooking);
+  }
+
+  /* ************************************ Private Methods ************************************ */
+
+  private _formChanged(): void {
+    const actionDto = {
+      action: 'CHANGE_FORM_PATIENT',
+      data: this.billingForm.invalid
+    } as UiActionDto<boolean>;
+    this.pubSub.emit(actionDto);
+  }
 }
 

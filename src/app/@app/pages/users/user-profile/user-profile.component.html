@@ -27,8 +27,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input class="form-control app-input" name="date" [(ngModel)]="userProfile.date"
-                                    required>
+                                <!-- <input class="form-control app-input" name="date" [(ngModel)]="userProfile.date"
+                                    required> -->
+                                    <input type="date" class="form-control app-input" name="date" [ngModel]="userProfile.date | date:'yyyy-MM-dd'"
+                                    (ngModelChange)="userProfile.date = $event" required> 
                             </div>
                         </div>
                     </div>
@@ -43,7 +45,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="nameF" class="form-control app-input" name="nameF"
+                                <input type="text" class="form-control app-input" name="nameF"
                                     [(ngModel)]="userProfile.firstName" required>
                             </div>
                         </div>
@@ -58,7 +60,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="nameL" class="form-control app-input" name="nameL"
+                                <input type="text" class="form-control app-input" name="nameL"
                                     [(ngModel)]="userProfile.lastName" required>
                             </div>
                         </div>
@@ -90,7 +92,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="age" class="form-control app-input" name="age" required
+                                <input type="" class="form-control app-input" name="age" required
                                     [(ngModel)]="userProfile.age">
                             </div>
                         </div>
@@ -175,7 +177,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="fatherName" class="form-control app-input" name="fatherName"
+                                <input type="text" class="form-control app-input" name="fatherName"
                                     [(ngModel)]="userProfile.fatherName" required>
                             </div>
                         </div>
@@ -206,7 +208,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="department" class="form-control app-input" name="department"
+                                <input type="text" class="form-control app-input" name="department"
                                     [(ngModel)]="userProfile.department" required>
                             </div>
                         </div>
@@ -221,7 +223,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input class="form-control app-input" name="designation"
+                                <input type="text" class="form-control app-input" name="designation"
                                     [(ngModel)]="userProfile.designation" required>
                             </div>
                         </div>
