@@ -1,0 +1,17 @@
+th{
+    border-width: 0px !important;
+}
+
+td {
+    border-width: 1px 0px;
+    
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+    border-bottom-color: rgb(184, 179, 179) !important;
+}
+
+.total-amount{
+    font-weight: 600;
+    font-size: 18px;
+}
