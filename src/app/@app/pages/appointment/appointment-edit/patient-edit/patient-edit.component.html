@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="email"
+                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input" name="email"
                                     [(ngModel)]="userBooking.user.email" required>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="cell1"
+                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input" name="cell1"
                                     [(ngModel)]="userBooking.user.cell" required maxlength="10" minlength="10"
                                     appNumberOnly>
                             </div>

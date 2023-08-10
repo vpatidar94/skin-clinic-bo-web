@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PATIENT_TYPE_LIST, SHIFT_LIST, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { PATIENT_TYPE_LIST, SHIFT_LIST, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -22,6 +22,9 @@ export class PatientEditComponent implements OnInit, OnChanges {
 
     @Output()
     pubSub = new EventEmitter<any>();
+
+    @Input()
+    userBookingInvestigationList!: UserBookingInvestigationDto;
 
     @ViewChild('patientForm', { static: true })
     patientForm!: NgForm;
@@ -66,6 +69,12 @@ export class PatientEditComponent implements OnInit, OnChanges {
             this.docSelectList = this.docterList?.map((user: UserVo) => {
                 return { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
             });
+        }
+        if (changes['userBookingInvestigationList']) {
+            this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
+            this.userBooking.booking.user = this.userBookingInvestigationList.user?._id;
+            this.userBooking.user = this.userBookingInvestigationList.user;
+            this.userBookingChange.emit(this.userBooking);
         }
     }
 

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ObservationVo, InvestigationVo } from 'aayam-clinic-core';
+import { ObservationVo, InvestigationVo, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -28,6 +28,9 @@ export class AppointmentTestEditComponent implements OnInit {
 
     panelOpenState = false;
 
+    @Input()
+    userBookingInvestigationList!: UserBookingInvestigationDto;
+
     /* ************************************ Constructors ************************************ */
     constructor(private dialog: MatDialog) {
 
@@ -36,6 +39,13 @@ export class AppointmentTestEditComponent implements OnInit {
     /* ************************************ Public Methods ************************************ */
     patientTests: any = [];
     invest: any = [];
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['userBookingInvestigationList']) {
+            this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
+        }
+    }
+
     public ngOnInit(): void {
         this.invest = [{
             _id: "12",

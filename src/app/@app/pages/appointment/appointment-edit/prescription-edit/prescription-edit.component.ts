@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -28,10 +28,11 @@ export class PrescriptionEditComponent implements OnInit {
   showSectionAdd = false;
   isNextVisitChecked: boolean = false;
 
+  @Input()
+  userBookingInvestigationList!: UserBookingInvestigationDto;
+
   /* ************************************ Constructors ************************************ */
   constructor() {
-    // this.addRxItem();
-    // console.log("xxcc",this.diagnosis)
   }
 
   /* ************************************ Public Methods ************************************ */
@@ -44,9 +45,11 @@ export class PrescriptionEditComponent implements OnInit {
     });
   }
 
-  // public trackByIndex(index: number, obj: any): any {
-  //     return index;
-  // }
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['userBookingInvestigationList']) {
+      this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
+    }
+  }
 
   public addNewPrescription(): void {
     this.showSectionAdd = true;

@@ -5,6 +5,198 @@
         <div class="col-md-2">
             <button (click)="addNewPrescription()" [disabled]="showSectionAdd" class="common-button">Add New</button>
         </div>
+        <mat-accordion *ngFor="let booking of userBookingInvestigationList?.bookingList">
+            <mat-expansion-panel class="my-3">
+                <mat-expansion-panel-header class="app-expansion">
+                    <div class="app-expansion-title col-md-12">
+                        <span>Patient ID: <span>{{booking.patientNo}}</span></span>
+                        <span>Booking ID: <span>{{booking.no}}</span></span>
+                        <span>First Name: <span
+                                *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF ??
+                                ''}}
+                                {{userBookingInvestigationList.user.nameL ?? ''}}</span></span>
+                        <span>Doctor's Name: <span>Ram</span></span>
+                        <span>Date: <span>{{booking.bookingDate | date}}</span></span>
+                    </div>
+                </mat-expansion-panel-header>
+                <div class="mt-4">
+                    <mat-accordion *ngIf="showSectionAdd">
+                        <mat-expansion-panel class="my-3">
+                            <mat-expansion-panel-header class="sub-app-expansion">
+                                <span class="prescription-heading">Patient Complaints</span>
+                            </mat-expansion-panel-header>
+                            <div class="border border-info rounded p-3 mt-3">
+                                <div class="row">
+                                    <p class="col-md-1"><strong>Sno.</strong></p>
+                                    <p class="col-md-8"><strong>Details</strong></p>
+                                    <p class="col-md-2"></p>
+                                </div>
+                                <div *ngFor="let complaint of booking.complaint; let i = index;"
+                                    class="row align-items-center">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 pres-input text-center">
+
+                                            <p class="border border-info rounded p-1 text-align-center">{{i+1}}</p>
+                                        </div>
+
+                                        <!-- complaint details -->
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" class="form-control pres-input" name="complaint{{i}}"
+                                                [(ngModel)]="booking.complaint[i]" required>
+                                        </div>
+                                        <!-- <div class="col-md-2">
+                                            <mat-icon (click)="removeComplaintItem(i)"
+                                                class="add-icon clickable">delete</mat-icon>
+                                            &nbsp;&nbsp;
+                                            <mat-icon (click)="addComplaintItem()"
+                                                *ngIf="(i+1) === booking.complaint?.length"
+                                                class="add-icon clickable">add_circle_outline</mat-icon>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <div class="mt-4">
+                        <mat-accordion *ngIf="showSectionAdd">
+                            <mat-expansion-panel class="my-3">
+                                <mat-expansion-panel-header class="sub-app-expansion">
+                                    <span class="prescription-heading">Diagnosis</span>
+                                </mat-expansion-panel-header>
+                                <div class="border border-info rounded p-3 mt-3">
+                                    <div class="row">
+                                        <p class="col-md-1"><strong>Sno.</strong></p>
+                                        <p class="col-md-8"><strong>Details</strong></p>
+                                        <p class="col-md-2"></p>
+                                    </div>
+                                    <div *ngFor="let diagnos of userBooking.booking.diagnosis; let i = index;"
+                                        class="row align-items-center">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-1 pres-input text-center">
+                                                <p class="border border-info rounded p-1 text-align-center">{{ i+1 }}
+                                                </p>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="text" class="form-control pres-input" name="diagnosis{{i}}"
+                                                    [(ngModel)]="userBooking.booking.diagnosis[i]" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <mat-icon (click)="removeDiagnosisItem(i)"
+                                                    class="add-icon clickable">delete</mat-icon>
+                                                &nbsp;&nbsp;
+                                                <mat-icon (click)="addDiagnosisItem()"
+                                                    *ngIf="(i+1) === userBooking.booking.diagnosis?.length"
+                                                    class="add-icon clickable">add_circle_outline</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                    <div class="mt-4">
+                        <mat-accordion *ngIf="showSectionAdd">
+                            <mat-expansion-panel class="my-3">
+                                <mat-expansion-panel-header class="sub-app-expansion">
+                                    <span class="prescription-heading">Rx</span>
+                                </mat-expansion-panel-header>
+                                <div class="border border-info rounded p-3 mt-3">
+                                    <div class="row">
+                                        <div class="col-md-1"><strong>Sno.</strong></div>
+                                        <div class="col-md-3"><strong>Medicine</strong></div>
+                                        <div class="col-md-2"><strong>Dosage</strong></div>
+                                        <div class="col-md-2"><strong>Duration</strong></div>
+                                        <div class="col-md-2"><strong>Remark</strong></div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    <div *ngFor="let item of userBooking.booking.prescription; let i = index;"
+                                        class="row align-items-center">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-1 pres-input text-center">
+                                                <p class="border border-info rounded p-1 text-align-center">
+                                                    {{ i+1 }}
+                                                </p>
+                                            </div>
+                                            <!-- Medicine Type -->
+                                            <div
+                                                class="form-group d-flex justify-content-between align-items-center col-md-3">
+                                                <select name="medicine" class="app-single-select-dropdown w-75"
+                                                    [(ngModel)]="userBooking.booking.prescription[i].name">
+                                                    <option>Acifin P</option>
+                                                    <option>Appointment</option>
+                                                    <option>Admission</option>
+                                                    <option>Investigation</option>
+                                                    <option>Emergency</option>
+                                                </select>
+                                                <mat-icon class="add-icon">add_circle_outline</mat-icon>
+                                            </div>
+                                            <!-- Dosage -->
+                                            <div class="form-group col-md-2">
+                                                <select name="dosage" class="app-single-select-dropdown w-100"
+                                                    [(ngModel)]="userBooking.booking.prescription[i].dosage">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>other</option>
+                                                </select>
+                                            </div>
+                                            <!-- Duration -->
+                                            <div class="form-group col-md-2">
+                                                <select name="duration" class="app-single-select-dropdown w-100"
+                                                    [(ngModel)]="userBooking.booking.prescription[i].duration">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>Emergency</option>
+                                                </select>
+                                            </div>
+                                            <!-- Remark -->
+                                            <div class="form-group col-md-2">
+                                                <input type="text" class="form-control pres-input w-100" name="remark"
+                                                    [(ngModel)]="userBooking.booking.prescription[i].instruction">
+                                                <!-- Add options for Remark here -->
+                                            </div>
+                                            <div class="col-md-2">
+                                                <mat-icon (click)="removeRxItem(i)"
+                                                    class="add-icon clickable">delete</mat-icon>
+                                                &nbsp;&nbsp;
+                                                <mat-icon (click)="addRxItem()"
+                                                    *ngIf="(i+1) === userBooking.booking.prescription?.length"
+                                                    class="add-icon clickable">add_circle_outline</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                    <div class="mt-4 row align-items-center">
+                        <div class="col-md-3">
+                            <span class="prescription-heading">Investigation</span>
+                            <input type="text" class="form-control pres-input" name="investigation"
+                                [(ngModel)]="userBooking.booking.test">
+                        </div>
+                        <div class="col-md-3">
+                            <span class="prescription-heading">Remark</span>
+                            <input type="text" class="form-control pres-input" name="remarks"
+                                [(ngModel)]="userBooking.booking.instruction">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
+                            <span class="prescription-heading">Next Visit</span>
+                            <input *ngIf="isNextVisitChecked " type="date" class="form-control pres-input"
+                                name="nextvisit" [(ngModel)]="userBooking.booking.nextVisitDate">
+                        </div>
+                    </div>
+                    <div class="mt-2 d-flex justify-content-end">
+                        <button class="common-button">Save</button>
+                        <button class="common-button ms-2">Add New</button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
         <!-- <div *ngFor="let prescription of prescription" class="row align-items-center mt-4"> -->
         <mat-accordion *ngIf="showSectionAdd">
             <mat-expansion-panel class="my-3">

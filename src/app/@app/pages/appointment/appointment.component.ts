@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BOOKING_TYPE, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingDto, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -37,6 +37,11 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  bookingTypeName: any = BOOKING_TYPE_NAME;
+
+  userBookingInvestigationList!: UserBookingInvestigationDto;
+
 
 
   /* ************************************* Constructors ******************************************** */
@@ -86,6 +91,13 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public getBookingType(type: string): string { 
+    if (!type) {
+      return '';
+    }
+    return this.bookingTypeName[type] as string;
+  }
+
   // newly added to show table
   public ngAfterViewInit() {
     const orgId = this.keyValueStorageService.getOrgId();
@@ -104,13 +116,16 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
             this.paginator.pageSize
           ).pipe(catchError(() => observableOf()));
         }),
-        map((res: ApiResponse<OrgBookingDto[]>) => {
-          this.resultsLength = 4;
-          return res.body;
+        map((res: ApiResponse<OrgBookingCountDto>) => {
+          if (res.body) {
+            this.resultsLength = res.body?.totalBooking;
+            return res.body;
+          }
+          return {} as OrgBookingCountDto;
         })
       )
-      .subscribe((empData) => {
-        this.bookingList = empData ?? [] as OrgBookingDto[];
+      .subscribe((dto) => {
+        this.bookingList = dto?.orgBooking ?? [] as OrgBookingDto[];
         this.dataSource = new MatTableDataSource(this.bookingList);
       });
 
@@ -126,22 +141,15 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public getBookingList(pageNumber: number, maxRecord: number) {
-    const orgId = this.keyValueStorageService.getOrgId();
-    if (!orgId) {
-      return;
-    }
-    this.bookingApi.getOrgBookingList(orgId, pageNumber, maxRecord).subscribe((res: ApiResponse<OrgBookingDto[]>) => {
-      this.bookingList = res.body ?? [] as OrgBookingDto[];
-      this.resultsLength = this.bookingList.length;
-      this._initBookingTable(this.bookingList);
-    })
+  public getUserBooking(orgBooking: OrgBookingDto): void {
+    console.log(orgBooking.booking.user);
+    this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
+      if (res.body) {
+        this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
+        this.addAppointment();
+      }
+    });
   }
-
-  // onPageChange(event: PageEvent) {
-  //   this.getBookingList(event.pageIndex + 1, event.pageSize);
-  // }
-
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
@@ -189,12 +197,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       }
     }
     );
-  }
-
-  private _initBookingTable(bookingList: Array<OrgBookingDto>): void {
-    // this.dataSource = new MatTableDataSource(bookingList);
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
   }
 }
 

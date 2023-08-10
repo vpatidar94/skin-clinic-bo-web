@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, OrgOrderNoDto, PrescriptionVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, ItemDetailDto, OrgOrderNoDto, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
-import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 @Component({
@@ -34,6 +33,9 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
   @Input()
   docterList!: UserVo[];
 
+  @Input()
+  userBookingInvestigationList!: UserBookingInvestigationDto;
+
   /* ************************************* Constructors ******************************************** */
   constructor(private orgApi: OrgApi,
     private keyValueStorageService: KeyValueStorageService
@@ -51,6 +53,9 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['docterList']) {
       this.docterList = changes['docterList'].currentValue as UserVo[];
+    }
+    if (changes['userBookingInvestigationList']) {
+      this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
     }
   }
 

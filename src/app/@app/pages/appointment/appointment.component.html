@@ -38,7 +38,7 @@
                     <!-- Type -->
                     <ng-container matColumnDef="Type">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.type}} </td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{getBookingType(row.booking.type)}} </td>
                     </ng-container>
 
                     <!-- Doctor Name -->
@@ -55,8 +55,8 @@
 
                     <!-- Action -->
                     <ng-container matColumnDef="Action">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                        <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">View Details | Delete | Booking</td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                        <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"> <span class="clickable">View Details</span>  | <span class="clickable">Delete</span>  |  <span class="clickable" (click)="getUserBooking(row)">Booking</span></td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -68,82 +68,15 @@
                     </tr>
                 </table>
 
-                <mat-paginator [length]="resultsLength" pageSize="1" [hidePageSize]="true" [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator>
+                <mat-paginator [length]="resultsLength" pageSize="5" [hidePageSize]="true" [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator>
             </div>
         </mat-card>
-
-
-
-
-        <!-- <div>
-            <br />
-            <div class="row">
-                <mat-form-field class="search-input col-3 ">
-                    <mat-label>{{'Search'}}</mat-label>
-                    <input matInput (keyup)="applyFilter($event.target)" placeholder="{{'search'}}">
-                </mat-form-field>
-            </div>
-
-            <mat-table class="row" [dataSource]="dataSource" matSort>
-
-                <ng-container matColumnDef="image">
-                    <mat-header-cell *matHeaderCellDef>{{'logo'}}</mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        <img class="avatar" src="../../../../../assets/icon/basic_picture_light.svg" />
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Name
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        <span class="text-ellipsis">{{row?.name}}</span>
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row?.type | titlecase}}</span></mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="ph">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Cell</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span
-                            class="text-ellipsis">{{formatPhoneNumber(row.ph)}}</span></mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="email">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'email'}}</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.email}}</span></mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'status'}}</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.status}}</span></mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="action">
-                    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        <button (click)="manageOrg(row)" mat-button>Manage</button>
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; let odd = odd; columns: displayedColumns;"
-                    [ngClass]="{rowgray: odd}"></mat-row>
-            </mat-table>
-
-            <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons></mat-paginator>
-
-        </div> -->
     </section>
 
     <section *ngIf="showSectionAppointmentEdit">
 
         <div>
-            <app-appointment-edit [docterList]="doctorList" [serviceItemList]="serviceItemList"
+            <app-appointment-edit [userBookingInvestigationList]="userBookingInvestigationList" [docterList]="doctorList" [serviceItemList]="serviceItemList"
                 [(userBooking)]="userBooking"></app-appointment-edit>
         </div>
 

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, UserBookingDto } from 'aayam-clinic-core';
+import { BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 
@@ -28,6 +28,9 @@ export class AppointmentServiceEditComponent implements OnInit, OnChanges {
 
     @Input()
     serviceItemList!: ItemDetailDto[];
+
+    @Input()
+    userBookingInvestigationList!: UserBookingInvestigationDto;
 
     cloneServiceItemList!: ItemDetailDto[];
 
