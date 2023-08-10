@@ -30,6 +30,7 @@ const DELETE = '/delete';
 const LIST = '/list';
 const DETAIL = '/detail';
 
+
 // ************************************************************************************************
 // ***************************************          BASE         **********************************
 // ************************************************************************************************
@@ -69,7 +70,7 @@ export const URL = {
     ADD_UPDATE_BOOKING: MJR_BOOKING + ADD_UPDATE,
     BOOKING_LIST: MJR_BOOKING + LIST,
     ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
-
+    ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
 
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'
