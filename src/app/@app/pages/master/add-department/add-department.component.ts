@@ -4,15 +4,8 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 import { MatSort, } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddDepartmentVo } from 'src/app/@shared/dto/add-department.dto';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
-const ELEMENT_DATA: AddDepartmentVo[] = [
-    { departmentCode: 1, departmentName: 'OPD', action: "Edit | Delete" },
-    { departmentCode: 2, departmentName: 'Dressing', action: "Edit | Delete" },
-    { departmentCode: 3, departmentName: 'Blood Test', action: "Edit | Delete" },
-    { departmentCode: 4, departmentName: '', action: "Edit | Delete" },
-]
 @Component({
     selector: 'app-add-department',
     templateUrl: './add-department.component.html',
@@ -23,7 +16,7 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
-    // department!: Array<AddDepartmentVo>; //to show the content of ELEMENT_DATA
+
     department!: DepartmentVo;
 
     departmentList!: DepartmentVo[];
@@ -36,9 +29,8 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
         this.showAddDepartmentSection = !this.showAddDepartmentSection;
     }
 
-    // newly added to show table
-    displayedColumns: string[] = ['departmentCode', 'departmentName', "action"];
-    dataSource = new MatTableDataSource<AddDepartmentVo>(ELEMENT_DATA);
+    displayedColumns: string[] = ['createdDate', 'departmentCode', 'departmentName', "action"];
+    dataSource = new MatTableDataSource<DepartmentVo>([] as DepartmentVo[]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -72,6 +64,7 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
             departmentDetails.brId = orgId;
         }
         departmentDetails.name = "";
+        departmentDetails.created = new Date();
         this.department = departmentDetails;
         this._init();
     }
@@ -83,12 +76,15 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
         }
         this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
+            // console.log("XX XX",this.departmentList);
+            // console.log("XX",this.departmentList[0].name);
             this.resultsLength = this.departmentList.length;
-            //   this._initBookingTable(this.bookingList);
+            this.dataSource = new MatTableDataSource(this.departmentList);
+            // console.log("XXmm..",this.dataSource);
         })
     }
 
-    public saveIt(): void {
+    public savingDepartment(): void {
         this.departmentApi.addUpdateDepartment(this.department).subscribe((res: ApiResponse<DepartmentVo>) => {
             if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
                 this.department = res.body

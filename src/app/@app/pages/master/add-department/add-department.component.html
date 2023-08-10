@@ -1,4 +1,4 @@
-<!------------------------- Products section ----------------------------->
+<!------------------------- Department section ----------------------------->
 <section class="section-org-edit" *ngIf="!showAddDepartmentSection">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <!--****************newly added to show table **********************-->
+    <!-- ********************************* Table Section *********************************** -->
     <mat-card class="table-card-style">
         <div class="row">
             <div class="search-input-style">
@@ -17,24 +17,29 @@
         </div>
 
         <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
+            <table mat-table [dataSource]="departmentList" matSort>
+                <!-- created On -->
+                <ng-container matColumnDef="createdDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                    <td mat-cell *matCellDef="let row"> {{row.created | date}} </td>
+                </ng-container>
+
                 <!-- Department  No -->
                 <ng-container matColumnDef="departmentCode">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Department Code </th>
-                    <td mat-cell *matCellDef="let row"> {{row.departmentCode}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.code}} </td>
                 </ng-container>
 
                 <!-- Date -->
                 <ng-container matColumnDef="departmentName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.departmentName}} </td>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.name}} </td>
                 </ng-container>
 
-                
                 <!-- Action -->
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">{{row.action}}</td>
+                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">Edit | Delete</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -51,7 +56,7 @@
     </mat-card>
 </section>
 
-<!------------------------- Add Product section ----------------------------->
+<!------------------------- Add Department section ----------------------------->
 <section class="section-org-edit" *ngIf="showAddDepartmentSection">
     <div class="row mb-3">
         <div class=" d-flex justify-content-between">
@@ -70,7 +75,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="departmentName" [(ngModel)]="department.name" required>
+                            <input type="text" class="form-control app-input" name="departmentName"
+                                [(ngModel)]="department.name" required>
                         </div>
                     </div>
                 </div>
@@ -80,7 +86,7 @@
     </form>
     <div class="d-flex align-items-center justify-content-center mb-5">
         <div class="col-1">
-            <button class="common-button" (click)="saveIt()">save</button>
+            <button class="common-button" (click)="savingDepartment()">save</button>
         </div>
     </div>
 </section>
