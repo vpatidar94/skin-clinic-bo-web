@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto } from 'aayam-clinic-core';
+import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -17,6 +17,9 @@ export class ObservationEditComponent implements OnInit {
 
     @Input()
     pastBookingList!: Array<UserBookingDto>;
+
+    @Input()
+    userBookingInvestigationList!: UserBookingInvestigationDto;
 
     @Output()
     pubSub = new EventEmitter<any>();
@@ -67,6 +70,11 @@ export class ObservationEditComponent implements OnInit {
         this.userBookingChange.emit(this.userBooking);
     }
 
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['userBookingInvestigationList']) {
+            this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
+        }
+    }
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {

@@ -6,19 +6,22 @@
             <div class="col-md-2">
                 <button (click)="addNewObservation()" [disabled]="showSectionAdd" class="common-button">Add New</button>
             </div>
-            <mat-accordion>
+            <mat-accordion *ngFor="let booking of userBookingInvestigationList?.bookingList">
                 <mat-expansion-panel class="my-3">
                     <mat-expansion-panel-header class="app-expansion">
                         <div class="app-expansion-title col-md-12">
-                            <span>Patient ID: <span>1122</span></span>
-                            <span>Booking ID: <span>23333</span></span>
-                            <span>First Name: <span>James D</span></span>
+                            <span>Patient ID: <span>{{booking.patientNo}}</span></span>
+                            <span>Booking ID: <span>{{booking.no}}</span></span>
+                            <span>First Name: <span *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF ?? ''}} {{userBookingInvestigationList.user.nameL ?? ''}}</span></span>
                             <span>Doctor's Name: <span>Ram</span></span>
-                            <span>Date: <span></span></span>
+                            <span>Date: <span>{{booking.bookingDate | date}}</span></span>
                         </div>
                     </mat-expansion-panel-header>
                     <div class="border border-info rounded p-3 mt-4">
-
+                        <div *ngFor="let obs of booking.observation?.healthParams">
+                            <span>{{obs.name}}: </span>
+                            <span>{{obs.value}}</span>
+                        </div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
