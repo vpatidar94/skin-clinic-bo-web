@@ -76,6 +76,22 @@ export class BillingComponent {
         return this.dataSource.data.reduce((total, row) => total + row.amount, 0);
     }
 
+    deleteRow(row: PeriodicElement): void {
+        const index = this.dataSource.data.indexOf(row);
+        if (index !== -1) {
+            this.dataSource.data.splice(index, 1);
+            this.dataSource._updateChangeSubscription();
+            this.updateSnoValues(); // Update sno values
+            this.getTotalAmount(); // Recalculate total amount
+        }
+    }
+
+    updateSnoValues(): void {
+        this.dataSource.data.forEach((row, index) => {
+            row.sno = index + 1;
+        });
+    }
+    
     addNewRow(): void {
         // Set the flag to false for the previous last row
         if (this.dataSource.data.length > 0) {
