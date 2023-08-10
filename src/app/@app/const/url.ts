@@ -71,7 +71,8 @@ export const URL = {
     BOOKING_LIST: MJR_BOOKING + LIST,
     ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
     ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
-
+    ORG_DEPARTMENT_LIST: MJR_ORG + '/department-list',
+    
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'
 };

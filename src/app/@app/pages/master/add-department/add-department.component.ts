@@ -26,6 +26,10 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
     // department!: Array<AddDepartmentVo>; //to show the content of ELEMENT_DATA
     department!: DepartmentVo;
 
+    departmentList!: DepartmentVo[];
+
+    resultsLength = 0;
+
     showAddDepartmentSection: boolean = false;
     toggleAddProductsSection() {
         console.log('Toggle function called');
@@ -69,6 +73,19 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
         }
         departmentDetails.name = "";
         this.department = departmentDetails;
+        this._init();
+    }
+
+    public _getDepartmentList() {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+            this.departmentList = res.body ?? [] as DepartmentVo[];
+            this.resultsLength = this.departmentList.length;
+            //   this._initBookingTable(this.bookingList);
+        })
     }
 
     public saveIt(): void {
@@ -80,4 +97,8 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
     }
 
     /* ************************************* Private Methods ******************************************** */
+    private _init(): void {
+        this._getDepartmentList();
+    }
+
 }
