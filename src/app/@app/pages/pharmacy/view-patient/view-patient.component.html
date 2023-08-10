@@ -1,0 +1,17 @@
+<section class="section-org">
+    <section class="section-org">
+        <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue" aria-label="Font Style">
+            <mat-button-toggle class="tab-content" (change)="tabChange()"  value="PRESCRIPTION">Prescription</mat-button-toggle>
+            <mat-button-toggle class="tab-content" (change)="tabChange()" value="BILLING">Billing</mat-button-toggle>       
+        </mat-button-toggle-group>
+    </section>
+    
+    <section class="section-org-edit">
+        <div *ngIf="showSectionPrescription">
+            <app-prescription></app-prescription> 
+        </div>
+        <div *ngIf="showSectionBilling">
+            <app-billing></app-billing> 
+        </div>
+    </section>
+</section>

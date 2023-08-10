@@ -179,6 +179,9 @@ export class SideMenuComponent {
     }
 
     private _getNavigationCommon(navList: Array<NavigationDto>): Array<NavigationDto> {
+        navList.push(new NavigationDto('Pharmacy', '/pharmacy', 'ic_user', []));
+        navList.push(new NavigationDto('Patient List', '/pharmacy/patient-list', '', []));
+        navList.push(new NavigationDto('Pharmacy Billing', '/pharmacy/pharmacy-billing', '', []));
         navList.push(new NavigationDto('Profile', '/profile', 'ic_user', []));
         navList.push(new NavigationDto('Master', '/master', 'ic_user', []));
         navList.push(new NavigationDto('Services', '/master/services', '', []));

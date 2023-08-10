@@ -29,6 +29,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
 import { PharmacyBillingComponent } from './pharmacy-billing/pharmacy-billing.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { BillingComponent } from './billing/billing.component';
+import { ViewPatientComponent } from './view-patient/view-patient.component';
 // import { ServicesComponent } from './services/services.component';
 // import { MasterComponent } from './master.component';
 // import { ServiceTypeComponent } from './service-type/service-type.component';
@@ -66,6 +67,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, PharmacyRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [PharmacyComponent, PatientListComponent, PharmacyBillingComponent, PrescriptionComponent, BillingComponent]
+  declarations: [PharmacyComponent, PatientListComponent, PharmacyBillingComponent, PrescriptionComponent, BillingComponent, ViewPatientComponent]
 })
 export class PharmacyModule { }

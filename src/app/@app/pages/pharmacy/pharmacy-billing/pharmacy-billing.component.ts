@@ -1,7 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
-
-
 //newly added to show table
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -25,7 +23,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     { patientId: 1464, patientName: 'Hardik Pandya', billNo: '4555', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
     { patientId: 8555, patientName: 'AB de Villiers', billNo: '3788', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
 ]
-
 
 @Component({
     selector: 'app-pharmacy-billing',
