@@ -64,7 +64,7 @@ export const URL = {
     STAFF_LIST: MJR_USER + '/staff-list',
     ADD_UPDATE_STAFF: MJR_USER + '/staff-add-update',
     ACCESS_LIST: MJR_USER + '/access-list',
-
+    ADD_UPDATE_USER_TYPE: MJR_ORG + '/user-type-add-update',
     // ******************************************************************
     // Booking API endpoint
     ADD_UPDATE_BOOKING: MJR_BOOKING + ADD_UPDATE,
@@ -72,6 +72,7 @@ export const URL = {
     ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
     ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
     ORG_DEPARTMENT_LIST: MJR_ORG + '/department-list',
+
     
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'

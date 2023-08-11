@@ -1,0 +1,180 @@
+<!------------------------- Add Service section ----------------------------->
+<section class="section-org-edit">
+  <div class="row mb-3">
+    <div class=" d-flex justify-content-between">
+      <h2>Add Service</h2>
+      <button class="common-button">Go To Services</button>
+    </div>
+  </div>
+
+  <form>
+    <div class="row">
+      <!-- Service Code-->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Service Code</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <input type="" class="form-control app-input" name="serviceCode"  [(ngModel)]="addService.serviceCode" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Name -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Service Name</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <input type="text" class="form-control app-input" name="serviceName"  [(ngModel)]="addService.serviceName" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Service Type -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Service Type</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <select name="serviceType" class="app-single-select-dropdown w-100"  [(ngModel)]="addService.serviceType" required>
+                <option value="">Select</option>
+                <option value="opd">OPD</option>
+                <option value="percentage">Investigation</option>
+                <option value="procedure">Procedure</option>
+                <option value="ot">OT</option>
+                <option value="admission">Admission</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Department -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Department</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <input class="form-control app-input" name="department"  [(ngModel)]="addService.department" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Associated Doctor-->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label"> Associated Doctor</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <input type="text" class="form-control app-input" name="associatedDoctor"  [(ngModel)]="addService.associatedDoctor" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fee Type -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Fee Type</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <select name="feeType" class="app-single-select-dropdown w-100"  [(ngModel)]="addService.feeType" required>
+                <option value="">Select</option>
+                <option value="Fixed">Fixed</option>
+                <option value="Commissioned">Commissioned</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Fee-->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Fee</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <input type="" class="form-control app-input" name="fee"  [(ngModel)]="addService.fee" required appAmountOnly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fee Distribution -->
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="col-md-3">
+            <label class="app-label">Fee Distribution</label>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group">
+              <select name="feeDistribution" class="app-single-select-dropdown w-100"  [(ngModel)]="addService.feeDistribution" required>
+                <option value="">Select</option>
+                <option value="Fixed">Fixed</option>
+                <option value="Percentage">Percentage</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="column">
+        <!-- Doctor Fee-->
+        <div class="col-md-6">
+          <div class="d-flex align-items-center mb-3">
+            <div class="col-md-3">
+              <label class="app-label">Doctors Fee</label>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <input type="" class="form-control app-input" name="doctorFee" required  [(ngModel)]="addService.doctorFee" appAmountOnly>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Org fee -->
+        <div class="col-md-6">
+          <div class="d-flex align-items-center mb-3">
+            <div class="col-md-3">
+              <label class="app-label">Org Fee</label>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <input type="" class="form-control app-input" name="orgFee" required  [(ngModel)]="addService.orgFee" appAmountOnly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <div class="d-flex align-items-center justify-content-center mb-5">
+    <div class="col-1">
+      <button class="common-button" (click)="onSave()">save</button>
+    </div>
+  </div>
+</section>

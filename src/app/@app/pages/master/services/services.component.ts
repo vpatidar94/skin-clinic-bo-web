@@ -1,9 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
-import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
-import { AuthService } from 'src/app/@shared/security/auth.service';
-import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-
 //newly added to show table
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -42,24 +38,11 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     addService!: AddServiceVo;
     
     ngOnInit(): void {
-        const serviceItem ={} as AddServiceVo
-        serviceItem.serviceCode = '';
-        serviceItem.serviceName ='';
-        serviceItem.serviceType = '';
-        serviceItem.department = '';
-        serviceItem.associatedDoctor = '';
-        serviceItem.feeType = '';
-        serviceItem.fee = 0;
-        serviceItem.feeDistribution = '';
-        this.addService = serviceItem;
     }
     showAddServiceSection: boolean = false;
     toggleAddServiceSection(): void {
         console.log('Toggle function called');
         this.showAddServiceSection = !this.showAddServiceSection;
-      }
-      onSave() : void{
-        console.log(this.addService)
       }
 
     // newly added to show table
@@ -70,9 +53,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     @ViewChild(MatSort) sort!: MatSort;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() {
-        
-     }
+    constructor() { }
 
     /* ************************************* Public Methods ******************************************** */
     // newly added to show table

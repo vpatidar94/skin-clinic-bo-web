@@ -2,12 +2,14 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
 
 //newly added to show table
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserTypeVo } from 'src/app/@shared/dto/user-type.dto';
+import { oldUserTypeVo } from 'src/app/@shared/dto/user-type.dto';
+import { UserTypeVo } from 'aayam-clinic-core';
 // newly added to show table
 // export interface PeriodicElement {
 //     userTypeCode: number;
@@ -18,7 +20,7 @@ import { UserTypeVo } from 'src/app/@shared/dto/user-type.dto';
 // }
 
 // newly added to show table
-const ELEMENT_DATA: UserTypeVo[] = [
+const ELEMENT_DATA: oldUserTypeVo[] = [
     { userTypeCode: 1, userTypeName: 'OPD', department: "", action: "Edit | Delete" },
     { userTypeCode: 2, userTypeName: 'Dressing', department: "", action: "Edit | Delete" },
     // { userTypeCode: 3, userTypeName: 'Blood Test', department: "", action: "Edit | Delete" },
@@ -37,9 +39,9 @@ export class AddUserTypeComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
-    userType!: Array<UserTypeVo>; // to show ELEMENT_DATA right now will remove it. 
-
-    // userTypeArray = [] as UserTypeVo[]; // to show the empty array so that data of user-type form will be pushed here
+    userType!: Array<oldUserTypeVo>; // to show ELEMENT_DATA right now will remove it. 
+    addUserType!: UserTypeVo ;
+        // userTypeArray = [] as UserTypeVo[]; // to show the empty array so that data of user-type form will be pushed here
 
     showAddUserTypeSection: boolean = false;
     toggleAddProductsSection() {
@@ -49,13 +51,14 @@ export class AddUserTypeComponent implements AfterViewInit, OnInit {
 
     // newly added to show table
     displayedColumns: string[] = ['userTypeCode', 'userTypeName', 'departmentName', "action"];
-    dataSource = new MatTableDataSource<UserTypeVo>(ELEMENT_DATA);
+    dataSource = new MatTableDataSource<oldUserTypeVo>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() { }
+    constructor(private keyValueStorageService: KeyValueStorageService,
+        private userApi: UserApi) { }
 
     /* ************************************* Public Methods ******************************************** */
     // newly added to show table
@@ -77,31 +80,52 @@ export class AddUserTypeComponent implements AfterViewInit, OnInit {
 
     public ngOnInit(): void {
         this.userType = ELEMENT_DATA;
-        const userTypeDetails = {} as UserTypeVo;
+        const userTypeDetails = {} as oldUserTypeVo;
         userTypeDetails.userTypeCode = 123;
         userTypeDetails.userTypeName = "";
         userTypeDetails.department = "";
         userTypeDetails.action = "Edit | Delete"
         this.userType.push(userTypeDetails);
         // this.userTypeArray.push(userTypeDetails);
-
         console.log("kkk", this.userType);
+
+
+        const addUserTypeDetails = {} as UserTypeVo;
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (orgId) {
+            addUserTypeDetails.orgId = orgId;
+            addUserTypeDetails.brId = orgId;
+        }
+        addUserTypeDetails.name = "";
+        addUserTypeDetails.departmentId = "";
+        this.addUserType = addUserTypeDetails;
     }
+
+  
+
+    // public saveIt(): void {
+    //     this.userType = ELEMENT_DATA;
+    //     const userTypeDetails = {} as UserTypeVo;
+    //     // userTypeDetails.userTypeCode = 123;
+    //     // userTypeDetails.department = "";
+    //     // userTypeDetails.action = "Edit | Delete"
+    //     this.userType.push(userTypeDetails);
+    //     console.log("XX XX XX,userType", this.userType);
+    //     // this.userTypeArray.push(userTypeDetails);
+    //     // console.log("XX XX userTypeArray", this.userTypeArray);
+
+    // }
 
     public saveIt(): void {
-        this.userType = ELEMENT_DATA;
-        const userTypeDetails = {} as UserTypeVo;
-        userTypeDetails.userTypeCode = 123;
-        userTypeDetails.department = "";
-        userTypeDetails.action = "Edit | Delete"
-        this.userType.push(userTypeDetails);
-        console.log("XX XX XX,userType", this.userType);
-        // this.userTypeArray.push(userTypeDetails);
-        // console.log("XX XX userTypeArray", this.userTypeArray);
-
+        this.userApi.addUpdateUserType(this.addUserType).subscribe((res: ApiResponse<UserTypeVo>) => {
+            if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+                this.addUserType = res.body
+            }
+        });
+        console.log("okk",this.addUserType)
     }
     /* ************************************* Private Methods ******************************************** */
-
+    
 
 
 }
