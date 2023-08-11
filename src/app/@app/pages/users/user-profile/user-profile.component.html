@@ -27,8 +27,6 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <!-- <input class="form-control app-input" name="date" [(ngModel)]="userProfile.date"
-                                    required> -->
                                 <input type="date" class="form-control app-input" name="date"
                                     [ngModel]="userProfile.date | date:'yyyy-MM-dd'"
                                     (ngModelChange)="userProfile.date = $event" required>
@@ -209,8 +207,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="department"
-                                    [(ngModel)]="userProfile.department" required>
+                                <select class="app-single-select-dropdown w-100">
+                                    <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -327,7 +327,7 @@
 
         <div class="d-flex align-items-center justify-content-center mb-4">
             <div class="col-1">
-                <button class="common-button" (click)="onSave()">{{'save'}}</button>
+                <button class="common-button" (click)="onSavingUserType()">{{'save'}}</button>
             </div>
             <div class="col-2">
                 <button class="common-button">{{'Generate Id Card'}}</button>

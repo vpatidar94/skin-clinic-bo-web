@@ -1,13 +1,13 @@
-<!------------------------- Department section ----------------------------->
+<!-- Department section -->
 <section class="section-org-edit" *ngIf="!showAddDepartmentSection">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
             <h2>Department List</h2>
-            <button class="common-button" (click)="toggleAddProductsSection()">Add Department</button>
+            <button class="common-button" (click)="AddDepartment()">Add Department</button>
         </div>
     </div>
 
-    <!-- ********************************* Table Section *********************************** -->
+    <!--  Table Section  -->
     <mat-card class="table-card-style">
         <div class="row">
             <div class="search-input-style">
@@ -56,34 +56,12 @@
     </mat-card>
 </section>
 
-<!------------------------- Add Department section ----------------------------->
+<!-- Add Department section -->
 <section class="section-org-edit" *ngIf="showAddDepartmentSection">
-    <div class="row mb-3">
-        <div class=" d-flex justify-content-between">
-            <h2>Add Department</h2>
-            <button class="common-button" (click)="toggleAddProductsSection()">Go To Department</button>
-        </div>
+    <div>
+        <app-department-edit [department]="department"
+            ></app-department-edit>
     </div>
-
-    <form>
-        <div class="row">
-            <!-- Department Name -->
-            <div class="col-md-6">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="col-md-3">
-                        <label class="app-label">Department Name</label>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <input type="text" class="form-control app-input" name="departmentName"
-                                [(ngModel)]="department.name" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </form>
     <div class="d-flex align-items-center justify-content-center mb-5">
         <div class="col-1">
             <button class="common-button" (click)="savingDepartment()">save</button>

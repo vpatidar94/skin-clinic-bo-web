@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 import { NgForm } from '@angular/forms';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
-import { AddressVo } from 'aayam-clinic-core';
+import { AddressVo, DepartmentVo, ApiResponse, ResponseStatus, } from 'aayam-clinic-core';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
 @Component({
     selector: 'app-user-profile',
@@ -10,9 +12,14 @@ import { AddressVo } from 'aayam-clinic-core';
     styleUrls: ['./user-profile.component.scss']
 })
 
-export class UserProfileComponent {
-
+export class UserProfileComponent implements OnInit {
+     /* ********************************* Static Field *************************************** */
+    /* *********************************** Instance Field *********************************** */
+    department!: DepartmentVo;
+    departmentList!: DepartmentVo[];
+    genderList = GENDER_LIST;
     userProfile!: UserProfileVo;
+    
     serviceTimingData = [{
         serviceTime: '',
         ampm: 'am',
@@ -20,7 +27,13 @@ export class UserProfileComponent {
         ampmEnd: 'am'
     }];
     
-    ngOnInit(): void {
+    /* ************************************ Constructors ************************************ */
+    constructor(private keyValueStorageService: KeyValueStorageService,
+        private departmentApi: DepartmentApi) { }
+
+    /* ************************************ Public Methods ************************************ */
+
+    public ngOnInit(): void {
         const userProfileItem = {} as UserProfileVo;
         userProfileItem.userId = '';
         userProfileItem.date = new Date();
@@ -34,23 +47,27 @@ export class UserProfileComponent {
         userProfileItem.userType = '';
         userProfileItem.fatherName = '';
         userProfileItem.alternateNumber = 0;
-        userProfileItem.department = '';
         userProfileItem.designation = '';
         userProfileItem.addPhoto = File;
         userProfileItem.uploadIdProof = File;
         userProfileItem.address = {} as AddressVo;
         userProfileItem.serviceTiming = this.serviceTimingData;
+        this._init();
+        userProfileItem.department = '';
         this.userProfile = userProfileItem;
     }
-    genderList = GENDER_LIST;
-    onSave(): void {
-        // console.log(this.userProfile)
+
+    public _getDepartmentList() {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+            this.departmentList = res.body ?? [] as DepartmentVo[];
+            console.log("XX XX users department", this.departmentList);
+        })
     }
-    /* ************************************ Constructors ************************************ */
 
-
-
-    /* ************************************ Public Methods ************************************ */
     public addServiceTiming() {
         this.userProfile.serviceTiming.push({
             serviceTime: '',
@@ -60,11 +77,18 @@ export class UserProfileComponent {
         });
     }
 
-    public removeServiceTiming(index:number): void {
-        this.userProfile.serviceTiming.splice(index,1);
+    public removeServiceTiming(index: number): void {
+        this.userProfile.serviceTiming.splice(index, 1);
     }
 
+    public onSavingUserType(): void {
+        console.log("XX userProfile", this.userProfile)
+    }
 
-    /* ************************************ Private Methods ************************************ */
+    /* ************************************* Private Methods ******************************************** */
+    
+    private _init(): void {
+        this._getDepartmentList();
+    }
 
 }

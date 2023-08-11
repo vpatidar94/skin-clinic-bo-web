@@ -7,12 +7,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
 @Component({
-    selector: 'app-add-department',
-    templateUrl: './add-department.component.html',
-    styleUrls: ['./add-department.component.scss'],
+    selector: 'app-department',
+    templateUrl: './department.component.html',
+    styleUrls: ['./department.component.scss'],
 })
 
-export class AddDepartmentComponent implements AfterViewInit, OnInit {
+export class DepartmentComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
@@ -24,8 +24,8 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
     resultsLength = 0;
 
     showAddDepartmentSection: boolean = false;
-    toggleAddProductsSection() {
-        console.log('Toggle function called');
+
+    AddDepartment() {
         this.showAddDepartmentSection = !this.showAddDepartmentSection;
     }
 
@@ -76,11 +76,8 @@ export class AddDepartmentComponent implements AfterViewInit, OnInit {
         }
         this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
-            // console.log("XX XX",this.departmentList);
-            // console.log("XX",this.departmentList[0].name);
             this.resultsLength = this.departmentList.length;
             this.dataSource = new MatTableDataSource(this.departmentList);
-            // console.log("XXmm..",this.dataSource);
         })
     }
 
