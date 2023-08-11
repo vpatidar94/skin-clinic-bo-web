@@ -1,18 +1,19 @@
 import { Component, Input,} from '@angular/core';
-import { YES_NO_LIST } from 'src/app/@app/const/yes-no.const';
-import { AddServiceTypeVo } from 'src/app/@shared/dto/add-service-type.dto';
+import { DepartmentVo, UserTypeVo,UserEmpDto } from 'aayam-clinic-core';
 
 @Component({
-    selector: 'app-service-type-edit',
-    templateUrl: './service-type-edit.component.html',
+    selector: 'app-user-type-edit',
+    templateUrl: './user-type-edit.component.html',
 })
-export class ServiceTypeEditComponent {
+export class UserTypeEditComponent {
    /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */ 
     @Input()
-    addServiceType!: AddServiceTypeVo;
+    userType!: UserTypeVo ;
+
+    @Input()
+    departmentList!: DepartmentVo[];
     
-    yesNoList = YES_NO_LIST;
     /* ************************************* Constructors ******************************************** */
     constructor() { }
     

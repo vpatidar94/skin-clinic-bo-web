@@ -1,13 +1,12 @@
-<!------------------------- Products section ----------------------------->
+<!-- User Type section -->
 <section class="section-org-edit" *ngIf="!showAddUserTypeSection">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
             <h2>User Type List</h2>
-            <button class="common-button" (click)="toggleAddProductsSection()">Add User Type</button>
+            <button class="common-button" (click)="toggleUserTypeSection()">Add User Type</button>
         </div>
     </div>
 
-    <!--****************newly added to show table **********************-->
     <mat-card class="table-card-style">
         <div class="row">
             <div class="search-input-style">
@@ -18,7 +17,7 @@
 
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
-                <!-- Department  No -->
+                <!-- User Type Code -->
                 <ng-container matColumnDef="userTypeCode">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> User Type Code </th>
                     <td mat-cell *matCellDef="let row"> {{row.userTypeCode}} </td>
@@ -30,12 +29,12 @@
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.userTypeName}} </td>
                 </ng-container>
 
+                <!-- Department -->
                 <ng-container matColumnDef="departmentName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td>
                 </ng-container>
 
-                
                 <!-- Action -->
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
@@ -56,53 +55,17 @@
     </mat-card>
 </section>
 
-<!------------------------- Add Product section ----------------------------->
+<!-- Add Product section -->
 <section class="section-org-edit" *ngIf="showAddUserTypeSection">
-    <div class="row mb-3">
-        <div class=" d-flex justify-content-between">
-            <h2> Add User Type</h2>
-            <button class="common-button" (click)="toggleAddProductsSection()">Go To User Type List</button>
-        </div>
+    <div class="d-flex justify-content-end align-items-end">
+        <button class="common-button" (click)="toggleUserTypeSection()">Go To User Type List</button>
     </div>
 
-    <form>
-        <div class="row">
-            <!-- User Type -->
-            <div class="col-md-6">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="col-md-3">
-                        <label class="app-label">User Type</label>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <input type="text" class="form-control app-input" name="userType" [(ngModel)]="addUserType.name" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!-- Department Name -->
-        <div class="row">
+    <app-user-type-edit [userType]="userType" [departmentList]="departmentList"></app-user-type-edit>
 
-            <div class="col-md-6">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="col-md-3">
-                        <label class="app-label">Department</label>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-group">
-                            <input type="text" class="form-control app-input" name="departmentName" [(ngModel)]="addUserType.departmentId" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </form>
-    <div class="d-flex align-items-start justify-content-center">
+    <div class="d-flex align-items-center  mt-5">
         <div class="col-1">
-            <button class="common-button" (click)="saveIt()">save</button>
+            <button class="common-button" (click)="savingUserType()">save</button>
         </div>
     </div>
 </section>
