@@ -7,8 +7,12 @@ import { DepartmentVo} from 'aayam-clinic-core';
     templateUrl: './department-edit.component.html',
 })
 export class DepartmentEditComponent {
-    
+  /* ********************************* Static Field *************************************** */
+  /* *********************************** Instance Field *********************************** */   
     @Input()
     department!: DepartmentVo;
-    
+   
+    /* ************************************* Constructors ******************************************** */
+    constructor() { }
+
 }

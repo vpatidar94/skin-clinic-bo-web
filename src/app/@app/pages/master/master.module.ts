@@ -33,6 +33,7 @@ import { ProductsComponent } from './products/products.component';
 import { AddUserTypeComponent } from './add-user-type/add-user-type.component';
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentEditComponent } from './department/department-edit/department-edit.component';
+import { ProductEditComponent } from './products/product-edit/product-edit.component';
 
 
 
@@ -64,6 +65,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, MasterRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [MasterComponent, ServicesComponent, ServiceTypeComponent, ProductsComponent, AddServiceTypeComponent, AddServiceComponent, DepartmentComponent,DepartmentEditComponent, AddUserTypeComponent ]
+  declarations: [MasterComponent, ServicesComponent, ServiceTypeComponent, ProductsComponent, ProductEditComponent, AddServiceTypeComponent, AddServiceComponent, DepartmentComponent,DepartmentEditComponent, AddUserTypeComponent ]
 })
 export class MasterModule { }

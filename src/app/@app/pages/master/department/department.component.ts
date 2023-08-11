@@ -25,9 +25,7 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
 
     showAddDepartmentSection: boolean = false;
 
-    AddDepartment() {
-        this.showAddDepartmentSection = !this.showAddDepartmentSection;
-    }
+    
 
     displayedColumns: string[] = ['createdDate', 'departmentCode', 'departmentName', "action"];
     dataSource = new MatTableDataSource<DepartmentVo>([] as DepartmentVo[]);
@@ -68,7 +66,11 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         this.department = departmentDetails;
         this._init();
     }
-
+    
+    public AddDepartment() {
+        this.showAddDepartmentSection = !this.showAddDepartmentSection;
+    }
+    
     public _getDepartmentList() {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
