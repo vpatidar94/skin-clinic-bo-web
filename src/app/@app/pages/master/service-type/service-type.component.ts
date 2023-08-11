@@ -1,16 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, PrescriptionVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
-import { AuthService } from 'src/app/@shared/security/auth.service';
-import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { AddServiceTypeVo } from 'src/app/@shared/dto/add-service-type.dto';
-
-//newly added to show table
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { YES_NO_LIST } from 'src/app/@app/const/yes-no.const';
 
-// newly added to show table
 export interface PeriodicElement {
   SerialNo: number;
   ServiceType: string;
@@ -19,7 +12,6 @@ export interface PeriodicElement {
   Action: string;
 }
 
-// newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
   { SerialNo: 1, ServiceType: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Department: '1120', Action: "Edit | Delete" },
   { SerialNo: 2, ServiceType: 'Dressing', DoctorsName: 'Dr.aayam', Department: '1120', Action: "Edit | Delete" },
@@ -40,15 +32,8 @@ export class ServiceTypeComponent implements AfterViewInit,OnInit {
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
   showAddServiceTypeSection: boolean = false;
-  toggleAddServiceTypeSection() {
-    // this.addServiceType =  AddServiceType;
+ 
 
-    console.log('Toggle function called');
-    this.showAddServiceTypeSection = !this.showAddServiceTypeSection;
-  }
-
-
-  // newly added to show table
   displayedColumns: string[] = ['Serial No', 'Service Type', 'DoctorsName', "Department", "Action"];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -57,26 +42,25 @@ export class ServiceTypeComponent implements AfterViewInit,OnInit {
 
   addServiceType!: AddServiceTypeVo;
 
-  yesNoList = YES_NO_LIST;
   /* ************************************* Constructors ******************************************** */
   constructor() { }
 
   /* ************************************* Public Methods ******************************************** */
 
-  // newly added to show table
   public ngAfterViewInit() {
     this.paginator.showFirstLastButtons = false;
     this.paginator.hidePageSize = false;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    
   }
-  
-  // newly added to show table
+
+  public toggleAddServiceTypeSection() {
+    this.showAddServiceTypeSection = !this.showAddServiceTypeSection;
+  }
+
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -88,11 +72,9 @@ export class ServiceTypeComponent implements AfterViewInit,OnInit {
     ServiceItem.drAssociated = "yes";
     ServiceItem.serviceType = " ";
     this.addServiceType = (ServiceItem);
-    console.log("kkkk", this.addServiceType)
   }
 
-  public saveIt(): void {
-    // console.log("hhh", this.addServiceType);
+  public savingServiceType(): void {
   }
 
   /* ************************************* Private Methods ******************************************** */

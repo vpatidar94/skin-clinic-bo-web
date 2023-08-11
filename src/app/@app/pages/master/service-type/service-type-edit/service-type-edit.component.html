@@ -1,0 +1,55 @@
+<section class="section-org-edit">
+    <div class="row">
+        <div class=" d-flex justify-content-between">
+            <h2>Add Service Type</h2>
+        </div>
+    </div>
+    <form>
+        <div class="column mt-3">
+            <!--Service Type -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-4">
+                        <label class="app-label">Service Type</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="serviceTypeName"
+                                [(ngModel)]="addServiceType.serviceType" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-4">
+                        <label class="app-label">Department</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="depatment"
+                                [(ngModel)]="addServiceType.department" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3 mt-3">
+                    <div class="col-md-4">
+                        <label class="label" class="app-label">Doctor Associated</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-check form-check-inline" *ngFor="let g of yesNoList">
+                            <input class="form-check-input" type="radio" name="yesNo" [value]="g.id"
+                                [(ngModel)]="addServiceType.drAssociated">
+                            <label class="form-check-label">{{ g.name }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
