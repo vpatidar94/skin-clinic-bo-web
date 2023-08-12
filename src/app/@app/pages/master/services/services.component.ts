@@ -36,14 +36,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
     addService!: AddServiceVo;
-    
-    ngOnInit(): void {
-    }
     showAddServiceSection: boolean = false;
     toggleAddServiceSection(): void {
-        console.log('Toggle function called');
         this.showAddServiceSection = !this.showAddServiceSection;
-      }
+    }
 
     // newly added to show table
     displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'DoctorsName', "Fee", "Action"];
@@ -56,6 +52,9 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     constructor() { }
 
     /* ************************************* Public Methods ******************************************** */
+    public ngOnInit(): void {
+    }
+
     // newly added to show table
     public ngAfterViewInit() {
         this.paginator.showFirstLastButtons = false;

@@ -71,7 +71,10 @@
 <!------------------------- Add Service section ----------------------------->
 <section class="section-org-edit" *ngIf="showAddServiceSection">
   <div>
-    <app-services-edit [addService]="addService"
-        ></app-services-edit>
-</div>
+    <div class="d-flex justify-content-end">
+      <button class="common-button" (click)="toggleAddServiceSection()">Go To Services</button>
+    </div>
+    <app-services-edit [addService]="addService">
+    </app-services-edit>
+  </div>
 </section>
