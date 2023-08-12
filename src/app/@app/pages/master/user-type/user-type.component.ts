@@ -28,7 +28,8 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     userType!: UserTypeVo;
     departmentList!: DepartmentVo[];
 
-    showAddUserTypeSection: boolean = false;
+    showSectionUserTypeList!: boolean;
+    showSectionUserTypeEdit!: boolean;
 
     displayedColumns: string[] = ['userTypeCode', 'userTypeName', 'departmentName', "action"];
     dataSource = new MatTableDataSource<oldUserTypeVo>(ELEMENT_DATA);
@@ -59,17 +60,10 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     }
 
     public ngOnInit(): void {
-        // just to show table ...we will remove it
-        this.addUserType = ELEMENT_DATA;
-        const addUserTypeDetails = {} as oldUserTypeVo;
-        addUserTypeDetails.userTypeCode = 123;
-        addUserTypeDetails.userTypeName = "";
-        addUserTypeDetails.department = "";
-        addUserTypeDetails.action = "Edit | Delete"
-        this.addUserType.push(addUserTypeDetails);
-        console.log("kkk", this.addUserType);
+        this._init();
+    }
 
-        // for updating the user Type
+    public addUserTypeSection() {
         const userTypeDetails = {} as UserTypeVo;
         const orgId = this.keyValueStorageService.getOrgId();
         if (orgId) {
@@ -79,11 +73,13 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         userTypeDetails.name = "";
         userTypeDetails.departmentId = "";
         this.userType = userTypeDetails;
+
+        this._addEditUserItem();
+        this._getDepartmentList();
     }
 
-    public toggleUserTypeSection() {
-        this.showAddUserTypeSection = !this.showAddUserTypeSection;
-        this._getDepartmentList();
+    public _getUserTypeList(): void {
+        this.showSectionUserTypeList = true;
     }
 
     public _getDepartmentList() {
@@ -93,8 +89,12 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         }
         this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
-            console.log("XX XX users department", this.departmentList);
         })
+    }
+
+    public seeUserTypeList(): void {
+        this._resetSection();
+        this.showSectionUserTypeList = true;
     }
 
     public savingUserType(): void {
@@ -103,10 +103,23 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
                 this.userType = res.body
             }
         });
-        console.log("okk", this.userType)
     }
-    /* ************************************* Private Methods ******************************************** */
 
+    /* ************************************* Private Methods ******************************************** */
+    private _init(): void {
+        this._resetSection();
+        this._getUserTypeList();
+    }
+
+    private _resetSection(): void {
+        this.showSectionUserTypeList = false;
+        this.showSectionUserTypeEdit = false;
+    }
+
+    private _addEditUserItem(): void {
+        this._resetSection();
+        this.showSectionUserTypeEdit = true;
+    }
 
 
 }

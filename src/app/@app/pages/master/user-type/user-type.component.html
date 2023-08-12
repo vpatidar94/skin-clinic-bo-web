@@ -1,9 +1,9 @@
 <!-- User Type section -->
-<section class="section-org-edit" *ngIf="!showAddUserTypeSection">
+<section class="section-org-edit" *ngIf="showSectionUserTypeList">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
             <h2>User Type List</h2>
-            <button class="common-button" (click)="toggleUserTypeSection()">Add User Type</button>
+            <button class="common-button" (click)="addUserTypeSection()">Add User Type</button>
         </div>
     </div>
 
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="search-input-style">
                 <label class="app-label me-2">{{'Search'}}</label>
-                <input class="input-style" (keyup)="applyFilter($event)" placeholder="" #input>
+                <input class="input-style" name="filter" (keyup)="applyFilter($event)" #input>
             </div>
         </div>
 
@@ -56,9 +56,9 @@
 </section>
 
 <!-- Add Product section -->
-<section class="section-org-edit" *ngIf="showAddUserTypeSection">
+<section class="section-org-edit" *ngIf="showSectionUserTypeEdit">
     <div class="d-flex justify-content-end align-items-end">
-        <button class="common-button" (click)="toggleUserTypeSection()">Go To User Type List</button>
+        <button class="common-button" (click)="seeUserTypeList()">User Type List</button>
     </div>
 
     <app-user-type-edit [userType]="userType" [departmentList]="departmentList"></app-user-type-edit>
