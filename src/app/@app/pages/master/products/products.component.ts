@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductVo } from 'src/app/@shared/dto/product.dto';
@@ -31,10 +31,11 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
-    product!:ProductVo;
+    product!: ProductVo;
 
-    showAddProductsSection: boolean = false;
-    
+    showSectionProductList!: boolean;
+    showSectionProductEdit!: boolean;
+
     displayedColumns: string[] = ['Product Code', 'Product Name', 'Product Type', "Price", "Action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -51,7 +52,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
-    
+
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -61,28 +62,51 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     }
 
     public ngOnInit(): void {
-       const productDetails = {} as ProductVo;
-       productDetails.productCode = 123;
-       productDetails.purchaseDate = new Date();
-       productDetails.productName = "";
-       productDetails.drug = "";
-       productDetails.company = "";
-       productDetails.productType = "";
-       productDetails.qtyPerStrip = 0;
-       productDetails.pricePerStrip = 0;
-       productDetails.price = 0;
-       productDetails.expiryDate = new Date();
-       this.product=productDetails;
+        this._init();
     }
-    
-    public AddProductsSection() {
-        this.showAddProductsSection = !this.showAddProductsSection;
+
+    public AddProduct() {
+        const productDetails = {} as ProductVo;
+        productDetails.productCode = 123;
+        productDetails.purchaseDate = new Date();
+        productDetails.productName = "";
+        productDetails.drug = "";
+        productDetails.company = "";
+        productDetails.productType = "";
+        productDetails.qtyPerStrip = 0;
+        productDetails.pricePerStrip = 0;
+        productDetails.price = 0;
+        productDetails.expiryDate = new Date();
+        this.product = productDetails;
+        this._addEditProduct();
+    }
+
+    public _getProductList(): void {
+        this.showSectionProductList = true;
+    }
+
+    public seeProductList(): void {
+        this._resetSection();
+        this.showSectionProductList = true;
     }
 
     public savingProduct(): void {
-        console.log("XX product",this.product);
+        console.log("XX product", this.product);
     }
-    
-    /* ************************************* Private Methods ******************************************** */
 
+    /* ************************************* Private Methods ******************************************** */
+    private _init(): void {
+        this._resetSection();
+        this._getProductList();
+    }
+
+    private _resetSection(): void {
+        this.showSectionProductList = false;
+        this.showSectionProductEdit = false;
+    }
+
+    private _addEditProduct(): void {
+        this._resetSection();
+        this.showSectionProductEdit = true;
+    }
 }
