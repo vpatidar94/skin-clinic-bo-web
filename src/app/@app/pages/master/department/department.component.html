@@ -1,9 +1,9 @@
 <!-- Department section -->
-<section class="section-org-edit" *ngIf="!showAddDepartmentSection">
+<section class="section-org-edit" *ngIf="showSectionDepartmentList">
     <div class="row">
         <div class="px-5 d-flex justify-content-between">
             <h2>Department List</h2>
-            <button class="common-button" (click)="AddDepartment()">Add Department</button>
+            <button class="common-button" (click)="addDepartment()">Add Department</button>
         </div>
     </div>
 
@@ -57,10 +57,9 @@
 </section>
 
 <!-- Add Department section -->
-<section class="section-org-edit" *ngIf="showAddDepartmentSection">
+<section class="section-org-edit" *ngIf="showSectionDepartmentEdit">
     <div>
-        <app-department-edit [department]="department"
-            ></app-department-edit>
+        <app-department-edit [department]="department"></app-department-edit>
     </div>
     <div class="d-flex align-items-center justify-content-center mb-5">
         <div class="col-1">

@@ -23,9 +23,8 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
 
     resultsLength = 0;
 
-    showAddDepartmentSection: boolean = false;
-
-    
+    showSectionDepartmentList!: boolean;
+    showSectionDepartmentEdit!: boolean;
 
     displayedColumns: string[] = ['createdDate', 'departmentCode', 'departmentName', "action"];
     dataSource = new MatTableDataSource<DepartmentVo>([] as DepartmentVo[]);
@@ -55,6 +54,10 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
     }
 
     public ngOnInit(): void {
+        this._init();
+    }
+
+    public addDepartment() {
         const departmentDetails = {} as DepartmentVo;
         const orgId = this.keyValueStorageService.getOrgId();
         if (orgId) {
@@ -64,14 +67,11 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         departmentDetails.name = "";
         departmentDetails.created = new Date();
         this.department = departmentDetails;
-        this._init();
+        this._addEditDepartment();
     }
-    
-    public AddDepartment() {
-        this.showAddDepartmentSection = !this.showAddDepartmentSection;
-    }
-    
+
     public _getDepartmentList() {
+        this.showSectionDepartmentList = true;
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -93,7 +93,18 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
+        this._resetSection();
         this._getDepartmentList();
+    }
+
+    private _resetSection(): void {
+        this.showSectionDepartmentList = false;
+        this.showSectionDepartmentEdit = false;
+    }
+
+    private _addEditDepartment(): void {
+        this._resetSection();
+        this.showSectionDepartmentEdit = true;
     }
 
 }
