@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AddServiceTypeVo } from 'src/app/@shared/dto/add-service-type.dto';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -27,12 +27,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './service-type.component.html',
 })
 
-export class ServiceTypeComponent implements AfterViewInit,OnInit {
+export class ServiceTypeComponent implements AfterViewInit, OnInit {
 
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
-  showAddServiceTypeSection: boolean = false;
- 
+  showSectionServiceTypeList!: boolean;
+  showSectionServiceTypeEdit!: boolean;
+
 
   displayedColumns: string[] = ['Serial No', 'Service Type', 'DoctorsName', "Department", "Action"];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
@@ -54,8 +55,17 @@ export class ServiceTypeComponent implements AfterViewInit,OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  public toggleAddServiceTypeSection() {
-    this.showAddServiceTypeSection = !this.showAddServiceTypeSection;
+  public addServiceTypeSection(): void {
+    const ServiceItem = {} as AddServiceTypeVo;
+    ServiceItem.department = " ";
+    ServiceItem.drAssociated = "yes";
+    ServiceItem.serviceType = " ";
+    this.addServiceType = ServiceItem;
+    this._addEditServiceItem();
+  }
+
+  public _getServiceTypeList(): void {
+    this.showSectionServiceTypeList = true;
   }
 
   public applyFilter(event: Event) {
@@ -67,18 +77,33 @@ export class ServiceTypeComponent implements AfterViewInit,OnInit {
   }
 
   public ngOnInit(): void {
-    const ServiceItem = {} as AddServiceTypeVo;
-    ServiceItem.department = " ";
-    ServiceItem.drAssociated = "yes";
-    ServiceItem.serviceType = " ";
-    this.addServiceType = (ServiceItem);
+    this._init();
   }
+
+  public seeServiceTypeList(): void {
+    this._resetSection();
+    this.showSectionServiceTypeList = true;
+}
 
   public savingServiceType(): void {
   }
 
   /* ************************************* Private Methods ******************************************** */
 
+  private _init(): void {
+    this._resetSection();
+    this._getServiceTypeList();
+  }
+
+  private _resetSection(): void {
+    this.showSectionServiceTypeList = false;
+    this.showSectionServiceTypeEdit = false;
+  }
+
+  private _addEditServiceItem(): void {
+    this._resetSection();
+    this.showSectionServiceTypeEdit = true;
+  }
 
 }
 

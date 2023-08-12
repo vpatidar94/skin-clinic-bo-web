@@ -1,9 +1,9 @@
-<section class="section-org-edit" *ngIf="!showAddServiceTypeSection">
+<section class="section-org-edit" *ngIf="showSectionServiceTypeList">
 
   <div class="row">
     <div class="px-5 d-flex justify-content-between">
       <h2>Service Type List</h2>
-      <button class="common-button" (click)="toggleAddServiceTypeSection()">Add Service Type</button>
+      <button class="common-button" (click)="addServiceTypeSection()">Add Service Type</button>
     </div>
   </div>
 
@@ -61,9 +61,14 @@
   </mat-card>
 </section>
 
-<section class="section-org-edit" *ngIf="showAddServiceTypeSection">
+<section class="section-org-edit" *ngIf="showSectionServiceTypeEdit">
+
+  <div class="d-flex justify-content-end align-items-end">
+    <button class="common-button" (click)="seeServiceTypeList()">Service Type List</button>
+  </div>
+
   <app-service-type-edit [addServiceType]="addServiceType"></app-service-type-edit>
-  
+
   <div class="d-flex align-items-center  mt-5">
     <div class="col-1">
       <button class="common-button" (click)="savingServiceType()">save</button>
