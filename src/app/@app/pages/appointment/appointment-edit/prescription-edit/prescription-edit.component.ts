@@ -43,6 +43,7 @@ export class PrescriptionEditComponent implements OnInit {
     this.prescriptionForm?.valueChanges?.subscribe(() => {
       this._formChanged();
     });
+    this.showSectionAdd = this.userBooking.booking?.prescription?.length > 0;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -57,7 +58,8 @@ export class PrescriptionEditComponent implements OnInit {
     const prescriptionItem = {} as PrescriptionVo;
     this.userBooking.booking.prescription.push(prescriptionItem);
     this.userBookingChange.emit(this.userBooking);
-    this.userBooking.booking.diagnosis = [" "];
+    this.userBooking.booking.diagnosis = [""];
+    this.userBookingChange.emit(this.userBooking);
   }
 
 

@@ -201,17 +201,17 @@
         <mat-accordion *ngIf="showSectionAdd">
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header class="app-expansion">
-                    <div class="app-expansion-title col-md-12">
-                        <span>Patient ID: <span>0812</span></span>
-                        <span>Booking ID: <span>booking_id</span></span>
-                        <span>First Name: <span>Mayank</span></span>
-                        <span>Doctor's Name: <span>M.Patidar</span></span>
-                        <span>Date: <span>02/08/23</span></span>
-                    </div>
+                    <span>Patient ID: <span>{{userBooking.booking.patientNo}}</span></span>
+                    <span>Booking ID: <span>{{userBooking.booking.no}}</span></span>
+                    <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
+                            ''}}
+                            {{userBooking.user.nameL ?? ''}}</span></span> <span>Doctor's Name:
+                        <span>M. Patidar</span></span>
+                    <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
                 </mat-expansion-panel-header>
                 <div class="mt-4">
 
-                    <mat-accordion *ngIf="showSectionAdd">
+                    <mat-accordion>
                         <mat-expansion-panel class="my-3">
                             <mat-expansion-panel-header class="sub-app-expansion">
                                 <span class="prescription-heading">Patient Complaints</span>
@@ -226,7 +226,6 @@
                                     class="row align-items-center">
                                     <div class="row align-items-center">
                                         <div class="col-md-1 pres-input text-center">
-
                                             <p class="border border-info rounded p-1 text-align-center">{{i+1}}</p>
                                         </div>
 

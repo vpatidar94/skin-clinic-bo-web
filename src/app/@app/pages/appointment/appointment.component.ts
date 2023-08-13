@@ -67,6 +67,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     booking.test = [] as string[];
     booking.bookingDate = new Date();
     booking.complaint = [] as string[];
+    booking.complaint.push("");
     booking.diagnosis = [] as string[];
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {

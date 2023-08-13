@@ -44,7 +44,7 @@
                     <!-- Doctor Name -->
                     <ng-container matColumnDef="DoctorsName">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctors Name </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.drList[0].nameF}}</td>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"><span *ngIf="row.drList && row.drList.length > 0">{{row.drList[0].nameF}}</span></td>
                     </ng-container>
 
                     <!-- Time -->

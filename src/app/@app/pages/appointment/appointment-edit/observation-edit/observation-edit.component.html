@@ -12,7 +12,9 @@
                         <div class="app-expansion-title col-md-12">
                             <span>Patient ID: <span>{{booking.patientNo}}</span></span>
                             <span>Booking ID: <span>{{booking.no}}</span></span>
-                            <span>First Name: <span *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF ?? ''}} {{userBookingInvestigationList.user.nameL ?? ''}}</span></span>
+                            <span>First Name: <span
+                                    *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF
+                                    ?? ''}} {{userBookingInvestigationList.user.nameL ?? ''}}</span></span>
                             <span>Doctor's Name: <span>Ram</span></span>
                             <span>Date: <span>{{booking.bookingDate | date}}</span></span>
                         </div>
@@ -30,11 +32,16 @@
                 <mat-expansion-panel class="my-3">
                     <mat-expansion-panel-header class="app-expansion">
                         <div class="app-expansion-title col-md-12">
-                            <span>Patient ID: <span>1122</span></span>
-                            <span>Booking ID: <span>23333</span></span>
-                            <span>First Name: <span>James D</span></span>
-                            <span>Doctor's Name: <span>Ram</span></span>
-                            <span>Date: <span></span></span>
+                            <div class="app-expansion-title col-md-12">
+                                <span>Patient ID: <span>{{userBooking.booking.no}}</span></span>
+                                <span>Booking ID: <span>{{userBooking.booking.patientNo}}</span></span>
+                                <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
+                                        ''}}
+                                        {{userBooking.user.nameL ?? ''}}</span></span> <span>Doctor's Name:
+                                    <span>M. Patidar</span></span>
+                                <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
+
+                            </div>
                         </div>
                     </mat-expansion-panel-header>
                     <div class="border border-info rounded p-3 mt-4 min-height-300">
@@ -61,15 +68,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6" *ngFor="let in of userBooking.booking.observation.healthParams; let i = index;">
+                                <div class="col-md-6"
+                                    *ngFor="let in of userBooking.booking.observation.healthParams; let i = index;">
                                     <div class="d-flex align-items-center mb-3">
                                         <div class="col-md-4">
                                             <label for="exampleInputEmail1" class="app-label">{{in.name}}</label>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="form-group">
-                                                <input type="text" class="form-control app-input" [name]="userBooking.booking.observation.healthParams[i].key"
-                                                    [(ngModel)]="userBooking.booking.observation.healthParams[i].value" required>
+                                                <input type="text" class="form-control app-input"
+                                                    [name]="userBooking.booking.observation.healthParams[i].key"
+                                                    [(ngModel)]="userBooking.booking.observation.healthParams[i].value"
+                                                    required>
                                             </div>
                                         </div>
                                     </div>

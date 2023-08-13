@@ -49,6 +49,7 @@ export class AppointmentServiceEditComponent implements OnInit, OnChanges {
         this.serviceForm?.valueChanges?.subscribe(() => {
             this._formChanged();
         });
+        this.showSectionAdd = this.userBooking.booking?.items?.length > 0;
     }
 
     public ngOnChanges(changes: SimpleChanges): void {

@@ -53,6 +53,7 @@ export class ObservationEditComponent implements OnInit {
         this.observationForm?.valueChanges?.subscribe(() => {
             this._formChanged();
         });
+        this.showSectionAdd = this.userBooking.booking.observation?.healthParams?.length > 0;
     }
 
     public addNewObservation(): void { 

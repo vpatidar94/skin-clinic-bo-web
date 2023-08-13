@@ -18,48 +18,51 @@
                         <span>Date: <span>{{booking.bookingDate | date}}</span></span>
                     </div>
                 </mat-expansion-panel-header>
-                    <div class="border border-info rounded p-3 mt-4 container-style">
-                        <div class="row">
-                            <div class="col-md-1"><strong>Sno.</strong></div>
-                            <div class="col-md-4"><strong>Service</strong></div>
-                            <div class="col-md-2"><strong>Total Amount</strong></div>
-                            <div class="col-md"></div>
+                <div class="border border-info rounded p-3 mt-4 container-style">
+                    <div class="row">
+                        <div class="col-md-1"><strong>Sno.</strong></div>
+                        <div class="col-md-4"><strong>Service</strong></div>
+                        <div class="col-md-2"><strong>Total Amount</strong></div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="row align-items-center" *ngFor="let orderItem of booking.items; let i = index;">
+                        <div class="col-md-1 pres-input text-center">
+                            <p class="border border-info rounded p-1 text-align-center">{{i + 1}}</p>
                         </div>
-                        <div class="row align-items-center"
-                            *ngFor="let orderItem of booking.items; let i = index;">
-                            <div class="col-md-1 pres-input text-center">
-                                <p class="border border-info rounded p-1 text-align-center">{{i + 1}}</p>
-                            </div>
-                            <!-- Service -->
-                            <div class="form-group col-md-4">
-                                <select [disabled]="true" (change)="addItem($event, i)" name="service-item"
-                                    class="app-single-select-dropdown w-100" required>
-                                    <option [disabled]="isOptionDisabled(item.item._id)"
-                                        *ngFor="let item of serviceItemList;" [value]="item.item._id">
-                                        {{item?.item?.name}} <span *ngIf="item?.user?._id"> - {{item.user.nameF}}
-                                            {{item.user.nameL ??
-                                            ''}}</span>
-                                    </option>
-                                </select>
-                            </div>
+                        <!-- Service -->
+                        <div class="form-group col-md-4">
+                            <select [disabled]="true" (change)="addItem($event, i)" name="service-item"
+                                class="app-single-select-dropdown w-100" required>
+                                <option [disabled]="isOptionDisabled(item.item._id)"
+                                    *ngFor="let item of serviceItemList;" [value]="item.item._id">
+                                    {{item?.item?.name}} <span *ngIf="item?.user?._id"> - {{item.user.nameF}}
+                                        {{item.user.nameL ??
+                                        ''}}</span>
+                                </option>
+                            </select>
+                        </div>
 
-                            <!--Total Amount  -->
-                            <div class="form-group col-md-2">
-                                <input [readOnly]="true" type="text" class="form-control pres-input w-100"
-                                    [value]="booking.items[i].amount">
-                            </div>
+                        <!--Total Amount  -->
+                        <div class="form-group col-md-2">
+                            <input [readOnly]="true" type="text" class="form-control pres-input w-100"
+                                [value]="booking.items[i].amount">
                         </div>
                     </div>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
         <mat-accordion *ngIf="showSectionAdd">
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header class="app-expansion ">
                     <div class="app-expansion-title col-md-12">
-                        <span>Patient ID: <span>0812</span></span>
-                        <span>Booking ID: <span>1021</span></span>
-                        <span>First Name: <span>Maynak</span></span>
-                        <span>Doctor's Name: <span>M. Patidar</span></span>
+                        <span>Patient ID: <span>{{userBooking.booking.patientNo}}</span></span>
+                        <span>Booking ID: <span>{{userBooking.booking.no}}</span></span>
+                        <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
+                                ''}}
+                                {{userBooking.user.nameL ?? ''}}</span></span> <span>Doctor's Name:
+                            <span>M. Patidar</span></span>
+                        <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
+
                     </div>
                 </mat-expansion-panel-header>
                 <form #serviceForm="ngForm">
