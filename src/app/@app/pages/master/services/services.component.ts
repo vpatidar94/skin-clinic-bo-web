@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
-//newly added to show table
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
-// newly added to show table
 export interface PeriodicElement {
     ServiceCode: number;
     ServiceName: string;
@@ -36,12 +34,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
     addService!: AddServiceVo;
-    showAddServiceSection: boolean = false;
-    toggleAddServiceSection(): void {
-        this.showAddServiceSection = !this.showAddServiceSection;
-    }
 
-    // newly added to show table
+    showSectionServiceList!: boolean;
+    showSectionServiceEdit!: boolean;
+
     displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'DoctorsName', "Fee", "Action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -53,6 +49,21 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
+        this._init();
+    }
+
+    public addServiceSection(): void {
+        const serviceItem = {} as AddServiceVo
+        serviceItem.serviceCode = '';
+        serviceItem.serviceName = '';
+        serviceItem.serviceType = '';
+        serviceItem.department = '';
+        serviceItem.associatedDoctor = '';
+        serviceItem.feeType = '';
+        serviceItem.fee = 0;
+        serviceItem.feeDistribution = '';
+        this.addService = serviceItem;
+        this._addEditService();
     }
 
     // newly added to show table
@@ -62,7 +73,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
-    // newly added to show table
+
+    public _getServiceList(): void {
+    }
+    
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -72,8 +86,30 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
     }
 
+    public savingService(): void {
+        this._init();
+    }
+
+    public cancel(): void {
+        this._init();
+    }
+    
     /* ************************************* Private Methods ******************************************** */
 
+    private _init(): void {
+        this._resetSection();
+        this.showSectionServiceList = true;
+        this._getServiceList();
+    }
 
+    private _resetSection(): void {
+        this.showSectionServiceList = false;
+        this.showSectionServiceEdit = false;
+    }
+
+    private _addEditService(): void {
+        this._resetSection();
+        this.showSectionServiceEdit = true;
+    }
 
 }

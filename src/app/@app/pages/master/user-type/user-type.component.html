@@ -57,15 +57,16 @@
 
 <!-- Add Product section -->
 <section class="section-org-edit" *ngIf="showSectionUserTypeEdit">
-    <div class="d-flex justify-content-end align-items-end">
-        <button class="common-button" (click)="seeUserTypeList()">User Type List</button>
-    </div>
 
     <app-user-type-edit [userType]="userType" [departmentList]="departmentList"></app-user-type-edit>
 
-    <div class="d-flex align-items-center  mt-5">
+    <div class="d-flex align-items-center mt-5 mb-4">
         <div class="col-1">
-            <button class="common-button" (click)="savingUserType()">save</button>
+            <button (click)="savingUserType()" class="common-button">{{'save'}}</button>
+        </div>
+        <div class="col-1">
+            <button (click)="cancel()" class="cancel-button">{{'cancel'}}</button>
         </div>
     </div>
+
 </section>

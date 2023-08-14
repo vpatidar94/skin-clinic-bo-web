@@ -63,16 +63,15 @@
 
 <!-- Add Product section -->
 <section class="section-org-edit" *ngIf="showSectionProductEdit">
-    
-    <div class="d-flex justify-content-end align-items-end">
-        <button class="common-button" (click)="seeProductList()">Product List</button>
-    </div>
 
     <app-product-edit [product]="product"></app-product-edit>
-    
-    <div class="d-flex align-items-center justify-content-center mb-5">
+
+    <div class="d-flex align-items-center justify-content-center mt-5 mb-4">
         <div class="col-1">
-            <button class="common-button" (click)="savingProduct()">save</button>
+            <button (click)="savingProduct()" class="common-button">{{'save'}}</button>
+        </div>
+        <div class="col-1">
+            <button (click)="cancel()" class="cancel-button">{{'cancel'}}</button>
         </div>
     </div>
 </section>

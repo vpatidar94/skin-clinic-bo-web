@@ -34,7 +34,6 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   showSectionServiceTypeList!: boolean;
   showSectionServiceTypeEdit!: boolean;
 
-
   displayedColumns: string[] = ['Serial No', 'Service Type', 'DoctorsName', "Department", "Action"];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -65,7 +64,6 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   }
 
   public _getServiceTypeList(): void {
-    this.showSectionServiceTypeList = true;
   }
 
   public applyFilter(event: Event) {
@@ -80,18 +78,19 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     this._init();
   }
 
-  public seeServiceTypeList(): void {
-    this._resetSection();
-    this.showSectionServiceTypeList = true;
-}
-
   public savingServiceType(): void {
+    this._init();
+  }
+
+  public cancel(): void {
+    this._init();
   }
 
   /* ************************************* Private Methods ******************************************** */
 
   private _init(): void {
     this._resetSection();
+    this.showSectionServiceTypeList = true;
     this._getServiceTypeList();
   }
 

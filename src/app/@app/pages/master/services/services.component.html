@@ -1,13 +1,12 @@
-<!------------------------- Services section ----------------------------->
-<section class="section-org-edit" *ngIf="!showAddServiceSection">
+<!-- Services section -->
+<section class="section-org-edit" *ngIf="showSectionServiceList">
   <div class="row">
     <div class="px-5 d-flex justify-content-between">
       <h2>Services</h2>
-      <button class="common-button" (click)="toggleAddServiceSection()">Add Service</button>
+      <button class="common-button" (click)="addServiceSection()">Add Service</button>
     </div>
   </div>
 
-  <!--****************newly added to show table **********************-->
   <mat-card class="table-card-style">
     <div class="row">
       <div class="search-input-style">
@@ -68,13 +67,18 @@
   </mat-card>
 </section>
 
-<!------------------------- Add Service section ----------------------------->
-<section class="section-org-edit" *ngIf="showAddServiceSection">
-  <div>
-    <div class="d-flex justify-content-end">
-      <button class="common-button" (click)="toggleAddServiceSection()">Go To Services</button>
+<!-- Add Service section -->
+<section class="section-org-edit" *ngIf="showSectionServiceEdit">
+
+  <app-services-edit [addService]="addService"></app-services-edit>
+
+  <div class="d-flex align-items-center justify-content-center mt-5 mb-4">
+    <div class="col-1">
+      <button (click)="savingService()" class="common-button">{{'save'}}</button>
     </div>
-    <app-services-edit [addService]="addService">
-    </app-services-edit>
+    <div class="col-1">
+      <button (click)="cancel()" class="cancel-button">{{'cancel'}}</button>
+    </div>
   </div>
+
 </section>

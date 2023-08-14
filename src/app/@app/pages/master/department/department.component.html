@@ -61,9 +61,13 @@
     <div>
         <app-department-edit [department]="department"></app-department-edit>
     </div>
-    <div class="d-flex align-items-center justify-content-center mb-5">
+    
+    <div class="row mt-4">
         <div class="col-1">
-            <button class="common-button" (click)="savingDepartment()">save</button>
+            <button (click)="savingDepartment()" class="common-button">{{'save'}}</button>
+        </div>
+        <div class="col-1">
+            <button (click)="cancel()" class="cancel-button">{{'cancel'}}</button>
         </div>
     </div>
 </section>

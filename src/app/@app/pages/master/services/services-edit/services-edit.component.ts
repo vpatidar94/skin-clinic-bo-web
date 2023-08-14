@@ -7,27 +7,17 @@ import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
     templateUrl: './services-edit.component.html',
 })
 
-export class ServicesEditComponent implements OnInit {
+export class ServicesEditComponent {
+    /* ********************************* Static Field *************************************** */
     /* ************************************* Instance Field ******************************************** */
     @Input()
     addService!: AddServiceVo;
 
-   
+    /* ************************************* Constructors ******************************************** */
+    constructor() { }
+
     /* ************************************* Public Methods ******************************************** */
-    ngOnInit(): void {
-        const serviceItem = {} as AddServiceVo
-        serviceItem.serviceCode = '';
-        serviceItem.serviceName = '';
-        serviceItem.serviceType = '';
-        serviceItem.department = '';
-        serviceItem.associatedDoctor = '';
-        serviceItem.feeType = '';
-        serviceItem.fee = 0;
-        serviceItem.feeDistribution = '';
-        this.addService = serviceItem;
-    }
-    onSave(): void {
-        console.log(this.addService)
-    }
-    
+    /* ************************************* Private Methods ******************************************** */
+
+
 }

@@ -79,7 +79,6 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     }
 
     public _getUserTypeList(): void {
-        this.showSectionUserTypeList = true;
     }
 
     public _getDepartmentList() {
@@ -92,22 +91,23 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         })
     }
 
-    public seeUserTypeList(): void {
-        this._resetSection();
-        this.showSectionUserTypeList = true;
-    }
-
     public savingUserType(): void {
         this.userApi.addUpdateUserType(this.userType).subscribe((res: ApiResponse<UserTypeVo>) => {
             if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-                this.userType = res.body
+                this.userType = res.body;
+                this._init();
             }
         });
+    }
+
+    public cancel(): void {
+        this._init();
     }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
+        this.showSectionUserTypeList = true;
         this._getUserTypeList();
     }
 

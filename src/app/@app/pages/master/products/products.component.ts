@@ -82,21 +82,20 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     }
 
     public _getProductList(): void {
-        this.showSectionProductList = true;
-    }
-
-    public seeProductList(): void {
-        this._resetSection();
-        this.showSectionProductList = true;
     }
 
     public savingProduct(): void {
-        console.log("XX product", this.product);
+        this._init();
+    }
+
+    public cancel(): void {
+        this._init();
     }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
+        this.showSectionProductList = true;
         this._getProductList();
     }
 

@@ -71,7 +71,7 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
     }
 
     public _getDepartmentList() {
-        this.showSectionDepartmentList = true;
+        // this.showSectionDepartmentList = true;
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -87,13 +87,18 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         this.departmentApi.addUpdateDepartment(this.department).subscribe((res: ApiResponse<DepartmentVo>) => {
             if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
                 this.department = res.body
+                this._init();
             }
         });
     }
 
+    public cancel(): void {
+        this._init();
+      }
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
+        this.showSectionDepartmentList = true;
         this._getDepartmentList();
     }
 
