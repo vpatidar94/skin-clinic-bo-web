@@ -16,29 +16,29 @@
         </div>
 
         <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
+            <table mat-table [dataSource]="userTypeList" matSort>
                 <!-- User Type Code -->
                 <ng-container matColumnDef="userTypeCode">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> User Type Code </th>
-                    <td mat-cell *matCellDef="let row"> {{row.userTypeCode}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.userType.code}} </td>
                 </ng-container>
 
                 <!-- User Type -->
                 <ng-container matColumnDef="userTypeName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>User Type</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.userTypeName}} </td>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.userType.name}} </td>
                 </ng-container>
 
                 <!-- Department -->
                 <ng-container matColumnDef="departmentName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.departmentName}} </td>
                 </ng-container>
 
                 <!-- Action -->
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">{{row.action}}</td>
+                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">Edit | Delete</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

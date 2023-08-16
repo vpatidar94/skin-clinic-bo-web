@@ -64,15 +64,19 @@ export const URL = {
     STAFF_LIST: MJR_USER + '/staff-list',
     ADD_UPDATE_STAFF: MJR_USER + '/staff-add-update',
     ACCESS_LIST: MJR_USER + '/access-list',
+    USER_LIST: MJR_ORG + '/user-type-list',
     ADD_UPDATE_USER_TYPE: MJR_ORG + '/user-type-add-update',
+
     // ******************************************************************
     // Booking API endpoint
     ADD_UPDATE_BOOKING: MJR_BOOKING + ADD_UPDATE,
     BOOKING_LIST: MJR_BOOKING + LIST,
     ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
+    
+    // ******************************************************************
+    // Department API endpoint
     ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
     ORG_DEPARTMENT_LIST: MJR_ORG + '/department-list',
-
     
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'

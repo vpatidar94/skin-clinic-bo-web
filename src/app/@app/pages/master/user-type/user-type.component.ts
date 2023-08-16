@@ -5,14 +5,9 @@ import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { oldUserTypeVo } from 'src/app/@shared/dto/user-type.dto';
 import { UserTypeVo } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
-const ELEMENT_DATA: oldUserTypeVo[] = [
-    { userTypeCode: 1, userTypeName: 'OPD', department: "", action: "Edit | Delete" },
-    { userTypeCode: 2, userTypeName: 'Dressing', department: "", action: "Edit | Delete" },
-]
 
 @Component({
     selector: 'app-user-type',
@@ -24,15 +19,17 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
-    addUserType!: Array<oldUserTypeVo>; // to show ELEMENT_DATA right now...we  will remove it. 
     userType!: UserTypeVo;
+    
     departmentList!: DepartmentVo[];
+    userTypeList!: UserTypeVo[];
 
     showSectionUserTypeList!: boolean;
     showSectionUserTypeEdit!: boolean;
 
     displayedColumns: string[] = ['userTypeCode', 'userTypeName', 'departmentName', "action"];
-    dataSource = new MatTableDataSource<oldUserTypeVo>(ELEMENT_DATA);
+    dataSource = new MatTableDataSource<UserTypeVo>([] as UserTypeVo[]);
+
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -78,9 +75,6 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this._getDepartmentList();
     }
 
-    public _getUserTypeList(): void {
-    }
-
     public _getDepartmentList() {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
@@ -88,6 +82,17 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         }
         this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
+        })
+    }
+
+    public _getUserTypeList() {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.userApi.getUserTypeList(orgId).subscribe((res: ApiResponse<UserTypeVo[]>) => {
+            this.userTypeList = res.body ?? [] as UserTypeVo[];
+            this.dataSource = new MatTableDataSource(this.userTypeList);
         })
     }
 

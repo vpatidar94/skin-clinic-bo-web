@@ -29,9 +29,13 @@ export class UserApi {
         return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl + URL.DOCTOR_ITEM_LIST, { params: { orgId, subRole } });
     }
 
-    /*------------------------------updating user type-------------------------*/
+    /*--user type--*/
     public addUpdateUserType(userType: UserTypeVo): Observable<ApiResponse<UserTypeVo>> {
         return this.http.post<ApiResponse<UserTypeVo>>(environment.apiUrl +  URL.ADD_UPDATE_USER_TYPE , userType);
+    }
+
+    public getUserTypeList(orgId: string): Observable<ApiResponse<UserTypeVo[]>> {
+        return this.http.get<ApiResponse<UserTypeVo[]>>(environment.apiUrl + URL.USER_LIST, { params: { orgId } });
     }
 }
 
