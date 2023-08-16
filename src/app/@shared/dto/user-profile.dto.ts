@@ -16,6 +16,7 @@ export interface UserProfileVo {
     fatherName: string;
     alternateNumber: Number;
     department: string;
+    departmentId: string;
     designation: string;
     addPhoto: any;
     uploadIdProof: any;

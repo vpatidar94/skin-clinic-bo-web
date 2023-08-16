@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ApiResponse, DepartmentVo, ResponseStatus, } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, ResponseStatus, UserTypeDetailDto, } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { MatSort } from '@angular/material/sort';
@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserTypeVo } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+
 
 
 @Component({
@@ -22,13 +23,13 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     userType!: UserTypeVo;
     
     departmentList!: DepartmentVo[];
-    userTypeList!: UserTypeVo[];
+    userTypeList!: UserTypeDetailDto[];
 
     showSectionUserTypeList!: boolean;
     showSectionUserTypeEdit!: boolean;
 
     displayedColumns: string[] = ['userTypeCode', 'userTypeName', 'departmentName', "action"];
-    dataSource = new MatTableDataSource<UserTypeVo>([] as UserTypeVo[]);
+    dataSource = new MatTableDataSource<UserTypeDetailDto>([] as UserTypeDetailDto[]);
 
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,8 +91,8 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         if (!orgId) {
             return;
         }
-        this.userApi.getUserTypeList(orgId).subscribe((res: ApiResponse<UserTypeVo[]>) => {
-            this.userTypeList = res.body ?? [] as UserTypeVo[];
+        this.userApi.getUserTypeList(orgId).subscribe((res: ApiResponse<UserTypeDetailDto[]>) => {
+            this.userTypeList = res.body ?? [] as UserTypeDetailDto[];
             this.dataSource = new MatTableDataSource(this.userTypeList);
         })
     }

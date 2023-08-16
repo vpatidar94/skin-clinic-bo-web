@@ -97,7 +97,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="row">
@@ -148,18 +147,19 @@
                     </div>
                 </div>
 
-                <!--User Type -->
+                <!-- Department -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
-                            <label class="app-label">User Type</label>
+                            <label class="app-label">Deparment</label>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select name="userType" class="app-single-select-dropdown w-100"
-                                    [(ngModel)]="userProfile.userType" required>
-                                    <option>a</option>
-                                    <option>b</option>
+                                <select class="app-single-select-dropdown w-100" name="department"
+                                    [(ngModel)]="userProfile.departmentId"
+                                    (ngModelChange)="filterUserTypesByDepartment(userProfile.departmentId)">
+                                    <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -199,22 +199,25 @@
             </div>
 
             <div class="row">
-                <!-- Deparment -->
+                <!-- User Type -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
-                            <label class="app-label">Deparment</label>
+                            <label class="app-label">User Type</label>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select class="app-single-select-dropdown w-100">
-                                    <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                                <select class="app-single-select-dropdown w-100" name="userType"
+                                    [(ngModel)]="userProfile.userType">
+                                    <option *ngFor="let item of filteredUserTypeList" [value]="item.userType._id">
+                                        {{item.userType.name}}
                                     </option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Designation -->
                 <div class="col-md-6">
@@ -231,6 +234,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="row">
                 <!-- Service Timing -->
