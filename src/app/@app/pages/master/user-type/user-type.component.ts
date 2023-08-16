@@ -40,7 +40,8 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi,
-        private departmentApi: DepartmentApi) { }
+        private departmentApi: DepartmentApi,
+        ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngAfterViewInit() {
@@ -72,9 +73,8 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         }
         userTypeDetails.name = "";
         userTypeDetails.departmentId = "";
-        this.userType = userTypeDetails;
 
-        this._addEditUserItem();
+        this._addEditUserItem(userTypeDetails);
         this._getDepartmentList();
     }
 
@@ -116,7 +116,9 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this.showSectionUserTypeEdit = false;
     }
 
-    private _addEditUserItem(): void {
+    private _addEditUserItem(userTypeDetails:UserTypeVo): void {
+        this.userType = userTypeDetails;
+
         this._resetSection();
         this.showSectionUserTypeEdit = true;
     }

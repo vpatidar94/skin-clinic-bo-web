@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select class="app-single-select-dropdown w-100" [(ngModel)]="userType.departmentId">
+                            <select class="app-single-select-dropdown w-100" [(ngModel)]="userType.departmentId" name="departmentId">
                                 <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
                                 </option>
                             </select>
