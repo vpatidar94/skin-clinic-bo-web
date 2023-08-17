@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { AccountsVo } from 'src/app/@shared/dto/accounts.dto';
 
 @Component({
@@ -32,10 +31,6 @@ export class AccountComponent{
         accountsSection.branch='';
         this.accounts=accountsSection;
     }
-
-    onSave() : void{
-        console.log(this.accounts)                                                                      
-      }
 
      /* ************************************ Constructors ************************************ */
      

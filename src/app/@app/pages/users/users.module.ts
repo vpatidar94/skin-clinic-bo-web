@@ -21,11 +21,12 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddressModule } from 'src/app/@shared/component/address/address.module';
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AccountComponent } from './accounts/accounts.component';
+import { UserProfileComponent } from './user-edit/user-profile/user-profile.component';
+import { AccountComponent } from './user-edit/accounts/accounts.component';
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -54,6 +55,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, UsersRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [UsersComponent, UserProfileComponent, AccountComponent]
+  declarations: [UsersComponent, UserEditComponent, UserProfileComponent, AccountComponent]
 })
 export class UsersModule { }

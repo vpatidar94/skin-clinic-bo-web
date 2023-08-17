@@ -19,11 +19,13 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="salaryType" value="fixed" [(ngModel)]="accounts.salaryType" >
+                                <input class="form-check-input" type="radio" name="salaryType" value="fixed"
+                                    [(ngModel)]="accounts.salaryType">
                                 <label class="form-check-label">Fixed Pay</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="salaryType" value="commission" [(ngModel)]="accounts.salaryType" >
+                                <input class="form-check-input" type="radio" name="salaryType" value="commission"
+                                    [(ngModel)]="accounts.salaryType">
                                 <label class="form-check-label">Commission Pay</label>
                             </div>
                         </div>
@@ -41,7 +43,8 @@
                             <label for="basicSalary" class="app-label">Basic Salary</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="basicSalary" name="basicSalary" [(ngModel)]="accounts.basicSalary" >
+                            <input type="text" class="form-control" id="basicSalary" name="basicSalary"
+                                [(ngModel)]="accounts.basicSalary">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
@@ -49,7 +52,7 @@
                             <label for="da" class="app-label">DA</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control " id="da" name="da" [(ngModel)]="accounts.da" >
+                            <input type="text" class="form-control " id="da" name="da" [(ngModel)]="accounts.da">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
@@ -57,7 +60,7 @@
                             <label for="hra" class="app-label">HRA</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control " id="hra" name="hra" [(ngModel)]="accounts.hra" >
+                            <input type="text" class="form-control " id="hra" name="hra" [(ngModel)]="accounts.hra">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
@@ -65,7 +68,8 @@
                             <label for="others" class="app-label">Others</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="others" name="others" [(ngModel)]="accounts.others" >
+                            <input type="text" class="form-control" id="others" name="others"
+                                [(ngModel)]="accounts.others">
                         </div>
                     </div>
                 </div>
@@ -78,7 +82,7 @@
                             <label for="tds" class="app-label">TDS</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="tds" name="tds" [(ngModel)]="accounts.tds" >
+                            <input type="text" class="form-control" id="tds" name="tds" [(ngModel)]="accounts.tds">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
@@ -94,7 +98,8 @@
                             <label for="professionalTax" class="app-label">Professional Tax</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="professionalTax" name="professionalTax" [(ngModel)]="accounts.professionalTax">
+                            <input type="text" class="form-control" id="professionalTax" name="professionalTax"
+                                [(ngModel)]="accounts.professionalTax">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
@@ -102,7 +107,8 @@
                             <label for="leaveDeduction" class="app-label">Leave Deduction</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="leaveDeduction" name="leaveDeduction" [(ngModel)]="accounts.leaveDeduction">
+                            <input type="text" class="form-control" id="leaveDeduction" name="leaveDeduction"
+                                [(ngModel)]="accounts.leaveDeduction">
                         </div>
                     </div>
                 </div>
@@ -115,7 +121,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="name" class="form-control app-input" name="total" required readonly [(ngModel)]="accounts.total">
+                                <input type="name" class="form-control app-input" name="total" required readonly
+                                    [(ngModel)]="accounts.total">
                             </div>
                         </div>
                     </div>
@@ -138,7 +145,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="bankName" class="form-control app-input" name="bankName" [(ngModel)]="accounts.bankName"  required>
+                                <input type="bankName" class="form-control app-input" name="bankName"
+                                    [(ngModel)]="accounts.bankName" required>
                             </div>
                         </div>
                     </div>
@@ -152,7 +160,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="" class="form-control app-input" name="accountNo" [(ngModel)]="accounts.accountNo" required appNumberOnly>
+                                <input type="" class="form-control app-input" name="accountNo"
+                                    [(ngModel)]="accounts.accountNo" required appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -168,11 +177,13 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="accountType" [(ngModel)]="accounts.accountType" value="saving">
+                                <input class="form-check-input" type="radio" name="accountType"
+                                    [(ngModel)]="accounts.accountType" value="saving">
                                 <label class="form-check-label">Saving</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="accountType" [(ngModel)]="accounts.accountType" value="current">
+                                <input class="form-check-input" type="radio" name="accountType"
+                                    [(ngModel)]="accounts.accountType" value="current">
                                 <label class="form-check-label">Current</label>
                             </div>
                         </div>
@@ -186,7 +197,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="name" class="form-control app-input" name="accountHolderName" [(ngModel)]="accounts.accountName" required>
+                                <input type="name" class="form-control app-input" name="accountHolderName"
+                                    [(ngModel)]="accounts.accountName" required>
                             </div>
                         </div>
                     </div>
@@ -203,7 +215,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="" class="form-control app-input" name="ifsc" [(ngModel)]="accounts.ifsc" required>
+                                <input type="" class="form-control app-input" name="ifsc" [(ngModel)]="accounts.ifsc"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -216,7 +229,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="name" class="form-control app-input" name="branch" [(ngModel)]="accounts.branch" required>
+                                <input type="name" class="form-control app-input" name="branch"
+                                    [(ngModel)]="accounts.branch" required>
                             </div>
                         </div>
                     </div>
@@ -225,9 +239,4 @@
 
         </mat-list>
     </form>
-    <div class="d-flex align-items-center justify-content-center mb-5">
-        <div class="col-1">
-            <button  class="common-button" (click)="onSave()">save</button>
-        </div>
-    </div>
 </section>

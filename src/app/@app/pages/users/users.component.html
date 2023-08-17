@@ -1,29 +1,17 @@
 <section class="section-org">
-
-    <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue" aria-label="Font Style">
-        <!-- <mat-button-toggle class="tab-content"  value="PATIENT">Patient Detail</mat-button-toggle>
-        <mat-button-toggle class="tab-content"  value="OBSERVATION">Observation</mat-button-toggle>
-        <mat-button-toggle class="tab-content"  value="SERVICE">Services</mat-button-toggle>
-        <mat-button-toggle class="tab-content"  value="TEST">Investigation</mat-button-toggle>
-        <mat-button-toggle class="tab-content"  value="PRESCRIPTION">Prescription</mat-button-toggle> -->
-        <mat-button-toggle class="tab-content" (change)="tabChange()"  value="USERPROFILE">User Profile</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="ACCOUNTS">Account/Salary</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()"  value="ATTENDANCE">Attendance</mat-button-toggle>
-    </mat-button-toggle-group>
-    
-    
-</section>
-
-<section class="section-org-edit">
-
-    <div *ngIf="showSectionUserProfile">
-        <app-user-profile></app-user-profile> 
-    </div>
-    <div *ngIf="showSectionAccounts">
-        <app-accounts></app-accounts> 
-    </div>
-    <!-- <div *ngIf="showSectionAttendance">
-        <app-attendance></app-attendance> 
-    </div> -->
-
+    <section class="row" *ngIf="showSectionUserList">
+        <div class="row">
+            <div class="row">
+                <div class="px-5 d-flex justify-content-between">
+                    <button class="common-button" (click)="addUser()">Add User</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="showSectionUserEdit">
+        <div>
+            <app-user-edit [departmentList]="departmentList" [userTypeList]="userTypeList" [department]="department"
+                [userProfile]="userProfile"></app-user-edit>
+        </div>
+    </section>
 </section>

@@ -1,8 +1,8 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 import { NgForm } from '@angular/forms';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
-import { AddressVo, DepartmentVo, ApiResponse, UserTypeDetailDto, } from 'aayam-clinic-core';
+import { DepartmentVo, UserTypeDetailDto, } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
@@ -17,13 +17,18 @@ import { UserApi } from 'src/app/@app/service/remote/user.api';
 export class UserProfileComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
+    @Input()
     department!: DepartmentVo;
+
+    @Input()
     departmentList!: DepartmentVo[];
     
     genderList = GENDER_LIST;
     
+    @Input()
     userProfile!: UserProfileVo;
     
+    @Input()
     userTypeList!: UserTypeDetailDto[];
 
     filteredUserTypeList!: UserTypeDetailDto[];
@@ -43,52 +48,7 @@ export class UserProfileComponent implements OnInit {
     /* ************************************ Public Methods ************************************ */
 
     public ngOnInit(): void {
-        const userProfileItem = {} as UserProfileVo;
-        userProfileItem.userId = '';
-        userProfileItem.date = new Date();
-        userProfileItem.firstName = '';
-        userProfileItem.lastName = '';
-        userProfileItem.gender = '';
-        userProfileItem.age = 0;
-        userProfileItem.contactNumber = 0;
-        userProfileItem.email = '';
-        userProfileItem.dob = new Date();
-        userProfileItem.userType = "";
-        userProfileItem.fatherName = '';
-        userProfileItem.alternateNumber = 0;
-        userProfileItem.designation = '';
-        userProfileItem.addPhoto = File;
-        userProfileItem.uploadIdProof = File;
-        userProfileItem.address = {} as AddressVo;
-        userProfileItem.serviceTiming = this.serviceTimingData;
-        userProfileItem.department = '';
-        this.userProfile = userProfileItem;
-
         this._init();
-
-    }
-
-    public _getDepartmentList() {
-        const orgId = this.keyValueStorageService.getOrgId();
-        if (!orgId) {
-            return;
-        }
-        this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
-            this.departmentList = res.body ?? [] as DepartmentVo[];
-            console.log("XX XX users department", this.departmentList);
-        })
-    }
-
-    public _getUserTypeList() {
-        const orgId = this.keyValueStorageService.getOrgId();
-        if (!orgId) {
-            return;
-        }
-        this.userApi.getUserTypeList(orgId).subscribe((res: ApiResponse<UserTypeDetailDto[]>) => {
-            this.userTypeList = res.body ?? [] as UserTypeDetailDto[];
-            console.log("xx xxuserTypeList", this.userTypeList);
-
-        })
     }
 
     public addServiceTiming() {
@@ -104,9 +64,6 @@ export class UserProfileComponent implements OnInit {
         this.userProfile.serviceTiming.splice(index, 1);
     }
 
-    public onSavingUserType(): void {
-        console.log("XX userProfile", this.userProfile)
-    }
 
     public filterUserTypesByDepartment(departmentId: string) {
         this.filteredUserTypeList = this.userTypeList.filter(item => item.userType.departmentId === departmentId);
@@ -117,8 +74,6 @@ export class UserProfileComponent implements OnInit {
 
     private _init(): void {
         this.filteredUserTypeList = this.userTypeList;
-        this._getDepartmentList();
-        this._getUserTypeList();
     }
 
 }
