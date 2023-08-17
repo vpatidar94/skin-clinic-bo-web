@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" [(ngModel)]="userProfile.userId"
+                                <input type="text" class="form-control app-input" [(ngModel)]="staff.user._id"
                                     name="userId" required>
                             </div>
                         </div>
@@ -28,8 +28,8 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="date" class="form-control app-input" name="date"
-                                    [ngModel]="userProfile.date | date:'yyyy-MM-dd'"
-                                    (ngModelChange)="userProfile.date = $event" required>
+                                    [ngModel]="staff.user.doA | date:'yyyy-MM-dd'"
+                                    (ngModelChange)="staff.user.doA = $event" required>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="text" class="form-control app-input" name="nameF"
-                                    [(ngModel)]="userProfile.firstName" required>
+                                    [(ngModel)]="staff.user.nameF" required>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="text" class="form-control app-input" name="nameL"
-                                    [(ngModel)]="userProfile.lastName" required>
+                                    [(ngModel)]="staff.user.nameL" required>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         <div class="col-md-9">
                             <div class="form-check form-check-inline" *ngFor="let g of genderList">
                                 <input class="form-check-input" type="radio" name="gender" [value]="g.id"
-                                    [(ngModel)]="userProfile.gender">
+                                    [(ngModel)]="staff.user.gender">
                                 <label class="form-check-label">{{ g.name }}</label>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="" class="form-control app-input" name="age" required
-                                    [(ngModel)]="userProfile.age">
+                                    [(ngModel)]="staff.user.age">
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="cell1" class="form-control app-input" name="cell1" required maxlength="10"
-                                    minlength="10" [(ngModel)]="userProfile.contactNumber" appNumberOnly>
+                                    minlength="10" [(ngModel)]="staff.user.cell" appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="email" class="form-control app-input" name="email"
-                                    [(ngModel)]="userProfile.email" required>
+                                    [(ngModel)]="staff.user.email" required>
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="date" class="form-control app-input" name="dateOfBirth"
-                                    [(ngModel)]="userProfile.dob" required>
+                                    [(ngModel)]="staff.user.doB" required>
 
                             </div>
                         </div>
@@ -156,8 +156,8 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <select class="app-single-select-dropdown w-100" name="department"
-                                    [(ngModel)]="userProfile.departmentId"
-                                    (ngModelChange)="filterUserTypesByDepartment(userProfile.departmentId)">
+                                    [(ngModel)]="staff.acl.departmentId"
+                                    (ngModelChange)="filterUserTypesByDepartment(staff.acl.departmentId)">
                                     <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
                                     </option>
                                 </select>
@@ -177,7 +177,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="text" class="form-control app-input" name="fatherName"
-                                    [(ngModel)]="userProfile.fatherName" required>
+                                    [(ngModel)]="staff.user.fatherName" required>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="cell2" class="form-control app-input" name="cell2" required maxlength="10"
-                                    minlength="10" [(ngModel)]="userProfile.alternateNumber" appNumberOnly>
+                                    minlength="10" [(ngModel)]="staff.user.cell2" appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <select class="app-single-select-dropdown w-100" name="userType"
-                                    [(ngModel)]="userProfile.userType">
+                                    [(ngModel)]="staff.acl.userTypeId">
                                     <option *ngFor="let item of filteredUserTypeList" [value]="item.userType._id">
                                         {{item.userType.name}}
                                     </option>
@@ -227,7 +227,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="text" class="form-control app-input" name="designation"
-                                    [(ngModel)]="userProfile.designation" required>
+                                    [(ngModel)]="staff.acl.designation" required>
                             </div>
                         </div>
                     </div>
@@ -324,8 +324,10 @@
             <!-- Address Section -->
             <app-label>Address Details</app-label>
             <div class="row">
-                <app-eg-edit-address-form [(ngModel)]="userProfile.address"></app-eg-edit-address-form>
+                <app-eg-edit-address-form [(ngModel)]="staff.user.address"></app-eg-edit-address-form>
             </div>
         </mat-list>
+
+        <button (click)="checkIt()" class="common-button">checkIt</button>
     </form>
 </section>

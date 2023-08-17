@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, Input, OnChanges } from '@angular/core';
-import { DepartmentVo, UserTypeDetailDto } from 'aayam-clinic-core';
+import { DepartmentVo, UserEmpDto, UserTypeDetailDto } from 'aayam-clinic-core';
 import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 
 @Component({
@@ -22,6 +22,9 @@ export class UserEditComponent implements OnInit {
     @Input()
     departmentList!: DepartmentVo[];
 
+    @Input()
+    staff!: UserEmpDto;
+    
     @Input()
     userProfile!: UserProfileVo;
 
@@ -74,7 +77,6 @@ export class UserEditComponent implements OnInit {
         this.showSectionAccounts = false;
         this.showSectionAttendance = false;
     }
-
 
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 import { NgForm } from '@angular/forms';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
-import { DepartmentVo, UserTypeDetailDto, } from 'aayam-clinic-core';
+import { DepartmentVo, UserEmpDto, UserTypeDetailDto, } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
@@ -25,6 +25,9 @@ export class UserProfileComponent implements OnInit {
     
     genderList = GENDER_LIST;
     
+    @Input()
+    staff!: UserEmpDto;
+
     @Input()
     userProfile!: UserProfileVo;
     
@@ -65,11 +68,13 @@ export class UserProfileComponent implements OnInit {
     }
 
 
-    public filterUserTypesByDepartment(departmentId: string) {
+    public filterUserTypesByDepartment(departmentId: string | null | undefined) {
         this.filteredUserTypeList = this.userTypeList.filter(item => item.userType.departmentId === departmentId);
     }
 
-
+    public checkIt(): void {
+        console.log("xx userProfile",this.staff)
+    }
     /* ************************************* Private Methods ******************************************** */
 
     private _init(): void {
