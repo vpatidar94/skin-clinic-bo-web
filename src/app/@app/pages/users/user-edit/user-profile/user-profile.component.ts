@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 import { NgForm } from '@angular/forms';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
@@ -6,6 +6,7 @@ import { DepartmentVo, UserEmpDto, UserTypeDetailDto, } from 'aayam-clinic-core'
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 
 @Component({
@@ -27,6 +28,14 @@ export class UserProfileComponent implements OnInit {
     
     @Input()
     staff!: UserEmpDto;
+    @Output()
+    staffChange = new EventEmitter<UserEmpDto>();
+
+    @Output()
+    pubSub = new EventEmitter<any>();
+
+    @ViewChild('staffForm', { static: true })
+    staffForm!: NgForm;
 
     @Input()
     userProfile!: UserProfileVo;
@@ -35,6 +44,8 @@ export class UserProfileComponent implements OnInit {
     userTypeList!: UserTypeDetailDto[];
 
     filteredUserTypeList!: UserTypeDetailDto[];
+
+    inValidAddressForm!: boolean;
 
     serviceTimingData = [{
         serviceTime: '',
@@ -52,6 +63,9 @@ export class UserProfileComponent implements OnInit {
 
     public ngOnInit(): void {
         this._init();
+        // this.staffForm.valueChanges.subscribe(() => {
+        //     this._formChanged();
+        // });
     }
 
     public addServiceTiming() {
@@ -63,6 +77,16 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
+    public addressFormChange(event: UiActionDto<boolean>): void {
+        switch (event.action) {
+            case 'CHANGE_FORM_ADDRESS':
+                this.inValidAddressForm = event.data;
+                this._formChanged();
+                this.staffChange.emit(this.staff);
+
+                break;
+        }
+    }
     public removeServiceTiming(index: number): void {
         this.userProfile.serviceTiming.splice(index, 1);
     }
@@ -79,6 +103,14 @@ export class UserProfileComponent implements OnInit {
 
     private _init(): void {
         this.filteredUserTypeList = this.userTypeList;
+    }
+
+    private _formChanged(): void {
+        const actionDto = {
+            action: 'CHANGE_FORM_STAFF',
+            data: this.staffForm.invalid || this.inValidAddressForm
+        } as UiActionDto<boolean>;
+        this.pubSub.emit(actionDto);
     }
 
 }

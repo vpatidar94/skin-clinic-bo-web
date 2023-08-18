@@ -1,5 +1,7 @@
-import { Component, OnInit, SimpleChanges, Input, OnChanges } from '@angular/core';
-import { DepartmentVo, UserEmpDto, UserTypeDetailDto } from 'aayam-clinic-core';
+import { Component, OnInit, SimpleChanges, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { ApiResponse, DepartmentVo, ResponseStatus, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 
 @Component({
@@ -15,7 +17,7 @@ export class UserEditComponent implements OnInit {
     showSectionAttendance!: boolean;
 
     tabValue!: string;
-
+    invalidFormStaff!: boolean;
     @Input()
     department!: DepartmentVo;
 
@@ -24,7 +26,9 @@ export class UserEditComponent implements OnInit {
 
     @Input()
     staff!: UserEmpDto;
-    
+    @Output()
+    staffChange = new EventEmitter<UserEmpDto>();
+
     @Input()
     userProfile!: UserProfileVo;
 
@@ -32,6 +36,13 @@ export class UserEditComponent implements OnInit {
     userTypeList!: UserTypeDetailDto[];
 
     filteredUserTypeList!: UserTypeDetailDto[];
+
+    /* ************************************* Constructor ******************************************** */
+    constructor(
+
+        private userApi: UserApi,
+
+    ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
@@ -43,11 +54,23 @@ export class UserEditComponent implements OnInit {
     }
 
     public onSavingUserProfile(): void {
+        this.userApi.addUpdateStaff(this.staff).subscribe((res: ApiResponse<UserVo>) => {
+            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+                console.log("user",this.staff);
+            }
+        });
     }
 
     public onSavingUserAccount(): void {
     }
 
+    public formChangeOrg(event: UiActionDto<boolean>): void {
+        switch (event.action) {
+            case 'CHANGE_FORM_STAFF':
+                this.invalidFormStaff = event.data;
+                break;
+        }
+    }
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this.tabValue = 'USERPROFILE'

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AclVo, AddressVo, ApiResponse, DepartmentVo, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
+import { AclVo, AddressVo, ApiResponse, DepartmentVo, ROLE, ROLE_NAME, ResponseStatus, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from '../../service/remote/department.api';
 import { UserApi } from '../../service/remote/user.api';
@@ -8,24 +8,9 @@ import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-  SerialNo: number;
-  ServiceType: string;
-  DoctorsName: string;
-  Department: string;
-  Action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { SerialNo: 1, ServiceType: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Department: '1120', Action: "Edit | Delete" },
-  { SerialNo: 2, ServiceType: 'Dressing', DoctorsName: 'Dr.aayam', Department: '1120', Action: "Edit | Delete" },
-  { SerialNo: 3, ServiceType: '', DoctorsName: 'Dr.Atharv', Department: '11:20', Action: "Edit | Delete" },
-  { SerialNo: 4, ServiceType: '', DoctorsName: 'Dr.Aman', Department: '1120', Action: "Edit | Delete" },
-  { SerialNo: 5, ServiceType: 'z', DoctorsName: 'Dr.aayam', Department: '1120', Action: "Edit | Delete" },
-  { SerialNo: 6, ServiceType: '', DoctorsName: 'Dr.Atharv', Department: '1120', Action: "Edit | Delete" },
-  { SerialNo: 7, ServiceType: 'kat', DoctorsName: 'Dr.Aman', Department: '1120', Action: "Edit | Delete" },
-]
+import { GENDER_NAME } from '../../const/gender.consr';
+import { SUB_ROLE_NAME } from '../../const/sub-role.const';
+import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 
 @Component({
   selector: 'app-users',
@@ -40,18 +25,24 @@ export class UsersComponent implements OnInit, AfterViewInit {
   showSectionUserList!: boolean;
   showSectionUserEdit!: boolean;
 
-  // newly staff
   showSectionStaffEdit!: boolean;
 
-  displayedColumns: string[] = ['Serial No', 'Service Type', 'DoctorsName', "Department", "Action"];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+ 
+  invalidFormStaff!: boolean;
+  genderName = GENDER_NAME as any;
+  subRoleName = SUB_ROLE_NAME as any;
+  roleName = ROLE_NAME as any
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
+  displayedColumns: string[] = ['image', 'name', 'gender', 'email', 'cell', 'role', 'subRole', 'action'];
+  dataSource!: MatTableDataSource<UserVo>;
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
   userProfile!: UserProfileVo;
+  user!: UserVo;
   staff!: UserEmpDto;
+  staffList!: Array<UserVo> | null;
+
   department!: DepartmentVo;
   departmentList!: DepartmentVo[];
 
@@ -69,7 +60,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
   /* ************************************* Constructor ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private departmentApi: DepartmentApi,
-    private userApi: UserApi) { }
+    private userApi: UserApi,
+    private globalEmitterService: GlobalEmitterService
+    ) {globalEmitterService.getAclChangedEmitter().subscribe(() => {
+      this._getStaffList();
+    }); }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -91,6 +86,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
   
+  public formatPhoneNumber(cell: string): string {
+    // TODO: Add phone util in npm
+    return cell;
+  }
+
   public addUser(): void {
     this._resetSection();
     this.showSectionUserEdit = true;
@@ -130,7 +130,27 @@ export class UsersComponent implements OnInit, AfterViewInit {
   this._addEditStaff(staff);
   }
 
+  
 
+public getSubRole(emp: { [key: string]: AclVo }): string {
+  const orgId = this.keyValueStorageService.getOrgId();
+  if (!orgId) {
+    return '';
+  }
+  const acl = emp[orgId];
+  const subRole = acl?.subRole;
+  return acl.role == ROLE.ADMIN ? 'All' : this.subRoleName[subRole ?? ''];
+}
+
+public getRole(emp: { [key: string]: AclVo }): string {
+  const orgId = this.keyValueStorageService.getOrgId();
+  if (!orgId) {
+    return '';
+  }
+  const acl = emp[orgId];
+  const role = acl?.role;
+  return this.roleName[role ?? ''];
+}
 
   public _getDepartmentList() {
     const orgId = this.keyValueStorageService.getOrgId();
@@ -159,6 +179,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.showSectionUserList = true;
     this._getDepartmentList();
     this._getUserTypeList();
+    this._getStaffList();
   }
 
   private _resetSection(): void {
@@ -170,6 +191,26 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.staff = staff;
     this._resetSection();
     this.showSectionUserEdit = true;
+  }
+
+  private _getStaffList(): void {
+    this.showSectionUserList = true;
+    this.staffList = null
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.userApi.getStaffList(orgId).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
+      this.staffList = apiResponse.body ?? [] as Array<UserVo>;
+      console.log("staffList",this.staffList);
+       this._initStaffTable(this.staffList);
+    });
+  }
+
+  private _initStaffTable(staffList: Array<UserVo>): void {
+    this.dataSource = new MatTableDataSource(staffList);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }

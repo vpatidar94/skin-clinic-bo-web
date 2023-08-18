@@ -1,6 +1,6 @@
 <section class="section-org-edit">
 
-    <form #patientForm="ngForm">
+    <form #staffForm="ngForm">
         <mat-list class="row">
             <app-label>Personal Information</app-label>
             <div class="row">
@@ -324,7 +324,8 @@
             <!-- Address Section -->
             <app-label>Address Details</app-label>
             <div class="row">
-                <app-eg-edit-address-form [(ngModel)]="staff.user.address"></app-eg-edit-address-form>
+                <app-eg-edit-address-form [(ngModel)]="staff.user.address"
+                (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
             </div>
         </mat-list>
 
