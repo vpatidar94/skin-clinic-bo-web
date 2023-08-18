@@ -72,7 +72,7 @@ export class ServiceItemComponent implements OnInit {
       serviceItem.orgId = orgId;
       serviceItem.brId = orgId;
     }
-    serviceItem.active = true;
+    // serviceItem.active = true;
     this._addEditOrg(serviceItem);
   }
 

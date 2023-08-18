@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="search-input-style">
                     <label class="app-label me-2">{{'Search'}}</label>
-                    <input class="input-style" (keyup)="applyFilter($event)" placeholder="" #input>
+                    <input class="input-style" (keyup)="applyFilter($event)" name="filter" placeholder="" #input>
                 </div>
             </div>
 
@@ -83,6 +83,6 @@
 <section *ngIf="showSectionUserEdit">
     <div>
         <app-user-edit [departmentList]="departmentList" [userTypeList]="userTypeList" [department]="department"
-            [userProfile]="userProfile" [staff]="staff"></app-user-edit>
+            [(staff)]="staff"></app-user-edit>
     </div>
 </section>

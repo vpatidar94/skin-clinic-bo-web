@@ -1,16 +1,19 @@
 <section class="section-org">
     <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue" aria-label="Font Style">
-        <mat-button-toggle class="tab-content" (change)="tabChange()"  value="USERPROFILE">User Profile</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="ACCOUNTS">Account/Salary</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()"  value="ATTENDANCE">Attendance</mat-button-toggle>
+        <mat-button-toggle class="tab-content" (change)="tabChange()" value="USERPROFILE">User
+            Profile</mat-button-toggle>
+        <mat-button-toggle class="tab-content" (change)="tabChange()"
+            value="ACCOUNTS">Account/Salary</mat-button-toggle>
+        <mat-button-toggle class="tab-content" (change)="tabChange()" value="ATTENDANCE">Attendance</mat-button-toggle>
     </mat-button-toggle-group>
 </section>
 
 <section class="section-org-edit">
 
     <div *ngIf="showSectionUserProfile">
-        <app-user-profile [userTypeList]="userTypeList" [departmentList]="departmentList" [userProfile]="userProfile" [department]="department" [(staff)]="staff" (pubSub)="formChangeOrg($event)"></app-user-profile>
-        
+        <app-user-profile [userTypeList]="userTypeList" [departmentList]="departmentList" [department]="department"
+            [(staff)]="staff" (pubSub)="formChangeOrg($event)"></app-user-profile>
+
         <div class="d-flex align-items-center justify-content-center mb-4">
             <div class="col-1">
                 <button class="common-button" (click)="onSavingUserProfile()">{{'save'}}</button>
@@ -25,10 +28,10 @@
         <app-accounts></app-accounts>
         <div class="d-flex align-items-center justify-content-center mb-5">
             <div class="col-1">
-                <button  class="common-button" (click)="onSavingUserAccount()">save</button>
+                <button class="common-button" (click)="onSavingUserAccount()">save</button>
             </div>
         </div>
-        
+
     </div>
     <!-- <div *ngIf="showSectionAttendance">
         <app-attendance></app-attendance> 

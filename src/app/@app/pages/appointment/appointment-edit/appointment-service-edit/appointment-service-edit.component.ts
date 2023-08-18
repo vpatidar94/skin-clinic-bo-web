@@ -76,7 +76,7 @@ export class AppointmentServiceEditComponent implements OnInit, OnChanges {
         const item = this.serviceItemList?.find((item) => item.item._id === event.target.value);
         if (item && item.item) {
             this.userBooking.booking.items[i].item = item.item;
-            this.userBooking.booking.items[i].priceBase = item.item.price;
+            this.userBooking.booking.items[i].priceBase = item.item.fee;
             this.userBooking.booking.items[i].qty = 1;
             this.userBooking.booking.items[i].name = item.item.name;
             BookingUtility.updateBookingItemAndCalcTotal(true, this.userBooking.booking, item.item, 1, '');

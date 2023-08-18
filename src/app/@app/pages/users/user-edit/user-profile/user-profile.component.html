@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="date" class="form-control app-input" name="date"
+                                <input type="date" class="form-control app-input" name="dateA"
                                     [ngModel]="staff.user.doA | date:'yyyy-MM-dd'"
                                     (ngModelChange)="staff.user.doA = $event" required>
                             </div>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="cell1" class="form-control app-input" name="cell1" required maxlength="10"
+                                <input type="" class="form-control app-input" name="cell1" required maxlength="10"
                                     minlength="10" [(ngModel)]="staff.user.cell" appNumberOnly>
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="cell2" class="form-control app-input" name="cell2" required maxlength="10"
+                                <input type="" class="form-control app-input" name="cell2" required maxlength="10"
                                     minlength="10" [(ngModel)]="staff.user.cell2" appNumberOnly>
                             </div>
                         </div>
@@ -239,36 +239,24 @@
                 <!-- Service Timing -->
                 <label class="app-label">Service Timing</label>
 
-                <div class="col-md-12 align-style" *ngFor="let timing of userProfile.serviceTiming; let i = index">
+                <div class="col-md-12 align-style" *ngFor="let timing of staff.user.serviceTiming; let i = index">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label class="app-label">Slot-{{i+1}}</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <div class="form-group d-flex">
                                 <div class="d-flex align-items-center col-md-5">
                                     <div class="input-with-dropdown">
-                                        <input type="text" class="form-control app-input time-input"
-                                            [(ngModel)]="timing.serviceTime" name="service_time_{{ i }}"
-                                            placeholder="HH:MM">
-                                        <select class="form-control app-input dropdown-select" [(ngModel)]="timing.ampm"
-                                            name="ampm_{{ i }}">
-                                            <option value="am">AM</option>
-                                            <option value="pm">PM</option>
-                                        </select>
+                                        <input type="time" class="form-control app-input time-input"
+                                            [(ngModel)]="timing.from" name="service_time_{{ i }}">
                                     </div>
                                 </div>
                                 <span class="col-md-2 d-flex  align-items-center app-label">To</span>
                                 <div class="d-flex align-items-center mt-2 col-md-5">
                                     <div class="input-with-dropdown">
-                                        <input type="text" class="form-control app-input time-input"
-                                            [(ngModel)]="timing.serviceTimeEnd" name="service_time_end_{{ i }}"
-                                            placeholder="HH:MM">
-                                        <select class="form-control app-input dropdown-select"
-                                            [(ngModel)]="timing.ampmEnd" name="ampm_end_{{ i }}">
-                                            <option value="am">AM</option>
-                                            <option value="pm">PM</option>
-                                        </select>
+                                        <input type="time" class="form-control app-input time-input"
+                                            [(ngModel)]="timing.to" name="service_time_end_{{ i }}">
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +265,7 @@
                         <div class="col-md-2">
                             <mat-icon class="add-icon clickable" (click)="removeServiceTiming(i)">delete</mat-icon>
                             &nbsp;&nbsp;
-                            <mat-icon class="add-icon clickable" *ngIf="(i+1)==userProfile.serviceTiming.length"
+                            <mat-icon class="add-icon clickable" *ngIf="(i+1)==staff.user.serviceTiming.length"
                                 (click)="addServiceTiming()">add_circle_outline</mat-icon>
                         </div>
                     </div>
@@ -294,7 +282,7 @@
                         <div class="row ">
                             <div class="form-group col-md-7">
                                 <input type="file" class="form-control app-input" name="addPhoto"
-                                    [(ngModel)]="userProfile.addPhoto" required>
+                                    [(ngModel)]="staff.user.img" required>
                             </div>
                             <div class="col-md-2">
                                 <button class="common-button">Browse</button>
@@ -312,7 +300,7 @@
                         <div class="row ">
                             <div class="form-group col-md-7">
                                 <input type="file" class="form-control app-input" name="uploadIdProof"
-                                    [(ngModel)]="userProfile.uploadIdProof" required>
+                                    [(ngModel)]="staff.user.img" required>
                             </div>
                             <div class="col-md-2">
                                 <button class="common-button">Browse</button>
@@ -324,8 +312,8 @@
             <!-- Address Section -->
             <app-label>Address Details</app-label>
             <div class="row">
-                <app-eg-edit-address-form [(ngModel)]="staff.user.address"
-                (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
+                <app-eg-edit-address-form [(address)]="staff.user.address"
+                    (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
             </div>
         </mat-list>
 

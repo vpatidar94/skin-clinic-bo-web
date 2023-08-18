@@ -15,7 +15,7 @@
                 <div class="col-md pad-l-md-1">
                     <mat-form-field appearance="outline">
                         <mat-label>Doctor</mat-label>
-                        <mat-select [(ngModel)]="serviceItemBr.userId" name="doctor">
+                        <mat-select [(ngModel)]="serviceItemBr._id" name="doctor">
                             <mat-option *ngFor="let doctor of doctorList" [value]="doctor._id">
                                 {{doctor.nameF}} {{doctor.nameL}}
                             </mat-option>
@@ -26,15 +26,15 @@
             <div class="row g-0">
                 <div class="col-md pad-r-md-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Price</mat-label>
-                        <input matInput placeholder="price" name="price" [(ngModel)]="serviceItemBr.price" required>
+                        <mat-label>Fee</mat-label>
+                        <input matInput placeholder="price" name="price" [(ngModel)]="serviceItemBr.fee" required>
                     </mat-form-field>
                 </div>
                 <div class="col-md pad-l-md-1">
                     <mat-form-field appearance="outline">
                         <mat-label>Description</mat-label>
                         <input matInput placeholder="description" name="description"
-                            [(ngModel)]="serviceItemBr.description">
+                            [(ngModel)]="serviceItemBr.status">
                     </mat-form-field>
                 </div>
             </div>

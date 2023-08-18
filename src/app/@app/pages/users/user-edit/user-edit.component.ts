@@ -2,7 +2,6 @@ import { Component, OnInit, SimpleChanges, Input, OnChanges, Output, EventEmitte
 import { ApiResponse, DepartmentVo, ResponseStatus, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
-import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 
 @Component({
     selector: 'app-user-edit',
@@ -28,9 +27,6 @@ export class UserEditComponent implements OnInit {
     staff!: UserEmpDto;
     @Output()
     staffChange = new EventEmitter<UserEmpDto>();
-
-    @Input()
-    userProfile!: UserProfileVo;
 
     @Input()
     userTypeList!: UserTypeDetailDto[];

@@ -3,7 +3,6 @@ import { AclVo, AddressVo, ApiResponse, DepartmentVo, ROLE, ROLE_NAME, ResponseS
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from '../../service/remote/department.api';
 import { UserApi } from '../../service/remote/user.api';
-import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GENDER_NAME } from '../../const/gender.consr';
 import { SUB_ROLE_NAME } from '../../const/sub-role.const';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
+import { UserServiceTimingVo } from 'aayam-clinic-core/dist/vo/user-service-timing.vo';
 
 @Component({
   selector: 'app-users',
@@ -25,9 +25,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
   showSectionUserList!: boolean;
   showSectionUserEdit!: boolean;
 
-  showSectionStaffEdit!: boolean;
+  // showSectionStaffEdit!: boolean;
 
- 
+
   invalidFormStaff!: boolean;
   genderName = GENDER_NAME as any;
   subRoleName = SUB_ROLE_NAME as any;
@@ -38,7 +38,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
 
-  userProfile!: UserProfileVo;
   user!: UserVo;
   staff!: UserEmpDto;
   staffList!: Array<UserVo> | null;
@@ -51,24 +50,26 @@ export class UsersComponent implements OnInit, AfterViewInit {
   filteredUserTypeList!: UserTypeDetailDto[];
 
   serviceTimingData = [{
-    serviceTime: '',
-    ampm: 'am',
-    serviceTimeEnd: '',
-    ampmEnd: 'am'
+    from: "",
+    to: ""
   }];
-  
+
+
   /* ************************************* Constructor ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private departmentApi: DepartmentApi,
     private userApi: UserApi,
     private globalEmitterService: GlobalEmitterService
-    ) {globalEmitterService.getAclChangedEmitter().subscribe(() => {
+  ) {
+    globalEmitterService.getAclChangedEmitter().subscribe(() => {
       this._getStaffList();
-    }); }
+    });
+  }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
     this._init();
+    this.dataSource = new MatTableDataSource<UserVo>([]);
   }
 
   public ngAfterViewInit() {
@@ -85,7 +86,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
   public formatPhoneNumber(cell: string): string {
     // TODO: Add phone util in npm
     return cell;
@@ -94,63 +95,38 @@ export class UsersComponent implements OnInit, AfterViewInit {
   public addUser(): void {
     this._resetSection();
     this.showSectionUserEdit = true;
-    
-// userProfile (to be removed later as UserProfileVo will not be used)
-    const userProfileItem = {} as UserProfileVo;
-    userProfileItem.userId = '';
-    userProfileItem.date = new Date();
-    userProfileItem.firstName = '';
-    userProfileItem.lastName = '';
-    userProfileItem.gender = '';
-    userProfileItem.age = 0;
-    userProfileItem.contactNumber = 0;
-    userProfileItem.email = '';
-    userProfileItem.dob = new Date();
-    userProfileItem.userType = "";
-    userProfileItem.fatherName = '';
-    userProfileItem.alternateNumber = 0;
-    userProfileItem.designation = '';
-    userProfileItem.addPhoto = File;
-    userProfileItem.uploadIdProof = File;
-    userProfileItem.address = {} as AddressVo;
-    userProfileItem.serviceTiming = this.serviceTimingData;
-    userProfileItem.department = '';
-    this.userProfile = userProfileItem;
-
-// newly added staff
-  const orgId = this.keyValueStorageService.getOrgId();
-  const user = {} as UserVo;
-  user.created = new Date();
-  user.address = ({} as AddressVo);
-  const acl = {} as AclVo;
-  acl.active = true;
-  acl.brId = orgId;
-  acl.orgId = orgId;
-  const staff = new UserEmpDto(user, acl);
-  this._addEditStaff(staff);
+    const orgId = this.keyValueStorageService.getOrgId();
+    const user = {} as UserVo;
+    user.created = new Date();
+    user.address = ({} as AddressVo);
+    user.serviceTiming = (this.serviceTimingData as Array<UserServiceTimingVo>)
+    const acl = {} as AclVo;
+    acl.active = true;
+    acl.brId = orgId;
+    acl.orgId = orgId;
+    const staff = new UserEmpDto(user, acl);
+    this._addEditStaff(staff);
   }
 
-  
-
-public getSubRole(emp: { [key: string]: AclVo }): string {
-  const orgId = this.keyValueStorageService.getOrgId();
-  if (!orgId) {
-    return '';
+  public getSubRole(emp: { [key: string]: AclVo }): string {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return '';
+    }
+    const acl = emp[orgId];
+    const subRole = acl?.subRole;
+    return acl.role == ROLE.ADMIN ? 'All' : this.subRoleName[subRole ?? ''];
   }
-  const acl = emp[orgId];
-  const subRole = acl?.subRole;
-  return acl.role == ROLE.ADMIN ? 'All' : this.subRoleName[subRole ?? ''];
-}
 
-public getRole(emp: { [key: string]: AclVo }): string {
-  const orgId = this.keyValueStorageService.getOrgId();
-  if (!orgId) {
-    return '';
+  public getRole(emp: { [key: string]: AclVo }): string {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return '';
+    }
+    const acl = emp[orgId];
+    const role = acl?.role;
+    return this.roleName[role ?? ''];
   }
-  const acl = emp[orgId];
-  const role = acl?.role;
-  return this.roleName[role ?? ''];
-}
 
   public _getDepartmentList() {
     const orgId = this.keyValueStorageService.getOrgId();
@@ -202,8 +178,8 @@ public getRole(emp: { [key: string]: AclVo }): string {
     }
     this.userApi.getStaffList(orgId).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
       this.staffList = apiResponse.body ?? [] as Array<UserVo>;
-      console.log("staffList",this.staffList);
-       this._initStaffTable(this.staffList);
+      console.log("staffList", this.staffList);
+      this._initStaffTable(this.staffList);
     });
   }
 

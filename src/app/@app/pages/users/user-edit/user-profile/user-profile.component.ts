@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { UserProfileVo } from 'src/app/@shared/dto/user-profile.dto';
 import { NgForm } from '@angular/forms';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { DepartmentVo, UserEmpDto, UserTypeDetailDto, } from 'aayam-clinic-core';
@@ -23,9 +22,9 @@ export class UserProfileComponent implements OnInit {
 
     @Input()
     departmentList!: DepartmentVo[];
-    
+
     genderList = GENDER_LIST;
-    
+
     @Input()
     staff!: UserEmpDto;
     @Output()
@@ -37,9 +36,7 @@ export class UserProfileComponent implements OnInit {
     @ViewChild('staffForm', { static: true })
     staffForm!: NgForm;
 
-    @Input()
-    userProfile!: UserProfileVo;
-    
+
     @Input()
     userTypeList!: UserTypeDetailDto[];
 
@@ -47,12 +44,7 @@ export class UserProfileComponent implements OnInit {
 
     inValidAddressForm!: boolean;
 
-    serviceTimingData = [{
-        serviceTime: '',
-        ampm: 'am',
-        serviceTimeEnd: '',
-        ampmEnd: 'am'
-    }];
+    // 
 
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
@@ -69,11 +61,10 @@ export class UserProfileComponent implements OnInit {
     }
 
     public addServiceTiming() {
-        this.userProfile.serviceTiming.push({
-            serviceTime: '',
-            ampm: 'am',
-            serviceTimeEnd: '',
-            ampmEnd: 'am'
+        this.staff.user.serviceTiming.push({
+            from: '',
+            to: '',
+
         });
     }
 
@@ -88,7 +79,7 @@ export class UserProfileComponent implements OnInit {
         }
     }
     public removeServiceTiming(index: number): void {
-        this.userProfile.serviceTiming.splice(index, 1);
+        this.staff.user.serviceTiming.splice(index, 1);
     }
 
 
@@ -97,7 +88,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     public checkIt(): void {
-        console.log("xx userProfile",this.staff)
+        console.log("xx userProfile", this.staff)
     }
     /* ************************************* Private Methods ******************************************** */
 
