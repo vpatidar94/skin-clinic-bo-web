@@ -27,16 +27,11 @@
                     <div class="col-md-4">
                         <label class="app-label">Department</label>
                     </div>
-                    <!-- <div class="col-md-7">
-                        <div class="form-group">
-                            <input type="text" class="form-control app-input" name="depatment"
-                                [(ngModel)]="serviceType.departmentId" required>
-                        </div>
-                    </div> -->
 
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select class="app-single-select-dropdown w-100" [(ngModel)]="serviceType.departmentId" name="departmentId">
+                            <select class="app-single-select-dropdown w-100" [(ngModel)]="serviceType.departmentId"
+                                name="departmentId">
                                 <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
                                 </option>
                             </select>
