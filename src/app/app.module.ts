@@ -16,6 +16,8 @@ import { AuthHttpInterceptor } from './@shared/service/auth-http.interceptor';
 import { SharedServiceModule } from './@shared/service/shared-service.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReceiptModule } from './receipt/receipt.module';
+import { PharmacyReceiptModule } from './pharmacy-receipt/pharmacy-receipt.module';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
+    ReceiptModule,
+    PharmacyReceiptModule,
     HttpClientModule,
     SigninModule,
     SpinnerModule,

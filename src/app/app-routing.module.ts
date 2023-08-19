@@ -3,11 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './@app/layout/layout.component';
 import { SigninComponent } from './@shared/component/signin/signin.component';
 import { AuthGuard } from './@shared/security/auth.guard';
+import { ReceiptComponent } from './receipt/receipt.component';
+import { PharmacyReceiptComponent } from './pharmacy-receipt/pharmacy-receipt.component';
 
 const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent
+  },
+  {
+    path: 'receipt',
+    component: ReceiptComponent
+  },
+  {
+    path: 'pharmacy-receipt',
+    component: PharmacyReceiptComponent
   },
   {
     path: '',

@@ -1,0 +1,47 @@
+<div class="receipt">
+    <div class="receipt-head">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxZnF-nba-de7h_3B6b5RrH6Z0YGyB-jt4xModq-MOAg&s"
+            alt="Clinic Logo" class="logo col-2" />
+        <div class="col-10 d-flex flex-column align-items-center">
+            <span class="receipt-title col-10">AAYAM SKIN CLINIC</span>
+            <span class="address col-9">9/3 Manoramaganj, Near Geeta Bhawan Hospital <br /> Aayam Institute Campus,
+                Indore</span>
+        </div>
+    </div>
+    <hr />
+    <h5 class="text-center">Receipt</h5>
+    <div class="info row">
+        <span class="col-5"><strong>Receipt No:</strong> {{ receiptNo }}</span>
+        <span class="col-4"><strong>Patient ID:</strong> {{patientId}}</span>
+        <span class="col-3"><strong>Date:</strong> {{ currentDate | date}}</span>
+        <span class="col-5"><strong>Patient Name:</strong> {{ patientName }}</span>
+        <span class="col-4"><strong>Gender:</strong> {{ gender }}</span>
+        <span class="col-3"><strong>Age:</strong> {{ age }}</span>
+        <span class="col-5"><strong>Father Name:</strong> {{ fatherName }}</span>
+        <span class="col-4"><strong>Payment Mode:</strong> {{ paymentMode }}</span>
+        <span class="col-3"><strong>Payment Type:</strong> {{ paymentType }}</span>
+        <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th class="sno-column">Sno</th>
+                <th class="text-center">Service</th>
+                <th class="fee-column text-center">Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let service of services; let i = index">
+                <td class="sno-column">{{i+1}}</td>
+                <td>{{ service.name }}</td>
+                <td class="fee-column text-end">{{ service.price | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="total">
+        <p><strong>Total:</strong> {{ calculateTotal() | currency}}</p>
+    </div>
+    <div class="mt-1">
+        <p><strong>Authority Sign</strong> </p>
+    </div>
+</div>

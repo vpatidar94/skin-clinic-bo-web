@@ -1,0 +1,65 @@
+.receipt {
+    font-family: Arial, sans-serif;
+    width: 210mm;
+    /* A5 width */
+    min-height: 148mm;
+    /* A5 height */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.receipt-head {
+    display: flex;
+    align-items: center;
+}
+
+.receipt-title {
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.address {
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+   
+}
+
+.logo {
+    max-width: 60px;
+    /* Adjust logo size */
+    margin-inline: 20px;
+}
+
+.info {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+.sno-column{
+    width: 5%;
+}
+.fee-column{
+    width: 25%;
+}
+.total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 15px;
+}

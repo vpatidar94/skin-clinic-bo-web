@@ -1,0 +1,102 @@
+<div class="receipt">
+    <div class="receipt-head">
+        <img src="\assets\prescription-pad-top.jpg" alt="Clinic Logo" class="logo" />
+    </div>
+    <hr />
+    <div class="d-flex p-2">
+        <div class="col-2 service-list">
+            <br/>
+            <li>Pimples</li>
+            <li>Dark Circles</li>
+            <li>Hairfall</li>
+            <li>Graying of Hair</li>
+            <li>Leukoderma</li>
+            <li>Eczema</li>
+            <li>Skin Allergy</li>
+            <li>Psoriasis</li>
+            <li>Skin Peeling</li>
+            <li>Mole Removal</li>
+            <li>Wart Removal</li>
+            <li>Chemical Peels</li>
+            <li>Microneedling</li>
+            <li>Nail Disorder</li>
+            <br/>
+            <li>कील मुहांसे</li>
+            <li>काले घेरे </li>
+            <li>बालों का झड़ना</li>
+            <li>बाल सफेद होना</li>
+            <li>सफ़ेद दाग</li>
+            <li>एक्जिमा</li>
+            <li>स्किन एलर्जी</li>
+            <li>सोरायसिस</li>
+            <li>त्वचा का छीलना</li>
+            <li>मस्से की सर्जरी</li>
+            <li>केमिकल पील्स</li>
+            <li>माइक्रोनीडलिंग</li>
+            <li>नाखून सम्बंधित रोग</li>
+
+        </div>
+        <div class="col-10 receipt-info">
+            <div class="info row ">
+                <span class="col-4"><strong>Patient ID:</strong> {{patientId}}</span>
+                <span class="col-4"><strong>Patient Name:</strong> {{ patientName }}</span>
+                <span class="col-4"><strong>Date:</strong> {{currentDate | date}} </span>
+                <span class="col-4"><strong>Father Name:</strong> {{ fatherName }}</span>
+                <span class="col-4"><strong>Gender:</strong> {{ gender }}</span>
+                <span class="col-4"><strong>Age:</strong> {{ age }}</span>
+                <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span>
+            </div>
+            <div class="d-flex p-2 col-12">
+                <div class="d-flex flex-column col-9 prescription-detail pe-2 ">
+                    <span>Patient Complaint:</span>
+                    <span>Diagnosis: </span>
+                    <span class="mt-2"><strong>Rx</strong></span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sno-column">Sno</th>
+                                <th class="text-center">Medicine</th>
+                                <th class="dosage-column text-center">Dosage</th>
+                                <th class="duration-column text-center">Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let service of prescription; let i = index">
+                                <td class="sno-column">{{i+1}}</td>
+                                <td>{{ service.name }}</td>
+                                <td class="dosage-column text-center">{{ service.dosage }}</td>
+                                <td class="duration-column text-center">{{ service.duration }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ps-2 col-3 d-flex flex-column justify-content-between">
+                    <div>
+                        <span><strong>Parameters</strong></span>
+                        <li>blood</li>
+                    </div>
+                    <div>
+                        <span><strong>Investigation</strong></span>
+                        <ol>
+                            <li>Widal test</li>
+                            <li>CBC</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <span><strong>Remark</strong></span>
+                        <li class="remark">Avoid Outside Food</li>
+                    </div>
+                    <div>
+                        <span><strong>Next Visit</strong></span>
+                        <p>After 15 days</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column  p-2">
+               <span class="d-flex align-items-center"><mat-icon>home</mat-icon> <span class="ms-1">9/3 Manoramaganj, Near Geeta Bhawan Hospital Aayam Institute Campus, Indore</span></span>
+               <span class="d-flex align-items-center"><mat-icon>mail</mat-icon><span class="ms-1">mail@aayamskinclinic.com</span></span>
+               <span class="d-flex align-items-center"><mat-icon>phone</mat-icon><span class="ms-1">+91 7470909055</span></span>
+            </div>
+        </div>
+    </div>
+</div>
