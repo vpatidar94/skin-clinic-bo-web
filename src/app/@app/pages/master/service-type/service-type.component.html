@@ -11,7 +11,7 @@
     <div class="row">
       <div class="search-input-style">
         <label class="app-label me-2">{{'Search'}}</label>
-        <input class="input-style" (keyup)="applyFilter($event)" placeholder="" #input>
+        <input class="input-style" (keyup)="applyFilter($event)" name="filter" placeholder="" #input>
       </div>
     </div>
 
@@ -63,7 +63,7 @@
 
 <section class="section-org-edit" *ngIf="showSectionServiceTypeEdit">
 
-  <app-service-type-edit [addServiceType]="addServiceType"></app-service-type-edit>
+  <app-service-type-edit [addServiceType]="addServiceType" [serviceType]="serviceType" [departmentList]="departmentList"></app-service-type-edit>
 
   <div class="d-flex align-items-center mt-5 mb-4">
     <div class="col-1">

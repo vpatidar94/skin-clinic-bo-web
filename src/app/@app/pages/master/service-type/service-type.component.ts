@@ -3,6 +3,10 @@ import { AddServiceTypeVo } from 'src/app/@shared/dto/add-service-type.dto';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ApiResponse, DepartmentVo, ResponseStatus, ServiceTypeVo } from 'aayam-clinic-core';
+import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
 export interface PeriodicElement {
   SerialNo: number;
@@ -41,9 +45,16 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   addServiceType!: AddServiceTypeVo;
+  departmentList!: DepartmentVo[];
+  serviceTypeList!: ServiceTypeVo[];
+  // ...........................
+  serviceType!: ServiceTypeVo
+  // ............................
 
   /* ************************************* Constructors ******************************************** */
-  constructor() { }
+  constructor(private serviceItemApi: ServiceItemApi,
+    private keyValueStorageService: KeyValueStorageService,
+    private departmentApi: DepartmentApi) { }
 
   /* ************************************* Public Methods ******************************************** */
 
@@ -60,11 +71,35 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     ServiceItem.drAssociated = "yes";
     ServiceItem.serviceType = " ";
     this.addServiceType = ServiceItem;
-    this._addEditServiceItem();
+
+    const serviceTypeDetails = {} as ServiceTypeVo;
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (orgId) {
+        serviceTypeDetails.orgId = orgId;
+        serviceTypeDetails.brId = orgId;
+    }
+    serviceTypeDetails.name = "";
+    serviceTypeDetails.departmentId = "";
+
+    this._addEditServiceItem(serviceTypeDetails);
+    this._getDepartmentList();
+
+    // this._addEditServiceItem();
   }
 
   public _getServiceTypeList(): void {
+   
+      const orgId = this.keyValueStorageService.getOrgId();
+      if (!orgId) {
+          return;
+      }
+      this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
+          this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+          // this.dataSource = new MatTableDataSource(this.serviceTypeList);
+          console.log("serviceTypeList",this.serviceTypeList);
+      })
   }
+  
 
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -78,8 +113,25 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     this._init();
   }
 
+  public _getDepartmentList() {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+        return;
+    }
+    this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+        this.departmentList = res.body ?? [] as DepartmentVo[];
+    })
+} 
+
   public savingServiceType(): void {
-    this._init();
+    this.serviceItemApi.addUpdateServiceType(this.serviceType).subscribe((res: ApiResponse<ServiceTypeVo>) => {
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+          this.serviceType = res.body;
+          this._init();
+          console.log("servicekkkk",this.serviceType);
+      }
+  });
+    
   }
 
   public cancel(): void {
@@ -99,7 +151,8 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     this.showSectionServiceTypeEdit = false;
   }
 
-  private _addEditServiceItem(): void {
+  private _addEditServiceItem(serviceTypeDetails:ServiceTypeVo): void {
+    this.serviceType = serviceTypeDetails;
     this._resetSection();
     this.showSectionServiceTypeEdit = true;
   }
