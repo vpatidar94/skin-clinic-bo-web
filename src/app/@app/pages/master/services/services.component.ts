@@ -3,6 +3,12 @@ import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+import { ApiResponse, DepartmentVo, ItemVo, PercentFlatVo, ResponseStatus, ServiceTypeVo, UserVo } from 'aayam-clinic-core';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { SUB_ROLE } from 'src/app/@app/const/sub-role.const';
 
 export interface PeriodicElement {
     ServiceCode: number;
@@ -34,6 +40,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
     addService!: AddServiceVo;
+    serviceTypeList!: ServiceTypeVo[];
+    serviceItem!: ItemVo;
+    departmentList!: DepartmentVo[];
+    doctorList!: UserVo[];
 
     showSectionServiceList!: boolean;
     showSectionServiceEdit!: boolean;
@@ -45,7 +55,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     @ViewChild(MatSort) sort!: MatSort;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() { }
+    constructor(private serviceItemApi: ServiceItemApi,
+        private keyValueStorageService: KeyValueStorageService,
+        private departmentApi: DepartmentApi,
+        private userApi: UserApi,) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
@@ -53,7 +66,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     public addServiceSection(): void {
-        const serviceItem = {} as AddServiceVo
+        const serviceItem = {} as AddServiceVo;
         serviceItem.serviceCode = '';
         serviceItem.serviceName = '';
         serviceItem.serviceType = '';
@@ -63,10 +76,18 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         serviceItem.fee = 0;
         serviceItem.feeDistribution = '';
         this.addService = serviceItem;
+
+        const newServiceItem = {} as ItemVo;
+        newServiceItem.feeType = {} as PercentFlatVo;
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (orgId) {
+            newServiceItem.orgId = orgId;
+            newServiceItem.brId = orgId;
+        }
+        this.serviceItem = newServiceItem;
         this._addEditService();
     }
 
-    // newly added to show table
     public ngAfterViewInit() {
         this.paginator.showFirstLastButtons = false;
         this.paginator.hidePageSize = false;
@@ -76,7 +97,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     public _getServiceList(): void {
     }
-    
+
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -87,19 +108,61 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     public savingService(): void {
-        this._init();
+        const orgId = this.keyValueStorageService.getOrgId();
+        this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
+            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+                console.log("updateservices", this.serviceItem);
+            }
+        });
+        console.log("servciceItemXXXX", this.serviceItem);
     }
 
     public cancel(): void {
         this._init();
     }
-    
+
+    public _getServiceTypeList(): void {
+
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
+            this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+            console.log("serviceTypeList", this.serviceTypeList);
+        })
+    }
+
+    public _getDepartmentList() {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+            this.departmentList = res.body ?? [] as DepartmentVo[];
+        })
+    }
+
     /* ************************************* Private Methods ******************************************** */
+    private _getDoctorList(): void {
+        this.doctorList = [] as Array<UserVo>;
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
+            this.doctorList = apiResponse.body ?? [] as Array<UserVo>;
+            console.log("doctor", this.doctorList);
+        });
+    }
 
     private _init(): void {
         this._resetSection();
         this.showSectionServiceList = true;
         this._getServiceList();
+        this._getServiceTypeList();
+        this._getDepartmentList();
+        this._getDoctorList();
     }
 
     private _resetSection(): void {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DepartmentVo, ItemVo, ServiceTypeVo, UserVo } from 'aayam-clinic-core';
+import { YES_NO_LIST } from 'src/app/@app/const/yes-no.const';
 import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
 
 @Component({
@@ -12,6 +14,20 @@ export class ServicesEditComponent {
     /* ************************************* Instance Field ******************************************** */
     @Input()
     addService!: AddServiceVo;
+
+    @Input()
+    serviceTypeList!: ServiceTypeVo[];
+
+    @Input()
+    departmentList!: DepartmentVo[];
+
+    @Input()
+    serviceItem!: ItemVo;
+
+    @Input()
+    doctorList!: UserVo[];
+
+    yesNoList = YES_NO_LIST;
 
     /* ************************************* Constructors ******************************************** */
     constructor() { }

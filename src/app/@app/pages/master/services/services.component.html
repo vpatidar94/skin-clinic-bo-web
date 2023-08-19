@@ -70,7 +70,8 @@
 <!-- Add Service section -->
 <section class="section-org-edit" *ngIf="showSectionServiceEdit">
 
-  <app-services-edit [addService]="addService"></app-services-edit>
+  <app-services-edit [addService]="addService" [serviceItem]="serviceItem" [serviceTypeList]="serviceTypeList"
+    [departmentList]="departmentList" [doctorList]="doctorList"></app-services-edit>
 
   <div class="d-flex align-items-center justify-content-center mt-5 mb-4">
     <div class="col-1">
