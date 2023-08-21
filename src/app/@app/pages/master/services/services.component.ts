@@ -1,34 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddServiceVo } from 'src/app/@shared/dto/add-service.dto';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
-import { ApiResponse, DepartmentVo, ItemVo, PercentFlatVo, ResponseStatus, ServiceTypeVo, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, ItemDetailDto, ItemVo, PercentFlatVo, ResponseStatus, ServiceTypeVo, UserVo } from 'aayam-clinic-core';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { SUB_ROLE } from 'src/app/@app/const/sub-role.const';
 
-export interface PeriodicElement {
-    ServiceCode: number;
-    ServiceName: string;
-    ServiceType: string;
-    DoctorsName: string;
-    Fee: string;
-    Action: string;
-}
-
-// newly added to show table
-const ELEMENT_DATA: PeriodicElement[] = [
-    { ServiceCode: 1, ServiceName: 'OPD', ServiceType: 'OPD', DoctorsName: 'Dr.Mayank Patidar', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 2, ServiceName: 'Dressing', ServiceType: 'Dressing', DoctorsName: 'Dr.aayam', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 3, ServiceName: 'Blood Test', ServiceType: '', DoctorsName: 'Dr.Atharv', Fee: '11:20', Action: "Edit | Delete" },
-    { ServiceCode: 4, ServiceName: '', ServiceType: '', DoctorsName: 'Dr.Aman', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 5, ServiceName: '', ServiceType: 'z', DoctorsName: 'Dr.aayam', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 6, ServiceName: '', ServiceType: '', DoctorsName: 'Dr.Atharv', Fee: '1120', Action: "Edit | Delete" },
-    { ServiceCode: 7, ServiceName: '', ServiceType: 'kat', DoctorsName: 'Dr.Aman', Fee: '1120', Action: "Edit | Delete" },
-]
 @Component({
     selector: 'app-services',
     styleUrls: ['./services.component.scss'],
@@ -39,17 +19,17 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
-    addService!: AddServiceVo;
     serviceTypeList!: ServiceTypeVo[];
     serviceItem!: ItemVo;
+    serviceItemList!: Array<ItemDetailDto> | null
     departmentList!: DepartmentVo[];
     doctorList!: UserVo[];
 
     showSectionServiceList!: boolean;
     showSectionServiceEdit!: boolean;
 
-    displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'DoctorsName', "Fee", "Action"];
-    dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'Doctors Name', "Fee", "Action"];
+    dataSource!: MatTableDataSource<ItemDetailDto>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -66,17 +46,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     public addServiceSection(): void {
-        const serviceItem = {} as AddServiceVo;
-        serviceItem.serviceCode = '';
-        serviceItem.serviceName = '';
-        serviceItem.serviceType = '';
-        serviceItem.department = '';
-        serviceItem.associatedDoctor = '';
-        serviceItem.feeType = '';
-        serviceItem.fee = 0;
-        serviceItem.feeDistribution = '';
-        this.addService = serviceItem;
-
         const newServiceItem = {} as ItemVo;
         newServiceItem.feeType = {} as PercentFlatVo;
         const orgId = this.keyValueStorageService.getOrgId();
@@ -95,8 +64,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    public _getServiceList(): void {
-    }
+
 
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
@@ -111,10 +79,9 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         const orgId = this.keyValueStorageService.getOrgId();
         this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-                console.log("updateservices", this.serviceItem);
+                this._init();
             }
         });
-        console.log("servciceItemXXXX", this.serviceItem);
     }
 
     public cancel(): void {
@@ -129,7 +96,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
             this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
-            console.log("serviceTypeList", this.serviceTypeList);
         })
     }
 
@@ -152,14 +118,28 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
             this.doctorList = apiResponse.body ?? [] as Array<UserVo>;
-            console.log("doctor", this.doctorList);
+        });
+    }
+
+    private _getServiceItemList(): void {
+        this.showSectionServiceList = true;
+        this.serviceItemList = null;
+        const serviceItemId = this.keyValueStorageService.getOrgId();
+        if (!serviceItemId) {
+            return;
+        }
+        this.serviceItemApi.getServiceItemList(serviceItemId).subscribe((apiResponse: ApiResponse<ItemDetailDto[]>) => {
+            this.serviceItemList = apiResponse.body ?? [] as Array<ItemDetailDto>;
+            this.dataSource = new MatTableDataSource(this.serviceItemList);
+
         });
     }
 
     private _init(): void {
+        this.dataSource = new MatTableDataSource<ItemDetailDto>([]);
         this._resetSection();
         this.showSectionServiceList = true;
-        this._getServiceList();
+        this._getServiceItemList();
         this._getServiceTypeList();
         this._getDepartmentList();
         this._getDoctorList();
