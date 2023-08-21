@@ -7,7 +7,6 @@ import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
-
 @Component({
   selector: 'app-servicetype',
   styleUrls: ['./service-type.component.scss'],
@@ -67,8 +66,8 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     }
     this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
       this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
-      this.dataSource = new MatTableDataSource(this.serviceTypeList);
-      console.log("serviceTypeList", this.serviceTypeList);
+      const enrichedList = this.extendServiceTypeList(this.serviceTypeList, this.addingDepartmentName);
+      this.dataSource = new MatTableDataSource(enrichedList);
     })
   }
 
@@ -92,6 +91,14 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     }
     this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
       this.departmentList = res.body ?? [] as DepartmentVo[];
+
+      // ................
+      this.addingDepartmentName = {};
+      this.departmentList.forEach(department => {
+        this.addingDepartmentName[department._id] = department.name;
+      });
+      this._getServiceTypeList(); // Refresh the service type list
+
     })
   }
 
@@ -115,6 +122,7 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     this._resetSection();
     this.showSectionServiceTypeList = true;
     this._getServiceTypeList();
+    this._getDepartmentList();
   }
 
   private _resetSection(): void {
@@ -126,6 +134,17 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     this.serviceType = serviceTypeDetails;
     this._resetSection();
     this.showSectionServiceTypeEdit = true;
+  }
+
+  private addingDepartmentName: { [departmentId: string]: string } = {};
+
+  private extendServiceTypeList(serviceTypeList: ServiceTypeVo[], addingDepartmentName: { [departmentId: string]: string }): any[] {
+    return serviceTypeList.map(serviceType => {
+      return {
+        ...serviceType,
+        departmentName: addingDepartmentName[serviceType.departmentId]
+      };
+    });
   }
 
 }
