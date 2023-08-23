@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductVo } from 'src/app/@shared/dto/product.dto';
 
+
 export interface PeriodicElement {
     ProductCode: number;
     ProductName: string;

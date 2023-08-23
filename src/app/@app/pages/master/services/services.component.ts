@@ -53,8 +53,8 @@ export class ServicesComponent implements AfterViewInit, OnInit {
             newServiceItem.orgId = orgId;
             newServiceItem.brId = orgId;
         }
-        this.serviceItem = newServiceItem;
-        this._addEditService();
+
+        this._addEditService(newServiceItem);
     }
 
     public ngAfterViewInit() {
@@ -112,6 +112,11 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         })
     }
 
+    public editService(serviceItem: ItemVo): void {
+        this.serviceItem = { ...serviceItem };
+        this._addEditService(this.serviceItem);
+        this._getDepartmentList();
+    }
     /* ************************************* Private Methods ******************************************** */
     private _getDoctorList(): void {
         this.doctorList = [] as Array<UserVo>;
@@ -142,7 +147,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
             /* ****to get the names in the table in using ids as name are not in the interface ******/
             const extendedList = this.extendServiceItemList(this.serviceItemList, this.addingServiceTypeName, this.addingAssociatedDoctorName);
             this.dataSource = new MatTableDataSource(extendedList);
-            // this.dataSource = new MatTableDataSource(this.serviceItemList);
         });
     }
 
@@ -161,7 +165,8 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         this.showSectionServiceEdit = false;
     }
 
-    private _addEditService(): void {
+    private _addEditService(newServiceItem: ItemVo): void {
+        this.serviceItem = newServiceItem;
         this._resetSection();
         this.showSectionServiceEdit = true;
     }

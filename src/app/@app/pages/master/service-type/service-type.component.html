@@ -44,7 +44,9 @@
         <!-- Action -->
         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-          <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">Edit | Delete</td>
+          <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><button mat-button class="action-style"
+              (click)="editServiceType(row)">Edit</button> | <button class="action-style" mat-button>Delete</button>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

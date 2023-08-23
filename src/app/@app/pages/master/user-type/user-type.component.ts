@@ -8,8 +8,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserTypeVo } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
-
-
 @Component({
     selector: 'app-user-type',
     templateUrl: './user-type.component.html',
@@ -21,7 +19,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     /* ************************************* Static Field ********************************************* */
     /* ************************************* Instance Field ******************************************** */
     userType!: UserTypeVo;
-    
+
     departmentList!: DepartmentVo[];
     userTypeList!: UserTypeDetailDto[];
 
@@ -39,7 +37,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi,
         private departmentApi: DepartmentApi,
-        ) { }
+    ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngAfterViewInit() {
@@ -110,6 +108,11 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this._init();
     }
 
+    public editUserType(userType: UserTypeDetailDto): void {
+        this.userType = { ...userType.userType };
+        this._addEditUserItem(this.userType);
+        this._getDepartmentList();
+    }
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
@@ -122,7 +125,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this.showSectionUserTypeEdit = false;
     }
 
-    private _addEditUserItem(userTypeDetails:UserTypeVo): void {
+    private _addEditUserItem(userTypeDetails: UserTypeVo): void {
         this.userType = userTypeDetails;
 
         this._resetSection();

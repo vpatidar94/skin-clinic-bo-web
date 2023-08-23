@@ -39,7 +39,9 @@
                 <!-- Action -->
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">Edit | Delete</td>
+                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><button mat-button
+                            class="action-style" (click)="editDepartment(row)">Edit</button> | <button mat-button
+                            class="action-style">Delete</button></td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -61,7 +63,7 @@
     <div>
         <app-department-edit [department]="department"></app-department-edit>
     </div>
-    
+
     <div class="row mt-4">
         <div class="col-1">
             <button (click)="savingDepartment()" class="common-button">{{'save'}}</button>

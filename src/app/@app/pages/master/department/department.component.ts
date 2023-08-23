@@ -66,12 +66,10 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         }
         departmentDetails.name = "";
         departmentDetails.created = new Date();
-        this.department = departmentDetails;
-        this._addEditDepartment();
+        this._addEditDepartment(departmentDetails);
     }
 
     public _getDepartmentList() {
-        // this.showSectionDepartmentList = true;
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -94,7 +92,13 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
 
     public cancel(): void {
         this._init();
-      }
+    }
+
+    public editDepartment(department: DepartmentVo): void {
+        this.department = { ...department };
+        this._addEditDepartment(this.department);
+        this._getDepartmentList();
+    }
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
@@ -107,7 +111,8 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         this.showSectionDepartmentEdit = false;
     }
 
-    private _addEditDepartment(): void {
+    private _addEditDepartment(departmentDetails: DepartmentVo): void {
+        this.department = departmentDetails;
         this._resetSection();
         this.showSectionDepartmentEdit = true;
     }

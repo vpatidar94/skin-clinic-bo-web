@@ -25,9 +25,9 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  serviceType!: ServiceTypeVo
   departmentList!: DepartmentVo[];
   serviceTypeList!: ServiceTypeVo[];
-  serviceType!: ServiceTypeVo
 
   /* ************************************* Constructors ******************************************** */
   constructor(private serviceItemApi: ServiceItemApi,
@@ -59,18 +59,16 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   }
 
   public _getServiceTypeList(): void {
-
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
       return;
     }
     this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
       this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
-      const enrichedList = this.extendServiceTypeList(this.serviceTypeList, this.addingDepartmentName);
-      this.dataSource = new MatTableDataSource(enrichedList);
+      const extendedList = this.extendServiceTypeList(this.serviceTypeList, this.addingDepartmentName);
+      this.dataSource = new MatTableDataSource(extendedList);
     })
   }
-
 
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -91,14 +89,12 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     }
     this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
       this.departmentList = res.body ?? [] as DepartmentVo[];
-
-      // ................
+      /**to show departmentName via departmentId as department name is not in the interface **/
       this.addingDepartmentName = {};
       this.departmentList.forEach(department => {
         this.addingDepartmentName[department._id] = department.name;
       });
-      this._getServiceTypeList(); // Refresh the service type list
-
+      this._getServiceTypeList();
     })
   }
 
@@ -109,15 +105,19 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
         this._init();
       }
     });
-
   }
 
   public cancel(): void {
     this._init();
   }
 
-  /* ************************************* Private Methods ******************************************** */
+  public editServiceType(serviceType: ServiceTypeVo): void {
+    this.serviceType = { ...serviceType };
+    this._addEditServiceItem(this.serviceType);
+    this._getDepartmentList();
+  }
 
+  /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
     this.showSectionServiceTypeList = true;
@@ -138,6 +138,7 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
 
   private addingDepartmentName: { [departmentId: string]: string } = {};
 
+  /**to extend ServiceList to add departmentName in it via departmentId as department name is not in the interface ServiceTypeVo **/
   private extendServiceTypeList(serviceTypeList: ServiceTypeVo[], addingDepartmentName: { [departmentId: string]: string }): any[] {
     return serviceTypeList.map(serviceType => {
       return {
