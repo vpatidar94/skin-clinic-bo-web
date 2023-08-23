@@ -33,13 +33,13 @@
         <!--Service type -->
         <ng-container matColumnDef="Service Type">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Type </th>
-          <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.item.serviceTypeId}} </td>
+          <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.serviceTypeName}} </td>
         </ng-container>
 
         <!-- Doctor Name -->
         <ng-container matColumnDef="Doctors Name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctors Name </th>
-          <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.item.associatedDoctorId}}</td>
+          <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.associatedDoctorName}}</td>
         </ng-container>
 
         <!-- Fee -->

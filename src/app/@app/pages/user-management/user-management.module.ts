@@ -22,6 +22,9 @@ import { StaffEditComponent } from './staff/staff-edit/staff-edit.component';
 import { AddressModule } from "../../../@shared/component/address/address.module";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { WattsappComponent } from './wattsapp/wattsapp.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NewWattsappComponent } from './new-wattsapp/new-wattsapp.component';
 
 
 const MATERIAL_MODULE = [
@@ -61,8 +64,8 @@ const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
   exports: [],
-  declarations: [StaffComponent, CustomerComponent, StaffEditComponent],
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule, AddressModule],
+  declarations: [StaffComponent, CustomerComponent, StaffEditComponent, WattsappComponent,NewWattsappComponent],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, UserManagementRoutingModule, AddressModule, HttpClientModule,],
 
 })
 export class UserManagementModule { }

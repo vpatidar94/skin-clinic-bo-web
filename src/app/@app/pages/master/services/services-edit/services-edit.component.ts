@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DepartmentVo, ItemVo, ServiceTypeVo, UserVo } from 'aayam-clinic-core';
-import { YES_NO_LIST } from 'src/app/@app/const/yes-no.const';
+import { FEE_TYPE_LIST } from 'src/app/@app/const/fee-type.const';
 
 @Component({
     selector: 'app-services-edit',
@@ -22,8 +22,7 @@ export class ServicesEditComponent {
     @Input()
     doctorList!: UserVo[];
 
-    yesNoList = YES_NO_LIST;
-
+    feeTypeList = FEE_TYPE_LIST;
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 

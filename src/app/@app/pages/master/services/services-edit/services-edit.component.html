@@ -116,11 +116,11 @@
       <div class="col-md-6">
         <div class="d-flex align-items-center mb-3">
           <div class="col-md-3">
-            <label class="app-label">Is Percentage</label>
+            <label class="app-label">Fee Type</label>
           </div>
           <div class="col-md-7">
             <div class="form-group">
-              <div class="form-check form-check-inline" *ngFor="let g of yesNoList">
+              <div class="form-check form-check-inline" *ngFor="let g of feeTypeList">
                 <input class="form-check-input" type="radio" name="yesNo" [value]="g.name"
                   [(ngModel)]="serviceItem.feeType.isPercent">
                 <label class="form-check-label">{{ g.id }}</label>

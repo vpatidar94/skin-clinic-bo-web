@@ -64,8 +64,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-
-
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -76,7 +74,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     public savingService(): void {
-        const orgId = this.keyValueStorageService.getOrgId();
         this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
                 this._init();
@@ -96,6 +93,12 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
             this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+            /* ****to get serviceType name via serviceTypeId ******/
+            this.addingServiceTypeName = {};
+            this.serviceTypeList.forEach(serviceType => {
+                this.addingServiceTypeName[serviceType._id] = serviceType.name;
+            });
+            this._getServiceItemList();
         })
     }
 
@@ -118,6 +121,12 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
             this.doctorList = apiResponse.body ?? [] as Array<UserVo>;
+            /* ****to get associate doctor name via associatedDoctorId ******/
+            this.addingAssociatedDoctorName = {};
+            this.doctorList.forEach(associatedDoctor => {
+                this.addingAssociatedDoctorName[associatedDoctor._id] = `${associatedDoctor.nameF} ${associatedDoctor.nameL}`;
+            });
+            this._getServiceItemList();
         });
     }
 
@@ -130,8 +139,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         this.serviceItemApi.getServiceItemList(serviceItemId).subscribe((apiResponse: ApiResponse<ItemDetailDto[]>) => {
             this.serviceItemList = apiResponse.body ?? [] as Array<ItemDetailDto>;
-            this.dataSource = new MatTableDataSource(this.serviceItemList);
-
+            /* ****to get the names in the table in using ids as name are not in the interface ******/
+            const extendedList = this.extendServiceItemList(this.serviceItemList, this.addingServiceTypeName, this.addingAssociatedDoctorName);
+            this.dataSource = new MatTableDataSource(extendedList);
+            // this.dataSource = new MatTableDataSource(this.serviceItemList);
         });
     }
 
@@ -153,6 +164,21 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     private _addEditService(): void {
         this._resetSection();
         this.showSectionServiceEdit = true;
+    }
+
+    private addingServiceTypeName: { [serviceTypeId: string]: string } = {};
+
+    private addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined } = {};
+
+    /**this method is to include the serviceTypeName and associatedDoctorName externally in the interface to show them in the table */
+    private extendServiceItemList(serviceItemList: Array<ItemDetailDto>, addingServiceTypeName: { [serviceTypeId: string]: string }, addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined }): any[] {
+        return serviceItemList.map(serviceItem => {
+            return {
+                ...serviceItem,
+                serviceTypeName: addingServiceTypeName[serviceItem.item.serviceTypeId],
+                associatedDoctorName: addingAssociatedDoctorName[serviceItem.item.associatedDoctorId],
+            };
+        });
     }
 
 }

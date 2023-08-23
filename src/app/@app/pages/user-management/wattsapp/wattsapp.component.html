@@ -1,0 +1,34 @@
+<h1>Contact Numbers</h1>
+<input type="textarea" class="input-style mb-5" placeholder="type number">
+<div *ngFor="let item of parameterArray; let i = index;">
+    <div class="d-flex">
+        <p>Variable text- {{i+1}}</p>
+        <input class="ms-5" [(ngModel)]="item.value">
+    </div>
+</div>
+
+<!-- ............................. -->
+<!-- <select [(ngModel)]="selectedTemplate">
+    <option *ngFor="let item of newCompleteArray" [value]="item">{{ item.template.name }}</option>
+</select>
+
+<div *ngIf="selectedTemplate">
+    <h2>Selected Template: {{ selectedTemplate.template.name }}</h2>
+    <div *ngFor="let param of selectedTemplate.template.components[0].parameters; let i = index;">
+        <input [(ngModel)]="param.value" placeholder="Enter value for {{ param.type }} ({{ i + 1 }})">
+    </div>
+</div> -->
+<!-- ............................. -->
+
+<div *ngIf="showMessage">
+    <div>{{message}}</div>
+</div>
+<button class="mt-5" (click)="generateMessage()">Generate Message</button>
+<button class="mt-5" (click)="sendApiRequest()">send Message</button>
+
+<select 
+(ngModelChange)="filterTemplateByName()">
+    <option *ngFor="let item of newCompleteArray">
+        {{item.template.name}}
+    </option>
+</select>
