@@ -1,6 +1,5 @@
 import { Component, Input, } from '@angular/core';
-import { ProductVo } from 'src/app/@shared/dto/product.dto';
-
+import { ProductVo } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-product-edit',
@@ -18,10 +17,9 @@ export class ProductEditComponent {
 
     /* ************************************* Public Methods ******************************************** */
     public onProductTypeChange() {
-        this.isQtyPerStripActive = this.product.productType === 'opd' || this.product.productType === 'percentage';
+        this.isQtyPerStripActive = this.product.productType === 'Tablet' || this.product.productType === 'Capsule';
     }
 
     /* ************************************* Private Methods ******************************************** */
-
 
 }

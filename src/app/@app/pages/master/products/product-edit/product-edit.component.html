@@ -16,7 +16,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="" class="form-control app-input" name="productCode"
-                                [(ngModel)]="product.productCode" required>
+                                [(ngModel)]="product.code" required>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="text" class="form-control app-input" name="productName"
-                                [(ngModel)]="product.productName" required>
+                                [(ngModel)]="product.name" required>
                         </div>
                     </div>
                 </div>
@@ -94,15 +94,15 @@
                             <select name="ProductType" class="app-single-select-dropdown w-100"
                                 [(ngModel)]="product.productType" (change)="onProductTypeChange()" required>
                                 <option value="">Select</option>
-                                <option value="opd">Tablet</option>
-                                <option value="percentage">Capsule</option>
-                                <option value="procedure">Syrup</option>
-                                <option value="ot">Drop</option>
-                                <option value="injection">Injection</option>
-                                <option value="inhaler">Inhaler</option>
-                                <option value="gel">Gel</option>
-                                <option value="ointment">Ointment</option>
-                                <option value="generalProduct">General Product</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Capsule">Capsule</option>
+                                <option value="Syrup">Syrup</option>
+                                <option value="Drop">Drop</option>
+                                <option value="Injection">Injection</option>
+                                <option value="Inhaler">Inhaler</option>
+                                <option value="Gel">Gel</option>
+                                <option value="Ointment">Ointment</option>
+                                <option value="General Product">General Product</option>
                             </select>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="date" class="form-control app-input" name="expiryDate"
-                                [(ngModel)]="product.expiryDate" required>
+                                [(ngModel)]="product.expirtyDate" required>
                         </div>
                     </div>
                 </div>

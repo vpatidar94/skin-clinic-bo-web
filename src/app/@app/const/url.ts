@@ -43,7 +43,7 @@ const MJR_ORG = BASE_CORE + '/org';
 const MJR_USER = BASE_CORE + '/user';
 const MJR_SERVICE_ITEM = BASE_CORE + '/service-item';
 const MJR_BOOKING = BASE_CORE + '/booking';
-
+const MJR_PRODUCT = BASE_CORE + '/product';
 /**
  * END_POINT URL URL
  */
@@ -77,7 +77,10 @@ export const URL = {
     // Department API endpoint
     ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
     ORG_DEPARTMENT_LIST: MJR_ORG + '/department-list',
-    
+    //********************************************************************
+    //Product API endpoint
+    PRODUCT_LIST : MJR_PRODUCT + '/list',
+    ADD_UPDATE_PRODUCT: MJR_PRODUCT + '/add-update',
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'
 };
