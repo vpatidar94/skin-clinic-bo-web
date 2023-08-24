@@ -25,7 +25,7 @@
     </div>
 
     <div *ngIf="showSectionPrescription">
-       <app-prescription-edit  [(userBooking)]="userBooking"></app-prescription-edit>
+       <app-prescription-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking" [productList]="productList"></app-prescription-edit>
     </div>
 
     <div *ngIf="showSectionBilling">

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
+import { ProductApi } from '../../service/remote/product.api';
 
 @Component({
   selector: 'app-appointment',
@@ -31,6 +32,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   bookingList!: OrgBookingDto[];
 
+  productList!: ProductVo[];
+
   // newly added to show table
   displayedColumns: string[] = ['AppNo', 'Date', 'PatientName', 'Type', 'DoctorsName', "Time", "Action"];
   dataSource = new MatTableDataSource<OrgBookingDto>([] as OrgBookingDto[]);
@@ -48,7 +51,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   constructor(private userApi: UserApi,
     private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
-    private bookingApi: BookingApi) { }
+    private bookingApi: BookingApi,
+    private productApi: ProductApi) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -147,10 +151,23 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
       if (res.body) {
         this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
+        console.log("nmnmnm",this.userBookingInvestigationList);
         this.addAppointment();
       }
     });
   }
+
+  public _getProductList(): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+        return;
+    }
+    this.productApi.getProductList(orgId).subscribe((res: ApiResponse<ProductVo[]>) => {
+        this.productList = res.body ?? [] as ProductVo[];
+        this.resultsLength = this.productList.length;
+        console.log("this",this.productList);
+    })
+}
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
@@ -158,6 +175,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.showSectionAppointmentList = true;
     this._getServiceList();
     this._getDoctorList();
+    this._getProductList();
+
+    
   }
 
   private _resetSection(): void {
@@ -169,6 +189,11 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.userBooking = userBooking;
     this._resetSection();
     this.showSectionAppointmentEdit = true;
+
+    // if (this.bookingList && this.bookingList.length > 0) {
+    //   const orgBookingToGetUserBooking = this.bookingList[1];
+    //   this.getUserBooking(orgBookingToGetUserBooking);
+    // }
   }
 
   private _getServiceList(): void {

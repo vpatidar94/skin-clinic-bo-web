@@ -61,8 +61,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
             productDetails.orgId = orgId;
             productDetails.brId = orgId;
         }
-        this.product = productDetails;
-        this._addEditProduct();
+        this._addEditProduct(productDetails);
     }
 
     public _getProductList(): void {
@@ -90,6 +89,12 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this._init();
     }
 
+    public editProduct(product: ProductVo): void {
+        this.product = { ...product };
+        this._addEditProduct(this.product);
+        this._getProductList();
+    }
+
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
@@ -102,7 +107,8 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this.showSectionProductEdit = false;
     }
 
-    private _addEditProduct(): void {
+    private _addEditProduct(productDetails: ProductVo): void {
+        this.product = productDetails;
         this._resetSection();
         this.showSectionProductEdit = true;
     }

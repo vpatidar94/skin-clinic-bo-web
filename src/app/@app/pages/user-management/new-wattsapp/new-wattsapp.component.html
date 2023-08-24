@@ -1,33 +1,5 @@
-<!-- <h1>Contact Numbers</h1>
-
-<select (change)="templateSelected()" [(ngModel)]="selectedTemplate">
-    <option *ngFor="let item of requestBody" [value]="item">{{ item.template.name }}</option>
-</select>
-
-<div *ngIf="selectedTemplate">
-    <h2>Selected Template: {{ selectedTemplate.template.name }}</h2>
-    <div *ngFor="let param of selectedTemplate.template.components[0].parameters; let i = index;">
-        <input [(ngModel)]="param.text" placeholder="Enter value for {{ param.type }} ({{ i + 1 }})">
-    </div>
-</div>
-
-<button class="mt-5" (click)="sendApiRequest()">Send Message</button> -->
-
-<!-- <select (change)="templateSelected()" [(ngModel)]="selectedTemplateName">
-    <option *ngFor="let item of requestBody" [value]="item.template.name">{{ item.template.name }}</option>
-</select>
-
-<div *ngIf="selectedTemplate">
-    <h2>Selected Template: {{ selectedTemplate.template.name }}</h2>
-    <div *ngFor="let param of selectedTemplate.template.components[0]?.parameters; let i = index;">
-        <input [(ngModel)]="param.value" placeholder="Enter value for {{ param.type }} ({{ i + 1 }})">
-    </div>
-</div>
-
-<button (click)="sendApiRequest()">send</button> -->
-
-
 <div class="row">
+
     <div class="col-md-6">
         <div class="d-flex align-items-center mb-3">
             <div class="col-md-3">
@@ -43,22 +15,67 @@
                 </div>
             </div>
         </div>
+
+        <div *ngFor="let component of selectedTemplate?.template.components; let i = index;">
+            <h3>Component {{ i + 1 }}</h3>
+            <div *ngFor="let param of component.parameters; let j = index;">
+                <ng-container [ngSwitch]="param.type">
+                    <input *ngSwitchCase="'text'" [(ngModel)]="param.text"
+                        placeholder="Enter text for {{ param.type }} ({{ j + 1 }})">
+                    <input *ngSwitchCase="'document'" [(ngModel)]="param.document.link"
+                        placeholder="Enter link for {{ param.type }} ({{ j + 1 }})">
+                    <div *ngSwitchDefault>
+                        Parameter type "{{ param.type }}" is not supported.
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <button class="common-button mt-2" (click)="sendApiRequest()">Send</button>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mb-5">
+            <button class="common-button" (click)="addingNewTemplate()">Add New Template</button>
+        </div>
+
+        <div *ngIf="addNewTemplate">
+            <form (ngSubmit)="addTemplate()">
+                <div>
+                    <textarea id="newTemplateCode" [(ngModel)]="newTemplateCode" name="newTemplateCode" rows="15"
+                        class="w-50" placeholder="write your template code here"></textarea>
+                </div>
+                <button type="submit" class="common-button">Add Template</button>
+            </form>
+        </div>
     </div>
 </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- </div> -->
 <!-- <select (change)="templateSelected()" [(ngModel)]="selectedTemplateName" class="app-single-select-dropdown w-100">
     <option *ngFor="let item of templates" [value]="item.template.name">{{ item.template.name }}</option>
   </select> -->
 
-<div *ngIf="selectedTemplate">
+<!-- <div *ngIf="selectedTemplate">
     <h2>Selected Template: {{ selectedTemplate.template.name }}</h2>
     <div class="d-flex" *ngFor="let param of selectedTemplate.template.components[0]?.parameters; let i = index;">
         <p class="me-5">Variable Text {{i+1}}</p>
         <input [(ngModel)]="param.text" placeholder="Enter value for {{ param.type }} ({{ i + 1 }})">
     </div>
-</div>
+</div> -->
 
 <!-- <div *ngFor="let component of selectedTemplate?.template.components; let i = index;">
         <h3>Component {{ i + 1 }}</h3>
@@ -66,35 +83,3 @@
           <input [(ngModel)]="param.value" placeholder="Enter value for {{ param.type }} ({{ j + 1 }})">
         </div>
       </div> -->
-
-
-
-<!-- <div *ngFor="let component of selectedTemplate?.template.components; let i = index;">
-        <h3>Component {{ i + 1 }}</h3>
-        <div *ngFor="let param of component.parameters; let j = index;">
-          <ng-container [ngSwitch]="param.type">
-            <input *ngSwitchCase="'text'" [(ngModel)]="param.text" placeholder="Enter text for {{ param.type }} ({{ j + 1 }})">
-            <input *ngSwitchCase="'document'" [(ngModel)]="param.document.link" placeholder="Enter link for {{ param.type }} ({{ j + 1 }})">
-            <div *ngSwitchDefault>
-              Parameter type "{{ param.type }}" is not supported.
-            </div>
-          </ng-container>
-        </div>
-      </div>
-       -->
-<!-- </div> -->
-
-<button class="common-button" (click)="sendApiRequest()">Send</button>
-<div class="mt-5 mb-5">
-<button class="common-button" (click)="addingNewTemplate()">Add New Template</button>
-</div>
-
-<div *ngIf="addNewTemplate">
-<form (ngSubmit)="addTemplate()">
-    <div>
-        <!-- <label for="newTemplateCode">New Template Code:</label> -->
-        <textarea id="newTemplateCode" [(ngModel)]="newTemplateCode" name="newTemplateCode" rows="15" class="w-50" placeholder="write your template code here" ></textarea>
-    </div>
-    <button type="submit">Add Template</button>
-</form>
-</div>

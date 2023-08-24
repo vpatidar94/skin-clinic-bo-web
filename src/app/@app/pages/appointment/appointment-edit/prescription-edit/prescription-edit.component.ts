@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, UserBookingInvestigationDto, ProductVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -30,6 +30,9 @@ export class PrescriptionEditComponent implements OnInit {
 
   @Input()
   userBookingInvestigationList!: UserBookingInvestigationDto;
+
+  @Input()
+  productList!: ProductVo[];
 
   /* ************************************ Constructors ************************************ */
   constructor() {

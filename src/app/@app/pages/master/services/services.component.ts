@@ -114,8 +114,12 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     public editService(serviceItem: ItemVo): void {
         this.serviceItem = { ...serviceItem };
-        this._addEditService(this.serviceItem);
+        // this._addEditService(this.serviceItem);
         this._getDepartmentList();
+        this._getDoctorList();
+        this._getServiceTypeList();
+        this._addEditService(this.serviceItem);
+
     }
     /* ************************************* Private Methods ******************************************** */
     private _getDoctorList(): void {
@@ -136,7 +140,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     private _getServiceItemList(): void {
-        this.showSectionServiceList = true;
         this.serviceItemList = null;
         const serviceItemId = this.keyValueStorageService.getOrgId();
         if (!serviceItemId) {
@@ -144,7 +147,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         this.serviceItemApi.getServiceItemList(serviceItemId).subscribe((apiResponse: ApiResponse<ItemDetailDto[]>) => {
             this.serviceItemList = apiResponse.body ?? [] as Array<ItemDetailDto>;
-            /* ****to get the names in the table in using ids as name are not in the interface ******/
+            /* ****to get the names in the table by using ids ..as name are not in the interface ******/
             const extendedList = this.extendServiceItemList(this.serviceItemList, this.addingServiceTypeName, this.addingAssociatedDoctorName);
             this.dataSource = new MatTableDataSource(extendedList);
         });
@@ -175,7 +178,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     private addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined } = {};
 
-    /**this method is to include the serviceTypeName and associatedDoctorName externally in the interface to show them in the table */
+    /**this method is used to include the serviceTypeName and associatedDoctorName externally in the interface to show them in the table */
     private extendServiceItemList(serviceItemList: Array<ItemDetailDto>, addingServiceTypeName: { [serviceTypeId: string]: string }, addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined }): any[] {
         return serviceItemList.map(serviceItem => {
             return {

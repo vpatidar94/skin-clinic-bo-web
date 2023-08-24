@@ -122,11 +122,7 @@
                                                 class="form-group d-flex justify-content-between align-items-center col-md-3">
                                                 <select name="medicine" class="app-single-select-dropdown w-75"
                                                     [(ngModel)]="userBooking.booking.prescription[i].name">
-                                                    <option>Acifin P</option>
-                                                    <option>Appointment</option>
-                                                    <option>Admission</option>
-                                                    <option>Investigation</option>
-                                                    <option>Emergency</option>
+                                                    <option *ngFor="let product of productList">{{product.name}}</option>
                                                 </select>
                                                 <mat-icon class="add-icon">add_circle_outline</mat-icon>
                                             </div>
@@ -312,11 +308,8 @@
                                                 class="form-group d-flex justify-content-between align-items-center col-md-3">
                                                 <select name="medicine" class="app-single-select-dropdown w-75"
                                                     [(ngModel)]="userBooking.booking.prescription[i].name">
-                                                    <option>Acifin P</option>
-                                                    <option>Appointment</option>
-                                                    <option>Admission</option>
-                                                    <option>Investigation</option>
-                                                    <option>Emergency</option>
+                                                    <option *ngFor="let product of productList">{{product.name}}
+                                                    </option>
                                                 </select>
                                                 <mat-icon class="add-icon">add_circle_outline</mat-icon>
                                             </div>

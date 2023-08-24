@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ApiResponse, ItemDetailDto, OrgOrderNoDto, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, ItemDetailDto, OrgOrderNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -32,6 +32,9 @@ export class AppointmentEditComponent implements OnInit, OnChanges {
 
   @Input()
   docterList!: UserVo[];
+
+  @Input()
+  productList!: ProductVo[];
 
   @Input()
   userBookingInvestigationList!: UserBookingInvestigationDto;
