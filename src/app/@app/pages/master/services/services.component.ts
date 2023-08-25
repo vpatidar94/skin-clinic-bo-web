@@ -115,9 +115,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     public editService(serviceItem: ItemVo): void {
         this.serviceItem = { ...serviceItem };
         this._addEditService(this.serviceItem);
-        this._getDepartmentList();
-        this._getDoctorList();
-        this._getServiceTypeList();
     }
     /* ************************************* Private Methods ******************************************** */
     private _getDoctorList(): void {

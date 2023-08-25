@@ -33,7 +33,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
   subRoleName = SUB_ROLE_NAME as any;
   roleName = ROLE_NAME as any
 
-  displayedColumns: string[] = ['image', 'name', 'gender', 'email', 'cell', 'role', 'subRole', 'action'];
+  // displayedColumns: string[] = ['image', 'name', 'gender', 'email', 'cell', 'role', 'subRole', 'action'];
+   displayedColumns: string[] = ['userCode', 'date', 'userName', 'type', 'department','action'];
+
   dataSource!: MatTableDataSource<UserVo>;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -148,6 +150,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
     })
   }
 
+  public editUsers(staff: UserEmpDto): void {
+    this.staff = { ...staff };
+    this._addEditStaff(this.staff);
+    this._getDepartmentList();
+}
   /* ************************************* Private Methods ******************************************** */
 
   private _init(): void {

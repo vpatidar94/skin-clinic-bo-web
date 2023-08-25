@@ -72,6 +72,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
 
         this._addEditUserItem(userTypeDetails);
         this._getDepartmentList();
+
     }
 
     public _getDepartmentList() {

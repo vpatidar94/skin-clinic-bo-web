@@ -31,6 +31,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PharmacyBillingComponent {
     // newly added to show table
+    showPharmacyEditForm: boolean = false;
+    
     displayedColumns: string[] = ['patientId', 'patientName', 'billNo', "date", 'doctorsName', "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -58,5 +60,9 @@ export class PharmacyBillingComponent {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    addNewCustomer(): void{
+        this.showPharmacyEditForm = !this.showPharmacyEditForm;
     }
 }
