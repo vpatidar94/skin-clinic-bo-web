@@ -1,5 +1,5 @@
 <!-- Add Service section -->
-<section class="section-org-edit">
+<section class="section-org-edit" *ngIf="serviceItem">
   <div class="row mb-3">
     <div class=" d-flex justify-content-between">
       <h2>Add Service</h2>
@@ -55,7 +55,6 @@
           </div>
         </div>
       </div>
-
       <!-- Department -->
       <div class="col-md-6">
         <div class="d-flex align-items-center mb-3">
@@ -138,7 +137,7 @@
           <div class="col-md-7">
             <div class="form-group">
               <div>
-                <input type="" class="form-control app-input" name="value" [(ngModel)]="serviceItem.feeType.value"
+                <input type="" class="form-control app-input" name="feeType" [(ngModel)]="serviceItem.feeType.value"
                   appNumberOnly>
               </div>
             </div>

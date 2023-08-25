@@ -47,7 +47,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     public addServiceSection(): void {
         const newServiceItem = {} as ItemVo;
-        newServiceItem.feeType = {} as PercentFlatVo;
+        newServiceItem.feeType = {value: 0} as PercentFlatVo;
         const orgId = this.keyValueStorageService.getOrgId();
         if (orgId) {
             newServiceItem.orgId = orgId;
@@ -114,12 +114,10 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     public editService(serviceItem: ItemVo): void {
         this.serviceItem = { ...serviceItem };
-        // this._addEditService(this.serviceItem);
+        this._addEditService(this.serviceItem);
         this._getDepartmentList();
         this._getDoctorList();
         this._getServiceTypeList();
-        this._addEditService(this.serviceItem);
-
     }
     /* ************************************* Private Methods ******************************************** */
     private _getDoctorList(): void {
@@ -187,6 +185,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
                 associatedDoctorName: addingAssociatedDoctorName[serviceItem.item.associatedDoctorId],
             };
         });
-    }
+    }   
 
 }

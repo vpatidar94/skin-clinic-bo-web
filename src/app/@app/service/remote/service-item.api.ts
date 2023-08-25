@@ -22,11 +22,11 @@ export class ServiceItemApi {
     }
 
     public addUpdateServiceType(service: ServiceTypeVo): Observable<ApiResponse<ServiceTypeVo>> {
-        return this.http.post<ApiResponse<ServiceTypeVo>>(environment.apiUrl + '/api/core/v1/service-item/service-type-add-update', service);
+        return this.http.post<ApiResponse<ServiceTypeVo>>(environment.apiUrl + URL.ADD_UPDATE_SERVICE_TYPE, service);
     }
 
     public getServiceTypeList(orgId: string): Observable<ApiResponse<ServiceTypeVo[]>> {
-        return this.http.get<ApiResponse<ServiceTypeVo[]>>(environment.apiUrl + '/api/core/v1/service-item/service-type-list?orgId=64d1eb29e42c4aa42aadb542', { params: { orgId } });
+        return this.http.get<ApiResponse<ServiceTypeVo[]>>(environment.apiUrl + URL.SERVICE_TYPE_LIST, { params: { orgId } });
     }
 
 }
