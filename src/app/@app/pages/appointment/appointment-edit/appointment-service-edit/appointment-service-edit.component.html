@@ -80,9 +80,9 @@
                             </div>
                             <!-- Service -->
                             <div class="form-group col-md-4">
-                                <select (change)="addItem($event, i)" name="service-item"
+                                <select (change)="addItem($event, i)" name="service-item-{{i}}"
+                                    [ngModel]="userBooking.booking.items[i].item?._id" 
                                     class="app-single-select-dropdown w-100" required>
-                                    <option disabled selected>Add Service Item</option>
                                     <option [disabled]="isOptionDisabled(item.item._id)"
                                         *ngFor="let item of serviceItemList;" [value]="item.item._id">
                                         {{item?.item?.name}} <span *ngIf="item?.user?._id"> - {{item.user.nameF}}
