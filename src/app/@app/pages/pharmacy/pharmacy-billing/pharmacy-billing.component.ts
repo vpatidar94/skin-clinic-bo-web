@@ -7,9 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 
 // newly added to show table
 export interface PeriodicElement {
-    patientId: number;
+    billNo: number;
     patientName: string;
-    billNo: string;
+    contactNo: string;
     date: string;
     doctorsName: string;
     action: string;
@@ -17,11 +17,11 @@ export interface PeriodicElement {
 
 // newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
-    { patientId: 1101, patientName: 'Chhitu Yadav', billNo: '4503', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 1202, patientName: 'Virat kohli', billNo: '6544', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 3625, patientName: 'Rohit Sharma', billNo: '8554', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 1464, patientName: 'Hardik Pandya', billNo: '4555', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 8555, patientName: 'AB de Villiers', billNo: '3788', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { billNo: 1101, patientName: 'Chhitu Yadav', contactNo: '7894561230', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { billNo: 1202, patientName: 'Virat kohli', contactNo: '6544000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { billNo: 3625, patientName: 'Rohit Sharma', contactNo: '8554000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { billNo: 1464, patientName: 'Hardik Pandya', contactNo: '4555000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { billNo: 8555, patientName: 'AB de Villiers', contactNo: '3788000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
 ]
 
 @Component({
@@ -32,8 +32,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class PharmacyBillingComponent {
     // newly added to show table
     showPharmacyEditForm: boolean = false;
+    // displayedColumns: string[] = ['patientId', 'patientName', 'billNo', "date", 'doctorsName', "action"];
     
-    displayedColumns: string[] = ['patientId', 'patientName', 'billNo', "date", 'doctorsName', "action"];
+    // newly added
+    displayedColumns: string[] = ['billNo', 'patientName', 'contactNo', "date", 'doctorsName', "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

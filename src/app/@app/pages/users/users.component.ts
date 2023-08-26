@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   user!: UserVo;
   staff!: UserEmpDto;
   staffList!: Array<UserVo> | null;
-
+  empOrgId!: string;
   department!: DepartmentVo;
   departmentList!: DepartmentVo[];
 
@@ -101,13 +101,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const user = {} as UserVo;
     user.created = new Date();
     user.address = ({} as AddressVo);
-    user.serviceTiming = (this.serviceTimingData as Array<UserServiceTimingVo>)
+    user.serviceTiming = (this.serviceTimingData as Array<UserServiceTimingVo>);
     const acl = {} as AclVo;
     acl.active = true;
     acl.brId = orgId;
     acl.orgId = orgId;
     const staff = new UserEmpDto(user, acl);
     this._addEditStaff(staff);
+    
   }
 
   public getSubRole(emp: { [key: string]: AclVo }): string {
@@ -163,6 +164,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this._getDepartmentList();
     this._getUserTypeList();
     this._getStaffList();
+
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+      this.empOrgId = orgId;
   }
 
   private _resetSection(): void {

@@ -34,7 +34,8 @@
                                     {{ row.medicine }}
                                 </ng-container>
                                 <ng-template #inputMedicine>
-                                    <input matInput [(ngModel)]="row.medicine" placeholder="Medicine" class="w-100">
+                                    <input matInput [(ngModel)]="row.medicine" placeholder="Medicine" class="w-100"
+                                        name="medicine">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -47,7 +48,8 @@
                                     {{ row.dosage }}
                                 </ng-container>
                                 <ng-template #inputDosage>
-                                    <input matInput [(ngModel)]="row.dosage" placeholder="Dosage" class="w-100">
+                                    <input matInput [(ngModel)]="row.dosage" placeholder="Dosage" name="dosage"
+                                        class="w-100">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -60,8 +62,8 @@
                                     {{row.duration}}
                                 </ng-container>
                                 <ng-template #inputDuration>
-                                    <input matInput [(ngModel)]="row.duration" type="number" placeholder="Duration"
-                                        class="w-100">
+                                    <input matInput [(ngModel)]="row.duration" type="number" name="duration"
+                                        placeholder="Duration" class="w-100">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -71,10 +73,12 @@
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty </th>
                             <td mat-cell *matCellDef="let row" class="action-style text-ellipsis col-1">
                                 <ng-container *ngIf="!row.showInputFields; else inputQuantity">
-                                    {{ row.quantity }}
+                                    <!-- {{ row.quantity }} -->
+                                    <!-- newly added (in place of hard coded quantity, now input is there) -->
+                                    <input [defaultValue]="row.quantity" [(ngModel)]="row.quantity" name="quantity">
                                 </ng-container>
                                 <ng-template #inputQuantity>
-                                    <input matInput [(ngModel)]="row.quantity" type="" placeholder="Qty"
+                                    <input matInput [(ngModel)]="row.quantity" type="" name="qty" placeholder="Qty"
                                         (ngModelChange)="updateAmount(row)" class="w-100" appNumberOnly>
                                 </ng-template>
                             </td>
@@ -88,9 +92,18 @@
                                     {{ row.rate }}
                                 </ng-container>
                                 <ng-template #inputRate>
-                                    <input matInput [(ngModel)]="row.rate" type="" placeholder="Rate"
+                                    <input matInput [(ngModel)]="row.rate" type="" name="rate" placeholder="Rate"
                                         (ngModelChange)="updateAmount(row)" class="w-100" appNumberOnly>
                                 </ng-template>
+                            </td>
+                        </ng-container>
+
+                        <!-- newly added -->
+                        <!--discount  -->
+                        <ng-container matColumnDef="discount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+                            <td mat-cell *matCellDef="let row" class="action-style text-ellipsis col-1">
+                                <input [defaultValue]="0" matInput [(ngModel)]="row.discount" name="discount">
                             </td>
                         </ng-container>
 
@@ -98,12 +111,14 @@
                         <ng-container matColumnDef="amount">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
                             <td mat-cell *matCellDef="let row" class="action-style text-ellipsis col-1">
-                                <ng-container *ngIf="!row.showInputFields; else inputAmount">
-                                    {{ row.amount }}
+                                <ng-container *ngIf="!row.showInputFields; else inputAmount" [(ngModel)]="row.amount">
+                                    <!-- {{ row.amount }} -->
+                                    <!-- newly added -->
+                                    {{ (row.quantity*row.rate)-row.discount}}
                                 </ng-container>
                                 <ng-template #inputAmount>
-                                    <input matInput [(ngModel)]="row.amount" type="" placeholder="Amount" class="w-100"
-                                        appNumberOnly disabled>
+                                    <input matInput [(ngModel)]="row.amount" type="" name="amount" placeholder="Amount"
+                                        class="w-100" appNumberOnly disabled>
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -128,6 +143,22 @@
                         <span>Total Amount : </span> <span class="mx-2">{{ getTotalAmount() }}</span>
                     </div>
                 </div>
+
+                <!--newly added-->
+                <div class="d-flex justify-content-end">
+                    <div class="pad-r-1 total-amount d-flex justify-content-between">
+                        <span class="me-0">Discount : </span> <input [(ngModel)]="overallDiscount" type=""
+                            name="overallDiscount" class="w-25 ms-0">
+                    </div>
+                </div>
+
+                <!-- Final Amount -->
+                <div class="d-flex justify-content-end">
+                    <div class="pad-r-1 total-amount d-flex justify-content-between">
+                        <span>Final Amount : </span> <span class="mx-2">{{ getFinalAmount() }}</span>
+                    </div>
+                </div>
+
                 <!----------payment Mode------------>
                 <div class="d-flex align-items-center my-3">
                     <div class="pad-r-1">

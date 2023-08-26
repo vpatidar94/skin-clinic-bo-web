@@ -19,9 +19,15 @@
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
                     <!--patient id -->
-                    <ng-container matColumnDef="patientId">
+                    <!-- <ng-container matColumnDef="patientId">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Id </th>
                         <td mat-cell *matCellDef="let row"> {{row.patientId}} </td>
+                    </ng-container> -->
+
+                    <!-- newly added -->
+                    <ng-container matColumnDef="billNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bill No </th>
+                        <td mat-cell *matCellDef="let row"> {{row.billNo}} </td>
                     </ng-container>
 
                     <!-- patient Name -->
@@ -31,9 +37,15 @@
                     </ng-container>
 
                     <!--Bill No -->
-                    <ng-container matColumnDef="billNo">
+                    <!-- <ng-container matColumnDef="billNo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Bill No </th>
                         <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.billNo}} </td>
+                    </ng-container> -->
+
+                    <!-- newly added -->
+                    <ng-container matColumnDef="contactNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact No </th>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.contactNo}} </td>
                     </ng-container>
                     <!-- Date -->
                     <ng-container matColumnDef="date">
