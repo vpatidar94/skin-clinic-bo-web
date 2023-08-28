@@ -10,15 +10,15 @@ export class ProductEditComponent {
     /* *********************************** Instance Field *********************************** */
     @Input()
     product!: ProductVo;
-    isQtyPerStripActive: boolean = false;
+    // isQtyPerStripActive: boolean = false;
 
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 
     /* ************************************* Public Methods ******************************************** */
-    public onProductTypeChange() {
-        this.isQtyPerStripActive = this.product.productType === 'Tablet' || this.product.productType === 'Capsule';
-    }
+    // public onProductTypeChange() {
+    //     this.isQtyPerStripActive = this.product.productType === 'Tablet' || this.product.productType === 'Capsule';
+    // }
 
     /* ************************************* Private Methods ******************************************** */
 

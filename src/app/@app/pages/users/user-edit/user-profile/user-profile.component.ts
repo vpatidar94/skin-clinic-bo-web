@@ -44,7 +44,7 @@ export class UserProfileComponent implements OnInit {
 
     inValidAddressForm!: boolean;
 
-    // 
+    
 
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
