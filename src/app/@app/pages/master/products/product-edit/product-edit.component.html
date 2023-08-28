@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Purchase Date -->
             <div class="col-md-6">
                 <div class="d-flex align-items-center mb-3">
@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            
+
         </div>
         <div class="row">
             <!-- Drug-->
@@ -117,7 +117,7 @@
                 <div class="d-flex align-items-center mb-3">
                     <div class="col-md-3">
                         <!-- <label class="app-label">Qty/strip</label> -->
-                        <label class="app-label">Packaging</label>
+                        <label class="app-label">Packaging<span class="ms-4">1 x</span></label>
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
@@ -154,7 +154,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="" class="form-control app-input" name="Unit Price" required appAmountOnly>
+                            <input type="" class="form-control app-input" name="Unit Price" [(ngModel)]="product.price"
+                                required appAmountOnly>
                         </div>
                     </div>
                 </div>
@@ -163,7 +164,7 @@
         </div>
         <div class="row">
             <!-- Price -->
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <div class="d-flex align-items-center mb-3">
                     <div class="col-md-3">
                         <label class="app-label">Price</label>
@@ -175,7 +176,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Expiry Date -->
             <div class="col-md-6">

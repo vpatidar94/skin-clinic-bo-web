@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 //newly added to show table
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { ProductApi } from 'src/app/@app/service/remote/product.api';
 
 // newly added to show table
 export interface PeriodicElement {
@@ -43,9 +45,12 @@ ELEMENT_DATA.forEach(item => {
 })
 
 export class BillingComponent {
+
+    /* ********************************* Static Field *************************************** */
+    
     // newly added
     overallDiscount: number = 0;
-
+    productList!: ProductVo[];
 
     // displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration", "quantity", "rate", "amount", "action"];
     //newly added 
@@ -58,42 +63,52 @@ export class BillingComponent {
     showInputFields: boolean = false;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() {
+    constructor(private keyValueStorageService: KeyValueStorageService,
+        private productApi: ProductApi) {
 
     }
 
     /* ************************************* Public Methods ******************************************** */
-    ngOnInit(): void {
+    public ngOnInit(): void {
         // Set the flag to true for the last row by default
         if (this.dataSource.data.length > 0) {
             this.dataSource.data[this.dataSource.data.length - 1].showInputFields = false;
         }
+        this._init();
+    }
+    public _getProductList(): void {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.productApi.getProductList(orgId).subscribe((res: ApiResponse<ProductVo[]>) => {
+            this.productList = res.body ?? [] as ProductVo[];
+        })
     }
 
-    /* ********************************* Static Field *************************************** */
-    onPaymentModeChange(event: Event) {
+    public onPaymentModeChange(event: Event) {
         const selectElement = event.target as HTMLSelectElement;
         this.showChequeInbox = selectElement.value === 'Cheque';
     }
 
-    updateAmount(row: PeriodicElement): void {
+    public updateAmount(row: PeriodicElement): void {
         row.amount = row.rate * row.quantity;
         this.getTotalAmount();
     }
 
-    getTotalAmount(): number {
+    public getTotalAmount(): number {
         // return this.dataSource.data.reduce((total, row) => total + row.amount, 0);
         // newly added
         return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0);
     }
 
     // newly added
-    getFinalAmount(): number {
+    public getFinalAmount(): number {
         return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0)-this.overallDiscount;
         // console.log('..', this.overallDiscount);
     }
 
-    deleteRow(row: PeriodicElement): void {
+    public deleteRow(row: PeriodicElement): void {
         const index = this.dataSource.data.indexOf(row);
         if (index !== -1) {
             this.dataSource.data.splice(index, 1);
@@ -103,13 +118,13 @@ export class BillingComponent {
         }
     }
 
-    updateSnoValues(): void {
+    public updateSnoValues(): void {
         this.dataSource.data.forEach((row, index) => {
             row.sno = index + 1;
         });
     }
 
-    addNewRow(): void {
+    public addNewRow(): void {
         // Set the flag to false for the previous last row
         if (this.dataSource.data.length > 0) {
             this.dataSource.data[this.dataSource.data.length - 1].showInputFields = false;
@@ -135,12 +150,20 @@ export class BillingComponent {
         this.showInputFields = false;
     }
 
-    isLastRow(row: PeriodicElement): boolean {
+    public isLastRow(row: PeriodicElement): boolean {
         const index = this.dataSource.data.indexOf(row);
         return index === this.dataSource.data.length - 1;
     }
-    printData(): void {
+
+    public printData(): void {
         console.log(this.dataSource.data);
         console.log(this.getTotalAmount())
     }
+
+    /* ************************************* Private Methods ******************************************** */
+
+    private _init(): void {
+        this._getProductList();
+    }
+    
 }

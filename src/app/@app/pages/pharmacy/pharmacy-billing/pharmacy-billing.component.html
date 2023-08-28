@@ -18,13 +18,8 @@
 
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
-                    <!--patient id -->
-                    <!-- <ng-container matColumnDef="patientId">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Id </th>
-                        <td mat-cell *matCellDef="let row"> {{row.patientId}} </td>
-                    </ng-container> -->
 
-                    <!-- newly added -->
+                    <!-- BillNo (newly added) -->
                     <ng-container matColumnDef="billNo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Bill No </th>
                         <td mat-cell *matCellDef="let row"> {{row.billNo}} </td>
@@ -36,27 +31,24 @@
                         <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patientName}} </td>
                     </ng-container>
 
-                    <!--Bill No -->
-                    <!-- <ng-container matColumnDef="billNo">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bill No </th>
-                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.billNo}} </td>
-                    </ng-container> -->
-
-                    <!-- newly added -->
+                    <!--Contact No. (newly added) -->
                     <ng-container matColumnDef="contactNo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact No </th>
                         <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.contactNo}} </td>
                     </ng-container>
+
                     <!-- Date -->
                     <ng-container matColumnDef="date">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date </th>
                         <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.date}} </td>
                     </ng-container>
+
                     <!-- Doctor Name -->
                     <ng-container matColumnDef="doctorsName">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Dr. Name </th>
                         <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.doctorsName}}</td>
                     </ng-container>
+
                     <!-- Action -->
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>

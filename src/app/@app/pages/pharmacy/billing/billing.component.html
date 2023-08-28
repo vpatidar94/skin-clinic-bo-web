@@ -34,8 +34,11 @@
                                     {{ row.medicine }}
                                 </ng-container>
                                 <ng-template #inputMedicine>
-                                    <input matInput [(ngModel)]="row.medicine" placeholder="Medicine" class="w-100"
-                                        name="medicine">
+                                    <select name="serviceType" [(ngModel)]="row.medicine"
+                                        class="app-single-select-dropdown w-100" required>
+                                        <option *ngFor="let type of productList" [value]="type._id">{{type.name}}
+                                        </option>
+                                    </select>
                                 </ng-template>
                             </td>
                         </ng-container>
