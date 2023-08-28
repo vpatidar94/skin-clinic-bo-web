@@ -17,34 +17,15 @@
 
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
-                    <!-- <ng-container matColumnDef="image">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-                        <td mat-cell *matCellDef="let row"> {{row.created | date}} </td>
-                    </ng-container> -->
-
                     <ng-container matColumnDef="userCode">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>User Code</th>
                         <td mat-cell *matCellDef="let row">{{row.code}}</td>
                     </ng-container>
 
-                    <!-- <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Name
-                        </th>
-                        <td mat-cell *matCellDef="let row"> <span class="text-ellipsis">{{row?.nameF}}
-                                {{row?.nameL}}</span></td>
-                    </ng-container> -->
-
                     <ng-container matColumnDef="date">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
                         <td mat-cell *matCellDef="let row"> {{row.created | date}} </td>
                     </ng-container>
-
-                    <!-- <ng-container matColumnDef="gender">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
-                        <td mat-cell *matCellDef="let row"><span class="text-ellipsis">{{genderName[row.gender]}}</span>
-                        </td>
-                    </ng-container> -->
 
                     <ng-container matColumnDef="userName">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
@@ -52,37 +33,16 @@
                             {{row?.nameL}} </td>
                     </ng-container>
 
-                    <!-- <ng-container matColumnDef="email">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-                        <td mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.email}}</span></td>
-                    </ng-container> -->
-                    
                     <ng-container matColumnDef="type">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
                         <td mat-cell *matCellDef="let row">{{row.emp[empOrgId].userTypeId}}</td>
                     </ng-container>
-
-
-                    <!-- <ng-container matColumnDef="cell">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cell</th>
-                        <td mat-cell *matCellDef="let row"><span class="text-ellipsis">{{row.cell}}</span></td>
-                    </ng-container> -->
 
                     <ng-container matColumnDef="department">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
                         <td mat-cell *matCellDef="let row">{{row.emp["64afa28e667796a7a7bd5292"].departmentId}}</td>
                     </ng-container>
 
-                    <!-- <ng-container matColumnDef="role">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
-                        <td mat-cell *matCellDef="let row"><span class="text-ellipsis">{{getRole(row.emp)}}</span></td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="subRole">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
-                        <td mat-cell *matCellDef="let row"><span class="text-ellipsis">{{getSubRole(row.emp)}}</span>
-                        </td>
-                    </ng-container> -->
 
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef>Action</th>

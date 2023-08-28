@@ -25,16 +25,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
   showSectionUserList!: boolean;
   showSectionUserEdit!: boolean;
 
-  // showSectionStaffEdit!: boolean;
-
-
   invalidFormStaff!: boolean;
   genderName = GENDER_NAME as any;
   subRoleName = SUB_ROLE_NAME as any;
   roleName = ROLE_NAME as any
 
-  // displayedColumns: string[] = ['image', 'name', 'gender', 'email', 'cell', 'role', 'subRole', 'action'];
-   displayedColumns: string[] = ['userCode', 'date', 'userName', 'type', 'department','action'];
+  displayedColumns: string[] = ['userCode', 'date', 'userName', 'type', 'department', 'action'];
 
   dataSource!: MatTableDataSource<UserVo>;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
@@ -100,7 +96,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const orgId = this.keyValueStorageService.getOrgId();
     const user = {} as UserVo;
     user.created = new Date();
-    user.address = ({} as AddressVo);
+    user.address = {} as AddressVo;
     user.serviceTiming = (this.serviceTimingData as Array<UserServiceTimingVo>);
     const acl = {} as AclVo;
     acl.active = true;
@@ -108,7 +104,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     acl.orgId = orgId;
     const staff = new UserEmpDto(user, acl);
     this._addEditStaff(staff);
-    
   }
 
   public getSubRole(emp: { [key: string]: AclVo }): string {
@@ -153,9 +148,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   public editUsers(staff: UserEmpDto): void {
     this.staff = { ...staff };
+    this.addUser();
     this._addEditStaff(this.staff);
-    this._getDepartmentList();
-}
+  }
   /* ************************************* Private Methods ******************************************** */
 
   private _init(): void {
@@ -169,7 +164,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     if (!orgId) {
       return;
     }
-      this.empOrgId = orgId;
+    this.empOrgId = orgId;
   }
 
   private _resetSection(): void {

@@ -147,11 +147,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   }
 
   public getUserBooking(orgBooking: OrgBookingDto): void {
-    console.log(orgBooking.booking.user);
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
       if (res.body) {
         this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
-        console.log("nmnmnm",this.userBookingInvestigationList);
         this.addAppointment();
       }
     });
@@ -189,11 +187,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.userBooking = userBooking;
     this._resetSection();
     this.showSectionAppointmentEdit = true;
-
-    // if (this.bookingList && this.bookingList.length > 0) {
-    //   const orgBookingToGetUserBooking = this.bookingList[1];
-    //   this.getUserBooking(orgBookingToGetUserBooking);
-    // }
   }
 
   private _getServiceList(): void {

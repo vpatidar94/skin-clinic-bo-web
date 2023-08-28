@@ -68,6 +68,20 @@
                             </td>
                         </ng-container>
 
+                        <!-- Packing (newly added) -->
+                        <ng-container matColumnDef="packing">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Packing </th>
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis col-1">
+                                <ng-container *ngIf="!row.showInputFields; else inputPacking">
+                                    {{row.packing}}
+                                </ng-container>
+                                <ng-template #inputPacking>
+                                    <input matInput [(ngModel)]="row.packing" type="" name="packing"
+                                        placeholder="Packing" class="w-100">
+                                </ng-template>
+                            </td>
+                        </ng-container>
+
                         <!-- quantity -->
                         <ng-container matColumnDef="quantity">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty </th>
