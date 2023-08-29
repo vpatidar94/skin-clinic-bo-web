@@ -151,6 +151,18 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.addUser();
     this._addEditStaff(this.staff);
   }
+
+  public getUserTypeName(row: UserVo): string {
+    const userTypeId = row.emp[this.empOrgId].userTypeId;
+    const userType = this.userTypeList.find(type => type.userType._id === userTypeId);
+    return userType ? userType.userType.name : '';
+  }
+  
+  public getDepartmentName(row: UserVo): string {
+    const departmentId = row.emp[this.empOrgId].departmentId;
+    const department = this.departmentList.find(dep => dep._id === departmentId);
+    return department ? department.name : '';
+  }
   /* ************************************* Private Methods ******************************************** */
 
   private _init(): void {
@@ -197,5 +209,9 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+
+  
+  
 
 }
