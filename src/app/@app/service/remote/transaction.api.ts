@@ -14,8 +14,8 @@ export class TransactionApi {
 
     /* ************************************ Public Methods ************************************ */
 
-    public addUpdateTransaction(bookingTransaction: BookingAddTransactionDto): Observable<ApiResponse<UserBookingDto>> {
-        return this.http.post<ApiResponse<UserBookingDto>>(environment.apiUrl + '/api/core/v1/booking/transaction-add-update' , bookingTransaction);
+    public addUpdateTransaction(bookingTransaction: BookingAddTransactionDto): Observable<ApiResponse<BookingVo>> {
+        return this.http.post<ApiResponse<BookingVo>>(environment.apiUrl + '/api/core/v1/booking/transaction-add-update' , bookingTransaction);
     }
 
 }
