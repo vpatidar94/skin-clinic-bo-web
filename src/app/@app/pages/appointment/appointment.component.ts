@@ -174,8 +174,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this._getServiceList();
     this._getDoctorList();
     this._getProductList();
-
-    
   }
 
   private _resetSection(): void {

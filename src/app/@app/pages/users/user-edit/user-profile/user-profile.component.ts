@@ -55,9 +55,9 @@ export class UserProfileComponent implements OnInit {
 
     public ngOnInit(): void {
         this._init();
-        // this.staffForm.valueChanges.subscribe(() => {
-        //     this._formChanged();
-        // });
+        this.staffForm?.valueChanges?.subscribe(() => {
+            this._formChanged();
+        });
     }
 
     public addServiceTiming() {

@@ -1,4 +1,4 @@
-<section class="section-org-edit">
+    <section class="section-org-edit">
     <mat-list class="row">
         <app-label>Billing</app-label>
         <mat-accordion>
@@ -57,7 +57,7 @@
 
                         <div class="form-group col-md-2">
                             <input type="" class="form-control pres-input w-100" name="totaldue"
-                                [(ngModel)]="userBooking.booking.totalDue" readonly>
+                                [(ngModel)]="userBooking.booking.totalDue" [(ngModel)]="bookingTransaction.amount" readonly>
                         </div>
 
                         <div class="row d-flex justify-content-center mt-4">
@@ -69,7 +69,7 @@
                             <div class="form-group col-md-2">
                                 <!-- <input type="paymentMode" class="form-control pres-input w-100"> -->
                                 <select name="paymentMode" class="app-single-select-dropdown w-100"
-                                    (change)="onPaymentModeChange($event)" required>
+                                    (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode" required>
                                     <option>cash</option>
                                     <option>Online</option>
                                     <option>UPI</option>
@@ -83,7 +83,7 @@
                             </div>
 
                             <!-- pay btn -->
-                            <span class=" col-md-1 download-button btn btn-info h-25 ms-2">Pay</span>
+                            <span class=" col-md-1 download-button btn btn-info h-25 ms-2" (click)="payMethod()">Pay</span>
                         </div>
                     </div>
                 </div>

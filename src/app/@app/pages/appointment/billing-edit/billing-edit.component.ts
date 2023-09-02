@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { NgForm } from '@angular/forms';
 // import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ObservationVo, UserBookingDto, BookingUtility } from 'aayam-clinic-core';
+import { ObservationVo, UserBookingDto, BookingUtility, BookingAddTransactionDto, ApiResponse, ResponseStatus, BookingVo } from 'aayam-clinic-core';
+import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -23,6 +24,8 @@ export class BillingEditComponent implements OnInit {
   @Input()
   userBooking!: UserBookingDto;
 
+  bookingTransaction!: BookingAddTransactionDto;
+
   @Output()
   userBookingChange = new EventEmitter<UserBookingDto>();
 
@@ -39,7 +42,7 @@ export class BillingEditComponent implements OnInit {
 
 
   /* ************************************ Constructors ************************************ */
-  constructor() {
+  constructor(private transactionApi: TransactionApi) {
 
   }
 
@@ -92,7 +95,14 @@ export class BillingEditComponent implements OnInit {
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
-
+    const transactionItem = {} as BookingAddTransactionDto;
+    // prescriptionItem.dosage = "";
+    // prescriptionItem.duration = 1;
+    // prescriptionItem.instruction = "";
+    // prescriptionItem.name = "";
+    // this.userBooking.booking.prescription.push(prescriptionItem);
+    // this.userBookingChange.emit(this.userBooking);
+    this.bookingTransaction=transactionItem;
   }
 
   public onPaymentModeChange(event: Event) {
@@ -109,6 +119,18 @@ export class BillingEditComponent implements OnInit {
     BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
     this.userBookingChange.emit(this.userBooking);
     console.log("llll", this.userBooking);
+  }
+
+  public payMethod(): void {
+    this.transactionApi.addUpdateTransaction(this.bookingTransaction).subscribe((res: ApiResponse<UserBookingDto>) => {
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+        // this.booking = res.body
+        console.log('ll',res.body);
+      }
+      console.log("hhhh",res.body);
+
+    });
+
   }
 
   /* ************************************ Private Methods ************************************ */
