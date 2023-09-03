@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && mv dist/skin-clinic-bo-web _static",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "add-core": "npm uninstall aayam-clinic-core && npm install aayam-clinic-core"
