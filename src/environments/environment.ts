@@ -8,5 +8,5 @@ export const environment = {
         appId: "1:255880178597:web:e1c344580f82a9d3e1164c",
         measurementId: "G-2FQ6NRHEYC"
     },
-    apiUrl: 'api.aayamskinclinic.com'
+    apiUrl: 'https://aayam-clicnic-api-dev-wpqbr.ondigitalocean.app'
 };
