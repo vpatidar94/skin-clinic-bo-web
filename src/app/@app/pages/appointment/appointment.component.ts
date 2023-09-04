@@ -163,7 +163,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.productApi.getProductList(orgId).subscribe((res: ApiResponse<ProductVo[]>) => {
         this.productList = res.body ?? [] as ProductVo[];
         this.resultsLength = this.productList.length;
-        console.log("this",this.productList);
     })
 }
 

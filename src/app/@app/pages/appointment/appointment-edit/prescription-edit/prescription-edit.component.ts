@@ -28,6 +28,11 @@ export class PrescriptionEditComponent implements OnInit {
   showSectionAdd = false;
   isNextVisitChecked: boolean = false;
 
+
+  nextVisitDays: number = 0; // Default value
+  nextVisitDate: string = ''; // Default value
+  minNextVisitDate: string = ''; // Minimum date
+
   @Input()
   userBookingInvestigationList!: UserBookingInvestigationDto;
 
@@ -97,6 +102,23 @@ export class PrescriptionEditComponent implements OnInit {
 
   public removeRxItem(index: number): void {
     this.userBooking.booking.prescription.splice(index, 1)
+  }
+
+  updateMinNextVisitDate() {
+    if (this.nextVisitDays >= 0) {
+      const today = new Date();
+      const nextDate = new Date(today);
+      nextDate.setDate(today.getDate() + this.nextVisitDays);
+      this.minNextVisitDate = nextDate.toISOString().split('T')[0];
+      this.nextVisitDate = this.minNextVisitDate; // Update the date input
+    }
+  }
+
+  // Watch for changes in nextVisitDays
+  onDaysChange() {
+    if (this.nextVisitDays >= 0) {
+      this.updateMinNextVisitDate();
+    }
   }
 
   /* ************************************ Private Methods ************************************ */

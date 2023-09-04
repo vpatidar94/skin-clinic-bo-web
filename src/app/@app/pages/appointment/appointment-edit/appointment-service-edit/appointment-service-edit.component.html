@@ -22,7 +22,9 @@
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
                         <div class="col-md-4"><strong>Service</strong></div>
-                        <div class="col-md-2"><strong>Total Amount</strong></div>
+                        <div class="col-md-2"><strong>Amount</strong></div>
+                        <div class="col-md-2"><strong>Discount</strong></div>
+                        <div class="col-md-2"><strong>Net Amount</strong></div>
                         <div class="col-md"></div>
                     </div>
                     <div class="row align-items-center" *ngFor="let orderItem of booking.items; let i = index;">
@@ -42,10 +44,20 @@
                             </select>
                         </div>
 
-                        <!--Total Amount  -->
+                        <!-- Amount -->
                         <div class="form-group col-md-2">
                             <input [readOnly]="true" type="text" class="form-control pres-input w-100"
                                 [value]="booking.items[i].amount">
+                        </div>
+
+                        <!-- Discount -->
+                        <div class="form-group col-md-2">
+                            <input type="text" class="form-control pres-input w-100">
+                        </div>
+
+                        <!-- Net Amount -->
+                        <div class="form-group col-md-2">
+                            <input [readOnly]="true" type="number" class="form-control pres-input w-100">
                         </div>
                     </div>
                 </div>
@@ -69,8 +81,10 @@
                     <div class="border border-info rounded p-3 mt-4 container-style">
                         <div class="row">
                             <div class="col-md-1"><strong>Sno.</strong></div>
-                            <div class="col-md-4"><strong>Service</strong></div>
-                            <div class="col-md-2"><strong>Total Amount</strong></div>
+                            <div class="col-md-3"><strong>Service</strong></div>
+                            <div class="col-md-2"><strong>Amount</strong></div>
+                            <div class="col-md-2"><strong>Discount</strong></div>
+                            <div class="col-md-2"><strong>Net Amount</strong></div>
                             <div class="col-md"></div>
                         </div>
                         <div class="row align-items-center"
@@ -79,9 +93,9 @@
                                 <p class="border border-info rounded p-1 text-align-center">{{i + 1}}</p>
                             </div>
                             <!-- Service -->
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <select (change)="addItem($event, i)" name="service-item-{{i}}"
-                                    [ngModel]="userBooking.booking.items[i].item?._id" 
+                                    [ngModel]="userBooking.booking.items[i].item?._id"
                                     class="app-single-select-dropdown w-100" required>
                                     <option [disabled]="isOptionDisabled(item.item._id)"
                                         *ngFor="let item of serviceItemList;" [value]="item.item._id">
@@ -96,6 +110,16 @@
                             <div class="form-group col-md-2">
                                 <input type="text" class="form-control pres-input w-100"
                                     [value]="userBooking.booking.items[i].amount">
+                            </div>
+
+                            <!-- Discount -->
+                            <div class="form-group col-md-2">
+                                <input type="text" class="form-control pres-input w-100">
+                            </div>
+
+                            <!-- Net Amount -->
+                            <div class="form-group col-md-2">
+                                <input [readOnly]="true" type="number" class="form-control pres-input w-100">
                             </div>
 
                             <div class="col-md-2">

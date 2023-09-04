@@ -131,23 +131,33 @@
                                             <div class="form-group col-md-2">
                                                 <select name="dosage" class="app-single-select-dropdown w-100"
                                                     [(ngModel)]="userBooking.booking.prescription[i].dosage">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>other</option>
+                                                    <option>RX = Treatment</option>
+                                                    <option>HX = History</option>
+                                                    <option>DX = Diagnosis</option>
+                                                    <option>qd = Every day</option>
+                                                    <option>qod = Every other day</option>
+                                                    <option>qh = Every Hour</option>
+                                                    <option>SOS = If needed</option>
+                                                    <option>AC = Before Meals</option>
+                                                    <option>PC = After Meals</option>
+                                                    <option>BID = Twice a Day</option>
+                                                    <option>TID = Thrice a Day</option>
+                                                    <option>QID = Four times a day</option>
+                                                    <option>OD = Once a Day</option>
+                                                    <option>BT = Bed Time</option>
+                                                    <option>BBF = Before Breakfast</option>
+                                                    <option>BD = Before Dinner</option>
+                                                    <option>Tw = Twoce a week</option>
+                                                    <option>SQ = sub cutaneous</option>
+                                                    <option>IM = IntraMusclular</option>
+                                                    <option>ID = Intradermal</option>
+                                                    <option>IV = Intravenous</option>
                                                 </select>
                                             </div>
                                             <!-- Duration -->
                                             <div class="form-group col-md-2">
-                                                <select name="duration" class="app-single-select-dropdown w-100"
+                                                <input name="duration" type="text" class="form-control pres-input w-100"
                                                     [(ngModel)]="userBooking.booking.prescription[i].duration">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>Emergency</option>
-                                                </select>
                                             </div>
                                             <!-- Remark -->
                                             <div class="form-group col-md-2">
@@ -172,24 +182,23 @@
                     <div class="mt-4 row align-items-center">
                         <div class="col-md-3">
                             <span class="prescription-heading">Investigation</span>
-                            <input type="text" class="form-control pres-input" name="investigation"
-                                [(ngModel)]="userBooking.booking.test">
+                            <textarea class="form-control pres-input" name="investigation"
+                                [(ngModel)]="userBooking.booking.test"></textarea>
                         </div>
                         <div class="col-md-3">
                             <span class="prescription-heading">Remark</span>
-                            <input type="text" class="form-control pres-input" name="remarks"
-                                [(ngModel)]="userBooking.booking.instruction">
+                            <textarea type="text" class="form-control pres-input" name="remarks"
+                                [(ngModel)]="userBooking.booking.instruction"></textarea>
                         </div>
                         <div class="col-md-3">
                             <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
-                            <span class="prescription-heading">Next Visit</span>
+                            <span class="prescription-heading">Next Visit(after days)</span>
                             <input *ngIf="isNextVisitChecked " type="date" class="form-control pres-input"
                                 name="nextvisit" [(ngModel)]="userBooking.booking.nextVisitDate">
                         </div>
                     </div>
                     <div class="mt-2 d-flex justify-content-end">
-                        <button class="common-button">Save</button>
-                        <button class="common-button ms-2">Add New</button>
+                        <button class="common-button">Print</button>
                     </div>
                 </div>
             </mat-expansion-panel>
@@ -293,7 +302,7 @@
                                         <div class="col-md-1"><strong>Sno.</strong></div>
                                         <div class="col-md-3"><strong>Medicine</strong></div>
                                         <div class="col-md-2"><strong>Dosage</strong></div>
-                                        <div class="col-md-2"><strong>Duration</strong></div>
+                                        <div class="col-md-2"><strong>Duration(in days)</strong></div>
                                         <div class="col-md-2"><strong>Remark</strong></div>
                                         <div class="col-md-2"></div>
                                     </div>
@@ -319,23 +328,33 @@
                                             <div class="form-group col-md-2">
                                                 <select name="dosage" class="app-single-select-dropdown w-100"
                                                     [(ngModel)]="userBooking.booking.prescription[i].dosage">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>other</option>
+                                                    <option>RX = Treatment</option>
+                                                    <option>HX = History</option>
+                                                    <option>DX = Diagnosis</option>
+                                                    <option>qd = Every day</option>
+                                                    <option>qod = Every other day</option>
+                                                    <option>qh = Every Hour</option>
+                                                    <option>SOS = If needed</option>
+                                                    <option>AC = Before Meals</option>
+                                                    <option>PC = After Meals</option>
+                                                    <option>BID = Twice a Day</option>
+                                                    <option>TID = Thrice a Day</option>
+                                                    <option>QID = Four times a day</option>
+                                                    <option>OD = Once a Day</option>
+                                                    <option>BT = Bed Time</option>
+                                                    <option>BBF = Before Breakfast</option>
+                                                    <option>BD = Before Dinner</option>
+                                                    <option>Tw = Twoce a week</option>
+                                                    <option>SQ = sub cutaneous</option>
+                                                    <option>IM = IntraMusclular</option>
+                                                    <option>ID = Intradermal</option>
+                                                    <option>IV = Intravenous</option>
                                                 </select>
                                             </div>
                                             <!-- Duration -->
-                                            <div class="form-group col-md-2">
-                                                <select name="duration" class="app-single-select-dropdown w-100"
+                                            <div class="form-group col-md-2 d-flex justify-content-between">
+                                                <input type="text" class="form-control pres-input w-100" name="duration"
                                                     [(ngModel)]="userBooking.booking.prescription[i].duration">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>Emergency</option>
-                                                </select>
                                             </div>
                                             <!-- Remark -->
                                             <div class="form-group col-md-2">
@@ -359,24 +378,36 @@
                     <div class="mt-4 row align-items-center">
                         <div class="col-md-3">
                             <span class="prescription-heading">Investigation</span>
-                            <input type="text" class="form-control pres-input" name="investigation"
-                                [(ngModel)]="userBooking.booking.test">
+                            <textarea type="text" class="form-control pres-input" name="investigation"
+                                [(ngModel)]="userBooking.booking.test"></textarea>
                         </div>
                         <div class="col-md-3">
                             <span class="prescription-heading">Remark</span>
-                            <input type="text" class="form-control pres-input" name="remarks"
-                                [(ngModel)]="userBooking.booking.instruction">
+                            <!-- <input type="text" class="form-control pres-input" name="remarks"
+                                [(ngModel)]="userBooking.booking.instruction"> -->
+                            <textarea type="text" class="form-control pres-input" name="remarks"
+                                [(ngModel)]="userBooking.booking.instruction"></textarea>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
                             <span class="prescription-heading">Next Visit</span>
                             <input *ngIf="isNextVisitChecked " type="date" class="form-control pres-input"
                                 name="nextvisit" [(ngModel)]="userBooking.booking.nextVisitDate">
+                        </div> -->
+
+                        <div class="col-md-3">
+                            <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
+                            <span class="prescription-heading">Next Visit(after days)</span>
+                            <input *ngIf="isNextVisitChecked" type="number" class="form-control pres-input"
+                                name="nextVisitDays" [(ngModel)]="nextVisitDays" (input)="updateMinNextVisitDate()">
+                            <input *ngIf="isNextVisitChecked" type="date" readonly class="form-control pres-input"
+                                name="nextvisit" [(ngModel)]="nextVisitDate" [min]="minNextVisitDate">
                         </div>
+
+
                     </div>
                     <div class="mt-2 d-flex justify-content-end">
-                        <button class="common-button">Save</button>
-                        <button class="common-button ms-2">Add New</button>
+                        <button class="common-button">Print</button>
                     </div>
                 </div>
             </mat-expansion-panel>

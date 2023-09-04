@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="date" class="form-control app-input" name="date"
+                                <input type="date" readonly class="form-control app-input" name="date"
                                     [ngModel]="userBooking.booking.bookingDate | date:'yyyy-MM-dd'" required
                                     (ngModelChange)="userBooking.booking.bookingDate = $event">
                             </div>
@@ -109,8 +109,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input" name="email"
-                                    [(ngModel)]="userBooking.user.email" required>
+                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input"
+                                    name="email" [(ngModel)]="userBooking.user.email" required>
                             </div>
                         </div>
                     </div>
@@ -124,9 +124,9 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input" name="cell1"
-                                    [(ngModel)]="userBooking.user.cell" required maxlength="10" minlength="10"
-                                    appNumberOnly>
+                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input"
+                                    name="cell1" [(ngModel)]="userBooking.user.cell" required maxlength="10"
+                                    minlength="10" appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -260,7 +260,8 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline" *ngFor="let shift of shiftList">
-                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id" [(ngModel)]="userBooking.booking.shift">
+                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id"
+                                    [(ngModel)]="userBooking.booking.shift">
                                 <label class="form-check-label">{{ shift.name }}</label>
                             </div>
                         </div>
@@ -289,13 +290,13 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="timeSlot" [(ngModel)]="userBooking.booking.timeSlot"
-                                    required>
+                                <input type="text" class="form-control app-input" name="timeSlot"
+                                    [(ngModel)]="userBooking.booking.timeSlot" required>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <app-label>Adress Details</app-label>
             <div class="row">
