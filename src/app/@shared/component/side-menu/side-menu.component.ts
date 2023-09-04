@@ -20,6 +20,8 @@ export class SideMenuComponent {
     private orgId?: string | null;
     private brId?: string | null;
     private subRole?: string | null;
+    public isMasterTabOpen = false; // Initialize to false
+    public isPharmacyTabOpen = false; // Initialize to false
 
     /* ************************************ Constructors ************************************ */
     constructor(private router: Router,
@@ -68,6 +70,7 @@ export class SideMenuComponent {
         this.brId = this.keyValueStorageService.getOrgId();
         this.subRole = this.keyValueStorageService.getSubRole();
         this.menus = this._getNavigation();
+
     }
 
     private _menuChange(url: string): void {
@@ -102,7 +105,7 @@ export class SideMenuComponent {
         // const noOrgAssociated = FnUtility.isEmpty(this.valueService.acl?.org);
         // const activeOrgSetupNotDone = this.valueService.acl?.org?.status === ORG_STATUS.IN_PROGRESS;
         // const showSetupOnly = (!superAdminAny && environment.region === 'US' && (noOrgAssociated || activeOrgSetupNotDone));
-
+        const navPharmacyList = [] as NavigationDto[];
         const navList = [] as NavigationDto[];
         navList.push(new NavigationDto('Dashboard', '/dashboard', 'ic_graph1', []));
         this._getNavigationSuperAdmin(navList);
@@ -179,17 +182,39 @@ export class SideMenuComponent {
     }
 
     private _getNavigationCommon(navList: Array<NavigationDto>): Array<NavigationDto> {
-        navList.push(new NavigationDto('Pharmacy', '/pharmacy', 'ic_user', []));
-        navList.push(new NavigationDto('Patient List', '/pharmacy/patient-list', '', []));
-        navList.push(new NavigationDto('Pharmacy Billing', '/pharmacy/pharmacy-billing', '', []));
+        // navList.push(new NavigationDto('Pharmacy', '/pharmacy', 'ic_user', []));
+        // navList.push(new NavigationDto('Patient List', '/pharmacy/patient-list', '', []));
+        // navList.push(new NavigationDto('Pharmacy Billing', '/pharmacy/pharmacy-billing', '', []));
         // navList.push(new NavigationDto('Profile', '/profile', 'ic_user', []));
-        navList.push(new NavigationDto('Master', '/master', 'ic_user', []));
-        navList.push(new NavigationDto('Services', '/master/services', '', []));
-        navList.push(new NavigationDto('Service Type', '/master/service-type', '', []));
-        navList.push(new NavigationDto('Products', '/master/products', '', []));
-        navList.push(new NavigationDto('Department', '/master/department', '', []));
-        navList.push(new NavigationDto('User Type', '/master/user-type', '', []));
+        // navList.push(new NavigationDto('Master', '/master', 'ic_user', []));
+        // navList.push(new NavigationDto('Services', '/master/services', '', []));
+        // navList.push(new NavigationDto('Service Type', '/master/service-type', '', []));
+        // navList.push(new NavigationDto('Products', '/master/products', '', []));
+        // navList.push(new NavigationDto('Department', '/master/department', '', []));
+        // navList.push(new NavigationDto('User Type', '/master/user-type', '', []));
         navList.push(new NavigationDto('Users', '/manage-user', 'ic_user', []));
         return navList;
+    }
+
+    // array of sub-options for the "Master" tab
+    public masterSubOptions = [
+        { label: 'Services', link: '/master/services' },
+        { label: 'Service Type', link: '/master/service-type' },
+        { label: 'Products', link: '/master/products' },
+        { label: 'Department', link: '/master/department' },
+        { label: 'User Type', link: '/master/user-type' }
+    ];
+
+    public pharmacySubOptions = [
+        { label: 'Patient List', link: '/pharmacy/patient-list' },
+        { label: 'Pharmacy Billing', link: '/pharmacy/pharmacy-billing' },
+    ];
+
+    toggleMasterTab() {
+        this.isMasterTabOpen = !this.isMasterTabOpen;
+    }
+
+    togglePharmacyTab() {
+        this.isPharmacyTabOpen = !this.isPharmacyTabOpen;
     }
 }
