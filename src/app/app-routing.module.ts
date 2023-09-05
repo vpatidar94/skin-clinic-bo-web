@@ -6,6 +6,7 @@ import { AuthGuard } from './@shared/security/auth.guard';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { PharmacyReceiptComponent } from './pharmacy-receipt/pharmacy-receipt.component';
 
+
 const routes: Routes = [
   {
     path: 'signin',
@@ -63,7 +64,11 @@ const routes: Routes = [
         path: 'pharmacy',
         loadChildren: () => import('./@app/pages/pharmacy/pharmacy.module').then(m => m.PharmacyModule)
       },
-      
+      {
+        path: 'new-appointment',
+        loadChildren: () => import('./@app/pages/new-appointment/new-appointment.module').then(m => m.NewAppointmentModule)
+
+      },
     ]
   }
 ];

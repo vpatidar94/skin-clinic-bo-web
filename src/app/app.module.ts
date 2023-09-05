@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReceiptModule } from './receipt/receipt.module';
 import { PharmacyReceiptModule } from './pharmacy-receipt/pharmacy-receipt.module';
+import { NewAppointmentModule } from './@app/pages/new-appointment/new-appointment.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { PharmacyReceiptModule } from './pharmacy-receipt/pharmacy-receipt.modul
     AlertMessageModule,
     NgxWebstorageModule.forRoot(),
     SharedServiceModule,
+    NewAppointmentModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
