@@ -192,7 +192,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       return;
     }
     this.serviceItemApi.getServiceItemList(orgId).subscribe((res: ApiResponse<ItemDetailDto[]>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.serviceItemList = res.body;
         }
@@ -206,7 +206,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       return;
     }
     this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.doctorList = res.body;
         }
