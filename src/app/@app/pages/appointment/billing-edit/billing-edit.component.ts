@@ -31,6 +31,12 @@ export class BillingEditComponent implements OnInit {
 
   showChequeInbox: boolean = false;
 
+  showInstallmentTwo:boolean = false;
+
+  newVar: number = 0;
+  newVar2: number = 0;
+  
+
 
 
   /* ************************************ Constructors ************************************ */
@@ -44,6 +50,8 @@ export class BillingEditComponent implements OnInit {
     const transactionItem = {} as BookingAddTransactionDto;
     // this.userBookingChange.emit(this.userBooking);
     this.bookingTransaction=transactionItem;
+    this.newVar = this.userBooking.booking.totalDue;
+    // this.newVar2 = this.userBooking.booking.totalDue - this.newVar
   }
 
   public onPaymentModeChange(event: Event) {
@@ -73,6 +81,17 @@ export class BillingEditComponent implements OnInit {
     });
 
   }
+
+  public addServiceItem(): void {
+    // const orderItem = {} as OrderItemVo;
+    // orderItem.item = {} as ItemVo;
+    // orderItem.amount = 0;
+    // this.userBooking.booking.items.push(orderItem);
+    // this.userBookingChange.emit(this.userBooking);
+    this.showInstallmentTwo = true;
+    // this.newVar = this.userBooking.booking.totalDue;
+     this.newVar2 = this.userBooking.booking.totalDue - this.newVar
+}
 
   /* ************************************ Private Methods ************************************ */
 

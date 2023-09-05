@@ -38,6 +38,10 @@ export class AppointmentServiceEditComponent implements OnInit, OnChanges {
 
     showSectionAdd = false;
 
+    // newly added to add discount field
+    serviceDiscount: number = 0;
+    serviceNetAmount!: number;
+
     /* ************************************ Constructors ************************************ */
     constructor() {
     }

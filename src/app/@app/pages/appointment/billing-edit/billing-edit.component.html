@@ -1,4 +1,4 @@
-    <section class="section-org-edit">
+<section class="section-org-edit">
     <mat-list class="row">
         <app-label>Billing</app-label>
         <mat-accordion>
@@ -19,9 +19,12 @@
                         <div class="col-md-3"><strong>Service</strong></div>
                         <div class="col-md-2"><strong>Total Amount</strong></div>
                         <!-- <div class="col-md-2"><strong>Payment Mode</strong></div> -->
-                        <div class="col-md-2"><strong>Discount</strong></div>
-                        <div class="col-md-2"><strong>Total Due</strong></div>
+                        <!-- <div class="col-md-2"><strong>Discount</strong></div> -->
+                        <div class="col-md-2"><strong>Payment Type</strong></div>
+
+                        <!-- <div class="col-md-2"><strong>Total Due</strong></div> -->
                         <div class="col-md"></div>
+
                     </div>
                     <div class="row align-items-center">
                         <div class="col-md-1 pres-input text-center">
@@ -29,8 +32,8 @@
                         </div>
                         <!-- Date -->
                         <div class="form-group d-flex justify-content-between align-items-center col-md-2">
-                            <input type="date" class="form-control pres-input w-100" name="date"
-                                [ngModel]="userBooking.booking.bookingDate | date:'yyyy-MM-dd'" required
+                            <input type="" class="form-control pres-input w-100" name="date"
+                                [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required [readOnly]="true"
                                 (ngModelChange)="userBooking.booking.bookingDate = $event">
                         </div>
 
@@ -46,22 +49,59 @@
 
                         <!--Total Amount  -->
                         <div class="form-group col-md-2">
-                            <input type="" class="form-control pres-input w-100" name="totalAmount" readonly
+                            <input type="" class="form-control pres-input w-100" name="totalAmount"
                                 [(ngModel)]="userBooking.booking.subTotal" readOnly>
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <input type="" class="form-control pres-input w-100" name="discount"
-                                [(ngModel)]="userBooking.booking.discount" (change)="applyDiscount()">
-                        </div>
+                       
 
                         <div class="form-group col-md-2">
+                            <!-- <input type="" class="form-control pres-input w-100" name="discount"
+                                [(ngModel)]="userBooking.booking.discount" (change)="applyDiscount()"> -->
+                            <select class="app-single-select-dropdown w-100" name="paymentType">
+                                <option value="Installment">Installment</option>
+                                <option value="Lumpsum">Lumpsum</option>
+                            </select>
+                        </div> 
+                        <hr class="mt-4"/>
+
+                        <div class="row form-group">
+                            <label class="col-md-2" for="installmentInput">Installment - 1</label>
+
+                            <div class="col-md-4">
+                                <input type="" id="installmentInput" class="form-control pres-input w-100" [(ngModel)]="newVar"
+                                    name="installmentAmount">
+                            </div>
+                            <div class="col-md-2">
+                                <mat-icon class="add-icon clickable">delete</mat-icon>
+                                &nbsp;&nbsp;
+                                <mat-icon (click)="addServiceItem()"
+                                    class="add-icon clickable">add_circle_outline</mat-icon>
+                            </div>
+                        </div>
+
+                        <div *ngIf="showInstallmentTwo" class="row form-group">
+                            <label class="col-md-2" for="installmentInput">Installment - 2</label>
+
+                            <div class="col-md-4">
+                                <input type="" id="installmentInput" class="form-control pres-input w-100" [(ngModel)]="newVar2"
+                                    name="installmentAmount">
+                            </div>
+                            <div class="col-md-2">
+                                <mat-icon class="add-icon clickable">delete</mat-icon>
+                                &nbsp;&nbsp;
+                                <mat-icon (click)="addServiceItem()"
+                                    class="add-icon clickable">add_circle_outline</mat-icon>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group col-md-2">
                             <input type="" class="form-control pres-input w-100" name="totaldue"
                                 [(ngModel)]="userBooking.booking.totalDue" [(ngModel)]="bookingTransaction.amount" readonly>
-                        </div>
+                        </div> -->
 
                         <div class="row d-flex justify-content-center mt-4">
-                            <div class="col-md-2"><strong>Payment Mode</strong></div>
+                            <div class="col-md-4"><strong>Payment Mode</strong></div>
                             <div class="col-md-1"></div>
                         </div>
                         <!-- payment mode -->
@@ -69,7 +109,8 @@
                             <div class="form-group col-md-2">
                                 <!-- <input type="paymentMode" class="form-control pres-input w-100"> -->
                                 <select name="paymentMode" class="app-single-select-dropdown w-100"
-                                    (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode" required>
+                                    (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode"
+                                    required>
                                     <option>cash</option>
                                     <option>Online</option>
                                     <option>UPI</option>
@@ -83,7 +124,11 @@
                             </div>
 
                             <!-- pay btn -->
-                            <span class=" col-md-1 download-button btn btn-info h-25 ms-2" (click)="payMethod()">Pay</span>
+                            <span class=" col-md-1 download-button btn btn-info h-25 ms-2"
+                                (click)="payMethod()">Pay</span>
+
+                            <span class=" col-md-2 download-button btn btn-info h-25 ms-2">Generate receipt</span>
+
                         </div>
                     </div>
                 </div>

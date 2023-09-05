@@ -114,12 +114,13 @@
 
                             <!-- Discount -->
                             <div class="form-group col-md-2">
-                                <input type="text" class="form-control pres-input w-100">
+                                <input type="text" class="form-control pres-input w-100" [(ngModel)]="serviceDiscount">
                             </div>
 
                             <!-- Net Amount -->
                             <div class="form-group col-md-2">
-                                <input [readOnly]="true" type="number" class="form-control pres-input w-100">
+                                <input [readOnly]="true" type="number" class="form-control pres-input w-100"
+                                    [value]="userBooking.booking.items[i].amount-serviceDiscount">
                             </div>
 
                             <div class="col-md-2">
