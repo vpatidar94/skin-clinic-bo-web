@@ -67,7 +67,8 @@ export class NewAppointmentComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  public searchPreviousAppointments(): void {
+  public searchPreviousAppointments():void {
+    
 
   }
 

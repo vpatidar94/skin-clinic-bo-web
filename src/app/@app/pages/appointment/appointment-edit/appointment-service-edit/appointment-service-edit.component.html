@@ -8,7 +8,7 @@
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header class="app-expansion ">
                     <div class="app-expansion-title col-md-12">
-                        <span>Patient ID: <span>{{booking.patientNo}}</span></span>
+                        <span>UHID: <span>{{booking.patientNo}}</span></span>
                         <span>Visiting ID: <span>{{booking.no}}</span></span>
                         <span>First Name: <span
                                 *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF ??
@@ -67,14 +67,13 @@
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header class="app-expansion ">
                     <div class="app-expansion-title col-md-12">
-                        <span>Patient ID: <span>{{userBooking.booking.patientNo}}</span></span>
+                        <span>UHID: <span>{{userBooking.booking.patientNo}}</span></span>
                         <span>Visiting ID: <span>{{userBooking.booking.no}}</span></span>
                         <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
                                 ''}}
                                 {{userBooking.user.nameL ?? ''}}</span></span> <span>Doctor's Name:
                             <span>M. Patidar</span></span>
                         <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
-
                     </div>
                 </mat-expansion-panel-header>
                 <form #serviceForm="ngForm">
