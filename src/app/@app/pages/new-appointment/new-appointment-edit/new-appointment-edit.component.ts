@@ -8,6 +8,7 @@ import { ItemDetailDto, SHIFT_LIST } from 'aayam-clinic-core';
 @Component({
     selector: 'app-new-appointment-edit',
     templateUrl: './new-appointment-edit.component.html',
+    styleUrls: ['./new-appointment-edit.component.scss']
 })
 export class NewAppointmentEditComponent {
     /* ********************************* Static Field *************************************** */
