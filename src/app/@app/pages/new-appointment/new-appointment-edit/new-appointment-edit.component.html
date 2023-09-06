@@ -1,0 +1,172 @@
+<section class="section-org-edit">
+    <form>
+        <mat-list class="row">
+            <h1 class='heading-style'>New Appointment</h1>
+            <app-label>Patient Details</app-label>
+            <div class="row">
+                <!-- First Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label ">First Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input class="form-control app-input" name="nameF" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Last Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="nameL" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Gender -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3 mt-3">
+                        <div class="col-md-3">
+                            <label class="label" class="app-label">Gender</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline" *ngFor="let g of genderList">
+                                <input class="form-check-input" type="radio" name="gender" [value]="g.id">
+                                <label class="form-check-label">{{ g.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact No -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Contact No</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="cell1" required maxlength="10"
+                                    minlength="10" appNumberOnly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Date of Birth -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Date of Birth</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="dateOfBirth" 
+                                [(ngModel)]="dob" (ngModelChange)="calculateAge()"required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Age</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="age"
+                                [(ngModel)]="age" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Appointment Date -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Appointment Date</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="appointmentDate" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Slot -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3 mt-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Shift</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline" *ngFor="let shift of shiftList">
+                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id">
+                                <label class="form-check-label">{{ shift.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Appointment For -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Appointment For</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input class="form-control app-input" name="appointmentFor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Doctor Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="doctorName">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-list>
+    </form>
+
+    <!-- <div class="d-flex align-items-center justify-content-center mb-4 mt-3">
+        <div class="col-1">
+            <button class="common-button">{{'save'}}</button>
+        </div>
+        <div class="col-1">
+            <button class="cancel-button">{{'cancel'}}</button>
+        </div>
+    </div> -->
+</section>

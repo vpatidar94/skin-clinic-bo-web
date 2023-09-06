@@ -1,171 +1,88 @@
-<section class="section-org-edit">
-    <form>
-        <mat-list class="row">
-            <app-label>Patient Appointment</app-label>
-            <div class="row">
-                <!-- First Name -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label ">First Name</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input class="form-control app-input" name="nameF" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<section class="section-org-edit" *ngIf="showSectionAppointmentList">
+    <div class="row">
+        <div class="px-5 d-flex justify-content-between">
+            <h2>Appointment List</h2>
+            <button class="common-button" (click)="addAppointment()">Add Appointment</button>
+            <button class="common-button" (click)="searchTodaysAppointments()" >Today's Appointments</button>
+            <button class="common-button" (click)="searchPreviousAppointments()">Previous Appointments</button>
 
-                <!-- Last Name -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Last Name</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="text" class="form-control app-input" name="nameL" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </div>
+
+    <!--  Table Section  -->
+    <mat-card class="table-card-style">
+        <div class="row">
+            <div class="search-input-style">
+                <label class="app-label me-2">{{'Search'}}</label>
+                <input class="input-style" (keyup)="applyFilter($event)" placeholder="" #input>
             </div>
+        </div>
 
-            <div class="row">
-                <!-- Gender -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3 mt-3">
-                        <div class="col-md-3">
-                            <label class="label" class="app-label">Gender</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="form-check form-check-inline" *ngFor="let g of genderList">
-                                <input class="form-check-input" type="radio" name="gender" [value]="g.id">
-                                <label class="form-check-label">{{ g.name }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <!-- appointment No -->
+                <ng-container matColumnDef="appNo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>App.No.</th>
+                    <!-- <td mat-cell *matCellDef="let row"> {{row.created | date}} </td> -->
+                    <td mat-cell *matCellDef="let row"> {{row.appNo}} </td>
 
-                <!-- Contact No -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Contact No</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="text" class="form-control app-input" name="cell1" required maxlength="10"
-                                    minlength="10" appNumberOnly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </ng-container>
 
-            <div class="row">
-                <!-- Date of Birth -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Date of Birth</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="date" class="form-control app-input" name="dateOfBirth" 
-                                [(ngModel)]="dob" (ngModelChange)="calculateAge()"required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Name -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                </ng-container>
 
-                <!-- Age -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Age</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="text" class="form-control app-input" name="age"
-                                [(ngModel)]="age" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <!-- Date -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.date}} </td>
+                </ng-container>
 
-            <div class="row">
-                <!-- Appointment Date -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Appointment Date</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="date" class="form-control app-input" name="appointmentDate" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Time -->
+                <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.time}} </td>
+                </ng-container>
 
-                <!-- Time Slot -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3 mt-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Shift</label>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="form-check form-check-inline" *ngFor="let shift of shiftList">
-                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id">
-                                <label class="form-check-label">{{ shift.name }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <!-- Doctor -->
+                <ng-container matColumnDef="doctor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor</th>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.doctor}} </td>
+                </ng-container>
+                
+                <!-- Action -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><button mat-button
+                            class="action-style">Add as Patient</button> | <button mat-button class="action-style">Delete</button>
+                    </td>
+                </ng-container>
 
-            <div class="row">
-                <!-- Appointment For -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Appointment For</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input class="form-control app-input" name="appointmentFor">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-                <!-- Doctor Name -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Doctor Name</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="text" class="form-control app-input" name="doctorName">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
 
-        </mat-list>
-    </form>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+    </mat-card>
+</section>
 
-    <div class="d-flex align-items-center justify-content-center mb-4">
+<section class="section-org-edit" *ngIf="showSectionAppointmentEdit" >
+    <app-new-appointment-edit></app-new-appointment-edit>
+
+    <div class="d-flex align-items-center justify-content-center mb-4 mt-3">
         <div class="col-1">
             <button class="common-button">{{'save'}}</button>
         </div>
         <div class="col-1">
-            <button class="cancel-button">{{'cancel'}}</button>
+            <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>
         </div>
     </div>
 </section>

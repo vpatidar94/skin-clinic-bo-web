@@ -155,6 +155,16 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // newly added to show details ..right now it is showing the same details as booking
+  public getDetails(orgBooking: OrgBookingDto): void {
+    this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
+      if (res.body) {
+        this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
+        this.addAppointment();
+      }
+    });
+  }
+
   public _getProductList(): void {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {

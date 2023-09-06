@@ -18,6 +18,7 @@ import { MatTableModule } from "@angular/material/table";
 import { NewAppointmentComponent } from './new-appointment.component';
 import { NewAppointmentRoutingModule } from './new-appointment-routing.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
+import { NewAppointmentEditComponent } from './new-appointment-edit/new-appointment-edit.component';
 
 const MATERIAL_MODULE = [
     MatButtonModule,
@@ -41,7 +42,7 @@ const MATERIAL_MODULE = [
     imports: [...COMMON_MODULE, ...MATERIAL_MODULE, NewAppointmentRoutingModule, LabelModule],
     providers: [],
     exports: [],
-    declarations: [NewAppointmentComponent]
+    declarations: [NewAppointmentComponent,NewAppointmentEditComponent]
   })
 
 export class NewAppointmentModule { }
