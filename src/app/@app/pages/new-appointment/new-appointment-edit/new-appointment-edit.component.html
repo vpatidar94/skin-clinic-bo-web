@@ -137,7 +137,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input class="form-control app-input" name="appointmentFor">
+                                <!-- <input class="form-control app-input" name="appointmentFor"> -->
+                                <select class="app-single-select-dropdown w-100">
+                                    <option *ngFor="let item of serviceItemList">{{item.item.name}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>

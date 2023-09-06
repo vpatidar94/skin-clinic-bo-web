@@ -2,7 +2,7 @@ import { Component, Input, } from '@angular/core';
 // import { DepartmentVo} from 'aayam-clinic-core';
 
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
-import { SHIFT_LIST } from 'aayam-clinic-core';
+import { ItemDetailDto, SHIFT_LIST } from 'aayam-clinic-core';
 
 
 @Component({
@@ -16,6 +16,9 @@ export class NewAppointmentEditComponent {
     shiftList = SHIFT_LIST;
     dob!: string;
     age: number | null = null;
+
+    @Input()
+    serviceItemList!: ItemDetailDto[];
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 
