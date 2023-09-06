@@ -106,9 +106,7 @@ export class NewAppointmentComponent implements OnInit {
       return;
     }
     this.serviceItemApi.getServiceItemList(orgId).subscribe((res: ApiResponse<ItemDetailDto[]>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-          this.serviceItemList = res.body;
-      }
-    });
+          this.serviceItemList = res.body?? [] as ItemDetailDto[];
+        });
   }
 }
