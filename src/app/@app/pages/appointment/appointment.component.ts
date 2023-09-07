@@ -5,7 +5,6 @@ import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
 import { UserApi } from '../../service/remote/user.api';
-//newly added to show table
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -34,7 +33,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   productList!: ProductVo[];
 
-  // newly added to show table
   displayedColumns: string[] = ['AppNo', 'Date', 'PatientName', 'Type', 'DoctorsName', "Time", "Action"];
   dataSource = new MatTableDataSource<OrgBookingDto>([] as OrgBookingDto[]);
 
@@ -103,7 +101,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     return this.bookingTypeName[type] as string;
   }
 
-  // newly added to show table
   public ngAfterViewInit() {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
@@ -136,7 +133,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   }
 
-  // newly added to show table
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -202,11 +198,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       return;
     }
     this.serviceItemApi.getServiceItemList(orgId).subscribe((res: ApiResponse<ItemDetailDto[]>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.serviceItemList = res.body;
         }
-      }
     });
   }
 
@@ -216,12 +210,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       return;
     }
     this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
         if (res.body && res.body?.length > 0) {
           this.doctorList = res.body;
         }
       }
-    }
     );
   }
 }
