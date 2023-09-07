@@ -6,7 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { ApiResponse, ItemDetailDto, ResponseStatus } from 'aayam-clinic-core';
+import { ApiResponse, ItemDetailDto, ResponseStatus, UserVo } from 'aayam-clinic-core';
+import { UserApi } from '../../service/remote/user.api';
+import { SUB_ROLE } from '../../const/sub-role.const';
+
 export interface PeriodicElement {
   appNo: number;
   name: string;
@@ -16,6 +19,13 @@ export interface PeriodicElement {
   consultationFor: string;
   action: string;
   showInputFields?: boolean;
+}
+
+export interface fetchBookingCriterionDto {
+  startDate: any;
+  endDate: any;
+  doctorId: any;
+  departmentId: any;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -44,10 +54,12 @@ export class NewAppointmentComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   serviceItemList!: ItemDetailDto[];
+  doctorList!: UserVo[];
 
   /* ************************************ Constructors ************************************ */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
+    private userApi: UserApi,
     ) {
   }
 
@@ -89,6 +101,7 @@ export class NewAppointmentComponent implements OnInit {
     this._resetSection();
     this.showSectionAppointmentList = true;
     this._getServiceList();
+    this._getDoctorList();
 
   }
   private _resetSection(): void {
@@ -110,6 +123,19 @@ export class NewAppointmentComponent implements OnInit {
           this.serviceItemList = res.body;
       }
     });
+  }
+
+  private _getDoctorList(): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
+        if (res.body && res.body?.length > 0) {
+          this.doctorList = res.body;
+        }
+      }
+    );
   }
 
 }

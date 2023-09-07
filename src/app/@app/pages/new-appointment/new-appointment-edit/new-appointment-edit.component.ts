@@ -2,7 +2,7 @@ import { Component, Input, } from '@angular/core';
 // import { DepartmentVo} from 'aayam-clinic-core';
 
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
-import { ItemDetailDto, SHIFT_LIST } from 'aayam-clinic-core';
+import { ItemDetailDto, SHIFT_LIST, UserVo } from 'aayam-clinic-core';
 
 
 @Component({
@@ -18,8 +18,15 @@ export class NewAppointmentEditComponent {
     dob!: string;
     age: number | null = null;
 
+    selectedDoctorId!: any;
+
     @Input()
     serviceItemList!: ItemDetailDto[];
+
+    filteredServiceItemList!: ItemDetailDto[];
+
+    @Input()
+    doctorList!: UserVo[];
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 
@@ -45,4 +52,8 @@ export class NewAppointmentEditComponent {
         }
     }
 
+    public filterServiceItemByDoctor(selectedDoctorId: string | null | undefined) {
+        this.filteredServiceItemList = this.serviceItemList.filter(item => item.item.associatedDoctorId ===selectedDoctorId );
+        console.log('filtered',this.filteredServiceItemList);
+    }
 }

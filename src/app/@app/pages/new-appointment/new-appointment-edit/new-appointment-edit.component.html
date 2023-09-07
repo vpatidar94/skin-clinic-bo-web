@@ -136,7 +136,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="doctorName">
+                                <!-- <input type="text" class="form-control app-input" name="doctorName"> -->
+                                <select class="app-single-select-dropdown w-100" [(ngModel)]="selectedDoctorId" (ngModelChange)="filterServiceItemByDoctor(selectedDoctorId)" name="doctor">
+                                    <option *ngFor="let item of doctorList;" [value]="item._id">{{item.nameF}} {{item.nameL}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -151,8 +154,9 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <!-- <input class="form-control app-input" name="appointmentFor"> -->
-                                <select class="app-single-select-dropdown w-100">
-                                    <option *ngFor="let item of serviceItemList">{{item.item.name}}</option>
+                                <select class="app-single-select-dropdown w-100" name="service">
+                                    <option *ngFor="let item of filteredServiceItemList;" [value]="item.item._id"><span>{{item.item.name}}
+                                        </span></option>
                                 </select>
                             </div>
                         </div>
