@@ -11,7 +11,7 @@ import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 
 export interface PeriodicElement {
-  appNo: number;
+  appNo: string;
   name: string;
   date: any;
   time: string;
@@ -19,20 +19,27 @@ export interface PeriodicElement {
   consultationFor: string;
   action: string;
   showInputFields?: boolean;
+  [key: string]: any;
 }
 
-export interface fetchBookingCriterionDto {
-  startDate: any;
-  endDate: any;
-  doctorId: any;
-  departmentId: any;
+export interface ColumnWiseFiltersDto {
+  [key: string]: string;
+  appNo: string;
+  name: string;
+  date: string;
+  time: string;
+  doctor: string;
+  consultationFor: string;
+  action: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { appNo: 1, name: 'Rahul Dongre', date: '09/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor:"normal checkup", action: "add appointment | delete", },
-  { appNo: 2, name: 'Abhay Singh', date: '09/6/2023', time: '11:30-11:40', doctor: "Dr Ram Shrivastava", consultationFor:"normal checkup", action: "add appointment | delete", },
-  { appNo: 3, name: 'Sunny Thakur', date: '12/6/2023', time: '01:00-01:10', doctor: "Dr Mayank Patidar", consultationFor:"normal checkup", action: "add appointment | delete", },
-  { appNo: 4, name: 'Vishal Pandit', date: '15/6/2023', time: '03:00-03:10', doctor: "Dr Mayur Patidar", consultationFor:"normal checkup", action: "add appointment | delete", },
+  { appNo: "1", name: 'Rahul Dongre', date: '09/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor:"normal checkup", action: "add appointment | delete", },
+  { appNo: "2", name: 'Abhay Singh', date: '09/6/2023', time: '11:30-11:40', doctor: "Dr Ram Shrivastava", consultationFor:"normal checkup", action: "add appointment | delete", },
+  { appNo: "3", name: 'Sunny Thakur', date: '12/6/2023', time: '01:00-01:10', doctor: "Dr Mayank Patidar", consultationFor:"normal checkup", action: "add appointment | delete", },
+  { appNo: "4", name: 'Vishal Pandit', date: '15/6/2023', time: '03:00-03:10', doctor: "Dr Mayur Patidar", consultationFor:"normal checkup", action: "add appointment | delete", },
+  { appNo: "5", name: 'Rahul Dongre', date: '09/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor:"normal checkup", action: "add appointment | delete", },
+  { appNo: "6", name: 'Rahul Dongre', date: '15/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor:"normal checkup", action: "add appointment | delete", },
 
 ]
 
@@ -56,6 +63,20 @@ export class NewAppointmentComponent implements OnInit {
   serviceItemList!: ItemDetailDto[];
   doctorList!: UserVo[];
 
+  showAllFilters: boolean = false;
+
+  filters: ColumnWiseFiltersDto = {
+    appNo: '',
+    name: '',
+    date: '',
+    time: '',
+    doctor: '',
+    consultationFor: '',
+    action: '',
+  };
+
+
+  filteredData: PeriodicElement[] = [...ELEMENT_DATA];
   /* ************************************ Constructors ************************************ */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
@@ -72,6 +93,52 @@ export class NewAppointmentComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  // public applyNewFilter(event: Event, columnName: string): void {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.filters[columnName] = filterValue.trim().toLowerCase();
+  //   this.dataSource.filter = JSON.stringify(this.filters);
+  
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
+
+  public applyOldFilter(event: Event, columnName: string): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    
+    // Create a custom filter function based on the selected column
+    const filterFunction = (data: PeriodicElement): boolean => {
+      // Use the selected column to access the corresponding property in data
+      const columnValue = data[columnName].toLowerCase();
+      return columnValue.includes(filterValue);
+    };
+  
+    // Set the custom filter function to the data source filter predicate
+    this.dataSource.filterPredicate = filterFunction;
+  
+    // Apply the filter
+    this.dataSource.filter = filterValue;
+  }
+
+  public applyNewFilter(event: Event, columnName: string): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  
+    // Filter data based on the current column
+    const filteredColumnData = this.filteredData.filter((data) =>
+      data[columnName].toLowerCase().includes(filterValue)
+    );
+  
+    // Update the filteredData array with the filteredColumnData
+    this.filteredData = filteredColumnData;
+  
+    // Update the table data source
+    this.dataSource.data = this.filteredData;
+  
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -95,6 +162,11 @@ export class NewAppointmentComponent implements OnInit {
   public cancel(): void {
     this._init();
   }
+
+public getAllFilters():void {
+this.showAllFilters = !this.showAllFilters;
+}
+  
 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
