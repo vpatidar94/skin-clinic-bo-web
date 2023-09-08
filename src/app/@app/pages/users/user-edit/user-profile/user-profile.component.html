@@ -241,19 +241,19 @@
 
                 <div class="col-md-12 align-style" *ngFor="let timing of staff.user.serviceTiming; let i = index">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <label class="app-label">Slot-{{i+1}}</label>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group d-flex">
-                                <div class="d-flex align-items-center col-md-5">
+                                <div class="d-flex align-items-center col-md-6">
                                     <div class="input-with-dropdown">
                                         <input type="time" class="form-control app-input time-input"
                                             [(ngModel)]="timing.from" name="service_time_{{ i }}">
                                     </div>
                                 </div>
                                 <span class="col-md-2 d-flex  align-items-center app-label">To</span>
-                                <div class="d-flex align-items-center mt-2 col-md-5">
+                                <div class="d-flex align-items-center mt-2 col-md-6">
                                     <div class="input-with-dropdown">
                                         <input type="time" class="form-control app-input time-input"
                                             [(ngModel)]="timing.to" name="service_time_end_{{ i }}">
@@ -270,11 +270,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
                 <!-- Add Photo -->
-                <div class="col-md-6">
+                <div class="col-md-6 mt-4">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Add Photo</label>
@@ -290,6 +288,26 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
+                <!-- Add Photo -->
+                <!-- <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Add Photo</label>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-md-7">
+                                <input type="file" class="form-control app-input" name="addPhoto"
+                                    [(ngModel)]="staff.user.img" required>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="common-button">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
 
                 <!-- upload Id Proof -->
                 <div class="col-md-6">
