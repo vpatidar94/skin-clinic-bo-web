@@ -54,7 +54,7 @@ export class NewAppointmentComponent implements OnInit {
   showSectionAppointmentList: boolean = false;
   showSectionAppointmentEdit: boolean = false;
 
-  displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor", "action"];
+  displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor","action"];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

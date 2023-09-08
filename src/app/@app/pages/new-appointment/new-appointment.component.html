@@ -3,8 +3,8 @@
         <div class="px-5 d-flex justify-content-between">
             <h2>Appointment List</h2>
             <button class="common-button" (click)="addAppointment()">Add Appointment</button>
-            <button class="common-button" (click)="searchTodaysAppointments()">Today's Appointments</button>
-            <button class="common-button" (click)="searchPreviousAppointments()">Previous Appointments</button>
+            <!-- <button class="common-button" (click)="searchTodaysAppointments()">Today's Appointments</button> -->
+            <!-- <button class="common-button" (click)="searchPreviousAppointments()">Previous Appointments</button> -->
 
         </div>
     </div>
@@ -16,13 +16,13 @@
                 <label class="app-label me-2">{{'Search'}}</label>
                 <input class="input-style" (keyup)="applyFilter($event)" placeholder="" #input>
             </div>
-            <button (click)="getAllFilters()" class="common-button d-flex justify-content-start  w-25">Show
+            <button (click)="getAllFilters()" class="common-button btn-style">Show
                 Filters</button>
             <div *ngIf="showAllFilters">
                 <ng-container *ngFor="let col of displayedColumns">
-                    <label class="app-label me-2">{{ 'Filter ' + col }}</label>
-                    <input class="input-style" [(ngModel)]="filters[col]" (keyup)="applyNewFilter($event, col)"
-                        placeholder="{{ 'Filter ' + col }}">
+                    <!-- <label class="app-label me-2">{{ 'Filter ' + col }}</label> -->
+                    <input class="input-stylee" [(ngModel)]="filters[col]" (keyup)="applyNewFilter($event, col)"
+                        placeholder="{{col}}">
                 </ng-container>
             </div>
         </div>
