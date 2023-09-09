@@ -72,8 +72,10 @@ export class PatientEditComponent implements OnInit, OnChanges {
         }
         if (changes['userBookingInvestigationList']) {
             this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
-            this.userBooking.booking.user = this.userBookingInvestigationList.user?._id;
-            this.userBooking.user = this.userBookingInvestigationList.user;
+            if (this.userBookingInvestigationList?.user?._id) {
+                this.userBooking.booking.user = this.userBookingInvestigationList?.user?._id;
+                this.userBooking.user = this.userBookingInvestigationList?.user;
+            }
             this.userBookingChange.emit(this.userBooking);
         }
     }

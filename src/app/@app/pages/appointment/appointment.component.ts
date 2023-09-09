@@ -25,6 +25,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   userBooking!: UserBookingDto;
 
+  orgBooking! : OrgBookingDto;
+
   resultsLength = 0;
   serviceItemList!: ItemDetailDto[];
   doctorList!: UserVo[];
@@ -71,6 +73,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     booking.complaint = [] as string[];
     booking.complaint.push("");
     booking.diagnosis = [] as string[];
+    booking.drExt = [] as string[];
+    booking.drExt.push("");
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {
       booking.orgId = orgId;
@@ -79,6 +83,32 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     userBooking.booking = booking;
     userBooking.user = {} as UserVo;
     userBooking.user.address = {} as AddressVo;
+    this._addEditOrg(userBooking);
+  }
+
+  public cloneAppointment(orgBookingDto : OrgBookingDto): void {
+    const userBooking = {} as UserBookingDto;
+    const booking = {} as BookingVo;
+    booking.type = BOOKING_TYPE.PATIENT; // TODO change if appointment
+    booking.observation = {} as ObservationVo;
+    booking.observation.date = new Date();
+    booking.observation.healthParams = [] as Array<KeyValueVo>
+    booking.prescription = [] as PrescriptionVo[];
+    booking.instruction = [] as string[];
+    booking.test = [] as string[];
+    booking.bookingDate = new Date();
+    booking.complaint =  orgBookingDto.booking.complaint;
+    booking.referedBy = orgBookingDto.booking.referedBy;
+    booking.diagnosis = [] as string[];
+    booking.drExt = orgBookingDto.booking.drExt;
+    booking.dr = orgBookingDto.booking.dr;
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (orgId) {
+      booking.orgId = orgId;
+      booking.brId = orgId;
+    }
+    userBooking.booking = booking;
+    userBooking.user = orgBookingDto.patient;
     this._addEditOrg(userBooking);
   }
 
@@ -146,7 +176,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
       if (res.body) {
         this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
-        this.addAppointment();
+        this.cloneAppointment(orgBooking);
       }
     });
   }
@@ -156,10 +186,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
       if (res.body) {
         this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
-        this.addAppointment();
+        this.cloneAppointment(orgBooking);
       }
     });
   }
+
+
 
   public _getProductList(): void {
     const orgId = this.keyValueStorageService.getOrgId();
