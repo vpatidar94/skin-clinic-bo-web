@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { ReceiptModule } from './receipt/receipt.module';
 import { PharmacyReceiptModule } from './pharmacy-receipt/pharmacy-receipt.module';
 import { NewAppointmentModule } from './@app/pages/new-appointment/new-appointment.module';
+import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/excel-file-upload.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NewAppointmentModule } from './@app/pages/new-appointment/new-appointme
     PharmacyReceiptModule,
     HttpClientModule,
     SigninModule,
+    ExcelFileUploadModule,
     SpinnerModule,
     AlertMessageModule,
     NgxWebstorageModule.forRoot(),

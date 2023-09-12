@@ -5,6 +5,7 @@ import { SigninComponent } from './@shared/component/signin/signin.component';
 import { AuthGuard } from './@shared/security/auth.guard';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { PharmacyReceiptComponent } from './pharmacy-receipt/pharmacy-receipt.component';
+import { ExcelFileUpload } from './@shared/component/excel-file-upload/excel-file-upload.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,11 @@ const routes: Routes = [
     path: 'signin',
     component: SigninComponent
   },
+  {
+    path: 'excel-file-upload',
+    component: ExcelFileUpload
+  },
+
   {
     path: 'receipt',
     component: ReceiptComponent
