@@ -73,15 +73,18 @@ export const URL = {
     ADD_UPDATE_BOOKING: MJR_BOOKING + ADD_UPDATE,
     BOOKING_LIST: MJR_BOOKING + LIST,
     ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
+    BOOKING_RECEIPT: MJR_BOOKING + '/receipt-create',
     
     // ******************************************************************
     // Department API endpoint
     ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
     ORG_DEPARTMENT_LIST: MJR_ORG + '/department-list',
+
     //********************************************************************
     //Product API endpoint
     PRODUCT_LIST : MJR_PRODUCT + '/list',
     ADD_UPDATE_PRODUCT: MJR_PRODUCT + '/add-update',
+
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'
 };

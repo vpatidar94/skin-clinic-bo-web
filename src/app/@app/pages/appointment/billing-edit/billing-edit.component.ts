@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ObservationVo, UserBookingDto, BookingUtility, BookingAddTransactionDto, ApiResponse, ResponseStatus, BookingVo } from 'aayam-clinic-core';
+import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
+import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -16,7 +17,10 @@ export class BillingEditComponent implements OnInit {
   @Input()
   userBooking!: UserBookingDto;
 
+  @Input()
   bookingTransaction!: BookingAddTransactionDto;
+  @Output()
+  bookingTransactionChange = new EventEmitter<BookingAddTransactionDto>();
 
   @Output()
   userBookingChange = new EventEmitter<UserBookingDto>();
@@ -31,33 +35,21 @@ export class BillingEditComponent implements OnInit {
 
   showChequeInbox: boolean = false;
 
-  showInstallmentTwo:boolean = false;
-
-  newVar: number = 0;
-  newVar2: number = 0;
-  
-
-
-
   /* ************************************ Constructors ************************************ */
-  constructor(private transactionApi: TransactionApi) {
+  constructor(private transactionApi: TransactionApi,
+    private bookingApi: BookingApi) {
 
   }
 
   
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
-    const transactionItem = {} as BookingAddTransactionDto;
-    // this.userBookingChange.emit(this.userBooking);
-    this.bookingTransaction=transactionItem;
-    this.newVar = this.userBooking.booking.totalDue;
-    // this.newVar2 = this.userBooking.booking.totalDue - this.newVar
+    this._init();
   }
 
   public onPaymentModeChange(event: Event) {
-
     const selectElement = event.target as HTMLSelectElement;
-    this.showChequeInbox = selectElement.value === 'Cheque';
+    this.showChequeInbox = selectElement.value === 'CHEQUE';
   }
 
   public getCommaSeparatedServices(): string {
@@ -67,40 +59,33 @@ export class BillingEditComponent implements OnInit {
   public applyDiscount(): void {
     BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
     this.userBookingChange.emit(this.userBooking);
-    console.log("llll", this.userBooking);
   }
 
-  public payMethod(): void {
+  public pay(): void { 
     this.transactionApi.addUpdateTransaction(this.bookingTransaction).subscribe((res: ApiResponse<BookingVo>) => {
       if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
         this.userBooking.booking = res.body;
-        console.log('ll',res.body);
+        this.userBookingChange.emit(this.userBooking);
       }
-      console.log("hhhh",res.body);
-
     });
-
   }
 
-  public addServiceItem(): void {
-    // const orderItem = {} as OrderItemVo;
-    // orderItem.item = {} as ItemVo;
-    // orderItem.amount = 0;
-    // this.userBooking.booking.items.push(orderItem);
-    // this.userBookingChange.emit(this.userBooking);
-    this.showInstallmentTwo = true;
-    // this.newVar = this.userBooking.booking.totalDue;
-     this.newVar2 = this.userBooking.booking.totalDue - this.newVar
-}
+  public downloadReceipt(): void { 
+    this.bookingApi.generateReceipt(this.userBooking.booking._id).subscribe((data) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = `RECEIPT_${this.userBooking.booking.no}.pdf`;
+      link.click();
+    });
+  }
 
   /* ************************************ Private Methods ************************************ */
-
-  private _formChanged(): void {
-    const actionDto = {
-      action: 'CHANGE_FORM_PATIENT',
-      data: this.billingForm.invalid
-    } as UiActionDto<boolean>;
-    this.pubSub.emit(actionDto);
+  private _init(): void {
+    this.bookingTransaction = {} as BookingAddTransactionDto;
+    this.bookingTransaction.bookingId = this.userBooking.booking._id;
+    this.bookingTransaction.amount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid
+    this.bookingTransactionChange.emit(this.bookingTransaction);
   }
 }
 

@@ -172,17 +172,20 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public getUserBooking(orgBooking: OrgBookingDto): void {
+  public editDetails(orgBooking: OrgBookingDto): void {
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
       if (res.body) {
         this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
-        this.cloneAppointment(orgBooking);
+        const userBooking = {} as UserBookingDto;
+        userBooking.booking = orgBooking.booking;
+        userBooking.user = orgBooking.patient;
+        this._addEditOrg(userBooking);
       }
     });
   }
 
   // newly added to show details ..right now it is showing the same details as booking
-  public getDetails(orgBooking: OrgBookingDto): void {
+  public addNewBookingUser(orgBooking: OrgBookingDto): void {
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
       if (res.body) {
         this.userBookingInvestigationList = res.body as UserBookingInvestigationDto;
