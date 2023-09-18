@@ -25,7 +25,7 @@
         </div>
     </div>
     <div *ngIf="showSectionAccounts">
-        <app-accounts></app-accounts>
+        <app-accounts [staff]="staff"></app-accounts>
         <div class="d-flex align-items-center justify-content-center mb-5">
             <div class="col-1">
                 <button class="common-button" (click)="onSavingUserAccount()">save</button>

@@ -44,7 +44,7 @@ export class UserProfileComponent implements OnInit {
 
     inValidAddressForm!: boolean;
 
-    
+
 
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
@@ -87,9 +87,6 @@ export class UserProfileComponent implements OnInit {
         this.filteredUserTypeList = this.userTypeList.filter(item => item.userType.departmentId === departmentId);
     }
 
-    public checkIt(): void {
-        console.log("xx userProfile", this.staff)
-    }
     /* ************************************* Private Methods ******************************************** */
 
     private _init(): void {

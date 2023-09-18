@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse, OrgVo, UserAccessDetailDto, UserAuthVo, UserEmpDto, UserTypeDetailDto, UserTypeVo, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, OrgVo, UserAccessDetailDto, UserAccountVo, UserAuthVo, UserEmpDto, UserTypeDetailDto, UserTypeVo, UserVo } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { URL } from '../../const/url';
@@ -36,6 +36,11 @@ export class UserApi {
 
     public getUserTypeList(orgId: string): Observable<ApiResponse<UserTypeDetailDto[]>> {
         return this.http.get<ApiResponse<UserTypeDetailDto[]>>(environment.apiUrl + URL.USER_LIST, { params: { orgId } });
+    }
+
+    // userAccount update api
+    public addUpdateUserAccount(userAccount: UserAccountVo): Observable<ApiResponse<UserAccountVo>> {
+        return this.http.post<ApiResponse<UserAccountVo>>(environment.apiUrl +  '/api/core/v1/user/user-account-add-update' , userAccount);
     }
 }
 

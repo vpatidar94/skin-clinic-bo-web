@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { ApiResponse, DepartmentVo, ResponseStatus, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, ResponseStatus, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -27,6 +27,9 @@ export class UserEditComponent implements OnInit {
     staff!: UserEmpDto;
     @Output()
     staffChange = new EventEmitter<UserEmpDto>();
+
+    @Input()
+    userAccounts!: UserAccountVo;
 
     @Input()
     userTypeList!: UserTypeDetailDto[];
@@ -58,6 +61,11 @@ export class UserEditComponent implements OnInit {
     }
 
     public onSavingUserAccount(): void {
+        this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res:ApiResponse<UserAccountVo>) => {
+            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+                console.log("user",this.userAccounts);
+            }
+        })
     }
 
     public formChangeOrg(event: UiActionDto<boolean>): void {

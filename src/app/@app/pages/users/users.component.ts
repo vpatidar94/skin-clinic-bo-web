@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AclVo, AddressVo, ApiResponse, DepartmentVo, ROLE, ROLE_NAME, ResponseStatus, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
+import { AclVo, AddressVo, ApiResponse, DepartmentVo, ROLE, ROLE_NAME, ResponseStatus, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from '../../service/remote/department.api';
 import { UserApi } from '../../service/remote/user.api';
@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   user!: UserVo;
   staff!: UserEmpDto;
   staffList!: Array<UserVo> | null;
+  userAccounts!: UserAccountVo;
   empOrgId!: string;
   department!: DepartmentVo;
   departmentList!: DepartmentVo[];
@@ -91,8 +92,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   public addUser(): void {
-    this._resetSection();
-    this.showSectionUserEdit = true;
+    // this._resetSection();
+    // this.showSectionUserEdit = true;
     const orgId = this.keyValueStorageService.getOrgId();
     const user = {} as UserVo;
     user.created = new Date();
@@ -104,6 +105,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
     acl.orgId = orgId;
     const staff = new UserEmpDto(user, acl);
     this._addEditStaff(staff);
+
+
   }
 
   public getSubRole(emp: { [key: string]: AclVo }): string {
@@ -209,9 +212,5 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
-
-  
-  
 
 }
