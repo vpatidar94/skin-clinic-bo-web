@@ -156,6 +156,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
     const acl = user.emp[orgId] as AclVo;
     const empDto = new UserEmpDto(user, acl);
+    console.log("XXX",empDto);
     this._addEditStaff(empDto);
   }
 
