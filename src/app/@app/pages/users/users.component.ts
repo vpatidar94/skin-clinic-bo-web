@@ -149,10 +149,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
     })
   }
 
-  public editUsers(staff: UserEmpDto): void {
-    this.staff = { ...staff };
-    this.addUser();
-    this._addEditStaff(this.staff);
+  public editUsers(user: UserVo): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    const acl = user.emp[orgId] as AclVo;
+    const empDto = new UserEmpDto(user, acl);
+    this._addEditStaff(empDto);
   }
 
   public getUserTypeName(row: UserVo): string {

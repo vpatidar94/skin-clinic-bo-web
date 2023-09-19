@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { DepartmentVo, UserEmpDto, UserTypeDetailDto, } from 'aayam-clinic-core';
@@ -14,7 +14,7 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
     styleUrls: ['./user-profile.component.scss']
 })
 
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     @Input()
@@ -58,6 +58,21 @@ export class UserProfileComponent implements OnInit {
         this.staffForm?.valueChanges?.subscribe(() => {
             this._formChanged();
         });
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['staff']) {
+            this.staff = changes['staff']?.currentValue as UserEmpDto;
+        }
+        if (changes['department']) {
+            this.department = changes['department']?.currentValue as DepartmentVo;
+        }
+        if (changes['departmentList']) {
+            this.departmentList = changes['departmentList']?.currentValue as DepartmentVo[];
+        }
+        if (changes['userTypeList']) {
+            this.userTypeList = changes['userTypeList']?.currentValue as UserTypeDetailDto[];
+        }
     }
 
     public addServiceTiming() {

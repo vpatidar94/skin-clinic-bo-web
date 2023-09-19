@@ -1,5 +1,4 @@
 <section class="section-org-edit">
-
     <form #staffForm="ngForm">
         <mat-list class="row">
             <app-label>Personal Information</app-label>
@@ -8,12 +7,12 @@
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
-                            <label class="app-label">User Id</label>
+                            <label class="app-label">User Code</label>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" [(ngModel)]="staff.user._id"
-                                    name="userId" required>
+                                <input type="text" readOnly class="form-control app-input" [ngModel]="staff.user.code"
+                                    name="code" required>
                             </div>
                         </div>
                     </div>

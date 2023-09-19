@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PrescriptionVo, BookingVo, UserBookingDto, UserBookingInvestigationDto, ProductVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
@@ -8,7 +8,7 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
   templateUrl: './prescription-edit.component.html',
   styleUrls: ['./prescription-edit.component.scss']
 })
-export class PrescriptionEditComponent implements OnInit {
+export class PrescriptionEditComponent implements OnInit, OnChanges {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
 

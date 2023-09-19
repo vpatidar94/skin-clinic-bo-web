@@ -8,7 +8,7 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
     templateUrl: './user-edit.component.html',
 })
 
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnChanges {
 
     /* ************************************* Instance Field ******************************************** */
     showSectionUserProfile!: boolean;
@@ -17,6 +17,7 @@ export class UserEditComponent implements OnInit {
 
     tabValue!: string;
     invalidFormStaff!: boolean;
+
     @Input()
     department!: DepartmentVo;
 
@@ -46,6 +47,21 @@ export class UserEditComponent implements OnInit {
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
         this._init();
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['staff']) {
+            this.staff = changes['staff']?.currentValue as UserEmpDto;
+        }
+        if (changes['department']) {
+            this.department = changes['department']?.currentValue as DepartmentVo;
+        }
+        if (changes['departmentList']) {
+            this.departmentList = changes['departmentList']?.currentValue as DepartmentVo[];
+        }
+        if (changes['userTypeList']) {
+            this.userTypeList = changes['userTypeList']?.currentValue as UserTypeDetailDto[];
+        }
     }
 
     public tabChange(): void {
