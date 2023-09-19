@@ -72,11 +72,9 @@ export class BillingEditComponent implements OnInit {
 
   public downloadReceipt(): void { 
     this.bookingApi.generateReceipt(this.userBooking.booking._id).subscribe((data) => {
-      const downloadURL = window.URL.createObjectURL(data);
-      const link = document.createElement('a');
-      link.href = downloadURL;
-      link.download = `RECEIPT_${this.userBooking.booking.no}.pdf`;
-      link.click();
+      const blob = new Blob([data], { type: 'application/pdf' })
+      const downloadURL = URL.createObjectURL(blob);
+      window.open(downloadURL, '_blank');
     });
   }
 

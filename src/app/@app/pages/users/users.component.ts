@@ -206,7 +206,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
     this.userApi.getStaffList(orgId).subscribe((apiResponse: ApiResponse<UserVo[]>) => {
       this.staffList = apiResponse.body ?? [] as Array<UserVo>;
-      console.log("staffList", this.staffList);
       this._initStaffTable(this.staffList);
     });
   }
