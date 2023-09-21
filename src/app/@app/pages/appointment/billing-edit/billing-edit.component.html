@@ -121,8 +121,19 @@
                             <!-- pay btn -->
                             <span class=" col-md-1 download-button btn btn-info h-25 ms-2" (click)="pay()">Pay</span>
 
-                            <span class=" col-md-2 download-button btn btn-info h-25 ms-2" (click)="downloadReceipt()">Generate receipt</span>
+                            <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                (click)="downloadReceipt()">Generate receipt</span>
 
+                        </div>
+                    </div>
+                    <div *ngIf="src">
+                        <h2>Receipt</h2>
+                        
+                        <button (click)="print()" [disabled]="!isPdfLoaded">Print</button>
+                        
+                        <div class="row pdf-container">
+                            <pdf-viewer [src]="src" style="width: 400px; height: 500px" [original-size]="false"
+                                (after-load-complete)="onLoaded($event)"></pdf-viewer>
                         </div>
                     </div>
                 </div>

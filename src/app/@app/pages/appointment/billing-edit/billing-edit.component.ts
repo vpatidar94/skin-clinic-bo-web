@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
-import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'app-billing-edit',
@@ -13,7 +13,7 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 export class BillingEditComponent implements OnInit {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
-  
+
   @Input()
   userBooking!: UserBookingDto;
 
@@ -35,13 +35,17 @@ export class BillingEditComponent implements OnInit {
 
   showChequeInbox: boolean = false;
 
+  isPdfLoaded: boolean = false;
+  private pdf!: PDFDocumentProxy;
+  public src!: Uint8Array;
+
+
   /* ************************************ Constructors ************************************ */
   constructor(private transactionApi: TransactionApi,
     private bookingApi: BookingApi) {
-
   }
 
-  
+
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
     this._init();
@@ -61,7 +65,7 @@ export class BillingEditComponent implements OnInit {
     this.userBookingChange.emit(this.userBooking);
   }
 
-  public pay(): void { 
+  public pay(): void {
     this.transactionApi.addUpdateTransaction(this.bookingTransaction).subscribe((res: ApiResponse<BookingVo>) => {
       if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
         this.userBooking.booking = res.body;
@@ -70,12 +74,35 @@ export class BillingEditComponent implements OnInit {
     });
   }
 
-  public downloadReceipt(): void { 
+  public downloadReceipt(): void {
     this.bookingApi.generateReceipt(this.userBooking.booking._id).subscribe((data) => {
       const blob = new Blob([data], { type: 'application/pdf' })
-      const downloadURL = URL.createObjectURL(blob);
-      window.open(downloadURL, '_blank');
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.src = new Uint8Array(fileReader.result as ArrayBuffer);
+      };
+      fileReader.readAsArrayBuffer(blob);
     });
+  }
+
+  public print(): void {
+    this.pdf.getData().then((u8) => {
+      let blob = new Blob([u8.buffer], {
+        type: 'application/pdf'
+      });
+
+      const blobUrl = window.URL.createObjectURL((blob));
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = blobUrl;
+      document.body.appendChild(iframe);
+      iframe.contentWindow?.print();
+    });
+  }
+
+  onLoaded(pdf: PDFDocumentProxy) {
+    this.pdf = pdf;
+    this.isPdfLoaded = true;
   }
 
   /* ************************************ Private Methods ************************************ */
