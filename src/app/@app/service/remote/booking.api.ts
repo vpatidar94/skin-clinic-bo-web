@@ -21,8 +21,8 @@ export class BookingApi {
         return this.http.get<ApiResponse<UserBookingInvestigationDto>>(environment.apiUrl + URL.BOOKING_LIST, { params: { userId, orgId } });
     }
 
-    public getOrgBookingList(orgId: string, pageNumber: number, maxRecord: number): Observable<ApiResponse<OrgBookingCountDto>> {
-        return this.http.get<ApiResponse<OrgBookingCountDto>>(environment.apiUrl + URL.ORG_BOOKING_LIST, { params: { orgId, pageNumber, maxRecord } });
+    public getOrgBookingList(orgId: string, type: string, pageNumber: number, maxRecord: number): Observable<ApiResponse<OrgBookingCountDto>> {
+        return this.http.get<ApiResponse<OrgBookingCountDto>>(environment.apiUrl + URL.ORG_BOOKING_LIST, { params: { orgId, type, pageNumber, maxRecord } });
     }
 
     public generateReceipt(bookingId: string): Observable<any> {

@@ -144,6 +144,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         switchMap(() => {
           return this.bookingApi.getOrgBookingList(
             orgId,
+            BOOKING_TYPE.PATIENT,
             this.paginator.pageIndex + 1,
             this.paginator.pageSize
           ).pipe(catchError(() => observableOf()));
