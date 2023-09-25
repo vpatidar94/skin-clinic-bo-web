@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input class="form-control app-input" name="nameF" required>
+                                <input class="form-control app-input" name="nameF" [(ngModel)]="userBooking.user.nameF" required>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="nameL" required>
+                                <input type="text" class="form-control app-input" name="nameL" [(ngModel)]="userBooking.user.nameL" required>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline" *ngFor="let g of genderList">
-                                <input class="form-check-input" type="radio" name="gender" [value]="g.id">
+                                <input class="form-check-input" type="radio" name="gender" [value]="g.id" [(ngModel)]="userBooking.user.gender">
                                 <label class="form-check-label">{{ g.name }}</label>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="cell1" required maxlength="10"
+                                <input type="text" class="form-control app-input" name="cell1" [(ngModel)]="userBooking.user.cell" required maxlength="10"
                                     minlength="10" appNumberOnly>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="date" class="form-control app-input" name="dateOfBirth" [(ngModel)]="dob"
+                                <input type="date" class="form-control app-input" name="dateOfBirth" [(ngModel)]="userBooking.user.doB"
                                     (ngModelChange)="calculateAge()" required>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="age" [(ngModel)]="age" required>
+                                <input type="text" class="form-control app-input" name="age" [(ngModel)]="userBooking.user.age" required>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline" *ngFor="let shift of shiftList">
-                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id">
+                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id" [(ngModel)]="userBooking.booking.shift">
                                 <label class="form-check-label">{{ shift.name }}</label>
                             </div>
                         </div>

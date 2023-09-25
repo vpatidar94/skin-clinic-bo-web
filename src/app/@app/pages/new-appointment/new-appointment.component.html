@@ -91,11 +91,11 @@
 </section>
 
 <section class="section-org-edit" *ngIf="showSectionAppointmentEdit">
-    <app-new-appointment-edit [serviceItemList]="serviceItemList" [doctorList]="doctorList"></app-new-appointment-edit>
+    <app-new-appointment-edit [serviceItemList]="serviceItemList" [doctorList]="doctorList" [userBooking]="userBooking"></app-new-appointment-edit>
 
     <div class="d-flex align-items-center justify-content-center mb-4 mt-3">
         <div class="col-1">
-            <button class="common-button">{{'save'}}</button>
+            <button class="common-button" (click)="saveBooking()">{{'save'}}</button>
         </div>
         <div class="col-1">
             <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>

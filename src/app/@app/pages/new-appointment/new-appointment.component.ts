@@ -6,9 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { ApiResponse, ItemDetailDto, ResponseStatus, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, } from 'aayam-clinic-core';
 import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
+import { BookingApi } from '../../service/remote/booking.api';
 
 export interface PeriodicElement {
   appNo: string;
@@ -54,14 +55,27 @@ export class NewAppointmentComponent implements OnInit {
   showSectionAppointmentList: boolean = false;
   showSectionAppointmentEdit: boolean = false;
 
+
+  userBooking!: UserBookingDto;
+
+  orgBooking! : OrgBookingDto;
+
+  resultsLength = 0;
+  serviceItemList!: ItemDetailDto[];
+  doctorList!: UserVo[];
+
+  bookingList!: OrgBookingDto[];
+
+  productList!: ProductVo[];
+
   displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor","action"];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  serviceItemList!: ItemDetailDto[];
-  doctorList!: UserVo[];
+  // serviceItemList!: ItemDetailDto[];
+  // doctorList!: UserVo[];
 
   showAllFilters: boolean = false;
 
@@ -81,6 +95,7 @@ export class NewAppointmentComponent implements OnInit {
   constructor(private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
     private userApi: UserApi,
+    private bookingApi: BookingApi,
     ) {
   }
 
@@ -145,8 +160,31 @@ export class NewAppointmentComponent implements OnInit {
   }
 
   public addAppointment() {
-
-    this._addEditAppointment();
+    const userBooking = {} as UserBookingDto;
+    const booking = {} as BookingVo;
+    booking.type = BOOKING_TYPE.APPOINTMENT; // TODO change if appointment
+    booking.observation = {} as ObservationVo;
+    booking.observation.date = new Date();
+    booking.observation.healthParams = [] as Array<KeyValueVo>;
+    booking.prescription = [] as PrescriptionVo[];
+    booking.instruction = [] as string[];
+    booking.test = [] as string[];
+    booking.bookingDate = new Date();
+    booking.complaint = [] as string[];
+    booking.complaint.push("");
+    booking.diagnosis = [] as string[];
+    booking.drExt = [] as string[];
+    booking.drExt.push("");
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (orgId) {
+      booking.orgId = orgId;
+      booking.brId = orgId;
+    }
+    userBooking.booking = booking;
+    userBooking.user = {} as UserVo;
+    userBooking.user.address = {} as AddressVo;
+    // this._addEditOrg(userBooking);
+    this._addEditAppointment(userBooking);
   }
 
   public searchTodaysAppointments(): void {
@@ -157,6 +195,15 @@ export class NewAppointmentComponent implements OnInit {
   public searchPreviousAppointments():void {
     
 
+  }
+
+  public saveBooking(): void {
+    this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+        this.userBooking = res.body
+        // console.log("showxxx",this.userBooking);
+      }
+    });
   }
 
   public cancel(): void {
@@ -180,10 +227,14 @@ this.showAllFilters = !this.showAllFilters;
     this.showSectionAppointmentList = false;
     this.showSectionAppointmentEdit = false;
   }
-  private _addEditAppointment(): void {
+  private _addEditAppointment(userBooking: UserBookingDto): void {
+    this.userBooking = userBooking;
+    // console.log("xxxxshow",this.userBooking);
     this._resetSection();
     this.showSectionAppointmentEdit = true;
   }
+
+  
 
   private _getServiceList(): void {
     const orgId = this.keyValueStorageService.getOrgId();

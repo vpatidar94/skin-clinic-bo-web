@@ -1,3 +1,24 @@
  .align-right {
     text-align: right;
  }
+
+ /* Add these styles to your component's CSS or in a global CSS file */
+
+.mat-dialog-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh; /* Ensure the dialog takes up the full viewport height */
+   margin: 0 !important; /* Remove any margins that might affect centering */
+ }
+ 
+ /* Optionally, you can set a max-width for the dialog */
+ .mat-dialog-container {
+   max-width: 80%; /* Adjust the value as needed */
+ }
+ 
+ /* Center the dialog content within the container */
+ .dialog-content {
+   text-align: center;
+ }
+ 
