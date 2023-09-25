@@ -43,6 +43,12 @@ export class BillingEditComponent implements OnInit {
   public src!: Uint8Array;
 
 
+  showPendingAmount: boolean = false;
+  payingAmount!: number;
+  newPendingAmount!: number;
+  makeAmountEditable: boolean = false;
+
+
   /* ************************************ Constructors ************************************ */
   constructor(private transactionApi: TransactionApi,
     private bookingApi: BookingApi,
@@ -75,6 +81,7 @@ export class BillingEditComponent implements OnInit {
         this.userBooking.booking = res.body;
         this.userBookingChange.emit(this.userBooking);
       }
+      
     });
   }
 
@@ -104,9 +111,48 @@ export class BillingEditComponent implements OnInit {
     });
   }
 
-  onLoaded(pdf: PDFDocumentProxy) {
+  public onLoaded(pdf: PDFDocumentProxy) {
     this.pdf = pdf;
     this.isPdfLoaded = true;
+  }
+
+  public showReceiptPopup() {
+    this.downloadReceipt();
+    let dialogRef = this.dialog.open(this.callAPIDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
+      if (result !== undefined) {
+        if (result === 'yes') {
+          // TODO: Replace the following line with your code.
+          console.log('User clicked yes.');
+        } else if (result === 'no') {
+          // TODO: Replace the following line with your code.
+          console.log('User clicked no.');
+        }
+      }
+
+    })
+  }
+
+  public addServiceItem(): void {
+    this.showPendingAmount = true;
+    // this.newPendingAmount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid- this.bookingTransaction.amount;
+    this.makeAmountEditable = true;
+    
+  }
+
+  removeServiceItem(): void {
+    this.showPendingAmount = false;
+    this.makeAmountEditable = false;
+  }
+
+
+
+  public addServiceItemNew(): void {
+    this.showPendingAmount = true;
+    this.newPendingAmount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid- this.bookingTransaction.amount;
+    // this.makeAmountEditable=true;
+    
   }
 
   /* ************************************ Private Methods ************************************ */
@@ -117,22 +163,114 @@ export class BillingEditComponent implements OnInit {
     this.bookingTransactionChange.emit(this.bookingTransaction);
   }
 
-  showReceiptPopup() {
-    this.downloadReceipt();
-    let dialogRef = this.dialog.open(this.callAPIDialog);
-    dialogRef.afterClosed().subscribe(result => {
-        // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
-        if (result !== undefined) {
-            if (result === 'yes') {
-                // TODO: Replace the following line with your code.
-                console.log('User clicked yes.');
-            } else if (result === 'no') {
-                // TODO: Replace the following line with your code.
-                console.log('User clicked no.');
-            }
-        }
-      
-    })
-}
+  
 }
 
+
+
+
+
+// import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+// import { NgForm } from '@angular/forms';
+// import { ObservationVo, UserBookingDto, BookingUtility, BookingAddTransactionDto, ApiResponse, ResponseStatus, BookingVo } from 'aayam-clinic-core';
+// import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
+// import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+
+// @Component({
+//   selector: 'app-billing-edit',
+//   templateUrl: './billing-edit.component.html',
+//   styleUrls: ['./billing-edit.component.scss'],
+// })
+// export class BillingEditComponent implements OnInit {
+//   /* ********************************* Static Field *************************************** */
+//   /* *********************************** Instance Field *********************************** */
+  
+//   @Input()
+//   userBooking!: UserBookingDto;
+
+//   bookingTransaction!: BookingAddTransactionDto;
+
+//   @Output()
+//   userBookingChange = new EventEmitter<UserBookingDto>();
+
+//   @Output()
+//   pubSub = new EventEmitter<any>();
+//  @ViewChild('billingForm', { static: true })
+//   billingForm!: NgForm;
+
+//   panelOpenState = false;
+
+//   showChequeInbox: boolean = false;
+
+//   showInstallmentTwo:boolean = false;
+
+//   newVar: number = 0;
+//   newVar2: number = 0;
+  
+
+
+
+//   /* ************************************ Constructors ************************************ */
+//   constructor(private transactionApi: TransactionApi) {
+
+//   }
+
+  
+//   /* ************************************ Public Methods ************************************ */
+//   public ngOnInit(): void {
+//     const transactionItem = {} as BookingAddTransactionDto;
+//     // this.userBookingChange.emit(this.userBooking);
+//     this.bookingTransaction=transactionItem;
+//     this.newVar = this.userBooking.booking.totalDue;
+//     // this.newVar2 = this.userBooking.booking.totalDue - this.newVar
+//   }
+
+//   public onPaymentModeChange(event: Event) {
+
+//     const selectElement = event.target as HTMLSelectElement;
+//     this.showChequeInbox = selectElement.value === 'Cheque';
+//   }
+
+//   public getCommaSeparatedServices(): string {
+//     return this.userBooking?.booking?.items?.map((item) => item.name).join(', ');
+//   }
+
+//   public applyDiscount(): void {
+//     BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
+//     this.userBookingChange.emit(this.userBooking);
+//     console.log("llll", this.userBooking);
+//   }
+
+//   public payMethod(): void {
+//     this.transactionApi.addUpdateTransaction(this.bookingTransaction).subscribe((res: ApiResponse<BookingVo>) => {
+//       if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
+//         this.userBooking.booking = res.body;
+//         console.log('ll',res.body);
+//       }
+//       console.log("hhhh",res.body);
+
+//     });
+
+//   }
+
+//   public addServiceItem(): void {
+//     // const orderItem = {} as OrderItemVo;
+//     // orderItem.item = {} as ItemVo;
+//     // orderItem.amount = 0;
+//     // this.userBooking.booking.items.push(orderItem);
+//     // this.userBookingChange.emit(this.userBooking);
+//     this.showInstallmentTwo = true;
+//     // this.newVar = this.userBooking.booking.totalDue;
+//      this.newVar2 = this.userBooking.booking.totalDue - this.newVar
+// }
+
+//   /* ************************************ Private Methods ************************************ */
+
+//   private _formChanged(): void {
+//     const actionDto = {
+//       action: 'CHANGE_FORM_PATIENT',
+//       data: this.billingForm.invalid
+//     } as UiActionDto<boolean>;
+//     this.pubSub.emit(actionDto);
+//   }
+// }

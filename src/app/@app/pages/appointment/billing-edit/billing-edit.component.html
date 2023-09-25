@@ -1,4 +1,5 @@
 <section class="section-org-edit">
+
     <mat-list class="row">
         <app-label>Billing</app-label>
         <mat-accordion>
@@ -16,10 +17,10 @@
                 <div class="border border-info rounded p-3 mt-4">
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
-                        <div class="col-md-2"><strong>Date</strong></div>
                         <div class="col-md-3"><strong>Service</strong></div>
                         <div class="col-md-2"><strong>Total Amount</strong></div>
                         <div class="col-md-2"><strong>Discount</strong></div>
+                        <div class="col-md-2"><strong>Net Amount</strong></div>
                         <div class="col-md"></div>
 
                     </div>
@@ -27,18 +28,7 @@
                         <div class="col-md-1 pres-input text-center">
                             <p class="border border-info rounded p-1 text-align-center">1</p>
                         </div>
-                        <!-- Date -->
-                        <div class="form-group d-flex justify-content-between align-items-center col-md-2">
-                            <input type="" class="form-control pres-input w-100" name="date"
-                                [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required
-                                [readOnly]="true" (ngModelChange)="userBooking.booking.bookingDate = $event">
-                        </div>
 
-                        <!-- Service -->
-                        <!-- <div class="form-group col-md-4" >
-                            <input *ngFor="let service of userBooking.booking.items; let i=index;" type="patientNumber" class="form-control pres-input w-100"  [(ngModel)]="userBooking.booking.items[i].name">
-                        </div> -->
-                        <!-- due to above approach the service names will come in different different input boxes but we want in a single input box with comma seperated so use the below approach -->
                         <div class="form-group col-md-3">
                             <input type="text" class="form-control pres-input w-100"
                                 [value]="getCommaSeparatedServices()" readonly>
@@ -47,7 +37,7 @@
                         <!--Total Amount  -->
                         <div class="form-group col-md-2">
                             <input type="" class="form-control pres-input w-100" name="totalAmount"
-                                [(ngModel)]="userBooking.booking.totalDue" readOnly>
+                                [(ngModel)]="userBooking.booking.subTotal" readOnly>
                         </div>
 
                         <div class="form-group col-md-2">
@@ -55,9 +45,14 @@
                                 [(ngModel)]="userBooking.booking.discount" (change)="applyDiscount()">
                         </div>
 
+                        <div class="form-group col-md-2">
+                            <input type="" class="form-control pres-input w-100" name="totalAmount"
+                                [(ngModel)]="userBooking.booking.totalDue" readOnly>
+                        </div>
+
                         <hr class="mt-4" />
 
-                        <div class="row form-group">
+                        <!-- <div class="row form-group">
                             <table class="table-billing col-md-4" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td>Total Due</td>
@@ -73,26 +68,47 @@
                                         userBooking.booking.totalPaid | currency}}</td>
                                 </tr>
                             </table>
+                        </div> -->
+                        <!-- newly added to show all previously paid amount -->
+                        <div class="row">
+                            <div class="col-md-3 mb-4"><strong>Details</strong></div>
+                            <div class="col-md"></div>
+                        </div>
+
+                        <div class="form-group col-md- d-flex flex-column"
+                            *ngFor="let orderItem of userBooking.booking.tx; let i = index;">
+                            <div class="d-flex col-md-">
+                                <p class="border border-info rounded p-1 text-align-center me-5">{{i + 1}}</p>
+
+                                <input class="form-control pres-input w-25 me-5" defaultValue="{{orderItem.amount}}"
+                                    readonly>
+                                <input type="" class="form-control pres-input w-25 me-5" name="date"
+                                    [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required
+                                    [readOnly]="true" (ngModelChange)="userBooking.booking.bookingDate = $event">
+                                <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                    (click)="showReceiptPopup()">Receipt</span>
+
+                            </div>
                         </div>
 
 
-                        <!-- <div class="form-group col-md-2">
-                            <input type="" class="form-control pres-input w-100" name="totaldue"
-                                [(ngModel)]="userBooking.booking.totalDue" [(ngModel)]="bookingTransaction.amount" readonly>
-                        </div> -->
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md"></div>
+                        </div>
 
-                        <!-- <div class="row d-flex justify-content-center mt-4">
-                            <div class="col-md-4"><strong>Payment Mode</strong></div>
-                            <div class="col-md-1"></div>
-                        </div> -->
-                        <!-- payment mode -->
-                        <div class="d-flex">
-                            <div class="row">
-                                <div class="col-md-3">Payment Mode</div>
-                                <div class="col-md-"></div>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <select name="paymentMode" class="app-single-select-dropdown w-100"
+                        <div class="form-group col-md- d-flex flex-column">
+                            <div class="d-flex col-md-">
+                                <p class="border border-info rounded p-1 text-align-center me-5">
+                                    {{userBooking.booking.tx.length
+                                    + 1}}</p>
+
+                                <input appNumberOnly [disabled]="!makeAmountEditable"
+                                    [value]="userBooking.booking.totalDue - userBooking.booking.totalPaid"
+                                    class="form-control pres-input w-25 me-5" name="totaldue"
+                                    [(ngModel)]="bookingTransaction.amount" (ngModelChange)="addServiceItemNew()">
+
+                                <select name="paymentMode" class="app-single-select-dropdown w-25 me-5"
                                     (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode"
                                     required>
                                     <option value="CASH">Cash</option>
@@ -102,40 +118,35 @@
                                     <option value="CHEQUE">Cheque</option>
                                 </select>
 
-                                <div *ngIf="showChequeInbox">
-                                    <input name="cheque" type="" placeholder="cheque number">
-                                </div>
+                                <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                    (click)="pay()">Pay</span>
+
                                 <div>
-                                    <h1>{{userBooking.booking.status}}</h1>
+                                    &nbsp;&nbsp;
+                                    <mat-icon (click)="addServiceItem()"
+                                        class="add-icon clickable">add_circle_outline</mat-icon>
                                 </div>
 
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <div *ngIf="showPendingAmount" class="col-md-2"><strong>Remaining Amount</strong></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md"></div>
+
+                        </div>
+                        <div *ngIf="showPendingAmount" class="form-group col-md-2">
+                            <input appNumberOnly [defaultValue]="userBooking.booking.totalDue -
+                                userBooking.booking.totalPaid | currency" class="form-control pres-input w-100"
+                                name="totaldue" [(ngModel)]="newPendingAmount" readonly>
+                        </div>
+                        <div *ngIf="showPendingAmount" class="col-md-1">
                             &nbsp;&nbsp;
-                            <div class="form-group col-md-2">
-                                <input appNumberOnly
-                                    [min]="userBooking.booking.totalDue - userBooking.booking.totalPaid"
-                                    class="form-control pres-input w-100" name="totaldue"
-                                    [(ngModel)]="bookingTransaction.amount">
-                            </div>
-
-                            <!-- pay btn -->
-                            <span class=" col-md-1 download-button btn btn-info h-25 ms-2" (click)="pay()">Pay</span>
-
-                            <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
-                                (click)="showReceiptPopup()">Generate receipt</span>
-
+                            <mat-icon (click)="removeServiceItem()"
+                                class="remove-icon clickable">remove_circle_outline</mat-icon>
                         </div>
                     </div>
-                    <!-- <div *ngIf="src">
-                        <h2>Receipt</h2>
-                        
-                        <button (click)="print()" [disabled]="!isPdfLoaded">Print</button>
-                        
-                        <div class="row pdf-container">
-                            <pdf-viewer [src]="src" style="width: 400px; height: 500px" [original-size]="false"
-                                (after-load-complete)="onLoaded($event)"></pdf-viewer>
-                        </div>
-                    </div> -->
                 </div>
 
                 <ng-template #callAPIDialog>
