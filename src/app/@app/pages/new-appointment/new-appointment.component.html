@@ -34,37 +34,49 @@
                 <!-- appointment No -->
                 <ng-container matColumnDef="appNo">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>App.No.</th>
-                    <td mat-cell *matCellDef="let row"> {{row.appNo}} </td>
+                    <!-- <td mat-cell *matCellDef="let row"> {{row.appNo}} </td> -->
+                    <td mat-cell *matCellDef="let row"> {{row.booking.no}} </td>
+
                 </ng-container>
 
                 <!-- Name -->
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    <!-- <td mat-cell *matCellDef="let row"> {{row.name}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patient.nameF ?? ''}}
+                        {{row.patient.nameL ?? ''}}</td>
                 </ng-container>
 
                 <!-- Date -->
                 <ng-container matColumnDef="date">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.date}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.date}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.bookingDate | date}}
+                    </td>
                 </ng-container>
 
                 <!-- Time -->
                 <ng-container matColumnDef="time">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.time}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.time}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.shift}} </td>
+
                 </ng-container>
 
                 <!-- Doctor -->
                 <ng-container matColumnDef="doctor">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.doctor}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.doctor}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"><span
+                        *ngIf="row.drList && row.drList.length > 0">{{row.drList[0].nameF}}</span></td>
                 </ng-container>
 
                 <!-- Consultaion For -->
                 <ng-container matColumnDef="consultationFor">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Consultation For</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.consultationFor}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.consultationFor}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{getBookingType(row.booking.type)}} </td>
+
                 </ng-container>
 
                 <!-- Action -->
@@ -91,7 +103,7 @@
 </section>
 
 <section class="section-org-edit" *ngIf="showSectionAppointmentEdit">
-    <app-new-appointment-edit [serviceItemList]="serviceItemList" [doctorList]="doctorList" [userBooking]="userBooking"></app-new-appointment-edit>
+    <app-new-appointment-edit [serviceItemList]="serviceItemList" [doctorList]="doctorList" [userBooking]="userBooking" ></app-new-appointment-edit>
 
     <div class="d-flex align-items-center justify-content-center mb-4 mt-3">
         <div class="col-1">

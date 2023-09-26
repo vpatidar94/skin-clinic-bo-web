@@ -19,6 +19,7 @@ import { NewAppointmentComponent } from './new-appointment.component';
 import { NewAppointmentRoutingModule } from './new-appointment-routing.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { NewAppointmentEditComponent } from './new-appointment-edit/new-appointment-edit.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 const MATERIAL_MODULE = [
     MatButtonModule,
@@ -39,7 +40,7 @@ const MATERIAL_MODULE = [
   const COMMON_MODULE = [CommonModule, FormsModule];
 
   @NgModule({
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, NewAppointmentRoutingModule, LabelModule],
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, NewAppointmentRoutingModule, NgMultiSelectDropDownModule.forRoot(), LabelModule],
     providers: [],
     exports: [],
     declarations: [NewAppointmentComponent,NewAppointmentEditComponent]

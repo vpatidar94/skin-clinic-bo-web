@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, OrgBookingCountDto, } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, OrgBookingCountDto, UserBookingInvestigationDto, } from 'aayam-clinic-core';
 import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -26,7 +26,7 @@ export interface PeriodicElement {
 }
 
 export interface ColumnWiseFiltersDto {
-  [key: string]: string;
+  [key: string]: any;
   appNo: string;
   name: string;
   date: string;
@@ -69,9 +69,14 @@ export class NewAppointmentComponent implements OnInit, AfterViewInit {
   bookingList!: OrgBookingDto[];
 
   productList!: ProductVo[];
+  userBookingInvestigationList!: UserBookingInvestigationDto;
 
-  displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor", "action"];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  // displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor", "action"];
+  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  // newly added
+  displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor", "action"];;
+  dataSource = new MatTableDataSource<any>([] as OrgBookingDto[]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -92,7 +97,9 @@ export class NewAppointmentComponent implements OnInit, AfterViewInit {
   };
 
 
-  filteredData: PeriodicElement[] = [...ELEMENT_DATA];
+  // filteredData: PeriodicElement[] = [...ELEMENT_DATA];
+  filteredData: any[] = [this.bookingList];
+
 
   bookingTypeName: any = BOOKING_TYPE_NAME;
   /* ************************************ Constructors ************************************ */
@@ -127,11 +134,11 @@ export class NewAppointmentComponent implements OnInit, AfterViewInit {
   //   }
   // }
 
-  public applyOldFilter(event: Event, columnName: string): void {
+  public applyOldFilter(event: Event, columnName: any): void {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
     // Create a custom filter function based on the selected column
-    const filterFunction = (data: PeriodicElement): boolean => {
+    const filterFunction = (data: any): boolean => {
       // Use the selected column to access the corresponding property in data
       const columnValue = data[columnName].toLowerCase();
       return columnValue.includes(filterValue);
@@ -144,7 +151,7 @@ export class NewAppointmentComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  public applyNewFilter(event: Event, columnName: string): void {
+  public applyNewFilter(event: Event, columnName: any): void {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
     // Filter data based on the current column
@@ -254,7 +261,7 @@ export class NewAppointmentComponent implements OnInit, AfterViewInit {
       )
       .subscribe((dto) => {
         this.bookingList = dto?.orgBooking ?? [] as OrgBookingDto[];
-        // this.dataSource = new MatTableDataSource(this.bookingList);
+        this.dataSource = new MatTableDataSource(this.bookingList);
       });
 
   }
@@ -305,5 +312,5 @@ export class NewAppointmentComponent implements OnInit, AfterViewInit {
     }
     );
   }
-
 }
+

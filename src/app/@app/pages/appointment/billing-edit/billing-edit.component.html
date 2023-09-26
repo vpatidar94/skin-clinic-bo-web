@@ -42,7 +42,7 @@
 
                         <div class="form-group col-md-2">
                             <input type="" class="form-control pres-input w-100" name="discount"
-                                [(ngModel)]="userBooking.booking.discount" (change)="applyDiscount()">
+                                [(ngModel)]="userBooking.booking.discount" (change)="applyDiscount()" placeholder="0">
                         </div>
 
                         <div class="form-group col-md-2">
@@ -111,7 +111,6 @@
                                 <select name="paymentMode" class="app-single-select-dropdown w-25 me-5"
                                     (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode"
                                     required>
-                                    <option defaultSelected>Payment Mode</option>
                                     <option value="CASH">Cash</option>
                                     <option value="ONLINE">Online</option>
                                     <option value="UPI">UPI</option>
