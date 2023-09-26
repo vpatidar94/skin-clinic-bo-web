@@ -111,6 +111,7 @@
                                 <select name="paymentMode" class="app-single-select-dropdown w-25 me-5"
                                     (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode"
                                     required>
+                                    <option defaultSelected>Payment Mode</option>
                                     <option value="CASH">Cash</option>
                                     <option value="ONLINE">Online</option>
                                     <option value="UPI">UPI</option>
@@ -118,7 +119,7 @@
                                     <option value="CHEQUE">Cheque</option>
                                 </select>
 
-                                <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                <span class=" col-md-2 download-button btn h-25 ms-2 pay-btn-color"
                                     (click)="pay()">Pay</span>
 
                                 <div>
