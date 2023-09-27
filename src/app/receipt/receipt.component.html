@@ -1,47 +1,69 @@
 <div class="receipt">
+    <div class="d-flex flex-row justify-content-between">
+        <span class="link-style"><span>GSTIN:</span>2388PCA5532R1Z5</span>
+        <span class="link-style"><span>Website:</span>aayamskinclinic.com</span>
+    </div>
     <div class="receipt-head">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxZnF-nba-de7h_3B6b5RrH6Z0YGyB-jt4xModq-MOAg&s"
             alt="Clinic Logo" class="logo col-2" />
-        <div class="col-10 d-flex flex-column align-items-center">
+        <div class="col-6 d-flex flex-column align-items-center">
             <span class="receipt-title col-10">AAYAM SKIN CLINIC</span>
             <span class="address col-9">9/3 Manoramaganj, Near Geeta Bhawan Hospital <br /> Aayam Institute Campus,
                 Indore</span>
+            <span class="contact col-10">95742-04550, aayamskinclinic@gmail.com</span>
+        </div>
+        <div class="col-3">
         </div>
     </div>
     <hr />
     <h5 class="text-center">Receipt</h5>
     <div class="info row">
-        <span class="col-5"><strong>Receipt No:</strong> {{ receiptNo }}</span>
-        <span class="col-4"><strong>Patient ID:</strong> {{patientId}}</span>
-        <span class="col-3"><strong>Date:</strong> {{ currentDate | date}}</span>
-        <span class="col-5"><strong>Patient Name:</strong> {{ patientName }}</span>
-        <span class="col-4"><strong>Gender:</strong> {{ gender }}</span>
-        <span class="col-3"><strong>Age:</strong> {{ age }}</span>
-        <span class="col-5"><strong>Father Name:</strong> {{ fatherName }}</span>
-        <span class="col-4"><strong>Payment Mode:</strong> {{ paymentMode }}</span>
-        <span class="col-3"><strong>Payment Type:</strong> {{ paymentType }}</span>
-        <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span>
+        <span class="col-5"><span class="label-style">Receipt No:</span> {{ receiptNo }}</span>
+        <span class="col-4"><span class="label-style">Patient ID:</span> {{patientId}}</span>
+        <span class="col-3"><span class="label-style">Visit ID:</span>{{visitId}}</span>
+
+        <span class="col-5"><span class="label-style">Patient Name:</span> {{ patientName }}</span>
+        <span class="col-4"><span class="label-style">Gender/Age:</span> {{ gender}}/{{age}}</span>
+        <span class="col-3"><span class="label-style">Father Name:</span> {{ fatherName }}</span>
+
+        <span class="col-5"><span class="label-style">Receipt Date:</span> {{ currentDate | date }}</span>
+        <span class="col-4"><span class="label-style">Payment Mode:</span> {{ paymentMode }}</span>
+        <span class="col-3"><span class="label-style">Payment status:</span>{{paymentStatus}}</span>
+
     </div>
     <table>
         <thead>
             <tr>
                 <th class="sno-column">Sno</th>
-                <th class="text-center">Service</th>
+                <th class="text-center">Service/Packages</th>
+                <th class="text-center">Qty</th>
                 <th class="fee-column text-center">Fee</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let service of services; let i = index">
+            <tr row-style *ngFor="let service of services; let i = index">
                 <td class="sno-column">{{i+1}}</td>
                 <td>{{ service.name }}</td>
-                <td class="fee-column text-end">{{ service.price | currency}}</td>
+                <td class="text-center">{{service.qty}}</td>
+                <td class="fee-column text-center">{{ service.price | currency}}</td>
             </tr>
         </tbody>
     </table>
-    <div class="total">
-        <p><strong>Total:</strong> {{ calculateTotal() | currency}}</p>
+    <span class=" d-flex flex-row mb-0">
+        <span class="col-9 text-start print-date-style style-words">Print Date Time:<span>{{currentDate |
+                date}}</span></span>
+        <span class="col-3 total"><strong>Total:</strong> {{ calculateTotal() | currency}}</span>
+    </span>
+    <div class="d-flex flex-row justify-content-between">
+        <span class="style-words">Subjected to Indore Juridiction</span>
+        <span class="style-words">IN WORDS [ONE THOUSAND SEVENTY FIVE ONLY]</span>
     </div>
-    <div class="mt-1">
-        <p><strong>Authority Sign</strong> </p>
+    <div class="mt-1 text-end">
+        <span class="mb-0 style-for">For JP Hospital - Sheru Verma</span>
+    </div>
+    <div class="d-flex flex-column">
+        <span>Note:</span>
+        <span class="mb-0 style-note">1. Culture Report: After 2-3 days, Enquire</span>
+        <span class="style-note">2. Outside Report: No same day guarantee, Enquire</span>
     </div>
 </div>
