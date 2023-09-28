@@ -1,5 +1,4 @@
 <section class="section-org-edit">
-
     <mat-list class="row">
         <app-label>Billing</app-label>
         <mat-accordion>
@@ -21,6 +20,7 @@
                         <div class="col-md-2"><strong>Total Amount</strong></div>
                         <div class="col-md-2"><strong>Discount</strong></div>
                         <div class="col-md-2"><strong>Net Amount</strong></div>
+                        <div class="col-md-1"><strong>Status</strong></div>
                         <div class="col-md"></div>
 
                     </div>
@@ -50,9 +50,14 @@
                                 [(ngModel)]="userBooking.booking.totalDue" readOnly>
                         </div>
 
+                        <div class="col-md-1">
+                            <span>{{userBooking.booking.status}}</span>
+                        </div>
+
                         <hr class="mt-4" />
 
-                        <!-- <div class="row form-group">
+                        <!-- the below commented code is the details of payment in tabular form -->
+                        <!-- <div class="row form-group">   
                             <table class="table-billing col-md-4" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td>Total Due</td>
@@ -69,6 +74,7 @@
                                 </tr>
                             </table>
                         </div> -->
+
                         <!-- newly added to show all previously paid amount -->
                         <div class="row">
                             <div class="col-md-3 mb-4"><strong>Details</strong></div>
@@ -111,6 +117,7 @@
                                 <select name="paymentMode" class="app-single-select-dropdown w-25 me-5"
                                     (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode"
                                     required>
+                                    <option [ngValue]="undefined" selected>Payment mode</option>
                                     <option value="CASH">Cash</option>
                                     <option value="ONLINE">Online</option>
                                     <option value="UPI">UPI</option>
@@ -124,27 +131,44 @@
                                 <div>
                                     &nbsp;&nbsp;
                                     <mat-icon (click)="addServiceItem()"
-                                        class="add-icon clickable">add_circle_outline</mat-icon>
+                                        class="add-icon clickable ms-4 mt-1">add_circle_outline</mat-icon>
                                 </div>
 
                             </div>
                         </div>
 
                         <div class="row">
-                            <div *ngIf="showPendingAmount" class="col-md-2"><strong>Remaining Amount</strong></div>
-                            <div class="col-md-1"></div>
+                            <div class="col-md-1"><strong></strong></div>
+                            <div class="col-md-4">
+                                <div *ngIf="showPendingAmount" class="col-md-"><strong>Remaining</strong></div>
+                            </div>
+                            <div *ngIf="showChequeInbox" class="col-md-3"></div>
                             <div class="col-md"></div>
 
                         </div>
-                        <div *ngIf="showPendingAmount" class="form-group col-md-2">
-                            <input appNumberOnly [defaultValue]="userBooking.booking.totalDue -
-                                userBooking.booking.totalPaid | currency" class="form-control pres-input w-100"
-                                name="totaldue" [(ngModel)]="newPendingAmount" readonly>
+
+                        <div class="col-md-1">
                         </div>
-                        <div *ngIf="showPendingAmount" class="col-md-1">
-                            &nbsp;&nbsp;
-                            <mat-icon (click)="removeServiceItem()"
-                                class="remove-icon clickable">remove_circle_outline</mat-icon>
+                        <div class="col-md-3 d-flex flex-row">
+                            <div *ngIf="showPendingAmount" class="form-group col-md-8">
+                                <input appNumberOnly [defaultValue]="userBooking.booking.totalDue -
+                                userBooking.booking.totalPaid | currency" class="form-control pres-input w-80"
+                                    name="totaldue" [(ngModel)]="newPendingAmount" readonly>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div *ngIf="showPendingAmount" class="col-md-12 ms-0 mt-2">
+                                &nbsp;&nbsp;
+                                <mat-icon (click)="removeServiceItem()"
+                                    class="remove-icon clickable">remove_circle_outline</mat-icon>
+                            </div>
+                        </div>
+
+                        <div *ngIf="showChequeInbox" class="mt-2 ms-4 col-md-3">
+                            <!-- <mat-form-field appearance="outline">
+                                <mat-label>Cheque number</mat-label> -->
+                            <input class="form-control pres-input w-100 me-5" matInput name="cheque" type="text"
+                                placeholder="Cheque number">
+                            <!-- </mat-form-field> -->
                         </div>
                     </div>
                 </div>
