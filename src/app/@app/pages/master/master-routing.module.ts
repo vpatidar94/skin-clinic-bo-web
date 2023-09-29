@@ -8,6 +8,7 @@ import { AddServiceComponent } from './add-service/add-service.component';
 import { ProductsComponent } from './products/products.component';
 import { DepartmentComponent } from './department/department.component';
 import { UserTypeComponent } from './user-type/user-type.component';
+import { InvestigationComponent } from './investigation/investigation.component';
 
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
   { path: 'add-service', component: AddServiceComponent },
   { path: 'department', component: DepartmentComponent },
   { path: 'user-type', component: UserTypeComponent },
+  { path: 'investigation', component: InvestigationComponent }
   
   
 ];

@@ -204,7 +204,8 @@ export class SideMenuComponent {
         { label: 'Service Type', link: '/master/service-type' },
         { label: 'Products', link: '/master/products' },
         { label: 'Department', link: '/master/department' },
-        { label: 'User Type', link: '/master/user-type' }
+        { label: 'User Type', link: '/master/user-type' },
+        { label: 'Investigation', link: '/master/investigation' }
     ];
 
     public pharmacySubOptions = [
