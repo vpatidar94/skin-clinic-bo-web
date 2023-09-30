@@ -1,0 +1,73 @@
+<section>
+    <app-label>Details</app-label>
+
+    <mat-accordion>
+        <mat-expansion-panel class="my-3">
+            <mat-expansion-panel-header class="app-expansion">
+                <div class="app-expansion-title col-md-12">
+                    <span>Patient Id: <span>0812</span></span>
+                    <span>Visiting ID: <span>booking_id</span></span>
+                    <span>First Name: <span>Mayank</span></span>
+                    <span>Doctor's Name: <span>M.Patidar</span></span>
+                    <span>Date: <span>02/08/23</span></span>
+                </div>
+            </mat-expansion-panel-header>
+
+            <!-- <div class="mt-4">
+                <mat-accordion>
+                    <mat-expansion-panel class="my-3">
+                        <mat-expansion-panel-header class="sub-app-expansion">
+                            <span class="prescription-heading">CBC</span>
+                        </mat-expansion-panel-header> -->
+            <div class="border border-info rounded p-3 mt-3">
+                <div class="row mb-0">
+                    <p class="col-md-1"><strong>S.No</strong></p>
+                    <p class="col-md-2"><strong>Item Name</strong></p>
+                    <p class="col-md-2"><strong>Company</strong></p>
+                    <p class="col-md-1"><strong>Qty</strong></p>
+                    <p class="col-md-2"><strong>Expiry</strong></p>
+                    <p class="col-md-"></p>
+                </div>
+
+                <!-- <div *ngFor="let details of cbcReportArray; let i = index;"> -->
+                <!-- <div>
+                    <div class="row align-items-center"> -->
+                <div class="col-md-1 pres-input text-center">
+
+                    <p class="border border-info rounded p-1 text-align-center">1</p>
+                </div>
+                <div class="form-group col-md-2">
+                    <select name="dosage" class="app-single-select-dropdown w-100">
+                        <option>RX = Treatment</option>
+                        <option>HX = History</option>
+                    </select>
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" class="form-control pres-input" name="result" required>
+                </div>
+                <div class="col-md-1 form-group">
+                    <input type="text" class="form-control pres-input" name="unit" required>
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" class="form-control pres-input" name="reference" required>
+                </div>
+
+                <!-- <div class="col-md-2">
+                                        <mat-icon (click)="removeComplaintItem(i)"
+                                            class="add-icon clickable">delete</mat-icon>
+                                        &nbsp;&nbsp;
+                                        <mat-icon (click)="addComplaintItem()"
+                                            *ngIf="(i+1) === booking.complaint?.length"
+                                            class="add-icon clickable">add_circle_outline</mat-icon>
+                                    </div> -->
+            </div>
+
+            <!-- </div> -->
+            <!-- </div> -->
+
+            <!-- </mat-expansion-panel>
+                </mat-accordion> -->
+            <!-- </div> -->
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>
