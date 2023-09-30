@@ -75,6 +75,10 @@ const routes: Routes = [
         loadChildren: () => import('./@app/pages/new-appointment/new-appointment.module').then(m => m.NewAppointmentModule)
 
       },
+      {
+        path: 'investigation',
+        loadChildren: () => import('./@app/pages/investigation/investigation.module').then(m => m.InvestigationModule)
+      },
     ]
   }
 ];
