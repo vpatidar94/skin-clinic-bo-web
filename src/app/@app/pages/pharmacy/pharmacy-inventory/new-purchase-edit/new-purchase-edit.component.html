@@ -1,0 +1,54 @@
+<section>
+    <div class="d-flex justify-content-end">
+        <button class="common-button" [routerLink]="['/master/products']">Add Product</button>
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel class="my-3">
+            <mat-expansion-panel-header class="app-expansion">
+                <div class="app-expansion-title col-md-12">
+                    <span>Patient Id: <span>0812</span></span>
+                    <span>Visiting ID: <span>booking_id</span></span>
+                    <span>First Name: <span>Mayank</span></span>
+                    <span>Doctor's Name: <span>M.Patidar</span></span>
+                    <span>Date: <span>02/08/23</span></span>
+                </div>
+            </mat-expansion-panel-header>
+
+
+            <div class="border border-info rounded p-3 mt-4 container-style">
+                <div class="row">
+                    <div class="col-md-1"><strong>Sno.</strong></div>
+                    <div class="col-md-2"><strong>Item Name</strong></div>
+                    <div class="col-md-2"><strong>Company</strong></div>
+                    <div class="col-md-2"><strong>Qty</strong></div>
+                    <div class="col-md-2"><strong>Expiry</strong></div>
+                    <div class="col-md"></div>
+                </div>
+
+
+                <div class="row align-items-center">
+                    <div class="col-md-1 pres-input text-center">
+                        <p class="border border-info rounded p-1 text-align-center">1</p>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <select name="dosage" class="app-single-select-dropdown w-100">
+                            <option>RX = Treatment</option>
+                            <option>HX = History</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <input type="text" class="form-control pres-input" name="result" required>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <input type="text" class="form-control pres-input" name="unit" required>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <input type="text" class="form-control pres-input" name="reference" required>
+                    </div>
+
+                </div>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

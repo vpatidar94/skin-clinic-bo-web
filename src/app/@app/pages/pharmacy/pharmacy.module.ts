@@ -31,15 +31,8 @@ import { PrescriptionComponent } from './prescription/prescription.component';
 import { BillingComponent } from './billing/billing.component';
 import { ViewPatientComponent } from './view-patient/view-patient.component';
 import { PharmacyEditComponent } from './pharmacy-billing/pharmacy-edit/pharmacy-edit.component';
-// import { ServicesComponent } from './services/services.component';
-// import { MasterComponent } from './master.component';
-// import { ServiceTypeComponent } from './service-type/service-type.component';
-// import { AddServiceTypeComponent } from './add-service-type/add-service-type.componrnt';
-// import { AddServiceComponent } from './add-service/add-service.component';
-// import { ProductsComponent } from './products/products.component';
-
-
-
+import { PharmacyInventoryComponent } from './pharmacy-inventory/pharmacy-inventory.component';
+import { NewPurchaseEditComponent } from './pharmacy-inventory/new-purchase-edit/new-purchase-edit.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -68,6 +61,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, PharmacyRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [PharmacyComponent,PharmacyEditComponent, PatientListComponent, PharmacyBillingComponent, PrescriptionComponent, BillingComponent, ViewPatientComponent]
+  declarations: [PharmacyComponent,PharmacyEditComponent, PatientListComponent, PharmacyBillingComponent, PrescriptionComponent, BillingComponent, ViewPatientComponent,PharmacyInventoryComponent,NewPurchaseEditComponent]
 })
 export class PharmacyModule { }

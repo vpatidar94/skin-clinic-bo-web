@@ -1,10 +1,8 @@
-<section class="section-org-edit" *ngIf="showSectionInventoryList">
+<section class="section-org-edit" *ngIf="showSectionPharmacyInventoryList">
     <div class="row">
         <div class="d-flex justify-content-between">
             <h2>Inventory List</h2>
-            <button class="common-button" (click)="addInventory()">Add Inventory</button>
-            <button class="common-button" (click)="addItem()">Add Item</button>
-
+            <button class="common-button" (click)="newPurchase()">New Purchase</button>
         </div>
     </div>
 
@@ -19,11 +17,6 @@
 
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
-                <!-- S.No -->
-                <ng-container matColumnDef="sNo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>S.No</th>
-                    <td mat-cell *matCellDef="let row"> {{row.sNo}} </td>
-                </ng-container>
 
                 <!-- patient Name -->
                 <ng-container matColumnDef="itemCode">
@@ -66,8 +59,20 @@
     </mat-card>
 </section>
 
-<section class="section-org-edit" *ngIf="showSectionInventoryEdit">
-    <app-inventory-edit></app-inventory-edit>
+<section class="section-org-edit" *ngIf="showSectionNewPurchaseEdit">
+
+    <app-new-purchase-edit></app-new-purchase-edit>
+
+    <ng-template #callAPIDialog>
+        <app-new-purchase-edit></app-new-purchase-edit>
+        <h1>hey</h1>
+        <mat-dialog-actions align="start">
+            <button mat-button matDialogClose="no">No</button>
+            <button mat-button matDialogClose="yes">Yes</button>
+        </mat-dialog-actions>
+    </ng-template>
+
+
 
     <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
         <div class="col-1">
@@ -80,7 +85,7 @@
 </section>
 
 <section class="section-org-edit" *ngIf="showSectionItemEdit">
-    <app-item-edit></app-item-edit>
+    <!-- <app-item-edit></app-item-edit> -->
 
     <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
         <div class="col-1">

@@ -193,6 +193,9 @@ export class SideMenuComponent {
         // navList.push(new NavigationDto('Department', '/master/department', '', []));
         // navList.push(new NavigationDto('User Type', '/master/user-type', '', []));
         navList.push(new NavigationDto('New Appointment', '/new-appointment', 'ic_user', []));
+        navList.push( new NavigationDto('Inventory', '/inventory', 'ic_user', []));
+        navList.push( new NavigationDto('Investigation', '/investigation', 'ic_user', []));
+
         navList.push(new NavigationDto('Users', '/manage-user', 'ic_user', []));
 
         return navList;
@@ -211,6 +214,8 @@ export class SideMenuComponent {
     public pharmacySubOptions = [
         { label: 'Patient List', link: '/pharmacy/patient-list' },
         { label: 'Pharmacy Billing', link: '/pharmacy/pharmacy-billing' },
+        { label: 'Pharmacy Inventory', link: '/pharmacy/pharmacy-inventory' },
+
     ];
 
     toggleMasterTab() {

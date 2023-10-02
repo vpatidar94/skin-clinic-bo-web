@@ -6,15 +6,15 @@ import { PharmacyBillingComponent } from './pharmacy-billing/pharmacy-billing.co
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { BillingComponent } from './billing/billing.component';
 import { ViewPatientComponent } from './view-patient/view-patient.component';
+import { PharmacyInventoryComponent } from './pharmacy-inventory/pharmacy-inventory.component';
 
 
 const routes = [
     { path: '', component: PharmacyComponent },
     {path:'patient-list' , component: PatientListComponent},
     {path:'pharmacy-billing' , component: PharmacyBillingComponent},
-    // {path: 'prescription' , component: PrescriptionComponent},
-    // {path: 'billing' , component: BillingComponent},
-    {path: 'view-patient' , component: ViewPatientComponent}
+    {path: 'view-patient' , component: ViewPatientComponent},
+    {path: 'pharmacy-inventory', component: PharmacyInventoryComponent}
 ]
 
 @NgModule({
