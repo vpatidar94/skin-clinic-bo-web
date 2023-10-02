@@ -29,6 +29,8 @@ import { InvestigationRoutingModule } from './investigation-routing.module';
 import { ViewInvestigationComponent } from './view-investigation/view-investigation.component';
 import { TestSampleDetailsComponent } from './test-sample-details/test-sample-details.component';
 import { ReportsComponent } from './reports/reports.component';
+import { NgxBarcode6Module } from 'ngx-barcode6';
+
 
 const MATERIAL_MODULE = [
     MatButtonModule,
@@ -54,7 +56,7 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),NgxBarcode6Module],
     providers: [],
     exports: [],
     declarations: [InvestigationComponent, ViewInvestigationComponent, TestSampleDetailsComponent, ReportsComponent]

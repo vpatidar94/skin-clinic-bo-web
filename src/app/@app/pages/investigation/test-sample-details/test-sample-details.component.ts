@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PrescriptionVo, BookingVo, UserBookingDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
@@ -7,6 +7,8 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxBarcode6Module } from 'ngx-barcode6';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 // newly added to show table
 export interface PeriodicElement {
@@ -38,8 +40,14 @@ export class TestSampleDetailsComponent {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+
+    showTestIdBarcode:boolean=false;
+    showPatientIdBarcode:boolean=false;
+
+
     /* ************************************* Constructors ******************************************** */
-    constructor() {
+    constructor(
+        ) {
 
     }
 
@@ -59,6 +67,20 @@ export class TestSampleDetailsComponent {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+
+    generatePatientIdBarcode():void {
+        this.showPatientIdBarcode=true;
+
+        console.log("hey");
+    }
+
+
+    generateTestIdBarcode():void {
+        this.showTestIdBarcode=true;
+
+        console.log("hey");
     }
     /* ********************************* Static Field *************************************** */
 
