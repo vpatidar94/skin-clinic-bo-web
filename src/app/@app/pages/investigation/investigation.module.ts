@@ -30,6 +30,8 @@ import { ViewInvestigationComponent } from './view-investigation/view-investigat
 import { TestSampleDetailsComponent } from './test-sample-details/test-sample-details.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NgxBarcode6Module } from 'ngx-barcode6';
+import { TestIdBarCodeDialogComponent } from './test-id-bar-code-dialog/test-id-bar-code-dialog.component';
+import { PatientIdBarCodeDialogComponent } from './patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 
 
 const MATERIAL_MODULE = [
@@ -59,6 +61,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
     imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),NgxBarcode6Module],
     providers: [],
     exports: [],
-    declarations: [InvestigationComponent, ViewInvestigationComponent, TestSampleDetailsComponent, ReportsComponent]
+    declarations: [InvestigationComponent, ViewInvestigationComponent, TestSampleDetailsComponent, ReportsComponent,PatientIdBarCodeDialogComponent,TestIdBarCodeDialogComponent]
 })
 export class InvestigationModule { }

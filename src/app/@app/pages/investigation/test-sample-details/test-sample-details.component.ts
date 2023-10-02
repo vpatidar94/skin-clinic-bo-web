@@ -8,7 +8,9 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxBarcode6Module } from 'ngx-barcode6';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
+import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 
 // newly added to show table
 export interface PeriodicElement {
@@ -46,7 +48,7 @@ export class TestSampleDetailsComponent {
 
 
     /* ************************************* Constructors ******************************************** */
-    constructor(
+    constructor(public dialog: MatDialog
         ) {
 
     }
@@ -70,18 +72,36 @@ export class TestSampleDetailsComponent {
     }
 
 
-    generatePatientIdBarcode():void {
-        this.showPatientIdBarcode=true;
+    // generatePatientIdBarcode():void {
+    //     this.showPatientIdBarcode=true;
 
-        console.log("hey");
-    }
+    //     console.log("hey");
+    // }
 
 
-    generateTestIdBarcode():void {
-        this.showTestIdBarcode=true;
+    // generateTestIdBarcode():void {
+    //     this.showTestIdBarcode=true;
 
-        console.log("hey");
-    }
+    //     console.log("hey");
+    // }
+
+    openDialogPatientId(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(PatientIdBarCodeDialogComponent, {
+          width: '550px',
+          height:'550px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+        });
+      }
+
+      openDialogTestId(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(TestIdBarCodeDialogComponent, {
+          width: '550px',
+          height:'550px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+        });
+      }
     /* ********************************* Static Field *************************************** */
 
 }
