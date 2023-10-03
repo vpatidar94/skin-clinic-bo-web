@@ -1,11 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
+import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
-import { PDFDocumentProxy } from 'ng2-pdf-viewer';
-import { TemplateRef } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { PdfViewerDialogComponent } from './pdf-viewer-dialog.component';
 
 @Component({
   selector: 'app-billing-edit',
@@ -15,7 +15,6 @@ import { MatDialog } from '@angular/material/dialog';
 export class BillingEditComponent implements OnInit {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
-  @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
   @Input()
   userBooking!: UserBookingDto;
 
@@ -41,16 +40,15 @@ export class BillingEditComponent implements OnInit {
   private pdf!: PDFDocumentProxy;
   public src!: Uint8Array;
 
-
   showPendingAmount: boolean = false;
   payingAmount!: number;
   newPendingAmount!: number;
   makeAmountEditable: boolean = false;
 
-
   /* ************************************ Constructors ************************************ */
   constructor(private transactionApi: TransactionApi,
     private bookingApi: BookingApi,
+    private zone: NgZone,
     private dialog: MatDialog) {
   }
 
@@ -81,7 +79,7 @@ export class BillingEditComponent implements OnInit {
         this.userBookingChange.emit(this.userBooking);
         this.showPendingAmount = false;
       }
-      
+
     });
   }
 
@@ -91,6 +89,7 @@ export class BillingEditComponent implements OnInit {
       const fileReader = new FileReader();
       fileReader.onload = () => {
         this.src = new Uint8Array(fileReader.result as ArrayBuffer);
+        this._showReceiptPopup(this.src);
       };
       fileReader.readAsArrayBuffer(blob);
     });
@@ -116,28 +115,17 @@ export class BillingEditComponent implements OnInit {
     this.isPdfLoaded = true;
   }
 
-  public showReceiptPopup() {
-    this.downloadReceipt();
-    let dialogRef = this.dialog.open(this.callAPIDialog);
-    dialogRef.afterClosed().subscribe(result => {
-      // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
-      if (result !== undefined) {
-        if (result === 'yes') {
-          // TODO: Replace the following line with your code.
-          console.log('User clicked yes.');
-        } else if (result === 'no') {
-          // TODO: Replace the following line with your code.
-          console.log('User clicked no.');
-        }
-      }
-
-    })
+  private _showReceiptPopup(src: Uint8Array): void {
+    this.dialog.open(PdfViewerDialogComponent, {
+      width: '800px',
+      data: { src },
+    });
   }
 
   public addServiceItem(): void {
     this.showPendingAmount = true;
     this.makeAmountEditable = true;
-    
+
   }
 
   public removeServiceItem(): void {
@@ -147,7 +135,7 @@ export class BillingEditComponent implements OnInit {
 
   public addServiceItemNew(): void {
     this.showPendingAmount = true;
-    this.newPendingAmount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid- this.bookingTransaction.amount;
+    this.newPendingAmount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid - this.bookingTransaction.amount;
   }
 
   /* ************************************ Private Methods ************************************ */

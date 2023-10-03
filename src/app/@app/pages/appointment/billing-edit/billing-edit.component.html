@@ -92,7 +92,7 @@
                                     [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required
                                     [readOnly]="true" (ngModelChange)="userBooking.booking.bookingDate = $event">
                                 <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
-                                    (click)="showReceiptPopup()">Receipt</span>
+                                    (click)="downloadReceipt()">Receipt</span>
 
                             </div>
                         </div>
@@ -172,23 +172,6 @@
                         </div>
                     </div>
                 </div>
-
-                <ng-template #callAPIDialog class="mat-dialog-container dialog-content">
-                    <div *ngIf="src">
-                        <h2>Receipt</h2>
-
-                        <button (click)="print()" [disabled]="!isPdfLoaded">Print</button>
-
-                        <div class="row pdf-container">
-                            <pdf-viewer [src]="src" style="width: 400px; height: 500px" [original-size]="false"
-                                (after-load-complete)="onLoaded($event)"></pdf-viewer>
-                        </div>
-                    </div>
-                    <mat-dialog-actions align="end">
-                        <button mat-button matDialogClose="no">No</button>
-                        <button mat-button matDialogClose="yes">Yes</button>
-                    </mat-dialog-actions>
-                </ng-template>
             </mat-expansion-panel>
         </mat-accordion>
     </mat-list>
