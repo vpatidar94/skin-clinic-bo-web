@@ -1,0 +1,33 @@
+// @page {
+//     size: 5cm 2.5cm; /* Width x Height */
+//     margin: 0; /* Remove any margins */
+//   }
+  
+  /* Define the size and styles for the printable content */
+  // #printable-content {
+  //   width: 5cm;
+  //   height: 2.5cm;
+  //   background-color: white; /* Set the background color to ensure it's printed */
+  //   padding: 10px; /* Add padding to ensure content fits within the specified size */
+  // }
+
+  .style-barcode{
+    width: 5cm;
+    height: 2.5cm;
+    background-color: white; /* Set the background color to ensure it's printed */
+    padding: 10px;
+  }
+  .style-heading{
+    color:black;
+    font-weight: 600;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  .style-department{
+    background-color: black;
+    color:white;
+    font-size: 25px;
+    padding: 8px;
+  }

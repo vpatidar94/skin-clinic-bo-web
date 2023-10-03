@@ -17,39 +17,43 @@ export interface PeriodicElement {
     sno: number;
     investigationName: string;
     specimen: string;
-    sampleCollected: string;
+    sampleCollected: boolean;
     date: string;
     time: string;
-    action:string
+    action: string
 }
 
 // newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
-    { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: "View", date: '09/09/2023', time: '12:30 PM', action:'Print' },
-    { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: "View", date: '09/09/2023', time: '12:30 PM', action:'Print' },
-    { sno: 3, investigationName: 'Lipid Profile', specimen: 'Blood', sampleCollected: "View", date: '09/09/2023', time: '12:30 PM', action:'Print' },
+    { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
+    { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
+    { sno: 3, investigationName: 'Lipid Profile', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
 
 ]
 @Component({
     selector: 'app-test-sample-details',
     templateUrl: './test-sample-details.component.html',
-    // styleUrls: ['./test-sample-details.component.scss']
+    styleUrls: ['./test-sample-details.component.scss']
 })
 export class TestSampleDetailsComponent {
-    displayedColumns: string[] = ['sno', 'investigationName', 'specimen', "sampleCollected", 'date', 'time','action'];
+    displayedColumns: string[] = ['sno', 'investigationName', 'specimen', "sampleCollected", 'date', 'time', 'action'];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
 
-    showTestIdBarcode:boolean=false;
-    showPatientIdBarcode:boolean=false;
+    showTestIdBarcode: boolean = false;
+    showPatientIdBarcode: boolean = false;
+
+
+    checkedOrNot!: 1;
+    printTest: boolean = false;
 
 
     /* ************************************* Constructors ******************************************** */
     constructor(public dialog: MatDialog
-        ) {
+    ) {
 
     }
 
@@ -87,21 +91,27 @@ export class TestSampleDetailsComponent {
 
     openDialogPatientId(enterAnimationDuration: string, exitAnimationDuration: string): void {
         this.dialog.open(PatientIdBarCodeDialogComponent, {
-          width: '550px',
-          height:'550px',
-          enterAnimationDuration,
-          exitAnimationDuration,
+            width: '550px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
         });
-      }
+    }
 
-      openDialogTestId(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    openDialogTestId(enterAnimationDuration: string, exitAnimationDuration: string): void {
         this.dialog.open(TestIdBarCodeDialogComponent, {
-          width: '550px',
-          height:'550px',
-          enterAnimationDuration,
-          exitAnimationDuration,
+            width: '550px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
         });
-      }
+    }
+
+    printIt(): boolean {
+        return (
+            this.printTest = true
+        )
+    }
     /* ********************************* Static Field *************************************** */
 
 }

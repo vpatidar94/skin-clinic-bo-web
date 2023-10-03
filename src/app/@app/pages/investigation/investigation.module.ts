@@ -32,6 +32,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { NgxBarcode6Module } from 'ngx-barcode6';
 import { TestIdBarCodeDialogComponent } from './test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 import { PatientIdBarCodeDialogComponent } from './patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 const MATERIAL_MODULE = [
@@ -58,7 +59,7 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),NgxBarcode6Module],
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),NgxBarcode6Module,PdfViewerModule],
     providers: [],
     exports: [],
     declarations: [InvestigationComponent, ViewInvestigationComponent, TestSampleDetailsComponent, ReportsComponent,PatientIdBarCodeDialogComponent,TestIdBarCodeDialogComponent]

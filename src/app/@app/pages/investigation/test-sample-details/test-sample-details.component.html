@@ -10,7 +10,7 @@
           <button mat-button >Cancel</button>
         </div>
       </section> -->
-      
+
     <!-- <div *ngIf="showPatientIdBarcode">
         <div style="text-align:center">
             <h1>
@@ -71,10 +71,18 @@
                         </ng-container>
 
                         <!-- select -->
-                        <ng-container matColumnDef="sampleCollected">
+                        <!-- <ng-container matColumnDef="sampleCollected">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Sample Collected </th>
                             <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><mat-checkbox
-                                    class="large-mat-checkbox"></mat-checkbox></td>
+                                    class="large-mat-checkbox" [checked]="printIt()"></mat-checkbox></td>
+                        </ng-container> -->
+
+                        <ng-container matColumnDef="sampleCollected">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sample Collected </th>
+                            <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">
+                                <mat-checkbox [(ngModel)]="row.sampleCollected"
+                                    class="large-mat-checkbox"></mat-checkbox>
+                            </td>
                         </ng-container>
 
                         <!-- Duration -->
@@ -89,14 +97,16 @@
                         </ng-container>
                         <ng-container matColumnDef="action">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Bar Code </th>
-                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> 
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis" >
                                 <!-- <button class="common-button"
                                     (click)="generatePatientIdBarcode()">Patient Id</button>  -->
-                                    <button class="common-button" (click)="openDialogPatientId('0ms', '0ms')">Patient Id</button>
+                                <button [(disabled)]="!row.sampleCollected" class="btn-style"
+                                    (click)="openDialogPatientId('0ms', '0ms')">Print</button>
 
-                                    |
-                                     <button class="common-button" (click)="openDialogTestId('0ms', '0ms')"
-                                        >Test Id </button></td> 
+                                <!-- |
+                                     <button class="common-button" [disabled]="!row.sampleCollected" (click)="openDialogTestId('0ms', '0ms')"
+                                        >Test Id </button> -->
+                            </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
