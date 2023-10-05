@@ -17,11 +17,11 @@ export interface PeriodicElement {
 
 // newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
-    { billNo: 1101, patientName: 'Chhitu Yadav', contactNo: '7894561230', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { billNo: 1202, patientName: 'Virat kohli', contactNo: '6544000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { billNo: 3625, patientName: 'Rohit Sharma', contactNo: '8554000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { billNo: 1464, patientName: 'Hardik Pandya', contactNo: '4555000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { billNo: 8555, patientName: 'AB de Villiers', contactNo: '3788000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { billNo: 1101, patientName: 'Chhitu Yadav', contactNo: '7894561230', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View | move to pharmacy" },
+    { billNo: 1202, patientName: 'Virat kohli', contactNo: '6544000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View | move to pharmacy" },
+    { billNo: 3625, patientName: 'Rohit Sharma', contactNo: '8554000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View | move to pharmacy" },
+    { billNo: 1464, patientName: 'Hardik Pandya', contactNo: '4555000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View | move to pharmacy" },
+    { billNo: 8555, patientName: 'AB de Villiers', contactNo: '3788000000', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View | move to pharmacy" },
 ]
 
 @Component({

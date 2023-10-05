@@ -1,41 +1,5 @@
 <section>
     <app-label>Details</app-label>
-    <!-- <section class="section-role-selector">
-        <h1 mat-dialog-title>Proceed</h1>
-        <div mat-dialog-content>
-          <p>You want to proceed?</p>
-        </div>
-        <div mat-dialog-actions>
-          <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Proceed</button>
-          <button mat-button >Cancel</button>
-        </div>
-      </section> -->
-
-    <!-- <div *ngIf="showPatientIdBarcode">
-        <div style="text-align:center">
-            <h1>
-                Welcome to Aayam !
-            </h1>
-        </div>
-        <div style="text-align:center">
-            <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'P12584'" [bc-display-value]="true">
-            </ngx-barcode6>
-        </div>
-       
-    </div>
-
-    <div *ngIf="showTestIdBarcode">
-        <div style="text-align:center">
-            <h1>
-                Welcome to Aayam !
-            </h1>
-        </div>
-        <div style="text-align:center">
-            <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'T123548'" [bc-display-value]="true">
-            </ngx-barcode6>
-        </div>
-       
-    </div> -->
     <mat-accordion>
         <mat-expansion-panel class="my-3">
             <mat-expansion-panel-header class="app-expansion">
@@ -58,13 +22,13 @@
                             <td mat-cell *matCellDef="let row"> {{row.sno}} </td>
                         </ng-container>
 
-                        <!-- medicine -->
+                        <!-- Investigation Name -->
                         <ng-container matColumnDef="investigationName">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Investigation Name</th>
                             <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.investigationName}} </td>
                         </ng-container>
 
-                        <!--dosage -->
+                        <!--Specimen -->
                         <ng-container matColumnDef="specimen">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Specimen </th>
                             <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.specimen}} </td>
@@ -97,15 +61,10 @@
                         </ng-container>
                         <ng-container matColumnDef="action">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Bar Code </th>
-                            <td mat-cell *matCellDef="let row" class="text-ellipsis" >
-                                <!-- <button class="common-button"
-                                    (click)="generatePatientIdBarcode()">Patient Id</button>  -->
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis">
                                 <button [(disabled)]="!row.sampleCollected" class="btn-style"
+                                    [class.checked]="row.sampleCollected"
                                     (click)="openDialogPatientId('0ms', '0ms')">Print</button>
-
-                                <!-- |
-                                     <button class="common-button" [disabled]="!row.sampleCollected" (click)="openDialogTestId('0ms', '0ms')"
-                                        >Test Id </button> -->
                             </td>
                         </ng-container>
 

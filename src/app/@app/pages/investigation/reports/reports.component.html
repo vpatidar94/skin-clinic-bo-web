@@ -17,7 +17,8 @@
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                            <input type="checkbox" class="me-3">
+                            <!-- <input type="checkbox" class="me-3"> -->
+                            <input type="checkbox" class="me-3" [(ngModel)]="cbcReportChecked">
                             <span class="prescription-heading">CBC</span>
                         </mat-expansion-panel-header>
                         <div class="border border-info rounded p-3 mt-3">
@@ -66,7 +67,8 @@
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                            <input type="checkbox" class="me-3">
+                            <!-- <input type="checkbox" class="me-3"> -->
+                            <input type="checkbox" class="me-3" [(ngModel)]="widalTestChecked">
                             <span class="prescription-heading">Widal Test</span>
                         </mat-expansion-panel-header>
                         <div class="border border-info rounded p-3 mt-3">
@@ -115,7 +117,8 @@
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                             <input type="checkbox" class="me-3">
+                             <!-- <input type="checkbox" class="me-3"> -->
+                             <input type="checkbox" class="me-3" [(ngModel)]="lipidProfileChecked">
                             <span class="prescription-heading">Lipid Profile</span>
                         </mat-expansion-panel-header>
                         <div class="border border-info rounded p-3 mt-3">
@@ -151,5 +154,6 @@
                 </mat-accordion>
             </div>
         </mat-expansion-panel>
+        <button (click)="printSelectedReports('CBC')">Print</button>
     </mat-accordion>
 </section>

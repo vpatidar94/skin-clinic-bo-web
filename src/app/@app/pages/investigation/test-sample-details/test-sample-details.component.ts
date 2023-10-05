@@ -47,10 +47,6 @@ export class TestSampleDetailsComponent {
     showPatientIdBarcode: boolean = false;
 
 
-    checkedOrNot!: 1;
-    printTest: boolean = false;
-
-
     /* ************************************* Constructors ******************************************** */
     constructor(public dialog: MatDialog
     ) {
@@ -58,14 +54,13 @@ export class TestSampleDetailsComponent {
     }
 
     /* ************************************* Public Methods ******************************************** */
-    // newly added to show table
     public ngAfterViewInit() {
         this.paginator.showFirstLastButtons = false;
         this.paginator.hidePageSize = false;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
-    // newly added to show table
+
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -75,21 +70,7 @@ export class TestSampleDetailsComponent {
         }
     }
 
-
-    // generatePatientIdBarcode():void {
-    //     this.showPatientIdBarcode=true;
-
-    //     console.log("hey");
-    // }
-
-
-    // generateTestIdBarcode():void {
-    //     this.showTestIdBarcode=true;
-
-    //     console.log("hey");
-    // }
-
-    openDialogPatientId(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    public openDialogPatientId(enterAnimationDuration: string, exitAnimationDuration: string): void {
         this.dialog.open(PatientIdBarCodeDialogComponent, {
             width: '550px',
             height: '550px',
@@ -98,7 +79,7 @@ export class TestSampleDetailsComponent {
         });
     }
 
-    openDialogTestId(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    public openDialogTestId(enterAnimationDuration: string, exitAnimationDuration: string): void {
         this.dialog.open(TestIdBarCodeDialogComponent, {
             width: '550px',
             height: '550px',
@@ -107,11 +88,6 @@ export class TestSampleDetailsComponent {
         });
     }
 
-    printIt(): boolean {
-        return (
-            this.printTest = true
-        )
-    }
     /* ********************************* Static Field *************************************** */
 
 }

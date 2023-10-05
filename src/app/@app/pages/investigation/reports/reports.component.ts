@@ -23,9 +23,66 @@ const cbcTestData: TestInterface[] = [
 
 export class ReportsComponent implements OnInit{
 
-    cbcReportArray!: any;
+    // cbcReportArray!: any;
+    
+    cbcReportArray: TestInterface[] = cbcTestData;
+    
+    // Variables to track the state of checkboxes
+    cbcReportChecked: boolean = false;
+    widalTestChecked: boolean = false;
+    lipidProfileChecked: boolean = false;
 
     public ngOnInit(): void {
-        this.cbcReportArray=cbcTestData;
+        // this.cbcReportArray=cbcTestData;
+    }
+
+    printSelectedReports(reportName:string) {
+        if (reportName === 'CBC' && this.cbcReportChecked) {
+            window.print();
+    //         // Print CBC report content
+    //         console.log('Printing CBC report content:',this.cbcReportArray);
+    //         // You can replace console.log with actual printing logic
+    //         const reportToPrint = this.cbcReportArray[0];
+
+    // const printWindow = window.open('', '', 'width=600,height=600');
+    // if (printWindow) { // Check if printWindow is not null
+    //   printWindow.document.open();
+    //   printWindow.document.write('<html><head><title>Printed Report</title></head><body>');
+      
+    //   printWindow.document.write(
+    // //     `
+    // //     <h2>${reportToPrint.testName}</h2>
+    // //     <p><strong>Result Value:</strong> ${reportToPrint.resultValue}</p>
+    // //     <p><strong>Unit:</strong> ${reportToPrint.unit}</p>
+    // //     <p><strong>Reference Value:</strong> ${reportToPrint.referenceValue}</p>
+    // //   `
+    // `<h2>${this.cbcReportArray}</h2>`
+    //   );
+
+    //   printWindow.document.write('</body></html>');
+    //   printWindow.document.close();
+    //   printWindow.print();
+    //   printWindow.close();
+    // } else {
+    //   console.error('Failed to open print window.');
+    // }
+//   } else {
+//     alert('No report selected for printing.');
+//   }
+    // }
+}
+        
+
+        if (this.widalTestChecked) {
+            // Print Widal Test report content
+            console.log('Printing Widal Test report content:');
+            // You can replace console.log with actual printing logic
+        }
+
+        if (this.lipidProfileChecked) {
+            // Print Lipid Profile report content
+            console.log('Printing Lipid Profile report content:');
+            // You can replace console.log with actual printing logic
+        }
     }
 }

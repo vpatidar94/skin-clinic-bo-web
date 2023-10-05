@@ -40,6 +40,8 @@ export class PatientListComponent {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+
+    showPharmacyEditForm: boolean = false;
     /* ************************************* Constructors ******************************************** */
     constructor() {
 
@@ -61,5 +63,10 @@ export class PatientListComponent {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+
+    addNewCustomer(): void{
+        this.showPharmacyEditForm = !this.showPharmacyEditForm;
     }
 }
