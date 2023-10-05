@@ -1,8 +1,9 @@
-import { Component, ViewChild, AfterViewInit, OnInit, TemplateRef } from "@angular/core";
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { Component, ViewChild, AfterViewInit, OnInit} from "@angular/core";
+import { MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { NewPurchaseEditDialogComponent } from "./new-purchase-edit-dialog/new-purchase-edit-dialog.component";
 
 export interface PeriodicElement {
 
@@ -27,8 +28,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
-
-    @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
 
     showSectionPharmacyInventoryList!: boolean;
     showSectionNewPurchaseEdit!: boolean;
@@ -62,20 +61,17 @@ export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
 
     public newPurchase():void {
         this._addEditINewPurchase();
-        let dialogRef = this.dialog.open(this.callAPIDialog);
-        dialogRef.afterClosed().subscribe(result => {
-          // Note: If the user clicks outside the dialog or presses the escape key, there'll be no result
-          if (result !== undefined) {
-            if (result === 'yes') {
-              // TODO: Replace the following line with your code.
-              console.log('User clicked yes.');
-            } else if (result === 'no') {
-              // TODO: Replace the following line with your code.
-              console.log('User clicked no.');
-            }
-        }
-    });
+   
+    
         
+    }
+    public openNewPurchaseEditDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(NewPurchaseEditDialogComponent, {
+            width: '1200px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+        });
     }
 
     public addItem(): void {

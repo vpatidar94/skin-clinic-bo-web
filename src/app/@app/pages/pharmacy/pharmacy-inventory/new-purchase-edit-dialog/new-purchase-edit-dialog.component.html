@@ -1,6 +1,7 @@
-<section>
+<section class="p-5">
     <div class="d-flex justify-content-end">
-        <button class="common-button" [routerLink]="['/master/products']">Add Product</button>
+        <!-- <button class="common-button" [routerLink]="['/master/products']">Add Product</button> -->
+        <button  class="common-button" (click)="openAddProductDialog('0ms', '0ms')">Add Product</button>
     </div>
     <mat-accordion>
         <mat-expansion-panel class="my-3">

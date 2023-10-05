@@ -1,0 +1,202 @@
+<section class="section-org-edit p-5">
+    <div class="row mb-3">
+        <div class=" d-flex justify-content-between">
+            <h2>Add Product</h2>
+        </div>
+    </div>
+
+    <form>
+        <div class="row">
+            <!-- Product Code-->
+            <!-- <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Product Code</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="" class="form-control app-input" name="productCode" [(ngModel)]="product.code"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Product Name -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Product Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="productName"
+                                [(ngModel)]="product.name" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchase Date -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Purchase Date</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="Date" class="form-control app-input" name="purchaseDate"
+                                [(ngModel)]="product.purchaseDate" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <!-- Drug-->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Drug</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="drug" [(ngModel)]="product.drug"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Company</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="company"
+                                [(ngModel)]="product.company" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Product Type -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Product Type</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <select name="ProductType" class="app-single-select-dropdown w-100"
+                                [(ngModel)]="product.productType" required>
+                                <option value="">Select</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Capsule">Capsule</option>
+                                <option value="Syrup">Syrup</option>
+                                <option value="Drop">Drop</option>
+                                <option value="Injection">Injection</option>
+                                <option value="Inhaler">Inhaler</option>
+                                <option value="Gel">Gel</option>
+                                <option value="Ointment">Ointment</option>
+                                <option value="General Product">General Product</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qty per strip -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <!-- <label class="app-label">Qty/strip</label> -->
+                        <label class="app-label">Packaging<span class="ms-4">1 x</span></label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerStrip"
+                                required appNumberOnly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Price per strip-->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <!-- <label class="app-label"> Price/strip</label> -->
+                        <label class="app-label">Price/Packaging</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="" class="form-control app-input" name="pricePerStrip"
+                                [(ngModel)]="product.pricePerStrip" required appAmountOnly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- newly added -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <!-- <label class="app-label"> Price/strip</label> -->
+                        <label class="app-label">Unit Price</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="" class="form-control app-input" name="Unit Price" [(ngModel)]="product.price"
+                                required appAmountOnly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <!-- Price -->
+            <!-- <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Price</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="" class="form-control app-input" name="price" [(ngModel)]="product.price"
+                                required appAmountOnly>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Expiry Date -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Expiry Date</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="date" class="form-control app-input" name="expiryDate"
+                                [(ngModel)]="product.expirtyDate" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-1">
+            <button (click)="savingProduct()" class="common-button">{{'save'}}</button>
+        </div>
+
+    </form>
+</section>

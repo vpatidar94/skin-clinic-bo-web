@@ -2,7 +2,8 @@
     <div class="row">
         <div class="d-flex justify-content-between">
             <h2>Inventory List</h2>
-            <button class="common-button" (click)="newPurchase()">New Purchase</button>
+            <!-- <button class="common-button" (click)="newPurchase()">New Purchase</button> -->
+            <button  class="common-button" (click)="openNewPurchaseEditDialog('0ms', '0ms')">New Purchase</button>
         </div>
     </div>
 
@@ -61,18 +62,7 @@
 
 <section class="section-org-edit" *ngIf="showSectionNewPurchaseEdit">
 
-    <app-new-purchase-edit></app-new-purchase-edit>
-
-    <ng-template #callAPIDialog>
-        <app-new-purchase-edit></app-new-purchase-edit>
-        <h1>hey</h1>
-        <mat-dialog-actions align="start">
-            <button mat-button matDialogClose="no">No</button>
-            <button mat-button matDialogClose="yes">Yes</button>
-        </mat-dialog-actions>
-    </ng-template>
-
-
+    <app-new-purchase-edit-dialog></app-new-purchase-edit-dialog>
 
     <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
         <div class="col-1">
