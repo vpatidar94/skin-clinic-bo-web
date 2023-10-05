@@ -212,10 +212,8 @@ export class SideMenuComponent {
     ];
 
     public pharmacySubOptions = [
-        
-        { label: 'Pharmacy Billing', link: '/pharmacy/patient-list' },
-        { label: 'Patient List', link: '/pharmacy/pharmacy-billing' },
-       
+        { label: 'Pharmacy Billing', link: '/pharmacy/pharmacy-billing' },
+        { label: 'Patient List', link: '/pharmacy/patient-list' },
         { label: 'Pharmacy Inventory', link: '/pharmacy/pharmacy-inventory' },
 
     ];

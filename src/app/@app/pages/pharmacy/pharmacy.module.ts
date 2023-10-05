@@ -33,7 +33,7 @@ import { ViewPatientComponent } from './view-patient/view-patient.component';
 import { PharmacyEditComponent } from './pharmacy-billing/pharmacy-edit/pharmacy-edit.component';
 import { PharmacyInventoryComponent } from './pharmacy-inventory/pharmacy-inventory.component';
 import { NewPurchaseEditComponent } from './pharmacy-inventory/new-purchase-edit/new-purchase-edit.component';
-import { PatientEditComponent } from './patient-list/patient-edit/patient-edit.component';
+import { PatientEditComponent } from './patient-list/pharmacy-edit/patient-edit.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
