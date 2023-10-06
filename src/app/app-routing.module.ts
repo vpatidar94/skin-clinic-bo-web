@@ -72,8 +72,7 @@ const routes: Routes = [
       },
       {
         path: 'new-appointment',
-        loadChildren: () => import('./@app/pages/new-appointment/new-appointment.module').then(m => m.NewAppointmentModule)
-
+        loadChildren: () => import('./@app/pages/appointment/appointment.module').then(m => m.AppointmentModule)
       },
       {
         path: 'investigation',

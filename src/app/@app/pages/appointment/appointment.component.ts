@@ -47,12 +47,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ]
 
 @Component({
-  selector: 'app-new-appointment',
-  templateUrl: './new-appointment.component.html',
-  styleUrls: ['./new-appointment.component.scss']
+  selector: 'app-appointment',
+  templateUrl: './appointment.component.html',
+  styleUrls: ['./appointment.component.scss']
 })
 
-export class NewAppointmentComponent implements OnInit, AfterViewInit {
+export class AppointmentComponent implements OnInit, AfterViewInit {
 
   showSectionAppointmentList: boolean = false;
   showSectionAppointmentEdit: boolean = false;

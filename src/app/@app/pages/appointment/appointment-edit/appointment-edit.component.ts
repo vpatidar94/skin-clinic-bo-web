@@ -6,11 +6,11 @@ import { ItemDetailDto, SHIFT_LIST, UserBookingDto, UserBookingInvestigationDto,
 
 
 @Component({
-    selector: 'app-new-appointment-edit',
-    templateUrl: './new-appointment-edit.component.html',
-    styleUrls: ['./new-appointment-edit.component.scss']
+    selector: 'app-appointment-edit',
+    templateUrl: './appointment-edit.component.html',
+    styleUrls: ['./appointment-edit.component.scss']
 })
-export class NewAppointmentEditComponent {
+export class AppointmentEditComponent {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     genderList = GENDER_LIST;

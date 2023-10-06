@@ -15,11 +15,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTableModule } from "@angular/material/table";
-import { NewAppointmentComponent } from './new-appointment.component';
-import { NewAppointmentRoutingModule } from './new-appointment-routing.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
-import { NewAppointmentEditComponent } from './new-appointment-edit/new-appointment-edit.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AppointmentRoutingModule } from './appointment-routing.module';
+import { AppointmentComponent } from './appointment.component';
+import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
 
 const MATERIAL_MODULE = [
     MatButtonModule,
@@ -40,10 +40,10 @@ const MATERIAL_MODULE = [
   const COMMON_MODULE = [CommonModule, FormsModule];
 
   @NgModule({
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, NewAppointmentRoutingModule, NgMultiSelectDropDownModule.forRoot(), LabelModule],
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, NgMultiSelectDropDownModule.forRoot(), LabelModule],
     providers: [],
     exports: [],
-    declarations: [NewAppointmentComponent,NewAppointmentEditComponent]
+    declarations: [AppointmentComponent,AppointmentEditComponent]
   })
 
-export class NewAppointmentModule { }
+export class AppointmentModule { }

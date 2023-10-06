@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReceiptModule } from './receipt/receipt.module';
 import { PharmacyReceiptModule } from './pharmacy-receipt/pharmacy-receipt.module';
-import { NewAppointmentModule } from './@app/pages/new-appointment/new-appointment.module';
+import { AppointmentModule } from './@app/pages/appointment/appointment.module';
 import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/excel-file-upload.module';
 
 
@@ -40,7 +40,7 @@ import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/exc
     AlertMessageModule,
     NgxWebstorageModule.forRoot(),
     SharedServiceModule,
-    NewAppointmentModule,
+    AppointmentModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
