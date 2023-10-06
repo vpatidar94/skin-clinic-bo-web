@@ -6,11 +6,11 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 
 @Component({
-    selector: 'app-appointment-service-edit',
-    templateUrl: './appointment-service-edit.component.html',
-    styleUrls: ['./appointment-service-edit.component.scss']
+    selector: 'app-patient-service-edit',
+    templateUrl: './patient-service-edit.component.html',
+    styleUrls: ['./patient-service-edit.component.scss']
 })
-export class AppointmentServiceEditComponent implements OnInit, OnChanges {
+export class PatientServiceEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     inValidServiceEditForm!: boolean;

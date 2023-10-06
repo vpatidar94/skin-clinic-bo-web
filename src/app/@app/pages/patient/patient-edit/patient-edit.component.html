@@ -9,26 +9,26 @@
     </mat-button-toggle-group>
 
     <div *ngIf="showSectionPatient">
-        <app-patient-edit [userBookingInvestigationList]="userBookingInvestigationList" [docterList]="docterList" [(userBooking)]="userBooking"></app-patient-edit>
+        <app-patient-detail-edit [userBookingInvestigationList]="userBookingInvestigationList" [docterList]="docterList" [(userBooking)]="userBooking"></app-patient-detail-edit>
     </div>
 
     <div *ngIf="showSectionObservation">
-        <app-observation-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking"></app-observation-edit>
+        <app-patient-observation-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking"></app-patient-observation-edit>
     </div>
 
     <div *ngIf="showSectionService">
-        <app-appointment-service-edit [userBookingInvestigationList]="userBookingInvestigationList" [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-appointment-service-edit>
+        <app-patient-service-edit [userBookingInvestigationList]="userBookingInvestigationList" [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-patient-service-edit>
     </div>
 
     <div *ngIf="showSectionTest">
-        <app-appointment-test-edit [(test)]="userBooking.booking.test"></app-appointment-test-edit>
+        <app-patient-test-edit [(test)]="userBooking.booking.test"></app-patient-test-edit>
     </div>
 
     <div *ngIf="showSectionPrescription">
-       <app-prescription-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking" [productList]="productList"></app-prescription-edit>
+       <app-patient-prescription-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking" [productList]="productList"></app-patient-prescription-edit>
     </div>
 
     <div *ngIf="showSectionBilling">
-        <app-billing-edit [(userBooking)]="userBooking"></app-billing-edit>
+        <app-patient-billing-edit [(userBooking)]="userBooking"></app-patient-billing-edit>
     </div>
 </section>

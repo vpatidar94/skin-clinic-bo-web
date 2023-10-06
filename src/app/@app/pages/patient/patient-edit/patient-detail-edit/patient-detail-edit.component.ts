@@ -6,11 +6,11 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 
 @Component({
-    selector: 'app-patient-edit',
-    templateUrl: './patient-edit.component.html',
-    styleUrls: ['./patient-edit.component.scss'],
+    selector: 'app-patient-detail-edit',
+    templateUrl: './patient-detail-edit.component.html',
+    styleUrls: ['./patient-detail-edit.component.scss'],
 })
-export class PatientEditComponent implements OnInit, OnChanges {
+export class PatientDetailEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     inValidAddressForm!: boolean;

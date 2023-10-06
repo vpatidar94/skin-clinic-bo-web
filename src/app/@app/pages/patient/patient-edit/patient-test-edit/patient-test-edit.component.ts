@@ -3,12 +3,18 @@ import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InvestigationVo, UserBookingInvestigationDto } from 'aayam-clinic-core';
 
+// @Component({
+//     selector: 'app-appointment-test-edit',
+//     templateUrl: './appointment-test-edit.component.html',
+//     styleUrls: ['./appointment-test-edit.component.scss'],
+// })
+
 @Component({
-    selector: 'app-appointment-test-edit',
-    templateUrl: './appointment-test-edit.component.html',
-    styleUrls: ['./appointment-test-edit.component.scss'],
+    selector: 'app-patient-test-edit',
+    templateUrl: './patient-test-edit.component.html',
+    styleUrls: ['./patient-test-edit.component.scss'],
 })
-export class AppointmentTestEditComponent implements OnInit, OnChanges {
+export class PatientTestEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     investigation!: Array<InvestigationVo>;

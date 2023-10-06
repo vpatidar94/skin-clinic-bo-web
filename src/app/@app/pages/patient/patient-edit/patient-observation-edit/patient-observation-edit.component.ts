@@ -4,10 +4,10 @@ import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto, UserBookingInvestigatio
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
-    selector: 'app-observation-edit',
-    templateUrl: './observation-edit.component.html'
+    selector: 'app-patient-observation-edit',
+    templateUrl: './patient-observation-edit.component.html'
 })
-export class ObservationEditComponent implements OnInit, OnChanges {
+export class PatientObservationEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     @Input()

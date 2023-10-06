@@ -55,7 +55,7 @@ const routes: Routes = [
       },
       {
         path: 'appointment',
-        loadChildren: () => import('./@app/pages/appointment/appointment.module').then(m => m.AppointmentModule)
+        loadChildren: () => import('./@app/pages/patient/patient.module').then(m => m.PatientModule)
 
       },
       {

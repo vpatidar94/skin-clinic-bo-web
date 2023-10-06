@@ -25,20 +25,21 @@ import { BillingComponent } from 'src/app/@shared/component/billing/billing.comp
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
-import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
-import { AppointmentServiceEditComponent } from './appointment-edit/appointment-service-edit/appointment-service-edit.component';
-import { AppointmentTestEditComponent } from './appointment-edit/appointment-test-edit/appointment-test-edit.component';
-import { ObservationEditComponent } from './appointment-edit/observation-edit/observation-edit.component';
-import { PatientEditComponent } from './appointment-edit/patient-edit/patient-edit.component';
-import { PrescriptionEditComponent } from './appointment-edit/prescription-edit/prescription-edit.component';
-import { AppointmentRoutingModule } from './appointment-routing.module';
-import { AppointmentComponent } from './appointment.component';
-import { BillingEditComponent } from './billing-edit/billing-edit.component';
+import { PatientEditComponent } from './patient-edit/patient-edit.component';
+import { PatientServiceEditComponent } from './patient-edit/patient-service-edit/patient-service-edit.component';
+import { PatientTestEditComponent } from './patient-edit/patient-test-edit/patient-test-edit.component';
+import { PatientObservationEditComponent } from './patient-edit/patient-observation-edit/patient-observation-edit.component';
+import { PatientDetailEditComponent } from './patient-edit/patient-detail-edit/patient-detail-edit.component';
+import { PatientPrescriptionEditComponent } from './patient-edit/patient-prescription-edit/patient-prescription-edit.component';
+import { PatientRoutingModule } from './patient-routing.module';
+import { PatientComponent } from './patient.component';
+import { PatientBillingEditComponent } from './patient-edit/patient-billing-edit/patient-billing-edit.component';
 import { ServiceItemEditComponent } from './service-item/service-item-edit/service-item-edit.component';
 import { ServiceItemComponent } from './service-item/service-item.component';
 
 import { MatSortModule } from '@angular/material/sort';
-import { PdfViewerDialogComponent } from './billing-edit/pdf-viewer-dialog.component';
+import { PdfViewerDialogComponent } from './patient-edit/patient-billing-edit/pdf-viewer-dialog.component';
+// import { AddPatientComponent } from 'src/app/addpatient/addpatient.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -62,9 +63,10 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, PatientRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule],
   providers: [],
   exports: [],
-  declarations: [AppointmentComponent, AppointmentEditComponent, PatientEditComponent, ServiceItemEditComponent, ServiceItemComponent, ObservationEditComponent, AppointmentTestEditComponent, AppointmentServiceEditComponent, PrescriptionEditComponent, BillingComponent, BillingEditComponent, PdfViewerDialogComponent],
+  declarations: [PatientComponent, PatientEditComponent, PatientDetailEditComponent, ServiceItemEditComponent, ServiceItemComponent, PatientObservationEditComponent, PatientTestEditComponent, PatientServiceEditComponent, PatientPrescriptionEditComponent, BillingComponent, PatientBillingEditComponent, PdfViewerDialogComponent],
 })
-export class AppointmentModule { }
+export class PatientModule { }
+

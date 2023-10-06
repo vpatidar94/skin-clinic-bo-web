@@ -4,11 +4,11 @@ import { PrescriptionVo, BookingVo, UserBookingDto, UserBookingInvestigationDto,
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
-  selector: 'app-prescription-edit',
-  templateUrl: './prescription-edit.component.html',
-  styleUrls: ['./prescription-edit.component.scss']
+  selector: 'app-patient-prescription-edit',
+  templateUrl: './patient-prescription-edit.component.html',
+  styleUrls: ['./patient-prescription-edit.component.scss']
 })
-export class PrescriptionEditComponent implements OnInit, OnChanges {
+export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
 

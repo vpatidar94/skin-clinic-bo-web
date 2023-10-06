@@ -8,11 +8,11 @@ import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { PdfViewerDialogComponent } from './pdf-viewer-dialog.component';
 
 @Component({
-  selector: 'app-billing-edit',
-  templateUrl: './billing-edit.component.html',
-  styleUrls: ['./billing-edit.component.scss'],
+  selector: 'app-patient-billing-edit',
+  templateUrl: './patient-billing-edit.component.html',
+  styleUrls: ['./patient-billing-edit.component.scss'],
 })
-export class BillingEditComponent implements OnInit {
+export class PatientBillingEditComponent implements OnInit {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
   @Input()

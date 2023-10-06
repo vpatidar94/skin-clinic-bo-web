@@ -12,11 +12,11 @@ import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs'
 import { ProductApi } from '../../service/remote/product.api';
 
 @Component({
-  selector: 'app-appointment',
-  templateUrl: './appointment.component.html',
-  styleUrls: ['./appointment.component.scss']
+  selector: 'app-patient',
+  templateUrl: './patient.component.html',
+  styleUrls: ['./patient.component.scss']
 })
-export class AppointmentComponent implements OnInit, AfterViewInit {
+export class PatientComponent implements OnInit, AfterViewInit {
 
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */

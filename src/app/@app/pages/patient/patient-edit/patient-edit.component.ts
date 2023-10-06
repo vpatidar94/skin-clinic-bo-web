@@ -3,12 +3,19 @@ import { ApiResponse, ItemDetailDto, OrgOrderNoDto, ProductVo, UserBookingDto, U
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
+// @Component({
+//   selector: 'app-appointment-edit',
+//   templateUrl: './appointment-edit.component.html',
+//   styleUrls: ['./appointment-edit.component.scss']
+// })
 @Component({
-  selector: 'app-appointment-edit',
-  templateUrl: './appointment-edit.component.html',
-  styleUrls: ['./appointment-edit.component.scss']
+  selector: 'app-patient-edit',
+  templateUrl: './patient-edit.component.html',
+  styleUrls: ['./patient-edit.component.scss']
 })
-export class AppointmentEditComponent implements OnInit, OnChanges {
+// export class AppointmentEditComponent implements OnInit, OnChanges {
+export class PatientEditComponent implements OnInit, OnChanges {
+
 
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
