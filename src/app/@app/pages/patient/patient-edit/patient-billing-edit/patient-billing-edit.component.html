@@ -92,7 +92,7 @@
                                     [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required
                                     [readOnly]="true" (ngModelChange)="userBooking.booking.bookingDate = $event">
                                 <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
-                                    (click)="downloadReceipt()">Receipt</span>
+                                    (click)="downloadReceipt(i)">Receipt</span>
 
                             </div>
                         </div>

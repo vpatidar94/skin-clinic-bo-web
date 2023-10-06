@@ -25,10 +25,10 @@ export class BookingApi {
         return this.http.get<ApiResponse<OrgBookingCountDto>>(environment.apiUrl + URL.ORG_BOOKING_LIST, { params: { orgId, type, pageNumber, maxRecord } });
     }
 
-    public generateReceipt(bookingId: string): Observable<any> {
+    public generateReceipt(bookingId: string,transactionId: string): Observable<any> {
         const httpOptions = {
             responseType: 'blob' as 'json',
-            params: { bookingId }
+            params: { bookingId,transactionId }
         };
         return this.http.get(environment.apiUrl + URL.BOOKING_RECEIPT, httpOptions);
     }
