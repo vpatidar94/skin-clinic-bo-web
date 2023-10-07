@@ -68,16 +68,18 @@
         </div>
         <div class="mt-5"></div>
         <app-label>Test Parameters</app-label>
+        <div class="row">
+            <div class="col-md-3"><strong>Test Name</strong></div>
+            <div class="col-md-3"><strong>Reference</strong></div>
+            <div class="col-md-3"><strong>Unit</strong></div>
+            <div class="col-md-"></div>
+        </div>
         <div class="col-md-12 align-style" *ngFor="let item of testParameter; let i = index">
-            <div class="row">
-                <div class="col-md-3"><strong>Test Name</strong></div>
-                <div class="col-md-3"><strong>Reference</strong></div>
-                <div class="col-md-3"><strong>Unit</strong></div>
-                <div class="col-md-"></div>
-            </div>
+
             <div class="row align-items-center">
                 <div class="form-group col-md-3">
-                    <input class="form-control pres-input w-100" type="text" name="test{{i}}" [(ngModel)]="item.testName">
+                    <input class="form-control pres-input w-100" type="text" name="test{{i}}"
+                        [(ngModel)]="item.testName">
                 </div>
                 <div class="form-group col-md-3">
                     <input class="form-control pres-input w-100" type="text" name="reference{{i}}"
@@ -89,7 +91,8 @@
                 <div class="col-md-2">
                     <mat-icon class="add-icon clickable" (click)="removeTestParameter(i)">delete</mat-icon>
                     &nbsp;&nbsp;
-                    <mat-icon *ngIf="(i+1)==testParameter.length" class="add-icon clickable" (click)="addTestParameter()">add_circle_outline</mat-icon>
+                    <mat-icon *ngIf="(i+1)==testParameter.length" class="add-icon clickable"
+                        (click)="addTestParameter()">add_circle_outline</mat-icon>
                 </div>
             </div>
         </div>

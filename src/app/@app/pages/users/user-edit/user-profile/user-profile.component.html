@@ -233,45 +233,9 @@
                 </div>
             </div>
 
-
             <div class="row">
-                <!-- Service Timing -->
-                <label class="app-label">Service Timing</label>
-
-                <div class="col-md-12 align-style" *ngFor="let timing of staff.user.serviceTiming; let i = index">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-5">
-                            <label class="app-label">Slot-{{i+1}}</label>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group d-flex">
-                                <div class="d-flex align-items-center col-md-6">
-                                    <div class="input-with-dropdown">
-                                        <input type="time" class="form-control app-input time-input"
-                                            [(ngModel)]="timing.from" name="service_time_{{ i }}">
-                                    </div>
-                                </div>
-                                <span class="col-md-2 d-flex  align-items-center app-label">To</span>
-                                <div class="d-flex align-items-center mt-2 col-md-6">
-                                    <div class="input-with-dropdown">
-                                        <input type="time" class="form-control app-input time-input"
-                                            [(ngModel)]="timing.to" name="service_time_end_{{ i }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <mat-icon class="add-icon clickable" (click)="removeServiceTiming(i)">delete</mat-icon>
-                            &nbsp;&nbsp;
-                            <mat-icon class="add-icon clickable" *ngIf="(i+1)==staff.user.serviceTiming.length"
-                                (click)="addServiceTiming()">add_circle_outline</mat-icon>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Add Photo -->
-                <div class="col-md-6 mt-4">
+                <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Add Photo</label>
@@ -287,14 +251,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
                 <!-- upload Id Proof -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label"> Upload Id Proof</label>
+                            <label for="exampleInputEmail1" class="app-label"> Id Proof</label>
                         </div>
                         <div class="row ">
                             <div class="form-group col-md-7">
@@ -307,7 +268,44 @@
                         </div>
                     </div>
                 </div>
+                <!-- </div> -->
+
             </div>
+
+            <app-label class="mt-5">Service Timing</app-label>
+            <div class="row">
+                <div class="col-md-1"><strong></strong></div>
+                <div class="col-md-2"><strong></strong></div>
+                <div class="col-md-1"><strong></strong></div>
+                <div class="col-md-2"><strong></strong></div>
+                <div class="col-md-"></div>
+            </div>
+            <div class="col-md-12 align-style" *ngFor="let timing of staff.user.serviceTiming; let i = index">
+
+                <div class="form-group col-md-1 mt-2">
+                    <span class="app-label">Slot-{{i+1}}</span>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="time" class="form-control pres-input w-100 input-with-dropdown"
+                        [(ngModel)]="timing.from" name="service_time_{{ i }}">
+                </div>
+                <div class="form-group col-md-1 mt-2 ">
+                    <p class="d-flex flex-row justify-content-center align-items-center app-label">To</p>
+                </div>
+
+                <div class="form-group col-md-2 input-with-dropdown">
+                    <input type="time" class="form-control pres-input w-100" [(ngModel)]="timing.to"
+                        name="service_time_end_{{ i }}">
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <mat-icon class="add-icon clickable" (click)="removeServiceTiming(i)">delete</mat-icon>
+                    &nbsp;&nbsp;
+                    <mat-icon class="add-icon clickable" *ngIf="(i+1)==staff.user.serviceTiming.length"
+                        (click)="addServiceTiming()">add_circle_outline</mat-icon>
+                </div>
+            </div>
+
             <!-- Address Section -->
             <app-label>Address Details</app-label>
             <div class="row">
