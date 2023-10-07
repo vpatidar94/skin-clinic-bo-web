@@ -3,8 +3,7 @@
         <div class="d-flex justify-content-between">
             <h1>Inventory List</h1>
             <!-- <button class="common-button" (click)="addInventory()">Add Inventory</button> -->
-            <button class="common-button" (click)="addItem()">Add Item</button>
-
+            <button class="common-button" (click)="openHospitalInventoryItemEditDialog('0ms', '0ms')">Add Item</button>
         </div>
     </div>
 
@@ -46,8 +45,9 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">
-                        <!-- {{row.action}}  -->
-                        <a [routerLink]="['/investigation/view-investigation']">{{row.action}}</a>
+                        <!-- <a [routerLink]="['/investigation/view-investigation']">{{row.action}}</a> -->
+                        <a>{{row.action}}</a>
+
                     </td>
                 </ng-container>
 
@@ -77,17 +77,4 @@
             <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>
         </div>
     </div>
-</section>
-
-<section class="section-org-edit" *ngIf="showSectionItemEdit">
-    <app-hospital-inventory-item-edit></app-hospital-inventory-item-edit>
-
-        <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
-            <div class="col-1">
-                <button class="common-button">{{'save'}}</button>
-            </div>
-            <div class="col-1">
-                <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>
-            </div>
-        </div>
 </section>

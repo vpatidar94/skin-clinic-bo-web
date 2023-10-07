@@ -28,12 +28,6 @@ import { HospitalInventoryComponent } from './hospital-inventory.component';
 import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
 import { HospitalInventoryItemEditComponent } from './hospital-inventory-item-edit/hospital-inventory-item-edit.component';
 
-// import { InvestigationComponent } from './investigation.component';
-// import { InvestigationRoutingModule } from './investigation-routing.module';
-// import { ViewInvestigationComponent } from './view-investigation/view-investigation.component';
-// import { TestSampleDetailsComponent } from './test-sample-details/test-sample-details.component';
-// import { ReportsComponent } from './reports/reports.component';
-
 const MATERIAL_MODULE = [
     MatButtonModule,
     MatButtonToggleModule,
@@ -61,6 +55,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
     imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InventoryRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
     providers: [],
     exports: [],
-    declarations: [HospitalInventoryComponent, InventoryEditComponent,HospitalInventoryItemEditComponent]
+    declarations: [HospitalInventoryComponent, InventoryEditComponent, HospitalInventoryItemEditComponent]
 })
 export class HospitalInventoryModule { }
