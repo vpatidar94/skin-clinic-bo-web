@@ -48,8 +48,16 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     }
 
     public applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+        const filterFunction = (data: UserTypeDetailDto) => {
+            const userTypeCode = data.userType?.code?.toLowerCase();
+            const userTypeName = data.userType?.name?.toLowerCase();
+            const departmentName = data.departmentName?.toLowerCase();
+            return userTypeCode?.includes(filterValue) || userTypeName?.includes(filterValue) || departmentName?.includes(filterValue);
+        };
+
+        this.dataSource.filterPredicate = filterFunction;
+        this.dataSource.filter = filterValue;
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();

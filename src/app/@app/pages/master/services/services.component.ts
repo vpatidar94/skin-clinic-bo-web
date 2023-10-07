@@ -9,11 +9,18 @@ import { ApiResponse, DepartmentVo, ItemDetailDto, ItemVo, PercentFlatVo, Respon
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { SUB_ROLE } from 'src/app/@app/const/sub-role.const';
 
+export interface ExtendedItemDetailDto extends ItemDetailDto {
+    serviceTypeName: string;
+    associatedDoctorName: string | null | undefined;
+}
+
 @Component({
     selector: 'app-services',
     styleUrls: ['./services.component.scss'],
     templateUrl: './services.component.html',
 })
+
+
 
 export class ServicesComponent implements AfterViewInit, OnInit {
 
@@ -29,7 +36,8 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     showSectionServiceEdit!: boolean;
 
     displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'Doctors Name', "Fee", "Action"];
-    dataSource!: MatTableDataSource<ItemDetailDto>;
+    // dataSource!: MatTableDataSource<ItemDetailDto>;
+    dataSource!: MatTableDataSource<ExtendedItemDetailDto>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -47,7 +55,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     public addServiceSection(): void {
         const newServiceItem = {} as ItemVo;
-        newServiceItem.feeType = {value: 0} as PercentFlatVo;
+        newServiceItem.feeType = { value: 0 } as PercentFlatVo;
         const orgId = this.keyValueStorageService.getOrgId();
         if (orgId) {
             newServiceItem.orgId = orgId;
@@ -65,8 +73,22 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     public applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+        const filterFunction = (data: ExtendedItemDetailDto) => {
+            const serviceTypeName = data.serviceTypeName?.toLowerCase();
+            const associatedDoctorName = data.associatedDoctorName?.toLowerCase();
+            const itemCode = data.item?.code?.toLowerCase();
+            const itemName = data.item?.name?.toLowerCase();
+            return (
+                serviceTypeName?.includes(filterValue) ||
+                associatedDoctorName?.includes(filterValue) ||
+                itemCode?.includes(filterValue) ||
+                itemName?.includes(filterValue)
+            );
+        };
+
+        this.dataSource.filterPredicate = filterFunction;
+        this.dataSource.filter = filterValue;
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
@@ -149,7 +171,8 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     private _init(): void {
-        this.dataSource = new MatTableDataSource<ItemDetailDto>([]);
+        // this.dataSource = new MatTableDataSource<ItemDetailDto>([]);
+        this.dataSource = new MatTableDataSource<ExtendedItemDetailDto>;
         this._resetSection();
         this.showSectionServiceList = true;
         this._getServiceItemList();
@@ -174,7 +197,11 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     private addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined } = {};
 
     /**this method is used to include the serviceTypeName and associatedDoctorName externally in the interface to show them in the table */
-    private extendServiceItemList(serviceItemList: Array<ItemDetailDto>, addingServiceTypeName: { [serviceTypeId: string]: string }, addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined }): any[] {
+    private extendServiceItemList(
+        serviceItemList: Array<ItemDetailDto>,
+        addingServiceTypeName: { [serviceTypeId: string]: string },
+        addingAssociatedDoctorName: { [associatedDoctorId: string]: string | null | undefined }
+    ): ExtendedItemDetailDto[] {
         return serviceItemList.map(serviceItem => {
             return {
                 ...serviceItem,
@@ -182,6 +209,5 @@ export class ServicesComponent implements AfterViewInit, OnInit {
                 associatedDoctorName: addingAssociatedDoctorName[serviceItem.item.associatedDoctorId],
             };
         });
-    }   
-
+    }
 }
