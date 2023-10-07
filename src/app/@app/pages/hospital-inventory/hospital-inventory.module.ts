@@ -23,10 +23,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 import { MatNativeDateModule } from '@angular/material/core';
-import { InventoryRoutingModule } from './inventory-routing.module';
-import { InventoryComponent } from './inventory.component';
+import { InventoryRoutingModule } from './hospital-inventory-routing.module';
+import { HospitalInventoryComponent } from './hospital-inventory.component';
 import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
-import { ItemEditComponent } from './item-edit/item-edit.component';
+import { HospitalInventoryItemEditComponent } from './hospital-inventory-item-edit/hospital-inventory-item-edit.component';
 
 // import { InvestigationComponent } from './investigation.component';
 // import { InvestigationRoutingModule } from './investigation-routing.module';
@@ -61,6 +61,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
     imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InventoryRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
     providers: [],
     exports: [],
-    declarations: [InventoryComponent, InventoryEditComponent,ItemEditComponent]
+    declarations: [HospitalInventoryComponent, InventoryEditComponent,HospitalInventoryItemEditComponent]
 })
-export class InventoryModule { }
+export class HospitalInventoryModule { }

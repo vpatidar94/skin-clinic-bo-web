@@ -2,10 +2,10 @@ import { Component, Input, } from '@angular/core';
 import { ProductVo } from 'aayam-clinic-core';
 
 @Component({
-    selector: 'app-item-edit',
-    templateUrl: './item-edit.component.html',
+    selector: 'app-hospital-inventory-item-edit',
+    templateUrl: './hospital-inventory-item-edit.component.html',
 })
-export class ItemEditComponent {
+export class HospitalInventoryItemEditComponent {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     

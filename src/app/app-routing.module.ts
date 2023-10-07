@@ -54,7 +54,7 @@ const routes: Routes = [
         loadChildren: () => import('./@app/pages/profile/profile.module').then(m => m.ProfileModule)
       },
       {
-        path: 'appointment',
+        path: 'patient',
         loadChildren: () => import('./@app/pages/patient/patient.module').then(m => m.PatientModule)
 
       },
@@ -71,7 +71,7 @@ const routes: Routes = [
         loadChildren: () => import('./@app/pages/pharmacy/pharmacy.module').then(m => m.PharmacyModule)
       },
       {
-        path: 'new-appointment',
+        path: 'appointment',
         loadChildren: () => import('./@app/pages/appointment/appointment.module').then(m => m.AppointmentModule)
       },
       {
@@ -80,8 +80,8 @@ const routes: Routes = [
       },
 
       {
-        path: 'inventory',
-        loadChildren: () => import('./@app/pages/inventory/inventory.module').then(m => m.InventoryModule)
+        path: 'hospital-inventory',
+        loadChildren: () => import('./@app/pages/hospital-inventory/hospital-inventory.module').then(m => m.HospitalInventoryModule)
       },
     ]
   }

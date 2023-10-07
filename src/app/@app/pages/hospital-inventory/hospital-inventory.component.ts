@@ -23,12 +23,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 @Component({
-    selector: 'app-inventory',
-    templateUrl: './inventory.component.html',
+    selector: 'app-hospital-inventory',
+    templateUrl: './hospital-inventory.component.html',
     // styleUrls: ['./inventory.component.scss']
 })
 
-export class InventoryComponent implements AfterViewInit, OnInit{
+export class HospitalInventoryComponent implements AfterViewInit, OnInit{
 
     showSectionInventoryList!: boolean;
     showSectionInventoryEdit!: boolean;

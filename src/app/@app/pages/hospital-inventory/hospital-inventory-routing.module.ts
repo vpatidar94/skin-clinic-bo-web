@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { InventoryComponent } from './inventory.component';
+import { HospitalInventoryComponent } from './hospital-inventory.component';
 
 const routes = [
-    { path: '', component: InventoryComponent },
-    { path: 'inventory', component: InventoryComponent },
+    { path: '', component: HospitalInventoryComponent },
+    { path: 'inventory', component: HospitalInventoryComponent },
     // { path: 'view-investigation', component: ViewInvestigationComponent }
 ]
 

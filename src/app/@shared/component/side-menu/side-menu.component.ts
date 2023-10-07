@@ -138,8 +138,8 @@ export class SideMenuComponent {
             if (OrgUtility.hasOrgAccess(this.orgId)) {
                 sub = [];
                 sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
-                sub.push(new NavigationDto('Add Patient', '/appointment', 'ic_users_m_f', []));
-                navList.push(new NavigationDto('Add Patient', '/appointment', 'ic_users_m_f', sub));
+                sub.push(new NavigationDto('Add Patient', '/patient', 'ic_users_m_f', []));
+                navList.push(new NavigationDto('Add Patient', '/patient', 'ic_users_m_f', sub));
 
                 sub = [];
                 sub.push(new NavigationDto('Staff', '/user/staff', 'ic_user_circle', []));
@@ -157,7 +157,7 @@ export class SideMenuComponent {
             sub = [];
             // sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
             // sub.push(new NavigationDto('Appointment', '/appointment', 'ic_users_m_f', []));
-            navList.push(new NavigationDto('Add Patient', '/appointment', 'ic_users_m_f', sub));
+            navList.push(new NavigationDto('Add Patient', '/patient', 'ic_users_m_f', sub));
 
             // sub = [];
             // sub.push(new NavigationDto('Staff', '/user/staff', 'ic_user_circle', []));
@@ -172,8 +172,8 @@ export class SideMenuComponent {
             let sub: Array<NavigationDto>;
             sub = [];
             sub.push(new NavigationDto('Services', '/appointment/service-item', 'ic_user_circle', []));
-            sub.push(new NavigationDto('Add Patient', '/appointment', 'ic_users_m_f', []));
-            navList.push(new NavigationDto('Add Patient', '/appointment', 'ic_users_m_f', sub));
+            sub.push(new NavigationDto('Add Patient', '/patient', 'ic_users_m_f', []));
+            navList.push(new NavigationDto('Add Patient', '/patient', 'ic_users_m_f', sub));
             // sub = [];
             // sub.push(new NavigationDto('Customer', '/user/customer', 'ic_users_m_f', []));
             // navList.push(new NavigationDto('User Management', '/user/customer', 'ic_users_m_f', sub));
@@ -192,8 +192,8 @@ export class SideMenuComponent {
         // navList.push(new NavigationDto('Products', '/master/products', '', []));
         // navList.push(new NavigationDto('Department', '/master/department', '', []));
         // navList.push(new NavigationDto('User Type', '/master/user-type', '', []));
-        navList.push(new NavigationDto('New Appointment', '/new-appointment', 'ic_user', []));
-        navList.push( new NavigationDto('Hospital Inventory', '/inventory', 'ic_user', []));
+        navList.push(new NavigationDto('New Appointment', '/appointment', 'ic_user', []));
+        navList.push( new NavigationDto('Hospital Inventory', '/hospital-inventory', 'ic_user', []));
         navList.push( new NavigationDto('Investigation', '/investigation', 'ic_user', []));
 
         navList.push(new NavigationDto('Users', '/manage-user', 'ic_user', []));

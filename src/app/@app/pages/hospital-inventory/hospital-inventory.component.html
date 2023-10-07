@@ -80,14 +80,14 @@
 </section>
 
 <section class="section-org-edit" *ngIf="showSectionItemEdit">
-    <app-item-edit></app-item-edit>
+    <app-hospital-inventory-item-edit></app-hospital-inventory-item-edit>
 
-    <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
-        <div class="col-1">
-            <button class="common-button">{{'save'}}</button>
+        <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
+            <div class="col-1">
+                <button class="common-button">{{'save'}}</button>
+            </div>
+            <div class="col-1">
+                <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>
+            </div>
         </div>
-        <div class="col-1">
-            <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>
-        </div>
-    </div>
 </section>
