@@ -35,6 +35,10 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
 
     columnFilters: { [key: string]: string } = {};
 
+    originalDataSource: UserTypeDetailDto[] = [];
+    filteredData: UserTypeDetailDto[] = [];
+
+
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi,
@@ -66,40 +70,145 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     //     }
     // }
 
+    // public applyFilter(columnName: string, event: Event) {
+    //     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    // this.columnFilters[columnName] = filterValue;
+
+    // // Create a function to check if the filterValue matches a cell value
+    // const filterFunction = (data: UserTypeDetailDto) => {
+    //     const departmentName = data.departmentName?.toLowerCase();
+
+    //     // Apply individual column filters
+    //     if (columnName === 'userTypeCode') {
+    //         const userTypeCode = data.userType?.code?.toLowerCase();
+    //         return userTypeCode?.includes(filterValue);
+    //     } else if (columnName === 'userTypeName') {
+    //         const userTypeName = data.userType?.name?.toLowerCase();
+    //         return userTypeName?.includes(filterValue);
+    //     } else if (columnName === 'departmentName') {
+    //         return departmentName?.includes(filterValue);
+    //     }
+
+    //     // Return true for rows where no filter is applied
+    //     return true;
+    // };
+
+    // this.dataSource.filterPredicate = filterFunction;
+
+    // // Combine all column filters
+    // const combinedFilters = Object.values(this.columnFilters).join(' ');
+
+    // this.dataSource.filter = combinedFilters;
+
+    // if (this.dataSource.paginator) {
+    //     this.dataSource.paginator.firstPage();
+    // }
+    // }
+    
+    // public applyFilter(columnName: string, event: Event) {
+    //     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    //     this.columnFilters[columnName] = filterValue;
+    
+    //     // Combine all column filters
+    //     const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+    
+    //     // If there are no filters, show all data
+    //     if (combinedFilters.length === 0) {
+    //         this.dataSource.data = this.originalDataSource;
+    //         this.filteredData = []; // Reset filtered data array
+    //         return;
+    //     }
+    
+    //     // Filter the data progressively from the original data or the previously filtered data
+    //     let dataToFilter: UserTypeDetailDto[];
+    //     if (this.filteredData.length > 0) {
+    //         dataToFilter = [...this.filteredData];
+    //     } else {
+    //         dataToFilter = [...this.originalDataSource];
+    //     }
+    
+    //     for (const filter of combinedFilters) {
+    //         dataToFilter = dataToFilter.filter((data) => {
+    //             if (columnName === 'userTypeCode' && data.userType && data.userType.code) {
+    //                 const userTypeCode = data.userType.code.toLowerCase();
+    //                 return userTypeCode.includes(filter);
+    //             } else if (columnName === 'userTypeName' && data.userType && data.userType.name) {
+    //                 const userTypeName = data.userType.name.toLowerCase();
+    //                 return userTypeName.includes(filter);
+    //             } else if (columnName === 'departmentName' && data.departmentName) {
+    //                 const departmentName = data.departmentName.toLowerCase();
+    //                 return departmentName.includes(filter);
+    //             }
+    //             return true; // If there's no filter for this column, consider it a pass
+    //         });
+    //     }
+    
+    //     // Update the data source with the filtered data
+    //     this.dataSource.data = dataToFilter;
+    //     this.filteredData = dataToFilter;
+    
+    //     if (this.dataSource.paginator) {
+    //         this.dataSource.paginator.firstPage();
+    //     }
+    // }
+
     public applyFilter(columnName: string, event: Event) {
         const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.columnFilters[columnName] = filterValue;
-
-    // Create a function to check if the filterValue matches a cell value
-    const filterFunction = (data: UserTypeDetailDto) => {
-        const departmentName = data.departmentName?.toLowerCase();
-
-        // Apply individual column filters
-        if (columnName === 'userTypeCode') {
-            const userTypeCode = data.userType?.code?.toLowerCase();
-            return userTypeCode?.includes(filterValue);
-        } else if (columnName === 'userTypeName') {
-            const userTypeName = data.userType?.name?.toLowerCase();
-            return userTypeName?.includes(filterValue);
-        } else if (columnName === 'departmentName') {
-            return departmentName?.includes(filterValue);
+        this.columnFilters[columnName] = filterValue;
+    
+        // Combine all column filters
+        const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+    
+        // If there are no filters, show all data
+        if (combinedFilters.length === 0) {
+            this.dataSource.data = this.originalDataSource;
+            this.filteredData = []; // Reset filtered data array
+            return;
         }
-
-        // Return true for rows where no filter is applied
-        return true;
-    };
-
-    this.dataSource.filterPredicate = filterFunction;
-
-    // Combine all column filters
-    const combinedFilters = Object.values(this.columnFilters).join(' ');
-
-    this.dataSource.filter = combinedFilters;
-
-    if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
+    
+        // Filter the data progressively from the original data or the previously filtered data
+        let dataToFilter: UserTypeDetailDto[];
+        if (this.filteredData.length > 0) {
+            dataToFilter = [...this.filteredData];
+        } else {
+            dataToFilter = [...this.originalDataSource];
+        }
+    
+        for (const filter of combinedFilters) {
+            dataToFilter = dataToFilter.filter((data) => {
+                const cellValue = this.getCellValue(data, columnName);
+    
+                if (cellValue !== undefined && cellValue.includes(filter)) {
+                    return true; // Include the row if the cell value matches the filter
+                }
+    
+                return false; // Exclude the row if no match is found or cellValue is undefined
+            });
+        }
+    
+        // Update the data source with the filtered data
+        this.dataSource.data = dataToFilter;
+        this.filteredData = dataToFilter;
+    
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
     }
+    
+    private getCellValue(data: UserTypeDetailDto, columnName: any): any | undefined {
+       
+         if (columnName === 'userTypeCode' && data.userType?.code) {
+            return data.userType.code.toLowerCase();
+        }  else if (columnName === 'departmentName' && data.departmentName) {
+            return data.departmentName.toLowerCase();
+        } 
+        else if (columnName === 'userTypeName' && data.userType?.name) {
+            return data.userType.name.toLowerCase();
+        }
+        return undefined;
     }
+    
+    
 
     public ngOnInit(): void {
         this._init();
@@ -138,6 +247,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this.userApi.getUserTypeList(orgId).subscribe((res: ApiResponse<UserTypeDetailDto[]>) => {
             this.userTypeList = res.body ?? [] as UserTypeDetailDto[];
             this.dataSource = new MatTableDataSource(this.userTypeList);
+            this.originalDataSource = [...this.userTypeList]; // Copy the data
         })
     }
 
