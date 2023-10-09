@@ -104,21 +104,21 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     //     this.dataSource.paginator.firstPage();
     // }
     // }
-    
+
     // public applyFilter(columnName: string, event: Event) {
     //     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
     //     this.columnFilters[columnName] = filterValue;
-    
+
     //     // Combine all column filters
     //     const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
-    
+
     //     // If there are no filters, show all data
     //     if (combinedFilters.length === 0) {
     //         this.dataSource.data = this.originalDataSource;
     //         this.filteredData = []; // Reset filtered data array
     //         return;
     //     }
-    
+
     //     // Filter the data progressively from the original data or the previously filtered data
     //     let dataToFilter: UserTypeDetailDto[];
     //     if (this.filteredData.length > 0) {
@@ -126,7 +126,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     //     } else {
     //         dataToFilter = [...this.originalDataSource];
     //     }
-    
+
     //     for (const filter of combinedFilters) {
     //         dataToFilter = dataToFilter.filter((data) => {
     //             if (columnName === 'userTypeCode' && data.userType && data.userType.code) {
@@ -142,11 +142,11 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     //             return true; // If there's no filter for this column, consider it a pass
     //         });
     //     }
-    
+
     //     // Update the data source with the filtered data
     //     this.dataSource.data = dataToFilter;
     //     this.filteredData = dataToFilter;
-    
+
     //     if (this.dataSource.paginator) {
     //         this.dataSource.paginator.firstPage();
     //     }
@@ -155,17 +155,17 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     public applyFilter(columnName: string, event: Event) {
         const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
         this.columnFilters[columnName] = filterValue;
-    
+
         // Combine all column filters
         const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
-    
+
         // If there are no filters, show all data
         if (combinedFilters.length === 0) {
             this.dataSource.data = this.originalDataSource;
             this.filteredData = []; // Reset filtered data array
             return;
         }
-    
+
         // Filter the data progressively from the original data or the previously filtered data
         let dataToFilter: UserTypeDetailDto[];
         if (this.filteredData.length > 0) {
@@ -173,42 +173,27 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         } else {
             dataToFilter = [...this.originalDataSource];
         }
-    
+
         for (const filter of combinedFilters) {
             dataToFilter = dataToFilter.filter((data) => {
                 const cellValue = this.getCellValue(data, columnName);
-    
+
                 if (cellValue !== undefined && cellValue.includes(filter)) {
                     return true; // Include the row if the cell value matches the filter
                 }
-    
+
                 return false; // Exclude the row if no match is found or cellValue is undefined
             });
         }
-    
+
         // Update the data source with the filtered data
         this.dataSource.data = dataToFilter;
         this.filteredData = dataToFilter;
-    
+
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
     }
-    
-    private getCellValue(data: UserTypeDetailDto, columnName: any): any | undefined {
-       
-         if (columnName === 'userTypeCode' && data.userType?.code) {
-            return data.userType.code.toLowerCase();
-        }  else if (columnName === 'departmentName' && data.departmentName) {
-            return data.departmentName.toLowerCase();
-        } 
-        else if (columnName === 'userTypeName' && data.userType?.name) {
-            return data.userType.name.toLowerCase();
-        }
-        return undefined;
-    }
-    
-    
 
     public ngOnInit(): void {
         this._init();
@@ -288,5 +273,17 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this.showSectionUserTypeEdit = true;
     }
 
+    private getCellValue(data: UserTypeDetailDto, columnName: any): any | undefined {
+
+        if (columnName === 'userTypeCode' && data.userType?.code) {
+            return data.userType.code.toLowerCase();
+        } else if (columnName === 'departmentName' && data.departmentName) {
+            return data.departmentName.toLowerCase();
+        }
+        else if (columnName === 'userTypeName' && data.userType?.name) {
+            return data.userType.name.toLowerCase();
+        }
+        return undefined;
+    }
 
 }

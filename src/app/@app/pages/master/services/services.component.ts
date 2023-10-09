@@ -35,12 +35,16 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     showSectionServiceList!: boolean;
     showSectionServiceEdit!: boolean;
 
-    displayedColumns: string[] = ['Service Code', 'Service Name', 'Service Type', 'Doctors Name', "Fee", "Action"];
+    displayedColumns: string[] = ['serviceCode', 'serviceName', 'serviceType', 'doctorsName', 'fee', 'action'];
     // dataSource!: MatTableDataSource<ItemDetailDto>;
     dataSource!: MatTableDataSource<ExtendedItemDetailDto>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+
+    columnFilters: { [key: string]: string } = {};
+    originalDataSource: ExtendedItemDetailDto[] = [];
+    filteredData: ExtendedItemDetailDto[] = [];
 
     /* ************************************* Constructors ******************************************** */
     constructor(private serviceItemApi: ServiceItemApi,
@@ -72,23 +76,66 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    public applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-        const filterFunction = (data: ExtendedItemDetailDto) => {
-            const serviceTypeName = data.serviceTypeName?.toLowerCase();
-            const associatedDoctorName = data.associatedDoctorName?.toLowerCase();
-            const itemCode = data.item?.code?.toLowerCase();
-            const itemName = data.item?.name?.toLowerCase();
-            return (
-                serviceTypeName?.includes(filterValue) ||
-                associatedDoctorName?.includes(filterValue) ||
-                itemCode?.includes(filterValue) ||
-                itemName?.includes(filterValue)
-            );
-        };
+    // public applyFilter(event: Event) {
+    //     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    //     const filterFunction = (data: ExtendedItemDetailDto) => {
+    //         const serviceTypeName = data.serviceTypeName?.toLowerCase();
+    //         const associatedDoctorName = data.associatedDoctorName?.toLowerCase();
+    //         const itemCode = data.item?.code?.toLowerCase();
+    //         const itemName = data.item?.name?.toLowerCase();
+    //         return (
+    //             serviceTypeName?.includes(filterValue) ||
+    //             associatedDoctorName?.includes(filterValue) ||
+    //             itemCode?.includes(filterValue) ||
+    //             itemName?.includes(filterValue)
+    //         );
+    //     };
 
-        this.dataSource.filterPredicate = filterFunction;
-        this.dataSource.filter = filterValue;
+    //     this.dataSource.filterPredicate = filterFunction;
+    //     this.dataSource.filter = filterValue;
+
+    //     if (this.dataSource.paginator) {
+    //         this.dataSource.paginator.firstPage();
+    //     }
+    // }
+
+    public applyFilter(columnName: string, event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+        this.columnFilters[columnName] = filterValue;
+
+        // Combine all column filters
+        const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+
+        // If there are no filters, show all data
+        if (combinedFilters.length === 0) {
+            this.dataSource.data = this.originalDataSource;
+            this.filteredData = []; // Reset filtered data array
+            return;
+        }
+
+        // Filter the data progressively from the original data or the previously filtered data
+        let dataToFilter: ExtendedItemDetailDto[];
+        if (this.filteredData.length > 0) {
+            dataToFilter = [...this.filteredData];
+        } else {
+            dataToFilter = [...this.originalDataSource];
+        }
+
+        for (const filter of combinedFilters) {
+            dataToFilter = dataToFilter.filter((data) => {
+                const cellValue = this.getCellValue(data, columnName);
+
+                if (cellValue !== undefined && cellValue.includes(filter)) {
+                    return true; // Include the row if the cell value matches the filter
+                }
+
+                return false; // Exclude the row if no match is found or cellValue is undefined
+            });
+        }
+
+        // Update the data source with the filtered data
+        this.dataSource.data = dataToFilter;
+        this.filteredData = dataToFilter;
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
@@ -167,6 +214,8 @@ export class ServicesComponent implements AfterViewInit, OnInit {
             /* ****to get the names in the table by using ids ..as name are not in the interface ******/
             const extendedList = this.extendServiceItemList(this.serviceItemList, this.addingServiceTypeName, this.addingAssociatedDoctorName);
             this.dataSource = new MatTableDataSource(extendedList);
+            this.originalDataSource = [...extendedList]; // Copy the data
+
         });
     }
 
@@ -209,5 +258,38 @@ export class ServicesComponent implements AfterViewInit, OnInit {
                 associatedDoctorName: addingAssociatedDoctorName[serviceItem.item.associatedDoctorId],
             };
         });
+    }
+
+    private getCellValue(data: ExtendedItemDetailDto, columnName: any): any | undefined {
+
+
+
+        // const serviceTypeName = data.serviceTypeName?.toLowerCase();
+        //         const associatedDoctorName = data.associatedDoctorName?.toLowerCase();
+        //         const itemCode = data.item?.code?.toLowerCase();
+        //         const itemName = data.item?.name?.toLowerCase();
+        //         return (
+        //             serviceTypeName?.includes(filterValue) ||
+        //             associatedDoctorName?.includes(filterValue) ||
+        //             itemCode?.includes(filterValue) ||
+        //             itemName?.includes(filterValue)
+        //         );
+        //     };
+
+        if (columnName === 'serviceType' && data.serviceTypeName) {
+            return data.serviceTypeName.toLowerCase();
+        } else if (columnName === 'serviceCode' && data.item?.code) {
+            return data.item?.code.toLowerCase();
+        }
+        else if (columnName === 'doctorsName' && data.associatedDoctorName) {
+            return data.associatedDoctorName.toLowerCase();
+        }
+        else if (columnName === 'serviceName' && data.item?.name) {
+            return data.item?.name.toLowerCase();
+        }
+        else if (columnName === 'fee' && data.item?.fee) {
+            return data.item?.fee;
+        }
+        return undefined;
     }
 }
