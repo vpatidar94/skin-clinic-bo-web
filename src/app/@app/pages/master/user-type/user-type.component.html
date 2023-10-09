@@ -8,31 +8,37 @@
     </div>
 
     <mat-card class="table-card-style">
-        <div class="row">
-            <div class="search-input-style">
-                <label class="app-label me-2">{{'Search'}}</label>
-                <input class="input-style" name="filter" (keyup)="applyFilter($event)" #input>
-            </div>
-        </div>
-
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
                 <!-- User Type Code -->
                 <ng-container matColumnDef="userTypeCode">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> User Type Code </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <input class="placeholder-style" placeholder="User Type Code" name="userTypeCodeFilter"
+                            (keyup)="applyFilter('userTypeCode', $event)" #userTypeCodeInput>
+                    </th>
                     <td mat-cell *matCellDef="let row"> {{row.userType.code}} </td>
                 </ng-container>
 
                 <!-- User Type -->
                 <ng-container matColumnDef="userTypeName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>User Type</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <input class="placeholder-style" placeholder="User Type Name" name="userTypeNameFilter"
+                            (keyup)="applyFilter('userTypeName', $event)" #userTypeNameInput>
+                    </th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.userType.name}} </td>
+                    <input class="placeholder-style" name="userTypeNameFilter" (keyup)="applyFilter('userTypeName', $event)"
+                        #userTypeNameInput>
+
                 </ng-container>
 
                 <!-- Department -->
                 <ng-container matColumnDef="departmentName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <input class="placeholder-style" placeholder="Department Name" name="departmentNameFilter"
+                            (keyup)="applyFilter('departmentName', $event)" #departmentNameInput>
+                    </th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.departmentName}} </td>
+
                 </ng-container>
 
                 <!-- Action -->
@@ -47,9 +53,9 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                 <!-- Row shown when there is no matching data. -->
-                <tr class="mat-row" *matNoDataRow>
+                <!-- <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                </tr>
+                </tr> -->
             </table>
 
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

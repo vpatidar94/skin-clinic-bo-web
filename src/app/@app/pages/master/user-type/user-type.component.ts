@@ -33,6 +33,8 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+    columnFilters: { [key: string]: string } = {};
+
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi,
@@ -47,21 +49,56 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    public applyFilter(event: Event) {
+    // public applyFilter(event: Event) {
+    //     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    //     const filterFunction = (data: UserTypeDetailDto) => {
+    //         const userTypeCode = data.userType?.code?.toLowerCase();
+    //         const userTypeName = data.userType?.name?.toLowerCase();
+    //         const departmentName = data.departmentName?.toLowerCase();
+    //         return userTypeCode?.includes(filterValue) || userTypeName?.includes(filterValue) || departmentName?.includes(filterValue);
+    //     };
+
+    //     this.dataSource.filterPredicate = filterFunction;
+    //     this.dataSource.filter = filterValue;
+
+    //     if (this.dataSource.paginator) {
+    //         this.dataSource.paginator.firstPage();
+    //     }
+    // }
+
+    public applyFilter(columnName: string, event: Event) {
         const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-        const filterFunction = (data: UserTypeDetailDto) => {
+    this.columnFilters[columnName] = filterValue;
+
+    // Create a function to check if the filterValue matches a cell value
+    const filterFunction = (data: UserTypeDetailDto) => {
+        const departmentName = data.departmentName?.toLowerCase();
+
+        // Apply individual column filters
+        if (columnName === 'userTypeCode') {
             const userTypeCode = data.userType?.code?.toLowerCase();
+            return userTypeCode?.includes(filterValue);
+        } else if (columnName === 'userTypeName') {
             const userTypeName = data.userType?.name?.toLowerCase();
-            const departmentName = data.departmentName?.toLowerCase();
-            return userTypeCode?.includes(filterValue) || userTypeName?.includes(filterValue) || departmentName?.includes(filterValue);
-        };
-
-        this.dataSource.filterPredicate = filterFunction;
-        this.dataSource.filter = filterValue;
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
+            return userTypeName?.includes(filterValue);
+        } else if (columnName === 'departmentName') {
+            return departmentName?.includes(filterValue);
         }
+
+        // Return true for rows where no filter is applied
+        return true;
+    };
+
+    this.dataSource.filterPredicate = filterFunction;
+
+    // Combine all column filters
+    const combinedFilters = Object.values(this.columnFilters).join(' ');
+
+    this.dataSource.filter = combinedFilters;
+
+    if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+    }
     }
 
     public ngOnInit(): void {
