@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, DepartmentVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 import { ProductApi } from '../../service/remote/product.api';
+import { DepartmentApi } from '../../service/remote/department.api';
 
 @Component({
   selector: 'app-patient',
@@ -35,6 +36,9 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   productList!: ProductVo[];
 
+  departmentList!: DepartmentVo[];
+
+
   displayedColumns: string[] = ['AppNo', 'Date', 'PatientName', 'Type', 'DoctorsName', "Time", "Action"];
   dataSource = new MatTableDataSource<OrgBookingDto>([] as OrgBookingDto[]);
 
@@ -52,7 +56,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
     private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
     private bookingApi: BookingApi,
-    private productApi: ProductApi) { }
+    private productApi: ProductApi,
+    private departmentApi: DepartmentApi,) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -208,6 +213,16 @@ export class PatientComponent implements OnInit, AfterViewInit {
     })
 }
 
+public _getDepartmentList() {
+  const orgId = this.keyValueStorageService.getOrgId();
+  if (!orgId) {
+    return;
+  }
+  this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+    this.departmentList = res.body ?? [] as DepartmentVo[];
+  })
+}
+
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
@@ -215,6 +230,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
     this._getServiceList();
     this._getDoctorList();
     this._getProductList();
+    this._getDepartmentList();
   }
 
   private _resetSection(): void {

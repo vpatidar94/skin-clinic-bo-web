@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ApiResponse, ItemDetailDto, OrgOrderNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, ItemDetailDto, OrgOrderNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -42,6 +42,9 @@ export class PatientEditComponent implements OnInit, OnChanges {
 
   @Input()
   productList!: ProductVo[];
+
+  @Input()
+  departmentList!: DepartmentVo[];
 
   @Input()
   userBookingInvestigationList!: UserBookingInvestigationDto;
