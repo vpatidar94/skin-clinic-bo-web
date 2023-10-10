@@ -25,12 +25,16 @@ export class BookingApi {
         return this.http.get<ApiResponse<OrgBookingCountDto>>(environment.apiUrl + URL.ORG_BOOKING_LIST, { params: { orgId, type, pageNumber, maxRecord } });
     }
 
-    public generateReceipt(bookingId: string,transactionId: string): Observable<any> {
+    public generateReceipt(bookingId: string, transactionId: string): Observable<any> {
         const httpOptions = {
             responseType: 'blob' as 'json',
-            params: { bookingId,transactionId }
+            params: { bookingId, transactionId }
         };
         return this.http.get(environment.apiUrl + URL.BOOKING_RECEIPT, httpOptions);
+    }
+
+    public convertToPatient(bookingId: string, patientType: string, orgId: string): Observable<ApiResponse<null>> {
+        return this.http.get<ApiResponse<null>>(environment.apiUrl + URL.CONVERT_PATIENT, { params: { bookingId, patientType, orgId } });
     }
 
 }

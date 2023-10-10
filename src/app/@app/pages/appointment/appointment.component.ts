@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, OrgBookingCountDto, UserBookingInvestigationDto, } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, OrgBookingCountDto, UserBookingInvestigationDto, PATIENT_TYPE, } from 'aayam-clinic-core';
 import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -234,6 +234,28 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit() {
+    this._initView();
+  }
+
+  public addAsPatient(dto: OrgBookingDto): void {
+    // TODO: If required select patient type from dialof open and then call this api with select patient type
+    this.bookingApi.convertToPatient(dto.booking._id, PATIENT_TYPE.OPD, dto.booking.orgId).subscribe((res: ApiResponse<null>) => {
+      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+        this._initView();
+      }
+    });
+  }
+
+  /* ************************************ Private Methods ************************************ */
+  private _init(): void {
+    this._resetSection();
+    this.showSectionAppointmentList = true;
+    this._getServiceList();
+    this._getDoctorList();
+
+  }
+
+  private _initView(): void { 
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
       return;
@@ -263,17 +285,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
         this.bookingList = dto?.orgBooking ?? [] as OrgBookingDto[];
         this.dataSource = new MatTableDataSource(this.bookingList);
       });
-
-  }
-
-
-  /* ************************************ Private Methods ************************************ */
-  private _init(): void {
-    this._resetSection();
-    this.showSectionAppointmentList = true;
-    this._getServiceList();
-    this._getDoctorList();
-
   }
 
   private _resetSection(): void {
