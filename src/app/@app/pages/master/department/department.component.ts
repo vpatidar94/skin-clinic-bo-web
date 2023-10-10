@@ -32,6 +32,11 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+    columnFilters: { [key: string]: string } = {};
+
+    originalDataSource: DepartmentVo[] = [];
+    filteredData: DepartmentVo[] = [];
+
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private departmentApi: DepartmentApi) { }
@@ -44,9 +49,51 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    public applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+    // public applyFilter(event: Event) {
+    //     const filterValue = (event.target as HTMLInputElement).value;
+    //     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    //     if (this.dataSource.paginator) {
+    //         this.dataSource.paginator.firstPage();
+    //     }
+    // }
+
+    public applyFilter(columnName: string, event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+        this.columnFilters[columnName] = filterValue;
+
+        // Combine all column filters
+        const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+
+        // If there are no filters, show all data
+        if (combinedFilters.length === 0) {
+            this.dataSource.data = this.originalDataSource;
+            this.filteredData = []; // Reset filtered data array
+            return;
+        }
+
+        // Filter the data progressively from the original data or the previously filtered data
+        let dataToFilter: DepartmentVo[];
+        if (this.filteredData.length > 0) {
+            dataToFilter = [...this.filteredData];
+        } else {
+            dataToFilter = [...this.originalDataSource];
+        }
+        for (const filter of combinedFilters) {
+            dataToFilter = dataToFilter.filter((data) => {
+                const cellValue = this.getCellValue(data, columnName);
+
+                if (cellValue !== undefined && cellValue.includes(filter)) {
+                    return true; // Include the row if the cell value matches the filter
+                }
+
+                return false; // Exclude the row if no match is found or cellValue is undefined
+            });
+        }
+
+        // Update the data source with the filtered data
+        this.dataSource.data = dataToFilter;
+        this.filteredData = dataToFilter;
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
@@ -78,6 +125,7 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
             this.departmentList = res.body ?? [] as DepartmentVo[];
             this.resultsLength = this.departmentList.length;
             this.dataSource = new MatTableDataSource(this.departmentList);
+            this.originalDataSource = [...this.departmentList];
         })
     }
 
@@ -115,6 +163,20 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         this.department = departmentDetails;
         this._resetSection();
         this.showSectionDepartmentEdit = true;
+    }
+
+    private getCellValue(data: DepartmentVo, columnName: string): string | undefined {
+
+        if (columnName === 'createdDate' && data.created) {
+            return data.created.toString();
+        }
+        if (columnName === 'departmentCode' && data.code) {
+            return data.code.toLowerCase();
+        }
+        if (columnName === 'departmentName' && data.name) {
+            return data.name.toLowerCase();
+        }
+        return undefined;
     }
 
 }

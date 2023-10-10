@@ -6,13 +6,6 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 import { ApiResponse, ProductVo, ResponseStatus } from 'aayam-clinic-core';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 
-export interface newInterfaceProduct {
-   productCode: string,
-   productName: string,
-   productType: string,
-   price: string,
-}
-
 @Component({
     selector: 'app-products',
     styleUrls: ['./products.component.scss'],
@@ -83,7 +76,6 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         } else {
             dataToFilter = [...this.originalDataSource];
         }
-
         for (const filter of combinedFilters) {
             dataToFilter = dataToFilter.filter((data) => {
                 const cellValue = this.getCellValue(data, columnName);
@@ -170,7 +162,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this.showSectionProductEdit = true;
     }
 
-    private getCellValue(data: ProductVo, columnName: any): any | undefined {
+    private getCellValue(data: ProductVo, columnName: string): string | undefined {
 
         if (columnName === 'productCode' && data.code) {
             return data.code.toLowerCase();
@@ -182,7 +174,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
             return data.productType.toLowerCase();
         }
         else if (columnName === 'price' && data.price) {
-            return data.price;
+            return data.price.toString();
         }
         return undefined;
     }

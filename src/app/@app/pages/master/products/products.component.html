@@ -8,18 +8,18 @@
     </div>
 
     <mat-card class="table-card-style">
-        <div class="row">
+        <!-- <div class="row"> -->
             <!-- <div class="search-input-style">
                 <label class="app-label me-2">{{'Search'}}</label>
                 <input class="input-style" (keyup)="applyFilter($event)" placeholder="" #input>
             </div> -->
-        </div>
+        <!-- </div> -->
 
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
                 <!-- Product Code -->
                 <ng-container matColumnDef="productCode">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Code 
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 
                         <input class="placeholder-style" placeholder="Product Code" name="productCodeFilter"
                             (keyup)="applyFilter('productCode', $event)" #productCodeInput>
                     </th>
@@ -28,7 +28,7 @@
 
                 <!-- Product Name -->
                 <ng-container matColumnDef="productName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <input class="placeholder-style" placeholder="Product Name" name="productNameFilter"
                         (keyup)="applyFilter('productName', $event)" #productNameInput>
                     </th>
@@ -37,7 +37,7 @@
 
                 <!-- Product Type -->
                 <ng-container matColumnDef="productType">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Type 
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 
                         <input class="placeholder-style" placeholder="Product Type" name="productType"
                         (keyup)="applyFilter('productType', $event)" #productTypeInput>
                     </th>
@@ -46,7 +46,7 @@
 
                 <!-- Price -->
                 <ng-container matColumnDef="price">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Price 
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 
                         <input class="placeholder-style" placeholder="Price" name="productPrice"
                         (keyup)="applyFilter('price', $event)" #productPriceInput>
                     </th>

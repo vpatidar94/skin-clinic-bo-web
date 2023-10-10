@@ -9,8 +9,7 @@ import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
 
 export interface ExtendedServiceTypeDto extends ServiceTypeVo {
-  addingDepartmentName:[departmentId: string];
-  associatedDoctorName: string | null | undefined;
+    departmentName: string;    // For Department
 }
 
 @Component({
@@ -26,9 +25,9 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   showSectionServiceTypeList!: boolean;
   showSectionServiceTypeEdit!: boolean;
 
-  displayedColumns: string[] = ['Service Code', 'Service Type', 'DoctorsName', "Department", "Action"];
+  displayedColumns: string[] = ['serviceCode', 'serviceType', 'doctorsName', "department", "action"];
   // dataSource = new MatTableDataSource<ServiceTypeVo>([] as ServiceTypeVo[]);
-  dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
+   dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -79,16 +78,61 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
       this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
       const extendedList = this.extendServiceTypeList(this.serviceTypeList, this.addingDepartmentName);
       this.dataSource = new MatTableDataSource(extendedList);
+    this.originalDataSource =[...extendedList];
+
     })
   }
 
-  public applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  // public applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
+
+  public applyFilter(columnName: string, event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.columnFilters[columnName] = filterValue;
+
+    // Combine all column filters
+    const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+
+    // If there are no filters, show all data
+    if (combinedFilters.length === 0) {
+        this.dataSource.data = this.originalDataSource;
+        this.filteredData = []; // Reset filtered data array
+        return;
     }
-  }
+
+    // Filter the data progressively from the original data or the previously filtered data
+    let dataToFilter: ExtendedServiceTypeDto[];
+    if (this.filteredData.length > 0) {
+        dataToFilter = [...this.filteredData];
+    } else {
+        dataToFilter = [...this.originalDataSource];
+    }
+
+    for (const filter of combinedFilters) {
+        dataToFilter = dataToFilter.filter((data) => {
+            const cellValue = this.getCellValue(data, columnName);
+
+            if (cellValue !== undefined && cellValue.includes(filter)) {
+                return true; // Include the row if the cell value matches the filter
+            }
+
+            return false; // Exclude the row if no match is found or cellValue is undefined
+        });
+    }
+
+    // Update the data source with the filtered data
+    this.dataSource.data = dataToFilter;
+    this.filteredData = dataToFilter;
+
+    if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+    }
+}
 
   public ngOnInit(): void {
     this._init();
@@ -158,6 +202,22 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
       };
     });
   }
+
+
+  private getCellValue(data: ExtendedServiceTypeDto, columnName: any): any | undefined {
+    if (columnName === 'serviceCode' && data.code) {
+        return data.code.toLowerCase();
+    } else if (columnName === 'serviceType' && data.name) {
+        return data.name.toLowerCase();
+    }
+    else if (columnName === 'department' && data.departmentName) {
+        return data.departmentName.toLowerCase();
+    }
+    else if (columnName === 'doctorsName' && data.doctorAssociated) {
+        return data.doctorAssociated;
+    }
+    return undefined;
+}
 
 }
 
