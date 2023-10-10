@@ -6,6 +6,13 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 import { ApiResponse, ProductVo, ResponseStatus } from 'aayam-clinic-core';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 
+export interface newInterfaceProduct {
+   productCode: string,
+   productName: string,
+   productType: string,
+   price: string,
+}
+
 @Component({
     selector: 'app-products',
     styleUrls: ['./products.component.scss'],
@@ -23,12 +30,17 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     showSectionProductList!: boolean;
     showSectionProductEdit!: boolean;
 
-    displayedColumns: string[] = ['Product Code', 'Product Name', 'Product Type', "Price", "Action"];
+    displayedColumns: string[] = ['productCode', 'productName', 'productType', "price", "action"];
     dataSource = new MatTableDataSource<ProductVo>([] as ProductVo[]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+
+    columnFilters: { [key: string]: string } = {};
+
+    originalDataSource: ProductVo[] = [];
+    filteredData: ProductVo[] = [];
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi) {
@@ -42,9 +54,52 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    public applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+    // public applyFilter(event: Event) {
+    //     const filterValue = (event.target as HTMLInputElement).value;
+    //     this.dataSource.filter = filterValue.trim().toLowerCase();
+    //     if (this.dataSource.paginator) {
+    //         this.dataSource.paginator.firstPage();
+    //     }
+    // }
+
+    public applyFilter(columnName: string, event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+        this.columnFilters[columnName] = filterValue;
+
+        // Combine all column filters
+        const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+
+        // If there are no filters, show all data
+        if (combinedFilters.length === 0) {
+            this.dataSource.data = this.originalDataSource;
+            this.filteredData = []; // Reset filtered data array
+            return;
+        }
+
+        // Filter the data progressively from the original data or the previously filtered data
+        let dataToFilter: ProductVo[];
+        if (this.filteredData.length > 0) {
+            dataToFilter = [...this.filteredData];
+        } else {
+            dataToFilter = [...this.originalDataSource];
+        }
+
+        for (const filter of combinedFilters) {
+            dataToFilter = dataToFilter.filter((data) => {
+                const cellValue = this.getCellValue(data, columnName);
+
+                if (cellValue !== undefined && cellValue.includes(filter)) {
+                    return true; // Include the row if the cell value matches the filter
+                }
+
+                return false; // Exclude the row if no match is found or cellValue is undefined
+            });
+        }
+
+        // Update the data source with the filtered data
+        this.dataSource.data = dataToFilter;
+        this.filteredData = dataToFilter;
+
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
@@ -73,6 +128,8 @@ export class ProductsComponent implements AfterViewInit, OnInit {
             this.productList = res.body ?? [] as ProductVo[];
             this.resultsLength = this.productList.length;
             this.dataSource = new MatTableDataSource(this.productList);
+            this.originalDataSource = [...this.productList]; // Copy the data
+
         })
     }
 
@@ -111,5 +168,22 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this.product = productDetails;
         this._resetSection();
         this.showSectionProductEdit = true;
+    }
+
+    private getCellValue(data: ProductVo, columnName: any): any | undefined {
+
+        if (columnName === 'productCode' && data.code) {
+            return data.code.toLowerCase();
+        } 
+        else if (columnName === 'productName' && data.name) {
+            return data.name.toLowerCase();
+        }
+        else if (columnName === 'productType' && data.productType) {
+            return data.productType.toLowerCase();
+        }
+        else if (columnName === 'price' && data.price) {
+            return data.price;
+        }
+        return undefined;
     }
 }

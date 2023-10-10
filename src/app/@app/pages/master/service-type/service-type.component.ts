@@ -7,6 +7,12 @@ import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
+
+export interface ExtendedServiceTypeDto extends ServiceTypeVo {
+  addingDepartmentName:[departmentId: string];
+  associatedDoctorName: string | null | undefined;
+}
+
 @Component({
   selector: 'app-servicetype',
   styleUrls: ['./service-type.component.scss'],
@@ -21,13 +27,19 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   showSectionServiceTypeEdit!: boolean;
 
   displayedColumns: string[] = ['Service Code', 'Service Type', 'DoctorsName', "Department", "Action"];
-  dataSource = new MatTableDataSource<ServiceTypeVo>([] as ServiceTypeVo[]);
+  // dataSource = new MatTableDataSource<ServiceTypeVo>([] as ServiceTypeVo[]);
+  dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   serviceType!: ServiceTypeVo
   departmentList!: DepartmentVo[];
   serviceTypeList!: ServiceTypeVo[];
+
+  columnFilters: { [key: string]: string } = {};
+  originalDataSource: ExtendedServiceTypeDto[] = [];
+  filteredData: ExtendedServiceTypeDto[] = [];
 
   /* ************************************* Constructors ******************************************** */
   constructor(private serviceItemApi: ServiceItemApi,

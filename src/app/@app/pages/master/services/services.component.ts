@@ -261,21 +261,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     private getCellValue(data: ExtendedItemDetailDto, columnName: any): any | undefined {
-
-
-
-        // const serviceTypeName = data.serviceTypeName?.toLowerCase();
-        //         const associatedDoctorName = data.associatedDoctorName?.toLowerCase();
-        //         const itemCode = data.item?.code?.toLowerCase();
-        //         const itemName = data.item?.name?.toLowerCase();
-        //         return (
-        //             serviceTypeName?.includes(filterValue) ||
-        //             associatedDoctorName?.includes(filterValue) ||
-        //             itemCode?.includes(filterValue) ||
-        //             itemName?.includes(filterValue)
-        //         );
-        //     };
-
         if (columnName === 'serviceType' && data.serviceTypeName) {
             return data.serviceTypeName.toLowerCase();
         } else if (columnName === 'serviceCode' && data.item?.code) {
@@ -286,9 +271,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         }
         else if (columnName === 'serviceName' && data.item?.name) {
             return data.item?.name.toLowerCase();
-        }
-        else if (columnName === 'fee' && data.item?.fee) {
-            return data.item?.fee;
         }
         return undefined;
     }
