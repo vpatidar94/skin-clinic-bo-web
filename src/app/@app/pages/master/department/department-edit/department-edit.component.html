@@ -15,8 +15,28 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="text" class="form-control app-input" name="departmentName"
-                            [(ngModel)]="department.name" required>
+                                [(ngModel)]="department.name" required>
                         </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label class="app-label">Department Type</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <select type="text" class="app-single-select-dropdown w-100" name="departmentName"
+                                    required>
+                                    <option>Patient Related</option>
+                                    <option>Non Patient Related</option>
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
