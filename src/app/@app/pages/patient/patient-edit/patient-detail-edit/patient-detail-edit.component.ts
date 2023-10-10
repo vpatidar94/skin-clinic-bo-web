@@ -37,7 +37,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     shiftList = SHIFT_LIST;
 
     docSelectList!: Array<any>;
-    selectedDocs = [];
+    selectedDocs = [] as any[];
     dropdownSettings = {
         singleSelection: false,
         idField: 'item_id',
@@ -67,7 +67,11 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         if (changes['docterList']) {
             this.docterList = changes['docterList'].currentValue;
             this.docSelectList = this.docterList?.map((user: UserVo) => {
-                return { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
+                const selected = { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
+                if (this.userBooking.booking?.dr?.includes(selected.item_id)) {
+                    this.selectedDocs.push(selected);
+                }
+                return selected;
             });
         }
         if (changes['userBookingInvestigationList']) {
