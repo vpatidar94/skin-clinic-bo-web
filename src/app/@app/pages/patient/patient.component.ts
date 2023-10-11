@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, DepartmentVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, DEPT, DEPT_LIST, DepartmentVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -37,6 +37,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
   productList!: ProductVo[];
 
   departmentList!: DepartmentVo[];
+  department!: DepartmentVo;
 
 
   displayedColumns: string[] = ['AppNo', 'Date', 'PatientName', 'Type', 'DoctorsName', "Time", "Action"];
@@ -61,6 +62,12 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
+    const departmentType = {} as DepartmentVo;
+    // departmentType.type= DEPT.NON_PATIENT_RELATED;
+    departmentType.type= 'NON PATIENT RELATED';
+
+    this.department = departmentType;
+    console.log("kkkkk",this.department)
     this._init();
   }
 
@@ -214,12 +221,15 @@ export class PatientComponent implements OnInit, AfterViewInit {
 }
 
 public _getDepartmentList() {
+  this.department.type='Non Patient Related';
   const orgId = this.keyValueStorageService.getOrgId();
   if (!orgId) {
     return;
   }
-  this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+  
+  this.departmentApi.getOrgDepartmentList(orgId,DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
     this.departmentList = res.body ?? [] as DepartmentVo[];
+    console.log("gggg",this.departmentList);
   })
 }
 
@@ -261,11 +271,17 @@ public _getDepartmentList() {
     if (!orgId) {
       return;
     }
+    // this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
+    //     if (res.body && res.body?.length > 0) {
+    //       this.doctorList = res.body;
+    //     }
+    //   }
+
     this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
-        if (res.body && res.body?.length > 0) {
-          this.doctorList = res.body;
-        }
+      if (res.body && res.body?.length > 0) {
+        this.doctorList = res.body;
       }
+    }
     );
   }
 }

@@ -219,7 +219,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
         if (!orgId) {
             return;
         }
-        this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+        this.departmentApi.getOrgDepartmentList(orgId,'').subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
         })
     }

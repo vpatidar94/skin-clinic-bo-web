@@ -17,8 +17,8 @@ export class DepartmentApi {
         return this.http.post<ApiResponse<DepartmentVo>>(environment.apiUrl + URL.ADD_UPDATE_DEPARTMENT, department);
     }
 
-    public getOrgDepartmentList(orgId: string): Observable<ApiResponse<DepartmentVo[]>> {
-        return this.http.get<ApiResponse<DepartmentVo[]>>(environment.apiUrl + URL.ORG_DEPARTMENT_LIST, { params: { orgId } });
+    public getOrgDepartmentList(orgId: string, type:string): Observable<ApiResponse<DepartmentVo[]>> {
+        return this.http.get<ApiResponse<DepartmentVo[]>>(environment.apiUrl + URL.ORG_DEPARTMENT_LIST, { params: { orgId, type } });
     }
 
 }

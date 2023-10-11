@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DepartmentVo, PATIENT_TYPE_LIST, SHIFT_LIST, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, PATIENT_TYPE_LIST, SHIFT_LIST, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     @ViewChild('patientForm', { static: true })
     patientForm!: NgForm;
 
-    @Input()
+    
     docterList!: UserVo[];
 
     @Input()
@@ -54,7 +56,14 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
 
     /* ************************************ Constructors ************************************ */
-    constructor() {
+    constructor(
+        private userApi: UserApi,
+    private keyValueStorageService: KeyValueStorageService,
+    // private serviceItemApi: ServiceItemApi,
+    // private bookingApi: BookingApi,
+    // private productApi: ProductApi,
+    // private departmentApi: DepartmentApi,
+    ) {
     }
 
     /* ************************************ Public Methods ************************************ */
@@ -122,7 +131,26 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
             this.userBooking.user.age = age;
         }
     }
+
+
+
+    filterDoctorByDepartmentId(departmentId:string):void{
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+          return;
+        }
+        this.userApi.getDoctorListByDepartmentId(orgId, departmentId).subscribe((res: ApiResponse<UserVo[]>) => {
+          if (res.body && res.body?.length > 0) {
+            this.docterList = res.body;
+            console.log("xxxxxxxxx",this.docterList);
+          }
+        }
+        );
+
+    }
     /* ************************************ Private Methods ************************************ */
+   
+   
     private _init(): void {
     }
 

@@ -123,7 +123,7 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
         if (!orgId) {
             return;
         }
-        this.departmentApi.getOrgDepartmentList(orgId).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+        this.departmentApi.getOrgDepartmentList(orgId,'').subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
             this.resultsLength = this.departmentList.length;
             this.dataSource = new MatTableDataSource(this.departmentList);

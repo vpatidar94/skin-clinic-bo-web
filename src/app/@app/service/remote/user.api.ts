@@ -29,6 +29,11 @@ export class UserApi {
         return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl + URL.DOCTOR_ITEM_LIST, { params: { orgId, subRole } });
     }
 
+    /*--Newly added to get doctor by departmentId--*/
+    public getDoctorListByDepartmentId(orgId: string, departmentId: string): Observable<ApiResponse<UserVo[]>> {
+        return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl +  '/api/core/v1/user/dept-doc-list', { params: { orgId, departmentId } });
+    }
+
     /*--user type--*/
     public addUpdateUserType(userType: UserTypeVo): Observable<ApiResponse<UserTypeVo>> {
         return this.http.post<ApiResponse<UserTypeVo>>(environment.apiUrl +  URL.ADD_UPDATE_USER_TYPE , userType);

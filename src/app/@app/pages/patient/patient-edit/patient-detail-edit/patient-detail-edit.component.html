@@ -206,7 +206,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select class="app-single-select-dropdown w-100" name="department"
+                                <select class="app-single-select-dropdown w-100" name="department"  [(ngModel)]="userBooking.booking.departmentId"
+                                (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)"
                                 >
                                 <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
                                 </option>
