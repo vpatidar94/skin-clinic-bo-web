@@ -56,6 +56,7 @@ export const URL = {
     ADD_UPDATE_SERVICE_ITEM: MJR_SERVICE_ITEM + ADD_UPDATE,
     SERVICE_ITEM_LIST: MJR_SERVICE_ITEM + LIST,
     DOCTOR_ITEM_LIST: MJR_USER + '/staff-subrole-list',
+    DOCTOR_BY_DEPT: MJR_USER + '/dept-doc-list',
     ADD_UPDATE_SERVICE_TYPE: MJR_SERVICE_ITEM + '/service-type-add-update',
     SERVICE_TYPE_LIST: MJR_SERVICE_ITEM + '/service-type-list',
     LAST_ORDER_NO: MJR_ORG + '/last-order-no',

@@ -64,7 +64,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     const departmentType = {} as DepartmentVo;
     // departmentType.type= DEPT.NON_PATIENT_RELATED;
-    departmentType.type= 'NON PATIENT RELATED';
+    departmentType.type= 'PATIENT RELATED';
 
     this.department = departmentType;
     console.log("kkkkk",this.department)

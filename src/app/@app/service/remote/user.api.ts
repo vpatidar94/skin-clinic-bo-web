@@ -31,7 +31,7 @@ export class UserApi {
 
     /*--Newly added to get doctor by departmentId--*/
     public getDoctorListByDepartmentId(orgId: string, departmentId: string): Observable<ApiResponse<UserVo[]>> {
-        return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl +  '/api/core/v1/user/dept-doc-list', { params: { orgId, departmentId } });
+        return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl +  URL.DOCTOR_BY_DEPT, { params: { orgId, departmentId } });
     }
 
     /*--user type--*/

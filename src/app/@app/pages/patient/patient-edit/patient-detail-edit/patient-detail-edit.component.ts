@@ -31,7 +31,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     @ViewChild('patientForm', { static: true })
     patientForm!: NgForm;
 
-    
+
     docterList!: UserVo[];
 
     @Input()
@@ -58,11 +58,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     /* ************************************ Constructors ************************************ */
     constructor(
         private userApi: UserApi,
-    private keyValueStorageService: KeyValueStorageService,
-    // private serviceItemApi: ServiceItemApi,
-    // private bookingApi: BookingApi,
-    // private productApi: ProductApi,
-    // private departmentApi: DepartmentApi,
+        private keyValueStorageService: KeyValueStorageService,
     ) {
     }
 
@@ -134,23 +130,24 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
 
 
-    filterDoctorByDepartmentId(departmentId:string):void{
+    filterDoctorByDepartmentId(departmentId: string): void {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
-          return;
+            return;
         }
         this.userApi.getDoctorListByDepartmentId(orgId, departmentId).subscribe((res: ApiResponse<UserVo[]>) => {
-          if (res.body && res.body?.length > 0) {
-            this.docterList = res.body;
-            console.log("xxxxxxxxx",this.docterList);
-          }
+            if (res.body && res.body?.length > 0) {
+                this.docterList = res.body;
+                console.log("xxxxxxx", this.docterList);
+
+            }
         }
         );
 
     }
     /* ************************************ Private Methods ************************************ */
-   
-   
+
+
     private _init(): void {
     }
 
