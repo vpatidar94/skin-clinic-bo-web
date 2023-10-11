@@ -30,14 +30,12 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select type="text" class="app-single-select-dropdown w-100" name="departmentName"
+                                <select type="text"  class="app-single-select-dropdown w-100" name="type" [(ngModel)]="department.type"
                                     required>
-                                    <option>Patient Related</option>
-                                    <option>Non Patient Related</option>
+                                    <option *ngFor="let deptType of departmentTypeList" [value]="deptType.value">{{deptType.label}}</option>
                                 </select>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

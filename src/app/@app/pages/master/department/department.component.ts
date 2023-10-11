@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild, } from '@angular/core';
-import { ApiResponse, DepartmentVo, ResponseStatus, } from 'aayam-clinic-core';
-import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-import { MatSort, } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ApiResponse, DEPT_LIST, DEPT_NAME, DepartmentVo, ResponseStatus, } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 @Component({
     selector: 'app-department',
@@ -26,7 +26,7 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
     showSectionDepartmentList!: boolean;
     showSectionDepartmentEdit!: boolean;
 
-    displayedColumns: string[] = ['createdDate', 'departmentCode', 'departmentName', "action"];
+    displayedColumns: string[] = ['createdDate', 'departmentCode', 'departmentName', 'type', "action"];
     dataSource = new MatTableDataSource<DepartmentVo>([] as DepartmentVo[]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,6 +36,8 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
 
     originalDataSource: DepartmentVo[] = [];
     filteredData: DepartmentVo[] = [];
+
+    departmentName: any = DEPT_NAME;
 
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,

@@ -22,16 +22,16 @@
                 <ng-container matColumnDef="createdDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <input class="placeholder-style" placeholder="Date" name="createdDateFilter"
-                        (keyup)="applyFilter('createdDate', $event)" #createdDateInput>
+                            (keyup)="applyFilter('createdDate', $event)" #createdDateInput>
                     </th>
                     <td mat-cell *matCellDef="let row"> {{row.created | date}} </td>
                 </ng-container>
 
                 <!-- Department  No -->
                 <ng-container matColumnDef="departmentCode">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <input class="placeholder-style" placeholder="Department Code" name="departmentCodeFilter"
-                        (keyup)="applyFilter('departmentCode', $event)" #departmentCodeInput>
+                            (keyup)="applyFilter('departmentCode', $event)" #departmentCodeInput>
                     </th>
                     <td mat-cell *matCellDef="let row"> {{row.code}} </td>
                 </ng-container>
@@ -40,9 +40,15 @@
                 <ng-container matColumnDef="departmentName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         <input class="placeholder-style" placeholder="Product Code" name="departmentNameFilter"
-                        (keyup)="applyFilter('departmentName', $event)" #departmentNameInput>
+                            (keyup)="applyFilter('departmentName', $event)" #departmentNameInput>
                     </th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.name}} </td>
+                </ng-container>
+
+                <!-- Type -->
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.type ? departmentName[row.type] : ''}} </td>
                 </ng-container>
 
                 <!-- Action -->
