@@ -250,15 +250,14 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     }
 
     public editUserType(userType: UserTypeDetailDto): void {
-        this.userType = { ...userType.userType };
-        this._addEditUserItem(this.userType);
-        this._getDepartmentList();
+        this._addEditUserItem(userType.userType);
     }
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this._resetSection();
         this.showSectionUserTypeList = true;
         this._getUserTypeList();
+        this._getDepartmentList();
     }
 
     private _resetSection(): void {
