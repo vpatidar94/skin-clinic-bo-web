@@ -182,7 +182,7 @@
                     </div>
                 </div>
 
-                <!-- Type -->
+                <!-- Patient Type -->
                 <!-- <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
@@ -199,6 +199,8 @@
                         </div>
                     </div>
                 </div> -->
+
+                <!-- Department -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
@@ -206,12 +208,12 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select class="app-single-select-dropdown w-100" name="department"  [(ngModel)]="userBooking.booking.departmentId"
-                                (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)"
-                                >
-                                <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
-                                </option>
-                            </select>
+                                <select class="app-single-select-dropdown w-100" name="department"
+                                    [(ngModel)]="userBooking.booking.departmentId"
+                                    (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)">
+                                    <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -229,10 +231,11 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <ng-multiselect-dropdown [name]="'doctorName'" [placeholder]="'Select Doctor'"
-                                    [settings]="dropdownSettings" [data]="docSelectList" [(ngModel)]="selectedDocs"
-                                    (onDeSelect)="onDocSelect($event)" (onSelect)="onDocSelect($event)">
-                                </ng-multiselect-dropdown>
+                                <select class="app-single-select-dropdown w-100" name="doctorname"
+                                    [(ngModel)]="doctorConst" (ngModelChange)="checkDoctor(doctorConst)">
+                                    <option *ngFor="let doctor of docterList" [value]="doctor.nameF">{{doctor.nameF}}
+                                        {{doctor.nameL}}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -305,15 +308,20 @@
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Time Slot</label>
                         </div>
+
                         <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="text" class="form-control app-input" name="timeSlot"
-                                    [(ngModel)]="userBooking.booking.timeSlot" required>
+                            <div class="form-group" *ngFor="let shift of time;let i=index;">
+                                <div class="time-slots">
+                                    <select class="app-single-select-dropdown w-100">
+                                        <option *ngFor="let slot of generateTimeSlots(time[i].from, time[i].to)">{{ slot
+                                            }}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
             <app-label>Adress Details</app-label>
             <div class="row">

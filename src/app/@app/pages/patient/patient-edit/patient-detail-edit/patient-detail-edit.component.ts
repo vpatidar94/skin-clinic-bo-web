@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiResponse, DepartmentVo, PATIENT_TYPE_LIST, SHIFT_LIST, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { UserServiceTimingVo } from 'aayam-clinic-core/dist/vo/user-service-timing.vo';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
@@ -34,6 +35,8 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     docterList!: UserVo[];
 
+    doctorConst!: string | null | undefined;
+
     @Input()
     departmentList!: DepartmentVo[];
 
@@ -53,7 +56,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         maxHeight: 50
     };
 
-
+    time!: Array<UserServiceTimingVo>;
 
     /* ************************************ Constructors ************************************ */
     constructor(
@@ -107,12 +110,12 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     }
 
     // multiple select
-    onDocSelect(item: any) {
+    public onDocSelect(item: any) {
         this.userBooking.booking.dr = this.selectedDocs.map((doc: any) => doc.item_id);
         this.userBookingChange.emit(this.userBooking);
     }
 
-    calculateAge() {
+    public calculateAge() {
         const dob = this.userBooking.user.doB;
         if (dob) {
             const today = new Date();
@@ -128,9 +131,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         }
     }
 
-
-
-    filterDoctorByDepartmentId(departmentId: string): void {
+    public filterDoctorByDepartmentId(departmentId: string): void {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -145,8 +146,42 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         );
 
     }
-    /* ************************************ Private Methods ************************************ */
 
+    public checkDoctor(selectedDoctor: string | null | undefined): void {
+        // Find the doctor based on the selectedDoctor name
+        const doctor = this.docterList.find((doc: UserVo) => doc.nameF === selectedDoctor);
+        // Check if the doctor is found and if they have serviceTiming
+        if (doctor && doctor.serviceTiming && doctor.serviceTiming.length > 0) {
+            // Update the userBooking with the selected doctor and their service timings
+            // this.userBooking.booking.dr = [doctor.nameF];   // this to be used again when api interface will changed by vinay
+            this.doctorConst = doctor.nameF // this will be removed when this.userBooking.booking.dr will be used
+            // Update the time variable with the service timings of the selected doctor
+            this.time = doctor.serviceTiming;
+            // Emit the updated userBooking
+            this.userBookingChange.emit(this.userBooking);
+        }
+    }
+
+    public generateTimeSlots(from: String, to: String): String[] {
+        const timeSlots = [];
+        const startTime = new Date(`2000-01-01T${from}`);
+        const endTime = new Date(`2000-01-01T${to}`);
+        const timeGapMinutes = 10;
+        while (startTime <= endTime) {
+            timeSlots.push(
+                startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+            );
+            // Calculate the next time slot
+            startTime.setMinutes(startTime.getMinutes() + timeGapMinutes);
+
+            // Ensure we don't go beyond the 'to' time
+            if (startTime > endTime) {
+                break;
+            }
+        }
+        return timeSlots;
+    }
+    /* ************************************ Private Methods ************************************ */
 
     private _init(): void {
     }
@@ -158,4 +193,5 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         } as UiActionDto<boolean>;
         this.pubSub.emit(actionDto);
     }
+
 }
