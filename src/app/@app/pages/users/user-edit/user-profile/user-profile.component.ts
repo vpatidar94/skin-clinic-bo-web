@@ -45,11 +45,8 @@ export class UserProfileComponent implements OnInit, OnChanges {
     inValidAddressForm!: boolean;
 
 
-
     /* ************************************ Constructors ************************************ */
-    constructor(private keyValueStorageService: KeyValueStorageService,
-        private departmentApi: DepartmentApi,
-        private userApi: UserApi) { }
+    constructor(private keyValueStorageService: KeyValueStorageService) { }
 
     /* ************************************ Public Methods ************************************ */
 
@@ -95,6 +92,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
     }
     public removeServiceTiming(index: number): void {
         this.staff.user.serviceTiming.splice(index, 1);
+        this.staffChange.emit(this.staff);
     }
 
 
@@ -105,7 +103,14 @@ export class UserProfileComponent implements OnInit, OnChanges {
     /* ************************************* Private Methods ******************************************** */
 
     private _init(): void {
-        this.filteredUserTypeList = this.userTypeList;
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        if (this.staff.acl?.departmentId) {
+            this.filteredUserTypeList = this.userTypeList?.filter((it: UserTypeDetailDto) => it.userType.departmentId === this.staff.acl.departmentId);
+
+        }
     }
 
     private _formChanged(): void {
