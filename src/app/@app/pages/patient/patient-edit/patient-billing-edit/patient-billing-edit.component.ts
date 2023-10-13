@@ -83,7 +83,7 @@ export class PatientBillingEditComponent implements OnInit {
     });
   }
 
-  public downloadReceipt(index:number): void {
+  public downloadReceipt(index: number): void {
     this.bookingApi.generateReceipt(this.userBooking.booking._id, this.userBooking.booking.tx[index]._id).subscribe((data) => {
       const blob = new Blob([data], { type: 'application/pdf' })
       const fileReader = new FileReader();

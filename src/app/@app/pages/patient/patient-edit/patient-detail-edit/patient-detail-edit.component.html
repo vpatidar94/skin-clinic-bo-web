@@ -35,6 +35,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <!-- First Name -->
                 <div class="col-md-6">
@@ -182,6 +183,7 @@
                     </div>
                 </div>
 
+                <!-- CAN BE USED IN FUTURE -->
                 <!-- Patient Type -->
                 <!-- <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
@@ -241,6 +243,7 @@
                     </div>
                 </div>
 
+                <!-- Other doctor -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
@@ -312,18 +315,19 @@
                         <div class="col-md-7">
                             <div class="form-group" *ngFor="let shift of time;let i=index;">
                                 <div class="time-slots">
-                                    <select class="app-single-select-dropdown w-100">
+                                    <select class="app-single-select-dropdown w-100" name="timeslots" [(ngModel)]="userBooking.booking.timeSlot">
                                         <option *ngFor="let slot of generateTimeSlots(time[i].from, time[i].to)">{{ slot
                                             }}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+
             <app-label>Adress Details</app-label>
+
             <div class="row">
                 <app-eg-edit-address-form [(address)]="userBooking.user.address"
                     (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>

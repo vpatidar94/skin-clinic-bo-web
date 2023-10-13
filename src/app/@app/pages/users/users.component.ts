@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AclVo, AddressVo, ApiResponse, DepartmentVo, ROLE, ROLE_NAME, ResponseStatus, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
+import { AclVo, AddressVo, ApiResponse, DepartmentVo, ROLE, ROLE_NAME, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from '../../service/remote/department.api';
 import { UserApi } from '../../service/remote/user.api';
-
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,7 +20,6 @@ import { UserServiceTimingVo } from 'aayam-clinic-core/dist/vo/user-service-timi
 export class UsersComponent implements OnInit, AfterViewInit {
 
   /* ************************************* Instance Field ******************************************** */
-
   showSectionUserList!: boolean;
   showSectionUserEdit!: boolean;
 
@@ -104,8 +102,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
     acl.role = ROLE.EMP;
     const staff = new UserEmpDto(user, acl);
     this._addEditStaff(staff);
-
-
   }
 
   public getSubRole(emp: { [key: string]: AclVo }): string {

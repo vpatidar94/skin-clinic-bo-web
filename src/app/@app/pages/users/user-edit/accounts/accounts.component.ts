@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { AccountsVo } from 'src/app/@shared/dto/accounts.dto';
-import { AclVo, ApiResponse, ResponseStatus, UserAccountVo, UserDeductionVo, UserEmpDto, UserIncomeVo, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, ResponseStatus, UserAccountVo, UserDeductionVo, UserEmpDto, UserIncomeVo} from 'aayam-clinic-core';
 import { UserBankDetailVo } from 'aayam-clinic-core/dist/vo/user-bank-detail.vo';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
@@ -21,12 +20,10 @@ export class AccountComponent implements OnInit {
     @Input()
     staff!: UserEmpDto;
 
-
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi, private globalEmitterService: GlobalEmitterService
-        // 
-    ) { }
+    ) {}
 
 
     /* ************************************ Public Methods ************************************ */
@@ -39,10 +36,8 @@ export class AccountComponent implements OnInit {
         accountDetails.income = {} as UserIncomeVo;
         accountDetails.deduction = {} as UserDeductionVo;
         this.userAccounts = accountDetails;
-
     }
-
-
+    
     public onSavingUserAccount(): void {
         this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res: ApiResponse<UserAccountVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
@@ -50,8 +45,5 @@ export class AccountComponent implements OnInit {
             }
         })
     }
-
-
     /* ************************************ Private Methods ************************************ */
-
 }

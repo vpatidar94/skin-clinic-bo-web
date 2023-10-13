@@ -7,7 +7,6 @@ import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
-
 @Component({
     selector: 'app-patient-detail-edit',
     templateUrl: './patient-detail-edit.component.html',
@@ -31,7 +30,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     @ViewChild('patientForm', { static: true })
     patientForm!: NgForm;
-
 
     docterList!: UserVo[];
 
@@ -93,7 +91,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
             }
             this.userBookingChange.emit(this.userBooking);
         }
-
         if (changes['departmentList']) {
             this.departmentList = changes['departmentList']?.currentValue as DepartmentVo[];
         }
@@ -139,8 +136,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         this.userApi.getDoctorListByDepartmentId(orgId, departmentId).subscribe((res: ApiResponse<UserVo[]>) => {
             if (res.body && res.body?.length > 0) {
                 this.docterList = res.body;
-                console.log("xxxxxxx", this.docterList);
-
             }
         }
         );
@@ -153,8 +148,8 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         // Check if the doctor is found and if they have serviceTiming
         if (doctor && doctor.serviceTiming && doctor.serviceTiming.length > 0) {
             // Update the userBooking with the selected doctor and their service timings
-            // this.userBooking.booking.dr = [doctor.nameF];   // this to be used again when api interface will changed by vinay
-            this.doctorConst = doctor.nameF // this will be removed when this.userBooking.booking.dr will be used
+            // this.userBooking.booking.dr = [doctor.nameF];   // TODO: this to be used again when api interface will be changed as per needed
+            this.doctorConst = doctor.nameF // TODO: this will be removed when this.userBooking.booking.dr will be used
             // Update the time variable with the service timings of the selected doctor
             this.time = doctor.serviceTiming;
             // Emit the updated userBooking
@@ -174,7 +169,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
             // Calculate the next time slot
             startTime.setMinutes(startTime.getMinutes() + timeGapMinutes);
 
-            // Ensure we don't go beyond the 'to' time
+            // Ensure not to go beyond the 'to' time
             if (startTime > endTime) {
                 break;
             }

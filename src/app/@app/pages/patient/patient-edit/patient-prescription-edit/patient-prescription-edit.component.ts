@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, UserBookingInvestigationDto, ProductVo } from 'aayam-clinic-core';
+import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -11,7 +11,6 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   /* ********************************* Static Field *************************************** */
   /* *********************************** Instance Field *********************************** */
-
 
   @Input()
   userBooking!: UserBookingDto;
@@ -45,7 +44,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
-    // console.log(this.userBooking['booking']);
     this._init();
     // @ts-ignore
     this.prescriptionForm?.valueChanges?.subscribe(() => {
@@ -70,14 +68,11 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     this.userBookingChange.emit(this.userBooking);
   }
 
-
   public addDiagnosisItem(): void {
     this.userBooking.booking.diagnosis.push(" ");
-    // console.log("userBooking.booking.diagnosis", this.userBooking.booking.diagnosis.length, "nn",this.userBooking.booking.diagnosis)
   }
 
   public removeDiagnosisItem(index: number): void {
-    // console.log("item has removed");
     this.userBooking.booking.diagnosis.splice(index, 1);
   }
 
@@ -86,7 +81,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   }
 
   public removeComplaintItem(index: number): void {
-    // console.log("item has removed");
     this.userBooking.booking.complaint.splice(index, 1);
   }
 
@@ -104,7 +98,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     this.userBooking.booking.prescription.splice(index, 1)
   }
 
-  updateMinNextVisitDate() {
+  public updateMinNextVisitDate() {
     if (this.nextVisitDays >= 0) {
       const today = new Date();
       const nextDate = new Date(today);
@@ -115,7 +109,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   }
 
   // Watch for changes in nextVisitDays
-  onDaysChange() {
+  public onDaysChange() {
     if (this.nextVisitDays >= 0) {
       this.updateMinNextVisitDate();
     }

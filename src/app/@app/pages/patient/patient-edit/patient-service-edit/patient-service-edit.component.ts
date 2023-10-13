@@ -63,7 +63,6 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         }
     }
 
-
     public setOrderItem(event: MatCheckboxChange, item: ItemDetailDto): void {
         this.calculateOrderTotal(event.checked, this.userBooking.booking, item.item, event.checked ? 1 : 0, '');
         this.userBookingChange.emit(this.userBooking);
@@ -115,8 +114,6 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         this.userBookingChange.emit(this.userBooking);
         console.log(this.userBooking);
     }
-
-
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {

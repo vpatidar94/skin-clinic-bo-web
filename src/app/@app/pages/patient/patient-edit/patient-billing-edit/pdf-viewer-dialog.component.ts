@@ -1,5 +1,5 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 
 
@@ -19,7 +19,6 @@ export class PdfViewerDialogComponent {
         @Inject(MAT_DIALOG_DATA) public data: any) {
     }
 
-
     /* ************************************ Public Methods ************************************ */
     public onNoClick(): void {
         this.dialogRef.close();
@@ -30,7 +29,6 @@ export class PdfViewerDialogComponent {
             let blob = new Blob([u8.buffer], {
                 type: 'application/pdf'
             });
-
             const blobUrl = window.URL.createObjectURL((blob));
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';

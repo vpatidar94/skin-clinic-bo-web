@@ -3,20 +3,13 @@ import { ApiResponse, DepartmentVo, ItemDetailDto, OrgOrderNoDto, ProductVo, Use
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
-// @Component({
-//   selector: 'app-appointment-edit',
-//   templateUrl: './appointment-edit.component.html',
-//   styleUrls: ['./appointment-edit.component.scss']
-// })
 @Component({
   selector: 'app-patient-edit',
   templateUrl: './patient-edit.component.html',
   styleUrls: ['./patient-edit.component.scss']
 })
-// export class AppointmentEditComponent implements OnInit, OnChanges {
+
 export class PatientEditComponent implements OnInit, OnChanges {
-
-
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
   showSectionPatient!: boolean;
@@ -25,7 +18,6 @@ export class PatientEditComponent implements OnInit, OnChanges {
   showSectionTest!: boolean;
   showSectionPrescription!: boolean;
   showSectionBilling!: boolean;
-
 
   tabValue!: string;
 

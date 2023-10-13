@@ -39,9 +39,7 @@ export class UserEditComponent implements OnInit, OnChanges {
 
     /* ************************************* Constructor ******************************************** */
     constructor(
-
         private userApi: UserApi,
-
     ) { }
 
     /* ************************************* Public Methods ******************************************** */
@@ -71,15 +69,15 @@ export class UserEditComponent implements OnInit, OnChanges {
     public onSavingUserProfile(): void {
         this.userApi.addUpdateStaff(this.staff).subscribe((res: ApiResponse<UserVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-                console.log("user",this.staff);
+                console.log("user", this.staff);
             }
         });
     }
 
     public onSavingUserAccount(): void {
-        this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res:ApiResponse<UserAccountVo>) => {
+        this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res: ApiResponse<UserAccountVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-                console.log("user",this.userAccounts);
+                console.log("user", this.userAccounts);
             }
         })
     }
@@ -111,7 +109,6 @@ export class UserEditComponent implements OnInit, OnChanges {
                 this._resetSection();
                 this.showSectionAttendance = true;
                 break;
-
         }
     }
 
@@ -120,6 +117,4 @@ export class UserEditComponent implements OnInit, OnChanges {
         this.showSectionAccounts = false;
         this.showSectionAttendance = false;
     }
-
-
 }

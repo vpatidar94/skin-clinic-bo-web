@@ -1,5 +1,4 @@
 <section class="section-org-edit">
-    <!-- <form #prescriptionForm="ngForm"> -->
     <mat-list class="row">
         <app-label>Prescription</app-label>
         <div class="col-md-2">
@@ -44,14 +43,6 @@
                                             <input type="text" class="form-control pres-input" name="complaint{{i}}"
                                                 [(ngModel)]="booking.complaint[i]" required>
                                         </div>
-                                        <!-- <div class="col-md-2">
-                                            <mat-icon (click)="removeComplaintItem(i)"
-                                                class="add-icon clickable">delete</mat-icon>
-                                            &nbsp;&nbsp;
-                                            <mat-icon (click)="addComplaintItem()"
-                                                *ngIf="(i+1) === booking.complaint?.length"
-                                                class="add-icon clickable">add_circle_outline</mat-icon>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -163,8 +154,8 @@
                                             <div class="form-group col-md-2">
                                                 <input type="text" class="form-control pres-input w-100" name="remark"
                                                     [(ngModel)]="userBooking.booking.prescription[i].instruction">
-                                                <!-- Add options for Remark here -->
                                             </div>
+
                                             <div class="col-md-2">
                                                 <mat-icon (click)="removeRxItem(i)"
                                                     class="add-icon clickable">delete</mat-icon>
@@ -383,18 +374,9 @@
                         </div>
                         <div class="col-md-3">
                             <span class="prescription-heading">Remark</span>
-                            <!-- <input type="text" class="form-control pres-input" name="remarks"
-                                [(ngModel)]="userBooking.booking.instruction"> -->
                             <textarea type="text" class="form-control pres-input" name="remarks"
                                 [(ngModel)]="userBooking.booking.instruction"></textarea>
                         </div>
-                        <!-- <div class="col-md-3">
-                            <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
-                            <span class="prescription-heading">Next Visit</span>
-                            <input *ngIf="isNextVisitChecked " type="date" class="form-control pres-input"
-                                name="nextvisit" [(ngModel)]="userBooking.booking.nextVisitDate">
-                        </div> -->
-
                         <div class="col-md-3">
                             <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
                             <span class="prescription-heading">Next Visit(after days)</span>
@@ -403,8 +385,6 @@
                             <input *ngIf="isNextVisitChecked" type="date" readonly class="form-control pres-input"
                                 name="nextvisit" [(ngModel)]="nextVisitDate" [min]="minNextVisitDate">
                         </div>
-
-
                     </div>
                     <div class="mt-2 d-flex justify-content-end">
                         <button class="common-button">Print</button>
@@ -413,5 +393,4 @@
             </mat-expansion-panel>
         </mat-accordion>
     </mat-list>
-    <!-- </form> -->
 </section>

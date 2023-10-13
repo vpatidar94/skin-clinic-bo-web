@@ -3,21 +3,26 @@
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="PATIENT">Patient Detail</mat-button-toggle>
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="SERVICE">Services</mat-button-toggle>
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="BILLING">Billing</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="OBSERVATION">Observation</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="PRESCRIPTION">Prescription</mat-button-toggle>
+        <mat-button-toggle class="tab-content" (change)="tabChange()"
+            value="OBSERVATION">Observation</mat-button-toggle>
+        <mat-button-toggle class="tab-content" (change)="tabChange()"
+            value="PRESCRIPTION">Prescription</mat-button-toggle>
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="TEST">Investigation</mat-button-toggle>
     </mat-button-toggle-group>
 
     <div *ngIf="showSectionPatient">
-        <app-patient-detail-edit [userBookingInvestigationList]="userBookingInvestigationList"  [(userBooking)]="userBooking" [departmentList]="departmentList"></app-patient-detail-edit>
+        <app-patient-detail-edit [userBookingInvestigationList]="userBookingInvestigationList"
+            [(userBooking)]="userBooking" [departmentList]="departmentList"></app-patient-detail-edit>
     </div>
 
     <div *ngIf="showSectionObservation">
-        <app-patient-observation-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking"></app-patient-observation-edit>
+        <app-patient-observation-edit [userBookingInvestigationList]="userBookingInvestigationList"
+            [(userBooking)]="userBooking"></app-patient-observation-edit>
     </div>
 
     <div *ngIf="showSectionService">
-        <app-patient-service-edit [userBookingInvestigationList]="userBookingInvestigationList" [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-patient-service-edit>
+        <app-patient-service-edit [userBookingInvestigationList]="userBookingInvestigationList"
+            [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-patient-service-edit>
     </div>
 
     <div *ngIf="showSectionTest">
@@ -25,7 +30,8 @@
     </div>
 
     <div *ngIf="showSectionPrescription">
-       <app-patient-prescription-edit [userBookingInvestigationList]="userBookingInvestigationList" [(userBooking)]="userBooking" [productList]="productList"></app-patient-prescription-edit>
+        <app-patient-prescription-edit [userBookingInvestigationList]="userBookingInvestigationList"
+            [(userBooking)]="userBooking" [productList]="productList"></app-patient-prescription-edit>
     </div>
 
     <div *ngIf="showSectionBilling">

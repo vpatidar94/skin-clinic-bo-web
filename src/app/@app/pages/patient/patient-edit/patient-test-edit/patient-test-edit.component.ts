@@ -3,17 +3,12 @@ import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InvestigationVo, UserBookingInvestigationDto } from 'aayam-clinic-core';
 
-// @Component({
-//     selector: 'app-appointment-test-edit',
-//     templateUrl: './appointment-test-edit.component.html',
-//     styleUrls: ['./appointment-test-edit.component.scss'],
-// })
-
 @Component({
     selector: 'app-patient-test-edit',
     templateUrl: './patient-test-edit.component.html',
     styleUrls: ['./patient-test-edit.component.scss'],
 })
+
 export class PatientTestEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
@@ -35,9 +30,7 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
     userBookingInvestigationList!: UserBookingInvestigationDto;
 
     /* ************************************ Constructors ************************************ */
-    constructor(private dialog: MatDialog) {
-
-    }
+    constructor(private dialog: MatDialog) {}
 
     /* ************************************ Public Methods ************************************ */
     patientTests: any = [];
@@ -61,7 +54,7 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
             created: Date,
             url: "http://aayam",
             testsArray: ["Lipid", "blood Test"]
-        },  //extra field to be added
+        },
 
         {
             _id: "13",
@@ -74,9 +67,7 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
             created: Date,
             url: "http://aayam",
             testsArray: ["blood Test", "CBT", "x-ray"]
-        }   //extra field to be added
+        }
         ]
     }
-
-
 }

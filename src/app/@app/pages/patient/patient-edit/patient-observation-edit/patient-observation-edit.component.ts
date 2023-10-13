@@ -56,11 +56,11 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
         this.showSectionAdd = this.userBooking.booking.observation?.healthParams?.length > 0;
     }
 
-    public addNewObservation(): void { 
+    public addNewObservation(): void {
         this.showSectionAdd = true;
     }
 
-    onParamSelect(item: any) {
+    public onParamSelect(item: any) {
         this.userBooking.booking.observation.healthParams = this.selectedParams.map((it: any) => {
             return {
                 key: it.item_id,
