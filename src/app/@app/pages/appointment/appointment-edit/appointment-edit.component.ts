@@ -1,9 +1,6 @@
 import { Component, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
-// import { DepartmentVo} from 'aayam-clinic-core';
-
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 import { ItemDetailDto, SHIFT_LIST, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
-
 
 @Component({
     selector: 'app-appointment-edit',
@@ -30,9 +27,6 @@ export class AppointmentEditComponent {
 
     @Input()
     userBooking!: UserBookingDto;
-
-
-    // newly added 
    
     @Output()
     userBookingChange = new EventEmitter<UserBookingDto>();
@@ -43,10 +37,6 @@ export class AppointmentEditComponent {
     @Input()
     userBookingInvestigationList!: UserBookingInvestigationDto;
 
-
-
-
-    // newly added
     docSelectList!: Array<any>;
     selectedDocs = [];
     dropdownSettings = {
@@ -67,7 +57,6 @@ export class AppointmentEditComponent {
             const dobDate = new Date(this.userBooking.user.doB);
             const today = new Date();
             const ageDiff = today.getFullYear() - dobDate.getFullYear();
-
             // Check if the birthday has already occurred this year
             if (
                 today.getMonth() < dobDate.getMonth() ||
@@ -85,22 +74,14 @@ export class AppointmentEditComponent {
 
     public filterServiceItemByDoctor(selectedDoctorId: string) {
         this.filteredServiceItemList = this.serviceItemList.filter(item => item.item.associatedDoctorId === selectedDoctorId );
-        // console.log('filtered',this.filteredServiceItemList);
-        // console.log(".....",this.selectedDoctorId);
 
     }
 
-
-
-    // newly added
     public ngOnChanges(changes: SimpleChanges): void {
-        // console.log("XXXXXXXXXXXCXXXXXXXXXX",this.doctorList);
         if (changes['doctorList']) {
-            console.log("///",this.doctorList)
             this.doctorList = changes['doctorList'].currentValue;
             this.docSelectList = this.doctorList?.map((user: UserVo) => {
                 return { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
-                
             });
         }
         if (changes['userBookingInvestigationList']) {

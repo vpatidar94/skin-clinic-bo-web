@@ -22,28 +22,28 @@ import { AppointmentComponent } from './appointment.component';
 import { AppointmentEditComponent } from './appointment-edit/appointment-edit.component';
 
 const MATERIAL_MODULE = [
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatTableModule,
-    MatInputModule,
-    MatListModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    MatSlideToggleModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatPaginatorModule,
-  ];
+  MatButtonModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatTableModule,
+  MatInputModule,
+  MatListModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  MatExpansionModule,
+  MatSlideToggleModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatPaginatorModule,
+];
 
-  const COMMON_MODULE = [CommonModule, FormsModule];
+const COMMON_MODULE = [CommonModule, FormsModule];
 
-  @NgModule({
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, NgMultiSelectDropDownModule.forRoot(), LabelModule],
-    providers: [],
-    exports: [],
-    declarations: [AppointmentComponent,AppointmentEditComponent]
-  })
+@NgModule({
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, AppointmentRoutingModule, NgMultiSelectDropDownModule.forRoot(), LabelModule],
+  providers: [],
+  exports: [],
+  declarations: [AppointmentComponent, AppointmentEditComponent]
+})
 
 export class AppointmentModule { }

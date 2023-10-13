@@ -1,6 +1,4 @@
-import { NgForm } from '@angular/forms';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,40 +9,6 @@ import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
-
-
-export interface PeriodicElement {
-  appNo: string;
-  name: string;
-  date: any;
-  time: string;
-  doctor: string;
-  consultationFor: string;
-  action: string;
-  showInputFields?: boolean;
-  [key: string]: any;
-}
-
-export interface ColumnWiseFiltersDto {
-  [key: string]: any;
-  appNo: string;
-  name: string;
-  date: string;
-  time: string;
-  doctor: string;
-  consultationFor: string;
-  action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { appNo: "1", name: 'Rahul Dongre', date: '09/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor: "normal checkup", action: "add appointment | delete", },
-  { appNo: "2", name: 'Abhay Singh', date: '09/6/2023', time: '11:30-11:40', doctor: "Dr Ram Shrivastava", consultationFor: "normal checkup", action: "add appointment | delete", },
-  { appNo: "3", name: 'Sunny Thakur', date: '12/6/2023', time: '01:00-01:10', doctor: "Dr Mayank Patidar", consultationFor: "normal checkup", action: "add appointment | delete", },
-  { appNo: "4", name: 'Vishal Pandit', date: '15/6/2023', time: '03:00-03:10', doctor: "Dr Mayur Patidar", consultationFor: "normal checkup", action: "add appointment | delete", },
-  { appNo: "5", name: 'Rahul Dongre', date: '09/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor: "normal checkup", action: "add appointment | delete", },
-  { appNo: "6", name: 'Rahul Dongre', date: '15/6/2023', time: '12:00-12:10', doctor: "Dr Ramesh Mahajan", consultationFor: "normal checkup", action: "add appointment | delete", },
-
-]
 
 @Component({
   selector: 'app-appointment',
@@ -71,38 +35,13 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   productList!: ProductVo[];
   userBookingInvestigationList!: UserBookingInvestigationDto;
 
-  // displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor", "action"];
-  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
-  // newly added
   displayedColumns: string[] = ['appNo', 'name', 'date', "time", "doctor", "consultationFor", "action"];;
   dataSource = new MatTableDataSource<OrgBookingDto>([] as OrgBookingDto[]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  // serviceItemList!: ItemDetailDto[];
-  // doctorList!: UserVo[];
-
-  showAllFilters: boolean = false;
-
-  filters: ColumnWiseFiltersDto = {
-    appNo: '',
-    name: '',
-    date: '',
-    time: '',
-    doctor: '',
-    consultationFor: '',
-    action: '',
-  };
-
-
-  // filteredData: PeriodicElement[] = [...ELEMENT_DATA];
-  // filteredData: any[] = [this.bookingList];
-
-
   bookingTypeName: any = BOOKING_TYPE_NAME;
-
 
   columnFilters: { [key: string]: string } = {};
 
@@ -121,105 +60,43 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this._init();
   }
 
-  // public applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
   public applyFilter(columnName: string, event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.columnFilters[columnName] = filterValue;
-
     // Combine all column filters
     const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
-
     // If there are no filters, show all data
     if (combinedFilters.length === 0) {
-        this.dataSource.data = this.originalDataSource;
-        this.filteredData = []; // Reset filtered data array
-        return;
+      this.dataSource.data = this.originalDataSource;
+      this.filteredData = []; // Reset filtered data array
+      return;
     }
-
     // Filter the data progressively from the original data or the previously filtered data
     let dataToFilter: OrgBookingDto[];
     if (this.filteredData.length > 0) {
-        dataToFilter = [...this.filteredData];
+      dataToFilter = [...this.filteredData];
     } else {
-        dataToFilter = [...this.originalDataSource];
+      dataToFilter = [...this.originalDataSource];
     }
-
     for (const filter of combinedFilters) {
-        dataToFilter = dataToFilter.filter((data) => {
-            const cellValue = this.getCellValue(data, columnName);
+      dataToFilter = dataToFilter.filter((data) => {
+        const cellValue = this.getCellValue(data, columnName);
 
-            if (cellValue !== undefined && cellValue.includes(filter)) {
-                return true; // Include the row if the cell value matches the filter
-            }
+        if (cellValue !== undefined && cellValue.includes(filter)) {
+          return true; // Include the row if the cell value matches the filter
+        }
 
-            return false; // Exclude the row if no match is found or cellValue is undefined
-        });
+        return false; // Exclude the row if no match is found or cellValue is undefined
+      });
     }
-
     // Update the data source with the filtered data
     this.dataSource.data = dataToFilter;
     this.filteredData = dataToFilter;
 
     if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
+      this.dataSource.paginator.firstPage();
     }
-}
-
-
-
-  // public applyNewFilter(event: Event, columnName: string): void {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.filters[columnName] = filterValue.trim().toLowerCase();
-  //   this.dataSource.filter = JSON.stringify(this.filters);
-
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
-  // public applyOldFilter(event: Event, columnName: any): void {
-  //   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-
-  //   // Create a custom filter function based on the selected column
-  //   const filterFunction = (data: any): boolean => {
-  //     // Use the selected column to access the corresponding property in data
-  //     const columnValue = data[columnName].toLowerCase();
-  //     return columnValue.includes(filterValue);
-  //   };
-
-  //   // Set the custom filter function to the data source filter predicate
-  //   this.dataSource.filterPredicate = filterFunction;
-
-  //   // Apply the filter
-  //   this.dataSource.filter = filterValue;
-  // }
-
-  // public applyNewFilter(event: Event, columnName: any): void {
-  //   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-
-  //   // Filter data based on the current column
-  //   const filteredColumnData = this.filteredData.filter((data) =>
-  //     data[columnName].toLowerCase().includes(filterValue)
-  //   );
-
-  //   // Update the filteredData array with the filteredColumnData
-  //   this.filteredData = filteredColumnData;
-
-  //   // Update the table data source
-  //   this.dataSource.data = this.filteredData;
-
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
+  }
 
   public addAppointment() {
     const userBooking = {} as UserBookingDto;
@@ -245,25 +122,13 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     userBooking.booking = booking;
     userBooking.user = {} as UserVo;
     userBooking.user.address = {} as AddressVo;
-    // this._addEditOrg(userBooking);
     this._addEditAppointment(userBooking);
-  }
-
-  public searchTodaysAppointments(): void {
-    const filterValue = new Date().toLocaleDateString();
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  public searchPreviousAppointments(): void {
-
-
   }
 
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
         this.userBooking = res.body
-        // console.log("showxxx",this.userBooking);
       }
     });
   }
@@ -272,11 +137,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this._init();
   }
 
-  public getAllFilters(): void {
-    this.showAllFilters = !this.showAllFilters;
-  }
-
-  // newly added
   public getBookingType(type: string): string {
     if (!type) {
       return '';
@@ -306,7 +166,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   }
 
-  private _initView(): void { 
+  private _initView(): void {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
       return;
@@ -346,7 +206,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   private _addEditAppointment(userBooking: UserBookingDto): void {
     this.userBooking = userBooking;
-    // console.log("xxxxshow",this.userBooking);
     this._resetSection();
     this.showSectionAppointmentEdit = true;
   }
@@ -376,31 +235,30 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     );
   }
 
-
   private getCellValue(data: OrgBookingDto, columnName: any): any | undefined {
 
     if (columnName === 'appNo' && data.booking?.no) {
-        return data.booking?.no.toLowerCase();
+      return data.booking?.no.toLowerCase();
     } else if (columnName === 'name' && data.patient.nameF) {
-        return data.patient.nameF.toLowerCase();
+      return data.patient.nameF.toLowerCase();
     }
     else if (columnName === 'date' && data.booking.bookingDate) {
-        return data.booking.bookingDate.toString();
+      return data.booking.bookingDate.toString();
     }
 
     else if (columnName === 'time' && data.booking.shift) {
       return data.booking.shift.toLowerCase();
-  }
+    }
 
-  else if (columnName === 'doctor' && data.drList[0].nameF) {
-    return data.drList[0].nameF.toLowerCase();
-}
+    else if (columnName === 'doctor' && data.drList[0].nameF) {
+      return data.drList[0].nameF.toLowerCase();
+    }
 
-else if (columnName === 'consultationFor' && data.booking.type) {
-  return data.booking.type.toLowerCase();
-}
+    else if (columnName === 'consultationFor' && data.booking.type) {
+      return data.booking.type.toLowerCase();
+    }
     return undefined;
 
-}
+  }
 }
 

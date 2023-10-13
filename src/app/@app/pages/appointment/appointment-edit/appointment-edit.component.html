@@ -12,7 +12,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input class="form-control app-input" name="nameF" [(ngModel)]="userBooking.user.nameF" required>
+                                <input class="form-control app-input" name="nameF" [(ngModel)]="userBooking.user.nameF"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -26,7 +27,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="nameL" [(ngModel)]="userBooking.user.nameL" required>
+                                <input type="text" class="form-control app-input" name="nameL"
+                                    [(ngModel)]="userBooking.user.nameL" required>
                             </div>
                         </div>
                     </div>
@@ -42,7 +44,8 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline" *ngFor="let g of genderList">
-                                <input class="form-check-input" type="radio" name="gender" [value]="g.id" [(ngModel)]="userBooking.user.gender">
+                                <input class="form-check-input" type="radio" name="gender" [value]="g.id"
+                                    [(ngModel)]="userBooking.user.gender">
                                 <label class="form-check-label">{{ g.name }}</label>
                             </div>
                         </div>
@@ -57,8 +60,9 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="cell1" [(ngModel)]="userBooking.user.cell" required maxlength="10"
-                                    minlength="10" appNumberOnly>
+                                <input type="text" class="form-control app-input" name="cell1"
+                                    [(ngModel)]="userBooking.user.cell" required maxlength="10" minlength="10"
+                                    appNumberOnly>
                             </div>
                         </div>
                     </div>
@@ -74,8 +78,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="date" class="form-control app-input" name="dateOfBirth" [(ngModel)]="userBooking.user.doB"
-                                    (ngModelChange)="calculateAge()" required>
+                                <input type="date" class="form-control app-input" name="dateOfBirth"
+                                    [(ngModel)]="userBooking.user.doB" (ngModelChange)="calculateAge()" required>
                             </div>
                         </div>
                     </div>
@@ -89,7 +93,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="age" [(ngModel)]="userBooking.user.age" required>
+                                <input type="text" class="form-control app-input" name="age"
+                                    [(ngModel)]="userBooking.user.age" required>
                             </div>
                         </div>
                     </div>
@@ -119,7 +124,8 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-check form-check-inline" *ngFor="let shift of shiftList">
-                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id" [(ngModel)]="userBooking.booking.shift">
+                                <input class="form-check-input" type="radio" name="shift" [value]="shift.id"
+                                    [(ngModel)]="userBooking.booking.shift">
                                 <label class="form-check-label">{{ shift.name }}</label>
                             </div>
                         </div>
@@ -129,21 +135,6 @@
 
             <div class="row">
                 <!-- Doctor Name -->
-                <!-- <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Doctor</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <ng-multiselect-dropdown [name]="'doctorName'" [placeholder]="'Select Doctor'"
-                                    [settings]="dropdownSettings" [data]="docSelectList" [(ngModel)]="selectedDocs"
-                                    (onDeSelect)="onDocSelect($event)" (onSelect)="onDocSelect($event)" (ngModelChange)="filterServiceItemByDoctor(selectedDoctorId)">
-                                </ng-multiselect-dropdown>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
@@ -151,8 +142,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select class="app-single-select-dropdown w-100" [(ngModel)]="selectedDoctorId" (ngModelChange)="filterServiceItemByDoctor(selectedDoctorId)" name="doctor">
-                                    <option *ngFor="let item of doctorList;" [value]="item._id">{{item.nameF}} {{item.nameL}}</option>
+                                <select class="app-single-select-dropdown w-100" [(ngModel)]="selectedDoctorId"
+                                    (ngModelChange)="filterServiceItemByDoctor(selectedDoctorId)" name="doctor">
+                                    <option *ngFor="let item of doctorList;" [value]="item._id">{{item.nameF}}
+                                        {{item.nameL}}</option>
                                 </select>
                             </div>
                         </div>
@@ -167,9 +160,9 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <!-- <input class="form-control app-input" name="appointmentFor"> -->
                                 <select class="app-single-select-dropdown w-100" name="service">
-                                    <option *ngFor="let item of filteredServiceItemList;" [value]="item.item._id"><span>{{item.item.name}}
+                                    <option *ngFor="let item of filteredServiceItemList;" [value]="item.item._id">
+                                        <span>{{item.item.name}}
                                         </span></option>
                                 </select>
                             </div>
