@@ -1,18 +1,12 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto } from 'aayam-clinic-core';
-import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
-
-//newly added to show table
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { Component, ViewChild } from '@angular/core';
+import { MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxBarcode6Module } from 'ngx-barcode6';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 
-// newly added to show table
 export interface PeriodicElement {
     sno: number;
     investigationName: string;
@@ -23,7 +17,6 @@ export interface PeriodicElement {
     action: string
 }
 
-// newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
     { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
     { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
@@ -35,13 +28,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
     templateUrl: './test-sample-details.component.html',
     styleUrls: ['./test-sample-details.component.scss']
 })
+
 export class TestSampleDetailsComponent {
+    /* ********************************* Static Field *************************************** */
+    /* *********************************** Instance Field *********************************** */
     displayedColumns: string[] = ['sno', 'investigationName', 'specimen', "sampleCollected", 'date', 'time', 'action'];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
-
 
     showTestIdBarcode: boolean = false;
     showPatientIdBarcode: boolean = false;
@@ -49,9 +44,7 @@ export class TestSampleDetailsComponent {
 
     /* ************************************* Constructors ******************************************** */
     constructor(public dialog: MatDialog
-    ) {
-
-    }
+    ) {}
 
     /* ************************************* Public Methods ******************************************** */
     public ngAfterViewInit() {
@@ -87,7 +80,5 @@ export class TestSampleDetailsComponent {
             exitAnimationDuration,
         });
     }
-
-    /* ********************************* Static Field *************************************** */
 
 }

@@ -2,28 +2,20 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, DepartmentVo, ResponseStatus, ServiceTypeVo } from 'aayam-clinic-core';
-import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
-import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
-
 
 export interface PeriodicElement {
-    testCode: string;
-    testName: string;
-    department: any;
-    specimenType: string;
-    // action: string;
-    
-  }
+  testCode: string;
+  testName: string;
+  department: any;
+  specimenType: string;
+}
 
+const ELEMENT_DATA: PeriodicElement[] = [
+  { testCode: "001", testName: 'CBC', department: 'Pathology', specimenType: 'Blood', },
+  { testCode: "002", testName: 'USG - Whole Abdomen', department: 'USG', specimenType: '-', },
+  { testCode: "003", testName: 'MRI-Brain', department: 'MRI', specimenType: '-', },
 
-  const ELEMENT_DATA: PeriodicElement[] = [
-    { testCode: "001", testName: 'CBC', department: 'Pathology', specimenType: 'Blood',  },
-    { testCode: "002", testName: 'USG - Whole Abdomen', department: 'USG', specimenType: '-',  },
-    { testCode: "003", testName: 'MRI-Brain', department: 'MRI', specimenType: '-',  },
-    
-  ]
+]
 
 @Component({
   selector: 'app-investigation',
@@ -38,15 +30,14 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   showSectionInvestigationList!: boolean;
   showSectionInvestigationEdit!: boolean;
 
-  displayedColumns: string[] = ['testCode', 'testName', "department", 'specimenType','action'];
+  displayedColumns: string[] = ['testCode', 'testName', "department", 'specimenType', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
 
   /* ************************************* Constructors ******************************************** */
-  constructor(
-    ) { }
+  constructor() { }
 
   /* ************************************* Public Methods ******************************************** */
 
@@ -61,7 +52,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this._addEditServiceItem();
   }
 
-
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -71,7 +61,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   }
 
   public ngOnInit(): void {
-    
     this._init();
   }
 

@@ -18,7 +18,7 @@ export class ServiceTypeEditComponent {
 
     yesNoList = YES_NO_LIST;
     /* ************************************* Constructors ******************************************** */
-    constructor() { }
+    constructor() {}
 
     /* ************************************* Public Methods ******************************************** */
 

@@ -2,7 +2,6 @@
     <div class="row">
         <div class="d-flex justify-content-between">
             <h1>Inventory List</h1>
-            <!-- <button class="common-button" (click)="addInventory()">Add Inventory</button> -->
             <button class="common-button" (click)="openHospitalInventoryItemEditDialog('0ms', '0ms')">Add Item</button>
         </div>
     </div>
@@ -50,7 +49,6 @@
 
                     </td>
                 </ng-container>
-
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -14,6 +14,7 @@ export class ViewInvestigationComponent implements OnInit {
 
     tabValue!: string;
     constructor(private route: ActivatedRoute) { }
+
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
         this._init();
@@ -22,6 +23,7 @@ export class ViewInvestigationComponent implements OnInit {
     public tabChange(): void {
         this._tabChange(this.tabValue);
     }
+
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this.tabValue = 'TESTSAMPLEDETAILS'
@@ -46,7 +48,5 @@ export class ViewInvestigationComponent implements OnInit {
         this.showSectionTestSamplesDetails = false;
         this.showSectionReports = false;
     }
-
-
 
 }

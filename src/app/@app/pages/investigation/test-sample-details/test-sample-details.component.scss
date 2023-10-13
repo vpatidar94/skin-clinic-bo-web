@@ -1,18 +1,17 @@
 .btn-style {
-    // background-color: blue;
-    // color: green;
-    padding: 5px 20px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    transition: background-color 0.3s ease;
+  padding: 5px 20px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: background-color 0.3s ease;
 }
 
 .checked {
-    background-color: rgb(137, 101, 73); /* Change to the desired color */
-    color: white; /* Text color for the button when checked */
-   
-  }
-  .checked:hover{
-    background-color:brown;
-     }
+  background-color: rgb(137, 101, 73);
+  color: white;
+
+}
+
+.checked:hover {
+  background-color: brown;
+}

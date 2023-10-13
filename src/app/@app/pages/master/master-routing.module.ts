@@ -10,7 +10,6 @@ import { DepartmentComponent } from './department/department.component';
 import { UserTypeComponent } from './user-type/user-type.component';
 import { InvestigationComponent } from './investigation/investigation.component';
 
-
 const routes = [
   { path: '', component: MasterComponent },
   { path: 'services', component: ServicesComponent },
@@ -21,8 +20,6 @@ const routes = [
   { path: 'department', component: DepartmentComponent },
   { path: 'user-type', component: UserTypeComponent },
   { path: 'investigation', component: InvestigationComponent }
-  
-  
 ];
 
 @NgModule({

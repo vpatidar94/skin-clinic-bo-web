@@ -5,7 +5,6 @@ export interface TestParameterInterface {
     testName: string;
     reference: string;
     unit:string;
-    
   }
 
 @Component({
@@ -15,10 +14,6 @@ export interface TestParameterInterface {
 export class InvestigationEditComponent implements OnInit{
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
-    
-    /* ************************************* Constructors ******************************************** */
-    constructor() { }
-
     testParameterData = [{
         testName: '',
         reference: '',
@@ -26,6 +21,12 @@ export class InvestigationEditComponent implements OnInit{
       }];
  
     testParameter!:Array<TestParameterInterface>
+    
+    
+    /* ************************************* Constructors ******************************************** */
+    constructor() { }
+
+   
     
     /* ************************************* Public Methods ******************************************** */
    

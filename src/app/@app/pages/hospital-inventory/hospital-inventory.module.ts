@@ -20,7 +20,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { InventoryRoutingModule } from './hospital-inventory-routing.module';
@@ -46,7 +45,6 @@ const MATERIAL_MODULE = [
     MatDialogModule,
     MatNativeDateModule,
     MatCardModule,
-
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];

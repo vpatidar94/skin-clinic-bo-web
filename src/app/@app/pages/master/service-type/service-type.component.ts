@@ -7,9 +7,8 @@ import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
-
 export interface ExtendedServiceTypeDto extends ServiceTypeVo {
-    departmentName: string;    // For Department
+  departmentName: string;    // For Department
 }
 
 @Component({
@@ -27,8 +26,8 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
 
   displayedColumns: string[] = ['serviceCode', 'serviceType', 'doctorsName', "department", "action"];
   // dataSource = new MatTableDataSource<ServiceTypeVo>([] as ServiceTypeVo[]);
-   dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
-  
+  dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -78,61 +77,46 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
       this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
       const extendedList = this.extendServiceTypeList(this.serviceTypeList, this.addingDepartmentName);
       this.dataSource = new MatTableDataSource(extendedList);
-    this.originalDataSource =[...extendedList];
+      this.originalDataSource = [...extendedList];
 
     })
   }
 
-  // public applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
   public applyFilter(columnName: string, event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.columnFilters[columnName] = filterValue;
-
     // Combine all column filters
     const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
-
     // If there are no filters, show all data
     if (combinedFilters.length === 0) {
-        this.dataSource.data = this.originalDataSource;
-        this.filteredData = []; // Reset filtered data array
-        return;
+      this.dataSource.data = this.originalDataSource;
+      this.filteredData = []; // Reset filtered data array
+      return;
     }
-
     // Filter the data progressively from the original data or the previously filtered data
     let dataToFilter: ExtendedServiceTypeDto[];
     if (this.filteredData.length > 0) {
-        dataToFilter = [...this.filteredData];
+      dataToFilter = [...this.filteredData];
     } else {
-        dataToFilter = [...this.originalDataSource];
+      dataToFilter = [...this.originalDataSource];
     }
-
     for (const filter of combinedFilters) {
-        dataToFilter = dataToFilter.filter((data) => {
-            const cellValue = this.getCellValue(data, columnName);
-
-            if (cellValue !== undefined && cellValue.includes(filter)) {
-                return true; // Include the row if the cell value matches the filter
-            }
-
-            return false; // Exclude the row if no match is found or cellValue is undefined
-        });
+      dataToFilter = dataToFilter.filter((data) => {
+        const cellValue = this.getCellValue(data, columnName);
+        if (cellValue !== undefined && cellValue.includes(filter)) {
+          return true; // Include the row if the cell value matches the filter
+        }
+        return false; // Exclude the row if no match is found or cellValue is undefined
+      });
     }
-
     // Update the data source with the filtered data
     this.dataSource.data = dataToFilter;
     this.filteredData = dataToFilter;
 
     if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
+      this.dataSource.paginator.firstPage();
     }
-}
+  }
 
   public ngOnInit(): void {
     this._init();
@@ -143,7 +127,7 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     if (!orgId) {
       return;
     }
-    this.departmentApi.getOrgDepartmentList(orgId,"").subscribe((res: ApiResponse<DepartmentVo[]>) => {
+    this.departmentApi.getOrgDepartmentList(orgId, "").subscribe((res: ApiResponse<DepartmentVo[]>) => {
       this.departmentList = res.body ?? [] as DepartmentVo[];
       /**to show departmentName via departmentId as department name is not in the interface **/
       this.addingDepartmentName = {};
@@ -203,21 +187,20 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     });
   }
 
-
   private getCellValue(data: ExtendedServiceTypeDto, columnName: any): any | undefined {
     if (columnName === 'serviceCode' && data.code) {
-        return data.code.toLowerCase();
+      return data.code.toLowerCase();
     } else if (columnName === 'serviceType' && data.name) {
-        return data.name.toLowerCase();
+      return data.name.toLowerCase();
     }
     else if (columnName === 'department' && data.departmentName) {
-        return data.departmentName.toLowerCase();
+      return data.departmentName.toLowerCase();
     }
     else if (columnName === 'doctorsName' && data.doctorAssociated) {
-        return data.doctorAssociated;
+      return data.doctorAssociated;
     }
     return undefined;
-}
+  }
 
 }
 

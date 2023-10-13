@@ -29,11 +29,11 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
-
     columnFilters: { [key: string]: string } = {};
 
     originalDataSource: ProductVo[] = [];
     filteredData: ProductVo[] = [];
+
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi) {
@@ -47,28 +47,17 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    // public applyFilter(event: Event) {
-    //     const filterValue = (event.target as HTMLInputElement).value;
-    //     this.dataSource.filter = filterValue.trim().toLowerCase();
-    //     if (this.dataSource.paginator) {
-    //         this.dataSource.paginator.firstPage();
-    //     }
-    // }
-
     public applyFilter(columnName: string, event: Event) {
         const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
         this.columnFilters[columnName] = filterValue;
-
         // Combine all column filters
         const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
-
         // If there are no filters, show all data
         if (combinedFilters.length === 0) {
             this.dataSource.data = this.originalDataSource;
             this.filteredData = []; // Reset filtered data array
             return;
         }
-
         // Filter the data progressively from the original data or the previously filtered data
         let dataToFilter: ProductVo[];
         if (this.filteredData.length > 0) {
@@ -83,15 +72,12 @@ export class ProductsComponent implements AfterViewInit, OnInit {
                 if (cellValue !== undefined && cellValue.includes(filter)) {
                     return true; // Include the row if the cell value matches the filter
                 }
-
                 return false; // Exclude the row if no match is found or cellValue is undefined
             });
         }
-
         // Update the data source with the filtered data
         this.dataSource.data = dataToFilter;
         this.filteredData = dataToFilter;
-
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
@@ -121,7 +107,6 @@ export class ProductsComponent implements AfterViewInit, OnInit {
             this.resultsLength = this.productList.length;
             this.dataSource = new MatTableDataSource(this.productList);
             this.originalDataSource = [...this.productList]; // Copy the data
-
         })
     }
 
@@ -139,9 +124,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     }
 
     public editProduct(product: ProductVo): void {
-        this.product = { ...product };
-        this._addEditProduct(this.product);
-        this._getProductList();
+        this._addEditProduct(product);
     }
 
     /* ************************************* Private Methods ******************************************** */
@@ -163,10 +146,9 @@ export class ProductsComponent implements AfterViewInit, OnInit {
     }
 
     private getCellValue(data: ProductVo, columnName: string): string | undefined {
-
         if (columnName === 'productCode' && data.code) {
             return data.code.toLowerCase();
-        } 
+        }
         else if (columnName === 'productName' && data.name) {
             return data.name.toLowerCase();
         }

@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HospitalInventoryItemEditComponent } from "./hospital-inventory-item-edit/hospital-inventory-item-edit.component";
 import { MatDialog } from "@angular/material/dialog";
 
-
 export interface PeriodicElement {
   sNo: number;
   itemCode: string;
@@ -13,7 +12,6 @@ export interface PeriodicElement {
   quantityRemain: string;
   action: string;
 }
-
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { sNo: 1, itemCode: 'IC01', itemName: 'item 1', quantityRemain: '100', action: "View" },
@@ -23,7 +21,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { sNo: 5, itemCode: 'IC05', itemName: 'item 5', quantityRemain: '500', action: "View" },
 ]
 
-
 @Component({
   selector: 'app-hospital-inventory',
   templateUrl: './hospital-inventory.component.html',
@@ -31,6 +28,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class HospitalInventoryComponent implements AfterViewInit, OnInit {
+
+  /* ********************************* Static Field *************************************** */
+  /* *********************************** Instance Field *********************************** */
 
   showSectionInventoryList!: boolean;
   showSectionInventoryEdit!: boolean;
@@ -42,8 +42,10 @@ export class HospitalInventoryComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  /* ************************************* Constructors ******************************************** */
   constructor(private dialog: MatDialog) { }
 
+  /* ************************************* Public Methods ******************************************** */
   public ngAfterViewInit() {
     this.paginator.showFirstLastButtons = false;
     this.paginator.hidePageSize = false;
@@ -82,7 +84,6 @@ export class HospitalInventoryComponent implements AfterViewInit, OnInit {
     });
   }
 
-
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
@@ -99,8 +100,6 @@ export class HospitalInventoryComponent implements AfterViewInit, OnInit {
     this._resetSection();
     this.showSectionInventoryEdit = true;
   }
-
-
 
 }
 

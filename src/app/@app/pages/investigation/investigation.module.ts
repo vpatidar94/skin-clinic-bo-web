@@ -20,10 +20,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogModule } from 'src/app/@shared/component/dialog/dialog.module';
 import { LabelModule } from 'src/app/@shared/component/label/label.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
 import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directive.module';
 import { MatNativeDateModule } from '@angular/material/core';
-
 import { InvestigationComponent } from './investigation.component';
 import { InvestigationRoutingModule } from './investigation-routing.module';
 import { ViewInvestigationComponent } from './view-investigation/view-investigation.component';
@@ -33,7 +31,6 @@ import { NgxBarcode6Module } from 'ngx-barcode6';
 import { TestIdBarCodeDialogComponent } from './test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 import { PatientIdBarCodeDialogComponent } from './patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
 
 const MATERIAL_MODULE = [
     MatButtonModule,
@@ -53,15 +50,14 @@ const MATERIAL_MODULE = [
     MatDialogModule,
     MatNativeDateModule,
     MatCardModule,
-
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),NgxBarcode6Module,PdfViewerModule],
+    imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InvestigationRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), NgxBarcode6Module, PdfViewerModule],
     providers: [],
     exports: [],
-    declarations: [InvestigationComponent, ViewInvestigationComponent, TestSampleDetailsComponent, ReportsComponent,PatientIdBarCodeDialogComponent,TestIdBarCodeDialogComponent]
+    declarations: [InvestigationComponent, ViewInvestigationComponent, TestSampleDetailsComponent, ReportsComponent, PatientIdBarCodeDialogComponent, TestIdBarCodeDialogComponent]
 })
 export class InvestigationModule { }

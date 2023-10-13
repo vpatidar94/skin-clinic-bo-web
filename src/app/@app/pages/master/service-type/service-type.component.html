@@ -19,37 +19,36 @@
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- service code -->
         <ng-container matColumnDef="serviceCode">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Type Code 
-
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Type Code
             <input class="placeholder-style" placeholde="Service Type Code" name="serviceTypeCodeFilter"
-                            (keyup)="applyFilter('productCode', $event)" #serviceTypeCodeInput>
+              (keyup)="applyFilter('productCode', $event)" #serviceTypeCodeInput>
           </th>
           <td mat-cell *matCellDef="let row"> {{row.code}} </td>
         </ng-container>
 
         <!--service type -->
         <ng-container matColumnDef="serviceType">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Type 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Type
             <input class="placeholder-style" placeholder="Service Type" name="serviceTypeFilter"
-                            (keyup)="applyFilter('serviceType', $event)" #productCodeInput>
+              (keyup)="applyFilter('serviceType', $event)" #productCodeInput>
           </th>
           <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.name}} </td>
         </ng-container>
 
         <!-- Department -->
         <ng-container matColumnDef="department">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Department 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Department
             <input class="placeholder-style" placeholder="Department" name="departmentFilter"
-                            (keyup)="applyFilter('department', $event)" #departmentInput>
+              (keyup)="applyFilter('department', $event)" #departmentInput>
           </th>
           <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.departmentName}} </td>
         </ng-container>
 
         <!-- Doctor Name -->
         <ng-container matColumnDef="doctorsName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor Associated 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor Associated
             <input class="placeholder-style" placeholder="Doctor Associated" name="doctorsNameFilter"
-                            (keyup)="applyFilter('doctorsName', $event)" #doctorAssociatedInput>
+              (keyup)="applyFilter('doctorsName', $event)" #doctorAssociatedInput>
           </th>
           <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.doctorAssociated}}</td>
         </ng-container>

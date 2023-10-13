@@ -26,9 +26,8 @@
                             (keyup)="applyFilter('userTypeName', $event)" #userTypeNameInput>
                     </th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.userType.name}} </td>
-                    <input class="placeholder-style" name="userTypeNameFilter" (keyup)="applyFilter('userTypeName', $event)"
-                        #userTypeNameInput>
-
+                    <input class="placeholder-style" name="userTypeNameFilter"
+                        (keyup)="applyFilter('userTypeName', $event)" #userTypeNameInput>
                 </ng-container>
 
                 <!-- Department -->
@@ -38,7 +37,6 @@
                             (keyup)="applyFilter('departmentName', $event)" #departmentNameInput>
                     </th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.departmentName}} </td>
-
                 </ng-container>
 
                 <!-- Action -->

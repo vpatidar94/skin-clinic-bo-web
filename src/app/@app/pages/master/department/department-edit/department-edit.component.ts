@@ -1,7 +1,6 @@
 import { Component, Input, } from '@angular/core';
 import { DEPT_LIST, DepartmentVo } from 'aayam-clinic-core';
 
-
 @Component({
   selector: 'app-department-edit',
   templateUrl: './department-edit.component.html',

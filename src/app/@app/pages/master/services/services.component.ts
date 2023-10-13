@@ -20,8 +20,6 @@ export interface ExtendedItemDetailDto extends ItemDetailDto {
     templateUrl: './services.component.html',
 })
 
-
-
 export class ServicesComponent implements AfterViewInit, OnInit {
 
     /* ************************************* Static Field ********************************************* */
@@ -50,7 +48,8 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     constructor(private serviceItemApi: ServiceItemApi,
         private keyValueStorageService: KeyValueStorageService,
         private departmentApi: DepartmentApi,
-        private userApi: UserApi,) { }
+        private userApi: UserApi,
+    ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
@@ -65,7 +64,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
             newServiceItem.orgId = orgId;
             newServiceItem.brId = orgId;
         }
-
         this._addEditService(newServiceItem);
     }
 
@@ -76,43 +74,17 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    // public applyFilter(event: Event) {
-    //     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    //     const filterFunction = (data: ExtendedItemDetailDto) => {
-    //         const serviceTypeName = data.serviceTypeName?.toLowerCase();
-    //         const associatedDoctorName = data.associatedDoctorName?.toLowerCase();
-    //         const itemCode = data.item?.code?.toLowerCase();
-    //         const itemName = data.item?.name?.toLowerCase();
-    //         return (
-    //             serviceTypeName?.includes(filterValue) ||
-    //             associatedDoctorName?.includes(filterValue) ||
-    //             itemCode?.includes(filterValue) ||
-    //             itemName?.includes(filterValue)
-    //         );
-    //     };
-
-    //     this.dataSource.filterPredicate = filterFunction;
-    //     this.dataSource.filter = filterValue;
-
-    //     if (this.dataSource.paginator) {
-    //         this.dataSource.paginator.firstPage();
-    //     }
-    // }
-
     public applyFilter(columnName: string, event: Event) {
         const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
         this.columnFilters[columnName] = filterValue;
-
         // Combine all column filters
         const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
-
         // If there are no filters, show all data
         if (combinedFilters.length === 0) {
             this.dataSource.data = this.originalDataSource;
             this.filteredData = []; // Reset filtered data array
             return;
         }
-
         // Filter the data progressively from the original data or the previously filtered data
         let dataToFilter: ExtendedItemDetailDto[];
         if (this.filteredData.length > 0) {
@@ -120,7 +92,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         } else {
             dataToFilter = [...this.originalDataSource];
         }
-
         for (const filter of combinedFilters) {
             dataToFilter = dataToFilter.filter((data) => {
                 const cellValue = this.getCellValue(data, columnName);
@@ -155,7 +126,6 @@ export class ServicesComponent implements AfterViewInit, OnInit {
     }
 
     public _getServiceTypeList(): void {
-
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -176,15 +146,15 @@ export class ServicesComponent implements AfterViewInit, OnInit {
         if (!orgId) {
             return;
         }
-        this.departmentApi.getOrgDepartmentList(orgId,'').subscribe((res: ApiResponse<DepartmentVo[]>) => {
+        this.departmentApi.getOrgDepartmentList(orgId, '').subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
         })
     }
 
     public editService(serviceItem: ItemVo): void {
-        this.serviceItem = { ...serviceItem };
-        this._addEditService(this.serviceItem);
+        this._addEditService(serviceItem);
     }
+
     /* ************************************* Private Methods ******************************************** */
     private _getDoctorList(): void {
         this.doctorList = [] as Array<UserVo>;

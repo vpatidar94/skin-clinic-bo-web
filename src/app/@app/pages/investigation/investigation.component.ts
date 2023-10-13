@@ -1,10 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { Component, ViewChild } from '@angular/core';
+import { MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
-
 
 export interface PeriodicElement {
     testNo: number;
@@ -15,7 +12,6 @@ export interface PeriodicElement {
     doctorsName: string;
     action: string;
 }
-
 
 const ELEMENT_DATA: PeriodicElement[] = [
     { testNo: 1101, patientName: 'Chhitu Yadav',patientType: '7898454503', patientId:'P10210',sampleDate:'02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
@@ -33,6 +29,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class InvestigationComponent {
 
+    /* ********************************* Static Field *************************************** */
+    /* *********************************** Instance Field *********************************** */
     displayedColumns: string[] = ['testNo','patientName', 'patientType', 'patientId', 'sampleDate', 'doctorsName', "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -40,9 +38,7 @@ export class InvestigationComponent {
     @ViewChild(MatSort) sort!: MatSort;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() {
-
-    }
+    constructor() {}
 
     /* ************************************* Public Methods ******************************************** */
 

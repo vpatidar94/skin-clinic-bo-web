@@ -12,7 +12,6 @@ export class MasterComponent implements OnInit {
   showSectionUserProfile!: boolean;
   showSectionAccounts!: boolean;
   showSectionAttendance!: boolean;
-
   tabValue!: string;
 
   /* ************************************* Public Methods ******************************************** */
@@ -27,8 +26,8 @@ export class MasterComponent implements OnInit {
   private _init(): void {
     this.tabValue = 'USERPROFILE'
     this.tabChange();
-    
   }
+
   private _tabChange(tabValue: string): void {
     switch (tabValue) {
       case 'USERPROFILE':
@@ -43,7 +42,6 @@ export class MasterComponent implements OnInit {
         this._resetSection();
         this.showSectionAttendance = true;
         break;
-     
     }
   }
 
@@ -52,7 +50,4 @@ export class MasterComponent implements OnInit {
     this.showSectionAccounts = false;
     this.showSectionAttendance = false;
   }
-
-
-
 }
