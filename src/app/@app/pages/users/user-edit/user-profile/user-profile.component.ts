@@ -97,7 +97,9 @@ export class UserProfileComponent implements OnInit, OnChanges {
 
 
     public filterUserTypesByDepartment(departmentId: string | null | undefined) {
+        this.staff.acl.userTypeId = null;
         this.filteredUserTypeList = this.userTypeList.filter(item => item.userType.departmentId === departmentId);
+        this.staffChange.emit(this.staff);
     }
 
     /* ************************************* Private Methods ******************************************** */

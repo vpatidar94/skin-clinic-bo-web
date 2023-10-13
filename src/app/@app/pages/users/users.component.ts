@@ -92,8 +92,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   public addUser(): void {
-    // this._resetSection();
-    // this.showSectionUserEdit = true;
     const orgId = this.keyValueStorageService.getOrgId();
     const user = {} as UserVo;
     user.created = new Date();
@@ -103,6 +101,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     acl.active = true;
     acl.brId = orgId;
     acl.orgId = orgId;
+    acl.role = ROLE.EMP;
     const staff = new UserEmpDto(user, acl);
     this._addEditStaff(staff);
 
@@ -155,8 +154,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
       return;
     }
     const acl = user.emp[orgId] as AclVo;
+    if (!acl.role) {
+      acl.role = ROLE.EMP;
+    }
     const empDto = new UserEmpDto(user, acl);
-    console.log("XXX",empDto);
     this._addEditStaff(empDto);
   }
 
