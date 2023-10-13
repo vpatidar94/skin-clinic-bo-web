@@ -19,6 +19,7 @@
     // background-color:azure;
     padding:20px;
     margin-top:20px;
+    align-items: center;
 }
 
 table {
@@ -72,3 +73,11 @@ table {
   .input-style{
     border-radius: 12px;
   }
+
+  .placeholder-style{
+    -webkit-text-fill-color: black;
+    border: none;
+    font-weight: 700;
+    width: 90%;
+  }
+  
