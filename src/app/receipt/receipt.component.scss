@@ -105,3 +105,15 @@ td {
 .style-note {
     font-size: 12px;
 }
+
+.bill-no-style{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    justify-content: flex-end;
+    font-size:13px;
+}
+.heading-style{
+    font-size: 15px;
+    font-weight: bold;
+}
