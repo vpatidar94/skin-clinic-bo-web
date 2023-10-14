@@ -325,8 +325,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
     else if (columnName === 'type' && data.booking.type) {
       return data.booking.type.toLowerCase();
     }
-    else if (columnName === 'doctorsName' && data.drList[0].nameF) {
-      return data.drList[0].nameF.toLowerCase();
+    else if (columnName === 'doctorsName' && data.drDetail?.nameF) {
+      return data.drDetail?.nameF.toLowerCase();
     }
     else if (columnName === 'time' && data.booking.timeSlot) {
       return data.booking.timeSlot.toLowerCase();

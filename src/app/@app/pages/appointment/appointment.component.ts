@@ -250,8 +250,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       return data.booking.shift.toLowerCase();
     }
 
-    else if (columnName === 'doctor' && data.drList[0].nameF) {
-      return data.drList[0].nameF.toLowerCase();
+    else if (columnName === 'doctor' && data.drDetail.nameF) {
+      return data.drDetail.nameF.toLowerCase();
     }
 
     else if (columnName === 'consultationFor' && data.booking.type) {

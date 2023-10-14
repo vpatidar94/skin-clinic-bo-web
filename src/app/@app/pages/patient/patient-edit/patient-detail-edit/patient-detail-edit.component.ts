@@ -42,18 +42,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     patientTypeList = PATIENT_TYPE_LIST;
     shiftList = SHIFT_LIST;
 
-    docSelectList!: Array<any>;
-    selectedDocs = [] as any[];
-    dropdownSettings = {
-        singleSelection: false,
-        idField: 'item_id',
-        textField: 'item_text',
-        itemsShowLimit: 3,
-        allowSearchFilter: true,
-        enableCheckAll: false,
-        maxHeight: 50
-    };
-
     time!: Array<UserServiceTimingVo>;
 
     /* ************************************ Constructors ************************************ */
@@ -73,21 +61,14 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        if (changes['docterList']) {
-            this.docterList = changes['docterList'].currentValue;
-            this.docSelectList = this.docterList?.map((user: UserVo) => {
-                const selected = { item_id: user._id, item_text: `${user.nameF} ${user.nameL}` };
-                if (this.userBooking.booking?.dr?.includes(selected.item_id)) {
-                    this.selectedDocs.push(selected);
-                }
-                return selected;
-            });
-        }
         if (changes['userBookingInvestigationList']) {
             this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
             if (this.userBookingInvestigationList?.user?._id) {
                 this.userBooking.booking.user = this.userBookingInvestigationList?.user?._id;
                 this.userBooking.user = this.userBookingInvestigationList?.user;
+                if (this.userBooking.booking?.departmentId) {
+                    this.filterDoctorByDepartmentId(this.userBooking.booking?.departmentId, true);
+                }
             }
             this.userBookingChange.emit(this.userBooking);
         }
@@ -106,12 +87,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         }
     }
 
-    // multiple select
-    public onDocSelect(item: any) {
-        this.userBooking.booking.dr = this.selectedDocs.map((doc: any) => doc.item_id);
-        this.userBookingChange.emit(this.userBooking);
-    }
-
     public calculateAge() {
         const dob = this.userBooking.user.doB;
         if (dob) {
@@ -128,7 +103,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         }
     }
 
-    public filterDoctorByDepartmentId(departmentId: string): void {
+    public filterDoctorByDepartmentId(departmentId: string, fetchTimeSlot: boolean = false): void {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -136,6 +111,9 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         this.userApi.getDoctorListByDepartmentId(orgId, departmentId).subscribe((res: ApiResponse<UserVo[]>) => {
             if (res.body && res.body?.length > 0) {
                 this.docterList = res.body;
+                if (this.userBooking.booking?.dr && fetchTimeSlot) {
+                    this.checkDoctor(this.userBooking.booking?.dr);
+                }
             }
         }
         );
@@ -144,16 +122,13 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     public checkDoctor(selectedDoctor: string | null | undefined): void {
         // Find the doctor based on the selectedDoctor name
-        const doctor = this.docterList.find((doc: UserVo) => doc.nameF === selectedDoctor);
+        const doctor = this.docterList.find((doc: UserVo) => doc._id === selectedDoctor);
         // Check if the doctor is found and if they have serviceTiming
         if (doctor && doctor.serviceTiming && doctor.serviceTiming.length > 0) {
             // Update the userBooking with the selected doctor and their service timings
             // this.userBooking.booking.dr = [doctor.nameF];   // TODO: this to be used again when api interface will be changed as per needed
-            this.doctorConst = doctor.nameF // TODO: this will be removed when this.userBooking.booking.dr will be used
             // Update the time variable with the service timings of the selected doctor
             this.time = doctor.serviceTiming;
-            // Emit the updated userBooking
-            this.userBookingChange.emit(this.userBooking);
         }
     }
 

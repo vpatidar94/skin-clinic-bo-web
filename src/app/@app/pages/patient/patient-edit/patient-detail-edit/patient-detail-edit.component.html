@@ -234,8 +234,8 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <select class="app-single-select-dropdown w-100" name="doctorname"
-                                    [(ngModel)]="doctorConst" (ngModelChange)="checkDoctor(doctorConst)">
-                                    <option *ngFor="let doctor of docterList" [value]="doctor.nameF">{{doctor.nameF}}
+                                    [(ngModel)]="userBooking.booking.dr" (ngModelChange)="checkDoctor(userBooking.booking.dr)">
+                                    <option *ngFor="let doctor of docterList" [value]="doctor._id">{{doctor.nameF}}
                                         {{doctor.nameL}}</option>
                                 </select>
                             </div>

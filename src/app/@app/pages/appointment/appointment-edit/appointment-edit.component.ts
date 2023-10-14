@@ -93,10 +93,4 @@ export class AppointmentEditComponent {
             this.userBookingChange.emit(this.userBooking);
         }
     }
-
-    onDocSelect(item: any) {
-        this.userBooking.booking.dr = this.selectedDocs.map((doc: any) => doc.item_id);
-        this.userBookingChange.emit(this.userBooking);
-    }
-
 }
