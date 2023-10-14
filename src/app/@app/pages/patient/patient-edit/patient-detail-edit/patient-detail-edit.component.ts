@@ -33,8 +33,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     docterList!: UserVo[];
 
-    doctorConst!: string | null | undefined;
-
     @Input()
     departmentList!: DepartmentVo[];
 
