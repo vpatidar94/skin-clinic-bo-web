@@ -4,11 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ServiceItemApi } from '../../service/remote/service-item.api';
-import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, OrgBookingCountDto, UserBookingInvestigationDto, PATIENT_TYPE, } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemDetailDto, ObservationVo, ResponseStatus, UserBookingDto, UserVo, BOOKING_TYPE, BOOKING_TYPE_NAME, KeyValueVo, PrescriptionVo, AddressVo, OrgBookingDto, ProductVo, OrgBookingCountDto, UserBookingInvestigationDto, PATIENT_TYPE, DepartmentVo, DEPT, } from 'aayam-clinic-core';
 import { UserApi } from '../../service/remote/user.api';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
+import { DepartmentApi } from '../../service/remote/department.api';
 
 @Component({
   selector: 'app-appointment',
@@ -28,7 +29,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   resultsLength = 0;
   serviceItemList!: ItemDetailDto[];
-  doctorList!: UserVo[];
+  docterList!: UserVo[];
 
   bookingList!: OrgBookingDto[];
 
@@ -47,11 +48,15 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   originalDataSource: OrgBookingDto[] = [];
   filteredData: OrgBookingDto[] = [];
+
+  departmentList!: DepartmentVo[];
+
   /* ************************************ Constructors ************************************ */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private serviceItemApi: ServiceItemApi,
     private userApi: UserApi,
     private bookingApi: BookingApi,
+    private departmentApi: DepartmentApi
   ) {
   }
 
@@ -163,6 +168,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.showSectionAppointmentList = true;
     this._getServiceList();
     this._getDoctorList();
+    this._getDepartmentList();
 
   }
 
@@ -229,10 +235,20 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     }
     this.userApi.getDoctorList(orgId, SUB_ROLE.DOCTOR).subscribe((res: ApiResponse<UserVo[]>) => {
       if (res.body && res.body?.length > 0) {
-        this.doctorList = res.body;
+        this.docterList = res.body;
       }
     }
     );
+  }
+
+  public _getDepartmentList() {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+      this.departmentList = res.body ?? [] as DepartmentVo[];
+    })
   }
 
   private getCellValue(data: OrgBookingDto, columnName: any): any | undefined {
