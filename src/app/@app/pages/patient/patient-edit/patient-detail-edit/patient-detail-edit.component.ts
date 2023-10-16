@@ -12,6 +12,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
     templateUrl: './patient-detail-edit.component.html',
     styleUrls: ['./patient-detail-edit.component.scss'],
 })
+
 export class PatientDetailEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
@@ -159,8 +160,8 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     public selectShift(index: number) {
         this.selectedShift = index;
     }
-    
-   public selectTimeSlot(shiftIndex: number, slotIndex: number) {
+
+    public selectTimeSlot(shiftIndex: number, slotIndex: number) {
         const selectedTimeSlot = this.generateTimeSlots(this.time[shiftIndex].from, this.time[shiftIndex].to)[slotIndex];
         this.userBooking.booking.timeSlot = selectedTimeSlot;
         this.selectedTimeSlots[shiftIndex] = slotIndex;
