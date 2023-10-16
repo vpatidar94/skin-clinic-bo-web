@@ -17,7 +17,7 @@ import { SharedServiceModule } from './@shared/service/shared-service.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReceiptModule } from './receipt/receipt.module';
-import { PharmacyReceiptModule } from './pharmacy-receipt/pharmacy-receipt.module';
+import { PrescriptionPrintModule } from './prescription-print/prescription-print.module';
 import { AppointmentModule } from './@app/pages/appointment/appointment.module';
 import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/excel-file-upload.module';
 
@@ -32,7 +32,7 @@ import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/exc
     BrowserAnimationsModule,
     LayoutModule,
     ReceiptModule,
-    PharmacyReceiptModule,
+    PrescriptionPrintModule,
     HttpClientModule,
     SigninModule,
     ExcelFileUploadModule,

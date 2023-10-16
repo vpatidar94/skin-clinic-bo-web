@@ -1,7 +1,7 @@
 import { DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PharmacyReceiptComponent } from './pharmacy-receipt.component';
+import { PrescriptionPrintComponent } from './prescription-print.component';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -10,6 +10,6 @@ const COMMON_MODULE = [CommonModule, RouterModule];
     imports: [...COMMON_MODULE, MatIconModule ],
     providers: [],
     exports: [],
-    declarations: [PharmacyReceiptComponent]
+    declarations: [PrescriptionPrintComponent]
   })
-  export class PharmacyReceiptModule { }
+  export class PrescriptionPrintModule { }

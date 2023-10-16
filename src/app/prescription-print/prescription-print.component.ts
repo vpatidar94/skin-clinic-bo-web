@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-pharmacy-receipt',
-  templateUrl: './pharmacy-receipt.component.html',
-  styleUrls: ['./pharmacy-receipt.component.scss']
+  selector: 'app-prescription-print',
+  templateUrl: './prescription-print.component.html',
+  styleUrls: ['./prescription-print.component.scss']
 })
-export class PharmacyReceiptComponent {
+export class PrescriptionPrintComponent {
   currentDate = new Date();
-  doctorName = 'Dr. John Snow';
+  doctorName = 'Dr. Ram';
   patientId ='1214';
   patientName = 'Mr Sheru';
   fatherName = 'Mr Singh';
-  gender = '';
-  age = '';
-  patientAddress= '';
+  gender = 'Male';
+  age = '24';
+  // patientAddress= '';
+  refferedBy='Dr. Dixit';
   paymentMode='';
   paymentType='';
 

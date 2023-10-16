@@ -4,7 +4,7 @@ import { LayoutComponent } from './@app/layout/layout.component';
 import { SigninComponent } from './@shared/component/signin/signin.component';
 import { AuthGuard } from './@shared/security/auth.guard';
 import { ReceiptComponent } from './receipt/receipt.component';
-import { PharmacyReceiptComponent } from './pharmacy-receipt/pharmacy-receipt.component';
+import { PrescriptionPrintComponent } from './prescription-print/prescription-print.component';
 import { ExcelFileUpload } from './@shared/component/excel-file-upload/excel-file-upload.component';
 
 
@@ -23,8 +23,8 @@ const routes: Routes = [
     component: ReceiptComponent
   },
   {
-    path: 'pharmacy-receipt',
-    component: PharmacyReceiptComponent
+    path: 'prescription-print',
+    component: PrescriptionPrintComponent
   },
   {
     path: '',

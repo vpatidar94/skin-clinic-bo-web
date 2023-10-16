@@ -39,12 +39,16 @@
         <div class="col-10 receipt-info">
             <div class="info row ">
                 <span class="col-4"><strong>Patient ID:</strong> {{patientId}}</span>
+                <span class="col-4"><strong>Doctor Name:</strong> {{doctorName}}</span>
+
                 <span class="col-4"><strong>Patient Name:</strong> {{ patientName }}</span>
                 <span class="col-4"><strong>Date:</strong> {{currentDate | date}} </span>
                 <span class="col-4"><strong>Father Name:</strong> {{ fatherName }}</span>
                 <span class="col-4"><strong>Gender:</strong> {{ gender }}</span>
                 <span class="col-4"><strong>Age:</strong> {{ age }}</span>
-                <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span>
+                <!-- <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span> -->
+                <span class="col-4"><strong>Referred By:</strong> {{ refferedBy }}</span>
+
             </div>
             <div class="d-flex p-2 col-12">
                 <div class="d-flex flex-column col-9 prescription-detail pe-2 ">
