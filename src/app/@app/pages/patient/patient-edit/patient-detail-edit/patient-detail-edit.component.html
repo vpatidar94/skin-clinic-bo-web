@@ -307,12 +307,53 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Time Slot</label>
                         </div>
+                        <div class="col-md-7">
+                            <div class="form-group" *ngFor="let shift of time;let shiftIndex=index;">
 
+                                <div class="time-slot-selector mb-2">
+                                    <div class="row">
+                                        <span (click)="selectShift(shiftIndex)">Shift-{{shiftIndex+1}}- From:
+                                            {{time[shiftIndex].from}} To:
+                                            {{time[shiftIndex].to}}</span>
+
+                                        <!-- <div  *ngFor="let slot of generateTimeSlots(time[i].from, time[i].to)"
+                                            class="col-4 ">
+                                            <div *ngIf="showShifts" class="time-slots-style">{{ slot }}</div>
+                                        </div> -->
+
+                                        <!-- <div  *ngFor="let slot of generateTimeSlots(time[i].from, time[i].to)"
+                                        class="col-4 ">
+                                        <div *ngIf="selectedShift === i" class="time-slots-style">{{ slot }}</div> -->
+                                        <!-- </div> -->
+
+
+                                        <!-- <div *ngIf="selectedShift === i"> -->
+                                        <div *ngFor="let slot of generateTimeSlots(time[shiftIndex].from, time[shiftIndex].to); let slotIndex = index"
+                                            class="col-4">
+                                            <div *ngIf="selectedShift === shiftIndex" class="time-slots-style"
+                                                [ngClass]="{'selected-time-slot': selectedTimeSlots[shiftIndex] === slotIndex}"
+                                                (click)="selectTimeSlot(shiftIndex, slotIndex)">{{ slot }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!--OLD ONE CAN BE USED IN FUTURE -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Time Slot</label>
+                        </div>
                         <div class="col-md-7">
                             <div class="form-group" *ngFor="let shift of time;let i=index;">
                                 <div class="time-slots">

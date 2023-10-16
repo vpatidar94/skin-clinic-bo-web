@@ -1,0 +1,19 @@
+.time-slot-selector{
+    border: solid 2px grey;
+}
+
+.time-slots-style{
+    // background-color: skyblue;
+    color:white;
+    background-color: rgb(58, 187, 238);
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+/* In your component's stylesheet */
+.selected-time-slot {
+    background-color: grey; /* Change this to your desired color */
+    color: white; /* Change this to your desired text color */
+    cursor: pointer; /* Make the cursor change to a pointer on hover */
+  }
+  
