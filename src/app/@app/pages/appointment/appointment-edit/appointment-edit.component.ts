@@ -48,6 +48,7 @@ export class AppointmentEditComponent {
         enableCheckAll: false,
         maxHeight: 50
     };
+
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 

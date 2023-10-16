@@ -276,8 +276,8 @@
                     </div>
                 </div>
 
-                <!-- Time Slot -->
-                <div class="col-md-6">
+                <!-- Time Shift -->
+                <!-- <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3 mt-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Shift</label>
@@ -290,7 +290,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- Refered By-->
             <div class="row">
@@ -315,17 +315,23 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group" *ngFor="let shift of time;let shiftIndex=index;">
-
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" (click)="selectShift(shiftIndex)" type="radio">
+                                    <label class="form-check-label">Shift-{{shiftIndex+1}}</label>
+                                </div>
                                 <div class="time-slot-selector mb-2">
-                                    <div class="row">
-                                        <span (click)="selectShift(shiftIndex)">Shift-{{shiftIndex+1}}- From:
-                                            {{time[shiftIndex].from}} To:
-                                            {{time[shiftIndex].to}}</span>
+                                <div class="row">
+                                    <!-- <div class="form-check form-check-inline">
+                                        <input class="form-check-input" (click)="selectShift(shiftIndex)" type="radio">
+                                        <label class="form-check-label">Shift-{{shiftIndex+1}}</label>
+                                    </div> -->
+                                    <!-- <div class="time-slot-selector mb-2"> -->
+
                                         <div *ngFor="let slot of generateTimeSlots(time[shiftIndex].from, time[shiftIndex].to); let slotIndex = index"
                                             class="col-4">
-                                            <div *ngIf="selectedShift === shiftIndex" class="time-slots-style"
+                                            <span *ngIf="selectedShift === shiftIndex" class="time-slots-style"
                                                 [ngClass]="{'selected-time-slot': selectedTimeSlots[shiftIndex] === slotIndex}"
-                                                (click)="selectTimeSlot(shiftIndex, slotIndex)">{{ slot }}</div>
+                                                (click)="selectTimeSlot(shiftIndex, slotIndex)">{{ slot }}</span>
                                         </div>
                                     </div>
                                 </div>
