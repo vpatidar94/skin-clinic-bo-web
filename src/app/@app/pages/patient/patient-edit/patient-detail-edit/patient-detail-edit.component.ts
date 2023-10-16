@@ -44,18 +44,9 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     showShifts: boolean = false;
 
-    // In your component
     selectedShift: number | null = null;
 
-    // In your component
     selectedTimeSlots: (number | null)[] = [];
-
-    // Function to select a time slot
-
-
-
-
-
 
     /* ************************************ Constructors ************************************ */
     constructor(
@@ -165,26 +156,14 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         return timeSlots;
     }
 
-    // public selectShift(index:number):void {
-    //     this.showShifts=!this.showShifts;
-    // }
-
-    // Function to set the selected shift
-    selectShift(index: number) {
+    public selectShift(index: number) {
         this.selectedShift = index;
     }
-
-    //   selectTimeSlot(shiftIndex: number, slotIndex: number) {
-    //     this.selectedTimeSlots[shiftIndex] = slotIndex;
-    //   }
-
-    // In your component
-    selectTimeSlot(shiftIndex: number, slotIndex: number) {
+    
+   public selectTimeSlot(shiftIndex: number, slotIndex: number) {
         const selectedTimeSlot = this.generateTimeSlots(this.time[shiftIndex].from, this.time[shiftIndex].to)[slotIndex];
         this.userBooking.booking.timeSlot = selectedTimeSlot;
         this.selectedTimeSlots[shiftIndex] = slotIndex;
-        console.log("kkkkkkxxxxx", this.selectedTimeSlots, this.userBooking.booking.timeSlot);
-
     }
 
     /* ************************************ Private Methods ************************************ */
