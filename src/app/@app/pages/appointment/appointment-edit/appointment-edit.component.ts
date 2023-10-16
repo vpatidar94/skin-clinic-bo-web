@@ -120,7 +120,8 @@ export class AppointmentEditComponent {
             if (res.body && res.body?.length > 0) {
                 this.docterList = res.body;
                 if (this.userBooking.booking?.dr && fetchTimeSlot) {
-                    this.checkDoctor(this.userBooking.booking?.dr);
+                
+                    this.checkDoctor(this.userBooking.booking?.dr,this.userBooking.booking.dr);
                 }
             }
         }
@@ -128,7 +129,7 @@ export class AppointmentEditComponent {
 
     }
 
-    public checkDoctor(selectedDoctor: string | null | undefined): void {
+    public checkDoctor(selectedDoctor: string | null | undefined,doctorId:string): void {
         // Find the doctor based on the selectedDoctor name
         const doctor = this.docterList.find((doc: UserVo) => doc._id === selectedDoctor);
         // Check if the doctor is found and if they have serviceTiming
@@ -137,6 +138,8 @@ export class AppointmentEditComponent {
             // this.userBooking.booking.dr = [doctor.nameF];   // TODO: this to be used again when api interface will be changed as per needed
             // Update the time variable with the service timings of the selected doctor
             this.time = doctor.serviceTiming;
+            doctorId=this.userBooking.booking.dr;
+            this.filterServiceItemByDoctor(doctorId);
         }
     }
 
