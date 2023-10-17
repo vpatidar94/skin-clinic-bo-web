@@ -226,20 +226,20 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="row">
-                                    <div class="col-4" *ngFor="let shift of time; let i = index;">
+                                    <div class="col-4" *ngFor="let shift of time; let shiftIndex = index;">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" (click)="toggleShift(i)" type="radio" [checked]="selectedShift === i">
-                                            <label class="form-check-label">Shift-{{i+1}}</label>
+                                            <input class="form-check-input" (click)="toggleShift(shiftIndex)" type="radio" [checked]="selectedShift === shiftIndex">
+                                            <label class="form-check-label">Shift-{{shiftIndex+1}}</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-10">
                                         <div *ngIf="selectedShift !== null">
                                             <div class="time-slot-selector mb-2">
                                                 <div class="row">
                                                     <div *ngFor="let slot of generateTimeSlots(time[selectedShift].from, time[selectedShift].to); let slotIndex = index"
-                                                        class="col-4">
+                                                        class="col-4 mb-3">
                                                         <span class="time-slots-style"
                                                             [ngClass]="{'selected-time-slot': selectedTimeSlots[selectedShift] === slotIndex}"
                                                             (click)="selectTimeSlot(selectedShift, slotIndex)">{{ slot }}</span>
@@ -252,11 +252,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     
                     
                     
                 </div>
-            </div>
         </mat-list>
     </form>
 </section>

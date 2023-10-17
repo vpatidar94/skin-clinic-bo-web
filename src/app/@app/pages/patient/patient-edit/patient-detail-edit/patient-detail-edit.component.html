@@ -292,34 +292,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Time Slot</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group" *ngFor="let shift of time;let shiftIndex=index;">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" (click)="selectShift(shiftIndex)" type="radio">
-                                    <label class="form-check-label">Shift-{{shiftIndex+1}}</label>
-                                </div>
-                                <div class="time-slot-selector mb-2">
-                                    <div class="row">
-                                        <div *ngFor="let slot of generateTimeSlots(time[shiftIndex].from, time[shiftIndex].to); let slotIndex = index"
-                                            class="col-4">
-                                            <span *ngIf="selectedShift === shiftIndex" class="time-slots-style"
-                                                [ngClass]="{'selected-time-slot': selectedTimeSlots[shiftIndex] === slotIndex}"
-                                                (click)="selectTimeSlot(shiftIndex, slotIndex)">{{ slot }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
-                <div class="col-md-6">
+                <div  class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Shift</label>
@@ -333,7 +306,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div  class="row" *ngIf="!showOnlySelectedTimeSlot">
                                 <div class="col-10">
                                     <div *ngIf="selectedShift !== null">
                                         <div class="time-slot-selector mb-2">
@@ -349,13 +322,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" *ngIf="showOnlySelectedTimeSlot">
+                            <div class="time-slots-style col-md-3">
+                                {{userBooking.booking.timeSlot}}
+                            </div></div>
+
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
             <app-label>Adress Details</app-label>
 
             <div class="row">
