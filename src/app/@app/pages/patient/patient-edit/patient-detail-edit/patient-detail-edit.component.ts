@@ -167,6 +167,15 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         this.selectedTimeSlots[shiftIndex] = slotIndex;
     }
 
+
+    public toggleShift(shiftIndex: number) {
+        if (this.selectedShift === shiftIndex) {
+            this.selectedShift = null;
+        } else {
+            this.selectedShift = shiftIndex;
+        }
+    }
+
     /* ************************************ Private Methods ************************************ */
 
     private _init(): void {

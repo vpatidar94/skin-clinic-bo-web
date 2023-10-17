@@ -1,13 +1,19 @@
 .time-slot-selector{
     border: solid 2px grey;
+    text-align: center;
+    // padding:30px;
+    // scroll-behavior: auto;
+    max-height:200px;
+    overflow-y: auto;
 }
 
 .time-slots-style{
     // background-color: skyblue;
     color:white;
-    background-color: rgb(58, 187, 238);
-    margin-bottom: 2px;
+    background-color: rgb(31 28 79 / 86%);
     text-align: center;
+    padding:4px;
+    // margin-bottom: 28px;
 }
 
 /* to change the color of selected time slot */

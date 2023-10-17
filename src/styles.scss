@@ -233,11 +233,14 @@ mat-list-item.section-title {
 //---------------------------------------TAB STYLES ---------------------------------------------//
 .tab-style{
     height:40px;
-    width:60%;
+    // width:60%;
+    width:auto;
 }
 
 .tab-content{
-    width:16.66%;
+    // width:16.66%;
+    width:auto;
+
 }
 //  ------------------------------------ flex css classes start  ------------------------------------ //
 .flex-row {

@@ -173,4 +173,12 @@ export class AppointmentEditComponent {
         this.selectedTimeSlots[shiftIndex] = slotIndex;
     }
 
+    toggleShift(shiftIndex: number) {
+        if (this.selectedShift === shiftIndex) {
+          this.selectedShift = null;
+        } else {
+          this.selectedShift = shiftIndex;
+        }
+      }
+
 }

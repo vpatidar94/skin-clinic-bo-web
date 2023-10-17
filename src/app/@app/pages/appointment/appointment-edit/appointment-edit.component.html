@@ -144,7 +144,7 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="form-group">
-                                    <select class="app-single-select-dropdown w-100" name="doctorname"
+                                    <select class="app-single-select-dropdown w-100" name="doctorName"
                                         [(ngModel)]="userBooking.booking.dr"
                                         (ngModelChange)="checkDoctor(userBooking.booking.dr, userBooking.booking.dr)">
                                         <option *ngFor="let doctor of docterList" [value]="doctor._id">{{doctor.nameF}}
@@ -155,7 +155,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="d-flex align-items-center mb-3">
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1" class="app-label">Shift</label>
@@ -179,7 +179,82 @@
                                 </div>
                             </div>
                         </div>
+                    </div> -->
+                    
+                    
+                    
+                    
+                    <!-- <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="exampleInputEmail1" class="app-label">Shift</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-4" *ngFor="let shift of time; let i = index;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" (click)="selectShift(i)" type="radio">
+                                            <label class="form-check-label">Shift-{{i+1}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div *ngIf="selectedShift !== null">
+                                            <div class="time-slot-selector mb-2">
+                                                <div class="row">
+                                                    <div *ngFor="let slot of generateTimeSlots(time[selectedShift].from, time[selectedShift].to); let slotIndex = index"
+                                                        class="col-4">
+                                                        <span class="time-slots-style"
+                                                            [ngClass]="{'selected-time-slot': selectedTimeSlots[selectedShift] === slotIndex}"
+                                                            (click)="selectTimeSlot(selectedShift, slotIndex)">{{ slot }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-3">
+                                <label for="exampleInputEmail1" class="app-label">Shift</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-4" *ngFor="let shift of time; let i = index;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" (click)="toggleShift(i)" type="radio" [checked]="selectedShift === i">
+                                            <label class="form-check-label">Shift-{{i+1}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div *ngIf="selectedShift !== null">
+                                            <div class="time-slot-selector mb-2">
+                                                <div class="row">
+                                                    <div *ngFor="let slot of generateTimeSlots(time[selectedShift].from, time[selectedShift].to); let slotIndex = index"
+                                                        class="col-4">
+                                                        <span class="time-slots-style"
+                                                            [ngClass]="{'selected-time-slot': selectedTimeSlots[selectedShift] === slotIndex}"
+                                                            (click)="selectTimeSlot(selectedShift, slotIndex)">{{ slot }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    
+                    
                 </div>
             </div>
         </mat-list>
