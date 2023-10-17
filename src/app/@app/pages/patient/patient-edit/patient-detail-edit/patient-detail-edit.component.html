@@ -292,7 +292,7 @@
                     </div>
                 </div>
 
-                <div  class="col-md-6">
+                <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">Shift</label>
@@ -301,12 +301,13 @@
                             <div class="row">
                                 <div class="col-4" *ngFor="let shift of time; let shiftIndex = index;">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" (click)="toggleShift(shiftIndex)" type="radio" [checked]="selectedShift === shiftIndex">
+                                        <input class="form-check-input" (click)="toggleShift(shiftIndex)" type="radio"
+                                            [checked]="selectedShift === shiftIndex">
                                         <label class="form-check-label">Shift-{{shiftIndex+1}}</label>
                                     </div>
                                 </div>
                             </div>
-                            <div  class="row" *ngIf="!showOnlySelectedTimeSlot">
+                            <div class="row" *ngIf="!showOnlySelectedTimeSlot">
                                 <div class="col-10">
                                     <div *ngIf="selectedShift !== null">
                                         <div class="time-slot-selector mb-2">
@@ -315,7 +316,8 @@
                                                     class="col-4 mb-3">
                                                     <span class="time-slots-style"
                                                         [ngClass]="{'selected-time-slot': selectedTimeSlots[selectedShift] === slotIndex}"
-                                                        (click)="selectTimeSlot(selectedShift, slotIndex)">{{ slot }}</span>
+                                                        (click)="selectTimeSlot(selectedShift, slotIndex)">{{ slot
+                                                        }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -323,9 +325,10 @@
                                 </div>
                             </div>
                             <div class="row" *ngIf="showOnlySelectedTimeSlot">
-                            <div class="time-slots-style col-md-3">
-                                {{userBooking.booking.timeSlot}}
-                            </div></div>
+                                <div class="time-slots-style col-md-3">
+                                    {{userBooking.booking.timeSlot}}
+                                </div>
+                            </div>
 
                         </div>
                     </div>

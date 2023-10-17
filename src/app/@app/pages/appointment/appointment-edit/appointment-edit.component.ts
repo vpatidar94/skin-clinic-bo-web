@@ -30,7 +30,7 @@ export class AppointmentEditComponent {
 
     @Input()
     userBooking!: UserBookingDto;
-   
+
     @Output()
     userBookingChange = new EventEmitter<UserBookingDto>();
 
@@ -63,9 +63,9 @@ export class AppointmentEditComponent {
 
     selectedTimeSlots: (number | null)[] = [];
 
-
+    showOnlySelectedTimeSlot = false;
     /* ************************************* Constructors ******************************************** */
-    constructor(private keyValueStorageService:KeyValueStorageService,
+    constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi) { }
 
     /* ************************************* Public Methods ******************************************** */
@@ -90,7 +90,7 @@ export class AppointmentEditComponent {
     }
 
     public filterServiceItemByDoctor(selectedDoctorId: string) {
-        this.filteredServiceItemList = this.serviceItemList.filter(item => item.item.associatedDoctorId === selectedDoctorId );
+        this.filteredServiceItemList = this.serviceItemList.filter(item => item.item.associatedDoctorId === selectedDoctorId);
 
     }
 
@@ -120,8 +120,8 @@ export class AppointmentEditComponent {
             if (res.body && res.body?.length > 0) {
                 this.docterList = res.body;
                 if (this.userBooking.booking?.dr && fetchTimeSlot) {
-                
-                    this.checkDoctor(this.userBooking.booking?.dr,this.userBooking.booking.dr);
+
+                    this.checkDoctor(this.userBooking.booking?.dr, this.userBooking.booking.dr);
                 }
             }
         }
@@ -129,7 +129,7 @@ export class AppointmentEditComponent {
 
     }
 
-    public checkDoctor(selectedDoctor: string | null | undefined,doctorId:string): void {
+    public checkDoctor(selectedDoctor: string | null | undefined, doctorId: string): void {
         // Find the doctor based on the selectedDoctor name
         const doctor = this.docterList.find((doc: UserVo) => doc._id === selectedDoctor);
         // Check if the doctor is found and if they have serviceTiming
@@ -138,7 +138,7 @@ export class AppointmentEditComponent {
             // this.userBooking.booking.dr = [doctor.nameF];   // TODO: this to be used again when api interface will be changed as per needed
             // Update the time variable with the service timings of the selected doctor
             this.time = doctor.serviceTiming;
-            doctorId=this.userBooking.booking.dr;
+            doctorId = this.userBooking.booking.dr;
             this.filterServiceItemByDoctor(doctorId);
         }
     }
@@ -160,25 +160,29 @@ export class AppointmentEditComponent {
                 break;
             }
         }
+        this.showOnlySelectedTimeSlot = false;
         return timeSlots;
     }
 
     public selectShift(index: number) {
         this.selectedShift = index;
     }
-    
-   public selectTimeSlot(shiftIndex: number, slotIndex: number) {
+
+    public selectTimeSlot(shiftIndex: number, slotIndex: number) {
         const selectedTimeSlot = this.generateTimeSlots(this.time[shiftIndex].from, this.time[shiftIndex].to)[slotIndex];
         this.userBooking.booking.timeSlot = selectedTimeSlot;
         this.selectedTimeSlots[shiftIndex] = slotIndex;
+        this.showOnlySelectedTimeSlot = true;
     }
 
-    toggleShift(shiftIndex: number) {
+    public toggleShift(shiftIndex: number) {
         if (this.selectedShift === shiftIndex) {
-          this.selectedShift = null;
+            this.selectedShift = null;
+            this.showOnlySelectedTimeSlot = false;
         } else {
-          this.selectedShift = shiftIndex;
+            this.selectedShift = shiftIndex;
+            this.showOnlySelectedTimeSlot = false;
         }
-      }
+    }
 
 }
