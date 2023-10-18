@@ -4,26 +4,23 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 export interface PeriodicElement {
-  date:string;
-  patientId: string;
-  patientName: string;
-  department: any;
-  doctorName: string;
-  referredBy: string;
-  amountDeposit: string;
+    date: string;
+    billNo: string;
+    patientId: string;
+    patientName: string;
+    department: any;
+    amount: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { date:'01/10/2023',patientId: "001", patientName: 'Ram Patidar', department: 'Pathology', doctorName: 'Blood',referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "002", patientName: 'Rahul Yadav', department: 'USG', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Keshav Patel', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Tarun Gandhi', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Hitesh Singh', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023', patientId: "003", patientName: 'Yatindra Sahu', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
+    { date: '01/10/2023', billNo: '012', patientId: "001", patientName: 'Ram Patidar', department: 'Pathology', amount: '1000' },
+    { date: '01/10/2023', billNo: '012', patientId: "002", patientName: 'Rahul Yadav', department: 'USG', amount: '1000' },
+    { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Keshav Patel', department: 'MRI', amount: '1000' },
+    { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Tarun Gandhi', department: 'MRI', amount: '1000' },
+    { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Hitesh Singh', department: 'MRI', amount: '1000' },
+    { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Yatindra Sahu', department: 'MRI', amount: '1000' },
 
 ]
-
-
 
 @Component({
     selector: 'app-pharmacy-report-edit',
@@ -31,64 +28,64 @@ const ELEMENT_DATA: PeriodicElement[] = [
     styleUrls: ['./pharmacy-report-edit.component.scss'],
 })
 
-export class PharmacyReportEditComponent implements OnInit, AfterViewInit{
+export class PharmacyReportEditComponent implements OnInit, AfterViewInit {
 
     /* ************************************* Static Field ********************************************* */
-  /* ************************************* Instance Field ******************************************** */
+    /* ************************************* Instance Field ******************************************** */
 
-    displayedColumns: string[] = ['date','patientId', 'patientName', "department", 'doctorName', 'referredBy', 'amountDeposit'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+    displayedColumns: string[] = ['date', 'billNo', 'patientId', 'patientName', "department", 'amount'];
+    dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
 
-  /* ************************************* Constructors ******************************************** */
-  constructor() { }
+    /* ************************************* Constructors ******************************************** */
+    constructor() { }
 
-  /* ************************************* Public Methods ******************************************** */
+    /* ************************************* Public Methods ******************************************** */
 
-  public ngAfterViewInit() {
-    this.paginator.showFirstLastButtons = false;
-    this.paginator.hidePageSize = false;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  public addInvestigation(): void {
-    this._addEditServiceItem();
-  }
-
-  public applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    public ngAfterViewInit() {
+        this.paginator.showFirstLastButtons = false;
+        this.paginator.hidePageSize = false;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     }
-  }
 
-  public ngOnInit(): void {
-    this._init();
-  }
+    public addInvestigation(): void {
+        this._addEditServiceItem();
+    }
 
-  public cancel(): void {
-    this._init();
-  }
+    public applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
+
+    public ngOnInit(): void {
+        this._init();
+    }
+
+    public cancel(): void {
+        this._init();
+    }
 
 
-  /* ************************************* Private Methods ******************************************** */
-  private _init(): void {
-    this._resetSection();
-    // this.showSectionInvestigationList = true;
-  }
+    /* ************************************* Private Methods ******************************************** */
+    private _init(): void {
+        this._resetSection();
+        // this.showSectionInvestigationList = true;
+    }
 
-  private _resetSection(): void {
-    // this.showSectionInvestigationList = false;
-    // this.showSectionInvestigationEdit = false;
-  }
+    private _resetSection(): void {
+        // this.showSectionInvestigationList = false;
+        // this.showSectionInvestigationEdit = false;
+    }
 
-  private _addEditServiceItem(): void {
-    this._resetSection();
-    // this.showSectionInvestigationEdit = true;
-  }
+    private _addEditServiceItem(): void {
+        this._resetSection();
+        // this.showSectionInvestigationEdit = true;
+    }
 
 }
