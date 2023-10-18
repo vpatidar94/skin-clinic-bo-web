@@ -22,6 +22,7 @@ export class SideMenuComponent {
     private subRole?: string | null;
     public isMasterTabOpen = false; // Initialize to false
     public isPharmacyTabOpen = false; // Initialize to false
+    public isAdminReportsTabOpen = false;
 
     /* ************************************ Constructors ************************************ */
     constructor(private router: Router,
@@ -218,11 +219,21 @@ export class SideMenuComponent {
 
     ];
 
+    public adminReportsSubOptions = [
+        { label: 'Patient Report', link: '/admin-reports/patient-report' },
+        // { label: 'Patient List', link: '/pharmacy/patient-list' },
+        // { label: 'Pharmacy Inventory', link: '/pharmacy/pharmacy-inventory' },
+    ]
+
     toggleMasterTab() {
         this.isMasterTabOpen = !this.isMasterTabOpen;
     }
 
     togglePharmacyTab() {
         this.isPharmacyTabOpen = !this.isPharmacyTabOpen;
+    }
+
+    toggleAdminReportsTab() {
+        this.isAdminReportsTabOpen = !this.isAdminReportsTabOpen;
     }
 }

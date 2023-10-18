@@ -6,6 +6,7 @@ import { AuthGuard } from './@shared/security/auth.guard';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { PrescriptionPrintComponent } from './prescription-print/prescription-print.component';
 import { ExcelFileUpload } from './@shared/component/excel-file-upload/excel-file-upload.component';
+import { AdminReportsComponent } from './@app/pages/admin-reports/admin-reports.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,11 @@ const routes: Routes = [
     path: 'prescription-print',
     component: PrescriptionPrintComponent
   },
+  // {
+  //   path: 'admin-reports',
+  //   component: AdminReportsComponent
+  // },
+
   {
     path: '',
     component: LayoutComponent,
@@ -82,6 +88,11 @@ const routes: Routes = [
       {
         path: 'hospital-inventory',
         loadChildren: () => import('./@app/pages/hospital-inventory/hospital-inventory.module').then(m => m.HospitalInventoryModule)
+      },
+
+      {
+        path: 'admin-reports',
+        loadChildren: () => import('./@app/pages/admin-reports/admin-reports.module').then(m => m.AdminReportsModule)
       },
     ]
   }
