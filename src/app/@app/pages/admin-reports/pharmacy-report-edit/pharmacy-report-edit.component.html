@@ -1,12 +1,27 @@
-<!-- <h1>Patient Reports</h1> -->
 <section class="section-org-edit">
     <form>
         <mat-list class="row">
-            <!-- <h1 class='heading-style'>New Appointment</h1> -->
-            <app-label>Patient Reports</app-label>
+            <app-label>Pharmacy Reports</app-label>
             <div class="row">
-                <!-- First Name -->
+                <!-- Days wise Reports -->
                 <div class="col-md-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-12">
+                            <select name="selectReports" class="app-single-select-dropdown w-100"
+                                (change)=" onReportSelectChange($event)">
+                                <option value="TODAY">Todays Report</option>
+                                <option value="YESTERDAY">Yesterdays Report</option>
+                                <option value="LASTSEVEN">Last 7 days Report</option>
+                                <option value="LASTFIFTEEN">Last 15 days Report</option>
+                                <option value="LASTONEMONTH">Last 1 month Report</option>
+                                <option value="CUSTOM">Custom Report</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- From Date -->
+                <div class="col-md-4" *ngIf="showCustomDateInput">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label ">From</label>
@@ -19,8 +34,8 @@
                     </div>
                 </div>
 
-                <!-- Last Name -->
-                <div class="col-md-4">
+                <!-- To Date -->
+                <div class="col-md-4" *ngIf="showCustomDateInput">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-3">
                             <label for="exampleInputEmail1" class="app-label">To</label>
@@ -32,41 +47,39 @@
                         </div>
                     </div>
                 </div>
-                <!-- </div> -->
+            </div>
 
-                <!-- Last Name -->
+            <div class="row">
+                <!-- Department Name -->
                 <div class="col-md-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-12">
-                            <select class="app-single-select-dropdown">
-                                <option>Last 7 days</option>
-                                <option>Last 15 days</option>
-                                <option>Last 1 month</option>
-                            </select>
-                        </div>
-                    </div>
+                    <select class="app-single-select-dropdown w-100">
+                        <option>Department-1</option>
+                        <option>Department-2</option>
+                    </select>
+                </div>
+
+                <!-- Doctor Name -->
+                <div class="col-md-4">
+                    <select class="app-single-select-dropdown w-100">
+                        <option>doctor-1</option>
+                        <option>doctor-2</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 align-content-end">
+                    <button class="common-button col-md-8 ">Search</button>
                 </div>
             </div>
 
             <section class="section-org-edit">
-                <!-- <div class="row">
-                    <div class="d-flex justify-content-between">
-                        <h2>Investigation List</h2>
-                        <button class="common-button" (click)="addInvestigation()">Add Investigation</button>
-            
-                    </div>
-                </div> -->
-
                 <!--  Table Section  -->
                 <mat-card class="table-card-style">
-
                     <div class="d-flex flex-row justify-content-between mb-2">
                         <div>
                             <button class="common-button">Excel</button>
                             <button class="common-button">Pdf</button>
                             <button class="common-button">Copy</button>
                         </div>
-
                         <div>
                             <input class="input-style" (keyup)="applyFilter($event)" placeholder="Search" #input>
                         </div>
@@ -74,11 +87,14 @@
 
                     <div class="mat-elevation-z8">
                         <table mat-table [dataSource]="dataSource" matSort>
+
+                            <!-- Date -->
                             <ng-container matColumnDef="date">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
                                 <td mat-cell *matCellDef="let row"> {{row.date}} </td>
                             </ng-container>
 
+                            <!-- Bill No -->
                             <ng-container matColumnDef="billNo">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Bill No.</th>
                                 <td mat-cell *matCellDef="let row"> {{row.billNo}} </td>
@@ -102,21 +118,13 @@
                                 <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td>
                             </ng-container>
 
-                            
-                            <!-- Specimen Type -->
+
+                            <!-- Amount -->
                             <ng-container matColumnDef="amount">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>amount</th>
                                 <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.amount}} </td>
                             </ng-container>
 
-                            <!-- Action -->
-                            <!-- <ng-container matColumnDef="action">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                                <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><button mat-button
-                                        class="action-style">Edit</button> | <button mat-button class="action-style">Delete</button>
-                                </td>
-                            </ng-container>
-             -->
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 

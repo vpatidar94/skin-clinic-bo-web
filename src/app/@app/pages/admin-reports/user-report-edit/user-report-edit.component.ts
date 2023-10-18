@@ -4,43 +4,42 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 export interface PeriodicElement {
-  date:string;
-  patientId: string;
-  patientName: string;
-  department: any;
-  doctorName: string;
-  referredBy: string;
-  amountDeposit: string;
+  userId: string;
+  userName: string;
+  department: string;
+  joiningDate: string;
+  attendance: string;
+  grossSalary: string;
+  netSalary: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { date:'01/10/2023',patientId: "001", patientName: 'Ram Patidar', department: 'Pathology', doctorName: 'Blood',referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "002", patientName: 'Rahul Yadav', department: 'USG', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Keshav Patel', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Tarun Gandhi', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Hitesh Singh', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023', patientId: "003", patientName: 'Yatindra Sahu', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
+  { userId: '01245', userName: 'Ram Patidar', department: 'Pathology', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
+  { userId: '01245', userName: 'Rahul Yadav', department: 'USG', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
+  { userId: '01245', userName: 'Keshav Patel', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
+  { userId: '01245', userName: 'Tarun Gandhi', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
+  { userId: '01245', userName: 'Hitesh Singh', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
+  { userId: '01245', userName: 'Yatindra Sahu', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
 
 ]
 
-
-
 @Component({
-    selector: 'app-user-report-edit',
-    templateUrl: './user-report-edit.component.html',
-    styleUrls: ['./user-report-edit.component.scss'],
+  selector: 'app-user-report-edit',
+  templateUrl: './user-report-edit.component.html',
+  styleUrls: ['./user-report-edit.component.scss'],
 })
 
-export class UserReportEditComponent implements OnInit, AfterViewInit{
+export class UserReportEditComponent implements OnInit, AfterViewInit {
 
-    /* ************************************* Static Field ********************************************* */
+  /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
 
-    displayedColumns: string[] = ['date','patientId', 'patientName', "department", 'doctorName', 'referredBy', 'amountDeposit'];
+  displayedColumns: string[] = ['userId', 'userName', "department", 'joiningDate', 'attendance', 'grossSalary', 'netSalary'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  showCustomDateInput: boolean = false;
 
   /* ************************************* Constructors ******************************************** */
   constructor() { }
@@ -74,6 +73,10 @@ export class UserReportEditComponent implements OnInit, AfterViewInit{
     this._init();
   }
 
+  public onReportSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.showCustomDateInput = selectElement.value === 'CUSTOM';
+  }
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {

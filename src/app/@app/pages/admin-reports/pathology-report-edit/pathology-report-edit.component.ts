@@ -4,43 +4,42 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 export interface PeriodicElement {
-  date:string;
+  date: string;
   patientId: string;
   patientName: string;
-  department: any;
+  testId: any;
+  testName: string;
   doctorName: string;
-  referredBy: string;
-  amountDeposit: string;
+  amount: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { date:'01/10/2023',patientId: "001", patientName: 'Ram Patidar', department: 'Pathology', doctorName: 'Blood',referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "002", patientName: 'Rahul Yadav', department: 'USG', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Keshav Patel', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Tarun Gandhi', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023',patientId: "003", patientName: 'Hitesh Singh', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
-  { date:'01/10/2023', patientId: "003", patientName: 'Yatindra Sahu', department: 'MRI', doctorName: '-', referredBy:'Dr. Ram', amountDeposit:'1000' },
+  { date: '01/10/2023', patientId: "001", patientName: 'Ram Patidar', testId: 'Pathology', testName: 'Blood', doctorName: 'Dr. Ram', amount: '1000' },
+  { date: '01/10/2023', patientId: "002", patientName: 'Rahul Yadav', testId: 'USG', testName: '-', doctorName: 'Dr. Ram', amount: '1000' },
+  { date: '01/10/2023', patientId: "003", patientName: 'Keshav Patel', testId: 'MRI', testName: '-', doctorName: 'Dr. Ram', amount: '1000' },
+  { date: '01/10/2023', patientId: "003", patientName: 'Tarun Gandhi', testId: 'MRI', testName: '-', doctorName: 'Dr. Ram', amount: '1000' },
+  { date: '01/10/2023', patientId: "003", patientName: 'Hitesh Singh', testId: 'MRI', testName: '-', doctorName: 'Dr. Ram', amount: '1000' },
+  { date: '01/10/2023', patientId: "003", patientName: 'Yatindra Sahu', testId: 'MRI', testName: '-', doctorName: 'Dr. Ram', amount: '1000' },
 
 ]
 
-
-
 @Component({
-    selector: 'app-pathology-report-edit',
-    templateUrl: './pathology-report-edit.component.html',
-    styleUrls: ['./pathology-report-edit.component.scss'],
+  selector: 'app-pathology-report-edit',
+  templateUrl: './pathology-report-edit.component.html',
+  styleUrls: ['./pathology-report-edit.component.scss'],
 })
 
-export class PathologyReportEditComponent implements OnInit, AfterViewInit{
+export class PathologyReportEditComponent implements OnInit, AfterViewInit {
 
-    /* ************************************* Static Field ********************************************* */
+  /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
 
-    displayedColumns: string[] = ['date','patientId', 'patientName', "department", 'doctorName', 'referredBy', 'amountDeposit'];
+  displayedColumns: string[] = ['date', 'patientId', 'patientName', "testId", 'testName', 'doctorName', 'amount'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  showCustomDateInput: boolean = false;
 
   /* ************************************* Constructors ******************************************** */
   constructor() { }
@@ -74,7 +73,10 @@ export class PathologyReportEditComponent implements OnInit, AfterViewInit{
     this._init();
   }
 
-
+  public onReportSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.showCustomDateInput = selectElement.value === 'CUSTOM';
+  }
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();

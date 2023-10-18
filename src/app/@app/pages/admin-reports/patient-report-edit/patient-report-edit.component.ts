@@ -24,8 +24,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 ]
 
-
-
 @Component({
     selector: 'app-patient-report-edit',
     templateUrl: './patient-report-edit.component.html',
@@ -41,12 +39,8 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
-
+   
     showCustomDateInput: boolean = false;
-
-
-
-    // isFilterShown: boolean = false;
 
     /* ************************************* Constructors ******************************************** */
     constructor() { }
@@ -80,9 +74,6 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         this._init();
     }
 
-    // public showFilters(): void {
-    //     this.isFilterShown=!this.isFilterShown;
-    // }
     public onReportSelectChange(event: Event) {
         const selectElement = event.target as HTMLSelectElement;
         this.showCustomDateInput = selectElement.value === 'CUSTOM';
