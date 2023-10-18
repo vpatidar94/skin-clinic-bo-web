@@ -1,0 +1,142 @@
+<!-- <h1>Patient Reports</h1> -->
+<section class="section-org-edit">
+    <form>
+        <mat-list class="row">
+            <!-- <h1 class='heading-style'>New Appointment</h1> -->
+            <app-label>Patient Reports</app-label>
+            <div class="row">
+                <!-- First Name -->
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label ">From</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input class="form-control app-input" name="nameF" type="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">To</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="nameL" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+
+                <!-- Last Name -->
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-12">
+                            <select class="app-single-select-dropdown">
+                                <option>Last 7 days</option>
+                                <option>Last 15 days</option>
+                                <option>Last 1 month</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section-org-edit">
+                <!-- <div class="row">
+                    <div class="d-flex justify-content-between">
+                        <h2>Investigation List</h2>
+                        <button class="common-button" (click)="addInvestigation()">Add Investigation</button>
+            
+                    </div>
+                </div> -->
+
+                <!--  Table Section  -->
+                <mat-card class="table-card-style">
+
+                    <div class="d-flex flex-row justify-content-between">
+                        <div>
+                            <button class="common-button">Excel</button>
+                            <button class="common-button">Pdf</button>
+                            <button class="common-button">Copy</button>
+                        </div>
+
+                        <div>
+                            <input class="input-style" (keyup)="applyFilter($event)" placeholder="Search" #input>
+                        </div>
+                    </div>
+
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort>
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                                <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                            </ng-container>
+
+                            <!-- Test code -->
+                            <ng-container matColumnDef="patientId">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient Id</th>
+                                <td mat-cell *matCellDef="let row"> {{row.patientId}} </td>
+                            </ng-container>
+
+                            <!--Test Name -->
+                            <ng-container matColumnDef="patientName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </th>
+                                <td mat-cell *matCellDef="let row"> {{row.patientName}} </td>
+                            </ng-container>
+
+                            <!-- Department -->
+                            <ng-container matColumnDef="department">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td>
+                            </ng-container>
+
+                            <!-- Specimen Type -->
+                            <ng-container matColumnDef="doctorName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.doctorName}} </td>
+                            </ng-container>
+
+                            <!-- Specimen Type -->
+                            <ng-container matColumnDef="referredBy">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Referred By</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.referredBy}} </td>
+                            </ng-container>
+
+                            <!-- Specimen Type -->
+                            <ng-container matColumnDef="amountDeposit">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>amountDeposit</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.amountDeposit}} </td>
+                            </ng-container>
+
+                            <!-- Action -->
+                            <!-- <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                                <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><button mat-button
+                                        class="action-style">Edit</button> | <button mat-button class="action-style">Delete</button>
+                                </td>
+                            </ng-container>
+             -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                            </tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                            aria-label="Select page of users"></mat-paginator>
+                    </div>
+                </mat-card>
+            </section>
+        </mat-list>
+    </form>
+</section>

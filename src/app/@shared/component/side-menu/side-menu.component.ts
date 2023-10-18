@@ -221,8 +221,14 @@ export class SideMenuComponent {
 
     public adminReportsSubOptions = [
         { label: 'Patient Report', link: '/admin-reports/patient-report' },
-        // { label: 'Patient List', link: '/pharmacy/patient-list' },
-        // { label: 'Pharmacy Inventory', link: '/pharmacy/pharmacy-inventory' },
+        { label: 'Pharmacy Report', link: '/admin-reports/pharmacy-report' },
+        { label: 'Pathology Report', link: '/admin-reports/pathology-report' },
+        { label: 'Pathology Report', link: '/admin-reports/pathology-report' },
+        { label: 'User Report', link: '/admin-reports/user-report' },
+        { label: 'Billing Report', link: '/admin-reports/billing-report' },
+        { label: 'Inventory Report', link: '/admin-reports/inventory-report' },
+
+
     ]
 
     toggleMasterTab() {

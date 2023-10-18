@@ -27,6 +27,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AdminReportsRoutingModule } from './admin-reports-routing.module';
 import { AdminReportsComponent } from './admin-reports.component';
 import { PatientReportEditComponent } from './patient-report-edit/patient-report-edit.component';
+import { PharmacyReportEditComponent } from './pharmacy-report-edit/pharmacy-report-edit.component';
+import { PathologyReportEditComponent } from './pathology-report-edit/pathology-report-edit.component';
 // import { PharmacyComponent } from './pharmacy.component';
 // import { PatientListComponent } from './patient-list/patient-list.component';
 // import { PharmacyBillingComponent } from './pharmacy-billing/pharmacy-billing.component';
@@ -66,6 +68,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [AdminReportsComponent,PatientReportEditComponent]
+  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent]
 })
 export class AdminReportsModule { }

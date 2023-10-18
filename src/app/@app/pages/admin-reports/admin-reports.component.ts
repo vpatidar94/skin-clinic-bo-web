@@ -10,6 +10,5 @@ import { Component, OnInit } from '@angular/core';
 export class AdminReportsComponent implements OnInit {
 
     ngOnInit(): void {
-        console.log("XXXXXXXXX","hey")
     }
 }
