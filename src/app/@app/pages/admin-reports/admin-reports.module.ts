@@ -32,6 +32,7 @@ import { PathologyReportEditComponent } from './pathology-report-edit/pathology-
 import { UserReportEditComponent } from './user-report-edit/user-report-edit.component';
 import { BillingReportEditComponent} from './billing-report-edit/billing-report-edit.component';
 import { InventoryReportEditComponent } from './inventory-report-edit/inventory-report-edit.component';
+import { InventoryDialogDateComponent } from './inventory-report-edit/inventory-dialog-date.component';
 // import { PharmacyComponent } from './pharmacy.component';
 // import { PatientListComponent } from './patient-list/patient-list.component';
 // import { PharmacyBillingComponent } from './pharmacy-billing/pharmacy-billing.component';
@@ -68,9 +69,9 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), MatCardModule, MatDatepickerModule, MatNativeDateModule],
   providers: [],
   exports: [],
-  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent]
+  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent,InventoryDialogDateComponent]
 })
 export class AdminReportsModule { }

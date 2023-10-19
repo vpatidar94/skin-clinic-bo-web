@@ -41,6 +41,7 @@ export class BillingReportEditComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  showCustomDateInput: boolean = false;
 
   /* ************************************* Constructors ******************************************** */
   constructor() { }
@@ -74,7 +75,10 @@ export class BillingReportEditComponent implements OnInit, AfterViewInit{
     this._init();
   }
 
-
+  public onReportSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.showCustomDateInput = selectElement.value === 'CUSTOM';
+  }
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
