@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { PharmacyDialogDateComponent } from './pharmacy-dialog-date.component';
 
 export interface PeriodicElement {
     date: string;
@@ -39,9 +41,13 @@ export class PharmacyReportEditComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
 
     showCustomDateInput: boolean = false;
-
+    
+    selectTabValue!: string;
+    selectedFromDate!: Date | null;
+    selectedToDate!: Date | null;
+  
     /* ************************************* Constructors ******************************************** */
-    constructor() { }
+    constructor(private dialog: MatDialog) { }
 
     /* ************************************* Public Methods ******************************************** */
 
@@ -51,11 +57,7 @@ export class PharmacyReportEditComponent implements OnInit, AfterViewInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
-
-    public addInvestigation(): void {
-        this._addEditServiceItem();
-    }
-
+    
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -75,22 +77,21 @@ export class PharmacyReportEditComponent implements OnInit, AfterViewInit {
     public onReportSelectChange(event: Event) {
         const selectElement = event.target as HTMLSelectElement;
         this.showCustomDateInput = selectElement.value === 'CUSTOM';
-    }
+        if (this.showCustomDateInput) {
+          this._showCalenderPopup();
+        }
+      }
+    
+      public _showCalenderPopup(): void {
+        this.dialog.open(PharmacyDialogDateComponent, {
+          width: '400px',
+        });
+      }
+    
+      public selectExcel(): void {
+      }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
-        this._resetSection();
-        // this.showSectionInvestigationList = true;
     }
-
-    private _resetSection(): void {
-        // this.showSectionInvestigationList = false;
-        // this.showSectionInvestigationEdit = false;
-    }
-
-    private _addEditServiceItem(): void {
-        this._resetSection();
-        // this.showSectionInvestigationEdit = true;
-    }
-
 }

@@ -4,7 +4,7 @@
             <app-label>User Reports</app-label>
             <div class="row">
                 <!-- Days wise Reports -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-12">
                             <select name="selectReports" class="app-single-select-dropdown w-100"
@@ -20,53 +20,24 @@
                     </div>
                 </div>
 
-                <!-- From Date -->
-                <div class="col-md-4" *ngIf="showCustomDateInput">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label ">From</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input class="form-control app-input" name="nameF" type="date" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- To Date -->
-                <div class="col-md-4" *ngIf="showCustomDateInput">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">To</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="date" class="form-control app-input" name="nameL" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
                 <!-- Department Name -->
-                <div class="col-md-4">
-                    <select class="app-single-select-dropdown w-100">
+                <div class="col-md-3">
+                    <select class="app-single-select-dropdown w-100" name="department">
                         <option>Department-1</option>
                         <option>Department-2</option>
                     </select>
                 </div>
 
                 <!-- Doctor Name -->
-                <div class="col-md-4">
-                    <select class="app-single-select-dropdown w-100">
+                <div class="col-md-3">
+                    <select class="app-single-select-dropdown w-100" name="doctor">
                         <option>doctor-1</option>
                         <option>doctor-2</option>
                     </select>
                 </div>
 
-                <div class="col-md-4 align-content-end">
+                <!-- Search btn -->
+                <div class="col-md-3 align-content-end">
                     <button class="common-button col-md-8 ">Search</button>
                 </div>
             </div>
@@ -74,14 +45,21 @@
             <section class="section-org-edit">
                 <!--  Table Section  -->
                 <mat-card class="table-card-style">
-                    <div class="d-flex flex-row justify-content-between mb-2">
+                    <div class="d-flex flex-row justify-content-between mb-4">
+                        <section class="section-org style-tabs">
+                            <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="selectTabValue"
+                                aria-label="Font Style" name="tabValue">
+                                <mat-button-toggle class="tab-content" (click)="selectExcel()" value="Excel">Excel
+                                </mat-button-toggle>
+                                <mat-button-toggle class="tab-content" value="Pdf">Pdf
+                                </mat-button-toggle>
+                                <mat-button-toggle class="tab-content" value="Copy">Copy
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </section>
                         <div>
-                            <button class="common-button">Excel</button>
-                            <button class="common-button">Pdf</button>
-                            <button class="common-button">Copy</button>
-                        </div>
-                        <div>
-                            <input class="input-style" (keyup)="applyFilter($event)" placeholder="Search" #input>
+                            <input class="input-style" (keyup)="applyFilter($event)" placeholder="Search" #input
+                                name="search">
                         </div>
                     </div>
 

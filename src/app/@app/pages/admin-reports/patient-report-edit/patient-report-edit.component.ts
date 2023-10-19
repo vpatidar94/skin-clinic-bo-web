@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { PatientDialogDateComponent } from './patient-dialog-date.component';
 
 export interface PeriodicElement {
     date: string;
@@ -41,10 +43,13 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort!: MatSort;
    
     showCustomDateInput: boolean = false;
-
+   
+    selectTabValue!: string;
+    selectedFromDate!: Date | null;
+    selectedToDate!: Date | null;
+  
     /* ************************************* Constructors ******************************************** */
-    constructor() { }
-
+    constructor(private dialog: MatDialog) { }
     /* ************************************* Public Methods ******************************************** */
 
     public ngAfterViewInit() {
@@ -52,10 +57,6 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         this.paginator.hidePageSize = false;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    }
-
-    public addInvestigation(): void {
-        this._addEditServiceItem();
     }
 
     public applyFilter(event: Event) {
@@ -77,23 +78,22 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     public onReportSelectChange(event: Event) {
         const selectElement = event.target as HTMLSelectElement;
         this.showCustomDateInput = selectElement.value === 'CUSTOM';
+        if (this.showCustomDateInput) {
+          this._showCalenderPopup();
+        }
+      }
+    
+      public _showCalenderPopup(): void {
+        this.dialog.open(PatientDialogDateComponent, {
+          width: '400px',
+        });
+      }
+    
+      public selectExcel(): void {
       }
     
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
-        this._resetSection();
-        // this.showSectionInvestigationList = true;
     }
-
-    private _resetSection(): void {
-        // this.showSectionInvestigationList = false;
-        // this.showSectionInvestigationEdit = false;
-    }
-
-    private _addEditServiceItem(): void {
-        this._resetSection();
-        // this.showSectionInvestigationEdit = true;
-    }
-
 }

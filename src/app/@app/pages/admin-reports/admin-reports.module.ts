@@ -33,6 +33,10 @@ import { BillingReportEditComponent} from './billing-report-edit/billing-report-
 import { InventoryReportEditComponent } from './inventory-report-edit/inventory-report-edit.component';
 import { InventoryDialogDateComponent } from './inventory-report-edit/inventory-dialog-date.component';
 import { BillingDialogDateComponent } from './billing-report-edit/billing-dialog-date.component';
+import { PathologyDialogDateComponent } from './pathology-report-edit/pathology-dialog-date.component';
+import { PatientDialogDateComponent } from './patient-report-edit/patient-dialog-date.component';
+import { PharmacyDialogDateComponent } from './pharmacy-report-edit/pharmacy-dialog-date.component';
+import { UserDialogDateComponent } from './user-report-edit/user-dialog-date.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -61,6 +65,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), MatCardModule, MatDatepickerModule, MatNativeDateModule],
   providers: [],
   exports: [],
-  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent,InventoryDialogDateComponent,BillingDialogDateComponent]
+  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent,InventoryDialogDateComponent,BillingDialogDateComponent,PathologyDialogDateComponent,PatientDialogDateComponent,PharmacyDialogDateComponent,UserDialogDateComponent]
 })
 export class AdminReportsModule { }
