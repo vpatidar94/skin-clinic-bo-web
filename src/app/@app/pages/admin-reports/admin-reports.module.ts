@@ -14,7 +14,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTableModule } from "@angular/material/table";
-// import { PharmacyRoutingModule } from './pharmacy-routing.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddressModule } from 'src/app/@shared/component/address/address.module'
 import { MatDialogModule } from '@angular/material/dialog';
@@ -33,17 +32,7 @@ import { UserReportEditComponent } from './user-report-edit/user-report-edit.com
 import { BillingReportEditComponent} from './billing-report-edit/billing-report-edit.component';
 import { InventoryReportEditComponent } from './inventory-report-edit/inventory-report-edit.component';
 import { InventoryDialogDateComponent } from './inventory-report-edit/inventory-dialog-date.component';
-// import { PharmacyComponent } from './pharmacy.component';
-// import { PatientListComponent } from './patient-list/patient-list.component';
-// import { PharmacyBillingComponent } from './pharmacy-billing/pharmacy-billing.component';
-// import { PrescriptionComponent } from './prescription/prescription.component';
-// import { BillingComponent } from './billing/billing.component';
-// import { ViewPatientComponent } from './view-patient/view-patient.component';
-// import { PharmacyEditComponent } from './pharmacy-billing/pharmacy-edit/pharmacy-edit.component';
-// import { PharmacyInventoryComponent } from './pharmacy-inventory/pharmacy-inventory.component';
-// import { NewPurchaseEditDialogComponent } from './pharmacy-inventory/new-purchase-edit-dialog/new-purchase-edit-dialog.component';
-// import { PatientEditComponent } from './patient-list/pharmacy-edit/patient-edit.component';
-// import { AddProductDialogComponent } from './pharmacy-inventory/add-product-dialog/add-product-dialog.component';
+import { BillingDialogDateComponent } from './billing-report-edit/billing-dialog-date.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -72,6 +61,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), MatCardModule, MatDatepickerModule, MatNativeDateModule],
   providers: [],
   exports: [],
-  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent,InventoryDialogDateComponent]
+  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent,InventoryDialogDateComponent,BillingDialogDateComponent]
 })
 export class AdminReportsModule { }

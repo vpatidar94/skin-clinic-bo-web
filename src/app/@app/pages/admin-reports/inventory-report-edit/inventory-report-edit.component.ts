@@ -61,6 +61,7 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
   showSectionHospitalInventory: boolean = false;
   showSectionPharmacyInventory: boolean = false;
   tabValue!: string;
+  selectTabValue!: string;
 
   selectedFromDate!: Date | null;
   selectedToDate!: Date | null;
@@ -76,10 +77,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
     this.paginator.hidePageSize = false;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  public addInvestigation(): void {
-    this._addEditServiceItem();
   }
 
   public applyFilter(event: Event) {
@@ -117,7 +114,7 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public selecExcel(): void {
+  public selectExcel(): void {
   }
 
 
@@ -131,10 +128,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
   private _resetSection(): void {
     this.showSectionHospitalInventory = false;
     this.showSectionPharmacyInventory = false;
-  }
-
-  private _addEditServiceItem(): void {
-    this._resetSection();
   }
 
   private _tabChange(tabValue: string): void {

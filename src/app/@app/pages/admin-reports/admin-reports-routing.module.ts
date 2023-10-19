@@ -7,14 +7,6 @@ import { PathologyReportEditComponent } from './pathology-report-edit/pathology-
 import { UserReportEditComponent } from './user-report-edit/user-report-edit.component';
 import { BillingReportEditComponent } from './billing-report-edit/billing-report-edit.component';
 import { InventoryReportEditComponent } from './inventory-report-edit/inventory-report-edit.component';
-// import { PharmacyComponent } from './pharmacy.component';
-// import { PatientListComponent } from './patient-list/patient-list.component';
-// import { PharmacyBillingComponent } from './pharmacy-billing/pharmacy-billing.component';
-// import { PrescriptionComponent } from './prescription/prescription.component';
-// import { BillingComponent } from './billing/billing.component';
-// import { ViewPatientComponent } from './view-patient/view-patient.component';
-// import { PharmacyInventoryComponent } from './pharmacy-inventory/pharmacy-inventory.component';
-
 
 const routes = [
     { path: '', component: AdminReportsComponent },
@@ -24,8 +16,6 @@ const routes = [
     { path: 'user-report', component: UserReportEditComponent},
     { path: 'billing-report', component: BillingReportEditComponent},
     { path: 'inventory-report', component: InventoryReportEditComponent},
-
-
 ]
 
 @NgModule({
