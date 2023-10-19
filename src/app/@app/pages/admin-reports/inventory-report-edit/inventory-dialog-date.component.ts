@@ -1,7 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { PDFDocumentProxy } from 'ng2-pdf-viewer';
-
 
 @Component({
     selector: 'app-inventory-dialog-date',
@@ -12,9 +10,6 @@ export class InventoryDialogDateComponent {
 
     /* ************************************ Static Fields ************************************ */
     /* ************************************ Instance Fields ************************************ */
-    isPdfLoaded: boolean = false;
-    private pdf!: PDFDocumentProxy;
-
     selectedFromDate!: Date | null;
     selectedToDate!: Date | null;
 

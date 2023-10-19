@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   date: string;
- itemCode: string;
+  itemCode: string;
   itemName: string;
   issuedQty: string;
   issuerName: string;
@@ -16,14 +16,26 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { date: '01/10/2023',itemCode: "001", itemName: 'item-1', issuedQty: '2', issuerName: 'Ram Patidar', issuedTo: 'Dr. Ram', department: 'O.T' },
-  { date: '01/10/2023',itemCode: "002", itemName: 'item-2', issuedQty: '3', issuerName: 'Keshav Sharma', issuedTo: 'Dr. Pulkit', department: 'Pharmacy' },
-  { date: '01/10/2023',itemCode: "003", itemName: 'item-3', issuedQty: '5', issuerName: 'Ravi Mishra', issuedTo: 'Dr. Raghav', department: 'Pathology' },
-  { date: '01/10/2023',itemCode: "003", itemName: 'item-4', issuedQty: '3', issuerName: 'Harish Jatav', issuedTo: 'Dr. Shyam', department: 'O.T' },
-  { date: '01/10/2023',itemCode: "003", itemName: 'item-5', issuedQty: '6', issuerName: 'Garima Prasad', issuedTo: 'Dr. Vikram', department: 'Surgery' },
-  { date: '01/10/2023',itemCode: "003", itemName: 'item-6', issuedQty: '3', issuerName: 'Himanshu Sinha', issuedTo: 'Dr. Ravi', department: 'Skin' },
+  { date: '01/10/2023', itemCode: "001", itemName: 'item-1', issuedQty: '2', issuerName: 'Ram Patidar', issuedTo: 'Dr. Ram', department: 'O.T' },
+  { date: '01/10/2023', itemCode: "002", itemName: 'item-2', issuedQty: '3', issuerName: 'Keshav Sharma', issuedTo: 'Dr. Pulkit', department: 'Pharmacy' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-3', issuedQty: '5', issuerName: 'Ravi Mishra', issuedTo: 'Dr. Raghav', department: 'Pathology' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-4', issuedQty: '3', issuerName: 'Harish Jatav', issuedTo: 'Dr. Shyam', department: 'O.T' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-5', issuedQty: '6', issuerName: 'Garima Prasad', issuedTo: 'Dr. Vikram', department: 'Surgery' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-6', issuedQty: '3', issuerName: 'Himanshu Sinha', issuedTo: 'Dr. Ravi', department: 'Skin' },
 
 ]
+
+const ELEMENT_DATA_2: PeriodicElement[] = [
+  { date: '01/10/2023', itemCode: "001", itemName: 'item-1', issuedQty: '2', issuerName: 'Ram Patidar', issuedTo: 'Dr. Ram', department: 'O.T' },
+  { date: '01/10/2023', itemCode: "002", itemName: 'item-2', issuedQty: '3', issuerName: 'Keshav Sharma', issuedTo: 'Dr. Pulkit', department: 'Pharmacy' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-3', issuedQty: '5', issuerName: 'Ravi Mishra', issuedTo: 'Dr. Raghav', department: 'Pathology' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-4', issuedQty: '3', issuerName: 'Harish Jatav', issuedTo: 'Dr. Shyam', department: 'O.T' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-5', issuedQty: '6', issuerName: 'Garima Prasad', issuedTo: 'Dr. Vikram', department: 'Surgery' },
+  { date: '01/10/2023', itemCode: "003", itemName: 'item-6', issuedQty: '3', issuerName: 'Himanshu Sinha', issuedTo: 'Dr. Ravi', department: 'Skin' },
+
+]
+
+
 
 @Component({
   selector: 'app-inventory-report-edit',
@@ -40,6 +52,9 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  displayedColumns_2: string[] = ['date', 'itemCode', 'itemName', "issuedQty", 'issuerName', 'issuedTo', 'department'];
+  dataSource_2 = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA_2);
 
   showCustomDateInput: boolean = false;
 
@@ -86,28 +101,36 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
   public onReportSelectChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.showCustomDateInput = selectElement.value === 'CUSTOM';
-    this._showReceiptPopup();
-    
+    if (this.showCustomDateInput) {
+      this._showCalenderPopup();
+    }
+
   }
 
   public tabChange(): void {
     this._tabChange(this.tabValue);
-}
+  }
 
+  public _showCalenderPopup(): void {
+    this.dialog.open(InventoryDialogDateComponent, {
+      width: '400px',
+    });
+  }
+
+  public selecExcel(): void {
+  }
 
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this.tabValue = 'USERPROFILE'
-        this.tabChange();
-        // this.showSectionHospitalInventory=true;
+    this.tabChange();
+    this.showSectionHospitalInventory = true;
   }
 
   private _resetSection(): void {
     this.showSectionHospitalInventory = false;
     this.showSectionPharmacyInventory = false;
-
-
   }
 
   private _addEditServiceItem(): void {
@@ -116,23 +139,15 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
 
   private _tabChange(tabValue: string): void {
     switch (tabValue) {
-        case 'HOSPITALINVENTORY':
-            this._resetSection();
-            this.showSectionHospitalInventory = true;
-            break;
-        case 'PHARMACYINVENTORY':
-            this._resetSection();
-            this.showSectionPharmacyInventory = true;
-            break;
-        
+      case 'HOSPITALINVENTORY':
+        this._resetSection();
+        this.showSectionHospitalInventory = true;
+        console.log(",,,,,,,,,,", this.showSectionHospitalInventory, this.showSectionPharmacyInventory)
+        break;
+      case 'PHARMACYINVENTORY':
+        this._resetSection();
+        this.showSectionPharmacyInventory = true;
+        break;
     }
-}
-
-public _showReceiptPopup(): void {
-  this.dialog.open(InventoryDialogDateComponent, {
-    width: '400px',
-    // data: { src },
-  });
-}
-
+  }
 }

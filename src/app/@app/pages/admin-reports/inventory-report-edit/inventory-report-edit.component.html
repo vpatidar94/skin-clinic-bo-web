@@ -3,7 +3,7 @@
         <mat-list class="row">
             <section class="section-org style-tabs">
                 <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue"
-                    aria-label="Font Style">
+                    aria-label="Font Style" name="tabValue">
                     <mat-button-toggle class="tab-content" (change)="tabChange()" value="HOSPITALINVENTORY">Hospital
                         Inventory
                     </mat-button-toggle>
@@ -31,41 +31,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md-4" *ngIf="showCustomDateInput">
-                    <button (click)=" _showReceiptPopup()">date</button>
-                </div> -->
-
-                <!-- From Date -->
-                <!-- <div class="col-md-4" *ngIf="showCustomDateInput">
-                    <button (click)=" _showReceiptPopup()">date</button>
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label ">From</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input class="form-control app-input" name="nameF" type="date" required>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- To Date -->
-                <!-- <div class="col-md-4" *ngIf="showCustomDateInput">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">To</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="date" class="form-control app-input" name="nameL" required>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- </div> -->
-
-                <!-- <div class="row"> -->
                 <!-- Department Name -->
                 <div class="col-md-3">
                     <select class="app-single-select-dropdown w-100" name="department">
@@ -82,30 +47,34 @@
                     </select>
                 </div>
 
+                <!-- Search btn -->
                 <div class="col-md-3 align-content-end">
                     <button class="common-button col-md-8 ">Search</button>
                 </div>
-            </div>
-            <div class="col-md-1" *ngIf="showCustomDateInput">
-                <button (click)=" _showReceiptPopup()">date</button>
             </div>
 
             <section class="section-org-edit">
                 <!--  Table Section  -->
                 <mat-card class="table-card-style">
-                    <div class="d-flex flex-row justify-content-between mb-2">
-                        <div>
-                            <button class="common-button">Excel</button>
-                            <button class="common-button">Pdf</button>
-                            <button class="common-button">Copy</button>
-                        </div>
+                    <div class="d-flex flex-row justify-content-between mb-4">
+                        <section class="section-org style-tabs">
+                            <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue"
+                                aria-label="Font Style" name="tabValue">
+                                <mat-button-toggle class="tab-content" (click)="selecExcel()" value="Excel">Excel
+                                </mat-button-toggle>
+                                <mat-button-toggle class="tab-content" value="Pdf">Pdf
+                                </mat-button-toggle>
+                                <mat-button-toggle class="tab-content" value="Copy">Copy
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </section>
                         <div>
                             <input class="input-style" (keyup)="applyFilter($event)" placeholder="Search" #input
                                 name="search">
                         </div>
                     </div>
 
-                    <div class="mat-elevation-z8">
+                    <div class="mat-elevation-z8" *ngIf="showSectionHospitalInventory">
                         <table mat-table [dataSource]="dataSource" matSort>
 
                             <!-- Date -->
@@ -152,6 +121,65 @@
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            <!-- Row shown when there is no matching data. -->
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                            </tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                            aria-label="Select page of users"></mat-paginator>
+                    </div>
+
+
+                    <div class="mat-elevation-z8" *ngIf="showSectionPharmacyInventory">
+                        <table mat-table [dataSource]="dataSource_2" matSort>
+
+                            <!-- Date -->
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                                <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                            </ng-container>
+
+                            <!-- Item code -->
+                            <ng-container matColumnDef="itemCode">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Item Code</th>
+                                <td mat-cell *matCellDef="let row"> {{row.itemCode}} </td>
+                            </ng-container>
+
+                            <!--Item Name -->
+                            <ng-container matColumnDef="itemName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
+                                <td mat-cell *matCellDef="let row"> {{row.itemName}} </td>
+                            </ng-container>
+
+                            <!-- Issued Qty -->
+                            <ng-container matColumnDef="issuedQty">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Issued Qty</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.issuedQty}} </td>
+                            </ng-container>
+
+                            <!-- Issuer Name -->
+                            <ng-container matColumnDef="issuerName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Issuer Name</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.issuerName}} </td>
+                            </ng-container>
+
+                            <!-- Issued To -->
+                            <ng-container matColumnDef="issuedTo">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Issued To</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.issuedTo}} </td>
+                            </ng-container>
+
+                            <!-- Department -->
+                            <ng-container matColumnDef="department">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns_2"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns_2;"></tr>
 
                             <!-- Row shown when there is no matching data. -->
                             <tr class="mat-row" *matNoDataRow>
