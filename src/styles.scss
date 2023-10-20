@@ -429,6 +429,25 @@ mat-form-field {
       border-bottom-color: black !important;
 }
 // ************************************ mat table commom css end *************************************//
+
+//************************* mat calender css start *************************//
+::ng-deep .mat-calendar-header .mat-calendar-period-button {
+    background-color: rgb(32, 184, 32);
+  }
+
+  ::ng-deep .mat-calendar-header .mat-calendar-previous-button,
+::ng-deep .mat-calendar-header .mat-calendar-next-button {
+  color: black; /* Change the font color of the navigation buttons */
+}
+  
+.calendar-card{
+    border: 2px solid rgb(35, 241, 187);
+}
+
+//************************* mat calender css end *************************//
+
+
+
 //  ------------------------------------ flex css classes end  ------------------------------------ //
 
 @media (max-width: 1024px) {

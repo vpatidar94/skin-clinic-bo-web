@@ -85,7 +85,7 @@ export class PathologyReportEditComponent implements OnInit, AfterViewInit {
 
   public _showCalenderPopup(): void {
     this.dialog.open(PathologyDialogDateComponent, {
-      width: '400px',
+      width: '500px',
     });
   }
 

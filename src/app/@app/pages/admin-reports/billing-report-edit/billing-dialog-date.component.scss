@@ -1,0 +1,12 @@
+::ng-deep .mat-calendar-header .mat-calendar-period-button {
+    background-color: rgb(32, 184, 32);
+  }
+
+  ::ng-deep .mat-calendar-header .mat-calendar-previous-button,
+::ng-deep .mat-calendar-header .mat-calendar-next-button {
+  color: black; /* Change the font color of the navigation buttons */
+}
+  
+.calendar-card{
+    border: 2px solid rgb(35, 241, 187);
+}

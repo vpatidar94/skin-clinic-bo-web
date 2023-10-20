@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
     selector: 'app-billing-dialog-date',
     templateUrl: 'billing-dialog-date.component.html',
-    // styleUrls: ['billing-dialog-date.component.scss']
+    styleUrls: ['billing-dialog-date.component.scss']
 })
 export class BillingDialogDateComponent {
 

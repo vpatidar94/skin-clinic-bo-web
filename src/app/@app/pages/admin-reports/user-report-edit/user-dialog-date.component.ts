@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
     selector: 'app-user-dialog-date',
     templateUrl: 'user-dialog-date.component.html',
-    // styleUrls: ['user-dialog-date.component.scss']
+    styleUrls: ['user-dialog-date.component.scss']
 })
 export class UserDialogDateComponent {
 

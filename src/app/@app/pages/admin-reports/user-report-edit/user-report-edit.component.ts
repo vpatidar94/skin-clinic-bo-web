@@ -85,7 +85,7 @@ export class UserReportEditComponent implements OnInit, AfterViewInit {
     
       public _showCalenderPopup(): void {
         this.dialog.open(UserDialogDateComponent, {
-          width: '400px',
+          width: '500px',
         });
       }
     

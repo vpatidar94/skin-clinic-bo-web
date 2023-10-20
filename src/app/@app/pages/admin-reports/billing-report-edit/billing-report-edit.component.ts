@@ -86,7 +86,7 @@ export class BillingReportEditComponent implements OnInit, AfterViewInit {
 
   public _showCalenderPopup(): void {
     this.dialog.open(BillingDialogDateComponent, {
-      width: '400px',
+      width: '500px',
     });
   }
 

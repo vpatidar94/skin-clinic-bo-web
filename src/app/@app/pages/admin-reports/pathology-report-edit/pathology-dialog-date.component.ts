@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
     selector: 'app-pathology-dialog-date',
     templateUrl: 'pathology-dialog-date.component.html',
-    // styleUrls: ['pathology-dialog-date.component.scss']
+    styleUrls: ['pathology-dialog-date.component.scss']
 })
 export class PathologyDialogDateComponent {
 

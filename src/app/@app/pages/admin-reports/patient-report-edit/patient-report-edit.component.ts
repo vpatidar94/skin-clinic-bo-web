@@ -85,7 +85,7 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     
       public _showCalenderPopup(): void {
         this.dialog.open(PatientDialogDateComponent, {
-          width: '400px',
+          width: '500px',
         });
       }
     
