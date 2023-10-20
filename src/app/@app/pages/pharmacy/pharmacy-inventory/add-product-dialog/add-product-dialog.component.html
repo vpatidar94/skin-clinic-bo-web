@@ -117,13 +117,19 @@
                 <div class="d-flex align-items-center mb-3">
                     <div class="col-md-3">
                         <!-- <label class="app-label">Qty/strip</label> -->
-                        <label class="app-label">Packaging<span class="ms-4">1 x</span></label>
+                        <label class="app-label">Packaging</label>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerStrip"
                                 required appNumberOnly>
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="app-single-select-dropdown w-100">
+                            <option>Per Unit</option>
+                            <option>Per Strip</option>
+                        </select>
                     </div>
                 </div>
             </div>

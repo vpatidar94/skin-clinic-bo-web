@@ -1,6 +1,6 @@
 <section class="p-5">
     <div class="d-flex justify-content-end">
-        <button  class="common-button" (click)="openAddProductDialog('0ms', '0ms')">Add Product</button>
+        <button class="common-button" (click)="openAddProductDialog('0ms', '0ms')">Add Product</button>
     </div>
     <mat-accordion>
         <mat-expansion-panel class="my-3">
@@ -14,38 +14,55 @@
                 </div>
             </mat-expansion-panel-header>
 
-
             <div class="border border-info rounded p-3 mt-4     ">
                 <div class="row">
                     <div class="col-md-1"><strong>Sno.</strong></div>
                     <div class="col-md-2"><strong>Item Name</strong></div>
                     <div class="col-md-2"><strong>Company</strong></div>
-                    <div class="col-md-2"><strong>Qty</strong></div>
+                    <div class="col-md-2"><strong>Batch No</strong></div>
+                    <div class="col-md-1"><strong>Qty</strong></div>
                     <div class="col-md-2"><strong>Expiry</strong></div>
                     <div class="col-md"></div>
                 </div>
 
+                <div class="col-md-12 align-style" *ngFor="let item of newPurchase; let i = index">
 
-                <div class="row align-items-center">
-                    <div class="col-md-1 pres-input text-center">
-                        <p class="border border-info rounded p-1 text-align-center">1</p>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <select name="dosage" class="app-single-select-dropdown w-100">
-                            <option>Item-1</option>
-                            <option>Item-2</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <input type="text" class="form-control pres-input" name="result" required>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <input type="text" class="form-control pres-input" name="unit" required>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <input type="text" class="form-control pres-input" name="reference" required>
-                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-1 pres-input text-center">
+                            <p class="border border-info rounded p-1 text-align-center">{{i+1}}</p>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <select class="app-single-select-dropdown w-100" [(ngModel)]="item.itemName"
+                                name="itemName{{i}}">
+                                <option>Item-1</option>
+                                <option>Item-2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <input type="text" class="form-control pres-input" name="company{{i}}"
+                                [(ngModel)]="item.company" required>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <input type="text" class="form-control pres-input" name="batchNo{{i}}"
+                                [(ngModel)]="item.batchNo" required>
+                        </div>
 
+                        <div class="col-md-1 form-group">
+                            <input type="text" class="form-control pres-input" name="qty{{i}}" [(ngModel)]="item.qty"
+                                required>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <input type="text" class="form-control pres-input" [(ngModel)]="item.expiry"
+                                name="expiry{{i}}" required>
+                        </div>
+                        <div class="col-md-2">
+                            <mat-icon class="add-icon clickable" (click)="removeTestParameter(i)">delete</mat-icon>
+                            &nbsp;&nbsp;
+                            <mat-icon *ngIf="(i+1)==newPurchase.length" class="add-icon clickable"
+                                (click)="addTestParameter()">add_circle_outline</mat-icon>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

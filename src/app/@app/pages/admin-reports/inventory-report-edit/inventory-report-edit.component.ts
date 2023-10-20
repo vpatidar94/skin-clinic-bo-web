@@ -48,12 +48,12 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
 
-  displayedColumns: string[] = ['date', 'itemCode', 'itemName', "issuedQty", 'issuerName', 'issuedTo', 'department'];
+  displayedColumns: string[] = ['date', 'itemCode', 'itemName', 'issuedQty', 'issuerName', 'issuedTo', 'department'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns_2: string[] = ['date', 'itemCode', 'itemName', "issuedQty", 'issuerName', 'issuedTo', 'department'];
+  displayedColumns_2: string[] = ['date', 'itemCode', 'itemName', 'issuedQty', 'issuerName', 'issuedTo', 'department'];
   dataSource_2 = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA_2);
 
   showCustomDateInput: boolean = false;
@@ -110,7 +110,7 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
 
   public _showCalenderPopup(): void {
     this.dialog.open(InventoryDialogDateComponent, {
-      width: '400px',
+      width: '500px',
     });
   }
 
@@ -135,7 +135,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
       case 'HOSPITALINVENTORY':
         this._resetSection();
         this.showSectionHospitalInventory = true;
-        console.log(",,,,,,,,,,", this.showSectionHospitalInventory, this.showSectionPharmacyInventory)
         break;
       case 'PHARMACYINVENTORY':
         this._resetSection();
