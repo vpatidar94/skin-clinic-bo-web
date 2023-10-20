@@ -1,41 +1,12 @@
-// .calendar-card{
-//     color:rgb(230, 151, 151);
-// }
-
-// .calendar-style{
-//     color:aquamarine;
-// }
-
 ::ng-deep .mat-calendar-header .mat-calendar-period-button {
-    background-color: rgb(32, 184, 32); /* Change the font color to red */
-    // width: 140px;
+    background-color: rgb(32, 184, 32);
   }
 
   ::ng-deep .mat-calendar-header .mat-calendar-previous-button,
 ::ng-deep .mat-calendar-header .mat-calendar-next-button {
-//   background-color: #007bff; /* Change the background color of the navigation buttons */
   color: black; /* Change the font color of the navigation buttons */
 }
-
-
-
-// ::ng-deep .mat-calendar-header {
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//   }
-  
-//   ::ng-deep .calendar-header .mat-calendar-previous-button,
-//   ::ng-deep .calendar-header .mat-calendar-next-button {
-//     flex: 1; /* Distribute space evenly to push the header to the center */
-//     text-align: center; /* Center align the buttons */
-//   }
-  
-//   ::ng-deep .calendar-header .mat-calendar-period-button {
-//     flex: 2; /* Allow more space for the period display (adjust as needed) */
-//     text-align: center; /* Center align the period display */
-//   }
   
 .calendar-card{
-    border: 2px solid blue;
+    border: 2px solid rgb(35, 241, 187);
 }
