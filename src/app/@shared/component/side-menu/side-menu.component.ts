@@ -193,11 +193,12 @@ export class SideMenuComponent {
         // navList.push(new NavigationDto('Products', '/master/products', '', []));
         // navList.push(new NavigationDto('Department', '/master/department', '', []));
         // navList.push(new NavigationDto('User Type', '/master/user-type', '', []));
-        navList.push(new NavigationDto('New Appointment', '/appointment', 'ic_user', []));
-        navList.push( new NavigationDto('Hospital Inventory', '/hospital-inventory', 'ic_user', []));
+        // navList.push(new NavigationDto('New Appointment', '/appointment', 'ic_add', []));
+        navList.push(new NavigationDto('New Appointment', '/appointment', 'ic_receipt', []));
+        navList.push( new NavigationDto('Hospital Inventory', '/hospital-inventory', 'ic_school', []));
         navList.push( new NavigationDto('Investigation', '/investigation', 'ic_user', []));
 
-        navList.push(new NavigationDto('Users', '/manage-user', 'ic_user', []));
+        navList.push(new NavigationDto('Users', '/manage-user', 'ic_users', []));
 
         return navList;
     }
