@@ -45,9 +45,9 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
-   
+
     showCustomDateInput: boolean = false;
-   
+
     selectTabValue!: string;
     selectedFromDate!: Date | null;
     selectedToDate!: Date | null;
@@ -56,13 +56,13 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     departmentList!: DepartmentVo[];
     docterList!: UserVo[];
 
-  
+
     /* ************************************* Constructors ******************************************** */
     constructor(private dialog: MatDialog,
         private userApi: UserApi,
         private keyValueStorageService: KeyValueStorageService,
         private departmentApi: DepartmentApi,
-        ) { }
+    ) { }
     /* ************************************* Public Methods ******************************************** */
 
     public ngAfterViewInit() {
@@ -92,21 +92,21 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         const selectElement = event.target as HTMLSelectElement;
         this.showCustomDateInput = selectElement.value === 'CUSTOM';
         if (this.showCustomDateInput) {
-          this._showCalenderPopup();
+            this._showCalenderPopup();
         }
-      }
-    
-      public _showCalenderPopup(): void {
-        this.dialog.open(PatientDialogDateComponent, {
-          width: '500px',
-        });
-      }
-    
-      public selectExcel(): void {
-      }
-    
+    }
 
-      public filterDoctorByDepartmentId(departmentId: string, fetchTimeSlot: boolean = false): void {
+    public _showCalenderPopup(): void {
+        this.dialog.open(PatientDialogDateComponent, {
+            width: '500px',
+        });
+    }
+
+    public selectExcel(): void {
+    }
+
+
+    public filterDoctorByDepartmentId(departmentId: string, fetchTimeSlot: boolean = false): void {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -114,11 +114,8 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         this.userApi.getDoctorListByDepartmentId(orgId, departmentId).subscribe((res: ApiResponse<UserVo[]>) => {
             if (res.body && res.body?.length > 0) {
                 this.docterList = res.body;
-                console.log("...",this.docterList);
                 if (this.userBooking.booking?.dr && fetchTimeSlot) {
-                    // this.checkDoctor(this.userBooking.booking?.dr);
                 }
-                console.log("NNNNNNNNNN",this.docterList, this.userBooking.booking.departmentId);
             }
         }
         );
@@ -126,23 +123,25 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     }
 
     public _getDepartmentList() {
+
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
-          return;
+            return;
         }
         this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
-          this.departmentList = res.body ?? [] as DepartmentVo[];
-          console.log(",,,,,,,",this.departmentList);
+            this.departmentList = res.body ?? [] as DepartmentVo[];
+
         })
-      }
+        console.log("XCXC",this.departmentList);
+
+    }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         const userBooking = {} as UserBookingDto;
-    const booking = {} as BookingVo;
-    userBooking.booking = booking;
-    this.userBooking = userBooking;
-
+        const booking = {} as BookingVo;
+        userBooking.booking = booking;
+        this.userBooking = userBooking;
         this._getDepartmentList();
     }
 }

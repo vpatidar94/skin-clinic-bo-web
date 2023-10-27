@@ -4,6 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogDateComponent } from './user-dialog-date.component';
+import { ApiResponse, BookingVo, DEPT, DepartmentVo, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
 export interface PeriodicElement {
   userId: string;
@@ -47,9 +51,17 @@ export class UserReportEditComponent implements OnInit, AfterViewInit {
   selectedFromDate!: Date | null;
   selectedToDate!: Date | null;
 
-  /* ************************************* Constructors ******************************************** */
-  constructor(private dialog: MatDialog) { }
+  userBooking!: UserBookingDto;
+  departmentList!: DepartmentVo[];
+  docterList!: UserVo[];
 
+
+  /* ************************************* Constructors ******************************************** */
+  constructor(private dialog: MatDialog,
+    private userApi: UserApi,
+    private keyValueStorageService: KeyValueStorageService,
+    private departmentApi: DepartmentApi,
+  ) { }
   /* ************************************* Public Methods ******************************************** */
 
   public ngAfterViewInit() {
@@ -75,25 +87,56 @@ export class UserReportEditComponent implements OnInit, AfterViewInit {
     this._init();
   }
 
- public onReportSelectChange(event: Event) {
-        const selectElement = event.target as HTMLSelectElement;
-        this.showCustomDateInput = selectElement.value === 'CUSTOM';
-        if (this.showCustomDateInput) {
-          this._showCalenderPopup();
+  public onReportSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.showCustomDateInput = selectElement.value === 'CUSTOM';
+    if (this.showCustomDateInput) {
+      this._showCalenderPopup();
+    }
+  }
+
+  public _showCalenderPopup(): void {
+    this.dialog.open(UserDialogDateComponent, {
+      width: '500px',
+    });
+  }
+
+  public selectExcel(): void {
+  }
+
+  public filterDoctorByDepartmentId(departmentId: string, fetchTimeSlot: boolean = false): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.userApi.getDoctorListByDepartmentId(orgId, departmentId).subscribe((res: ApiResponse<UserVo[]>) => {
+      if (res.body && res.body?.length > 0) {
+        this.docterList = res.body;
+        if (this.userBooking.booking?.dr && fetchTimeSlot) {
         }
       }
-    
-      public _showCalenderPopup(): void {
-        this.dialog.open(UserDialogDateComponent, {
-          width: '500px',
-        });
-      }
-    
-      public selectExcel(): void {
-      }
+    }
+    );
+
+  }
+
+  public _getDepartmentList() {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+      this.departmentList = res.body ?? [] as DepartmentVo[];
+    })
+  }
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
+    const userBooking = {} as UserBookingDto;
+    const booking = {} as BookingVo;
+    userBooking.booking = booking;
+    this.userBooking = userBooking;
+    this._getDepartmentList();
   }
 
 }
