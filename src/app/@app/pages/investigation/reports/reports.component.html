@@ -17,7 +17,6 @@
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                            <!-- <input type="checkbox" class="me-3"> -->
                             <input type="checkbox" class="me-3" [(ngModel)]="cbcReportChecked">
                             <span class="prescription-heading">CBC</span>
                         </mat-expansion-panel-header>
@@ -45,15 +44,6 @@
                                 <div class="col-md-2 form-group">
                                     <input type="text" class="form-control pres-input" name="reference" value={{details.referenceValue}} required>
                                 </div>
-
-                                <!-- <div class="col-md-2">
-                                        <mat-icon (click)="removeComplaintItem(i)"
-                                            class="add-icon clickable">delete</mat-icon>
-                                        &nbsp;&nbsp;
-                                        <mat-icon (click)="addComplaintItem()"
-                                            *ngIf="(i+1) === booking.complaint?.length"
-                                            class="add-icon clickable">add_circle_outline</mat-icon>
-                                    </div> -->
                             </div>
 
                         </div>
@@ -67,7 +57,6 @@
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                            <!-- <input type="checkbox" class="me-3"> -->
                             <input type="checkbox" class="me-3" [(ngModel)]="widalTestChecked">
                             <span class="prescription-heading">Widal Test</span>
                         </mat-expansion-panel-header>
@@ -77,11 +66,9 @@
                                 <p class="col-md-3"><strong>Result Value</strong></p>
                                 <p class="col-md-3"><strong>Unit</strong></p>
                                 <p class="col-md-3"><strong>Reference Value</strong></p>
-
                                 <p class="col-md-"></p>
                             </div>
 
-                            
                             <div class="row align-items-center">
                                 <div class="col-md-3 form-group">
                                     <input type="text" class="form-control pres-input" name="nameoftest" value="HAEMOGLOBIN" required>
@@ -95,29 +82,16 @@
                                 <div class="col-md-3 form-group">
                                     <input type="text" class="form-control pres-input" name="reference" value="11 - 17" required>
                                 </div>
-
-                                
-                                <!-- <div class="col-md-2">
-                                        <mat-icon (click)="removeComplaintItem(i)"
-                                            class="add-icon clickable">delete</mat-icon>
-                                        &nbsp;&nbsp;
-                                        <mat-icon (click)="addComplaintItem()"
-                                            *ngIf="(i+1) === booking.complaint?.length"
-                                            class="add-icon clickable">add_circle_outline</mat-icon>
-                                    </div> -->
                             </div>
-
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
 
-
             <div class="mt-4">
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                             <!-- <input type="checkbox" class="me-3"> -->
                              <input type="checkbox" class="me-3" [(ngModel)]="lipidProfileChecked">
                             <span class="prescription-heading">Lipid Profile</span>
                         </mat-expansion-panel-header>
@@ -127,7 +101,6 @@
                                 <p class="col-md-8"><strong>Details</strong></p>
                                 <p class="col-md-2"></p>
                             </div>
-
                             
                             <div class="row align-items-center">
                                 <div class="col-md-1 pres-input text-center">
@@ -139,21 +112,12 @@
                                 <div class="col-md-8 form-group">
                                     <input type="text" class="form-control pres-input" name="complaint" required>
                                 </div>
-                                <!-- <div class="col-md-2">
-                                        <mat-icon (click)="removeComplaintItem(i)"
-                                            class="add-icon clickable">delete</mat-icon>
-                                        &nbsp;&nbsp;
-                                        <mat-icon (click)="addComplaintItem()"
-                                            *ngIf="(i+1) === booking.complaint?.length"
-                                            class="add-icon clickable">add_circle_outline</mat-icon>
-                                    </div> -->
                             </div>
-
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
         </mat-expansion-panel>
-        <button (click)="printSelectedReports('CBC')">Print</button>
+        <button (click)="printSelectedReports('CBC')" class="common-button">print</button>
     </mat-accordion>
 </section>

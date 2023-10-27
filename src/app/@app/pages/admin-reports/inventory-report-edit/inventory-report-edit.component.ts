@@ -167,11 +167,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
     this.showSectionHospitalInventory = true;
 
   }
-  // private _init(): void {
-    // this.tabValue = 'USERPROFILE'
-    // this.tabChange();
-    // this.showSectionHospitalInventory = true;
-  // }
 
   private _resetSection(): void {
     this.showSectionHospitalInventory = false;
