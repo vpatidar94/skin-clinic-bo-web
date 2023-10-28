@@ -32,20 +32,30 @@
                 </div>
 
                 <!-- Department Name -->
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <select class="app-single-select-dropdown w-100" name="department">
                         <option>Department-1</option>
                         <option>Department-2</option>
+                    </select>
+                </div> -->
+                <div class="col-md-3">
+                    <select class="app-single-select-dropdown w-100" name="department"
+                        [(ngModel)]="userBooking.booking.departmentId"
+                        (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)">
+                        <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                        </option>
                     </select>
                 </div>
 
                 <!-- Doctor Name -->
                 <div class="col-md-3">
-                    <select class="app-single-select-dropdown w-100" name="doctor">
-                        <option>doctor-1</option>
-                        <option>doctor-2</option>
+                    <select class="app-single-select-dropdown w-100" name="doctorname"
+                        [(ngModel)]="userBooking.booking.dr">
+                        <option *ngFor="let doctor of docterList" [value]="doctor._id">{{doctor.nameF}}
+                            {{doctor.nameL}}</option>
                     </select>
                 </div>
+
 
                 <!-- Search btn -->
                 <div class="col-md-3 align-content-end">
