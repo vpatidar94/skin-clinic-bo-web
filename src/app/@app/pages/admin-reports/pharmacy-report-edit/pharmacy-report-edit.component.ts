@@ -25,7 +25,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Tarun Gandhi', department: 'MRI', amount: '1000' },
     { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Hitesh Singh', department: 'MRI', amount: '1000' },
     { date: '01/10/2023', billNo: '012', patientId: "003", patientName: 'Yatindra Sahu', department: 'MRI', amount: '1000' },
-
 ]
 
 @Component({
@@ -53,7 +52,6 @@ export class PharmacyReportEditComponent implements OnInit, AfterViewInit {
     userBooking!: UserBookingDto;
     departmentList!: DepartmentVo[];
     docterList!: UserVo[];
-
 
     /* ************************************* Constructors ******************************************** */
     constructor(private dialog: MatDialog,
@@ -116,7 +114,6 @@ export class PharmacyReportEditComponent implements OnInit, AfterViewInit {
             }
         }
         );
-
     }
 
     public _getDepartmentList() {

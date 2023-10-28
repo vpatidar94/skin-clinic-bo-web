@@ -32,12 +32,6 @@
                 </div>
 
                 <!-- Department Name -->
-                <!-- <div class="col-md-3">
-                    <select class="app-single-select-dropdown w-100" name="department">
-                        <option>Department-1</option>
-                        <option>Department-2</option>
-                    </select>
-                </div> -->
                 <div class="col-md-3">
                     <select class="app-single-select-dropdown w-100" name="department"
                         [(ngModel)]="userBooking.booking.departmentId"
@@ -55,7 +49,6 @@
                             {{doctor.nameL}}</option>
                     </select>
                 </div>
-
 
                 <!-- Search btn -->
                 <div class="col-md-3 align-content-end">
@@ -84,6 +77,7 @@
                         </div>
                     </div>
 
+                    <!-- HOSPITAL INVENTORY -->
                     <div class="mat-elevation-z8" *ngIf="showSectionHospitalInventory">
                         <table mat-table [dataSource]="dataSource" matSort>
 
@@ -142,7 +136,7 @@
                             aria-label="Select page of users"></mat-paginator>
                     </div>
 
-
+                    <!-- PHARMACY INVENTORY -->
                     <div class="mat-elevation-z8" *ngIf="showSectionPharmacyInventory">
                         <table mat-table [dataSource]="dataSource_2" matSort>
 

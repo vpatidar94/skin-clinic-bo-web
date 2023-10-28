@@ -27,7 +27,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   showSectionAdd = false;
   isNextVisitChecked: boolean = false;
 
-
   nextVisitDays: number = 0; // Default value
   nextVisitDate: string = ''; // Default value
   minNextVisitDate: string = ''; // Minimum date

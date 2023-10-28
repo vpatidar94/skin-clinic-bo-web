@@ -87,9 +87,9 @@ export class ServiceItemComponent implements OnInit {
   public saveServiceItem(): void {
     const orgId = this.keyValueStorageService.getOrgId();
     this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
-         if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-       this._init();
-         }
+      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+        this._init();
+      }
     });
   }
 
@@ -105,7 +105,6 @@ export class ServiceItemComponent implements OnInit {
     this.showSectionServiceItemDetail = false;
     this.showSectionServiceItemEdit = false;
   }
-
 
   private _getServiceItemList(): void {
     this.showSectionServiceItemList = true;
@@ -130,7 +129,6 @@ export class ServiceItemComponent implements OnInit {
       this.doctorList = apiResponse.body ?? [] as Array<UserVo>;
     });
   }
-
 
   private _initServiceItemTable(serviceItemList: Array<ItemDetailDto>): void {
     this.dataSource = new MatTableDataSource(serviceItemList);

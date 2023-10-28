@@ -12,15 +12,13 @@ export interface NewPurchaseInterface {
     expiry: string,
 }
 
-
 @Component({
     selector: 'app-new-purchase-edit-dialog',
     templateUrl: './new-purchase-edit-dialog.component.html',
 })
-export class NewPurchaseEditDialogComponent implements OnInit{
+export class NewPurchaseEditDialogComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
-
     newPurchaseData = [{
         sNo: '',
         itemName: '',
@@ -32,14 +30,13 @@ export class NewPurchaseEditDialogComponent implements OnInit{
 
     newPurchase!: Array<NewPurchaseInterface>
 
-
     /* ************************************* Constructors ******************************************** */
     constructor(private dialog: MatDialog) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
-        this.newPurchase= (this.newPurchaseData as Array<NewPurchaseInterface>);
-       }
+        this.newPurchase = (this.newPurchaseData as Array<NewPurchaseInterface>);
+    }
 
     public openAddProductDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
         this.dialog.open(AddProductDialogComponent, {

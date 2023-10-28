@@ -11,6 +11,7 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 export class UserEditComponent implements OnInit, OnChanges {
 
     /* ************************************* Instance Field ******************************************** */
+    /* ************************************* Static Field ******************************************** */
     showSectionUserProfile!: boolean;
     showSectionAccounts!: boolean;
     showSectionAttendance!: boolean;
@@ -89,6 +90,7 @@ export class UserEditComponent implements OnInit, OnChanges {
                 break;
         }
     }
+
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this.tabValue = 'USERPROFILE'

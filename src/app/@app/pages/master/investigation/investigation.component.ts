@@ -35,7 +35,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-
   /* ************************************* Constructors ******************************************** */
   constructor() { }
 
@@ -67,7 +66,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   public cancel(): void {
     this._init();
   }
-
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {

@@ -7,7 +7,6 @@ import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
-
 @Component({
     selector: 'app-user-profile',
     templateUrl: './user-profile.component.html',
@@ -35,7 +34,6 @@ export class UserProfileComponent implements OnInit, OnChanges {
 
     @ViewChild('staffForm', { static: true })
     staffForm!: NgForm;
-
 
     @Input()
     userTypeList!: UserTypeDetailDto[];
@@ -90,11 +88,11 @@ export class UserProfileComponent implements OnInit, OnChanges {
                 break;
         }
     }
+
     public removeServiceTiming(index: number): void {
         this.staff.user.serviceTiming.splice(index, 1);
         this.staffChange.emit(this.staff);
     }
-
 
     public filterUserTypesByDepartment(departmentId: string | null | undefined) {
         this.staff.acl.userTypeId = null;

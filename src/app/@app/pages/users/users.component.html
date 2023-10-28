@@ -45,7 +45,6 @@
                         <td mat-cell *matCellDef="let row">{{ getDepartmentName(row) }}</td>
                     </ng-container>
 
-
                     <ng-container matColumnDef="action">
                         <th mat-header-cell *matHeaderCellDef>Action</th>
                         <td mat-cell class="action-style" *matCellDef="let row">
@@ -68,6 +67,7 @@
         </mat-card>
     </section>
 </section>
+
 <section *ngIf="showSectionUserEdit">
     <div>
         <app-user-edit [departmentList]="departmentList" [userTypeList]="userTypeList" [department]="department"

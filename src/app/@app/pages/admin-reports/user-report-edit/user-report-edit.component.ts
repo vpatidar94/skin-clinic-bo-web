@@ -26,7 +26,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { userId: '01245', userName: 'Tarun Gandhi', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
   { userId: '01245', userName: 'Hitesh Singh', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
   { userId: '01245', userName: 'Yatindra Sahu', department: 'MRI', joiningDate: '01/10/2023', attendance: 'Dr. Ram', grossSalary: '2000', netSalary: '5000' },
-
 ]
 
 @Component({
@@ -55,15 +54,14 @@ export class UserReportEditComponent implements OnInit, AfterViewInit {
   departmentList!: DepartmentVo[];
   docterList!: UserVo[];
 
-
   /* ************************************* Constructors ******************************************** */
   constructor(private dialog: MatDialog,
     private userApi: UserApi,
     private keyValueStorageService: KeyValueStorageService,
     private departmentApi: DepartmentApi,
   ) { }
-  /* ************************************* Public Methods ******************************************** */
 
+  /* ************************************* Public Methods ******************************************** */
   public ngAfterViewInit() {
     this.paginator.showFirstLastButtons = false;
     this.paginator.hidePageSize = false;
@@ -117,7 +115,6 @@ export class UserReportEditComponent implements OnInit, AfterViewInit {
       }
     }
     );
-
   }
 
   public _getDepartmentList() {

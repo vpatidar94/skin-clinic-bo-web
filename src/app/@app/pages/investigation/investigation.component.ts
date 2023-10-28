@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -14,11 +14,11 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    { testNo: 1101, patientName: 'Chhitu Yadav',patientType: '7898454503', patientId:'P10210',sampleDate:'02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { testNo: 1202, patientName: 'Virat kohli',patientType: '86566546544', patientId:'P10210',sampleDate:'02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { testNo: 3625, patientName: 'Rohit Sharma',patientType: '654498498554', patientId:'P10210',sampleDate:'02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { testNo: 1464, patientName: 'Hardik Pandya',patientType: '656484654555', patientId:'P10210',sampleDate:'02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { testNo: 8555, patientName: 'AB de Villiers',patientType: '371648984588', patientId:'P10210',sampleDate:'02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { testNo: 1101, patientName: 'Chhitu Yadav', patientType: '7898454503', patientId: 'P10210', sampleDate: '02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { testNo: 1202, patientName: 'Virat kohli', patientType: '86566546544', patientId: 'P10210', sampleDate: '02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { testNo: 3625, patientName: 'Rohit Sharma', patientType: '654498498554', patientId: 'P10210', sampleDate: '02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { testNo: 1464, patientName: 'Hardik Pandya', patientType: '656484654555', patientId: 'P10210', sampleDate: '02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
+    { testNo: 8555, patientName: 'AB de Villiers', patientType: '371648984588', patientId: 'P10210', sampleDate: '02/09/2023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
 ]
 
 @Component({
@@ -31,14 +31,14 @@ export class InvestigationComponent {
 
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
-    displayedColumns: string[] = ['testNo','patientName', 'patientType', 'patientId', 'sampleDate', 'doctorsName', "action"];
+    displayedColumns: string[] = ['testNo', 'patientName', 'patientType', 'patientId', 'sampleDate', 'doctorsName', "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
     /* ************************************* Constructors ******************************************** */
-    constructor() {}
+    constructor() { }
 
     /* ************************************* Public Methods ******************************************** */
 

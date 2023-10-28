@@ -1,7 +1,9 @@
 <section class="section-org-edit">
     <form #staffForm="ngForm">
         <mat-list class="row">
+
             <app-label>Personal Information</app-label>
+
             <div class="row">
                 <!-- User Id -->
                 <div class="col-md-6">
@@ -34,6 +36,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <!-- First Name -->
                 <div class="col-md-6">
@@ -82,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Age -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
@@ -113,6 +117,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Email -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
@@ -181,6 +186,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Alternate Number-->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
@@ -251,6 +257,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- upload Id Proof -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
@@ -268,11 +275,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- </div> -->
-
             </div>
 
             <app-label class="mt-5">Service Timing</app-label>
+
             <div class="row">
                 <div class="col-md-1"><strong></strong></div>
                 <div class="col-md-2"><strong></strong></div>
@@ -280,8 +286,8 @@
                 <div class="col-md-2"><strong></strong></div>
                 <div class="col-md-"></div>
             </div>
-            <div class="col-md-12 align-style" *ngFor="let timing of staff.user.serviceTiming; let i = index">
 
+            <div class="col-md-12 align-style" *ngFor="let timing of staff.user.serviceTiming; let i = index">
                 <div class="form-group col-md-1 mt-2">
                     <span class="app-label">Shift-{{i+1}}</span>
                 </div>
@@ -308,6 +314,7 @@
 
             <!-- Address Section -->
             <app-label>Address Details</app-label>
+
             <div class="row">
                 <app-eg-edit-address-form [(address)]="staff.user.address"
                     (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>

@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './pharmacy.component.html',
   styleUrls: ['./pharmacy.component.scss']
 })
+
 export class PharmacyComponent {
 
 }

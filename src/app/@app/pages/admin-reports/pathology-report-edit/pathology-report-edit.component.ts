@@ -51,7 +51,6 @@ export class PathologyReportEditComponent implements OnInit, AfterViewInit {
   selectedFromDate!: Date | null;
   selectedToDate!: Date | null;
 
-
   userBooking!: UserBookingDto;
   departmentList!: DepartmentVo[];
   docterList!: UserVo[];
@@ -107,7 +106,6 @@ export class PathologyReportEditComponent implements OnInit, AfterViewInit {
   public selectExcel(): void {
   }
 
-
   public filterDoctorByDepartmentId(departmentId: string, fetchTimeSlot: boolean = false): void {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
@@ -121,7 +119,6 @@ export class PathologyReportEditComponent implements OnInit, AfterViewInit {
       }
     }
     );
-
   }
 
   public _getDepartmentList() {

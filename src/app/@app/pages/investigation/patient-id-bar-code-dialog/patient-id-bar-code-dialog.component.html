@@ -1,57 +1,33 @@
-
-
-<!-- <div *ngIf="showPatientIdBarCode"> -->
-<!-- <h1 mat-dialog-title>Patient Id Bar code</h1> -->
 <div id="printable-content">
-<div style="text-align:center" >
-<h1 class="style-heading">Jp Hospital</h1>
-<p class="style-department">Department - Pathology</p>
-</div>
-<div class="d-flex flex-direction-row" style="text-align:center">
-  <span class="me-3">Print Date:03/10/2023, </span> 
-  <span>Print Time:01:55 PM</span> 
-  
-</div>
-<!-- <div class="d-flex justify-content-end me-4">
-<button class="common-button" (click)="printBarcode()">Print</button>
-</div> -->
-<div mat-dialog-content>
- 
-  <div>
-    <div style="text-align:center">
-    </div>
-    
-    <div style="text-align:center">
+  <div style="text-align:center">
+    <h1 class="style-heading">Jp Hospital</h1>
+    <p class="style-department">Department - Pathology</p>
+  </div>
+
+  <div class="d-flex flex-direction-row" style="text-align:center">
+    <span class="me-3">Print Date:03/10/2023, </span>
+    <span>Print Time:01:55 PM</span>
+  </div>
+
+  <div mat-dialog-content>
+    <div>
+      <div style="text-align:center">
+      </div>
+      <div style="text-align:center">
         <ngx-barcode6 class='style-barcode' [bc-format]="'CODE128'" [bc-value]="'P12584'" [bc-display-value]="false">
         </ngx-barcode6>
         <span>Patient Id: P12584</span>
+      </div>
+      <div style="text-align:center">
+        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'T125840'" [bc-display-value]="false">
+        </ngx-barcode6>
+        <span>Test Id: CODE128</span>
+      </div>
     </div>
-    <div style="text-align:center">
-      <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'T125840'" [bc-display-value]="false">
-      </ngx-barcode6>
-      <span>Test Id: CODE128</span>
-
   </div>
-    </div>
-   
 </div>
 
-</div>
 <mat-dialog-actions align="end">
   <button mat-button matDialogClose="no">Cancel</button>
   <button mat-button (click)="printBarcode()">Print</button>
 </mat-dialog-actions>
-<!-- </div> -->
-
-<!-- <section>
-  <div *ngIf="data.src">
-    <div class="row pdf-container">
-      <pdf-viewer [src]="data.src" style="width: 800px; height: 500px" [original-size]="false"
-        (after-load-complete)="onLoaded($event)"></pdf-viewer>
-    </div>
-  </div>
-  <mat-dialog-actions align="end">
-    <button mat-button matDialogClose="no">Cancel</button>
-    <button mat-button (click)="print()">Print</button>
-  </mat-dialog-actions>
-</section> -->

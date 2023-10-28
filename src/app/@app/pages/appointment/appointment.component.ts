@@ -22,7 +22,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   showSectionAppointmentList: boolean = false;
   showSectionAppointmentEdit: boolean = false;
 
-
   userBooking!: UserBookingDto;
 
   orgBooking!: OrgBookingDto;
@@ -169,7 +168,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this._getServiceList();
     this._getDoctorList();
     this._getDepartmentList();
-
   }
 
   private _initView(): void {
@@ -178,7 +176,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       return;
     }
     this.dataSource.paginator = this.paginator;
-
     this.paginator.page
       .pipe(
         startWith({}),
@@ -252,7 +249,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   }
 
   private getCellValue(data: OrgBookingDto, columnName: any): any | undefined {
-
     if (columnName === 'appNo' && data.booking?.no) {
       return data.booking?.no.toLowerCase();
     } else if (columnName === 'name' && data.patient.nameF) {

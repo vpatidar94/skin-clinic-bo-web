@@ -25,7 +25,6 @@ export class AppointmentEditComponent {
 
     filteredServiceItemList!: ItemDetailDto[];
 
-    // @Input()
     docterList!: UserVo[];
 
     @Input()
@@ -126,7 +125,6 @@ export class AppointmentEditComponent {
             }
         }
         );
-
     }
 
     public checkDoctor(selectedDoctor: string | null | undefined, doctorId: string): void {
@@ -184,5 +182,4 @@ export class AppointmentEditComponent {
             this.showOnlySelectedTimeSlot = false;
         }
     }
-
 }

@@ -30,7 +30,7 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
     userBookingInvestigationList!: UserBookingInvestigationDto;
 
     /* ************************************ Constructors ************************************ */
-    constructor(private dialog: MatDialog) {}
+    constructor(private dialog: MatDialog) { }
 
     /* ************************************ Public Methods ************************************ */
     patientTests: any = [];

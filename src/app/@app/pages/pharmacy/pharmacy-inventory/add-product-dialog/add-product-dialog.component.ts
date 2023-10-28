@@ -1,4 +1,4 @@
-import { Component, Input,OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiResponse, ProductVo, ResponseStatus } from 'aayam-clinic-core';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -10,7 +10,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 export class AddProductDialogComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
-    
+
     product!: ProductVo;
     // isQtyPerStripActive: boolean = false;
 
@@ -24,28 +24,28 @@ export class AddProductDialogComponent implements OnInit {
     // }
 
     /* ************************************* Private Methods ******************************************** */
-public ngOnInit(): void {
-    const productDetails = {} as ProductVo;
-    const orgId = this.keyValueStorageService.getOrgId();
-    if (orgId) {
-        productDetails.orgId = orgId;
-        productDetails.brId = orgId;
-    }
-    this._addEditProduct(productDetails);
-}
-
-private _addEditProduct(productDetails: ProductVo): void {
-    this.product = productDetails;
-    
-}
-
-public savingProduct(): void {
-    this.productApi.addUpdateProduct(this.product).subscribe((res: ApiResponse<ProductVo>) => {
-        if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-            this.product = res.body
-            // this._init();
+    public ngOnInit(): void {
+        const productDetails = {} as ProductVo;
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (orgId) {
+            productDetails.orgId = orgId;
+            productDetails.brId = orgId;
         }
-    });
-}
+        this._addEditProduct(productDetails);
+    }
+
+    private _addEditProduct(productDetails: ProductVo): void {
+        this.product = productDetails;
+
+    }
+
+    public savingProduct(): void {
+        this.productApi.addUpdateProduct(this.product).subscribe((res: ApiResponse<ProductVo>) => {
+            if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+                this.product = res.body
+                // this._init();
+            }
+        });
+    }
 
 }

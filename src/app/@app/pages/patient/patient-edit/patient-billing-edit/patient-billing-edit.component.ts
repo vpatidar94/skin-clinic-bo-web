@@ -100,7 +100,6 @@ export class PatientBillingEditComponent implements OnInit {
       let blob = new Blob([u8.buffer], {
         type: 'application/pdf'
       });
-
       const blobUrl = window.URL.createObjectURL((blob));
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
@@ -113,13 +112,6 @@ export class PatientBillingEditComponent implements OnInit {
   public onLoaded(pdf: PDFDocumentProxy) {
     this.pdf = pdf;
     this.isPdfLoaded = true;
-  }
-
-  private _showReceiptPopup(src: Uint8Array): void {
-    this.dialog.open(PdfViewerDialogComponent, {
-      width: '800px',
-      data: { src },
-    });
   }
 
   public addServiceItem(): void {
@@ -144,5 +136,12 @@ export class PatientBillingEditComponent implements OnInit {
     this.bookingTransaction.bookingId = this.userBooking.booking._id;
     this.bookingTransaction.amount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid
     this.bookingTransactionChange.emit(this.bookingTransaction);
+  }
+
+  private _showReceiptPopup(src: Uint8Array): void {
+    this.dialog.open(PdfViewerDialogComponent, {
+      width: '800px',
+      data: { src },
+    });
   }
 }

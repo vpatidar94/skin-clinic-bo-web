@@ -29,7 +29,7 @@ import { PatientReportEditComponent } from './patient-report-edit/patient-report
 import { PharmacyReportEditComponent } from './pharmacy-report-edit/pharmacy-report-edit.component';
 import { PathologyReportEditComponent } from './pathology-report-edit/pathology-report-edit.component';
 import { UserReportEditComponent } from './user-report-edit/user-report-edit.component';
-import { BillingReportEditComponent} from './billing-report-edit/billing-report-edit.component';
+import { BillingReportEditComponent } from './billing-report-edit/billing-report-edit.component';
 import { InventoryReportEditComponent } from './inventory-report-edit/inventory-report-edit.component';
 import { InventoryDialogDateComponent } from './inventory-report-edit/inventory-dialog-date.component';
 import { BillingDialogDateComponent } from './billing-report-edit/billing-dialog-date.component';
@@ -56,15 +56,14 @@ const MATERIAL_MODULE = [
   MatDialogModule,
   MatNativeDateModule,
   MatCardModule,
-  
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE,SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), MatCardModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, AdminReportsRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), MatCardModule, MatDatepickerModule, MatNativeDateModule],
   providers: [],
   exports: [],
-  declarations: [AdminReportsComponent,PatientReportEditComponent,PharmacyReportEditComponent,PathologyReportEditComponent,UserReportEditComponent,BillingReportEditComponent,InventoryReportEditComponent,InventoryDialogDateComponent,BillingDialogDateComponent,PathologyDialogDateComponent,PatientDialogDateComponent,PharmacyDialogDateComponent,UserDialogDateComponent]
+  declarations: [AdminReportsComponent, PatientReportEditComponent, PharmacyReportEditComponent, PathologyReportEditComponent, UserReportEditComponent, BillingReportEditComponent, InventoryReportEditComponent, InventoryDialogDateComponent, BillingDialogDateComponent, PathologyDialogDateComponent, PatientDialogDateComponent, PharmacyDialogDateComponent, UserDialogDateComponent]
 })
 export class AdminReportsModule { }

@@ -46,7 +46,6 @@ const MATERIAL_MODULE = [
   MatDialogModule,
   MatNativeDateModule,
   MatCardModule,
-
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];

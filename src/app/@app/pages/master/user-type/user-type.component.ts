@@ -41,7 +41,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
     constructor(private keyValueStorageService: KeyValueStorageService,
         private userApi: UserApi,
         private departmentApi: DepartmentApi,
-    ) {}
+    ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngAfterViewInit() {

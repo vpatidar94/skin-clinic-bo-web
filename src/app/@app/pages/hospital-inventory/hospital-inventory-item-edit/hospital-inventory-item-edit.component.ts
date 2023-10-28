@@ -33,6 +33,8 @@ export class HospitalInventoryItemEditComponent implements OnInit{
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 
+    /* ************************************* Public Methods ******************************************** */
+
     public ngOnInit(): void {
         this.newItem= (this.newItemData as Array<NewItemInterface>);
        }
@@ -51,8 +53,6 @@ export class HospitalInventoryItemEditComponent implements OnInit{
             expiry: '',
         });
     }
-
-    /* ************************************* Public Methods ******************************************** */
 
     /* ************************************* Private Methods ******************************************** */
 

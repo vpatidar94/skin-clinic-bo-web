@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -18,7 +16,6 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTableModule } from "@angular/material/table";
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile/profile.component';
-
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -44,4 +41,5 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   exports: [],
   declarations: [ProfileComponent]
 })
+
 export class ProfileModule { }

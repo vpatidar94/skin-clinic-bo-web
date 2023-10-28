@@ -12,7 +12,7 @@
                     <span>Date: <span>02/08/23</span></span>
                 </div>
             </mat-expansion-panel-header>
-        
+
             <div class="mt-4">
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
@@ -26,28 +26,31 @@
                                 <p class="col-md-2"><strong>Result Value</strong></p>
                                 <p class="col-md-1"><strong>Unit</strong></p>
                                 <p class="col-md-2"><strong>Reference Value</strong></p>
-
                                 <p class="col-md-"></p>
                             </div>
 
-                        <div *ngFor="let details of cbcReportArray; let i = index;">
-                            <div class="row align-items-center">
-                                <div class="col-md-2 form-group">
-                                    <input type="text" class="form-control pres-input" name="nameoftest" value={{details.testName}} required>
+                            <div *ngFor="let details of cbcReportArray; let i = index;">
+                                <div class="row align-items-center">
+                                    <div class="col-md-2 form-group">
+                                        <input type="text" class="form-control pres-input" name="nameoftest"
+                                            value={{details.testName}} required>
+                                    </div>
+                                    <div class="col-md-2 form-group">
+                                        <input type="text" class="form-control pres-input" name="result"
+                                            value={{details.resultValue}} required>
+                                    </div>
+                                    <div class="col-md-1 form-group">
+                                        <input type="text" class="form-control pres-input" name="unit"
+                                            value={{details.unit}} required>
+                                    </div>
+                                    <div class="col-md-2 form-group">
+                                        <input type="text" class="form-control pres-input" name="reference"
+                                            value={{details.referenceValue}} required>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 form-group">
-                                    <input type="text" class="form-control pres-input" name="result" value={{details.resultValue}} required>
-                                </div>
-                                <div class="col-md-1 form-group">
-                                    <input type="text" class="form-control pres-input" name="unit" value={{details.unit}} required>
-                                </div>
-                                <div class="col-md-2 form-group">
-                                    <input type="text" class="form-control pres-input" name="reference" value={{details.referenceValue}} required>
-                                </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div> 
 
                     </mat-expansion-panel>
                 </mat-accordion>
@@ -71,16 +74,19 @@
 
                             <div class="row align-items-center">
                                 <div class="col-md-3 form-group">
-                                    <input type="text" class="form-control pres-input" name="nameoftest" value="HAEMOGLOBIN" required>
+                                    <input type="text" class="form-control pres-input" name="nameoftest"
+                                        value="HAEMOGLOBIN" required>
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <input type="text" class="form-control pres-input" name="result" value="10.2" required>
+                                    <input type="text" class="form-control pres-input" name="result" value="10.2"
+                                        required>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <input type="text" class="form-control pres-input" name="unit" value="gm%" required>
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <input type="text" class="form-control pres-input" name="reference" value="11 - 17" required>
+                                    <input type="text" class="form-control pres-input" name="reference" value="11 - 17"
+                                        required>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +98,7 @@
                 <mat-accordion>
                     <mat-expansion-panel class="my-3">
                         <mat-expansion-panel-header class="sub-app-expansion">
-                             <input type="checkbox" class="me-3" [(ngModel)]="lipidProfileChecked">
+                            <input type="checkbox" class="me-3" [(ngModel)]="lipidProfileChecked">
                             <span class="prescription-heading">Lipid Profile</span>
                         </mat-expansion-panel-header>
                         <div class="border border-info rounded p-3 mt-3">
@@ -101,7 +107,7 @@
                                 <p class="col-md-8"><strong>Details</strong></p>
                                 <p class="col-md-2"></p>
                             </div>
-                            
+
                             <div class="row align-items-center">
                                 <div class="col-md-1 pres-input text-center">
 

@@ -1,12 +1,11 @@
-import { Component, ViewChild, AfterViewInit, OnInit} from "@angular/core";
-import { MatSort} from '@angular/material/sort';
+import { Component, ViewChild, AfterViewInit, OnInit } from "@angular/core";
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NewPurchaseEditDialogComponent } from "./new-purchase-edit-dialog/new-purchase-edit-dialog.component";
 
 export interface PeriodicElement {
-
     itemCode: string;
     itemName: string;
     quantityRemain: string;
@@ -24,7 +23,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
     selector: 'app-pharmacy-inventory',
     templateUrl: './pharmacy-inventory.component.html',
-    // styleUrls: ['./inventory.component.scss']
 })
 
 export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
@@ -39,10 +37,12 @@ export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+    /* ************************************* Constructor ******************************************** */
     constructor(
         private dialog: MatDialog) {
-      }
+    }
 
+    /* ************************************* Public Methods ******************************************** */
     public ngAfterViewInit() {
         this.paginator.showFirstLastButtons = false;
         this.paginator.hidePageSize = false;
@@ -59,12 +59,10 @@ export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
         }
     }
 
-    public newPurchase():void {
+    public newPurchase(): void {
         this._addEditINewPurchase();
-   
-    
-        
     }
+
     public openNewPurchaseEditDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
         this.dialog.open(NewPurchaseEditDialogComponent, {
             width: '1200px',

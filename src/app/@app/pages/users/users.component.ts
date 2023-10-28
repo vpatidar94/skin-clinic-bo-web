@@ -129,7 +129,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     if (!orgId) {
       return;
     }
-    this.departmentApi.getOrgDepartmentList(orgId,"").subscribe((res: ApiResponse<DepartmentVo[]>) => {
+    this.departmentApi.getOrgDepartmentList(orgId, "").subscribe((res: ApiResponse<DepartmentVo[]>) => {
       this.departmentList = res.body ?? [] as DepartmentVo[];
     })
   }
@@ -162,7 +162,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const userType = this.userTypeList?.find(type => type.userType._id === userTypeId);
     return userType ? userType.userType.name : '';
   }
-  
+
   public getDepartmentName(row: UserVo): string {
     const departmentId = row.emp[this.empOrgId].departmentId;
     const department = this.departmentList?.find(dep => dep._id === departmentId);

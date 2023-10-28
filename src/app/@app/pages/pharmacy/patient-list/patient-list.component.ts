@@ -29,7 +29,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PatientListComponent {
     showPharmacyEditForm: boolean = false;
-    
+
     displayedColumns: string[] = ['billNo', 'patientName', 'contactNo', "date", 'doctorsName', "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 

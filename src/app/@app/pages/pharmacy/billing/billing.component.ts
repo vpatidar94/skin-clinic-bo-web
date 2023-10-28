@@ -10,7 +10,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 
-// newly added to show table
 export interface PeriodicElement {
     sno: number;
     medicine: string;
@@ -26,12 +25,11 @@ export interface PeriodicElement {
     showInputFields?: boolean;
 }
 
-// newly added to show table
 const ELEMENT_DATA: PeriodicElement[] = [
-    { sno: 1, medicine: 'Tab Acifin p 500mg', dosage: 'BD', duration: '5 days', packing:"1 * 3", quantity: 8, rate: 60.20, discount: 0, amount: 0, action: '' },
-    { sno: 2, medicine: 'Tab Azee 500mg', dosage: 'OD', duration: '2 days', packing:"1 * 4", quantity: 5, rate: 60, discount: 0, amount: 0, action: '' },
-    { sno: 3, medicine: 'Sy Cherycof', dosage: 'OD', duration: '5 days', packing:"1 * 9",quantity: 5, rate: 60, discount: 0, amount: 0, action: '' },
-    { sno: 4, medicine: 'Tab Azithromycin 650mg', dosage: 'OD', duration: '15 days',packing:"1 * 9", quantity: 10, rate: 60, discount: 0, amount: 0, action: '' },
+    { sno: 1, medicine: 'Tab Acifin p 500mg', dosage: 'BD', duration: '5 days', packing: "1 * 3", quantity: 8, rate: 60.20, discount: 0, amount: 0, action: '' },
+    { sno: 2, medicine: 'Tab Azee 500mg', dosage: 'OD', duration: '2 days', packing: "1 * 4", quantity: 5, rate: 60, discount: 0, amount: 0, action: '' },
+    { sno: 3, medicine: 'Sy Cherycof', dosage: 'OD', duration: '5 days', packing: "1 * 9", quantity: 5, rate: 60, discount: 0, amount: 0, action: '' },
+    { sno: 4, medicine: 'Tab Azithromycin 650mg', dosage: 'OD', duration: '15 days', packing: "1 * 9", quantity: 10, rate: 60, discount: 0, amount: 0, action: '' },
 
 ]
 ELEMENT_DATA.forEach(item => {
@@ -47,14 +45,12 @@ ELEMENT_DATA.forEach(item => {
 export class BillingComponent {
 
     /* ********************************* Static Field *************************************** */
-    
+
     // newly added
     overallDiscount: number = 0;
     productList!: ProductVo[];
 
-    // displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration", "quantity", "rate", "amount", "action"];
-    //newly added 
-    displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration","packing", "quantity", "rate", "discount", "amount", "action"];
+    displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration", "packing", "quantity", "rate", "discount", "amount", "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -65,7 +61,6 @@ export class BillingComponent {
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi) {
-
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -98,13 +93,12 @@ export class BillingComponent {
 
     public getTotalAmount(): number {
         // return this.dataSource.data.reduce((total, row) => total + row.amount, 0);
-        // newly added
         return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0);
     }
 
     // newly added
     public getFinalAmount(): number {
-        return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0)-this.overallDiscount;
+        return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0) - this.overallDiscount;
         // console.log('..', this.overallDiscount);
     }
 
@@ -165,5 +159,5 @@ export class BillingComponent {
     private _init(): void {
         this._getProductList();
     }
-    
+
 }

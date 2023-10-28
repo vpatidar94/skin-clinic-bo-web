@@ -8,12 +8,18 @@ import { ActivatedRoute } from '@angular/router';
 
 export class ViewPatientComponent implements OnInit {
 
-    /* ************************************* Instance Field ******************************************** */
+    /* ********************************* Static Field *************************************** */
+    /* *********************************** Instance Field *********************************** */
+
     showSectionPrescription!: boolean;
     showSectionBilling!: boolean;
 
     tabValue!: string;
+
+    /* ************************************* Constructor ******************************************** */
+
     constructor(private route: ActivatedRoute) { }
+
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
         this._init();
@@ -22,12 +28,13 @@ export class ViewPatientComponent implements OnInit {
     public tabChange(): void {
         this._tabChange(this.tabValue);
     }
+
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
         this.tabValue = 'PRESCRIPTION'
         this.tabChange();
-
     }
+
     private _tabChange(tabValue: string): void {
         switch (tabValue) {
             case 'PRESCRIPTION':
@@ -38,7 +45,6 @@ export class ViewPatientComponent implements OnInit {
                 this._resetSection();
                 this.showSectionBilling = true;
                 break;
-
         }
     }
 
@@ -46,7 +52,4 @@ export class ViewPatientComponent implements OnInit {
         this.showSectionPrescription = false;
         this.showSectionBilling = false;
     }
-
-
-
 }

@@ -105,7 +105,6 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     public selectExcel(): void {
     }
 
-
     public filterDoctorByDepartmentId(departmentId: string, fetchTimeSlot: boolean = false): void {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
@@ -119,11 +118,9 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
             }
         }
         );
-
     }
 
     public _getDepartmentList() {
-
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
             return;
@@ -132,8 +129,7 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
             this.departmentList = res.body ?? [] as DepartmentVo[];
 
         })
-        console.log("XCXC",this.departmentList);
-
+        console.log("XCXC", this.departmentList);
     }
 
     /* ************************************* Private Methods ******************************************** */

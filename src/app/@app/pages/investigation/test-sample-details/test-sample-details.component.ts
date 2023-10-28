@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxBarcode6Module } from 'ngx-barcode6';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 
@@ -21,8 +21,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
     { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
     { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
     { sno: 3, investigationName: 'Lipid Profile', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
-
 ]
+
 @Component({
     selector: 'app-test-sample-details',
     templateUrl: './test-sample-details.component.html',
@@ -41,10 +41,9 @@ export class TestSampleDetailsComponent {
     showTestIdBarcode: boolean = false;
     showPatientIdBarcode: boolean = false;
 
-
     /* ************************************* Constructors ******************************************** */
     constructor(public dialog: MatDialog
-    ) {}
+    ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngAfterViewInit() {
@@ -80,5 +79,4 @@ export class TestSampleDetailsComponent {
             exitAnimationDuration,
         });
     }
-
 }

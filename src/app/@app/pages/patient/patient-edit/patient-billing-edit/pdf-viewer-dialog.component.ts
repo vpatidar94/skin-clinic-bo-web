@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 
-
 @Component({
     selector: 'app-pdf-viewer-dialog',
     templateUrl: 'pdf-viewer-dialog.component.html'

@@ -39,8 +39,6 @@ const ELEMENT_DATA_2: PeriodicElement[] = [
 
 ]
 
-
-
 @Component({
   selector: 'app-inventory-report-edit',
   templateUrl: './inventory-report-edit.component.html',
@@ -73,7 +71,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
   userBooking!: UserBookingDto;
   departmentList!: DepartmentVo[];
   docterList!: UserVo[];
-
 
   /* ************************************* Constructors ******************************************** */
   constructor(private dialog: MatDialog,
@@ -113,7 +110,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
     if (this.showCustomDateInput) {
       this._showCalenderPopup();
     }
-
   }
 
   public tabChange(): void {
@@ -142,7 +138,6 @@ export class InventoryReportEditComponent implements OnInit, AfterViewInit {
       }
     }
     );
-
   }
 
   public _getDepartmentList() {

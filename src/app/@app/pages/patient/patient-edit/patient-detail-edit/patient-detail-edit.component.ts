@@ -49,7 +49,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     selectedTimeSlots: (number | null)[] = [];
 
-    showOnlySelectedTimeSlot:boolean=false;
+    showOnlySelectedTimeSlot: boolean = false;
 
     /* ************************************ Constructors ************************************ */
     constructor(
@@ -156,7 +156,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
                 break;
             }
         }
-        this.showOnlySelectedTimeSlot=false;
+        this.showOnlySelectedTimeSlot = false;
 
         return timeSlots;
     }
@@ -169,17 +169,16 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         const selectedTimeSlot = this.generateTimeSlots(this.time[shiftIndex].from, this.time[shiftIndex].to)[slotIndex];
         this.userBooking.booking.timeSlot = selectedTimeSlot;
         this.selectedTimeSlots[shiftIndex] = slotIndex;
-        this.showOnlySelectedTimeSlot=true;
+        this.showOnlySelectedTimeSlot = true;
     }
-
 
     public toggleShift(shiftIndex: number) {
         if (this.selectedShift === shiftIndex) {
             this.selectedShift = null;
-            this.showOnlySelectedTimeSlot=false;
+            this.showOnlySelectedTimeSlot = false;
         } else {
             this.selectedShift = shiftIndex;
-            this.showOnlySelectedTimeSlot=false;
+            this.showOnlySelectedTimeSlot = false;
         }
     }
 

@@ -10,19 +10,19 @@ import { InventoryReportEditComponent } from './inventory-report-edit/inventory-
 
 const routes = [
     { path: '', component: AdminReportsComponent },
-    {path:'patient-report' , component: PatientReportEditComponent},
-    {path:'pharmacy-report' , component: PharmacyReportEditComponent},
-    { path: 'pathology-report', component: PathologyReportEditComponent},
-    { path: 'user-report', component: UserReportEditComponent},
-    { path: 'billing-report', component: BillingReportEditComponent},
-    { path: 'inventory-report', component: InventoryReportEditComponent},
+    { path: 'patient-report', component: PatientReportEditComponent },
+    { path: 'pharmacy-report', component: PharmacyReportEditComponent },
+    { path: 'pathology-report', component: PathologyReportEditComponent },
+    { path: 'user-report', component: UserReportEditComponent },
+    { path: 'billing-report', component: BillingReportEditComponent },
+    { path: 'inventory-report', component: InventoryReportEditComponent },
 ]
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
-  })
+})
 
-  export class AdminReportsRoutingModule {
+export class AdminReportsRoutingModule {
 
-  }
+}

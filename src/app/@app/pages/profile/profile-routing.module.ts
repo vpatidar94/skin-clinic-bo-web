@@ -11,5 +11,6 @@ const routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class ProfileRoutingModule {
 }

@@ -190,36 +190,35 @@ export class PatientComponent implements OnInit, AfterViewInit {
     const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
     // If there are no filters, show all data
     if (combinedFilters.length === 0) {
-        this.dataSource.data = this.originalDataSource;
-        this.filteredData = []; // Reset filtered data array
-        return;
+      this.dataSource.data = this.originalDataSource;
+      this.filteredData = []; // Reset filtered data array
+      return;
     }
     // Filter the data progressively from the original data or the previously filtered data
     let dataToFilter: OrgBookingDto[];
     if (this.filteredData.length > 0) {
-        dataToFilter = [...this.filteredData];
+      dataToFilter = [...this.filteredData];
     } else {
-        dataToFilter = [...this.originalDataSource];
+      dataToFilter = [...this.originalDataSource];
     }
     for (const filter of combinedFilters) {
-        dataToFilter = dataToFilter.filter((data) => {
-            const cellValue = this.getCellValue(data, columnName);
+      dataToFilter = dataToFilter.filter((data) => {
+        const cellValue = this.getCellValue(data, columnName);
 
-            if (cellValue !== undefined && cellValue.includes(filter)) {
-                return true; // Include the row if the cell value matches the filter
-            }
+        if (cellValue !== undefined && cellValue.includes(filter)) {
+          return true; // Include the row if the cell value matches the filter
+        }
 
-            return false; // Exclude the row if no match is found or cellValue is undefined
-        });
+        return false; // Exclude the row if no match is found or cellValue is undefined
+      });
     }
     // Update the data source with the filtered data
     this.dataSource.data = dataToFilter;
     this.filteredData = dataToFilter;
     if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
+      this.dataSource.paginator.firstPage();
     }
-}
-
+  }
 
   public editDetails(orgBooking: OrgBookingDto): void {
     this.bookingApi.getBookingList(orgBooking.booking.user, orgBooking.booking.orgId).subscribe((res: ApiResponse<UserBookingInvestigationDto>) => {
@@ -242,8 +241,6 @@ export class PatientComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-
 
   public _getProductList(): void {
     const orgId = this.keyValueStorageService.getOrgId();

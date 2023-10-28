@@ -22,10 +22,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ]
 
 @Component({
-         selector: 'app-pharmacy-billing',
-         templateUrl: './pharmacy-billing.component.html',
-         styleUrls: ['./pharmacy-billing.component.scss']
-     })
+    selector: 'app-pharmacy-billing',
+    templateUrl: './pharmacy-billing.component.html',
+    styleUrls: ['./pharmacy-billing.component.scss']
+})
 
 export class PharmacyBillingComponent implements OnInit {
     displayedColumns: string[] = ['patientId', 'patientName', 'contact', "date", 'doctorsName', "action"];
@@ -39,20 +39,20 @@ export class PharmacyBillingComponent implements OnInit {
 
     /* ************************************* Constructors ******************************************** */
     constructor() {
-
     }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
         this._init();
-      }
-    
+    }
+
     public ngAfterViewInit() {
         this.paginator.showFirstLastButtons = false;
         this.paginator.hidePageSize = false;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
+
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -62,26 +62,23 @@ export class PharmacyBillingComponent implements OnInit {
         }
     }
 
-
-    public addNewCustomer(): void{
+    public addNewCustomer(): void {
         this._resetSection();
         this.showSectionPharmacyEdit = true;
     }
 
     public cancel(): void {
         this._init();
-      }
+    }
 
-     /* ************************************ Private Methods ************************************ */
-     private _init(): void {
+    /* ************************************ Private Methods ************************************ */
+    private _init(): void {
         this._resetSection();
         this.showSectionPharmacyBillingList = true;
-        
-    
-      }
+    }
 
-     private _resetSection(): void {
+    private _resetSection(): void {
         this.showSectionPharmacyBillingList = false;
         this.showSectionPharmacyEdit = false;
-      }
+    }
 }

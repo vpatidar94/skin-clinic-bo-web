@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from "@angular/material/card";
@@ -36,10 +34,8 @@ import { PatientComponent } from './patient.component';
 import { PatientBillingEditComponent } from './patient-edit/patient-billing-edit/patient-billing-edit.component';
 import { ServiceItemEditComponent } from './service-item/service-item-edit/service-item-edit.component';
 import { ServiceItemComponent } from './service-item/service-item.component';
-
 import { MatSortModule } from '@angular/material/sort';
 import { PdfViewerDialogComponent } from './patient-edit/patient-billing-edit/pdf-viewer-dialog.component';
-// import { AddPatientComponent } from 'src/app/addpatient/addpatient.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,

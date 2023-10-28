@@ -40,7 +40,6 @@ export class ViewInvestigationComponent implements OnInit {
                 this._resetSection();
                 this.showSectionReports = true;
                 break;
-
         }
     }
 
