@@ -12,15 +12,15 @@ export interface PeriodicElement {
     investigationName: string;
     specimen: string;
     sampleCollected: boolean;
-    date: string;
+    sampleDate: string;
     time: string;
     action: string
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
-    { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
-    { sno: 3, investigationName: 'Lipid Profile', specimen: 'Blood', sampleCollected: false, date: '09/09/2023', time: '12:30 PM', action: 'Print' },
+    { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: false, sampleDate: '09/09/2023', time: '12:30 PM', action: 'Print' },
+    { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: false, sampleDate: '09/09/2023', time: '12:30 PM', action: 'Print' },
+    { sno: 3, investigationName: 'Lipid Profile', specimen: 'Blood', sampleCollected: false, sampleDate: '09/09/2023', time: '12:30 PM', action: 'Print' },
 ]
 
 @Component({
@@ -32,7 +32,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class TestSampleDetailsComponent {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
-    displayedColumns: string[] = ['sno', 'investigationName', 'specimen', "sampleCollected", 'date', 'time', 'action'];
+    displayedColumns: string[] = ['sno', 'investigationName', 'specimen', "sampleCollected", 'sampleDate', 'time', 'action'];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
