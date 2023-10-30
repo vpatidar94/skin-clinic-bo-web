@@ -70,32 +70,69 @@
 
         <app-label>Test Parameters</app-label>
 
-        <div class="row">
-            <div class="col-md-3"><strong>Test Name</strong></div>
-            <div class="col-md-3"><strong>Reference</strong></div>
-            <div class="col-md-3"><strong>Unit</strong></div>
-            <div class="col-md-"></div>
-        </div>
+        <!-- <div class="col-md-12 align-style" *ngFor="let newItem of groupTestPara; let j = index"> -->
+        <div class="col-md-12 align-style">
 
-        <div class="col-md-12 align-style" *ngFor="let item of testParameter; let i = index">
+            <div class="d-flex flex-row">
 
-            <div class="row align-items-center">
-                <div class="form-group col-md-3">
-                    <input class="form-control pres-input w-100" type="text" name="test{{i}}"
-                        [(ngModel)]="item.testName">
+                <div *ngFor="let btn of buttonNumber; let k=index">
+                    <button class="me-2 mb-4 common-button">Group-{{k+1}}</button>
                 </div>
-                <div class="form-group col-md-3">
-                    <input class="form-control pres-input w-100" type="text" name="reference{{i}}"
-                        [(ngModel)]="item.reference">
+                <mat-icon class="add-icon clickable mb-4" (click)="addNewGroupTest()">add_circle_outline</mat-icon>
+            </div>
+            <div class="row">
+                <!-- Group -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <!-- <label class="app-label">Group - {{j}}</label> -->
+                            <label class="app-label">Group Name</label>
+
+                        </div>
+                        <div class="col-md-7 me-2">
+                            <div class="form-group">
+                                <!-- <input type="text" class="form-control app-input" name="group{{j}}" [ngModel]="newItem.group" required> -->
+                                <input type="text" class="form-control app-input" name="group" required>
+
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-2">
+                        <button class="common-button" (click)="addNewGroupTest()">Add New</button>
+                    </div> -->
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <input class="form-control pres-input w-100" type="text" name="unit{{i}}" [(ngModel)]="item.unit">
-                </div>
-                <div class="col-md-2">
-                    <mat-icon class="add-icon clickable" (click)="removeTestParameter(i)">delete</mat-icon>
-                    &nbsp;&nbsp;
-                    <mat-icon *ngIf="(i+1)==testParameter.length" class="add-icon clickable"
-                        (click)="addTestParameter()">add_circle_outline</mat-icon>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3"><strong>Test Name</strong></div>
+                <div class="col-md-3"><strong>Reference</strong></div>
+                <div class="col-md-3"><strong>Unit</strong></div>
+                <div class="col-md-"></div>
+            </div>
+
+            <div class="col-md-12 align-style mb-3" *ngFor="let item of testParameter; let i = index">
+
+                <div class="row align-items-center">
+                    <div class="form-group col-md-3">
+                        <input class="form-control pres-input w-100" type="text" name="test{{i}}"
+                            [(ngModel)]="item.testName">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input class="form-control pres-input w-100" type="text" name="reference{{i}}"
+                            [(ngModel)]="item.reference">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input class="form-control pres-input w-100" type="text" name="unit{{i}}"
+                            [(ngModel)]="item.unit">
+                    </div>
+                    <div class="col-md-2">
+                        <mat-icon class="add-icon clickable" (click)="removeTestParameter(i)">delete</mat-icon>
+                        &nbsp;&nbsp;
+                        <mat-icon *ngIf="(i+1)==testParameter.length" class="add-icon clickable"
+                            (click)="addTestParameter()">add_circle_outline</mat-icon>
+                    </div>
+
                 </div>
             </div>
         </div>
