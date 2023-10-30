@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { PrescriptionPrintDialogComponent } from './prescription-print/prescription-print-dialog.component';
 
 @Component({
   selector: 'app-patient-prescription-edit',
@@ -38,7 +40,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   productList!: ProductVo[];
 
   /* ************************************ Constructors ************************************ */
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   /* ************************************ Public Methods ************************************ */
@@ -112,6 +114,13 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     if (this.nextVisitDays >= 0) {
       this.updateMinNextVisitDate();
     }
+  }
+
+  public printPrescription(): void {
+    this.dialog.open(PrescriptionPrintDialogComponent, {
+      height: '500px',
+      data: { ...this.userBooking },
+    });
   }
 
   /* ************************************ Private Methods ************************************ */

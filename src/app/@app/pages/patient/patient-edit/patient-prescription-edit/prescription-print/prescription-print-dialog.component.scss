@@ -1,0 +1,103 @@
+.receipt {
+    font-family: Arial, sans-serif;
+    width: 8.5in;
+    /* Set the width to 8.5 inches */
+    // height: 11in;
+    /* Set the height to 11 inches */
+    // margin: 0 auto;
+    //padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.receipt-info {
+    //background-image: url('/assets/caduceus-symbol1.png');
+    background-size: 70%;
+    /* Options: cover, contain, auto, etc. */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: transparent;
+
+
+}
+
+.receipt-head {
+    display: flex;
+    align-items: center;
+}
+
+.receipt-title {
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.address {
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+}
+
+.logo {
+    width: 100%;
+}
+
+.info {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    margin-inline: 5px;
+    font-size: 16px;
+}
+
+.service-list {
+    font-size: 17px;
+    list-style-type: none;
+    border-right: 2px solid #ccc;
+    // height: calc(11in - 250px);
+    /* Subtract header and padding heights */
+}
+
+.prescription-detail {
+    border-right: 1px solid #ccc;
+    // height: calc(11in - 425px);
+    /* Subtract header and padding heights */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.sno-column {
+    width: 5%;
+}
+
+.medicine-column {
+    width: 60%;
+}
+
+.dosage-column {
+    width: 20%;
+}
+
+.duration-column {
+    width: 20%
+}
+.remark{
+    font-size: 13px;
+}
+.total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 15px;
+}

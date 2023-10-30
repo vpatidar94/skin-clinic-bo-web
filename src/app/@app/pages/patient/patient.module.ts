@@ -36,6 +36,7 @@ import { ServiceItemEditComponent } from './service-item/service-item-edit/servi
 import { ServiceItemComponent } from './service-item/service-item.component';
 import { MatSortModule } from '@angular/material/sort';
 import { PdfViewerDialogComponent } from './patient-edit/patient-billing-edit/pdf-viewer-dialog.component';
+import { PrescriptionPrintDialogComponent } from './patient-edit/patient-prescription-edit/prescription-print/prescription-print-dialog.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -62,7 +63,11 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, PatientRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule],
   providers: [],
   exports: [],
-  declarations: [PatientComponent, PatientEditComponent, PatientDetailEditComponent, ServiceItemEditComponent, ServiceItemComponent, PatientObservationEditComponent, PatientTestEditComponent, PatientServiceEditComponent, PatientPrescriptionEditComponent, BillingComponent, PatientBillingEditComponent, PdfViewerDialogComponent],
+  declarations: [PatientComponent, PatientEditComponent,
+    PatientDetailEditComponent, ServiceItemEditComponent, ServiceItemComponent,
+    PatientObservationEditComponent, PatientTestEditComponent, PatientServiceEditComponent,
+    PatientPrescriptionEditComponent, BillingComponent, PatientBillingEditComponent,
+    PdfViewerDialogComponent, PrescriptionPrintDialogComponent],
 })
 export class PatientModule { }
 
