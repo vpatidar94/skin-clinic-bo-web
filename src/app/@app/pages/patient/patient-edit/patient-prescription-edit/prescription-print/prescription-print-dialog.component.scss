@@ -1,18 +1,19 @@
-.receipt {
-    font-family: Arial, sans-serif;
-    width: 8.5in;
-    /* Set the width to 8.5 inches */
-    // height: 11in;
-    /* Set the height to 11 inches */
-    // margin: 0 auto;
-    //padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
+// .receipt {
+//     font-family: Arial, sans-serif;
+//     width: 8.5in;
+//     /* Set the width to 8.5 inches */
+//     // height: 11in;
+//     /* Set the height to 11 inches */
+//     // margin: 0 auto;
+//     //padding: 20px;
+//     border: 1px solid #ccc;
+//     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+// }
 
 .receipt-info {
     //background-image: url('/assets/caduceus-symbol1.png');
-    background-size: 70%;
+    // margin-left:1px;
+    background-size: cover;
     /* Options: cover, contain, auto, etc. */
     background-repeat: no-repeat;
     background-position: center center;
@@ -21,10 +22,10 @@
 
 }
 
-.receipt-head {
-    display: flex;
-    align-items: center;
-}
+// .receipt-head {
+//     display: flex;
+//     align-items: center;
+// }
 
 .receipt-title {
     font-size: 28px;
@@ -44,16 +45,17 @@
 
 .info {
     border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
-    margin-inline: 5px;
-    font-size: 16px;
+    // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    // padding: 5px 10px;
+    // margin-inline: 5px;
+    width:99%;
+    font-size: 14px;
 }
 
 .service-list {
     font-size: 17px;
     list-style-type: none;
-    border-right: 2px solid #ccc;
+    border-left: 2px solid #ccc;
     // height: calc(11in - 250px);
     /* Subtract header and padding heights */
 }
@@ -93,11 +95,28 @@ td {
 .duration-column {
     width: 20%
 }
-.remark{
-    font-size: 13px;
-}
+
 .total {
     text-align: right;
     font-weight: bold;
     margin-top: 15px;
+}
+
+/* styles.css or styles.scss (global) */
+.receipt-head {
+    background-image: url('/assets/images/prescription-image.jpg');
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat;
+     /* Set the height as needed */
+    /* You can add other styles as needed */
+    width:9.2in;
+    height:11.9in;
+}
+
+.style-it{
+    margin-top:230px;
+}
+
+.para-style{
+    margin-bottom: 130px;
 }

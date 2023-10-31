@@ -1,11 +1,15 @@
 <section>
-    <div class="receipt" id="receipt-print">
+    <span class="receipt-head" id="receipt-print">
         <div class="receipt-head">
-            <img src="\assets\prescription-pad-top.jpg" alt="Clinic Logo" class="logo" />
-        </div>
-        <hr />
-        <div class="d-flex p-2">
-            <div class="col-2 service-list">
+            <!-- <img src="\assets\prescription-pad-top.jpg" alt="Clinic Logo" class="logo" /> -->
+            <!-- </div> -->
+            <!-- <hr /> -->
+            <!-- </div> -->
+            <div class="d-flex p-2">
+                <div class="col-3">
+                </div>
+
+                <!-- <div class="col-2 service-list">
                 <br />
                 <li>Pimples</li>
                 <li>Dark Circles</li>
@@ -36,69 +40,70 @@
                 <li>माइक्रोनीडलिंग</li>
                 <li>नाखून सम्बंधित रोग</li>
 
-            </div>
-            <div class="col-10 receipt-info">
-                <div class="info row ">
-                    <span class="col-4"><strong>Patient ID:</strong> {{data.booking.patientNo}}</span>
-                    <span class="col-4"><strong>Doctor Name:</strong> {{doctorName}}</span>
+            </div> -->
+                <div class="col-9 receipt-info style-it">
+                    <div class="info row">
+                        <span class="col-md-3"><strong>Patient ID:</strong> {{data.booking.patientNo}}</span>
+                        <span class="col-4"><strong>Doctor Name:</strong> {{doctorName}}</span>
 
-                    <span class="col-4"><strong>Patient Name:</strong> {{ data.user.nameF ?? '' }} {{ data.user.nameL ??
-                        '' }}</span>
-                    <span class="col-4"><strong>Date:</strong> {{currentDate | date}} </span>
-                    <span class="col-4"><strong>Father Name:</strong> {{ data.user.fatherName ?? '' }}</span>
-                    <span class="col-4"><strong>Gender:</strong> <span *ngIf="data.user.gender">{{
-                            genderName[data.user.gender] }}</span></span>
-                    <span class="col-4"><strong>Age:</strong> {{ age }}</span>
-                    <!-- <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span> -->
-                    <span class="col-4"><strong>Referred By:</strong> {{ data.booking.referedBy }}</span>
+                        <span class="col-4"><strong>Patient Name:</strong> {{ data.user.nameF ?? '' }} {{
+                            data.user.nameL ??
+                            '' }}</span>
+                        <span class="col-3"><strong>Date:</strong> {{currentDate | date}} </span>
+                        <span class="col-4"><strong>Father Name:</strong> {{ data.user.fatherName ?? '' }}</span>
+                        <span class="col-4"><strong>Gender:</strong> <span *ngIf="data.user.gender">{{
+                                genderName[data.user.gender] }}</span></span>
+                        <span class="col-3"><strong>Age:</strong> {{ age }}</span>
+                        <!-- <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span> -->
+                        <span class="col-4"><strong>Referred By:</strong> {{ data.booking.referedBy }}</span>
 
-                </div>
-                <div class="d-flex p-2 col-12">
-                    <div class="d-flex flex-column col-9 prescription-detail pe-2 ">
-                        <span>Patient Complaint:</span>
-                        <span>Diagnosis: </span>
-                        <span class="mt-2"><strong>Rx</strong></span>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="sno-column">Sno</th>
-                                    <th class="text-center">Medicine</th>
-                                    <th class="dosage-column text-center">Dosage</th>
-                                    <th class="duration-column text-center">Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let service of data.booking.prescription; let i = index">
-                                    <td class="sno-column">{{i+1}}</td>
-                                    <td>{{ service.name }}</td>
-                                    <td class="dosage-column text-center">{{ service.dosage }}</td>
-                                    <td class="duration-column text-center">{{ service.duration }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
-                    <div class="ps-2 col-3 d-flex flex-column justify-content-between">
-                        <div>
-                            <span><strong>Parameters</strong></span>
-                            <li>blood</li>
+                    <div class="d-flex p-2 col-12">
+                        <div class="d-flex flex-column col-9 pe-2 prescription-details">
+                            <span class="mb-2"><strong>Patient Complaint: </strong>{{data.booking.complaint}}</span>
+                            <span><strong>Diagnosis: </strong>{{data.booking.diagnosis}}</span>
+                            <span class="mt-2"><strong>Rx</strong></span>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="sno-column">Sno</th>
+                                        <th class="text-center">Medicine</th>
+                                        <th class="dosage-column text-center">Dosage</th>
+                                        <th class="duration-column text-center">Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let service of data.booking.prescription; let i = index">
+                                        <td class="sno-column">{{i+1}}</td>
+                                        <td>{{ service.name }}</td>
+                                        <td class="dosage-column text-center">{{ service.dosage }}</td>
+                                        <td class="duration-column text-center">{{ service.duration }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div>
-                            <span><strong>Investigation</strong></span>
-                            <ol>
-                                <li *ngFor="let test of data.booking.test">{{test}}</li>
-                            </ol>
-                        </div>
-                        <div>
-                            <span><strong>Remark</strong></span>
-                            <li class="remark">{{data.booking.instruction}}</li>
-                        </div>
-                        <div>
-                            <span><strong>Next Visit</strong></span>
-                            <p>{{data.booking.nextVisitDate | date}}</p>
+                        <div class="ps-2 col-3 d-flex flex-column justify-content-between service-list">
+                            <div class="para-style">
+                                <span><strong>Parameters</strong></span>
+                                <li>blood</li>
+                            </div>
+                            <div class="para-style">
+                                <span class=""><strong>Investigation</strong></span>
+                                <ul>
+                                    <li *ngFor="let test of data.booking.test">{{test}}</li>
+                                </ul>
+                            </div>
+                            <div class="para-style">
+                                <span><strong>Remark</strong></span>
+                                <li>{{data.booking.instruction}}</li>
+                            </div>
+                            <div class="para-style">
+                                <span><strong>Next Visit</strong></span>
+                                <p>{{data.booking.nextVisitDate | date}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex flex-column  p-2">
+                    <!-- <div class="d-flex flex-column justify-content-end p-2">
                     <span class="d-flex align-items-center"><mat-icon>home</mat-icon> <span class="ms-1">9/3
                             Manoramaganj,
                             Near Geeta Bhawan Hospital Aayam Institute Campus, Indore</span></span>
@@ -106,10 +111,11 @@
                             class="ms-1">mail@aayamskinclinic.com</span></span>
                     <span class="d-flex align-items-center"><mat-icon>phone</mat-icon><span class="ms-1">+91
                             7470909055</span></span>
+                </div> -->
                 </div>
             </div>
         </div>
-    </div>
+    </span>
     <mat-dialog-actions align="end">
         <button mat-button matDialogClose="no">Cancel</button>
         <button (click)="print()" mat-button>Print</button>
