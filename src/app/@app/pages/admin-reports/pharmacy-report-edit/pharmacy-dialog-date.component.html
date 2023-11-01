@@ -1,11 +1,12 @@
 <div class="d-flex justify-content-around">
     <mat-card class="calendar-card w-100 p-2">
         <mat-calendar [(selected)]="selectedFromDate" class="calender-style "></mat-calendar>
-        <p>From date: {{selectedFromDate}}</p>
+        <p class="app-label"><strong>From date:</strong> {{selectedFromDate|date}}</p>
+
     </mat-card>
     <mat-card class="calendar-card w-100 p-2">
         <mat-calendar [(selected)]="selectedToDate"></mat-calendar>
-        <p>To date: {{selectedToDate}}</p>
+        <p class="app-label"><strong>To date:</strong> {{selectedToDate|date}}</p>
     </mat-card>
 
 </div>
