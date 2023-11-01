@@ -55,6 +55,8 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       this._formChanged();
     });
     this.showSectionAdd = this.userBooking.booking?.prescription?.length > 0;
+
+    console.log("seeItXXXX",this.userBooking.booking.observation.healthParams);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

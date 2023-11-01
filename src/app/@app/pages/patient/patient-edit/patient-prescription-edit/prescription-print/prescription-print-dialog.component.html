@@ -85,21 +85,23 @@
                         <div class="ps-2 col-3 d-flex flex-column justify-content-between service-list">
                             <div class="para-style">
                                 <span><strong>Parameters</strong></span>
-                                <li>blood</li>
+                                <ul *ngFor="let item of data.booking.observation.healthParams" class="mt-2">
+                                    <li class="custom-li">{{item.name}} : <span>{{item.value}}</span></li>
+                                </ul>
                             </div>
                             <div class="para-style">
-                                <span class=""><strong>Investigation</strong></span>
-                                <ul>
+                                <span><strong>Investigation</strong></span>
+                                <ul class="mt-2">
                                     <li *ngFor="let test of data.booking.test">{{test}}</li>
                                 </ul>
                             </div>
                             <div class="para-style">
                                 <span><strong>Remark</strong></span>
-                                <li>{{data.booking.instruction}}</li>
+                                <li class="mt-2">{{data.booking.instruction}}</li>
                             </div>
-                            <div class="para-style">
+                            <div class="">
                                 <span><strong>Next Visit</strong></span>
-                                <p>{{data.booking.nextVisitDate| date}}</p>
+                                <p class="mt-2">{{data.booking.nextVisitDate| date}}</p>
                             </div>
                         </div>
                     </div>
