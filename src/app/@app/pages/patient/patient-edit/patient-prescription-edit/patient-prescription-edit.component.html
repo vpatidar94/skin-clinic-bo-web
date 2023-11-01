@@ -390,8 +390,9 @@
                             <span class="prescription-heading">Next Visit(after days)</span>
                             <input *ngIf="isNextVisitChecked" type="number" class="form-control pres-input"
                                 name="nextVisitDays" [(ngModel)]="nextVisitDays" (input)="updateMinNextVisitDate()">
-                            <input *ngIf="isNextVisitChecked" type="date" readonly class="form-control pres-input"
-                                name="nextvisit" [(ngModel)]="nextVisitDate" [min]="minNextVisitDate">
+                            <p *ngIf="isNextVisitChecked" readonly class="form-control pres-input">
+                                {{userBooking.booking.nextVisitDate|date}}
+                            </p>
                         </div>
                     </div>
                     <div class="mt-2 d-flex justify-content-end">

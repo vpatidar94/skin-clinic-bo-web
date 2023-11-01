@@ -29,9 +29,13 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   showSectionAdd = false;
   isNextVisitChecked: boolean = false;
 
+  // nextVisitDays: number = 0; // Default value
+  // nextVisitDate: string = ''; // Default value
+  // minNextVisitDate: string = ''; // Minimum date
+
   nextVisitDays: number = 0; // Default value
-  nextVisitDate: string = ''; // Default value
-  minNextVisitDate: string = ''; // Minimum date
+  nextVisitDate!: Date; // Default value
+  minNextVisitDate!: Date; // Minimum date
 
   @Input()
   userBookingInvestigationList!: UserBookingInvestigationDto;
@@ -104,8 +108,11 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       const today = new Date();
       const nextDate = new Date(today);
       nextDate.setDate(today.getDate() + this.nextVisitDays);
-      this.minNextVisitDate = nextDate.toISOString().split('T')[0];
+      // this.minNextVisitDate = nextDate.toISOString().split('T')[0];
+      // this.nextVisitDate = this.minNextVisitDate; // Update the date input
+      this.minNextVisitDate = nextDate;
       this.nextVisitDate = this.minNextVisitDate; // Update the date input
+      this.userBooking.booking.nextVisitDate = this.nextVisitDate;
     }
   }
 
@@ -125,6 +132,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
+    this.userBooking.booking.nextVisitDate = this.nextVisitDate;
   }
 
   private _formChanged(): void {
