@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { InvestigationParamVo } from 'aayam-clinic-core';
 
 export interface PeriodicElement {
   testCode: string;
@@ -30,6 +31,8 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   showSectionInvestigationList!: boolean;
   showSectionInvestigationEdit!: boolean;
 
+  investigationParameters!: InvestigationParamVo;
+
   displayedColumns: string[] = ['testCode', 'testName', "department", 'specimenType', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,8 +51,17 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   }
 
   public addInvestigation(): void {
-    this._addEditServiceItem();
+    // const orgId = this.keyValueStorageService.getOrgId();
+    const investigationParameters = {} as InvestigationParamVo;
+    // if (orgId) {
+    //   serviceItem.orgId = orgId;
+    //   serviceItem.brId = orgId;
+    // }
+    // serviceItem.active = true;
+    this._addEditServiceItem(investigationParameters);
+
   }
+ 
 
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -78,7 +90,8 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.showSectionInvestigationEdit = false;
   }
 
-  private _addEditServiceItem(): void {
+  private _addEditServiceItem(investigationParameters:InvestigationParamVo): void {
+    this.investigationParameters = investigationParameters
     this._resetSection();
     this.showSectionInvestigationEdit = true;
   }
