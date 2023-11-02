@@ -51,17 +51,10 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   }
 
   public addInvestigation(): void {
-    // const orgId = this.keyValueStorageService.getOrgId();
     const investigationParameters = {} as InvestigationParamVo;
-    // if (orgId) {
-    //   serviceItem.orgId = orgId;
-    //   serviceItem.brId = orgId;
-    // }
-    // serviceItem.active = true;
     this._addEditServiceItem(investigationParameters);
-
   }
- 
+
 
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -90,7 +83,7 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.showSectionInvestigationEdit = false;
   }
 
-  private _addEditServiceItem(investigationParameters:InvestigationParamVo): void {
+  private _addEditServiceItem(investigationParameters: InvestigationParamVo): void {
     this.investigationParameters = investigationParameters
     this._resetSection();
     this.showSectionInvestigationEdit = true;
