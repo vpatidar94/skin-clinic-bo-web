@@ -65,10 +65,10 @@
 </section>
 
 <section class="section-org-edit" *ngIf="showSectionInvestigationEdit">
-    <app-investigation-edit [investigationParameters]="investigationParameters"></app-investigation-edit>
+    <app-investigation-edit [investigationParameters]="investigationParameters" [departmentList]="departmentList"></app-investigation-edit>
     <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
         <div class="col-1">
-            <button class="common-button">{{'save'}}</button>
+            <button class="common-button" (click)="savingInvestigationParameters()">{{'save'}}</button>
         </div>
         <div class="col-1">
             <button class="cancel-button" (click)="cancel()">{{'cancel'}}</button>

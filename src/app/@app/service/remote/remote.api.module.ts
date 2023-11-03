@@ -7,12 +7,13 @@ import { BookingApi } from './booking.api';
 import { DepartmentApi } from './department.api';
 import { ProductApi } from './product.api';
 import { TransactionApi } from './transaction.api';
+import { InvestigationApi } from './investigation.api';
 
 @NgModule({
   imports: [],
   declarations: [],
   providers: [
-    AuthApi, OrgApi, UserApi, ServiceItemApi, BookingApi, DepartmentApi, ProductApi, TransactionApi
+    AuthApi, OrgApi, UserApi, ServiceItemApi, BookingApi, DepartmentApi, ProductApi, TransactionApi,InvestigationApi
   ],
   exports: []
 })

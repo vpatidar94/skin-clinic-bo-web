@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, } from '@angular/core';
-import { InvestigationCriteriaVo, ProductVo } from 'aayam-clinic-core';
+import { DepartmentVo, InvestigationCriteriaVo, ProductVo } from 'aayam-clinic-core';
 import { InvestigationParamVo } from 'aayam-clinic-core';
 
 @Component({
@@ -23,6 +23,9 @@ export class InvestigationEditComponent implements OnInit {
     @Input()
     investigationParameters!: InvestigationParamVo;
 
+    @Input()
+    departmentList!: DepartmentVo[];
+
     /* ************************************* Constructors ******************************************** */
     constructor() { }
 
@@ -33,7 +36,7 @@ export class InvestigationEditComponent implements OnInit {
     }
 
     public removeTestParameter(index: number): void {
-        this.investigationParameters.params[index].criteriaList.splice(index, 1);
+        this.investigationParameters.params[index].criteriaList.splice(1, 1);
     }
 
     public addTestParameter(index: number) {
@@ -47,10 +50,6 @@ export class InvestigationEditComponent implements OnInit {
     public addNewGroupTest(index: number) {
         this.investigationParameters.params.push({ name: '', criteriaList: [] })
     }
-
-    // public checkIt():void {
-    //     console.log("XXXXXXXXX",this.investigationParameters);
-    // }
 
     public addParameters(index: number): void {
         if (this.investigationParameters.params[index].criteriaList.length == 0) {

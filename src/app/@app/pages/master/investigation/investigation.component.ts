@@ -2,7 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { InvestigationParamVo } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_TYPE_NAME, DEPT, DepartmentVo, InvestigationParamVo, ResponseStatus } from 'aayam-clinic-core';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
+import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 
 export interface PeriodicElement {
   testCode: string;
@@ -38,8 +41,14 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  bookingTypeName: any = BOOKING_TYPE_NAME;
+
+  departmentList!: DepartmentVo[];
+
   /* ************************************* Constructors ******************************************** */
-  constructor() { }
+  constructor(private keyValueStorageService: KeyValueStorageService,
+    private investigationApi: InvestigationApi,
+    private departmentApi: DepartmentApi) { }
 
   /* ************************************* Public Methods ******************************************** */
 
@@ -52,6 +61,11 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
 
   public addInvestigation(): void {
     const investigationParameters = {} as InvestigationParamVo;
+    const orgId = this.keyValueStorageService.getOrgId();
+        if (orgId) {
+            investigationParameters.orgId = orgId;
+            investigationParameters.brId = orgId;
+        }
     this._addEditServiceItem(investigationParameters);
   }
 
@@ -72,10 +86,31 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this._init();
   }
 
+  public savingInvestigationParameters(): void {
+    this.investigationApi.addUpdateInvestigation(this.investigationParameters).subscribe((res: ApiResponse<InvestigationParamVo>) => {
+        if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+            this.investigationParameters = res.body
+            console.log("XXXXXXXXXBBBBbbbbb",this.investigationParameters)
+            this._init();
+        }
+    });
+}
+
+public _getDepartmentList() {
+  const orgId = this.keyValueStorageService.getOrgId();
+  if (!orgId) {
+    return;
+  }
+  this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+    this.departmentList = res.body ?? [] as DepartmentVo[];
+  })
+}
+
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
     this.showSectionInvestigationList = true;
+    this._getDepartmentList();
   }
 
   private _resetSection(): void {

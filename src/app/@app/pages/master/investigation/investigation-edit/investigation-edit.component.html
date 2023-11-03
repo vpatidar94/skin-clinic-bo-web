@@ -30,8 +30,11 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="department"
-                                [(ngModel)]="investigationParameters.departmentId" required>
+                            <select class="app-single-select-dropdown w-100" name="department"
+                                [(ngModel)]="investigationParameters.departmentId">
+                                <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -69,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <!-- <button (click)="checkIt()">Check</button> -->
+
         <div class="mt-5"></div>
 
         <app-label>Test Parameters</app-label>
