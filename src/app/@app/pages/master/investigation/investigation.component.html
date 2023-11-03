@@ -21,7 +21,9 @@
                 <!-- Test code -->
                 <ng-container matColumnDef="testCode">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Test Code</th>
-                    <td mat-cell *matCellDef="let row"> {{row.testCode}} </td>
+                    <!-- <td mat-cell *matCellDef="let row"> {{row.testCode}} </td> -->
+                    <td mat-cell *matCellDef="let row"> test code </td>
+
                 </ng-container>
 
                 <!--Test Name -->
@@ -33,13 +35,17 @@
                 <!-- Department -->
                 <ng-container matColumnDef="department">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.department}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> department </td>
+
                 </ng-container>
 
                 <!-- Specimen Type -->
                 <ng-container matColumnDef="specimenType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Specimen Type</th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.specimenType}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.specimenType}} </td> -->
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.specimen}} </td>
+
                 </ng-container>
 
                 <!-- Action -->

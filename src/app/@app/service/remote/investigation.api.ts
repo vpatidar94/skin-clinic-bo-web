@@ -18,7 +18,7 @@ export class InvestigationApi {
     }
 
     public getInvestigationList(orgId: string): Observable<ApiResponse<InvestigationParamVo[]>> {
-        return this.http.get<ApiResponse<InvestigationParamVo[]>>(environment.apiUrl + URL.ORG_DEPARTMENT_LIST, { params: { orgId } });
+        return this.http.get<ApiResponse<InvestigationParamVo[]>>(environment.apiUrl + URL.INVESTIGATION_LIST, { params: { orgId } });
     }
 
 }

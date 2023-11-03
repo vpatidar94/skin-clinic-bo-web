@@ -37,13 +37,17 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   investigationParameters!: InvestigationParamVo;
 
   displayedColumns: string[] = ['testCode', 'testName', "department", 'specimenType', 'action'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<InvestigationParamVo>([] as InvestigationParamVo[]);
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   bookingTypeName: any = BOOKING_TYPE_NAME;
 
   departmentList!: DepartmentVo[];
+
+  investigationList!: InvestigationParamVo[];
 
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
@@ -106,11 +110,26 @@ public _getDepartmentList() {
   })
 }
 
+public _getInvestigationList() {
+  const orgId = this.keyValueStorageService.getOrgId();
+  if (!orgId) {
+    return;
+  }
+  this.investigationApi.getInvestigationList(orgId).subscribe((res: ApiResponse<InvestigationParamVo[]>) => {
+    this.investigationList = res.body ?? [] as InvestigationParamVo[];
+    this.dataSource = new MatTableDataSource(this.investigationList);
+    console.log('CCCCCCCXXXXXXXX',this.investigationList);
+
+  })
+}
+
+
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
     this.showSectionInvestigationList = true;
     this._getDepartmentList();
+    this._getInvestigationList();
   }
 
   private _resetSection(): void {
