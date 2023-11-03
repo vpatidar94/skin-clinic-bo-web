@@ -14,12 +14,12 @@
             </mat-expansion-panel-header>
 
             <div class="mt-4">
-                <mat-accordion>
+                <!-- <mat-accordion>
                     <mat-expansion-panel class="my-3">
-                        <mat-expansion-panel-header class="sub-app-expansion">
+                        <mat-expansion-panel-header class="sub-app-expansion"> -->
                             <input type="checkbox" class="me-3" [(ngModel)]="cbcReportChecked">
                             <span class="prescription-heading">CBC</span>
-                        </mat-expansion-panel-header>
+                        <!-- </mat-expansion-panel-header> -->
                         <div class="border border-info rounded p-3 mt-3">
                             <div class="row mb-0">
                                 <p class="col-md-2"><strong>Name of Test</strong></p>
@@ -52,17 +52,17 @@
                             </div>
                         </div>
 
-                    </mat-expansion-panel>
-                </mat-accordion>
+                    <!-- </mat-expansion-panel> -->
+                <!-- </mat-accordion> -->
             </div>
 
             <div class="mt-4">
-                <mat-accordion>
+                <!-- <mat-accordion>
                     <mat-expansion-panel class="my-3">
-                        <mat-expansion-panel-header class="sub-app-expansion">
+                        <mat-expansion-panel-header class="sub-app-expansion"> -->
                             <input type="checkbox" class="me-3" [(ngModel)]="widalTestChecked">
                             <span class="prescription-heading">Widal Test</span>
-                        </mat-expansion-panel-header>
+                        <!-- </mat-expansion-panel-header> -->
                         <div class="border border-info rounded p-3 mt-3">
                             <div class="row">
                                 <p class="col-md-3"><strong>Name of Test</strong></p>
@@ -90,17 +90,17 @@
                                 </div>
                             </div>
                         </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
+                    <!-- </mat-expansion-panel> -->
+                <!-- </mat-accordion> -->
             </div>
 
             <div class="mt-4">
-                <mat-accordion>
+                <!-- <mat-accordion>
                     <mat-expansion-panel class="my-3">
-                        <mat-expansion-panel-header class="sub-app-expansion">
+                        <mat-expansion-panel-header class="sub-app-expansion"> -->
                             <input type="checkbox" class="me-3" [(ngModel)]="lipidProfileChecked">
                             <span class="prescription-heading">Lipid Profile</span>
-                        </mat-expansion-panel-header>
+                        <!-- </mat-expansion-panel-header> -->
                         <div class="border border-info rounded p-3 mt-3">
                             <div class="row">
                                 <p class="col-md-1"><strong>Sno.</strong></p>
@@ -120,8 +120,8 @@
                                 </div>
                             </div>
                         </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
+                    <!-- </mat-expansion-panel>
+                </mat-accordion> -->
             </div>
         </mat-expansion-panel>
         <button (click)="printSelectedReports('CBC')" class="common-button">print</button>
