@@ -42,7 +42,6 @@ export class AccountComponent implements OnInit {
     public onSavingUserAccount(): void {
         this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res: ApiResponse<UserAccountVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-                console.log("user", this.userAccounts);
             }
         })
     }

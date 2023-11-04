@@ -99,7 +99,6 @@ export class BillingComponent {
     // newly added
     public getFinalAmount(): number {
         return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0) - this.overallDiscount;
-        // console.log('..', this.overallDiscount);
     }
 
     public deleteRow(row: PeriodicElement): void {
@@ -150,8 +149,6 @@ export class BillingComponent {
     }
 
     public printData(): void {
-        console.log(this.dataSource.data);
-        console.log(this.getTotalAmount())
     }
 
     /* ************************************* Private Methods ******************************************** */

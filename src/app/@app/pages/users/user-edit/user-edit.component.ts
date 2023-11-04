@@ -70,7 +70,6 @@ export class UserEditComponent implements OnInit, OnChanges {
     public onSavingUserProfile(): void {
         this.userApi.addUpdateStaff(this.staff).subscribe((res: ApiResponse<UserVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-                console.log("user", this.staff);
             }
         });
     }
@@ -78,7 +77,6 @@ export class UserEditComponent implements OnInit, OnChanges {
     public onSavingUserAccount(): void {
         this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res: ApiResponse<UserAccountVo>) => {
             if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
-                console.log("user", this.userAccounts);
             }
         })
     }

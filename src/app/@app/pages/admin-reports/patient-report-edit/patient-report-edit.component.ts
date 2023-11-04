@@ -129,7 +129,6 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
             this.departmentList = res.body ?? [] as DepartmentVo[];
 
         })
-        console.log("XCXC", this.departmentList);
     }
 
     /* ************************************* Private Methods ******************************************** */
