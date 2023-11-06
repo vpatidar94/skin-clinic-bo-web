@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ApiResponse, DepartmentVo, ItemDetailDto, OrgOrderNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, ItemDetailDto, OrgCodeNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -70,7 +70,7 @@ export class PatientEditComponent implements OnInit, OnChanges {
     this.tabChange();
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {
-      this.orgApi.getLastOrderNo(orgId).subscribe((res: ApiResponse<OrgOrderNoDto>) => {
+      this.orgApi.getLastOrderNo(orgId).subscribe((res: ApiResponse<OrgCodeNoDto>) => {
         if (res.body) {
           this.userBooking.booking.no = String(res.body.no + 1);
           this.userBooking.booking.patientNo = String(res.body.patientNo + 1);
