@@ -46,18 +46,18 @@
 
                         <!-- Amount -->
                         <div class="form-group col-md-2">
-                            <input [readOnly]="true" type="text" class="form-control pres-input w-100"
+                            <input [readOnly]="true" type="text" class="form-control pres-input w-100" name="amount{{i}}"
                                 [value]="booking.items[i].amount">
                         </div>
 
                         <!-- Discount -->
                         <div class="form-group col-md-2">
-                            <input type="text" class="form-control pres-input w-100">
+                            <input type="text" class="form-control pres-input w-100" name="discount">
                         </div>
 
                         <!-- Net Amount -->
                         <div class="form-group col-md-2">
-                            <input [readOnly]="true" type="number" class="form-control pres-input w-100">
+                            <input [readOnly]="true" type="number" class="form-control pres-input w-100" name="net-amount">
                         </div>
                     </div>
                 </div>
@@ -107,18 +107,18 @@
 
                             <!--Total Amount  -->
                             <div class="form-group col-md-2">
-                                <input type="text" class="form-control pres-input w-100"
+                                <input type="text" class="form-control pres-input w-100" name="total{{i}}"
                                     [value]="userBooking.booking.items[i].amount">
                             </div>
 
                             <!-- Discount -->
                             <div class="form-group col-md-2">
-                                <input type="text" class="form-control pres-input w-100" [(ngModel)]="serviceDiscount">
+                                <input type="text" class="form-control pres-input w-100" [(ngModel)]="serviceDiscount" name="discount">
                             </div>
 
                             <!-- Net Amount -->
                             <div class="form-group col-md-2">
-                                <input [readOnly]="true" type="number" class="form-control pres-input w-100"
+                                <input [readOnly]="true" type="number" class="form-control pres-input w-100" name="net-amount{{i}}"
                                     [value]="userBooking.booking.items[i].amount-serviceDiscount">
                             </div>
 
