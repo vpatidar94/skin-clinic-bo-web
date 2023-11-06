@@ -35,7 +35,6 @@
                         <div *ngFor="let complaint of booking.complaint; let i = index;" class="row align-items-center">
                             <div class="row align-items-center">
                                 <div class="col-md-1 pres-input text-center">
-
                                     <p class="border border-info rounded p-1 text-align-center">{{i+1}}</p>
                                 </div>
 
@@ -64,7 +63,7 @@
                                 <p class="col-md-8"><strong>Details</strong></p>
                                 <p class="col-md-2"></p>
                             </div>
-                            <div *ngFor="let diagnos of userBooking.booking.diagnosis; let i = index;"
+                            <div *ngFor="let diagnos of booking.diagnosis; let i = index;"
                                 class="row align-items-center">
                                 <div class="row align-items-center">
                                     <div class="col-md-1 pres-input text-center">
@@ -73,14 +72,14 @@
                                     </div>
                                     <div class="col-md-8 form-group">
                                         <input type="text" class="form-control pres-input" name="diagnosis{{i}}"
-                                            [(ngModel)]="userBooking.booking.diagnosis[i]" required>
+                                            [(ngModel)]="booking.diagnosis[i]" required>
                                     </div>
                                     <div class="col-md-2">
                                         <mat-icon (click)="removeDiagnosisItem(i)"
                                             class="add-icon clickable">delete</mat-icon>
                                         &nbsp;&nbsp;
                                         <mat-icon (click)="addDiagnosisItem()"
-                                            *ngIf="(i+1) === userBooking.booking.diagnosis?.length"
+                                            *ngIf="(i+1) === booking.diagnosis?.length"
                                             class="add-icon clickable">add_circle_outline</mat-icon>
                                     </div>
                                 </div>
@@ -107,7 +106,7 @@
                                 <div class="col-md-2"><strong>Remark</strong></div>
                                 <div class="col-md-2"></div>
                             </div>
-                            <div *ngFor="let item of userBooking.booking.prescription; let i = index;"
+                            <div *ngFor="let item of booking.prescription; let i = index;"
                                 class="row align-items-center">
                                 <div class="row align-items-center">
                                     <div class="col-md-1 pres-input text-center">
@@ -118,7 +117,7 @@
                                     <!-- Medicine Type -->
                                     <div class="form-group d-flex justify-content-between align-items-center col-md-2">
                                         <select name="medicine" class="app-single-select-dropdown w-100"
-                                            [(ngModel)]="userBooking.booking.prescription[i].name">
+                                            [(ngModel)]="booking.prescription[i].name">
                                             <option *ngFor="let product of productList">{{product.name}}
                                             </option>
                                         </select>
@@ -127,7 +126,7 @@
                                     <!-- Dosage -->
                                     <div class="form-group col-md-2">
                                         <select name="dosage" class="app-single-select-dropdown w-100"
-                                            [(ngModel)]="userBooking.booking.prescription[i].dosage">
+                                            [(ngModel)]="booking.prescription[i].dosage">
                                             <option>RX = Treatment</option>
                                             <option>HX = History</option>
                                             <option>DX = Diagnosis</option>
@@ -154,19 +153,18 @@
                                     <!-- Duration -->
                                     <div class="form-group col-md-2">
                                         <input name="duration" type="text" class="form-control pres-input w-100"
-                                            [(ngModel)]="userBooking.booking.prescription[i].duration">
+                                            [(ngModel)]="booking.prescription[i].duration">
                                     </div>
                                     <!-- Remark -->
                                     <div class="form-group col-md-2">
                                         <input type="text" class="form-control pres-input w-100" name="remark"
-                                            [(ngModel)]="userBooking.booking.prescription[i].instruction">
+                                            [(ngModel)]="booking.prescription[i].instruction">
                                     </div>
 
                                     <div class="col-md-2">
                                         <mat-icon (click)="removeRxItem(i)" class="add-icon clickable">delete</mat-icon>
                                         &nbsp;&nbsp;
-                                        <mat-icon (click)="addRxItem()"
-                                            *ngIf="(i+1) === userBooking.booking.prescription?.length"
+                                        <mat-icon (click)="addRxItem()" *ngIf="(i+1) === booking.prescription?.length"
                                             class="add-icon clickable">add_circle_outline</mat-icon>
                                     </div>
                                 </div>
@@ -181,18 +179,28 @@
                         <div class="col-md-3">
                             <span class="prescription-heading">Investigation</span>
                             <textarea class="form-control pres-input" name="investigation"
-                                [(ngModel)]="userBooking.booking.test"></textarea>
+                                [(ngModel)]="booking.test"></textarea>
                         </div>
                         <div class="col-md-3">
                             <span class="prescription-heading">Remark</span>
                             <textarea type="text" class="form-control pres-input" name="remarks"
-                                [(ngModel)]="userBooking.booking.instruction"></textarea>
+                                [(ngModel)]="booking.instruction"></textarea>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
                             <span class="prescription-heading">Next Visit(after days)</span>
                             <input *ngIf="isNextVisitChecked " type="date" class="form-control pres-input"
                                 name="nextvisit" [(ngModel)]="userBooking.booking.nextVisitDate">
+                        </div> -->
+
+                        <div class="col-md-3">
+                            <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
+                            <span class="prescription-heading">Next Visit(after days)</span>
+                            <input *ngIf="isNextVisitChecked" type="number" class="form-control pres-input"
+                                name="nextVisitDays" [(ngModel)]="nextVisitDays" (input)="updateMinNextVisitDate()">
+                            <p *ngIf="isNextVisitChecked" readonly class="form-control pres-input">
+                                {{booking.nextVisitDate|date}}
+                            </p>
                         </div>
                     </div>
                     <div class="mt-2 d-flex justify-content-end">

@@ -132,7 +132,13 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
+    if(this.userBooking.booking.nextVisitDate){
+      this.isNextVisitChecked=true;
+      
+    }
+    else{
     this.userBooking.booking.nextVisitDate = this.nextVisitDate;
+    }
   }
 
   private _formChanged(): void {
