@@ -125,7 +125,9 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   public printPrescription(): void {
     this.dialog.open(PrescriptionPrintDialogComponent, {
-      height: '500px',
+      height: '1500px',
+      
+
       data: { ...this.userBooking },
     });
   }

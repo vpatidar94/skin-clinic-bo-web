@@ -81,11 +81,19 @@
             <div class="d-flex flex-row">
                 <!-- ng-container is used here in place of div so that the group name came in row and not in column as due to ngFor it will came in column  -->
                 <ng-container *ngFor="let grp of investigationParameters.params; let k=index">
-                    <div class="d-flex flex-row">
+                    <div *ngIf="!grp" class="d-flex flex-row">
+                        <!-- <div *ngFor="investigation" -->
                         <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
                         <mat-icon class="add-icon clickable mb-4" *ngIf="k==investigationParameters.params.length-1"
                             (click)="addNewGroupTest(k)">add_circle_outline</mat-icon>
                     </div>
+
+                    <div *ngIf="grp" class="d-flex flex-row">
+                        <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
+                        <mat-icon class="add-icon clickable mb-4" *ngIf="k==investigationParameters.params.length-1"
+                            (click)="addNewGroupTest(k)">add_circle_outline</mat-icon>
+                    </div>
+
                 </ng-container>
             </div>
             <div *ngFor="let grp of investigationParameters.params; let k=index">

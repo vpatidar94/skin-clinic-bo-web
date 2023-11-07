@@ -163,6 +163,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     public selectShift(index: number) {
         this.selectedShift = index;
+        // this.userBooking.booking.shift = this.selectShift.toString();
     }
 
     public selectTimeSlot(shiftIndex: number, slotIndex: number) {
@@ -173,19 +174,32 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     }
 
     public toggleShift(shiftIndex: number) {
-        if (this.selectedShift === shiftIndex) {
-            this.selectedShift = null;
-            this.showOnlySelectedTimeSlot = false;
-        } else {
-            this.selectedShift = shiftIndex;
-            this.showOnlySelectedTimeSlot = false;
-        }
+            if (this.selectedShift === shiftIndex) {
+                this.selectedShift = null;
+                this.showOnlySelectedTimeSlot = false;
+            } else {
+                this.selectedShift = shiftIndex;
+                this.showOnlySelectedTimeSlot = false;
+            }
+
+
     }
+
 
     /* ************************************ Private Methods ************************************ */
 
     private _init(): void {
+        /* to show the previous booking selected time slot */
+        if (this.userBooking.booking.timeSlot) {
+            this.showOnlySelectedTimeSlot = true;
+
+        }
+        else {
+            this.showOnlySelectedTimeSlot = false;
+        }
+
     }
+
 
     private _formChanged(): void {
         const actionDto = {
