@@ -21,15 +21,23 @@
                 <div class="border border-info rounded p-3 mt-4 container-style">
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
+                        <div class="col-me-3"><strong>Service Type</strong></div>
                         <div class="col-md-4"><strong>Service</strong></div>
                         <div class="col-md-2"><strong>Amount</strong></div>
-                        <div class="col-md-2"><strong>Discount</strong></div>
-                        <div class="col-md-2"><strong>Net Amount</strong></div>
+                        <!-- CAN BE USED FURTHER -->
+                        <!-- <div class="col-md-2"><strong>Discount</strong></div>
+                        <div class="col-md-2"><strong>Net Amount</strong></div> -->
                         <div class="col-md"></div>
                     </div>
                     <div class="row align-items-center" *ngFor="let orderItem of booking.items; let i = index;">
                         <div class="col-md-1 pres-input text-center">
                             <p class="border border-info rounded p-1 text-align-center">{{i + 1}}</p>
+                        </div>
+                        <!-- Service-type -->
+                        <div class="form-group col-md-3">
+                            <select class="app-single-select-dropdown w-100">
+                                <option *ngFor="let item of serviceTypeList">{{item}}</option>
+                            </select>
                         </div>
                         <!-- Service -->
                         <div class="form-group col-md-4">
@@ -46,19 +54,20 @@
 
                         <!-- Amount -->
                         <div class="form-group col-md-2">
-                            <input [readOnly]="true" type="text" class="form-control pres-input w-100" name="amount{{i}}"
-                                [value]="booking.items[i].amount">
+                            <input [readOnly]="true" type="text" class="form-control pres-input w-100"
+                                name="amount{{i}}" [value]="booking.items[i].amount">
                         </div>
 
+                        <!-- CAN BE USED FURTHER -->
                         <!-- Discount -->
-                        <div class="form-group col-md-2">
+                        <!-- <div class="form-group col-md-2">
                             <input type="text" class="form-control pres-input w-100" name="discount">
-                        </div>
+                        </div> -->
 
                         <!-- Net Amount -->
-                        <div class="form-group col-md-2">
+                        <!-- <div class="form-group col-md-2">
                             <input [readOnly]="true" type="number" class="form-control pres-input w-100" name="net-amount">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </mat-expansion-panel>
@@ -80,10 +89,12 @@
                     <div class="border border-info rounded p-3 mt-4 container-style">
                         <div class="row">
                             <div class="col-md-1"><strong>Sno.</strong></div>
+                            <div class="col-md-3"><strong>Service Type</strong></div>
                             <div class="col-md-3"><strong>Service</strong></div>
                             <div class="col-md-2"><strong>Amount</strong></div>
-                            <div class="col-md-2"><strong>Discount</strong></div>
-                            <div class="col-md-2"><strong>Net Amount</strong></div>
+                            <!-- CAN BE USED FURTHER -->
+                            <!-- <div class="col-md-2"><strong>Discount</strong></div>
+                            <div class="col-md-2"><strong>Net Amount</strong></div> -->
                             <div class="col-md"></div>
                         </div>
                         <div class="row align-items-center"
@@ -91,6 +102,15 @@
                             <div class="col-md-1 pres-input text-center">
                                 <p class="border border-info rounded p-1 text-align-center">{{i + 1}}</p>
                             </div>
+
+                            <!-- Service Type-->
+                            <div class="form-group col-md-3">
+                                <select class="app-single-select-dropdown w-100">
+                                    <option *ngFor="let item of serviceTypeList">{{item.name}}</option>
+                                    <!-- <option>Investigation</option> -->
+                                </select>
+                            </div>
+
                             <!-- Service -->
                             <div class="form-group col-md-3">
                                 <select (change)="addItem($event, i)" name="service-item-{{i}}"
@@ -111,16 +131,17 @@
                                     [value]="userBooking.booking.items[i].amount">
                             </div>
 
+                            <!-- CAN BE USED FURTHER -->
                             <!-- Discount -->
-                            <div class="form-group col-md-2">
+                            <!-- <div class="form-group col-md-2">
                                 <input type="text" class="form-control pres-input w-100" [(ngModel)]="serviceDiscount" name="discount">
-                            </div>
+                            </div> -->
 
                             <!-- Net Amount -->
-                            <div class="form-group col-md-2">
+                            <!-- <div class="form-group col-md-2">
                                 <input [readOnly]="true" type="number" class="form-control pres-input w-100" name="net-amount{{i}}"
                                     [value]="userBooking.booking.items[i].amount-serviceDiscount">
-                            </div>
+                            </div> -->
 
                             <div class="col-md-2">
                                 <mat-icon (click)="removeServiceItem(i)" class="add-icon clickable">delete</mat-icon>
@@ -132,7 +153,6 @@
                         </div>
                     </div>
                 </form>
-
             </mat-expansion-panel>
         </mat-accordion>
     </mat-list>

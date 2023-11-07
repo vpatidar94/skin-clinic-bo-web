@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 
 @Component({
@@ -42,8 +44,12 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
     serviceDiscount: number = 0;
     serviceNetAmount!: number;
 
+    serviceTypeList!: ServiceTypeVo[];
+
     /* ************************************ Constructors ************************************ */
-    constructor() {
+    constructor(private keyValueStorageService: KeyValueStorageService,
+        private serviceItemApi: ServiceItemApi,
+    ) {
     }
 
     /* ************************************ Public Methods ************************************ */
@@ -115,8 +121,20 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         console.log(this.userBooking);
     }
 
+    public _getServiceTypeList(): void {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
+            this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+        });
+    }
+
+
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
+        this._getServiceTypeList();
     }
 
     private _formChanged(): void {
