@@ -32,7 +32,7 @@ export class InvestigationEditComponent implements OnInit {
     /* ************************************* Public Methods ******************************************** */
 
     public ngOnInit(): void {
-        this.investigationParameters.params = [{ name: '', criteriaList: [] }]
+        this._inIt()
     }
 
     public removeTestParameter(index: number): void {
@@ -66,5 +66,13 @@ export class InvestigationEditComponent implements OnInit {
         return this.groupStates[index];
     }
     /* ************************************* Private Methods ******************************************** */
-
+    private _inIt(): void {
+        if (!this.investigationParameters.params) {
+            this.investigationParameters.params = [{ name: '', criteriaList: [] }]
+            // this.investigationParameters.params=this.investigationParameters.params;
+        }
+        // else{
+        // this.investigationParameters.params = [{ name: '', criteriaList: [] }]
+        //  }
+    }
 }
