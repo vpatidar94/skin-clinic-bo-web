@@ -124,7 +124,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
             }
         }
         );
-
     }
 
     public checkDoctor(selectedDoctor: string | null | undefined): void {
@@ -157,7 +156,6 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
             }
         }
         this.showOnlySelectedTimeSlot = false;
-
         return timeSlots;
     }
 
@@ -181,25 +179,19 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
                 this.selectedShift = shiftIndex;
                 this.showOnlySelectedTimeSlot = false;
             }
-
-
     }
 
 
     /* ************************************ Private Methods ************************************ */
-
     private _init(): void {
         /* to show the previous booking selected time slot */
         if (this.userBooking.booking.timeSlot) {
             this.showOnlySelectedTimeSlot = true;
-
         }
         else {
             this.showOnlySelectedTimeSlot = false;
         }
-
     }
-
 
     private _formChanged(): void {
         const actionDto = {

@@ -51,7 +51,7 @@
                         <input class="placeholder-style" placeholder="Time" name="timeFilter"
                             (keyup)="applyFilter('time', $event)" #timeInput>
                     </th>
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.shift}} </td>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.timeSlot}} </td>
 
                 </ng-container>
 
