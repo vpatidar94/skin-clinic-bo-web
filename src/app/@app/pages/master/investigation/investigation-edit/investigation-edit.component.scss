@@ -1,0 +1,11 @@
+@import "/src/variable.scss";
+.style-gender-dropdown{
+    border:solid 2px;
+    height: 50px;
+    border-radius: 6px;
+    border-color: $lightGray;
+    background-color: white;
+    text-align: center;
+    justify-content: center;
+    padding-top:2px;
+}

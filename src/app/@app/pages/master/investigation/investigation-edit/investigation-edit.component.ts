@@ -7,6 +7,7 @@ import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 @Component({
     selector: 'app-investigation-edit',
     templateUrl: './investigation-edit.component.html',
+    styleUrls: ['./investigation-edit.component.scss'],
 })
 export class InvestigationEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
