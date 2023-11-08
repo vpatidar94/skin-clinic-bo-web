@@ -114,7 +114,7 @@
                     </div>
 
                     <!-- Gender -->
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="d-flex align-items-center mb-3">
                             <div class="col-md-4">
                                 <label class="app-label">Gender</label>
@@ -128,8 +128,22 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                    
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-4">
+                                <label class="app-label">Gender</label>
+                            </div>
+                            <div class="col-md-8 me-2">
+                            <ng-multiselect-dropdown  [placeholder]="'Select Gender'"
+                                [settings]="dropdownSettings" [data]="genderSelectList" 
+                                (onDeSelect)="onGenderSelect($event)" (onSelect)="onGenderSelect($event)">
+                            </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Age Group -->
                     <div class="col-md-3">
                         <div class="d-flex align-items-center mb-3">

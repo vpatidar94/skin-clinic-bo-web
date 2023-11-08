@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DepartmentVo, InvestigationCriteriaVo, ProductVo } from 'aayam-clinic-core';
+import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, ProductVo } from 'aayam-clinic-core';
 import { InvestigationParamVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
@@ -31,6 +31,23 @@ gender = new FormControl('');
 
     @Input()
     departmentList!: DepartmentVo[];
+
+    orgBooking!:  OrgBookingDto[]
+
+
+
+    // newly added 
+    genderSelectList: Array<any> = GENDER_LIST;
+    selectedGender = [] as any[];
+    dropdownSettings = {
+        singleSelection: false,
+        idField: 'item_id',
+        textField: 'item_text',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+        enableCheckAll: false,
+        maxHeight: 50
+    };
 
     /* ************************************* Constructors ******************************************** */
     constructor() { }
@@ -76,13 +93,21 @@ gender = new FormControl('');
 
     /* ************************************* Private Methods ******************************************** */
     private _inIt(): void {
+        this.genderSelectList = this.genderList?.map((item: any) => {
+                         const selected = { item_id: item.id, item_text: item.name};
+                         return selected;
+                   });
+
         if (!this.investigationParameters.params) {
             this.investigationParameters.params = [{ name: '', criteriaList: [] }]
-            // this.investigationParameters.params=this.investigationParameters.params;
         }
-        // else{
-        // this.investigationParameters.params = [{ name: '', criteriaList: [] }]
-        //  }
+        
+    }
+    
+    // newly added
+    // multiple select
+    onGenderSelect(item: any) {
+        
     }
 
 }
