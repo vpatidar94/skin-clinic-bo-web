@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from "@angular/material/button";
 import { MatCard, MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -57,12 +57,14 @@ const MATERIAL_MODULE = [
   MatDialogModule,
   MatNativeDateModule,
   MatCardModule,
+  ReactiveFormsModule, 
+  NgFor
 ];
 
-const COMMON_MODULE = [CommonModule, FormsModule];
+const COMMON_MODULE = [CommonModule, FormsModule];       
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, MasterRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, MasterRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),  ],
   providers: [],
   exports: [],
   declarations: [MasterComponent, ServicesComponent, ServicesEditComponent, ServiceTypeComponent, ServiceTypeEditComponent, ProductsComponent, ProductEditComponent, AddServiceTypeComponent, AddServiceComponent, DepartmentComponent, DepartmentEditComponent, UserTypeComponent, UserTypeEditComponent, InvestigationComponent, InvestigationEditComponent]

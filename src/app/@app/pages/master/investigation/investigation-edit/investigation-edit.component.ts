@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { DepartmentVo, InvestigationCriteriaVo, ProductVo } from 'aayam-clinic-core';
 import { InvestigationParamVo } from 'aayam-clinic-core';
+import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
 @Component({
     selector: 'app-investigation-edit',
@@ -10,6 +12,9 @@ export class InvestigationEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
 
+   
+genderList = GENDER_LIST;
+gender = new FormControl('');
     criteriParameterData = [{
         testName: '',
         ref: '',
@@ -34,6 +39,7 @@ export class InvestigationEditComponent implements OnInit {
     public ngOnInit(): void {
         this._inIt()
     }
+
 
     public removeTestParameter(index: number): void {
         this.investigationParameters.params[index].criteriaList.splice(1, 1);
@@ -65,6 +71,8 @@ export class InvestigationEditComponent implements OnInit {
     public isGroupOpen(index: number): boolean {
         return this.groupStates[index];
     }
+
+
     /* ************************************* Private Methods ******************************************** */
     private _inIt(): void {
         if (!this.investigationParameters.params) {
@@ -75,4 +83,5 @@ export class InvestigationEditComponent implements OnInit {
         // this.investigationParameters.params = [{ name: '', criteriaList: [] }]
         //  }
     }
+
 }

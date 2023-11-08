@@ -98,16 +98,47 @@
             </div>
             <div *ngFor="let grp of investigationParameters.params; let k=index">
                 <div class="row" *ngIf="isGroupOpen(k)">
-                    <!-- Group -->
-                    <div class="col-md-6">
+                    <!-- Group Name-->
+                    <div class="col-md-3">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="app-label">Group Name</label>
                             </div>
-                            <div class="col-md-7 me-2">
+                            <div class="col-md-8 me-2">
                                 <div class="form-group">
                                     <input type="text" class="form-control app-input" name="group"
                                         [(ngModel)]="grp.name" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-4">
+                                <label class="app-label">Gender</label>
+                            </div>
+                            <div class="col-md-8 me-2">
+                                <mat-form-field>
+                                    <mat-select [formControl]="gender" multiple>
+                                        <mat-option *ngFor="let gender of genderList"
+                                            [value]="gender.id">{{gender.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- Age Group -->
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="col-md-4">
+                                <label class="app-label">Age Group</label>
+                            </div>
+                            <div class="col-md-7 me-2">
+                                <div class="form-group">
+                                    <input type="text" class="form-control app-input" name="age-group" required>
                                 </div>
                             </div>
                         </div>
