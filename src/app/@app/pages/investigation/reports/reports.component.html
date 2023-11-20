@@ -103,20 +103,28 @@
                         <!-- </mat-expansion-panel-header> -->
                         <div class="border border-info rounded p-3 mt-3">
                             <div class="row">
-                                <p class="col-md-1"><strong>Sno.</strong></p>
-                                <p class="col-md-8"><strong>Details</strong></p>
-                                <p class="col-md-2"></p>
+                                <p class="col-md-3"><strong>Name of Test</strong></p>
+                                <p class="col-md-3"><strong>Result Value</strong></p>
+                                <p class="col-md-3"><strong>Unit</strong></p>
+                                <p class="col-md-3"><strong>Reference Value</strong></p>
+                                <p class="col-md-"></p>
                             </div>
 
                             <div class="row align-items-center">
-                                <div class="col-md-1 pres-input text-center">
-
-                                    <p class="border border-info rounded p-1 text-align-center">i+1</p>
+                                <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control pres-input" name="nameoftest"
+                                        value="LIPID" required>
                                 </div>
-
-                                <!-- complaint details -->
-                                <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control pres-input" name="complaint" required>
+                                <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control pres-input" name="result" value="10.2"
+                                        required>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control pres-input" name="unit" value="gm%" required>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <input type="text" class="form-control pres-input" name="reference" value="11 - 17"
+                                        required>
                                 </div>
                             </div>
                         </div>

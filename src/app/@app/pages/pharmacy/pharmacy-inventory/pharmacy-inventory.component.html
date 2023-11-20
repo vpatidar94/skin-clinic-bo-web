@@ -41,7 +41,8 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">
                         <!-- {{row.action}}  -->
-                        <a [routerLink]="['/investigation/view-investigation']">{{row.action}}</a>
+                        <!-- <a [routerLink]="['/investigation/view-investigation']">{{row.action}}</a> -->
+                        {{row.action}}
                     </td>
                 </ng-container>
 
