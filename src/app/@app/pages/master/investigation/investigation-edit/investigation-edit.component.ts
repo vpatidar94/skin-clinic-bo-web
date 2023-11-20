@@ -72,7 +72,7 @@ gender = new FormControl('');
     }
 
     public addNewGroupTest(index: number) {
-        this.investigationParameters.params.push({ name: '', criteriaList: [] })
+        this.investigationParameters.params.push({ name: '', criteriaList: [], geneder: [], ageGroup: ''})
     }
 
     public addParameters(index: number): void {
@@ -99,7 +99,7 @@ gender = new FormControl('');
                    });
 
         if (!this.investigationParameters.params) {
-            this.investigationParameters.params = [{ name: '', criteriaList: [] }]
+            this.investigationParameters.params = [{ name: '', criteriaList: [], geneder: [], ageGroup: '' }]
         }
         
     }
@@ -107,7 +107,13 @@ gender = new FormControl('');
     // newly added
     // multiple select
     onGenderSelect(item: any) {
-        
+        // this.investigationParameters.params[0].geneder = this.selectedGender.map((it: any) => {
+        //     return {
+        //         key: it.item_id,
+        //         name: it.item_text,
+        //         value: ''
+        //     } as any;
+        // });
     }
 
 }
