@@ -37,5 +37,10 @@ export class BookingApi {
         return this.http.get<ApiResponse<null>>(environment.apiUrl + URL.CONVERT_PATIENT, { params: { bookingId, patientType, orgId } });
     }
 
+    public getInvestigationList(orgId: string):Observable<ApiResponse<OrgBookingDto[]>> {
+        return this.http.get<ApiResponse<OrgBookingDto[]>>(environment.apiUrl + '/api/core/v1/investigation/patient-list', { params: { orgId } });
+
+    }
+
 }
 
