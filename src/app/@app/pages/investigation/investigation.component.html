@@ -19,7 +19,6 @@
                 <!--patient id -->
                 <ng-container matColumnDef="visitId">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Visit Id</th>
-                    <!-- <td mat-cell *matCellDef="let row"> {{row.visitId}} </td> -->
                     <td mat-cell *matCellDef="let row">{{row.booking.no}}</td>
 
                 </ng-container>
@@ -35,15 +34,13 @@
                 <!--Contact -->
                 <ng-container matColumnDef="patientType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient Type</th>
-                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patientType}} </td> -->
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.type}} </td>
 
                 </ng-container>
 
-                <!-- Date -->
+                <!-- Patient Id -->
                 <ng-container matColumnDef="patientId">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient ID</th>
-                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patientId}} </td> -->
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.patientNo}} </td>
 
                 </ng-container>
@@ -51,16 +48,14 @@
                 <!-- Date -->
                 <ng-container matColumnDef="sampleDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Billing Date</th>
-                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.sampleDate}} </td> -->
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.booking.bookingDate |date}} </td>
 
                 </ng-container>
 
                 <!-- Doctor Name -->
                 <ng-container matColumnDef="doctorsName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dr. Name </th>
-                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.doctorsName}}</td> -->
-                    <td mat-cell *matCellDef="let row" class="text-ellipsis">dr</td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Referred By </th>
+                    <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row.booking.referedBy}}</td>
 
                 </ng-container>
 

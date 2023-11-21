@@ -129,21 +129,22 @@
                             </div>
                         </div>
                     </div> -->
-                   
+
                     <div class="col-md-3">
                         <div class="d-flex align-items-center mb-3">
                             <div class="col-md-4">
                                 <label class="app-label">Gender</label>
                             </div>
                             <div class="col-md-8 me-2">
-                            <ng-multiselect-dropdown  [placeholder]="'Select Gender'" type="" name="gender"
-                                [settings]="dropdownSettings" [data]="genderSelectList" 
-                                (onDeSelect)="onGenderSelect($event)" (onSelect)="onGenderSelect($event)" [(ngModel)]="grp.geneder">
-                            </ng-multiselect-dropdown>
+                                <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" name="gender"
+                                    [settings]="dropdownSettings" [data]="genderSelectList"
+                                    (onDeSelect)="onGenderSelect($event)" (onSelect)="onGenderSelect($event)"
+                                    [(ngModel)]="grp.gender">
+                                </ng-multiselect-dropdown>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Age Group -->
                     <div class="col-md-3">
                         <div class="d-flex align-items-center mb-3">
@@ -152,7 +153,8 @@
                             </div>
                             <div class="col-md-7 me-2">
                                 <div class="form-group">
-                                    <input type="text" class="form-control app-input" name="age-group" [(ngModel)]="grp.ageGroup" required >
+                                    <input type="text" class="form-control app-input" name="age-group"
+                                        [(ngModel)]="grp.ageGroup" required>
                                 </div>
                             </div>
                         </div>

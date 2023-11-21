@@ -13,9 +13,9 @@ export class InvestigationEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
 
-   
-genderList = GENDER_LIST;
-gender = new FormControl('');
+
+    genderList = GENDER_LIST;
+    gender = new FormControl('');
     criteriParameterData = [{
         testName: '',
         ref: '',
@@ -32,7 +32,7 @@ gender = new FormControl('');
     @Input()
     departmentList!: DepartmentVo[];
 
-    orgBooking!:  OrgBookingDto[]
+    orgBooking!: OrgBookingDto[]
 
 
 
@@ -72,7 +72,7 @@ gender = new FormControl('');
     }
 
     public addNewGroupTest(index: number) {
-        this.investigationParameters.params.push({ name: '', criteriaList: [], geneder: [], ageGroup: ''})
+        this.investigationParameters.params.push({ name: '', criteriaList: [], gender: [], ageGroup: '' })
     }
 
     public addParameters(index: number): void {
@@ -94,16 +94,16 @@ gender = new FormControl('');
     /* ************************************* Private Methods ******************************************** */
     private _inIt(): void {
         this.genderSelectList = this.genderList?.map((item: any) => {
-                         const selected = { item_id: item.id, item_text: item.name};
-                         return selected;
-                   });
+            const selected = { item_id: item.id, item_text: item.name };
+            return selected;
+        });
 
         if (!this.investigationParameters.params) {
-            this.investigationParameters.params = [{ name: '', criteriaList: [], geneder: [], ageGroup: '' }]
+            this.investigationParameters.params = [{ name: '', criteriaList: [], gender: [], ageGroup: '' }]
         }
-        
+
     }
-    
+
     // newly added
     // multiple select
     onGenderSelect(item: any) {
