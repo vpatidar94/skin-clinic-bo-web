@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { ApiResponse, BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingUtility, BookingVo, InvestigationParamVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -46,9 +47,22 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
 
     serviceTypeList!: ServiceTypeVo[];
 
+    investigationList!: InvestigationParamVo[];
+
+    // newly added
+    showInvestigation : boolean = false;
+
+    // newly added to link service type as investigation with the investigation list
+
+    serviceTypeInvestigation! : string;
+
+    selectedIndex: number =0;
+
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private serviceItemApi: ServiceItemApi,
+    private investigationApi: InvestigationApi,
+    // private departmentApi: DepartmentApi
     ) {
     }
 
@@ -132,9 +146,34 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
     }
 
 
+    // newly added
+    public _getInvestigationList() {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+          return;
+        }
+        this.investigationApi.getInvestigationList(orgId).subscribe((res: ApiResponse<InvestigationParamVo[]>) => {
+          this.investigationList = res.body ?? [] as InvestigationParamVo[];
+        //   console.log("////",this.investigationList);
+
+        })
+    }
+
+    public serviceItemSelect(event:any, i:number){
+        console.log(event.target.value)
+        if(event.target.value == "investigation"){
+            this.showInvestigation = true;
+            // console.log("KKLL",this.serviceTypeInvestigation)
+        }
+        else{
+            this.showInvestigation = false;
+        }
+    }
+
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
         this._getServiceTypeList();
+        this._getInvestigationList();
     }
 
     private _formChanged(): void {

@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
                         <div class="col-me-3"><strong>Service Type</strong></div>
-                        <div class="col-md-4"><strong>Service</strong></div>
+                        <div class="col-md-4"><strong>Service/Investigation</strong></div>
                         <div class="col-md-2"><strong>Amount</strong></div>
                         <!-- CAN BE USED FURTHER -->
                         <!-- <div class="col-md-2"><strong>Discount</strong></div>
@@ -33,14 +33,15 @@
                         <div class="col-md-1 pres-input text-center">
                             <p class="border border-info rounded p-1 text-align-center">{{i + 1}}</p>
                         </div>
+                       
                         <!-- Service-type -->
                         <div class="form-group col-md-3">
                             <select class="app-single-select-dropdown w-100">
-                                <option *ngFor="let item of serviceTypeList">{{item}}</option>
+                                <option *ngFor="let item of serviceTypeList">{{item.name}}</option>
                             </select>
                         </div>
                         <!-- Service -->
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4" *ngIf="!showInvestigation">
                             <select [disabled]="true" (change)="addItem($event, i)" name="service-item"
                                 class="app-single-select-dropdown w-100" required>
                                 <option [disabled]="isOptionDisabled(item.item._id)"
@@ -52,10 +53,33 @@
                             </select>
                         </div>
 
+                        <!-- newly added -->
+                        <div class="form-group col-md-4" *ngIf="showInvestigation">
+                            <select 
+                                class="app-single-select-dropdown w-100" required>
+                                <option
+                                    *ngFor="let item of investigationList;">
+                                    {{item.testName}}
+                                </option>
+                            </select>
+                        </div>
+
+
                         <!-- Amount -->
-                        <div class="form-group col-md-2">
+                        <!-- <div class="form-group col-md-2">
                             <input [readOnly]="true" type="text" class="form-control pres-input w-100"
                                 name="amount{{i}}" [value]="booking.items[i].amount">
+                        </div> -->
+
+                        <!--Total Amount  -->
+                        <div class="form-group col-md-2" *ngIf="!showInvestigation">
+                            <input type="text" class="form-control pres-input w-100" name="amount{{i}}"
+                                [value]="userBooking.booking.items[i].amount">
+                        </div>
+
+                        <div class="form-group col-md-2" *ngIf="showInvestigation">
+                            <input type="text" class="form-control pres-input w-100" name="amount"
+                                [value]="100">
                         </div>
 
                         <!-- CAN BE USED FURTHER -->
@@ -90,7 +114,7 @@
                         <div class="row">
                             <div class="col-md-1"><strong>Sno.</strong></div>
                             <div class="col-md-3"><strong>Service Type</strong></div>
-                            <div class="col-md-3"><strong>Service</strong></div>
+                            <div class="col-md-3"><strong>Service/Investigation</strong></div>
                             <div class="col-md-2"><strong>Amount</strong></div>
                             <!-- CAN BE USED FURTHER -->
                             <!-- <div class="col-md-2"><strong>Discount</strong></div>
@@ -105,14 +129,14 @@
 
                             <!-- Service Type-->
                             <div class="form-group col-md-3">
-                                <select class="app-single-select-dropdown w-100">
-                                    <option *ngFor="let item of serviceTypeList">{{item.name}}</option>
+                                <select class="app-single-select-dropdown w-100" name="service-type{{i}}" [(ngModel)]="serviceTypeInvestigation" (change)="serviceItemSelect($event,i)" >
+                                    <option *ngFor="let item of serviceTypeList" >{{item.name}}</option>
                                     <!-- <option>Investigation</option> -->
                                 </select>
                             </div>
 
                             <!-- Service -->
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3" *ngIf="!showInvestigation">
                                 <select (change)="addItem($event, i)" name="service-item-{{i}}"
                                     [ngModel]="userBooking.booking.items[i].item?._id"
                                     class="app-single-select-dropdown w-100" required>
@@ -124,12 +148,27 @@
                                     </option>
                                 </select>
                             </div>
+                            <div class="form-group col-md-2" *ngIf="showInvestigation">
+                                <select 
+                                    class="app-single-select-dropdown w-100" required>
+                                    <option
+                                        *ngFor="let item of investigationList">
+                                        {{item.testName}}
+                                    </option>
+                                </select>
+                            </div>
 
                             <!--Total Amount  -->
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2" *ngIf="!showInvestigation">
                                 <input type="text" class="form-control pres-input w-100" name="total{{i}}"
                                     [value]="userBooking.booking.items[i].amount">
                             </div>
+
+                            <div class="form-group col-md-2" *ngIf="showInvestigation">
+                                <input type="text" class="form-control pres-input w-100" name="total"
+                                    [value]="100">
+                            </div>
+
 
                             <!-- CAN BE USED FURTHER -->
                             <!-- Discount -->

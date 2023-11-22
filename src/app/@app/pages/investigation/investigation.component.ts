@@ -81,7 +81,7 @@ export class InvestigationComponent {
         }
         this.bookingApi.getInvestigationList(orgId).subscribe((res: ApiResponse<OrgBookingDto[]>) => {
           this.investigationList = res.body ?? [] as OrgBookingDto[];
-          console.log("kkkkk",this.investigationList);
+          console.log("kkkkklmnop",this.investigationList);
           this.dataSource = new MatTableDataSource(this.investigationList);
 
         })
