@@ -50,19 +50,17 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
     investigationList!: InvestigationParamVo[];
 
     // newly added
-    showInvestigation : boolean = false;
+    showInvestigation: boolean = false;
 
     // newly added to link service type as investigation with the investigation list
+    serviceTypeInvestigation!: string;
 
-    serviceTypeInvestigation! : string;
-
-    selectedIndex: number =0;
+    selectedIndex: number = 0;
 
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private serviceItemApi: ServiceItemApi,
-    private investigationApi: InvestigationApi,
-    // private departmentApi: DepartmentApi
+        private investigationApi: InvestigationApi,
     ) {
     }
 
@@ -132,7 +130,6 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         this.userBooking.booking.items.splice(index, 1);
         BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
         this.userBookingChange.emit(this.userBooking);
-        console.log(this.userBooking);
     }
 
     public _getServiceTypeList(): void {
@@ -150,22 +147,18 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
     public _getInvestigationList() {
         const orgId = this.keyValueStorageService.getOrgId();
         if (!orgId) {
-          return;
+            return;
         }
         this.investigationApi.getInvestigationList(orgId).subscribe((res: ApiResponse<InvestigationParamVo[]>) => {
-          this.investigationList = res.body ?? [] as InvestigationParamVo[];
-        //   console.log("////",this.investigationList);
-
+            this.investigationList = res.body ?? [] as InvestigationParamVo[];
         })
     }
 
-    public serviceItemSelect(event:any, i:number){
-        console.log(event.target.value)
-        if(event.target.value == "investigation"){
+    public serviceItemSelect(event: any, i: number) {
+        if (event.target.value == "investigation") {
             this.showInvestigation = true;
-            // console.log("KKLL",this.serviceTypeInvestigation)
         }
-        else{
+        else {
             this.showInvestigation = false;
         }
     }
