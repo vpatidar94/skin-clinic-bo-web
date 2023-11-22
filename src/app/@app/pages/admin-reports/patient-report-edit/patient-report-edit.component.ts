@@ -57,6 +57,17 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     docterList!: UserVo[];
 
 
+    genderSelectList!: Array<any>;
+    dropdownSettings = {
+        singleSelection: true,
+        idField: 'item_id',
+        textField: 'item_text',
+        itemsShowLimit: 3,
+        allowSearchFilter: true,
+        enableCheckAll: false,
+        maxHeight: 50
+    };
+
     /* ************************************* Constructors ******************************************** */
     constructor(private dialog: MatDialog,
         private userApi: UserApi,
@@ -128,7 +139,17 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
             this.departmentList = res.body ?? [] as DepartmentVo[];
 
+            this.genderSelectList = this.departmentList?.map((item: any) => {
+                const selected = { item_id: item._id, item_text: item.name };
+                return selected;
+            });
+
         })
+    }
+
+    public onDepartmentChange(event: any): void {
+        console.log('Department changed:', event);
+        this.filterDoctorByDepartmentId(this.userBooking.booking.departmentId);
     }
 
     /* ************************************* Private Methods ******************************************** */
@@ -137,6 +158,30 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         const booking = {} as BookingVo;
         userBooking.booking = booking;
         this.userBooking = userBooking;
+        this.userBooking.booking.departmentId = '';
         this._getDepartmentList();
+        // this.genderSelectList = this.departmentList?.map((item: any) => {
+        //     const selected = { item_id: item._id, item_text: item.name };
+        //     return selected;
+        // });
+
+
+       
+        // console.log("?//?",this.genderSelectList)
+    }
+
+    // onDepartmentSelect(item: any) {
+        // this.investigationParameters.params[0].geneder = this.selectedGender.map((it: any) => {
+        //     return {
+        //         key: it.item_id,
+        //         name: it.item_text,
+        //         value: ''
+        //     } as any;
+        // });
+    // }
+
+    public onDepartmentSelect(selectedItem: any): void {
+        console.log('Selected department:', selectedItem);
+        this.filterDoctorByDepartmentId(selectedItem.item_id);
     }
 }

@@ -29,12 +29,26 @@
 
                 <!-- Department  -->
                 <div class="col-md-3">
-                    <select class="app-single-select-dropdown w-100" name="department"
+
+                    <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" name="department"
+                                    [settings]="dropdownSettings" [data]="genderSelectList"
+                                    (onSelect)="onDepartmentSelect($event)"
+                                   
+                                    [(ngModel)]="userBooking.booking.departmentId">
+                                </ng-multiselect-dropdown>
+
+                    <!-- <select class="app-single-select-dropdown w-100" name="department"
                         [(ngModel)]="userBooking.booking.departmentId"
                         (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)">
                         <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
                         </option>
-                    </select>
+                    </select> -->
+
+                    <!-- <input list="menace" name="menace" class="app-single-select-dropdown w-100" [(ngModel)]="userBooking.booking.departmentId"
+                    >
+                    <datalist id="menace" (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)">
+                        <option *ngFor="let menace of departmentList" [ngValue]="menace._id">{{menace.name}} </option>
+                    </datalist> -->
                 </div>
 
                 <!-- Doctor's Name -->

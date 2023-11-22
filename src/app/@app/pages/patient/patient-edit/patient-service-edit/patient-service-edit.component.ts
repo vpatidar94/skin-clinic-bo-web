@@ -57,6 +57,19 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
 
     selectedIndex: number = 0;
 
+
+    serviceItemSelectList!: Array<any>;
+    dropdownSettings = {
+        singleSelection: true,
+        idField: 'item_id',
+        textField: 'item_text',
+        itemsShowLimit: 8,
+        allowSearchFilter: true,
+        enableCheckAll: false,
+        maxHeight: 500
+    };
+
+
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private serviceItemApi: ServiceItemApi,
@@ -66,6 +79,9 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
 
     /* ************************************ Public Methods ************************************ */
     public ngOnInit(): void {
+        console.log('lol',this.serviceItemList);
+        
+
         this._init();
         // @ts-ignore
         this.serviceForm?.valueChanges?.subscribe(() => {
@@ -78,6 +94,8 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         if (changes['serviceItemList']) {
             this.serviceItemList = changes['serviceItemList'].currentValue;
             this.cloneServiceItemList = changes['serviceItemList'].currentValue;
+
+           
         }
     }
 
@@ -139,6 +157,14 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         }
         this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
             this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+
+            this.serviceItemSelectList = this.serviceItemList?.map((item: any) => {
+                const selected = { item_id: item.item._id, item_text: item.item.name };
+                
+                return selected;
+                
+            });
+            console.log("nol",this.serviceItemSelectList);
         });
     }
 
@@ -176,4 +202,33 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         } as UiActionDto<boolean>;
         this.pubSub.emit(actionDto);
     }
+
+    // onServiceSelect(event:any,i:number):void {
+    //     const item = this.serviceItemList?.find((item) => item.item._id === event.target);
+    //     if (item && item.item) {
+    //         this.userBooking.booking.items[i].item = JSON.parse(JSON.stringify(item.item));
+    //         this.userBooking.booking.items[i].priceBase = item.item.fee;
+    //         this.userBooking.booking.items[i].qty = 1;
+    //         this.userBooking.booking.items[i].name = item.item.name;
+    //         BookingUtility.updateBookingItemAndCalcTotal(true, this.userBooking.booking, item.item, 1, '');
+    //         this.userBookingChange.emit(this.userBooking);
+    //     }
+    // }
+
+    onServiceSelect(event: any, i: number): void {
+        const selectedServiceItemId = event[0]?.item_id; // Assuming the structure of the selected item
+        const selectedServiceItem = this.serviceItemList.find(item => item.item._id === selectedServiceItemId);
+    
+        if (selectedServiceItem && selectedServiceItem.item) {
+            this.userBooking.booking.items[i].item = JSON.parse(JSON.stringify(selectedServiceItem.item));
+            this.userBooking.booking.items[i].priceBase = selectedServiceItem.item.fee;
+            this.userBooking.booking.items[i].qty = 1;
+            this.userBooking.booking.items[i].name = selectedServiceItem.item.name;
+    
+            BookingUtility.updateBookingItemAndCalcTotal(true, this.userBooking.booking, selectedServiceItem.item, 1, '');
+    
+            this.userBookingChange.emit(this.userBooking);
+        }
+    }
+    
 }

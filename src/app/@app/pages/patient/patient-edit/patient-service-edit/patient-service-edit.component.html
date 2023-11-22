@@ -137,7 +137,7 @@
 
                             <!-- Service -->
                             <div class="form-group col-md-3" *ngIf="!showInvestigation">
-                                <select (change)="addItem($event, i)" name="service-item-{{i}}"
+                                <!-- <select (change)="addItem($event, i)" name="service-item-{{i}}"
                                     [ngModel]="userBooking.booking.items[i].item?._id"
                                     class="app-single-select-dropdown w-100" required>
                                     <option [disabled]="isOptionDisabled(item.item._id)"
@@ -146,7 +146,16 @@
                                             {{item.user.nameL ??
                                             ''}}</span>
                                     </option>
-                                </select>
+                                </select> -->
+
+                                <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" 
+                                [settings]="dropdownSettings" [data]="serviceItemSelectList"
+                                (ngModelChange)="onServiceSelect($event,i)"
+                                name="service-item-{{i}}"
+                               
+                                [ngModel]="userBooking.booking.items[i].item?._id">
+                            </ng-multiselect-dropdown>
+
                             </div>
                             <div class="form-group col-md-2" *ngIf="showInvestigation">
                                 <select 
