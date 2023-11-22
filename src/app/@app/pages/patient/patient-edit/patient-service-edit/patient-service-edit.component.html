@@ -42,7 +42,7 @@
                         </div>
                         <!-- Service -->
                         <div class="form-group col-md-4" *ngIf="!showInvestigation">
-                            <select [disabled]="true" (change)="addItem($event, i)" name="service-item"
+                            <!-- <select [disabled]="true" (change)="addItem($event, i)" name="service-item"
                                 class="app-single-select-dropdown w-100" required>
                                 <option [disabled]="isOptionDisabled(item.item._id)"
                                     *ngFor="let item of serviceItemList;" [value]="item.item._id">
@@ -50,7 +50,14 @@
                                         {{item.user.nameL ??
                                         ''}}</span>
                                 </option>
-                            </select>
+                            </select> -->
+                            <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" 
+                                [settings]="dropdownSettings" [data]="serviceItemSelectList"
+                                (ngModelChange)="onServiceSelect($event,i)"
+                                name="service-item-{{i}}"
+                               
+                                [ngModel]="userBooking.booking.items[i].item?._id">
+                            </ng-multiselect-dropdown>
                         </div>
 
                         <!-- newly added -->
@@ -71,7 +78,7 @@
                                 name="amount{{i}}" [value]="booking.items[i].amount">
                         </div> -->
 
-                        <!--Total Amount  -->
+                        <!--Total Amount-->
                         <div class="form-group col-md-2" *ngIf="!showInvestigation">
                             <input type="text" class="form-control pres-input w-100" name="amount{{i}}"
                                 [value]="userBooking.booking.items[i].amount">

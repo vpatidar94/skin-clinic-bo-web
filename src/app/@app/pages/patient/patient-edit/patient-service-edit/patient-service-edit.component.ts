@@ -218,6 +218,7 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
     onServiceSelect(event: any, i: number): void {
         const selectedServiceItemId = event[0]?.item_id; // Assuming the structure of the selected item
         const selectedServiceItem = this.serviceItemList.find(item => item.item._id === selectedServiceItemId);
+        console.log('Selected Service Item:', selectedServiceItem);
     
         if (selectedServiceItem && selectedServiceItem.item) {
             this.userBooking.booking.items[i].item = JSON.parse(JSON.stringify(selectedServiceItem.item));
