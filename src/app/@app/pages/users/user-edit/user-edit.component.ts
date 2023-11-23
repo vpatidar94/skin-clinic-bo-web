@@ -15,6 +15,7 @@ export class UserEditComponent implements OnInit, OnChanges {
     showSectionUserProfile!: boolean;
     showSectionAccounts!: boolean;
     showSectionAttendance!: boolean;
+    showSectionUserLogin!: boolean;
 
     tabValue!: string;
     invalidFormStaff!: boolean;
@@ -105,6 +106,13 @@ export class UserEditComponent implements OnInit, OnChanges {
                 this._resetSection();
                 this.showSectionAccounts = true;
                 break;
+
+            // newly added for user login
+            case 'USERLOGIN':
+                this._resetSection();
+                this.showSectionUserLogin = true;
+                break;
+
             case 'ATTENDANCE':
                 this._resetSection();
                 this.showSectionAttendance = true;
@@ -116,5 +124,6 @@ export class UserEditComponent implements OnInit, OnChanges {
         this.showSectionUserProfile = false;
         this.showSectionAccounts = false;
         this.showSectionAttendance = false;
+        this.showSectionUserLogin = false;
     }
 }

@@ -27,6 +27,7 @@ import { SharedDirectiveModule } from 'src/app/@shared/directive/shared-directiv
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserLoginComponent } from './user-edit/user-login/user-login.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -54,6 +55,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, UsersRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
   providers: [],
   exports: [],
-  declarations: [UsersComponent, UserEditComponent, UserProfileComponent, AccountComponent]
+  declarations: [UsersComponent, UserEditComponent, UserProfileComponent, AccountComponent,UserLoginComponent]
 })
 export class UsersModule { }

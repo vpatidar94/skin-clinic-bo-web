@@ -1,0 +1,20 @@
+.style-form{
+    background-color: rgb(217, 235, 243);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+// .style-form {
+//     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+//     padding: 20px;
+//     border-radius: 10px;
+// }
+
+.style-form label {
+    font-weight: bold;
+}
+
+.style-form select {
+    height: 50px;
+}
