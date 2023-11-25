@@ -9,6 +9,7 @@ import { ProductsComponent } from './products/products.component';
 import { DepartmentComponent } from './department/department.component';
 import { UserTypeComponent } from './user-type/user-type.component';
 import { InvestigationComponent } from './investigation/investigation.component';
+import { DepartmentWisePermissionsComponent } from './department-wise-permissions/department-wise-permissions.component';
 
 const routes = [
   { path: '', component: MasterComponent },
@@ -19,7 +20,8 @@ const routes = [
   { path: 'add-service', component: AddServiceComponent },
   { path: 'department', component: DepartmentComponent },
   { path: 'user-type', component: UserTypeComponent },
-  { path: 'investigation', component: InvestigationComponent }
+  { path: 'investigation', component: InvestigationComponent },
+  { path: 'department-wise-permissions', component: DepartmentWisePermissionsComponent }
 ];
 
 @NgModule({

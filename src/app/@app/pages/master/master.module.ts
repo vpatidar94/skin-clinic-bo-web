@@ -38,6 +38,7 @@ import { ServiceTypeEditComponent } from './service-type/service-type-edit/servi
 import { UserTypeEditComponent } from './user-type/user-type-edit/user-type-edit.component';
 import { InvestigationComponent } from './investigation/investigation.component';
 import { InvestigationEditComponent } from './investigation/investigation-edit/investigation-edit.component';
+import { DepartmentWisePermissionsComponent } from './department-wise-permissions/department-wise-permissions.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -67,6 +68,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
   imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, MasterRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(),  ],
   providers: [],
   exports: [],
-  declarations: [MasterComponent, ServicesComponent, ServicesEditComponent, ServiceTypeComponent, ServiceTypeEditComponent, ProductsComponent, ProductEditComponent, AddServiceTypeComponent, AddServiceComponent, DepartmentComponent, DepartmentEditComponent, UserTypeComponent, UserTypeEditComponent, InvestigationComponent, InvestigationEditComponent]
+  declarations: [MasterComponent, ServicesComponent, ServicesEditComponent, ServiceTypeComponent, ServiceTypeEditComponent, ProductsComponent, ProductEditComponent, AddServiceTypeComponent, AddServiceComponent, DepartmentComponent, DepartmentEditComponent, UserTypeComponent, UserTypeEditComponent, InvestigationComponent, InvestigationEditComponent, DepartmentWisePermissionsComponent]
 })
 export class MasterModule { }

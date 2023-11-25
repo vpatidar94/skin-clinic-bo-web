@@ -1,0 +1,29 @@
+<app-label>Roles and Permissions</app-label>
+
+<div *ngFor="let section of arrayMenus; let i = index">
+    <div class="menu-container">
+        <label for="menuDropdown{{ i }}">Select Menu:</label>
+        <select id="menuDropdown{{ i }}" [(ngModel)]="section.menu" (change)="selectMenu(section)"
+            class="app-single-select-dropdown">
+            <option *ngFor="let menuOption of menuOptions" [value]="menuOption">{{ menuOption }}</option>
+        </select>
+
+        <mat-icon (click)="removeMenu(i)" class="add-icon clickable">delete</mat-icon>
+        &nbsp;&nbsp;
+        <mat-icon (click)="addMenu()" *ngIf="(i+1) === arrayMenus.length"
+            class="add-icon clickable">add_circle_outline</mat-icon>
+
+        <div class="pages-container" *ngIf="section.menu !== ''">
+
+            <div class="d-flex flex-row">
+                <h3>Pages:</h3>
+                <div *ngFor="let page of section.pages">
+                    <input type="checkbox" [id]="page.name" [value]="page.selected" [(ngModel)]="page.selected" />
+                    <label [for]="page.name">{{ page.name }}</label>
+                </div>
+            </div>
+            <button (click)="addPage(section)">Add Page</button>
+            <button (click)="removePage(section)">Remove Page</button>
+        </div>
+    </div>
+</div>
