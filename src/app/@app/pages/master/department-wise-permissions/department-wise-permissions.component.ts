@@ -17,10 +17,23 @@ export class DepartmentWisePermissionsComponent implements OnInit {
     public ngOnInit(): void {
     }
 
+    arrayDept: {departmentName: string }[] = [{departmentName: ''}];
+    
+    departmentOptions: string[] = ['department1', 'department2'];
+
     menuOptions: string[] = ['Add Patient', 'Appointment']; // Add other menu options as needed
     arrayMenus: { menu: string, pages: { name: string, selected: boolean }[] }[] = [
         { menu: '', pages: [] } // Initially, an empty menu
     ];
+
+    addDept(): void {
+        this.arrayDept.push({departmentName: ''})
+    }
+
+    removeDept(index: number): void {
+        this.arrayDept.splice(index,1)
+
+    }
 
     addMenu(): void {
         this.arrayMenus.push({ menu: '', pages: [] });
@@ -28,6 +41,7 @@ export class DepartmentWisePermissionsComponent implements OnInit {
 
     removeMenu(index: number): void {
         this.arrayMenus.splice(index, 1);
+
     }
 
     selectMenu(section: any): void {
