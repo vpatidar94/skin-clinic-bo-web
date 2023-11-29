@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { ApiResponse, DepartmentVo, ResponseStatus, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, DepartmentVo, ResponseStatus, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo, AssetPathUtility } from 'aayam-clinic-core';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
@@ -39,6 +39,9 @@ export class UserEditComponent implements OnInit, OnChanges {
 
     filteredUserTypeList!: UserTypeDetailDto[];
 
+    fileEmpImg!: File;
+    fileEmpIdProof!: File;
+
     /* ************************************* Constructor ******************************************** */
     constructor(
         private userApi: UserApi,
@@ -70,8 +73,27 @@ export class UserEditComponent implements OnInit, OnChanges {
 
     public onSavingUserProfile(): void {
         this.userApi.addUpdateStaff(this.staff).subscribe((res: ApiResponse<UserVo>) => {
-            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+            const userId = res.body?._id ?? '';
+            if (this.fileEmpImg) {
+                this.uploadUserImage(userId);
             }
+            if (this.fileEmpIdProof) {
+                this.uploadUserIdProof(userId);
+            }
+        });
+    }
+
+    public uploadUserImage(empId: string): void {
+        this.userApi.uploadUserImage(this.fileEmpImg, empId, AssetPathUtility.ASSET_IDENTITY.EMP_PHOTO).subscribe((res: any) => {
+            this.staff.user.img = res.body;
+            this.staffChange.emit(this.staff);
+        });
+    }
+
+    public uploadUserIdProof(empId: string): void {
+        this.userApi.uploadUserImage(this.fileEmpIdProof, empId, AssetPathUtility.ASSET_IDENTITY.EMP_ID_PROOF).subscribe((res: any) => {
+            this.staff.user.imgIdProof = res.body;
+            this.staffChange.emit(this.staff);
         });
     }
 
@@ -82,10 +104,16 @@ export class UserEditComponent implements OnInit, OnChanges {
         })
     }
 
-    public formChangeOrg(event: UiActionDto<boolean>): void {
+    public formChangeOrg(event: UiActionDto<any>): void {
         switch (event.action) {
             case 'CHANGE_FORM_STAFF':
                 this.invalidFormStaff = event.data;
+                break;
+            case 'USER_PHOTO_UPLOAD':
+                this.fileEmpImg = event.data as File;
+                break;
+            case 'USER_ID_PROOF_UPLOAD':
+                this.fileEmpIdProof = event.data as File;
                 break;
         }
     }

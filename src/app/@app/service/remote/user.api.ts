@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse, OrgVo, UserAccessDetailDto, UserAccountVo, UserAuthVo, UserEmpDto, UserTypeDetailDto, UserTypeVo, UserVo } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
@@ -46,6 +46,20 @@ export class UserApi {
     // userAccount update api
     public addUpdateUserAccount(userAccount: UserAccountVo): Observable<ApiResponse<UserAccountVo>> {
         return this.http.post<ApiResponse<UserAccountVo>>(environment.apiUrl +  '/api/core/v1/user/user-account-add-update' , userAccount);
+    }
+
+    public uploadUserImage(file: File, empId: string, assetIdentity: string): Observable<HttpEvent<ApiResponse<string>>> {
+        const formdata: FormData = new FormData();
+        formdata.append('file', file);
+        formdata.append('assetId', empId);
+        formdata.append('assetIdentity', assetIdentity);
+
+        const req = new HttpRequest('POST', environment.apiUrl + URL.USER_ASSET_UPLOAD, formdata, {
+            reportProgress: true,
+            responseType: 'text'
+        });
+
+        return this.http.request(req);
     }
 }
 

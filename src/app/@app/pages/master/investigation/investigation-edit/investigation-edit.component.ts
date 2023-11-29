@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, ProductVo } from 'aayam-clinic-core';
+import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, InvestigationGroupVo } from 'aayam-clinic-core';
 import { InvestigationParamVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
@@ -72,7 +72,7 @@ export class InvestigationEditComponent implements OnInit {
     }
 
     public addNewGroupTest(index: number) {
-        this.investigationParameters.params.push({ name: '', criteriaList: [], gender: [], ageGroup: '' })
+        this.investigationParameters.params.push({} as InvestigationGroupVo)
     }
 
     public addParameters(index: number): void {
@@ -99,7 +99,7 @@ export class InvestigationEditComponent implements OnInit {
         });
 
         if (!this.investigationParameters.params) {
-            this.investigationParameters.params = [{ name: '', criteriaList: [], gender: [], ageGroup: '' }]
+            this.investigationParameters.params = [] as InvestigationGroupVo[];
         }
 
     }

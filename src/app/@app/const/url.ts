@@ -61,14 +61,16 @@ export const URL = {
     ADD_UPDATE_SERVICE_TYPE: MJR_SERVICE_ITEM + '/service-type-add-update',
     SERVICE_TYPE_LIST: MJR_SERVICE_ITEM + '/service-type-list',
     LAST_ORDER_NO: MJR_ORG + '/last-order-no',
+    USER_LIST: MJR_ORG + '/user-type-list',
+    ADD_UPDATE_USER_TYPE: MJR_ORG + '/user-type-add-update',
+    ADD_UPDATE_USER: MJR_ORG + ADD_UPDATE,
+
     // ******************************************************************
     // User API endpoint
-    ADD_UPDATE_USER: MJR_ORG + ADD_UPDATE,
     STAFF_LIST: MJR_USER + '/staff-list',
     ADD_UPDATE_STAFF: MJR_USER + '/staff-add-update',
     ACCESS_LIST: MJR_USER + '/access-list',
-    USER_LIST: MJR_ORG + '/user-type-list',
-    ADD_UPDATE_USER_TYPE: MJR_ORG + '/user-type-add-update',
+    USER_ASSET_UPLOAD: MJR_USER + '/upload-user-asset',
 
     // ******************************************************************
     // Booking API endpoint

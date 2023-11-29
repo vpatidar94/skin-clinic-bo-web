@@ -10,6 +10,7 @@ import { GENDER_NAME } from '../../const/gender.consr';
 import { SUB_ROLE_NAME } from '../../const/sub-role.const';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { UserServiceTimingVo } from 'aayam-clinic-core/dist/vo/user-service-timing.vo';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -28,7 +29,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   subRoleName = SUB_ROLE_NAME as any;
   roleName = ROLE_NAME as any
 
-  displayedColumns: string[] = ['userCode', 'date', 'userName', 'type', 'department', 'action'];
+  displayedColumns: string[] = ['img', 'userCode', 'date', 'userName', 'type', 'department', 'action'];
 
   dataSource!: MatTableDataSource<UserVo>;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
@@ -51,6 +52,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     to: ""
   }];
 
+  bucketUrl = environment.bucketUrl;
 
   /* ************************************* Constructor ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,

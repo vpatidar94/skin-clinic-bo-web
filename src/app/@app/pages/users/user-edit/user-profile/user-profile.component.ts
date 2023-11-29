@@ -70,6 +70,27 @@ export class UserProfileComponent implements OnInit, OnChanges {
         }
     }
 
+    onPhotoSelected(event: any) {
+        if (event.target.files.length > 0) {
+            const actionDto = {
+                action: 'USER_PHOTO_UPLOAD',
+                data: event.target.files[0]
+            } as UiActionDto<File>;
+            this.pubSub.emit(actionDto);
+        }
+    }
+
+    onIdProofSelected(event: any) {
+        if (event.target.files.length > 0) {
+            const actionDto = {
+                action: 'USER_ID_PROOF_UPLOAD',
+                data: event.target.files[0]
+            } as UiActionDto<File>;
+            this.pubSub.emit(actionDto);
+        }
+    }
+
+
     public addServiceTiming() {
         this.staff.user.serviceTiming.push({
             from: '',
@@ -84,7 +105,6 @@ export class UserProfileComponent implements OnInit, OnChanges {
                 this.inValidAddressForm = event.data;
                 this._formChanged();
                 this.staffChange.emit(this.staff);
-
                 break;
         }
     }

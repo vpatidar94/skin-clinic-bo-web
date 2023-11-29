@@ -6,7 +6,8 @@ export const environment = {
         storageBucket: "aayam-clinic.appspot.com",
         messagingSenderId: "255880178597",
         appId: "1:255880178597:web:e1c344580f82a9d3e1164c",
-        measurementId: "G-2FQ6NRHEYC"
+        measurementId: "G-2FQ6NRHEYC",
     },
-    apiUrl: 'https://aayam-clicnic-api-dev-wpqbr.ondigitalocean.app'
+    apiUrl: 'https://aayam-clicnic-api-dev-wpqbr.ondigitalocean.app',
+    bucketUrl: 'https://aayam-clinic-storage.blr1.cdn.digitaloceanspaces.com/'
 };

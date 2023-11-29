@@ -248,8 +248,7 @@
                         </div>
                         <div class="row ">
                             <div class="form-group col-md-7">
-                                <input type="file" class="form-control app-input" name="addPhoto"
-                                    [(ngModel)]="staff.user.img" required>
+                                <input type="file" (change)="onPhotoSelected($event)"  class="form-control app-input" name="addPhoto" required>
                             </div>
                             <div class="col-md-2">
                                 <button class="common-button">Browse</button>
@@ -267,7 +266,7 @@
                         <div class="row ">
                             <div class="form-group col-md-7">
                                 <input type="file" class="form-control app-input" name="uploadIdProof"
-                                    [(ngModel)]="staff.user.img" required>
+                                    (change)="onIdProofSelected($event)" required>
                             </div>
                             <div class="col-md-2">
                                 <button class="common-button">Browse</button>
