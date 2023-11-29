@@ -1,0 +1,144 @@
+<div id="printable-content">
+    <h4 class="modal-title">
+        ID Card
+    </h4>
+    <div class="modal-body">
+        <div class="ms-5 mt-5">
+            <div id="idcard" class="mt-5">
+
+
+                <table style="height: 440px; width: 380px; border:1px solid black;" class="IDCARD">
+                    <tbody>
+                        <tr style="height:95px">
+                            <td colspan="2"><img style="padding-left:10px; height:70px" src="/Images/logo.png"></td>
+                            <td colspan="3" class="text-center">
+                                <p style="font-style: italic; font-size: 13px; font-weight: 700; margin: 0 0 0;"
+                                    class="color-red">An Institute dedicated for the </p>
+                                <p style="font-style: italic; font-size: 13px; font-weight: 700; margin: 0 0 0;"
+                                    class="color-red">excellence in preparation of</p>
+                                <p style="font-size: 24px; font-weight: 700; margin: 0 0 0;" class="color-navy">NEET |
+                                    JEE</p>
+                            </td>
+                        </tr>
+                        <tr style="height:47px">
+                            <td colspan="5" class="text-center bg-navy">
+                                <p style="font-size: 30px; font-weight: 700; margin: 0 0 0;" class="color-white">
+                                    ENTRANCE CARD</p>
+                            </td>
+
+                        </tr>
+                        <tr style="height:20px;">
+                            <td colspan="5"></td>
+                        </tr>
+                        <tr style="height:112px">
+                            <td colspan="3" class="padding-left-10">
+                                <table style="height: 112px; width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-weight-medium font-size-18 color-navy">Roll No.</td>
+                                            <td class="font-weight-bold font-size-18 color-red">6883</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-medium font-size-14 color-navy">Stream</td>
+                                            <td class="font-weight-bold font-size-14 color-black">NEET classroom</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-medium font-size-14 color-navy">Course</td>
+                                            <td class="font-weight-bold font-size-14 color-black">TARGET - NEET</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-medium font-size-14 color-navy">Batch</td>
+                                            <td class="font-weight-bold font-size-14 color-red">A3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td colspan="2" class="padding-left-30">
+                                <img *ngIf="staff.user.img" class="avatar" [src]="bucketUrl + staff.user.img" />
+                            </td>
+                        </tr>
+                        <tr style="height:20px">
+                            <td class="font-weight-medium font-size-18 color-navy padding-left-10">Name</td>
+                            <td class="font-weight-bold font-size-18 color-red padding-left-30" colspan="4">
+                                {{staff.user.nameF}} {{staff.user.nameL}}</td>
+
+                        </tr>
+                        <tr style="height:40px">
+                            <td class="font-weight-medium font-size-14 color-navy padding-left-10">Address</td>
+                            <td class="font-weight-bold font-size-12 color-black padding-left-30" colspan="4">
+                                {{staff.user.address?.city}}</td>
+                        </tr>
+
+                        <tr style="height:20px">
+                            <td colspan="3">
+                                <table>
+                                    <tbody>
+                                        <tr style="height:20px">
+                                            <td class="font-weight-medium font-size-12 color-navy padding-left-10">Adm.
+                                                Date</td>
+                                            <td class="font-weight-bold font-size-12 color-black padding-left-10">
+                                                27/11/2023</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-medium font-size-12 color-navy padding-left-10">Valid
+                                                Upto</td>
+                                            <td class="font-weight-bold font-size-12 color-black padding-left-10"
+                                                colspan="2">30/04/2024</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td colspan="2">
+                                <img src={{staff.user.img}} alt="Imagggggg" style="margin-bottom: 4px;">
+
+                            </td>
+                        </tr>
+                        <tr style="border-top: 1px solid black; border-bottom: 1px solid black; height: 20px;">
+                            <td colspan="5">
+                                <table style="width:100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-size:8px;" class="font-weight-medium">1. This card is
+                                                compulsory for admission in class.</td>
+                                            <td style="font-size:8px;" class="font-weight-medium">3. New card will be
+                                                issued after payment of 50/-.</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size:8px;" class="font-weight-medium">2. This card will not
+                                                be valid after expiry date.</td>
+                                            <td style="font-size:8px;" class="font-weight-medium">4. Wear the card in
+                                                the campus compulsorily.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="bg-yellow">
+                            <td class="padding-left-10 padding-right-0 font-size-12 font-weight-bold color-red">Reg.
+                                office :</td>
+                            <td colspan="4"
+                                class="padding-left-0 padding-right-0 font-size-12 font-weight-bold color-navy">
+                                3/1, Ravindra Nagar Old Palasia Indore (M.P.) <br> Contact: 0731-4058393, 0722-4048393
+                            </td>
+                        </tr>
+                        <tr class="bg-yellow">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-button matDialogClose="no">Cancel</button>
+    <button mat-button (click)="printBarcode()">Print</button>
+</mat-dialog-actions>

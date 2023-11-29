@@ -2,6 +2,8 @@ import { Component, OnInit, SimpleChanges, Input, OnChanges, Output, EventEmitte
 import { ApiResponse, DepartmentVo, ResponseStatus, UserAccountVo, UserEmpDto, UserTypeDetailDto, UserVo, AssetPathUtility } from 'aayam-clinic-core';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { IdCardDialogComponent } from './id-card-dialog/id-card-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-user-edit',
@@ -45,6 +47,7 @@ export class UserEditComponent implements OnInit, OnChanges {
     /* ************************************* Constructor ******************************************** */
     constructor(
         private userApi: UserApi,
+        public dialog: MatDialog
     ) { }
 
     /* ************************************* Public Methods ******************************************** */
@@ -117,6 +120,20 @@ export class UserEditComponent implements OnInit, OnChanges {
                 break;
         }
     }
+
+    public generateIdCard(enterAnimationDuration: string, exitAnimationDuration: string):void {
+            this.dialog.open(IdCardDialogComponent, {
+                width: '550px',
+                height: '550px',
+                enterAnimationDuration,
+                exitAnimationDuration,
+                data: { staff: this.staff }
+            });
+            
+            
+            
+        }
+   
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
