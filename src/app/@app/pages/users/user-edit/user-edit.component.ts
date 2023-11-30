@@ -129,7 +129,7 @@ export class UserEditComponent implements OnInit, OnChanges {
             height: '830px',
             enterAnimationDuration,
             exitAnimationDuration,
-            data: { staff: this.staff }
+            data: { staff: this.staff, departmentList:this.departmentList }
         });
     }
 

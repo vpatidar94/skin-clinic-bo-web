@@ -1,6 +1,7 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentVo, UserEmpDto, UserVo } from 'aayam-clinic-core';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,12 +9,12 @@ import { environment } from 'src/environments/environment';
     templateUrl: './id-card-dialog.component.html',
     styleUrls: ['./id-card-dialog.component.scss']
 })
-export class IdCardDialogComponent {
+export class IdCardDialogComponent implements OnInit {
 
     /* ************************************ Static Fields ************************************ */
 
     /* ************************************ Instance Fields ************************************ */
-    staff: UserEmpDto;
+    staff!: UserEmpDto;
     bucketUrl = environment.bucketUrl;
     empOrgId!: string;
     secondIdCard!: boolean
@@ -23,13 +24,25 @@ export class IdCardDialogComponent {
 
     /* ************************************ Constructors ************************************ */
     constructor(public dialogRef: MatDialogRef<IdCardDialogComponent>,
+        private keyValueStorageService: KeyValueStorageService,
         @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.staff = data.staff;
-        this.secondIdCard = data.secondIdCard;
+
 
     }
 
     /* ************************************ Public Methods ************************************ */
+    public ngOnInit(): void {
+        this.staff = this.data.staff;
+        this.secondIdCard = this.data.secondIdCard;
+        this.departmentList = this.data.departmentList;
+
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.empOrgId = orgId;
+    }
+
     public onNoClick(): void {
         this.dialogRef.close();
     }
@@ -38,6 +51,7 @@ export class IdCardDialogComponent {
         const departmentId = row.emp[this.empOrgId].departmentId;
         const department = this.departmentList?.find(dep => dep._id === departmentId);
         return department ? department.name : '';
+
     }
 
     public printBarcode() {
