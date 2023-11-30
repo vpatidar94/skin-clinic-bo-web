@@ -1,3 +1,4 @@
+/* CSS FOR THE ID CARD same as that of student's i card start*/
 .IDCARD td {
     /*padding: 0px !important;*/
     width: 20%;
@@ -30,3 +31,118 @@ text-center {
 .bg-yellow {
     background-color: #ffff00 !important;
 }
+
+/* CSS FOR THE ID CARD same as that of student's i card end*/
+
+
+/* second id cards css start*/
+
+.idCard {
+    width: 420px;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  #header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // background-color: #007bff;
+    color: red;
+    padding: 10px;
+  }
+  
+  .logo {
+    max-width: 50px;
+    max-height: 50px;
+  }
+  
+  .slogan {
+    margin-left: 10px;
+  }
+  
+  .title-container {
+    background-color: #007bff;
+    color: #fff;
+    // padding: 10px;
+    text-align: center;
+    // font-size: 50px;
+  }
+
+  .card-title{
+    font-size:30px;
+    padding: 10px;
+  }
+  
+  .employeeDetails {
+    display: flex;
+    padding-left: 10px;
+  }
+  
+  .employeeInfo {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .employeeImage {
+    max-width: 120px;
+    height: 150px;
+    // border-radius: 50%;
+    margin-right:20px;
+  }
+  
+  .address {
+    padding-left: 20px;
+
+  }
+  
+  .dates {
+    padding-left: 20px;
+    margin-top: 0px;
+
+  }
+  
+//   .pointsContainer {
+//     // padding: 10px;
+    
+//   }
+  
+  .point {
+    margin-bottom: 0px;
+    font-size: 10px;
+  }
+  
+  .officeAddress {
+    background-color: yellow;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .label-style1{
+    font-weight:medium ;
+    font-size:18px;
+    color: navy;
+  }
+
+  .detail-style1{
+    font-weight:bold ;
+    font-size:18px;
+    color:red;
+  }
+
+  .label-style2{
+    font-weight:medium;
+    font-size:14px; 
+    color:navy;
+  }
+
+  .detail-style2{
+    font-weight:bold ;
+    font-size:14px;
+    color: black;
+  }
+/* second id cards css end*/
+  
+  

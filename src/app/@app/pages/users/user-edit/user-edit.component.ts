@@ -44,6 +44,8 @@ export class UserEditComponent implements OnInit, OnChanges {
     fileEmpImg!: File;
     fileEmpIdProof!: File;
 
+    secondIdCard: boolean = false;
+
     /* ************************************* Constructor ******************************************** */
     constructor(
         private userApi: UserApi,
@@ -121,19 +123,27 @@ export class UserEditComponent implements OnInit, OnChanges {
         }
     }
 
-    public generateIdCard(enterAnimationDuration: string, exitAnimationDuration: string):void {
-            this.dialog.open(IdCardDialogComponent, {
-                width: '550px',
-                height: '550px',
-                enterAnimationDuration,
-                exitAnimationDuration,
-                data: { staff: this.staff }
-            });
-            
-            
-            
-        }
-   
+    public generateIdCard(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(IdCardDialogComponent, {
+            width: '550px',
+            height: '830px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+            data: { staff: this.staff }
+        });
+    }
+
+    public generateIdCard2(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.secondIdCard=true;
+        this.dialog.open(IdCardDialogComponent, {
+            width: '550px',
+            height: '830px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+            data: { staff: this.staff, secondIdCard:this.secondIdCard }
+        });
+    }
+
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {

@@ -1,8 +1,82 @@
 <div id="printable-content">
-    <h4 class="modal-title">
+
+    <div class="idCard" *ngIf="!secondIdCard">
+        <div id="header">
+            <img src="https://aayamskinclinic.com/images/logo.jpg" alt="Company Logo" width="150" height="100">
+            <div class="d-flex flex-column">
+                <h3 class="mb-1">Healthcare at its finest.</h3>
+                <h3 class="mb-1">The hospital that cares.</h3>
+                <h3>We work for complete healing.</h3>
+            </div>
+        </div>
+
+        <div class="title-container">
+            <h2 class="card-title">ID CARD</h2>
+        </div>
+
+        <div class="employeeDetails">
+            <div class="employeeInfo">
+                <!-- <p>Name: {{ employee.name }}</p> -->
+                <p><span class="label-style1">Employee ID: </span> <span class="detail-style1">{{ staff.user.code ||
+                        '12345' }}</span></p>
+                <p><span class="label-style2">Roll: </span> <span class="detail-style2">{{ staff.acl.role }}</span></p>
+                <p><span class="label-style2">Dept: </span> <span class="detail-style2">Department</span></p>
+                <p><span class="label-style2">Contact No: </span> <span class="detail-style2">{{ staff.user.cell
+                        }}</span></p>
+                <p><span class="label-style2">Email: </span> <span class="detail-style2">{{ staff.user.email }}</span>
+                </p>
+            </div>
+            <div>
+                <img class="employeeImage" [src]="bucketUrl + staff.user.img" alt="Employee Photo">
+            </div>
+        </div>
+        <div class="address">
+            <p><span class="label-style1">Name : </span><span
+                    class="detail-style1">{{staff.user.nameF}}{{staff.user.nameL}}</span></p>
+        </div>
+        <div class="address">
+            <p><span class="label-style2">Address: </span><span class="detail-style2">{{ staff.user.address?.city
+                    }}, {{staff.user.address?.district}}</span></p>
+        </div>
+        <!-- </div> -->
+
+        <div class="dates">
+            <p><span class="label-style2">Joining Date: </span> <span class="detail-style2">{{ staff.user.doA || '01/01/23'}}
+                    </span></p>
+            <p><span class="label-style2"> Validity Date: </span><span class="detail-style2"> {{"01/12/23"
+                    }}</span></p>
+        </div>
+
+        <hr class="mt-0 mb-0" />
+
+        <!-- <div class="pointsContainer"> -->
+        <div class="d-flex flex-row ps-4 mt-0 mb-0">
+            <div class="d-flex flex-column me-2 mb-0">
+                <div class="point">1. This card is compulsory</div>
+                <div class="point">2. for new card pay Rs 50.</div>
+            </div>
+            <div class="d-flex flex-column">
+                <div class="point">3. This card is not valid after the expiry date.</div>
+                <div class="point">4. Wear this card in the campus compulsorily.</div>
+            </div>
+        </div>
+        <hr class="mt-0 mb-0" />
+        <div class="officeAddress">
+            <p><span class="text-danger">Office Address:</span> {{ '3/1, Ravindra Nagar Old Palasia Indore (M.P.)' }}</p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<!-- CAN BE USED ....THE ID CARD AS PER STUDENT'S ID CARD -->
+    <!-- <h4 class="modal-title">
         ID Card
-    </h4>
-    <div class="modal-body">
+    </h4> -->
+    <div *ngIf="secondIdCard" class="modal-body">
         <div class="ms-5 mt-5">
             <div id="idcard" class="mt-5">
 

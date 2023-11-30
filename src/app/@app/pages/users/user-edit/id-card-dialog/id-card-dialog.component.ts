@@ -1,7 +1,6 @@
-import { outputAst } from '@angular/compiler';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserEmpDto } from 'aayam-clinic-core';
+import { DepartmentVo, UserEmpDto, UserVo } from 'aayam-clinic-core';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,44 +13,45 @@ export class IdCardDialogComponent {
     /* ************************************ Static Fields ************************************ */
 
     /* ************************************ Instance Fields ************************************ */
+    staff: UserEmpDto;
+    bucketUrl = environment.bucketUrl;
+    empOrgId!: string;
+    secondIdCard!: boolean
+
+    @Input()
+    departmentList!: DepartmentVo[];
 
     /* ************************************ Constructors ************************************ */
     constructor(public dialogRef: MatDialogRef<IdCardDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.staff = data.staff;
-    }
+        this.secondIdCard = data.secondIdCard;
 
-    staff: UserEmpDto;
-    bucketUrl = environment.bucketUrl;
+    }
 
     /* ************************************ Public Methods ************************************ */
     public onNoClick(): void {
         this.dialogRef.close();
     }
 
-    public printBarcode() {
-        const printWindow = window.open('', '_blank');
-        if (printWindow) {
-            const printableContent = document.getElementById('printable-content');
-
-            if (printableContent) {
-                // Clone the content to be printed
-                const contentToPrint = printableContent.cloneNode(true);
-
-                // Append the cloned content to the new window
-                printWindow.document.body.appendChild(contentToPrint);
-
-                // Close the new window after printing
-                printWindow.onafterprint = () => {
-                    printWindow.close();
-                };
-
-                // Use window.print() to trigger the browser's print functionality for the new window
-                printWindow.print();
-            }
-        }
+    public getDepartmentName(row: UserVo): string {
+        const departmentId = row.emp[this.empOrgId].departmentId;
+        const department = this.departmentList?.find(dep => dep._id === departmentId);
+        return department ? department.name : '';
     }
 
+    public printBarcode() {
+
+        const printContents = document?.getElementById('printable-content')?.innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents ?? '';
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+        this.dialogRef.close();
+    }
 
     /* ************************************ Private Methods ************************************ */
 }
