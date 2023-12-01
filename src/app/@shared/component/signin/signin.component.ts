@@ -33,6 +33,7 @@ export class SigninComponent implements OnInit {
   }
 
   public login(): void {
+    this.userAuth.email = this.userAuth.email?.trim() + '@aayam.co.in'
     this.angularFireAuth.signInWithEmailAndPassword(this.userAuth.email, this.userAuth.password)
       .then((result) => {
         if (result.user) {
