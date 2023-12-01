@@ -36,7 +36,7 @@
                         <button [disabled]="loginForm.invalid" (click)="login()" mat-raised-button class="btn w-100"
                             type="submit" color="primary">Sign in</button>
                     </mat-card-actions>
-                    <p (click)="forgotPassword('0ms', '0ms')">forgot password?</p>
+                    <button (click)="forgotPassword('0ms', '0ms')" class="forgot-btn-style">forgot password?</button>
                 </mat-card>
             </div>
         </div>
