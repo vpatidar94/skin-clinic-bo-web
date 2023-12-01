@@ -21,7 +21,7 @@
                             <mat-form-field>
                                 <mat-label class="form-label" for="email">Employee Code</mat-label>
                                 <input matInput type="email" class="form-control" name="email"
-                                    [(ngModel)]="userAuth.email" placeholder="name@address.com" required>
+                                    [(ngModel)]="userAuth.email" placeholder="Enter Employee code" required>
                             </mat-form-field>
 
                             <!-- Password -->
@@ -36,7 +36,7 @@
                         <button [disabled]="loginForm.invalid" (click)="login()" mat-raised-button class="btn w-100"
                             type="submit" color="primary">Sign in</button>
                     </mat-card-actions>
-                    <p>forgot password?</p>
+                    <p (click)="forgotPassword('0ms', '0ms')">forgot password?</p>
                 </mat-card>
             </div>
         </div>

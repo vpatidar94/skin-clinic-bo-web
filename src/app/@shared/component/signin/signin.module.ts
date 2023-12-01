@@ -18,6 +18,10 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatTableModule } from "@angular/material/table";
 import { SigninComponent } from './signin.component';
 import { RemoteApiModule } from 'src/app/@app/service/remote/remote.api.module';
+import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
+import { DialogModule } from '@angular/cdk/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { VerifyOtpDialogComponent } from './verify-otp-dialog/verify-otp-dialog.component';
 
 
 const MATERIAL_MODULE = [
@@ -33,15 +37,16 @@ const MATERIAL_MODULE = [
   MatSlideToggleModule,
   MatCardModule,
   MatDatepickerModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, RemoteApiModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, RemoteApiModule,DialogModule],
   providers: [],
   exports: [],
-  declarations: [SigninComponent]
+  declarations: [SigninComponent, ForgotPasswordDialogComponent,VerifyOtpDialogComponent]
 })
 export class SigninModule { }

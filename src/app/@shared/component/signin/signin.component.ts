@@ -7,6 +7,8 @@ import { GlobalEmitterService } from '../../service/global-emitter.service';
 import { KeyValueStorageService } from '../../service/key-value-storage.service';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { AlertMessage } from '../../dto/alert-message';
+import { MatDialog } from '@angular/material/dialog';
+import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-signin',
@@ -24,7 +26,8 @@ export class SigninComponent implements OnInit {
     private angularFireAuth: AngularFireAuth,
     private glabalEmitterService: GlobalEmitterService,
     private userApi: UserApi,
-    private router: Router) {
+    private router: Router,
+    public dialog: MatDialog) {
   }
 
   /* ************************************* Public Methods ******************************************** */
@@ -50,6 +53,14 @@ export class SigninComponent implements OnInit {
       });
   }
 
+public forgotPassword(enterAnimationDuration: string, exitAnimationDuration: string):void {
+    this.dialog.open(ForgotPasswordDialogComponent, {
+        width: '350px',
+        height: '240px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+    });
+}
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
