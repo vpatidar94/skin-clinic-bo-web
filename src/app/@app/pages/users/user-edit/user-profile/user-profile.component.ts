@@ -70,6 +70,12 @@ export class UserProfileComponent implements OnInit, OnChanges {
         }
     }
 
+    public updateSubRole(event: any): void {
+        const type = this.filteredUserTypeList?.find(it => it?.userType?._id === event.target.value);
+        this.staff.acl.subRole = type?.userType?.name;
+        this.staffChange.emit(this.staff);
+    }
+
     onPhotoSelected(event: any) {
         if (event.target.files.length > 0) {
             const actionDto = {
@@ -115,8 +121,8 @@ export class UserProfileComponent implements OnInit, OnChanges {
     }
 
     public filterUserTypesByDepartment(departmentId: string | null | undefined) {
-        this.staff.acl.userTypeId = null;
         this.filteredUserTypeList = this.userTypeList.filter(item => item.userType.departmentId === departmentId);
+        this.staff.acl.userTypeId = null;
         this.staffChange.emit(this.staff);
     }
 

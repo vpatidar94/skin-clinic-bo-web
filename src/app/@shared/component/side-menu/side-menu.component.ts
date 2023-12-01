@@ -211,7 +211,10 @@ export class SideMenuComponent {
         { label: 'Department', link: '/master/department' },
         { label: 'User Type', link: '/master/user-type' },
         { label: 'Investigation', link: '/master/investigation' },
-        { label: 'Permissions', link: '/master/department-wise-permissions' }
+        { label: 'Permissions', link: '/master/department-wise-permissions' },
+        { label: 'Hospital', link: '/support/org' }
+        
+
     ];
 
     public pharmacySubOptions = [

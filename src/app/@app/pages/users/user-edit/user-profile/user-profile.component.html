@@ -213,10 +213,13 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <select class="app-single-select-dropdown w-100" name="userType"
-                                    [(ngModel)]="staff.acl.userTypeId">
-                                    <option *ngFor="let item of filteredUserTypeList" [value]="item.userType._id">
-                                        {{item.userType.name}}
-                                    </option>
+                                    (change)="updateSubRole($event)" [(ngModel)]="staff.acl.userTypeId">
+                                    <ng-container *ngIf="filteredUserTypeList && filteredUserTypeList.length > 0">
+                                        <option [value]="null" [disabled]="true" >Select User Type</option>
+                                        <option *ngFor="let item of filteredUserTypeList" [value]="item.userType._id">
+                                            {{item.userType.name}}
+                                        </option>
+                                    </ng-container>
                                 </select>
                             </div>
                         </div>
@@ -248,7 +251,8 @@
                         </div>
                         <div class="row ">
                             <div class="form-group col-md-7">
-                                <input type="file" (change)="onPhotoSelected($event)"  class="form-control app-input" name="addPhoto" required>
+                                <input type="file" (change)="onPhotoSelected($event)" class="form-control app-input"
+                                    name="addPhoto" required>
                             </div>
                             <div class="col-md-2">
                                 <button class="common-button">Browse</button>
