@@ -1,35 +1,35 @@
 /* CSS FOR THE ID CARD same as that of student's i card start*/
 .IDCARD td {
-    /*padding: 0px !important;*/
-    width: 20%;
+  /*padding: 0px !important;*/
+  width: 20%;
 }
 
 text-center {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .color-red {
-    color: #ff0000 !important;
+  color: #ff0000 !important;
 }
 
 .color-black {
-    color: #000000 !important;
+  color: #000000 !important;
 }
 
 .color-navy {
-    color: #000080 !important;
+  color: #000080 !important;
 }
 
 .color-white {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .bg-navy {
-    background-color: #000080 !important;
+  background-color: #000080 !important;
 }
 
 .bg-yellow {
-    background-color: #ffff00 !important;
+  background-color: #ffff00 !important;
 }
 
 /* CSS FOR THE ID CARD same as that of student's i card end*/
@@ -38,111 +38,142 @@ text-center {
 /* second id cards css start*/
 
 .idCard {
-    width: 420px;
-    margin: auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  #header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // background-color: #007bff;
-    color: red;
-    padding: 10px;
-  }
-  
-  .logo {
-    max-width: 50px;
-    max-height: 50px;
-  }
-  
-  .slogan {
-    margin-left: 10px;
-  }
-  
-  .title-container {
-    background-color: #007bff;
-    color: #fff;
-    // padding: 10px;
-    text-align: center;
-    // font-size: 50px;
-  }
+  width: 2in;
+  height: 3.5in;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  // background-color: rgb(150, 237, 237);
+  // background-image: url("https://img.freepik.com/free-photo/top-view-colorful-geometric-shapes_23-2148209883.jpg?w=740&t=st=1701354003~exp=1701354603~hmac=bd9a441f06e0192bcbeebf8b673eb82e34ec478dfcb3ce53ee2eff81c0b75699");
+  // background-image: url("https://img.freepik.com/premium-photo/blue-green-pink-background-colored-paper-geometrically-divides-into-zones-frame-copy-space_89381-2968.jpg?w=360");
+  // background-image: url("https://img.freepik.com/free-photo/geometric-background-yellow-red-blue_23-2147668457.jpg?w=996&t=st=1701354397~exp=1701354997~hmac=fc9376c4bae28c440bb8a534fcdee4a70e082fdaca654aff233f43add12b70fe");
+  // background-image: url("https://img.freepik.com/free-photo/geometric-composition-made-with-blue-yellow-cardboard_24972-989.jpg?w=740&t=st=1701354554~exp=1701355154~hmac=9e0cee340a0c68faf419050ecb876e588accbed2fc9cf5d035910a56f6177599");
+  // background-image: url("https://img.freepik.com/free-photo/geometric-background-with-shapes-four-different-colors_23-2147668486.jpg?w=740&t=st=1701354904~exp=1701355504~hmac=cec2121c44b7e6adca2fd18b5d668801cf6687c40e7f8c8b26bc8a3ae82432eb");
+  // background-image: url("https://img.freepik.com/free-photo/yellow-grey-red-colored-cardboard-papers-pink-backdrop_23-2147878473.jpg?w=996&t=st=1701354782~exp=1701355382~hmac=f06d07e658ae43c6c342b3500f183f38efc3a17cb034298444d1d8eae505d95a");
+  // background-image: url("https://img.freepik.com/free-photo/creative-flat-lay-paper-mockup_23-2148175854.jpg?w=996&t=st=1701426702~exp=1701427302~hmac=d8aaf31f2b6de50893dc736897fbf04b28d8f957c15fef27cba1ad7e333d4337");
+  // background-image: url('https://img.freepik.com/free-photo/blue-copy-space-background-polygon-paper-design_23-2148319118.jpg?t=st=1701426702~exp=1701427302~hmac=4388895300e6229767cf9e9873f69a9d89dc7de2973b6b1c1391131092a3a38d');
+  // background-image: url('https://img.freepik.com/free-photo/close-up-abstract-bent-paper-shapes-with-shadow_23-2148319131.jpg');
+  // background-image: url('https://img.freepik.com/premium-vector/vector-illustration-liquid-colored-covers-liquid-form-composition-futuristic-design-poster_174496-997.jpg');
+  // background-image: url("https://img.freepik.com/free-vector/gradient-abstract-geometric-background-layered_530521-731.jpg");
+  // background-image: url("https://img.freepik.com/free-vector/simple-blank-green-background-business_53876-117344.jpg");
+  background-image: url("https://img.freepik.com/premium-photo/abstract-paper-is-colorful-background-pastel-color-wallpaper_60487-2502.jpg");
 
-  .card-title{
-    font-size:30px;
-    padding: 10px;
-  }
-  
-  .employeeDetails {
-    display: flex;
-    padding-left: 10px;
-  }
-  
-  .employeeInfo {
-    flex: 1;
-    padding: 10px;
-  }
-  
-  .employeeImage {
-    max-width: 120px;
-    height: 150px;
-    // border-radius: 50%;
-    margin-right:20px;
-  }
-  
-  .address {
-    padding-left: 20px;
+}
 
-  }
-  
-  .dates {
-    padding-left: 20px;
-    margin-top: 0px;
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // background-color: #007bff;
+  color: red;
+  // padding: 10px;
+}
 
-  }
-  
+.logo {
+  max-width: 20px;
+  max-height: 20px;
+}
+
+// .slogan {
+//   margin-left: 10px;
+// }
+
+.title-container {
+  background-color: #007bff;
+  color: #fff;
+  // padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  // font-size: 50px;
+  height: 20px;
+  margin-top: 0px;
+}
+
+.card-title {
+  margin-top: 15px;
+  font-size: 8px;
+  // padding: 2px;
+}
+
+.employeeDetails {
+  display: flex;
+  padding-left: 10px;
+}
+
+.employeeInfo {
+  flex: 1;
+  padding: 10px;
+}
+
+.employeeImage {
+  max-width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  // margin-right:20px;
+}
+
+.address {
+  // padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.dates {
+  padding-left: 20px;
+  margin-top: 0px;
+
+}
+
 //   .pointsContainer {
 //     // padding: 10px;
-    
+
 //   }
-  
-  .point {
-    margin-bottom: 0px;
-    font-size: 10px;
-  }
-  
-  .officeAddress {
-    background-color: yellow;
-    padding: 10px;
-    text-align: center;
-  }
 
-  .label-style1{
-    font-weight:medium ;
-    font-size:18px;
-    color: navy;
-  }
+.point {
+  margin-bottom: 0px;
+  font-size: 10px;
+}
 
-  .detail-style1{
-    font-weight:bold ;
-    font-size:18px;
-    color:red;
-  }
+.officeAddress {
+  background-color: yellow;
+  padding: 10px;
+  text-align: center;
+}
 
-  .label-style2{
-    font-weight:medium;
-    font-size:14px; 
-    color:navy;
-  }
+.label-style1 {
+  font-weight: medium;
+  font-size: 16px;
+  color: navy;
+}
 
-  .detail-style2{
-    font-weight:bold ;
-    font-size:14px;
-    color: black;
-  }
+.detail-style1 {
+  font-weight: bold;
+  font-size: 14px;
+  color: red;
+}
+
+.label-style2 {
+  font-weight: medium;
+  font-size: 14px;
+  color: navy;
+}
+
+.detail-style2 {
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+}
+
 /* second id cards css end*/
-  
-  
+
+.adress-style {
+  font-size: 9px;
+  color: black;
+}
