@@ -17,7 +17,7 @@ export class UserEditComponent implements OnInit, OnChanges {
     showSectionUserProfile!: boolean;
     showSectionAccounts!: boolean;
     showSectionAttendance!: boolean;
-    showSectionUserLogin!: boolean;
+    showSectionUserPermission!: boolean;
 
     tabValue!: string;
     invalidFormStaff!: boolean;
@@ -129,18 +129,18 @@ export class UserEditComponent implements OnInit, OnChanges {
             height: '830px',
             enterAnimationDuration,
             exitAnimationDuration,
-            data: { staff: this.staff, departmentList:this.departmentList }
+            data: { staff: this.staff, departmentList: this.departmentList }
         });
     }
 
     public generateIdCard2(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.secondIdCard=true;
+        this.secondIdCard = true;
         this.dialog.open(IdCardDialogComponent, {
             width: '550px',
             height: '830px',
             enterAnimationDuration,
             exitAnimationDuration,
-            data: { staff: this.staff, secondIdCard:this.secondIdCard }
+            data: { staff: this.staff, secondIdCard: this.secondIdCard }
         });
     }
 
@@ -163,9 +163,9 @@ export class UserEditComponent implements OnInit, OnChanges {
                 break;
 
             // newly added for user login
-            case 'USERLOGIN':
+            case 'USERPERMISSION':
                 this._resetSection();
-                this.showSectionUserLogin = true;
+                this.showSectionUserPermission = true;
                 break;
 
             case 'ATTENDANCE':
@@ -179,6 +179,6 @@ export class UserEditComponent implements OnInit, OnChanges {
         this.showSectionUserProfile = false;
         this.showSectionAccounts = false;
         this.showSectionAttendance = false;
-        this.showSectionUserLogin = false;
+        this.showSectionUserPermission = false;
     }
 }

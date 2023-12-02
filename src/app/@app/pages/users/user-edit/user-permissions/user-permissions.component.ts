@@ -10,29 +10,29 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    {menu: 'Add patient', pages: ['List', 'New patient', 'Service']},
+    { menu: 'Add patient', pages: ['List', 'New patient', 'Service'] },
 
-    {menu: 'New Appointment', pages: ['List', 'Add appointment']},
+    { menu: 'New Appointment', pages: ['List', 'Add appointment'] },
 
-    {menu: 'Hospital Inventory', pages: ['List']},
+    { menu: 'Hospital Inventory', pages: ['List'] },
 
-    {menu: 'Investigation', pages: ['List', 'Test samples', 'Reports']},
+    { menu: 'Investigation', pages: ['List', 'Test samples', 'Reports'] },
 
-    {menu: 'Users', pages: ['List', 'User Profile', 'Account/Salary', 'User Login', 'Attendance']},
+    { menu: 'Users', pages: ['List', 'User Profile', 'Account/Salary', 'User Login', 'Attendance'] },
 
     // Master menus and pages
-    {menu: 'Services', pages: ['List', 'Add Service']},
-    {menu: 'Service Type', pages: ['List', 'Service Type']},
-    {menu: 'Product', pages: ['List', 'Add Product']},
-    {menu: 'Department', pages: ['List', 'Add Department']},
-    {menu: 'User Type', pages: ['List', 'User Type']},
-    {menu: 'Investigation', pages: ['List', 'Add Investigation']},
+    { menu: 'Services', pages: ['List', 'Add Service'] },
+    { menu: 'Service Type', pages: ['List', 'Service Type'] },
+    { menu: 'Product', pages: ['List', 'Add Product'] },
+    { menu: 'Department', pages: ['List', 'Add Department'] },
+    { menu: 'User Type', pages: ['List', 'User Type'] },
+    { menu: 'Investigation', pages: ['List', 'Add Investigation'] },
 
     // Pharmacy menus and pages
 
-    {menu: 'Pharmacy Billing', pages: ['List', 'Add New Customer']},
-    {menu: 'Patient List', pages: ['List']},
-    {menu: 'Pharmacy Inventory', pages: ['List', 'New Purchase']},
+    { menu: 'Pharmacy Billing', pages: ['List', 'Add New Customer'] },
+    { menu: 'Patient List', pages: ['List'] },
+    { menu: 'Pharmacy Inventory', pages: ['List', 'New Purchase'] },
 
 
 
@@ -43,14 +43,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ]
 
 @Component({
-    selector: 'app-user-login',
-    templateUrl: './user-login.component.html',
-    styleUrls: ['./user-login.component.scss']
+    selector: 'app-user-permissions',
+    templateUrl: './user-permissions.component.html',
+    styleUrls: ['./user-permissions.component.scss']
 })
 
-export class UserLoginComponent implements OnInit, AfterViewInit {
+export class UserPermissionsComponent implements OnInit, AfterViewInit {
 
-    displayedColumns: string[] = ['menu','pages'];
+    displayedColumns: string[] = ['menu', 'pages'];
 
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     @ViewChild(MatPaginator) paginator!: MatPaginator;

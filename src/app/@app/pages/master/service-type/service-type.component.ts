@@ -24,7 +24,7 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
   showSectionServiceTypeList!: boolean;
   showSectionServiceTypeEdit!: boolean;
 
-  displayedColumns: string[] = ['serviceCode', 'serviceType', 'doctorsName', "department", "action"];
+  displayedColumns: string[] = ['serviceCode', 'serviceType', 'doctorAssociated', "department", "action"];
   // dataSource = new MatTableDataSource<ServiceTypeVo>([] as ServiceTypeVo[]);
   dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
 

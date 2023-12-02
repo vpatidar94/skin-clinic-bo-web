@@ -2,8 +2,8 @@
     <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue" aria-label="Font Style">
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="USERPROFILE">User Profile</mat-button-toggle>
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="ACCOUNTS">Account/Salary</mat-button-toggle>
-        <!-- newly added for Login crendentials of user -->
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="USERLOGIN">User Login</mat-button-toggle>
+        <!-- newly added for user permissions -->
+        <mat-button-toggle class="tab-content" (change)="tabChange()" value="USERPERMISSION">User's Permissions</mat-button-toggle>
 
         <mat-button-toggle class="tab-content" (change)="tabChange()" value="ATTENDANCE">Attendance</mat-button-toggle>
     </mat-button-toggle-group>
@@ -37,8 +37,8 @@
         </div>
     </div>
 
-    <div *ngIf="showSectionUserLogin">
-        <app-user-login></app-user-login>
+    <div *ngIf="showSectionUserPermission">
+        <app-user-permissions></app-user-permissions>
         <div class="d-flex align-items-center justify-content-center mb-5">
             <div class="col-1">
                 <button class="common-button" (click)="onSavingUserAccount()">save</button>
