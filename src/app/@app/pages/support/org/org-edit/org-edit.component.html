@@ -123,6 +123,123 @@
                 <app-eg-edit-address-form [(address)]="orgBr.address"
                     (pubSub)="addressFormChange($event)"></app-eg-edit-address-form>
             </div>
+
+            <!-- NEWLY ADDED -->
+            <app-label>Admin Details</app-label>
+
+            <div class="row">
+                <!-- Admin Name -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Name</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" name="admin-name" class="form-control app-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin contact -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Contact</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="admin-contact">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Admin Designation -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Designation</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="admin-designation">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-label>OtherDetails</app-label>
+
+            <div class="row">
+                <!-- GST Number -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">GST Number</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" name="gst-number" class="form-control app-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Registration Number -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Registration Number</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control app-input" name="registration-number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Panel Validity -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Panel Validity</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="date" class="form-control app-input" name="panel-validity">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase category -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Purchase Category</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <select  name="purchase-category" class="app-single-select-dropdown w-100">
+                                    <option>Basic</option>
+                                    <option>Advanced</option>
+                                    <option>Monthly</option>
+                                    <option>Half Yearly</option>
+                                    <option>Yearly</option>
+                                    <option>Life time</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </mat-list>
     </form>
 </section>
