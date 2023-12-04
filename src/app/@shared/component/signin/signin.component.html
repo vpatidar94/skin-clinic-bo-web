@@ -19,15 +19,15 @@
                         <form #loginForm="ngForm">
                             <!-- Email Address -->
                             <mat-form-field>
-                                <mat-label class="form-label" for="email">Employee Code</mat-label>
-                                <input matInput type="email" class="form-control" name="email"
+                                <label class="app-label" for="email">Employee Code</label>
+                                <input  type="email" name="email" class="form-control app-input"
                                     [(ngModel)]="userAuth.email" placeholder="Enter Employee code" required>
                             </mat-form-field>
 
                             <!-- Password -->
                             <mat-form-field>
-                                <mat-label class="form-label" for="password">Password</mat-label>
-                                <input matInput type="password" class="form-control" name="password"
+                                <label class="app-label" for="password">Password</label>
+                                <input type="password" class="form-control app-input" name="password"
                                     [(ngModel)]="userAuth.password" placeholder="Enter your password" required>
                             </mat-form-field>
                         </form>
