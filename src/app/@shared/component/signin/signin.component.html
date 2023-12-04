@@ -3,7 +3,7 @@
         Welcome to AAYAM
     </h1>
     <div class="container  g-0">
-        <div class="row align-items-center justify-content-center min-vh-100">
+        <div class="row align-items-center justify-content-center">
             <div class="col-lg-6">
                 <!-- Image -->
                 <img src="https://aayamskinclinic.com/images/about-dr.jpg" class="img-style" />
@@ -19,14 +19,14 @@
                         <form #loginForm="ngForm">
                             <!-- Email Address -->
                             <mat-form-field>
-                                <label class="app-label" for="email">Employee Code</label>
+                                <label class="app-label mb-1" for="email">Employee Code</label>
                                 <input  type="email" name="email" class="form-control app-input"
                                     [(ngModel)]="userAuth.email" placeholder="Enter Employee code" required>
                             </mat-form-field>
 
                             <!-- Password -->
                             <mat-form-field>
-                                <label class="app-label" for="password">Password</label>
+                                <label class="app-label mb-1" for="password">Password</label>
                                 <input type="password" class="form-control app-input" name="password"
                                     [(ngModel)]="userAuth.password" placeholder="Enter your password" required>
                             </mat-form-field>
