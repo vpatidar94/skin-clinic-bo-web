@@ -7,7 +7,7 @@
                 <div class="col-md">
                     <div class="d-flex align-items-center mb-3">
                         <div class="col-md-2">
-                            <label for="exampleInputEmail1" class="app-label">Hospital/Clinic Name</label>
+                            <label for="exampleInputEmail1" class="app-label">Organisation Name</label>
                         </div>
                         <div class="col-md-9">
                             <div class="form-group">
@@ -37,23 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Tax Payer Id -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Tax Payer Id</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="taxpayerId" class="form-control app-input" name="taxpayerId"
-                                    [(ngModel)]="orgBr.taxpayerId">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
                 <!-- Domain -->
                 <div class="col-md-6">
                     <div class="d-flex align-items-center mb-3">
@@ -64,21 +48,6 @@
                             <div class="form-group">
                                 <input type="domain" class="form-control app-input" name="domain"
                                     [(ngModel)]="orgBr.domain">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tagline -->
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="col-md-3">
-                            <label for="exampleInputEmail1" class="app-label">Tagline</label>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                <input type="tagline" class="form-control app-input" name="tagline"
-                                    [(ngModel)]="orgBr.tagline">
                             </div>
                         </div>
                     </div>
@@ -111,6 +80,23 @@
                             <div class="form-group">
                                 <input maxlength="10" minlength="10" type="cell" class="form-control app-input"
                                     name="cell" [(ngModel)]="orgBr.ph" required appNumberOnly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Tagline -->
+                <div class="col-md-">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1" class="app-label">Organisation Tagline</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="tagline" class="form-control app-input" name="tagline"
+                                    [(ngModel)]="orgBr.tagline">
                             </div>
                         </div>
                     </div>
@@ -172,6 +158,37 @@
                 </div>
             </div>
 
+            <app-label>Upload Photos</app-label>
+
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Upload Logo</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group col-md-7">
+                                <input type="file" class="form-control app-input" name="logo" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin contact -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1" class="app-label">Upload Cover Photo</label>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group col-md-7">
+                                <input type="file" class="form-control app-input" name="coverPhoto" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <app-label>OtherDetails</app-label>
 
             <div class="row">
@@ -226,7 +243,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select  name="purchase-category" class="app-single-select-dropdown w-100">
+                                <select name="purchase-category" class="app-single-select-dropdown w-100">
                                     <option>Basic</option>
                                     <option>Starter</option>
                                     <option>Enterprise</option>

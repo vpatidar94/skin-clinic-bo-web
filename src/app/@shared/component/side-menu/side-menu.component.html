@@ -13,21 +13,7 @@
       <mat-divider></mat-divider>
     </ng-container>
 
-    <a mat-icon-button (click)="toggleMasterTab()">
-      <div class="my-3">
-        <mat-icon mat-list-icon svgIcon="ic_user" class="ms-3"></mat-icon><span class="style-side-menu-item">Master</span>
-        <mat-icon>{{ isMasterTabOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
-      </div>
-      <mat-divider></mat-divider>
-    </a>
-
-    <ng-container *ngIf="isMasterTabOpen">
-      <ng-container *ngFor="let subOption of masterSubOptions, let i=index">
-        <a disableRipple="true" mat-list-item [routerLink]="masterSubOptions[i].link" [routerLinkActive]="'is-active'"
-          href="#" mat-button class="ps-5">{{ subOption.label }}</a>
-        <mat-divider></mat-divider>
-      </ng-container>
-    </ng-container>
+    
 
     <a mat-icon-button (click)="togglePharmacyTab()">
       <div class="my-3">
@@ -56,6 +42,22 @@
     <ng-container *ngIf="isAdminReportsTabOpen">
       <ng-container *ngFor="let subOption of adminReportsSubOptions, let i=index">
         <a disableRipple="true" mat-list-item [routerLink]="adminReportsSubOptions[i].link" [routerLinkActive]="'is-active'"
+          href="#" mat-button class="ps-5">{{ subOption.label }}</a>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </ng-container>
+
+    <a mat-icon-button (click)="toggleMasterTab()">
+      <div class="my-3">
+        <mat-icon mat-list-icon svgIcon="ic_user" class="ms-3"></mat-icon><span class="style-side-menu-item">Master</span>
+        <mat-icon>{{ isMasterTabOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+      </div>
+      <mat-divider></mat-divider>
+    </a>
+
+    <ng-container *ngIf="isMasterTabOpen">
+      <ng-container *ngFor="let subOption of masterSubOptions, let i=index">
+        <a disableRipple="true" mat-list-item [routerLink]="masterSubOptions[i].link" [routerLinkActive]="'is-active'"
           href="#" mat-button class="ps-5">{{ subOption.label }}</a>
         <mat-divider></mat-divider>
       </ng-container>
