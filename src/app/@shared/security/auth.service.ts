@@ -42,7 +42,7 @@ export class AuthService {
     this.angularFireAuth.authState.subscribe((user: User | any) => {
       if (user) {
         this.user = user;
-        user.getIdToken().then((token: string) => { 
+        user.getIdToken().then((token: string) => {
           this.claim = jwt_decode(token);
         });
       }
@@ -67,9 +67,9 @@ export class AuthService {
     return this.user;
   }
 
-   get getClaim(): JwtClaimDto | null {
+  get getClaim(): JwtClaimDto | null {
     // return this.authenticated ? this.user : null;
-     return this.claim as JwtClaimDto;
+    return this.claim as JwtClaimDto;
   }
 
   // Returns current user UID
@@ -78,7 +78,7 @@ export class AuthService {
     return this.user?.uid ?? '';
   }
 
-  getRole(): string { 
+  getRole(): string {
     return this.claim?.userAccess.role ?? '';
   }
 
@@ -90,6 +90,22 @@ export class AuthService {
     auth.signOut().then(r => { });
     this.keyValueStorageService.clearAll();
     console.log('successful sign-out');
+  }
+
+  // NEWLY ADDED TO CHECK IF ALREADY LOGGED IN AND REDIRECT TO HOME PAGE
+
+  checkAuthAndRedirect(): void {
+    this.angularFireAuth.authState
+      .pipe(take(1))
+      .subscribe((user: User | any) => {
+        if (user) {
+          // User is authenticated, redirect to home if on the sign-in page
+          const currentUrl = this.router.url;
+          if (currentUrl.includes('/signin')) {
+            this.router.navigate(['/']); // Redirect to home page
+          }
+        }
+      });
   }
 
 }

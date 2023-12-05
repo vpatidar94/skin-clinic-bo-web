@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../../security/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -32,7 +33,9 @@ export class SigninComponent implements OnInit {
     private userApi: UserApi,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private authService: AuthService,
+    ) {
   }
 
   /* ************************************* Public Methods ******************************************** */
@@ -77,6 +80,8 @@ export class SigninComponent implements OnInit {
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
+    this.authService.checkAuthAndRedirect();
+    
     this.route.queryParams
       .subscribe((params: any) => {
         if (params && params.orgId) {

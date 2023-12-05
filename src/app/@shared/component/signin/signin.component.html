@@ -11,25 +11,44 @@
             <div class="col-lg-6">
                 <!-- Form -->
                 <mat-card class="login-card">
-                    <img (error)="logoImageError($event)"  [src]="logo" class="logo-style" />
+                    <img (error)="logoImageError($event)" [src]="logo" class="logo-style" />
                     <mat-card-header class="login-heading">
                         <mat-card-title class="title-style">Login</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <form #loginForm="ngForm">
-                            <!-- Email Address -->
-                            <mat-form-field>
-                                <label class="app-label mb-1" for="email">Employee Code</label>
-                                <input  type="email" name="email" class="form-control app-input"
-                                    [(ngModel)]="userAuth.email" placeholder="Enter Employee code" required>
-                            </mat-form-field>
+                            <div class="row mb-3">
+                                <!-- Email Address -->
+                                <div class="col-md- d-flex flex-column justify-content-center align-items-center">
+                                    <div
+                                        class="col-md-10 d-flex flex-row justify-content-start align-items-center mb-2">
+                                        <label for="exampleInputEmail1" class="app-label">Employee Code</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control app-input"
+                                                [(ngModel)]="userAuth.email" placeholder="Enter Employee code" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <!-- Password -->
-                            <mat-form-field>
-                                <label class="app-label mb-1" for="password">Password</label>
-                                <input type="password" class="form-control app-input" name="password"
-                                    [(ngModel)]="userAuth.password" placeholder="Enter your password" required>
-                            </mat-form-field>
+                            <div class="row">
+                                <!-- Password -->
+                                <div class="col-md- d-flex flex-column justify-content-center align-items-center">
+                                    <div
+                                        class="col-md-10 d-flex flex-row justify-content-start align-items-center mb-2">
+                                        <label for="exampleInputEmail1" class="app-label">Password</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control app-input" name="password"
+                                                [(ngModel)]="userAuth.password" placeholder="Enter your password"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </mat-card-content>
                     <mat-card-actions class="login-btn">
