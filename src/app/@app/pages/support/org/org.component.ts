@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddressVo, ApiResponse, ApiRunStatus, OrgVo, ResponseStatus } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, AssetPathUtility, OrgVo, ResponseStatus } from 'aayam-clinic-core';
 import { APP_CONST } from 'src/app/@app/const/app.const';
 import { ORG_STATUS } from 'src/app/@app/const/org-status.const';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
@@ -27,6 +27,9 @@ export class OrgComponent implements OnInit {
   org!: OrgVo;
 
   invalidFormOrg!: boolean;
+
+  fileOrgLogo!: File;
+  fileOrgCover!: File;
 
 
   displayedColumns: string[] = ['image', 'name', 'type', 'ph', 'email', 'status', 'action'];
@@ -62,7 +65,7 @@ export class OrgComponent implements OnInit {
     return cell;
   }
 
-  public manageOrg(org: OrgVo): void { 
+  public manageOrg(org: OrgVo): void {
     this.keyValueStorageService.saveOrgId(org._id);
     this.keyValueStorageService.saveOrg(org);
     this.globalEmitterService.emitAclChangedEmitter();
@@ -78,10 +81,16 @@ export class OrgComponent implements OnInit {
     this._addEditOrg(org);
   }
 
-  public formChangeOrg(event: UiActionDto<boolean>): void {
+  public formChangeOrg(event: UiActionDto<any>): void {
     switch (event.action) {
       case 'CHANGE_FORM_ORG':
         this.invalidFormOrg = event.data;
+        break;
+      case 'ORG_LOGO_UPLOAD':
+        this.fileOrgLogo = event.data as File;
+        break;
+      case 'ORG_COVER_UPLOAD':
+        this.fileOrgCover = event.data as File;
         break;
     }
   }
@@ -89,8 +98,27 @@ export class OrgComponent implements OnInit {
   public saveOrg(): void {
     this.orgApi.addUpdateOrg(this.org).subscribe((res: ApiResponse<OrgVo>) => {
       if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+        const orgId = res.body?._id ?? '';
+        if (this.fileOrgLogo) {
+          this.uploadOrgLogo(orgId);
+        }
+        if (this.fileOrgCover) {
+          this.uploadOrgCover(orgId);
+        }
         this._init();
       }
+    });
+  }
+
+  public uploadOrgLogo(orgId: string): void {
+    this.orgApi.uploadOrgImage(this.fileOrgLogo, orgId, AssetPathUtility.ASSET_IDENTITY.ORG_LOGO).subscribe((res: any) => {
+      this.org.logo = res.body;
+    });
+  }
+
+  public uploadOrgCover(orgId: string): void {
+    this.orgApi.uploadOrgImage(this.fileOrgCover, orgId, AssetPathUtility.ASSET_IDENTITY.ORG_COVER).subscribe((res: any) => {
+      this.org.logo = res.body;
     });
   }
 

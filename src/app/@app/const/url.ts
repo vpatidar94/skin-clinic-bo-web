@@ -84,6 +84,8 @@ export const URL = {
     // Department API endpoint
     ADD_UPDATE_DEPARTMENT: MJR_ORG + '/department-add-update',
     ORG_DEPARTMENT_LIST: MJR_ORG + '/department-list',
+    ORG_ASSET_UPLOAD: MJR_ORG + '/upload-org-asset',
+
 
     //********************************************************************
     //Product API endpoint

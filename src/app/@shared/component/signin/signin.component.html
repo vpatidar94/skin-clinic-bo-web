@@ -6,12 +6,12 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-6">
                 <!-- Image -->
-                <img src="https://aayamskinclinic.com/images/about-dr.jpg" class="img-style" />
+                <img (error)="coverImageError($event)" [src]="cover" class="img-style" />
             </div>
             <div class="col-lg-6">
                 <!-- Form -->
                 <mat-card class="login-card">
-                    <img src="https://aayamskinclinic.com/images/logo.jpg" class="logo-style" />
+                    <img (error)="logoImageError($event)"  [src]="logo" class="logo-style" />
                     <mat-card-header class="login-heading">
                         <mat-card-title class="title-style">Login</mat-card-title>
                     </mat-card-header>

@@ -6,7 +6,6 @@ import { AuthGuard } from './@shared/security/auth.guard';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { PrescriptionPrintComponent } from './prescription-print/prescription-print.component';
 import { ExcelFileUpload } from './@shared/component/excel-file-upload/excel-file-upload.component';
-import { AdminReportsComponent } from './@app/pages/admin-reports/admin-reports.component';
 
 
 const routes: Routes = [

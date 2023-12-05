@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse, OrgCodeNoDto, OrgVo } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
@@ -23,6 +23,20 @@ export class OrgApi {
 
     public getLastOrderNo(orgId: string): Observable<ApiResponse<OrgCodeNoDto>> {
         return this.http.get<ApiResponse<OrgCodeNoDto>>(environment.apiUrl + URL.LAST_ORDER_NO, { params: { orgId } });
+    }
+
+    public uploadOrgImage(file: File, orgId: string, assetIdentity: string): Observable<HttpEvent<ApiResponse<string>>> {
+        const formdata: FormData = new FormData();
+        formdata.append('file', file);
+        formdata.append('assetId', orgId);
+        formdata.append('assetIdentity', assetIdentity);
+
+        const req = new HttpRequest('POST', environment.apiUrl + URL.ORG_ASSET_UPLOAD, formdata, {
+            reportProgress: true,
+            responseType: 'text'
+        });
+
+        return this.http.request(req);
     }
 }
 

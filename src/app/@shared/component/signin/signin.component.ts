@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth, } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { ApiResponse, JwtClaimDto, Message, MessageType, MessageValue, ResponseStatus, UserAccessDetailDto, UserAuthDto } from 'aayam-clinic-core';
+import { ApiResponse, JwtClaimDto, Message, MessageType, AssetPathUtility, ResponseStatus, UserAccessDetailDto, UserAuthDto } from 'aayam-clinic-core';
 import jwt_decode from 'jwt-decode';
 import { GlobalEmitterService } from '../../service/global-emitter.service';
 import { KeyValueStorageService } from '../../service/key-value-storage.service';
@@ -9,6 +9,8 @@ import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { AlertMessage } from '../../dto/alert-message';
 import { MatDialog } from '@angular/material/dialog';
 import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signin',
@@ -20,6 +22,8 @@ export class SigninComponent implements OnInit {
   /* ************************************* Static Field ********************************************* */
   /* ************************************* Instance Field ******************************************** */
   userAuth: UserAuthDto = {} as UserAuthDto;
+  logo!: string;
+  cover!: string;
 
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
@@ -27,6 +31,7 @@ export class SigninComponent implements OnInit {
     private glabalEmitterService: GlobalEmitterService,
     private userApi: UserApi,
     private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog) {
   }
 
@@ -53,17 +58,34 @@ export class SigninComponent implements OnInit {
       });
   }
 
-public forgotPassword(enterAnimationDuration: string, exitAnimationDuration: string):void {
+  public forgotPassword(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(ForgotPasswordDialogComponent, {
-        width: '350px',
-        height: '240px',
-        enterAnimationDuration,
-        exitAnimationDuration,
+      width: '350px',
+      height: '240px',
+      enterAnimationDuration,
+      exitAnimationDuration,
     });
-}
+  }
+
+  public logoImageError(event: any): void { 
+    event.target.src = 'https://aayamskinclinic.com/images/logo.jpg';
+  }
+
+  public coverImageError(event: any): void {
+    event.target.src = 'https://aayamskinclinic.com/images/about-dr.jpg';
+  }
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
+    this.route.queryParams
+      .subscribe((params: any) => {
+        if (params && params.orgId) {
+          this.logo = environment.bucketUrl + AssetPathUtility.getPathOrgLogo(params.orgId)  + '.png';
+          this.cover = environment.bucketUrl + AssetPathUtility.getPathOrgCover(params.orgId) + '.png';
+        }
+      }
+      );
+
   }
 
   private _getUserAllAccessList(token: string): void {

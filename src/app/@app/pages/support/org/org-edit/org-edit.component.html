@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" name="admin-name" class="form-control app-input">
+                                <input type="text" name="admin-name" class="form-control app-input" [(ngModel)]="orgBr.adminName">
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="admin-contact">
+                                <input type="text" class="form-control app-input" name="admin-contact" [(ngModel)]="orgBr.adminCell">
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="admin-designation">
+                                <input type="text" class="form-control app-input" name="admin-designation" [(ngModel)]="orgBr.adminDesignation">
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group col-md-7">
-                                <input type="file" class="form-control app-input" name="logo" required>
+                                <input type="file" (change)="onLogoSelected($event)" class="form-control app-input" name="logo" required>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group col-md-7">
-                                <input type="file" class="form-control app-input" name="coverPhoto" required>
+                                <input type="file" (change)="onCoverSelected($event)" class="form-control app-input" name="coverPhoto" required>
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" name="gst-number" class="form-control app-input">
+                                <input type="text" name="gst-number" class="form-control app-input" [(ngModel)]="orgBr.gst">
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" class="form-control app-input" name="registration-number">
+                                <input type="text" class="form-control app-input" name="registration-number" [(ngModel)]="orgBr.reg">>
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="date" class="form-control app-input" name="panel-validity">
+                                <input type="date" class="form-control app-input" name="panel-validity" [(ngModel)]="orgBr.expiryPanel">
                             </div>
                         </div>
                     </div>
@@ -243,11 +243,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select name="purchase-category" class="app-single-select-dropdown w-100">
-                                    <option>Basic</option>
-                                    <option>Starter</option>
-                                    <option>Enterprise</option>
-                                    <option>Premium</option>
+                                <select name="purchase-category" class="app-single-select-dropdown w-100" [(ngModel)]="orgBr.category">
+                                    <option *ngFor="let plan of orgPlanList" [value]="plan.id">
+                                        {{plan.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
