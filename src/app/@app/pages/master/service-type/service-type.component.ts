@@ -156,6 +156,10 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
     this._addEditServiceItem(this.serviceType);
   }
 
+  getYesNoValue(value: boolean): string {
+    return value ? 'Yes' : 'No';
+  }
+
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this._resetSection();
