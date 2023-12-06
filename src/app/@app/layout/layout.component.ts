@@ -30,7 +30,7 @@ export class LayoutComponent implements OnInit {
 
   showOptions = false;
 
-  logo!: string;
+  logo!: string | null;
 
   
 
@@ -99,6 +99,8 @@ export class LayoutComponent implements OnInit {
     this.org = this.keyValueStorageService.getOrg();
     if (this.org?.logo) {
       this.logo = environment.bucketUrl + AssetPathUtility.getPathOrgLogo(this.org._id) + '.png';
+    } else {
+      this.logo = null;
     }
   }
 }
