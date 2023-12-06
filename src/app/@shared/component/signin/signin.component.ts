@@ -35,7 +35,8 @@ export class SigninComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private authService: AuthService,
-    ) {
+  ) {
+    this.authService.checkAuthAndRedirect();
   }
 
   /* ************************************* Public Methods ******************************************** */
@@ -70,7 +71,7 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  public logoImageError(event: any): void { 
+  public logoImageError(event: any): void {
     event.target.src = 'https://aayamskinclinic.com/images/logo.jpg';
   }
 
@@ -80,12 +81,10 @@ export class SigninComponent implements OnInit {
 
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
-    this.authService.checkAuthAndRedirect();
-    
     this.route.queryParams
       .subscribe((params: any) => {
         if (params && params.orgId) {
-          this.logo = environment.bucketUrl + AssetPathUtility.getPathOrgLogo(params.orgId)  + '.png';
+          this.logo = environment.bucketUrl + AssetPathUtility.getPathOrgLogo(params.orgId) + '.png';
           this.cover = environment.bucketUrl + AssetPathUtility.getPathOrgCover(params.orgId) + '.png';
         }
       }

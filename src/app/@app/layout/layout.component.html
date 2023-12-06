@@ -5,6 +5,9 @@
   </button>
   <div class="large-shadow-text" fxHide.lt-sm mat-line>
     <span *ngIf="!org">Aayam Clinic Diary</span>
+    <span *ngIf="logo" class="logout-btn-menu">
+      <img [src]="logo" (click)="openOptions()" class="avatar" alt="Menu" />&nbsp;
+    </span>
     <span *ngIf="org">{{ org.name }}</span>
   </div>
 

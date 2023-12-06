@@ -1,11 +1,12 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
-import { OrgVo, ROLE } from 'aayam-clinic-core';
+import { AssetPathUtility, OrgVo, ROLE } from 'aayam-clinic-core';
 import { NavigationDto } from 'src/app/@shared/dto/navigation.dto';
 import { AuthService } from 'src/app/@shared/security/auth.service';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { environment } from 'src/environments/environment';
 
 /**
  * AppComponent
@@ -28,6 +29,8 @@ export class LayoutComponent implements OnInit {
   org!: OrgVo | null;
 
   showOptions = false;
+
+  logo!: string;
 
   
 
@@ -94,5 +97,8 @@ export class LayoutComponent implements OnInit {
     this.isSupportUser = role == ROLE.SUPER_ADMIN
     // FIXME should be in valueSerice
     this.org = this.keyValueStorageService.getOrg();
+    if (this.org?.logo) {
+      this.logo = environment.bucketUrl + AssetPathUtility.getPathOrgLogo(this.org._id) + '.png';
+    }
   }
 }
