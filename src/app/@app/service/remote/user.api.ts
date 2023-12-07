@@ -54,12 +54,20 @@ export class UserApi {
         formdata.append('assetId', empId);
         formdata.append('assetIdentity', assetIdentity);
 
-        const req = new HttpRequest('POST', environment.apiUrl + URL.USER_ASSET_UPLOAD, formdata, {
+        const req = new HttpRequest('POST', environment.apiUrl + URL.SEND_OTP, formdata, {
             reportProgress: true,
             responseType: 'text'
         });
 
         return this.http.request(req);
+    }
+
+    public sendOtp(empCode: string): Observable<ApiResponse<boolean>> {
+        return this.http.get<ApiResponse<boolean>>(environment.apiUrl + URL.SEND_OTP, { params: { empCode } });
+    }
+
+    public resetPassword(empCode: string, otp: string): Observable<ApiResponse<string>> {
+        return this.http.get<ApiResponse<string>>(environment.apiUrl + URL.RESET_PASSWORD_LINK, { params: { empCode, otp } });
     }
 }
 

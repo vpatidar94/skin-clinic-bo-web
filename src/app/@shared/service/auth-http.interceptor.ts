@@ -105,7 +105,8 @@ export class AuthHttpInterceptor implements HttpInterceptor {
               });
             } else {
               console.log('Firebase user not found ');
-              observer.error('user not found');
+              // observer.error('user not found');
+              observer.next('');
               observer.complete();
             }
           });

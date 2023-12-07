@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { VerifyOtpDialogComponent } from '../verify-otp-dialog/verify-otp-dialog.component';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { ApiResponse, MessageType } from 'aayam-clinic-core';
+import { AlertMessage } from 'src/app/@shared/dto/alert-message';
+import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 
 @Component({
     selector: 'app-forgot-password-dialog',
@@ -10,9 +14,13 @@ import { VerifyOtpDialogComponent } from '../verify-otp-dialog/verify-otp-dialog
 export class ForgotPasswordDialogComponent implements OnInit {
 
     /* ************************************ Static Fields ************************************ */
+    empCode!: string;
+
     /* ************************************ Constructors ************************************ */
     constructor(public dialogRef: MatDialogRef<ForgotPasswordDialogComponent>,
         public dialog: MatDialog,
+        private glabalEmitterService: GlobalEmitterService,
+        private userApi: UserApi
         ) {
     }
 
@@ -38,13 +46,25 @@ export class ForgotPasswordDialogComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    public sendOtp(enterAnimationDuration: string, exitAnimationDuration: string):void {
-        this.dialog.open(VerifyOtpDialogComponent, {
-            width: '350px',
-            height: '250px',
-            enterAnimationDuration,
-            exitAnimationDuration,
-        });
+    public sendOtp(): void {
+        if (this.empCode) {
+            this.userApi.sendOtp(this.empCode).subscribe((res: ApiResponse<boolean>) => {
+                if (res.body === true) { 
+                    const message = {} as AlertMessage;
+                    message.type = MessageType[MessageType.SUCCESS];
+                    message.text = 'Otp Sent Successfully';
+                    this.glabalEmitterService.addAlerMsg(message);
+                    this.dialog.open(VerifyOtpDialogComponent, {
+                        width: '350px',
+                        height: '250px',
+                        data: {
+                            empCode: this.empCode
+                        }
+                    });
+                }
+            });
+        }
+        
     }
     /* ************************************ Private Methods ************************************ */
 }

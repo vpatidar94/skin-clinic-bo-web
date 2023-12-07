@@ -62,12 +62,10 @@ export class SigninComponent implements OnInit {
       });
   }
 
-  public forgotPassword(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  public forgotPassword(): void {
     this.dialog.open(ForgotPasswordDialogComponent, {
       width: '350px',
-      height: '240px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      height: '240px'
     });
   }
 

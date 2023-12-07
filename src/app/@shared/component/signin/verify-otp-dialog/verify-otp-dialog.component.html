@@ -8,14 +8,15 @@
                     <div class="col-md-12 mb-2">
                         <label for="exampleInputEmail1" class="app-label">Enter Otp</label>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input class="form-control app-input" name="otp" placeholder="Enter Otp"
-                             required>
+                    <form #otpForm="ngForm">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input [maxlength]="6" [minlength]="6" appNumberOnly [(ngModel)]="otp" class="form-control app-input" name="otp" placeholder="Enter Otp" required>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="mt-2">
-                        <button class="common-button" (click)="verifyOtp()">Verify Otp</button>
+                        <button [disabled]="otpForm.invalid" class="common-button" (click)="verifyOtp()">Verify Otp</button>
                     </div>
                 </div>
             </div>

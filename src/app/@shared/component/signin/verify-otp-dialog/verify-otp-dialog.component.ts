@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ApiResponse } from 'aayam-clinic-core';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 @Component({
@@ -10,13 +12,15 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 export class VerifyOtpDialogComponent implements OnInit {
 
     /* ************************************ Static Fields ************************************ */
+    otp!: string;
 
     /* ************************************ Instance Fields ************************************ */
 
     /* ************************************ Constructors ************************************ */
     constructor(public dialogRef: MatDialogRef<VerifyOtpDialogComponent>,
-        private keyValueStorageService: KeyValueStorageService,
+        @Inject(MAT_DIALOG_DATA) public data: any,
         public dialog: MatDialog,
+        public userApi: UserApi
         ) {
     }
 
@@ -29,8 +33,15 @@ export class VerifyOtpDialogComponent implements OnInit {
         this.dialogRef.close();
     }
    
-    public verifyOtp():void {
-    //    NAVIGATE TO THE NEW PASSWORD PAGE/LINK
+    public verifyOtp(): void {
+        if (this.otp) {
+            this.userApi.resetPassword(this.data.empCode, this.otp).subscribe((res: ApiResponse<string>) => {
+                if (res.body && res.body?.length > 0) {
+                    console.log('xxx xxx x x res.body ', res.body);
+                    window.location.href = res.body;
+                }
+            });
+        }
     }
     /* ************************************ Private Methods ************************************ */
 }

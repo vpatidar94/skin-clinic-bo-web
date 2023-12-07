@@ -22,6 +22,7 @@ import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-p
 import { DialogModule } from '@angular/cdk/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VerifyOtpDialogComponent } from './verify-otp-dialog/verify-otp-dialog.component';
+import { SharedDirectiveModule } from '../../directive/shared-directive.module';
 
 
 const MATERIAL_MODULE = [
@@ -44,9 +45,9 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, RemoteApiModule,DialogModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, RemoteApiModule, DialogModule, SharedDirectiveModule],
   providers: [],
   exports: [],
-  declarations: [SigninComponent, ForgotPasswordDialogComponent,VerifyOtpDialogComponent]
+  declarations: [SigninComponent, ForgotPasswordDialogComponent, VerifyOtpDialogComponent]
 })
 export class SigninModule { }
