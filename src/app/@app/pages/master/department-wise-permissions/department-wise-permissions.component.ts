@@ -26,6 +26,13 @@ export class DepartmentWisePermissionsComponent implements OnInit {
         { menu: '', pages: [] } // Initially, an empty menu
     ];
 
+
+    // newly added all permisson list
+    permissionList: string[]= ['Appointement Form','Appointment List', 'Patient Form', 'Patiet List', 'Show Service','Show and Edit Service', 'Show Billing','Show and Edit Billing', 'Prescriptions', 'Observations','Investigations','Pharmcy Billing','Sample Collection', 'Admin Reports'];
+
+    departmentOptionsList: string[] = ['Reception', 'OPD', 'Pharmacy', 'Pathology', 'Doctor', 'Pathology staff', 'Cleaning staff', 'Security staff','Accounts']
+
+    showDepartmentOption: boolean = false;
     addDept(): void {
         this.arrayDept.push({departmentName: ''})
     }
@@ -57,6 +64,10 @@ export class DepartmentWisePermissionsComponent implements OnInit {
             default:
                 section.pages = [];
         }
+    }
+
+    public selectDepartment(): void {
+        this.showDepartmentOption = true;
     }
 
     addPage(section: any): void {
