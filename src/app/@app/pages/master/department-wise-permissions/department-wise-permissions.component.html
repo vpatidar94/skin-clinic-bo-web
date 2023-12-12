@@ -1,5 +1,57 @@
-<app-label>Roles and Permissions</app-label>
+<div class="mt-3">
+    <app-label>Roles and Permissions</app-label>
+    <div class="row">
+        <p class="col-md-1"><strong>Sno.</strong></p>
+        <p class="col-md-2"><strong>Department</strong></p>
+        <p class="col-md-8"><strong></strong></p>
+
+        <p class="col-md-2"></p>
+    </div>
+    <div *ngFor="let item of arrayDept; let l=index" class="row align-items-center">
+        <div class="row align-items-center">
+            <div class="col-md-1 pres-input text-center">
+                <p class="border border-info rounded p-1 text-align-center">{{ l+1 }}
+                </p>
+            </div>
+            <div class="col-md-4 form-group">
+                <!-- <input type="text" class="form-control pres-input" name="diagnosis{{i}}"
+                    [(ngModel)]="booking.diagnosis[i]" required> -->
+                <select class="app-single-select-dropdown" (change)="selectDepartment()">
+                    <option *ngFor="let dept of departmentOptionsList" [value]='dept'>{{dept}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <mat-icon (click)="removeDept(l)" class="add-icon clickable">delete</mat-icon>
+                &nbsp;&nbsp;
+                <mat-icon (click)="addDept()" *ngIf="(l+1) === arrayDept.length"
+                    class="add-icon clickable">add_circle_outline</mat-icon>
+            </div>
+            
+            <div *ngFor="let permission of permissionList" class="col-md-4 form-group">
+                <input type="checkbox" [value]="permission" />
+                <label>{{ permission }}</label>
+            </div>
+            <hr class="mb-3 mt-2"/>
+
+            <!-- <div class="col-md-2">
+                <mat-icon (click)="removeDept(l)" class="add-icon clickable">delete</mat-icon>
+                &nbsp;&nbsp;
+                <mat-icon (click)="addDept()" *ngIf="(l+1) === arrayMenus.length"
+                    class="add-icon clickable">add_circle_outline</mat-icon>
+            </div> -->
+        </div>
+    </div>
+    <!-- <hr /> -->
+</div>
+
+
+<!-- PREVIOUSLY DESIGNED CODE CAN BE USED FURTHER -->
+
+<!-- <app-label>Roles and Permissions</app-label>
 <div *ngFor="let item of arrayDept; let l=index">
+
     <select class="app-single-select-dropdown" (change)="selectDepartment()">
         <option *ngFor="let dept of departmentOptionsList" [value]='dept'>{{dept}}
         </option>
@@ -7,7 +59,7 @@
     <mat-icon (click)="removeDept(l)" class="add-icon clickable">delete</mat-icon>
     &nbsp;&nbsp;
     <mat-icon (click)="addDept()" *ngIf="(l+1) === arrayMenus.length"
-        class="add-icon clickable">add_circle_outline</mat-icon>
+        class="add-icon clickable">add_circle_outline</mat-icon> -->
 
     <!-- NEWLY ADDED -->
     <!-- <div *ngFor="let permission of permissionList; let p=index">
@@ -27,8 +79,8 @@
             <label for="menuDropdown{{ i }}">Select Menu:</label>
             <select id="menuDropdown{{ i }}" [(ngModel)]="section.menu" (change)="selectMenu(section)"
                 class="app-single-select-dropdown"> -->
-                <!-- <option *ngFor="let menuOption of menuOptions" [value]="menuOption">{{ menuOption }}</option> -->
-                <!-- <option *ngFor="let menuOption of menuOptions" [value]="menuOption">{{ menuOption }}</option>
+    <!-- <option *ngFor="let menuOption of menuOptions" [value]="menuOption">{{ menuOption }}</option> -->
+    <!-- <option *ngFor="let menuOption of menuOptions" [value]="menuOption">{{ menuOption }}</option>
 
             </select>
 
@@ -37,24 +89,24 @@
             <mat-icon (click)="addMenu()" *ngIf="(i+1) === arrayMenus.length"
                 class="add-icon clickable">add_circle_outline</mat-icon> -->
 
-            <!-- <div class="pages-container" *ngIf="section.menu !== ''"> -->
-            <div class="pages-container" *ngIf="showDepartmentOption">
+    <!-- <div class="pages-container" *ngIf="section.menu !== ''"> -->
+    <!-- <div class="pages-container" *ngIf="showDepartmentOption">
 
 
-                <div class="col-md-8 d-flex flex-column">
-                    <!-- <h3>Pages:</h3> -->
-                    <!-- <div *ngFor="let page of section.pages">
+        <div class="col-md-8 d-flex flex-column"> -->
+            <!-- <h3>Pages:</h3> -->
+            <!-- <div *ngFor="let page of section.pages">
                         <input type="checkbox" [id]="page.name" [value]="page.selected" [(ngModel)]="page.selected" />
                         <label [for]="page.name">{{ page.name }}</label>
                     </div> -->
-                    <div *ngFor="let permission of permissionList">
-                        <input type="checkbox" [value]="permission" />
-                        <label>{{ permission }}</label>
-                    </div>
-                </div>
-                <!-- <button (click)="addPage(section)">Add Page</button>
-                <button (click)="removePage(section)">Remove Page</button> -->
+            <!-- <div *ngFor="let permission of permissionList">
+                <input type="checkbox" [value]="permission" />
+                <label>{{ permission }}</label>
             </div>
-        <!-- </div>
+        </div> -->
+        <!-- <button (click)="addPage(section)">Add Page</button>
+                <button (click)="removePage(section)">Remove Page</button> -->
+    <!-- </div> -->
+    <!-- </div>
     </div> -->
-</div>
+<!-- </div> -->
