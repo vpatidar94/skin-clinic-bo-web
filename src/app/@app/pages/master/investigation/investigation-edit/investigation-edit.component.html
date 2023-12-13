@@ -15,8 +15,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="testName"
-                                [(ngModel)]="item.name" required>
+                            <input type="text" class="form-control app-input" name="testName" [(ngModel)]="item.name"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <input type="text" class="form-control app-input" name="charges"
-                                [(ngModel)]="item.fee" required>
+                            <input type="text" class="form-control app-input" name="charges" [(ngModel)]="item.fee"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -85,14 +85,15 @@
                         <!-- <div *ngFor="investigation" -->
                         <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
                         <mat-icon class="add-icon clickable mb-4"
-                            (click)="addNewGroupTest(k)">add_circle_outline</mat-icon>
+                            *ngIf="(k+1) === item.investigationParam?.params?.length"
+                            (click)="addNewGroupTest(k+1 )">add_circle_outline</mat-icon>
                     </div>
 
-                    <div *ngIf="grp" class="d-flex flex-row">
+                    <!-- <div *ngIf="grp" class="d-flex flex-row">
                         <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
                         <mat-icon class="add-icon clickable mb-4"
                             (click)="addNewGroupTest(k)">add_circle_outline</mat-icon>
-                    </div>
+                    </div> -->
 
                 </ng-container>
             </div>

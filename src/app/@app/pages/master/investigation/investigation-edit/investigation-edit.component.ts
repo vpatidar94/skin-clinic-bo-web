@@ -27,6 +27,8 @@ export class InvestigationEditComponent implements OnInit {
     @Input()
     departmentList!: DepartmentVo[];
 
+    groupStates: boolean[] = [];
+
 
     // newly added 
     genderSelectList: Array<any> = GENDER_LIST;
@@ -52,47 +54,58 @@ export class InvestigationEditComponent implements OnInit {
 
 
     public removeTestParameter(index: number): void {
-        // this.investigationParameters.params[index].criteriaList.splice(1, 1);
+        this.item.investigationParam?.params[index].criteriaList.splice(1, 1);
     }
 
     public addTestParameter(index: number) {
-        // this.investigationParameters.params[index].criteriaList.push({
-        //     testName: '',
-        //     ref: '',
-        //     unit: ''
-        // })
+        this.item.investigationParam?.params[index].criteriaList.push({
+            testName: '',
+            ref: '',
+            unit: ''
+        })
     }
 
     public addNewGroupTest(index: number) {
-        // this.investigationParameters.params.push({} as InvestigationGroupVo)
+        // this.item.investigationParam?.params.push({} as InvestigationGroupVo)
+        this.item.investigationParam?.params.push({
+            name: '',
+            criteriaList: [{
+                testName: "",
+                ref: "",
+                unit: ""
+            }],
+            gender: [],
+            ageGroup: '',
+        } as InvestigationGroupVo);
+
     }
 
     public addParameters(index: number): void {
-        // if (this.investigationParameters.params[index].criteriaList.length == 0) {
-        //     this.investigationParameters.params[index].criteriaList.push({
-        //         testName: '',
-        //         ref: '',
-        //         unit: ''
-        //     })
-        // }
-        // this.groupStates[index] = !this.groupStates[index];
+        if (this.item.investigationParam?.params[index].criteriaList) {
+            // this.item.investigationParam?.params[index].criteriaList.push({
+            //     testName: '',
+            //     ref: '',
+            //     unit: ''
+            // })
+        }
+        this.groupStates[index] = !this.groupStates[index];
     }
 
     public isGroupOpen(index: number): boolean {
-        // return this.groupStates[index];
-        return true;
+        return this.groupStates[index];
+        // return true;
     }
 
 
     /* ************************************* Private Methods ******************************************** */
     private _inIt(): void {
-        // this.genderSelectList = this.genderList?.map((item: any) => {
-        //     const selected = { item_id: item.id, item_text: item.name };
-        //     return selected;
-        // });
+        this.genderSelectList = this.genderList?.map((item: any) => {
+            const selected = { item_id: item.id, item_text: item.name };
+            return selected;
+        });
 
-        // if (!this.investigationParameters.params) {
-        //     this.investigationParameters.params = [] as InvestigationGroupVo[];
+        // if (!this.item.investigationParam?.params) {
+        //     this.item.investigationParam?.params == [] as InvestigationGroupVo[];
         // }
 
     }
@@ -100,13 +113,13 @@ export class InvestigationEditComponent implements OnInit {
     // newly added
     // multiple select
     onGenderSelect(item: any) {
-        // this.investigationParameters.params[0].geneder = this.selectedGender.map((it: any) => {
-        //     return {
-        //         key: it.item_id,
-        //         name: it.item_text,
-        //         value: ''
-        //     } as any;
-        // });
+        this.item.investigationParam?.params[0].gender == this.selectedGender.map((it: any) => {
+            return {
+                key: it.item_id,
+                name: it.item_text,
+                value: ''
+            } as any;
+        });
     }
 
 }

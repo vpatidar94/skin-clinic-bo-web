@@ -68,8 +68,19 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
 
   public addInvestigation(): void {
     const item = {} as ItemVo;
+    // item.investigationParam = {} as InvestigationParamVo;
+    // item.investigationParam.params = [] as InvestigationGroupVo[];
     item.investigationParam = {} as InvestigationParamVo;
-    item.investigationParam.params = [] as InvestigationGroupVo[];
+    item.investigationParam.params = [{
+      name: '',
+      criteriaList: [{
+        testName: "",
+        ref: "",
+        unit: ""
+      }],
+      gender: [],
+      ageGroup: '',
+    }] as InvestigationGroupVo[];
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {
       item.orgId = orgId;
@@ -157,6 +168,7 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.item = item;
     this._resetSection();
     this.showSectionInvestigationEdit = true;
+    console.log('item in _addEditInvestigation:', item);
   }
 
 
