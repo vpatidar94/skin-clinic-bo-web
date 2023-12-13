@@ -64,6 +64,8 @@ export const URL = {
     USER_LIST: MJR_ORG + '/user-type-list',
     ADD_UPDATE_USER_TYPE: MJR_ORG + '/user-type-add-update',
     ADD_UPDATE_USER: MJR_ORG + ADD_UPDATE,
+    SERVICE_ITEM_INVESTIGATION_LIST: MJR_SERVICE_ITEM +  "/investigation-list",
+
 
     // ******************************************************************
     // User API endpoint

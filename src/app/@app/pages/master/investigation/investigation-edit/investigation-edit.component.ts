@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, InvestigationGroupVo } from 'aayam-clinic-core';
+import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, InvestigationGroupVo, ItemVo } from 'aayam-clinic-core';
 import { InvestigationParamVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
@@ -12,9 +12,8 @@ import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 export class InvestigationEditComponent implements OnInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
-
-
     genderList = GENDER_LIST;
+
     gender = new FormControl('');
     criteriParameterData = [{
         testName: '',
@@ -22,18 +21,11 @@ export class InvestigationEditComponent implements OnInit {
         unit: '',
     }]
 
-    criteriaList!: Array<InvestigationCriteriaVo>;
-
-    groupStates: boolean[] = [];  /* it is to give groupname[index] as true or false as we want to make particular group as true or false*/
-
     @Input()
-    investigationParameters!: InvestigationParamVo;
+    item!: ItemVo;
 
     @Input()
     departmentList!: DepartmentVo[];
-
-    orgBooking!: OrgBookingDto[]
-
 
 
     // newly added 
@@ -60,47 +52,48 @@ export class InvestigationEditComponent implements OnInit {
 
 
     public removeTestParameter(index: number): void {
-        this.investigationParameters.params[index].criteriaList.splice(1, 1);
+        // this.investigationParameters.params[index].criteriaList.splice(1, 1);
     }
 
     public addTestParameter(index: number) {
-        this.investigationParameters.params[index].criteriaList.push({
-            testName: '',
-            ref: '',
-            unit: ''
-        })
+        // this.investigationParameters.params[index].criteriaList.push({
+        //     testName: '',
+        //     ref: '',
+        //     unit: ''
+        // })
     }
 
     public addNewGroupTest(index: number) {
-        this.investigationParameters.params.push({} as InvestigationGroupVo)
+        // this.investigationParameters.params.push({} as InvestigationGroupVo)
     }
 
     public addParameters(index: number): void {
-        if (this.investigationParameters.params[index].criteriaList.length == 0) {
-            this.investigationParameters.params[index].criteriaList.push({
-                testName: '',
-                ref: '',
-                unit: ''
-            })
-        }
-        this.groupStates[index] = !this.groupStates[index];
+        // if (this.investigationParameters.params[index].criteriaList.length == 0) {
+        //     this.investigationParameters.params[index].criteriaList.push({
+        //         testName: '',
+        //         ref: '',
+        //         unit: ''
+        //     })
+        // }
+        // this.groupStates[index] = !this.groupStates[index];
     }
 
     public isGroupOpen(index: number): boolean {
-        return this.groupStates[index];
+        // return this.groupStates[index];
+        return true;
     }
 
 
     /* ************************************* Private Methods ******************************************** */
     private _inIt(): void {
-        this.genderSelectList = this.genderList?.map((item: any) => {
-            const selected = { item_id: item.id, item_text: item.name };
-            return selected;
-        });
+        // this.genderSelectList = this.genderList?.map((item: any) => {
+        //     const selected = { item_id: item.id, item_text: item.name };
+        //     return selected;
+        // });
 
-        if (!this.investigationParameters.params) {
-            this.investigationParameters.params = [] as InvestigationGroupVo[];
-        }
+        // if (!this.investigationParameters.params) {
+        //     this.investigationParameters.params = [] as InvestigationGroupVo[];
+        // }
 
     }
 

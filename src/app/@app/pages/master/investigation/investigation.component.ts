@@ -2,12 +2,13 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, BOOKING_TYPE_NAME, DEPT, DepartmentVo, InvestigationParamVo, ResponseStatus } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_TYPE_NAME, DEPT, DepartmentVo, InvestigationGroupVo, InvestigationParamVo, ItemVo, ResponseStatus } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 
-export interface ExtendedServiceTypeDto extends InvestigationParamVo {
+export interface ExtendedServiceTypeDto extends ItemVo {
   departmentName: string;    // For Department
 }
 
@@ -38,33 +39,26 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   showSectionInvestigationList!: boolean;
   showSectionInvestigationEdit!: boolean;
 
-  investigationParameters!: InvestigationParamVo;
+  item!: ItemVo;
 
   displayedColumns: string[] = ['testCode', 'testName', "department", 'specimenType', 'action'];
-  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  // dataSource = new MatTableDataSource<InvestigationParamVo>([] as InvestigationParamVo[]);
-  dataSource!: MatTableDataSource<ExtendedServiceTypeDto>;
-
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  bookingTypeName: any = BOOKING_TYPE_NAME;
-
   departmentList!: DepartmentVo[];
 
-  investigationList!: InvestigationParamVo[];
-
-  originalDataSource: ExtendedServiceTypeDto[] = [];
+  itemList!: ItemVo[];
 
 
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private investigationApi: InvestigationApi,
+    private itemApi: ServiceItemApi,
     private departmentApi: DepartmentApi) { }
 
   /* ************************************* Public Methods ******************************************** */
-
   public ngAfterViewInit() {
     this.paginator.showFirstLastButtons = false;
     this.paginator.hidePageSize = false;
@@ -73,13 +67,15 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   }
 
   public addInvestigation(): void {
-    const investigationParameters = {} as InvestigationParamVo;
+    const item = {} as ItemVo;
+    item.investigationParam = {} as InvestigationParamVo;
+    item.investigationParam.params = [] as InvestigationGroupVo[];
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {
-      investigationParameters.orgId = orgId;
-      investigationParameters.brId = orgId;
+      item.orgId = orgId;
+      item.brId = orgId;
     }
-    this._addEditInvestigation(investigationParameters);
+    this._addEditInvestigation(item);
   }
 
   public applyFilter(event: Event) {
@@ -99,12 +95,12 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   }
 
   public savingInvestigationParameters(): void {
-    this.investigationApi.addUpdateInvestigation(this.investigationParameters).subscribe((res: ApiResponse<InvestigationParamVo>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-        this.investigationParameters = res.body
-        this._init();
-      }
-    });
+    // this.itemApi.addUpdateInvestigation(this.investigationParameters).subscribe((res: ApiResponse<InvestigationParamVo>) => {
+    //   if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+    //     this.investigationParameters = res.body
+    //     this._init();
+    //   }
+    // });
   }
 
   public _getDepartmentList() {
@@ -130,18 +126,15 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     if (!orgId) {
       return;
     }
-    this.investigationApi.getInvestigationList(orgId).subscribe((res: ApiResponse<InvestigationParamVo[]>) => {
-      this.investigationList = res.body ?? [] as InvestigationParamVo[];
+    this.itemApi.getInvestigationServiceItemList(orgId).subscribe((res: ApiResponse<any[]>) => {
+      this.itemList = res.body ?? [] as any[];
       // this.dataSource = new MatTableDataSource(this.investigationList);
-      const extendedList = this.extendServiceTypeList(this.investigationList, this.addingDepartmentName);
-      this.dataSource = new MatTableDataSource(extendedList);
-      this.originalDataSource = [...extendedList];
-
+      this.dataSource = new MatTableDataSource(this.itemList);
     })
   }
 
-  public editInvestigation(investigation: InvestigationParamVo): void {
-    this._addEditInvestigation(investigation);
+  public editInvestigation(item: ItemVo): void {
+    this._addEditInvestigation(item);
   }
 
   /* ************************************* Private Methods ******************************************** */
@@ -160,21 +153,21 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.showSectionInvestigationEdit = false;
   }
 
-  private _addEditInvestigation(investigationParameters: InvestigationParamVo): void {
-    this.investigationParameters = investigationParameters
+  private _addEditInvestigation(item: ItemVo): void {
+    this.item = item;
     this._resetSection();
     this.showSectionInvestigationEdit = true;
   }
 
 
-  private extendServiceTypeList(investigationList: InvestigationParamVo[], addingDepartmentName: { [departmentId: string]: string }): any[] {
-    return investigationList.map(investigation => {
-      return {
-        ...investigation,
-        departmentName: addingDepartmentName[investigation.departmentId]
-      };
-    });
-  }
+  // private extendServiceTypeList(investigationList: any[], addingDepartmentName: { [departmentId: string]: string }): any[] {
+  //   return investigationList.map(investigation => {
+  //     return {
+  //       ...investigation,
+  //       departmentName: addingDepartmentName[investigation.departmentId]
+  //     };
+  //   });
+  // }
 
 }
 
