@@ -71,7 +71,7 @@
 
 <section class="section-org-edit" *ngIf="showSectionInvestigationEdit">
     <app-investigation-edit [item]="item"
-        [departmentList]="departmentList"></app-investigation-edit>
+        [departmentList]="departmentList"  [serviceTypeList]="serviceTypeList"></app-investigation-edit>
     <div class="d-flex align-items-center justify-content-center mb-4 mt-5">
         <div class="col-1">
             <button class="common-button" (click)="savingInvestigationParameters()">{{'save'}}</button>

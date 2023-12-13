@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, BOOKING_TYPE_NAME, DEPT, DepartmentVo, InvestigationGroupVo, InvestigationParamVo, ItemVo, ResponseStatus } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_TYPE_NAME, DEPT, DepartmentVo, InvestigationGroupVo, InvestigationParamVo, ItemVo, ResponseStatus, ServiceTypeVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
@@ -51,12 +51,15 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
 
   itemList!: ItemVo[];
 
+  serviceTypeList!: ServiceTypeVo[];
+
 
   /* ************************************* Constructors ******************************************** */
   constructor(private keyValueStorageService: KeyValueStorageService,
     private investigationApi: InvestigationApi,
     private itemApi: ServiceItemApi,
-    private departmentApi: DepartmentApi) { }
+    private departmentApi: DepartmentApi,
+    private serviceItemApi: ServiceItemApi) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngAfterViewInit() {
@@ -112,6 +115,7 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     //     this._init();
     //   }
     // });
+    console.log('item',this.item)
   }
 
   public _getDepartmentList() {
@@ -131,6 +135,16 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
 
     })
   }
+
+  public _getServiceTypeList(): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+        return;
+    }
+    this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
+        this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+      })}
+      
 
   public _getInvestigationList() {
     const orgId = this.keyValueStorageService.getOrgId();
@@ -157,6 +171,7 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.showSectionInvestigationList = true;
     this._getDepartmentList();
     this._getInvestigationList();
+    this._getServiceTypeList();
   }
 
   private _resetSection(): void {
@@ -168,7 +183,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.item = item;
     this._resetSection();
     this.showSectionInvestigationEdit = true;
-    console.log('item in _addEditInvestigation:', item);
   }
 
 

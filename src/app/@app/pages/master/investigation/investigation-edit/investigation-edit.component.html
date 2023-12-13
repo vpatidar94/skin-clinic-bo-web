@@ -30,9 +30,10 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select [disabled]="true" class="app-single-select-dropdown w-100" name="department"
-                                [(ngModel)]="item.departmentId">
-                                <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
+                            <select class="app-single-select-dropdown w-100" name="department" [disabled]="true">
+                                <option *ngFor="let department of departmentList" [value]="department._id"
+                                    [attr.selected]="department.name === 'PATHOLOGY' ? true : null">
+                                    {{ department.name }}
                                 </option>
                             </select>
                         </div>
@@ -42,6 +43,25 @@
         </div>
 
         <div class="row">
+            <!-- Service Type -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Service Type</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <select name="serviceType" class="app-single-select-dropdown w-100"
+                                [(ngModel)]="item.serviceTypeId" required>
+                                <option *ngFor="let type of serviceTypeList" [value]="type._id">{{type.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="row"> -->
             <!-- Specimen-->
             <div class="col-md-6" *ngIf="item.investigationParam">
                 <div class="d-flex align-items-center mb-3">
@@ -56,7 +76,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <!-- Charges -->
             <div class="col-md-6">
                 <div class="d-flex align-items-center mb-3">
@@ -190,8 +212,10 @@
                             <mat-icon *ngIf="(i+1)==grp.criteriaList.length" class="add-icon clickable"
                                 (click)="addTestParameter(k)">add_circle_outline</mat-icon>
                         </div>
+
                     </div>
                 </div>
+                <hr class="mt-3 mb-3" />
             </div>
         </div>
     </form>

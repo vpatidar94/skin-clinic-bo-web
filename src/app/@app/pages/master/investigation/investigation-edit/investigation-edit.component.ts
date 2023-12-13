@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, InvestigationGroupVo, ItemVo } from 'aayam-clinic-core';
+import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, InvestigationGroupVo, ItemVo, ServiceTypeVo } from 'aayam-clinic-core';
 import { InvestigationParamVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
@@ -27,7 +27,12 @@ export class InvestigationEditComponent implements OnInit {
     @Input()
     departmentList!: DepartmentVo[];
 
+    @Input()
+    serviceTypeList!: ServiceTypeVo[];
+
     groupStates: boolean[] = [];
+
+    itemList!: ItemVo[]
 
 
     // newly added 
