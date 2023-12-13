@@ -60,8 +60,6 @@
                 </div>
             </div>
 
-
-            <!-- <div class="row"> -->
             <!-- Specimen-->
             <div class="col-md-6" *ngIf="item.investigationParam">
                 <div class="d-flex align-items-center mb-3">
@@ -104,7 +102,6 @@
                 <!-- ng-container is used here in place of div so that the group name came in row and not in column as due to ngFor it will came in column  -->
                 <ng-container *ngFor="let grp of item.investigationParam?.params; let k=index">
                     <div class="d-flex flex-row">
-                        <!-- <div *ngFor="investigation" -->
                         <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
                         <mat-icon class="add-icon clickable mb-4"
                             *ngIf="(k+1) === item.investigationParam?.params?.length"
@@ -215,7 +212,7 @@
 
                     </div>
                 </div>
-                <hr class="mt-3 mb-3" />
+                <hr *ngIf="isGroupOpen(k)" class="mt-3 mb-3" />
             </div>
         </div>
     </form>
