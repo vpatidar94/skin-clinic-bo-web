@@ -51,9 +51,10 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select name="serviceType" class="app-single-select-dropdown w-100"
-                                [(ngModel)]="item.serviceTypeId" required>
-                                <option *ngFor="let type of serviceTypeList" [value]="type._id">{{type.name}}</option>
+                            <select name="serviceType" class="app-single-select-dropdown w-100" [disabled]="true"
+                                 required>
+                                <option *ngFor="let type of serviceTypeList" [value]="type._id"
+                                [attr.selected]="type.name === 'INVESTIGATION' ? true : null">{{type.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -132,23 +133,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Gender -->
-                    <!-- <div class="col-md-3">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="col-md-4">
-                                <label class="app-label">Gender</label>
-                            </div>
-                            <div class="col-md-8 me-2">
-                                <div class="style-gender-dropdown">
-                                    <mat-select [formControl]="gender" multiple>
-                                        <mat-option *ngFor="let gender of genderList"
-                                            [value]="gender.id">{{gender.name}}</mat-option>
-                                    </mat-select>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
 
                     <div class="col-md-3">
                         <div class="d-flex align-items-center mb-3">
