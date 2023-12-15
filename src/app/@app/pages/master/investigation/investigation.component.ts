@@ -9,10 +9,6 @@ import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { APP_CONST } from 'src/app/@app/const/app.const';
 
-export interface ExtendedServiceTypeDto extends ItemVo {
-  departmentName: string;    // For Department
-}
-
 export interface PeriodicElement {
   testCode: string;
   testName: string;
@@ -127,12 +123,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     }
     this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
       this.departmentList = res.body ?? [] as DepartmentVo[];
-
-      /**to show departmentName via departmentId as department name is not in the interface **/
-      this.addingDepartmentName = {};
-      this.departmentList.forEach(department => {
-        this.addingDepartmentName[department._id] = department.name;
-      });
       this._getInvestigationList();
 
     })
@@ -141,12 +131,13 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
   public _getServiceTypeList(): void {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
-        return;
+      return;
     }
     this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
-        this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
-      })}
-      
+      this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
+    })
+  }
+
 
   public _getInvestigationList() {
     const orgId = this.keyValueStorageService.getOrgId();
@@ -187,15 +178,11 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this.showSectionInvestigationEdit = true;
   }
 
-
-  // private extendServiceTypeList(investigationList: any[], addingDepartmentName: { [departmentId: string]: string }): any[] {
-  //   return investigationList.map(investigation => {
-  //     return {
-  //       ...investigation,
-  //       departmentName: addingDepartmentName[investigation.departmentId]
-  //     };
-  //   });
-  // }
+  public getDepartmentName(row: ItemVo): string {
+    const departmentId = row.departmentId;
+    const department = this.departmentList?.find(dep => dep._id === departmentId);
+    return department ? department.name : '';
+  }
 
 }
 
