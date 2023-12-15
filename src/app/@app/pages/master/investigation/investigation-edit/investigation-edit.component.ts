@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DepartmentVo, InvestigationCriteriaVo, OrgBookingDto, InvestigationGroupVo, ItemVo, ServiceTypeVo } from 'aayam-clinic-core';
-import { InvestigationParamVo } from 'aayam-clinic-core';
+import { DepartmentVo, InvestigationGroupVo, ItemVo, ServiceTypeVo } from 'aayam-clinic-core';
 import { GENDER_LIST } from 'src/app/@app/const/gender.consr';
 
 @Component({
@@ -14,12 +13,7 @@ export class InvestigationEditComponent implements OnInit {
     /* *********************************** Instance Field *********************************** */
     genderList = GENDER_LIST;
 
-    gender = new FormControl('');
-    criteriParameterData = [{
-        testName: '',
-        ref: '',
-        unit: '',
-    }]
+    gender = [] as string[];
 
     @Input()
     item!: ItemVo;
@@ -71,7 +65,6 @@ export class InvestigationEditComponent implements OnInit {
     }
 
     public addNewGroupTest(index: number) {
-        // this.item.investigationParam?.params.push({} as InvestigationGroupVo)
         this.item.investigationParam?.params.push({
             name: '',
             criteriaList: [{
@@ -86,38 +79,16 @@ export class InvestigationEditComponent implements OnInit {
     }
 
     public addParameters(index: number): void {
-        if (this.item.investigationParam?.params[index].criteriaList) {
-            // this.item.investigationParam?.params[index].criteriaList.push({
-            //     testName: '',
-            //     ref: '',
-            //     unit: ''
-            // })
-        }
         this.groupStates[index] = !this.groupStates[index];
     }
 
     public isGroupOpen(index: number): boolean {
         return this.groupStates[index];
-        // return true;
-    }
-
-
-    /* ************************************* Private Methods ******************************************** */
-    private _inIt(): void {
-        this.genderSelectList = this.genderList?.map((item: any) => {
-            const selected = { item_id: item.id, item_text: item.name };
-            return selected;
-        });
-
-        // if (!this.item.investigationParam?.params) {
-        //     this.item.investigationParam?.params == [] as InvestigationGroupVo[];
-        // }
-
     }
 
     // newly added
     // multiple select
-    onGenderSelect(item: any) {
+    public onGenderSelect(item: any) {
         this.item.investigationParam?.params[0].gender == this.selectedGender.map((it: any) => {
             return {
                 key: it.item_id,
@@ -127,4 +98,12 @@ export class InvestigationEditComponent implements OnInit {
         });
     }
 
+
+    /* ************************************* Private Methods ******************************************** */
+    private _inIt(): void {
+        this.genderSelectList = this.genderList?.map((item: any) => {
+            const selected = { item_id: item.id, item_text: item.name };
+            return selected;
+        });
+    }
 }

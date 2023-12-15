@@ -30,9 +30,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select class="app-single-select-dropdown w-100" name="department" [disabled]="true">
-                                <option *ngFor="let department of departmentList" [value]="department._id"
-                                    [attr.selected]="department.name === 'PATHOLOGY' ? true : null">
+                            <select class="app-single-select-dropdown w-100" name="department" [(ngModel)]="item.departmentId" [disabled]="true">
+                                <option *ngFor="let department of departmentList" [value]="department._id">
                                     {{ department.name }}
                                 </option>
                             </select>
@@ -51,10 +50,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select name="serviceType" class="app-single-select-dropdown w-100" [disabled]="true"
-                                 required>
-                                <option *ngFor="let type of serviceTypeList" [value]="type._id"
-                                [attr.selected]="type.name === 'INVESTIGATION' ? true : null">{{type.name}}</option>
+                            <select name="serviceType" class="app-single-select-dropdown w-100" [disabled]="true" [(ngModel)]="item.serviceTypeId">
+                                <option *ngFor="let type of serviceTypeList" [value]="type._id">{{type.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -108,13 +105,6 @@
                             *ngIf="(k+1) === item.investigationParam?.params?.length"
                             (click)="addNewGroupTest(k+1 )">add_circle_outline</mat-icon>
                     </div>
-
-                    <!-- <div *ngIf="grp" class="d-flex flex-row">
-                        <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
-                        <mat-icon class="add-icon clickable mb-4"
-                            (click)="addNewGroupTest(k)">add_circle_outline</mat-icon>
-                    </div> -->
-
                 </ng-container>
             </div>
             <div *ngFor="let grp of item.investigationParam?.params; let k=index">

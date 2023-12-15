@@ -7,6 +7,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
+import { APP_CONST } from 'src/app/@app/const/app.const';
 
 export interface ExtendedServiceTypeDto extends ItemVo {
   departmentName: string;    // For Department
@@ -71,8 +72,6 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
 
   public addInvestigation(): void {
     const item = {} as ItemVo;
-    // item.investigationParam = {} as InvestigationParamVo;
-    // item.investigationParam.params = [] as InvestigationGroupVo[];
     item.investigationParam = {} as InvestigationParamVo;
     item.investigationParam.params = [{
       name: '',
@@ -89,6 +88,10 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
       item.orgId = orgId;
       item.brId = orgId;
     }
+    const dept = this.departmentList?.find(dep => dep.name === APP_CONST.PATHOLOGY) as DepartmentVo;
+    item.departmentId = dept._id;
+    const serviceType = this.serviceTypeList.find(st => st.name == APP_CONST.INVESTIGATION) as ServiceTypeVo;
+    item.serviceTypeId = serviceType._id;
     this._addEditInvestigation(item);
   }
 
@@ -108,14 +111,13 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     this._init();
   }
 
-  public savingInvestigationParameters(): void {
-    // this.itemApi.addUpdateInvestigation(this.investigationParameters).subscribe((res: ApiResponse<InvestigationParamVo>) => {
-    //   if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-    //     this.investigationParameters = res.body
-    //     this._init();
-    //   }
-    // });
-    console.log('item',this.item)
+  public addUpdateItem(): void {
+    this.itemApi.addUpdateServiceItem(this.item).subscribe((res: ApiResponse<ItemVo>) => {
+      if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
+        this.item = res.body as ItemVo;
+        this._init();
+      }
+    });
   }
 
   public _getDepartmentList() {
