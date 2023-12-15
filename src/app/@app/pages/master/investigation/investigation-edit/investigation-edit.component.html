@@ -30,7 +30,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select class="app-single-select-dropdown w-100" name="department" [(ngModel)]="item.departmentId" [disabled]="true">
+                            <select class="app-single-select-dropdown w-100" name="department"
+                                [(ngModel)]="item.departmentId" [disabled]="true">
                                 <option *ngFor="let department of departmentList" [value]="department._id">
                                     {{ department.name }}
                                 </option>
@@ -50,7 +51,8 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-group">
-                            <select name="serviceType" class="app-single-select-dropdown w-100" [disabled]="true" [(ngModel)]="item.serviceTypeId">
+                            <select name="serviceType" class="app-single-select-dropdown w-100" [disabled]="true"
+                                [(ngModel)]="item.serviceTypeId">
                                 <option *ngFor="let type of serviceTypeList" [value]="type._id">{{type.name}}</option>
                             </select>
                         </div>
@@ -103,7 +105,7 @@
                         <button class="me-2 mb-4 common-button" (click)="addParameters(k)">Group-{{k+1}}</button>
                         <mat-icon class="add-icon clickable mb-4"
                             *ngIf="(k+1) === item.investigationParam?.params?.length"
-                            (click)="addNewGroupTest(k+1 )">add_circle_outline</mat-icon>
+                            (click)="addNewGroupTest(k)">add_circle_outline</mat-icon>
                     </div>
                 </ng-container>
             </div>
@@ -117,7 +119,7 @@
                             </div>
                             <div class="col-md-8 me-2">
                                 <div class="form-group">
-                                    <input type="text" class="form-control app-input" name="group"
+                                    <input type="text" class="form-control app-input" name="group{{k}}"
                                         [(ngModel)]="grp.name" required>
                                 </div>
                             </div>
@@ -130,7 +132,7 @@
                                 <label class="app-label">Gender</label>
                             </div>
                             <div class="col-md-8 me-2">
-                                <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" name="gender"
+                                <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" name="gender{{k}}"
                                     [settings]="dropdownSettings" [data]="genderSelectList"
                                     (onDeSelect)="onGenderSelect($event)" (onSelect)="onGenderSelect($event)"
                                     [(ngModel)]="grp.gender">
@@ -147,7 +149,7 @@
                             </div>
                             <div class="col-md-7 me-2">
                                 <div class="form-group">
-                                    <input type="text" class="form-control app-input" name="age-group"
+                                    <input type="text" class="form-control app-input" name="age-group{{k}}"
                                         [(ngModel)]="grp.ageGroup" required>
                                 </div>
                             </div>
@@ -166,15 +168,15 @@
 
                     <div class="row align-items-center" *ngIf="isGroupOpen(k)">
                         <div class="form-group col-md-3">
-                            <input class="form-control pres-input w-100" type="text" name="test{{i}}"
+                            <input class="form-control pres-input w-100" type="text" name="test{{k}}_{{i}}"
                                 [(ngModel)]="item.testName">
                         </div>
                         <div class="form-group col-md-3">
-                            <input class="form-control pres-input w-100" type="text" name="reference{{i}}"
+                            <input class="form-control pres-input w-100" type="text" name="reference{{k}}_{{i}}"
                                 [(ngModel)]="item.ref">
                         </div>
                         <div class="form-group col-md-3">
-                            <input class="form-control pres-input w-100" type="text" name="unit{{i}}"
+                            <input class="form-control pres-input w-100" type="text" name="unit{{k}}_{{i}}"
                                 [(ngModel)]="item.unit">
                         </div>
                         <div class="col-md-2">
