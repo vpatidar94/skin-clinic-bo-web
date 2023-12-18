@@ -65,6 +65,7 @@ export const URL = {
     ADD_UPDATE_USER_TYPE: MJR_ORG + '/user-type-add-update',
     ADD_UPDATE_USER: MJR_ORG + ADD_UPDATE,
     SERVICE_ITEM_INVESTIGATION_LIST: MJR_SERVICE_ITEM +  "/investigation-list",
+    DELETE_ITEM: MJR_SERVICE_ITEM + DELETE,
 
 
     // ******************************************************************

@@ -21,7 +21,7 @@ export class ServiceItemApi {
         return this.http.get<ApiResponse<ItemDetailDto[]>>(environment.apiUrl + URL.SERVICE_ITEM_LIST, { params: { orgId } });
     }
 
-    public getInvestigationServiceItemList(orgId: string): Observable<ApiResponse<any[]>> {
+    public getInvestigationServiceItemList(orgId: string): Observable<ApiResponse<ItemVo[]>> {
         return this.http.get<ApiResponse<any[]>>(environment.apiUrl + URL.SERVICE_ITEM_INVESTIGATION_LIST, { params: { orgId } });
     }
 
@@ -31,6 +31,10 @@ export class ServiceItemApi {
 
     public getServiceTypeList(orgId: string): Observable<ApiResponse<ServiceTypeVo[]>> {
         return this.http.get<ApiResponse<ServiceTypeVo[]>>(environment.apiUrl + URL.SERVICE_TYPE_LIST, { params: { orgId } });
+    }
+
+    public deleteByItemId(itemId: string): Observable<ApiResponse<boolean>> {
+        return this.http.get<ApiResponse<boolean>>(environment.apiUrl + URL.DELETE_ITEM, { params: { itemId } });
     }
 
 }

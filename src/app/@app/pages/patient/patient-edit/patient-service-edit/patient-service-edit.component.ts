@@ -37,38 +37,12 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
 
     cloneServiceItemList!: ItemDetailDto[];
 
-    selectedItem!: ItemVo;
-
     showSectionAdd = false;
-
-    // newly added to add discount field
-    serviceDiscount: number = 0;
-    serviceNetAmount!: number;
 
     serviceTypeList!: ServiceTypeVo[];
 
-    investigationList!: InvestigationParamVo[];
-
-    // newly added
-    showInvestigation: boolean = false;
-
     // newly added to link service type as investigation with the investigation list
-    serviceTypeInvestigation!: string;
-
-    selectedIndex: number = 0;
-
-
-    serviceItemSelectList!: Array<any>;
-    dropdownSettings = {
-        singleSelection: true,
-        idField: 'item_id',
-        textField: 'item_text',
-        itemsShowLimit: 8,
-        allowSearchFilter: true,
-        enableCheckAll: false,
-        maxHeight: 500
-    };
-
+    serviceTypeInvestigation: { [key: string]: string } = {} as { [key: string]: string };
 
     /* ************************************ Constructors ************************************ */
     constructor(private keyValueStorageService: KeyValueStorageService,
@@ -79,8 +53,8 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
 
     /* ************************************ Public Methods ************************************ */
     public ngOnInit(): void {
-        console.log('lol',this.serviceItemList);
-        
+        console.log('lol', this.serviceItemList);
+
 
         this._init();
         // @ts-ignore
@@ -94,8 +68,6 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         if (changes['serviceItemList']) {
             this.serviceItemList = changes['serviceItemList'].currentValue;
             this.cloneServiceItemList = changes['serviceItemList'].currentValue;
-
-           
         }
     }
 
@@ -157,42 +129,19 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         }
         this.serviceItemApi.getServiceTypeList(orgId).subscribe((res: ApiResponse<ServiceTypeVo[]>) => {
             this.serviceTypeList = res.body ?? [] as ServiceTypeVo[];
-
-            this.serviceItemSelectList = this.serviceItemList?.map((item: any) => {
-                const selected = { item_id: item.item._id, item_text: item.item.name };
-                
-                return selected;
-                
-            });
-            console.log("nol",this.serviceItemSelectList);
         });
     }
 
-
-    // newly added
-    public _getInvestigationList() {
-        const orgId = this.keyValueStorageService.getOrgId();
-        if (!orgId) {
-            return;
-        }
-        this.investigationApi.getInvestigationList(orgId).subscribe((res: ApiResponse<InvestigationParamVo[]>) => {
-            this.investigationList = res.body ?? [] as InvestigationParamVo[];
-        })
-    }
-
-    public serviceItemSelect(event: any, i: number) {
-        if (event.target.value == "investigation") {
-            this.showInvestigation = true;
-        }
-        else {
-            this.showInvestigation = false;
-        }
+    public getServiceItemSelectList(index: number): Array<ItemDetailDto> {
+        const typeId = this.serviceTypeInvestigation[index];
+        return this.serviceItemList?.filter((item: ItemDetailDto) => {
+            return item?.item?.serviceTypeId == typeId;
+        });
     }
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
         this._getServiceTypeList();
-        this._getInvestigationList();
     }
 
     private _formChanged(): void {
@@ -203,33 +152,15 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         this.pubSub.emit(actionDto);
     }
 
-    // onServiceSelect(event:any,i:number):void {
-    //     const item = this.serviceItemList?.find((item) => item.item._id === event.target);
-    //     if (item && item.item) {
-    //         this.userBooking.booking.items[i].item = JSON.parse(JSON.stringify(item.item));
-    //         this.userBooking.booking.items[i].priceBase = item.item.fee;
-    //         this.userBooking.booking.items[i].qty = 1;
-    //         this.userBooking.booking.items[i].name = item.item.name;
-    //         BookingUtility.updateBookingItemAndCalcTotal(true, this.userBooking.booking, item.item, 1, '');
-    //         this.userBookingChange.emit(this.userBooking);
-    //     }
-    // }
-
-    onServiceSelect(event: any, i: number): void {
-        const selectedServiceItemId = event[0]?.item_id; // Assuming the structure of the selected item
-        const selectedServiceItem = this.serviceItemList.find(item => item.item._id === selectedServiceItemId);
-        console.log('Selected Service Item:', selectedServiceItem);
-    
-        if (selectedServiceItem && selectedServiceItem.item) {
-            this.userBooking.booking.items[i].item = JSON.parse(JSON.stringify(selectedServiceItem.item));
-            this.userBooking.booking.items[i].priceBase = selectedServiceItem.item.fee;
+    public onServiceSelect(event: any, i: number): void {
+        const item = this.serviceItemList?.find((item) => item.item._id === event.target.value);
+        if (item && item.item) {
+            this.userBooking.booking.items[i].item = JSON.parse(JSON.stringify(item.item));
+            this.userBooking.booking.items[i].priceBase = item.item.fee;
             this.userBooking.booking.items[i].qty = 1;
-            this.userBooking.booking.items[i].name = selectedServiceItem.item.name;
-    
-            BookingUtility.updateBookingItemAndCalcTotal(true, this.userBooking.booking, selectedServiceItem.item, 1, '');
-    
+            this.userBooking.booking.items[i].name = item.item.name;
+            BookingUtility.updateBookingItemAndCalcTotal(true, this.userBooking.booking, item.item, 1, '');
             this.userBookingChange.emit(this.userBooking);
         }
     }
-    
 }

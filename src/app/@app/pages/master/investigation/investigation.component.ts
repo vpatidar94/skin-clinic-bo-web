@@ -144,15 +144,20 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
     if (!orgId) {
       return;
     }
-    this.itemApi.getInvestigationServiceItemList(orgId).subscribe((res: ApiResponse<any[]>) => {
+    this.itemApi.getInvestigationServiceItemList(orgId).subscribe((res: ApiResponse<ItemVo[]>) => {
       this.itemList = res.body ?? [] as any[];
-      // this.dataSource = new MatTableDataSource(this.investigationList);
       this.dataSource = new MatTableDataSource(this.itemList);
     })
   }
 
   public editInvestigation(item: ItemVo): void {
     this._addEditInvestigation(item);
+  }
+
+  public deleteItem(itemId: string): void {
+    this.serviceItemApi.deleteByItemId(itemId).subscribe(() => {
+      this._init();
+    });
   }
 
   /* ************************************* Private Methods ******************************************** */
