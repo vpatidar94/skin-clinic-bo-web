@@ -21,8 +21,8 @@
                 <div class="border border-info rounded p-3 mt-4 container-style">
                     <div class="row">
                         <div class="col-md-1"><strong>Sno.</strong></div>
-                        <div class="col-me-3"><strong>Service Type</strong></div>
-                        <div class="col-md-4"><strong>Service/Investigation</strong></div>
+                        <div class="col-md-3"><strong>Service Type</strong></div>
+                        <div class="col-md-3"><strong>Service/Investigation</strong></div>
                         <div class="col-md-2"><strong>Amount</strong></div>
                         <!-- CAN BE USED FURTHER -->
                         <!-- <div class="col-md-2"><strong>Discount</strong></div>
@@ -41,7 +41,7 @@
                             </select>
                         </div>
                         <!-- Service -->
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <select class="app-single-select-dropdown w-100" name="service-item{{i}}"
                                 (change)="onServiceSelect($event, i)"
                                 [ngModel]="userBooking.booking.items[i].item?._id">
