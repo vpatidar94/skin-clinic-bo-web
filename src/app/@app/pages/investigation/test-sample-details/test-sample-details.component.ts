@@ -1,27 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { NgxBarcode6Module } from 'ngx-barcode6';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { OrderItemVo, OrgBookingDto } from 'aayam-clinic-core';
 import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
-
-export interface PeriodicElement {
-    sno: number;
-    investigationName: string;
-    specimen: string;
-    sampleCollected: boolean;
-    sampleDate: Date;
-    time: string;
-    action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    { sno: 1, investigationName: 'CBC', specimen: 'Blood', sampleCollected: false, sampleDate: new Date(), time: '12:30 PM', action: 'Print' },
-    { sno: 2, investigationName: 'Widal Test', specimen: 'Blood', sampleCollected: false, sampleDate: new Date(), time: '12:30 PM', action: 'Print' },
-    { sno: 3, investigationName: 'Lipid Profile', specimen: 'Blood', sampleCollected: false, sampleDate: new Date(), time: '12:30 PM', action: 'Print' },
-]
+import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 
 @Component({
     selector: 'app-test-sample-details',
@@ -29,11 +14,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
     styleUrls: ['./test-sample-details.component.scss']
 })
 
-export class TestSampleDetailsComponent {
+export class TestSampleDetailsComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     displayedColumns: string[] = ['sno', 'investigationName', 'specimen', "sampleCollected", 'sampleDate', 'time', 'action'];
-    dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    dataSource!: MatTableDataSource<OrderItemVo>;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -41,16 +26,23 @@ export class TestSampleDetailsComponent {
     showTestIdBarcode: boolean = false;
     showPatientIdBarcode: boolean = false;
 
+    @Input()
+    booking!: OrgBookingDto;
+    @Output()
+    bookingChange = new EventEmitter<OrgBookingDto>();
+
     /* ************************************* Constructors ******************************************** */
-    constructor(public dialog: MatDialog
-    ) { }
+    constructor(public dialog: MatDialog) { }
 
     /* ************************************* Public Methods ******************************************** */
-    public ngAfterViewInit() {
-        this.paginator.showFirstLastButtons = false;
-        this.paginator.hidePageSize = false;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    public ngOnInit(): void {
+        this._init();
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['booking']) {
+            this.booking = changes['booking'].currentValue as OrgBookingDto;
+        }
     }
 
     public applyFilter(event: Event) {
@@ -79,4 +71,32 @@ export class TestSampleDetailsComponent {
             exitAnimationDuration,
         });
     }
+
+    public sampleCollectionChange(event: MatCheckboxChange, itemId: string): void {
+        const date = event.checked ? new Date() : null;
+        const orderItemIndex = this.booking?.booking?.items?.findIndex((it: OrderItemVo) => { return it?.item?._id === itemId });
+        if (orderItemIndex >= 0) {
+            this.booking.booking.items[orderItemIndex].sampleCollectDate = date;
+            this.bookingChange.emit(this.booking);
+            this._initItemTable();
+            //TODO: Save booking data
+        }
+    }
+
+    /* ************************************* Private Methods ******************************************** */
+    private _init(): void {
+        this._initItemTable();
+    }
+
+    private _initItemTable(): void {
+        const items = this.booking?.booking?.items?.filter((item: OrderItemVo) => {
+            return item && item.item && item.item.investigationParam;
+        });
+        if (items.length > 0) {
+            this.dataSource = new MatTableDataSource(items);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+        }
+    }
+
 }

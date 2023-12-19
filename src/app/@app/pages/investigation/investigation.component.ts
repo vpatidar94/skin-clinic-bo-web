@@ -12,7 +12,7 @@ import { ApiResponse, OrgBookingDto } from 'aayam-clinic-core';
     styleUrls: ['./investigation.component.scss']
 })
 
-export class InvestigationComponent implements OnInit{
+export class InvestigationComponent implements OnInit {
 
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
@@ -24,25 +24,19 @@ export class InvestigationComponent implements OnInit{
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+    public showSectionBookingList!: boolean;
+    public showSectionBookingDetail!: boolean;
+
+    booking!: OrgBookingDto;
+
     /* ************************************* Constructors ******************************************** */
     constructor(
         private keyValueStorageService: KeyValueStorageService,
-        private bookingApi: BookingApi,
-
-    ) { }
+        private bookingApi: BookingApi) { }
 
     /* ************************************* Public Methods ******************************************** */
-
-
     public ngOnInit(): void {
         this._init();
-    }
-
-    public ngAfterViewInit() {
-        this.paginator.showFirstLastButtons = false;
-        this.paginator.hidePageSize = false;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
     }
 
     public applyFilter(event: Event) {
@@ -54,22 +48,32 @@ export class InvestigationComponent implements OnInit{
         }
     }
 
-    public _getInvestigationList(){
-        const orgId = this.keyValueStorageService.getOrgId();
-        if (!orgId) {
-          return;
-        }
-        this.bookingApi.getInvestigationList(orgId).subscribe((res: ApiResponse<OrgBookingDto[]>) => {
-          this.investigationList = res.body ?? [] as OrgBookingDto[];
-          this.dataSource = new MatTableDataSource(this.investigationList);
-
-        })
-      }
-
+    public viewInvestigation(row: OrgBookingDto): void {
+        this.booking = row;
+        this._resetSection();
+        this.showSectionBookingDetail = true;
+    }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
-        this._getInvestigationList()
+        this._getInvestigationList();
     }
 
+    private _getInvestigationList(): void {
+        this._resetSection();
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.bookingApi.getInvestigationList(orgId).subscribe((res: ApiResponse<OrgBookingDto[]>) => {
+            this.investigationList = res.body ?? [] as OrgBookingDto[];
+            this.dataSource = new MatTableDataSource(this.investigationList);
+            this.showSectionBookingList = true;
+        });
+    }
+
+    private _resetSection(): void {
+        this.showSectionBookingList = false;
+        this.showSectionBookingDetail = false;
+    }
 }

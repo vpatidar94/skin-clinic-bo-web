@@ -4,11 +4,11 @@
         <mat-expansion-panel class="my-3">
             <mat-expansion-panel-header class="app-expansion">
                 <div class="app-expansion-title col-md-12">
-                    <span>Patient Id: <span>0812</span></span>
-                    <span>Visiting ID: <span>booking_id</span></span>
-                    <span>First Name: <span>Mayank</span></span>
-                    <span>Doctor's Name: <span>M.Patidar</span></span>
-                    <span>Date: <span>02/08/23</span></span>
+                    <span>Patient Id: <span>{{booking.booking.patientNo}}</span></span>
+                    <span>Visiting ID: <span>{{booking.booking.no}}</span></span>
+                    <span>First Name: <span>{{booking.patient.nameF}}</span></span>
+                    <span>Doctor's Name: <span *ngIf="booking.drDetail">{{booking.drDetail.nameF}}</span></span>
+                    <span>Date: <span>{{booking.booking.bookingDate | date}}</span></span>
                 </div>
             </mat-expansion-panel-header>
 
@@ -19,26 +19,26 @@
                         <!--Sno -->
                         <ng-container matColumnDef="sno">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Sno </th>
-                            <td mat-cell *matCellDef="let row"> {{row.sno}} </td>
+                            <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
                         </ng-container>
 
                         <!-- Investigation Name -->
                         <ng-container matColumnDef="investigationName">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Investigation Name</th>
-                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.investigationName}} </td>
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row?.item?.name}} </td>
                         </ng-container>
 
                         <!--Specimen -->
                         <ng-container matColumnDef="specimen">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Specimen </th>
-                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.specimen}} </td>
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row?.item?.investigationParam?.specimen}} </td>
                         </ng-container>
 
                         <!-- select -->
                         <ng-container matColumnDef="sampleCollected">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Sample Collected </th>
                             <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">
-                                <mat-checkbox [(ngModel)]="row.sampleCollected"
+                                <mat-checkbox (change)="sampleCollectionChange($event, row?.item?._id)" [ngModel]="!!row?.sampleCollectDate"
                                     class="large-mat-checkbox"></mat-checkbox>
                             </td>
                         </ng-container>
@@ -47,20 +47,19 @@
                         <ng-container matColumnDef="sampleDate">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Sample Date </th>
                             <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.sampleDate}} </td> -->
-                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> <span *ngIf="row.sampleCollected">{{row.sampleDate | date}} </span><span *ngIf="!row.sampleCollected"></span></td>
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> <span *ngIf="row?.sampleCollectDate">{{row?.sampleCollectDate | date}} </span><span *ngIf="!row.sampleCollected"></span></td>
 
                         </ng-container>
 
                         <ng-container matColumnDef="time">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Time </th>
-                            <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.time}} </td>
+                            <td mat-cell *matCellDef="let row" class="text-ellipsis">{{row?.sampleCollectDate | date:'h:mm a'}}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="action">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Bar Code </th>
                             <td mat-cell *matCellDef="let row" class="text-ellipsis">
-                                <button [(disabled)]="!row.sampleCollected" class="btn-style"
-                                    [class.checked]="row.sampleCollected"
+                                <button [(disabled)]="!row.sampleCollectDate" class="btn-style"
                                     (click)="openDialogPatientId('0ms', '0ms')">Print</button>
                             </td>
                         </ng-container>
@@ -87,11 +86,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end my-2">
+                        <!-- <div class="d-flex align-items-center justify-content-end my-2">
                             <div class="col-3">
                                 <button class="common-button">Save</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

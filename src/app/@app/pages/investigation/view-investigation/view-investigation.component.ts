@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { OrgBookingDto } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-view-investigation',
@@ -13,7 +13,14 @@ export class ViewInvestigationComponent implements OnInit {
     showSectionReports!: boolean;
 
     tabValue!: string;
-    constructor(private route: ActivatedRoute) { }
+
+    @Input()
+    booking!: OrgBookingDto;
+    @Output()
+    bookingChange = new EventEmitter<OrgBookingDto>();
+
+    /* ************************************* Constructors ******************************************** */
+    constructor() { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
@@ -26,17 +33,17 @@ export class ViewInvestigationComponent implements OnInit {
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
-        this.tabValue = 'TESTSAMPLEDETAILS'
+        this.tabValue = 'TEST_SAMPLE_DETAILS'
         this.tabChange();
 
     }
     private _tabChange(tabValue: string): void {
         switch (tabValue) {
-            case 'TESTSAMPLEDETAILS':
+            case 'TEST_SAMPLE_DETAILS':
                 this._resetSection();
                 this.showSectionTestSamplesDetails = true;
                 break;
-            case 'REPORTS':
+            case 'TEST_REPORTS':
                 this._resetSection();
                 this.showSectionReports = true;
                 break;
