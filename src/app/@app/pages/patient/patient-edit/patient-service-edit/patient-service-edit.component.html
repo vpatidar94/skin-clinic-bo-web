@@ -36,26 +36,20 @@
 
                         <!-- Service-type -->
                         <div class="form-group col-md-3">
-                            <select class="app-single-select-dropdown w-100">
-                                <option *ngFor="let item of serviceTypeList">{{item.name}}</option>
-                            </select>
+                            <p class="form-control pres-input w-100">
+                                {{getServiceTypeName(orderItem.item?.serviceTypeId)}}</p>
                         </div>
+
                         <!-- Service -->
                         <div class="form-group col-md-3">
-                            <select class="app-single-select-dropdown w-100" name="service-item{{i}}"
-                                (change)="onServiceSelect($event, i)"
-                                [ngModel]="userBooking.booking.items[i].item?._id">
-                                <option [value]="null" [disabled]="true">Select Sevice Item</option>
-                                <option *ngFor="let item of getServiceItemSelectList(i)" [value]="item?.item?._id">
-                                    {{item?.item?.name}}
-                                </option>
-                            </select>
+                            <input type="text" class="form-control pres-input w-100" name="service-item{{i}}"
+                                [value]="orderItem.name">
                         </div>
 
                         <!--Total Amount-->
                         <div class="form-group col-md-2">
                             <input type="text" class="form-control pres-input w-100" name="amount{{i}}"
-                                [value]="userBooking.booking.items[i].amount">
+                                [value]="orderItem.amount">
                         </div>
 
                         <!-- CAN BE USED FURTHER -->

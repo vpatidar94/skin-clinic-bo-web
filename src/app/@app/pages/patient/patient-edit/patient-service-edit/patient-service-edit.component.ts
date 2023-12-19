@@ -163,4 +163,11 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
             this.userBookingChange.emit(this.userBooking);
         }
     }
+
+    public getServiceTypeName(row: any): string {
+        const serviceType = this.serviceTypeList.find((ser: any) => ser._id === row);
+        console.log('ServiceType:', serviceType);
+        return serviceType ? serviceType.name : '';
+    }
+
 }
