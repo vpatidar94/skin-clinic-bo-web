@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { OrgBookingDto } from 'aayam-clinic-core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import { NgxBarcode6Module } from 'ngx-barcode6';
 
@@ -15,6 +16,10 @@ export class PatientIdBarCodeDialogComponent {
   /* ************************************ Instance Fields ************************************ */
 
   /* ************************************ Constructors ************************************ */
+  // @Input()
+  // booking!: OrgBookingDto;
+
+
   constructor(public dialogRef: MatDialogRef<PatientIdBarCodeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }

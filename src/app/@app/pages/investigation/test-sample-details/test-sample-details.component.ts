@@ -54,8 +54,10 @@ export class TestSampleDetailsComponent implements OnInit, OnChanges {
         }
     }
 
-    public openDialogPatientId(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    public openDialogPatientId(enterAnimationDuration: string, exitAnimationDuration: string, row:OrderItemVo): void {
+        const booking = this.booking;
         this.dialog.open(PatientIdBarCodeDialogComponent, {
+            data: {row, booking},
             width: '550px',
             height: '550px',
             enterAnimationDuration,

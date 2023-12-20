@@ -14,14 +14,14 @@
       <div style="text-align:center">
       </div>
       <div style="text-align:center">
-        <ngx-barcode6 class='style-barcode' [bc-format]="'CODE128'" [bc-value]="'P12584'" [bc-display-value]="false">
+        <ngx-barcode6 class='style-barcode' [bc-format]="'CODE128'" [bc-value]="data.booking.booking.patientNo" [bc-display-value]="false">
         </ngx-barcode6>
-        <span>Patient Id: P12584</span>
+        <span>Patient Id: <span>{{data.booking.booking.patientNo}}</span></span>
       </div>
       <div style="text-align:center">
-        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'T125840'" [bc-display-value]="false">
+        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="data.row.item.code" [bc-display-value]="false">
         </ngx-barcode6>
-        <span>Test Id: CODE128</span>
+        <span>Test Id: <span>{{data.row.item.code}}</span></span>
       </div>
     </div>
   </div>
