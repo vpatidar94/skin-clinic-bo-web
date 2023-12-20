@@ -18,7 +18,7 @@ export class PatientIdBarCodeDialogComponent {
   /* ************************************ Constructors ************************************ */
   // @Input()
   // booking!: OrgBookingDto;
-
+  date = new Date();
 
   constructor(public dialogRef: MatDialogRef<PatientIdBarCodeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {

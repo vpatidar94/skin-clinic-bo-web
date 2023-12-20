@@ -5,8 +5,8 @@
   </div>
 
   <div class="d-flex flex-direction-row" style="text-align:center">
-    <span class="me-3">Print Date:03/10/2023, </span>
-    <span>Print Time:01:55 PM</span>
+    <span class="me-3">Print Date: {{date |date}} </span>
+    <span>Print Time: {{date | date:'h:mm a'}}</span>
   </div>
 
   <div mat-dialog-content>
