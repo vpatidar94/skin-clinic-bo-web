@@ -4,9 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { OrderItemVo, OrgBookingDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, OrderItemVo, OrgBookingDto, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
 import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
+import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 
 @Component({
     selector: 'app-test-sample-details',
@@ -31,8 +32,13 @@ export class TestSampleDetailsComponent implements OnInit, OnChanges {
     @Output()
     bookingChange = new EventEmitter<OrgBookingDto>();
 
+    userBooking!: UserBookingDto;
+
     /* ************************************* Constructors ******************************************** */
-    constructor(public dialog: MatDialog) { }
+    constructor(public dialog: MatDialog,
+        private bookingApi: BookingApi,
+        
+        ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
@@ -82,11 +88,22 @@ export class TestSampleDetailsComponent implements OnInit, OnChanges {
             this.bookingChange.emit(this.booking);
             this._initItemTable();
             //TODO: Save booking data
+
+            this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
+                if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+                  this.userBooking = res.body
+                  this.bookingChange.emit(this.booking);
+                }
+              });
         }
     }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
+        const userBooking = {} as UserBookingDto;
+        userBooking.booking = this.booking.booking;
+        this.userBooking = userBooking;
+
         this._initItemTable();
     }
 
