@@ -1,8 +1,8 @@
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 export interface PeriodicElement {
@@ -14,11 +14,11 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    { billNo: 1101, patientName: 'Chhitu Yadav',  date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
-    { billNo: 1202, patientName: 'Virat kohli',  date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
-    { billNo: 3625, patientName: 'Rohit Sharma',  date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
-    { billNo: 1464, patientName: 'Hardik Pandya',  date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
-    { billNo: 8555, patientName: 'AB de Villiers',  date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
+    { billNo: 1101, patientName: 'Chhitu Yadav', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
+    { billNo: 1202, patientName: 'Virat kohli', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
+    { billNo: 3625, patientName: 'Rohit Sharma', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
+    { billNo: 1464, patientName: 'Hardik Pandya', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
+    { billNo: 8555, patientName: 'AB de Villiers', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View prescription | move to pharmacy" },
 ]
 
 @Component({
