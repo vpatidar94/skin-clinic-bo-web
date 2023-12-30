@@ -27,6 +27,8 @@ export class HospitalInventoryItemEditComponent implements OnInit{
 
     newItem!: Array<NewItemInterface>
 
+    isPanelOpen:boolean = true;
+
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
 
@@ -54,6 +56,9 @@ export class HospitalInventoryItemEditComponent implements OnInit{
         });
     }
 
+    panelClosed() {
+        this.isPanelOpen = true;
+      }
     /* ************************************* Private Methods ******************************************** */
 
 }

@@ -76,8 +76,8 @@ export class HospitalInventoryComponent implements AfterViewInit, OnInit {
 
   public openHospitalInventoryItemEditDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(HospitalInventoryItemEditComponent, {
-      width: '1000px',
-      height: '450px',
+      width: '1200px',
+      height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

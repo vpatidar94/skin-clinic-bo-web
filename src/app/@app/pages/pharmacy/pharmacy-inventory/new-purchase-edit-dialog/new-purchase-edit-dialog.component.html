@@ -1,16 +1,22 @@
 <section class="p-5">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between">
+        <div>
+            <input type="date" style="padding: 5px; margin-right: 10px;">
+            <input type="text" placeholder="Added by" style="padding: 5px;">
+
+        </div>
         <button class="common-button" (click)="openAddProductDialog('0ms', '0ms')">Add Product</button>
     </div>
+
     <mat-accordion>
-        <mat-expansion-panel class="my-3">
+        <mat-expansion-panel class="my-3" [expanded]="isPanelOpen" (closed)="panelClosed()">
             <mat-expansion-panel-header class="app-expansion">
                 <div class="app-expansion-title col-md-12">
-                    <span>Patient Id: <span>0812</span></span>
+                    <!-- <span>Patient Id: <span>0812</span></span>
                     <span>Visiting ID: <span>booking_id</span></span>
                     <span>First Name: <span>Mayank</span></span>
                     <span>Doctor's Name: <span>M.Patidar</span></span>
-                    <span>Date: <span>02/08/23</span></span>
+                    <span>Date: <span>02/08/23</span></span> -->
                 </div>
             </mat-expansion-panel-header>
 
@@ -67,5 +73,9 @@
             </div>
 
         </mat-expansion-panel>
+
+        <div class="d-flex flex-row justify-content-center mt-3">
+            <button class="common-button">{{'save'}}</button>
+        </div>
     </mat-accordion>
 </section>

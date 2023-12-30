@@ -1,19 +1,18 @@
 <section class="p-5">
-    <!-- <div>
-        <input type="date" name="purchase-date" class="me-2 input-style">
-        <input type="text" name="name" class="input-style" placeholder="added by">
-    </div> -->
+    <div>
+        <input type="date" style="padding: 5px; margin-right: 10px;">
+        <input type="text" placeholder="Added by" style="padding: 5px;">
+
+    </div>
     <mat-accordion>
-        <mat-expansion-panel class="my-3">
-            <mat-expansion-panel-header class="app-expansion">
+        <mat-expansion-panel class="my-3" [expanded]="isPanelOpen" (closed)="panelClosed()">
+            <mat-expansion-panel-header class="app-expansion" >
                 <div class="app-expansion-title col-md-12">
                     <!-- <span> <span></span></span>
                     <span><span></span></span>
                     <span><span></span></span>
                     <span> <span></span></span>
                     <span><span></span></span> -->
-                    <input type="date" name="purchase-date" class="me-2">
-                    <input type="text" name="name" placeholder="added by">
                 </div>
             </mat-expansion-panel-header>
 
@@ -70,8 +69,8 @@
         <div class="col-1">
             <button class="common-button">{{'save'}}</button>
         </div>
-        <div class="col-1">
+        <!-- <div class="col-1">
             <button class="cancel-button">{{'cancel'}}</button>
-        </div>
+        </div> -->
     </div>
 </section>

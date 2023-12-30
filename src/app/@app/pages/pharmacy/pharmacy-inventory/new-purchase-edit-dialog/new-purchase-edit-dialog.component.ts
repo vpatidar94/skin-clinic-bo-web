@@ -30,6 +30,9 @@ export class NewPurchaseEditDialogComponent implements OnInit {
 
     newPurchase!: Array<NewPurchaseInterface>
 
+    isPanelOpen:boolean = true;
+
+
     /* ************************************* Constructors ******************************************** */
     constructor(private dialog: MatDialog) { }
 
@@ -61,6 +64,15 @@ export class NewPurchaseEditDialogComponent implements OnInit {
             expiry: '',
         });
     }
+
+
+  panelOpened() {
+    this.isPanelOpen = false;
+  }
+
+  panelClosed() {
+    this.isPanelOpen = true;
+  }
 
     /* ************************************* Private Methods ******************************************** */
 
