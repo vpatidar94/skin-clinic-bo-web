@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { ApiResponse, BookingUtility, BookingVo, InvestigationParamVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
 import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
@@ -53,15 +53,16 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
 
     /* ************************************ Public Methods ************************************ */
     public ngOnInit(): void {
-        console.log('lol', this.serviceItemList);
-
-
         this._init();
         // @ts-ignore
         this.serviceForm?.valueChanges?.subscribe(() => {
             this._formChanged();
         });
         this.showSectionAdd = this.userBooking.booking?.items?.length > 0;
+        // serviceTypeInvestigation
+        this.userBooking.booking?.items?.forEach((oi: OrderItemVo, index: number) => {
+            this.serviceTypeInvestigation[index] = oi?.item?.serviceTypeId ?? '';
+        });
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
