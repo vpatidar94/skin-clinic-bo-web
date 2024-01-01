@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApiResponse, ProductVo, ResponseStatus } from 'aayam-clinic-core';
+import { ApiResponse, PRODUCT_PACK_TYPE_LIST, PRODUCT_TYPE_LIST, ProductVo, ResponseStatus } from 'aayam-clinic-core';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -12,6 +12,8 @@ export class AddProductDialogComponent implements OnInit {
     /* *********************************** Instance Field *********************************** */
 
     product!: ProductVo;
+    productTypeList = PRODUCT_TYPE_LIST;
+    productPackTypeList = PRODUCT_PACK_TYPE_LIST;
     // isQtyPerStripActive: boolean = false;
 
     /* ************************************* Constructors ******************************************** */

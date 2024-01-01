@@ -1,5 +1,5 @@
 import { Component, Input, } from '@angular/core';
-import { ProductVo } from 'aayam-clinic-core';
+import { PRODUCT_TYPE_LIST, ProductVo, PRODUCT_PACK_TYPE_LIST } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-product-edit',
@@ -11,6 +11,10 @@ export class ProductEditComponent {
     @Input()
     product!: ProductVo;
     // isQtyPerStripActive: boolean = false;
+
+    productTypeList = PRODUCT_TYPE_LIST;
+    productPackTypeList = PRODUCT_PACK_TYPE_LIST;
+
 
     /* ************************************* Constructors ******************************************** */
     constructor() { }

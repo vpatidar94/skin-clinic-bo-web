@@ -7,7 +7,7 @@
                 <button (click)="addNewObservation()" [disabled]="showSectionAdd" class="common-button">Add New</button>
             </div>
             <mat-accordion *ngFor="let booking of userBookingInvestigationList?.bookingList">
-                <mat-expansion-panel class="my-3">
+                <mat-expansion-panel class="my-3" *ngIf="booking._id != userBooking.booking?._id">
                     <mat-expansion-panel-header class="app-expansion">
                         <div class="app-expansion-title col-md-12">
                             <span>UHID: <span>{{booking.patientNo}}</span></span>

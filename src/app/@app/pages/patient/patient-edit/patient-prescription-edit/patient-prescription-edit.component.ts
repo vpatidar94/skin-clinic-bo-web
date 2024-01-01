@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo } from 'aayam-clinic-core';
+import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo, DOSAGE_LIST } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { PrescriptionPrintDialogComponent } from './prescription-print/prescription-print-dialog.component';
 
@@ -42,6 +42,8 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   @Input()
   productList!: ProductVo[];
+
+  dosageList = DOSAGE_LIST;
 
   /* ************************************ Constructors ************************************ */
   constructor(private dialog: MatDialog) {
@@ -130,6 +132,10 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
       data: { ...this.userBooking },
     });
+  }
+
+  public trackByFn(index: number) {
+    return index;
   }
 
   /* ************************************ Private Methods ************************************ */

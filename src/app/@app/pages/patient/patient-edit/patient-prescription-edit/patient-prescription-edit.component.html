@@ -5,7 +5,7 @@
             <button (click)="addNewPrescription()" [disabled]="showSectionAdd" class="common-button">Add New</button>
         </div>
         <mat-accordion *ngFor="let booking of userBookingInvestigationList?.bookingList">
-            <mat-expansion-panel class="my-3">
+            <mat-expansion-panel class="my-3" *ngIf="booking._id != userBooking.booking?._id">
                 <mat-expansion-panel-header class="app-expansion">
                     <div class="app-expansion-title col-md-12">
                         <span>UHID: <span>{{booking.patientNo}}</span></span>
@@ -41,7 +41,7 @@
                                 <!-- complaint details -->
                                 <div class="col-md-8 form-group">
                                     <input type="text" class="form-control pres-input" name="complaint{{i}}"
-                                        [(ngModel)]="booking.complaint[i]" required>
+                                        [(ngModel)]="booking.complaint[i]" required [readOnly]="true">
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                             <p class="col-md-8"><strong>Details</strong></p>
                             <p class="col-md-2"></p>
                         </div>
-                        <div *ngFor="let complaint of userBooking.booking.complaint; let i = index;"
+                        <div *ngFor="let complaint of userBooking.booking.complaint; let i = index; trackBy: trackByFn"
                             class="row align-items-center">
                             <div class="row align-items-center">
                                 <div class="col-md-1 pres-input text-center">
@@ -244,8 +244,8 @@
 
                                 <!-- complaint details -->
                                 <div class="col-md-8 form-group">
-                                    <input type="text" class="form-control pres-input" name="complaint{{i}}"
-                                        [(ngModel)]="userBooking.booking.complaint[i]" required>
+                                    <input class="form-control pres-input" name="booking_complaint{{i}}"
+                                        [(ngModel)]="userBooking.booking.complaint[i]">
                                 </div>
                                 <div class="col-md-2">
                                     <mat-icon (click)="removeComplaintItem(i)"
@@ -273,7 +273,7 @@
                                 <p class="col-md-8"><strong>Details</strong></p>
                                 <p class="col-md-2"></p>
                             </div>
-                            <div *ngFor="let diagnos of userBooking.booking.diagnosis; let i = index;"
+                            <div *ngFor="let diagnos of userBooking.booking.diagnosis; let i = index; trackBy: trackByFn"
                                 class="row align-items-center">
                                 <div class="row align-items-center">
                                     <div class="col-md-1 pres-input text-center">
@@ -326,7 +326,8 @@
                                     <div class="form-group d-flex justify-content-between align-items-center col-md-2">
                                         <select name="medicine" class="app-single-select-dropdown w-100"
                                             [(ngModel)]="userBooking.booking.prescription[i].name">
-                                            <option *ngFor="let product of productList">{{product.name}}
+                                            <option [value]="null" [disabled]="true">Select Medicine</option>
+                                            <option *ngFor="let product of productList" [value]="product.name" >{{product.name}}
                                             </option>
                                         </select>
                                         <!-- <mat-icon class="add-icon">add_circle_outline</mat-icon> -->
@@ -335,27 +336,9 @@
                                     <div class="form-group col-md-2">
                                         <select name="dosage" class="app-single-select-dropdown w-100"
                                             [(ngModel)]="userBooking.booking.prescription[i].dosage">
-                                            <option>RX = Treatment</option>
-                                            <option>HX = History</option>
-                                            <option>DX = Diagnosis</option>
-                                            <option>qd = Every day</option>
-                                            <option>qod = Every other day</option>
-                                            <option>qh = Every Hour</option>
-                                            <option>SOS = If needed</option>
-                                            <option>AC = Before Meals</option>
-                                            <option>PC = After Meals</option>
-                                            <option>BID = Twice a Day</option>
-                                            <option>TID = Thrice a Day</option>
-                                            <option>QID = Four times a day</option>
-                                            <option>OD = Once a Day</option>
-                                            <option>BT = Bed Time</option>
-                                            <option>BBF = Before Breakfast</option>
-                                            <option>BD = Before Dinner</option>
-                                            <option>Tw = Twice a week</option>
-                                            <option>SQ = sub cutaneous</option>
-                                            <option>IM = IntraMusclular</option>
-                                            <option>ID = Intradermal</option>
-                                            <option>IV = Intravenous</option>
+                                            <option [value]="null" [disabled]="true">Select Medicine</option>
+                                            <option *ngFor="let dosage of dosageList" [value]="dosage.id" >{{dosage.name}}
+                                            </option>
                                         </select>
                                     </div>
                                     <!-- Duration -->
@@ -396,7 +379,7 @@
                         <div class="col-md-3">
                             <input type="checkbox" class="me-1" name="checkbox" [(ngModel)]="isNextVisitChecked">
                             <span class="prescription-heading">Next Visit(after days)</span>
-                            <input *ngIf="isNextVisitChecked" type="number" class="form-control pres-input"
+                            <input *ngIf="isNextVisitChecked" appNumberOnly class="form-control pres-input"
                                 name="nextVisitDays" [(ngModel)]="nextVisitDays" (input)="updateMinNextVisitDate()">
                             <p *ngIf="isNextVisitChecked" readonly class="form-control pres-input">
                                 {{userBooking.booking.nextVisitDate|date}}

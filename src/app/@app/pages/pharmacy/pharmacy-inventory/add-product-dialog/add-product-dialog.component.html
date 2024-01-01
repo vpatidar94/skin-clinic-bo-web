@@ -32,18 +32,9 @@
                         <div class="form-group">
                             <select name="ProductType" class="app-single-select-dropdown w-100"
                                 [(ngModel)]="product.productType" required>
-                                <option value="">Select</option>
-                                <option value="Tablet">Tablet</option>
-                                <option value="Capsule">Capsule</option>
-                                <option value="Syrup">Syrup</option>
-                                <option value="Drop">Drop</option>
-                                <option value="Injection">Injection</option>
-                                <option value="Inhaler">Inhaler</option>
-                                <option value="Gel">Gel</option>
-                                <option value="Ointment">Ointment</option>
-                                <option value="General Product">General Product</option>
-                                <option value="Facewash">Facewash</option>
-                                <option value="Lotion">Lotion</option>
+                                <option [value]="null" [disabled]="true">Select Product Type</option>
+                                <option *ngFor="let type of productTypeList" [value]="type.value">{{type.label}}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -91,15 +82,15 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerStrip"
+                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerPackage"
                                 required appNumberOnly>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <select class="app-single-select-dropdown w-100">
-                            <option>Per Unit</option>
-                            <option>Per Strip</option>
-                            <option>Per Pack</option>
+                        <select class="app-single-select-dropdown w-100" [(ngModel)]="product.packagingType" name="packagingType">
+                            <option [value]="null" [disabled]="true">Select Packaging Type</option>
+                            <option *ngFor="let type of productPackTypeList" [value]="type.value">{{type.label}}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -114,7 +105,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="" class="form-control app-input" name="pricePerStrip"
-                                [(ngModel)]="product.pricePerStrip" required appAmountOnly>
+                                [(ngModel)]="product.pricePerPackage" required appAmountOnly>
                         </div>
                     </div>
                 </div>
