@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, BookingVo, OrderItemVo, OrgBookingDto, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingVo, ItemVo, OrderItemVo, OrgBookingDto, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
 import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
@@ -109,7 +109,7 @@ export class TestSampleDetailsComponent implements OnInit, OnChanges {
 
     private _initItemTable(): void {
         const items = this.booking?.booking?.items?.filter((item: OrderItemVo) => {
-            return item && item.item && item.item.investigationParam;
+            return item && item.item && (item.item as ItemVo).investigationParam;
         });
         if (items.length > 0) {
             this.dataSource = new MatTableDataSource(items);

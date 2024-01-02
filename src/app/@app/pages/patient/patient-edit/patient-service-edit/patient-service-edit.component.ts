@@ -61,7 +61,7 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         this.showSectionAdd = this.userBooking.booking?.items?.length > 0;
         // serviceTypeInvestigation
         this.userBooking.booking?.items?.forEach((oi: OrderItemVo, index: number) => {
-            this.serviceTypeInvestigation[index] = oi?.item?.serviceTypeId ?? '';
+            this.serviceTypeInvestigation[index] = (oi?.item as ItemVo | null)?.serviceTypeId ?? '';
         });
     }
 
@@ -165,8 +165,8 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         }
     }
 
-    public getServiceTypeName(row: any): string {
-        const serviceType = this.serviceTypeList.find((ser: any) => ser._id === row);
+    public getServiceTypeName(row: OrderItemVo): string {
+        const serviceType = this.serviceTypeList.find((ser: any) => ser._id === (row.item as ItemVo)?.serviceTypeId);
         console.log('ServiceType:', serviceType);
         return serviceType ? serviceType.name : '';
     }

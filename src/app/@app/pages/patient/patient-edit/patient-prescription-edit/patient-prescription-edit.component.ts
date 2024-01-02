@@ -138,6 +138,14 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     return index;
   }
 
+  public prescriptionChange(event: any, index: number): void {
+    const productId = this.userBooking.booking.prescription[index]?.productId;
+    const product = this.productList.find(it => it._id == productId);
+    if (product && product?._id) {
+      this.userBooking.booking.prescription[index].name = product?.name;
+    }
+  }
+
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
     if(this.userBooking.booking.nextVisitDate){
