@@ -8,12 +8,14 @@ import { DepartmentApi } from './department.api';
 import { ProductApi } from './product.api';
 import { TransactionApi } from './transaction.api';
 import { InvestigationApi } from './investigation.api';
+import { PharmacyApi } from './pharmacy.api';
 
 @NgModule({
   imports: [],
   declarations: [],
   providers: [
-    AuthApi, OrgApi, UserApi, ServiceItemApi, BookingApi, DepartmentApi, ProductApi, TransactionApi,InvestigationApi
+    AuthApi, OrgApi, UserApi, ServiceItemApi, BookingApi, DepartmentApi, ProductApi, TransactionApi, InvestigationApi,
+    PharmacyApi
   ],
   exports: []
 })

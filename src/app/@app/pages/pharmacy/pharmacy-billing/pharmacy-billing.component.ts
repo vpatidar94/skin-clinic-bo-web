@@ -1,25 +1,12 @@
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-    patientId: number;
-    patientName: string;
-    contact: string;
-    date: string;
-    doctorsName: string;
-    action: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    { patientId: 1101, patientName: 'Chhitu Yadav', contact: '7898454503', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 1202, patientName: 'Virat kohli', contact: '86566546544', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 3625, patientName: 'Rohit Sharma', contact: '654498498554', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 1464, patientName: 'Hardik Pandya', contact: '656484654555', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-    { patientId: 8555, patientName: 'AB de Villiers', contact: '371648984588', date: '02/08/22023', doctorsName: 'Dr.Mayank Patidar', action: "View" },
-]
+import { ApiResponse, OrgPharmacyOrderCountDto, OrgPharmacyOrderDto } from 'aayam-clinic-core';
+import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
+import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
+import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 @Component({
     selector: 'app-pharmacy-billing',
@@ -28,17 +15,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class PharmacyBillingComponent implements OnInit {
-    displayedColumns: string[] = ['patientId', 'patientName', 'contact', "date", 'doctorsName', "action"];
-    dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    displayedColumns: string[] = ['appNo', 'date', 'patientName', 'doctorsName', "action"];
+    dataSource = new MatTableDataSource<OrgPharmacyOrderDto>([] as OrgPharmacyOrderDto[]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
+
     showSectionPharmacyBillingList: boolean = false;
     showSectionPharmacyEdit: boolean = false;
 
+    resultsLength = 0;
+    orderList!: OrgPharmacyOrderDto[];
+
+    columnFilters: { [key: string]: string } = {};
+
+    originalDataSource: OrgPharmacyOrderDto[] = [];
+    filteredData: OrgPharmacyOrderDto[] = [];
+
     /* ************************************* Constructors ******************************************** */
-    constructor() {
+    constructor(private keyValueStorageService: KeyValueStorageService,
+        private pharmacyApi: PharmacyApi) {
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -47,19 +44,88 @@ export class PharmacyBillingComponent implements OnInit {
     }
 
     public ngAfterViewInit() {
-        this.paginator.showFirstLastButtons = false;
-        this.paginator.hidePageSize = false;
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+
+        this.paginator.page
+            .pipe(
+                startWith({}),
+                switchMap(() => {
+                    return this.pharmacyApi.getOrderList(
+                        orgId,
+                        this.paginator.pageIndex + 1,
+                        this.paginator.pageSize
+                    ).pipe(catchError(() => observableOf()));
+                }),
+                map((res: ApiResponse<OrgPharmacyOrderCountDto>) => {
+                    if (res.body) {
+                        this.resultsLength = res.body?.totalOrder;
+                        return res.body;
+                    }
+                    return {} as OrgPharmacyOrderCountDto;
+                })
+            )
+            .subscribe((dto) => {
+                this.orderList = dto?.orgOrder ?? [] as OrgPharmacyOrderDto[];
+                this.dataSource = new MatTableDataSource(this.orderList);
+                this.originalDataSource = [...this.orderList];
+            });
     }
 
-    public applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+    public applyFilter(columnName: string, event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+        this.columnFilters[columnName] = filterValue;
+        // Combine all column filters
+        const combinedFilters = Object.values(this.columnFilters).filter((filter) => !!filter);
+        // If there are no filters, show all data
+        if (combinedFilters.length === 0) {
+            this.dataSource.data = this.originalDataSource;
+            this.filteredData = []; // Reset filtered data array
+            return;
+        }
+        // Filter the data progressively from the original data or the previously filtered data
+        let dataToFilter: OrgPharmacyOrderDto[];
+        if (this.filteredData.length > 0) {
+            dataToFilter = [...this.filteredData];
+        } else {
+            dataToFilter = [...this.originalDataSource];
+        }
+        for (const filter of combinedFilters) {
+            dataToFilter = dataToFilter.filter((data) => {
+                const cellValue = this.getCellValue(data, columnName);
 
+                if (cellValue !== undefined && cellValue.includes(filter)) {
+                    return true; // Include the row if the cell value matches the filter
+                }
+
+                return false; // Exclude the row if no match is found or cellValue is undefined
+            });
+        }
+        // Update the data source with the filtered data
+        this.dataSource.data = dataToFilter;
+        this.filteredData = dataToFilter;
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    private getCellValue(data: OrgPharmacyOrderDto, columnName: string): string | undefined {
+        if (columnName === 'appNo' && data.order.no) {
+            return data.order.no.toLocaleLowerCase();
+        }
+        else if (columnName === 'date' && data.order.bookingDate) {
+            return data.order.bookingDate.toString();
+        }
+        else if (columnName === 'patientName' && data.patient.nameF) {
+            return data.patient.nameF.toLowerCase();
+        }
+        else if (columnName === 'doctorsName' && data.drDetail?.nameF) {
+            return data.drDetail?.nameF.toLowerCase();
+        }
+        return undefined;
     }
 
     public addNewCustomer(): void {

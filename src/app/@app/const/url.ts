@@ -45,6 +45,8 @@ const MJR_INVESTIGATION = BASE_CORE + '/investigation'
 const MJR_SERVICE_ITEM = BASE_CORE + '/service-item';
 const MJR_BOOKING = BASE_CORE + '/booking';
 const MJR_PRODUCT = BASE_CORE + '/product';
+const MJR_PHARMACY = BASE_CORE + '/pharmacy';
+
 /**
  * END_POINT URL URL
  */
@@ -103,6 +105,10 @@ export const URL = {
     ADD_UPDATE_INVESTIGATION: MJR_INVESTIGATION + '/add-update',
     INVESTIGATION_LIST: MJR_INVESTIGATION +'/param-list',
 
+    // ******************************************************************
+    // Pharmacy API endpoint
+    PHARMACY_ORDER_ADD_UPDATE: MJR_PHARMACY + '/order-add-update',
+    PHARMACY_ORDER_ORDER_LIST_BY_ORG: MJR_PHARMACY + "/order-list-by-org",
 
     // ************************************************************************************************
     Z_LAST: 'Do-Not-Delete'

@@ -4,9 +4,10 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingUtility, BookingVo, OrderItemVo, OrgBookingCountDto, OrgBookingDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_STATUS, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingUtility, BookingVo, OrderItemVo, OrgBookingCountDto, OrgBookingDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
 import { catchError, map, of as observableOf, startWith, switchMap, } from 'rxjs';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
+import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -39,6 +40,7 @@ export class PatientListComponent {
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi,
+        private pharmacyApi: PharmacyApi,
         private bookingApi: BookingApi) {
     }
 
@@ -62,6 +64,7 @@ export class PatientListComponent {
         pharmacyBooking.brId = booking.brId;
         pharmacyBooking.user = booking.user;
         pharmacyBooking.items = [] as OrderItemVo[];
+        pharmacyBooking.status = 'IN_PROGRESS';
         if (booking?.prescription?.length > 0) {
             booking.prescription.forEach((pres: PrescriptionVo, i: number) => {
                 const item = this.productList?.find((item) => item._id === pres.productId) as ProductVo;
@@ -76,7 +79,9 @@ export class PatientListComponent {
                 }
             });
         }
-        console.log('xx xx xx pharmacyBooking ', pharmacyBooking);
+        this.pharmacyApi.addUpdateOrder(pharmacyBooking).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
+            this._init();
+        });
     }
 
     /* ************************************* Private Methods ******************************************** */
@@ -123,6 +128,7 @@ export class PatientListComponent {
             )
             .subscribe((dto) => {
                 this.bookingList = dto?.orgBooking ?? [] as OrgBookingDto[];
+                this.bookingList = this.bookingList?.filter(it => it.pharmacyOrderId == null);
                 this.dataSource = new MatTableDataSource(this.bookingList);
                 this.originalDataSource = [...this.bookingList];
             });
