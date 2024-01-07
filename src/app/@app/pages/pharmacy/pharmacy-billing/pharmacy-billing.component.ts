@@ -15,7 +15,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 })
 
 export class PharmacyBillingComponent implements OnInit {
-    displayedColumns: string[] = ['appNo', 'date', 'patientName', 'doctorsName', "action"];
+    displayedColumns: string[] = ['appNo', 'date', 'patientName', 'doctorsName', 'amount', "action"];
     dataSource = new MatTableDataSource<OrgPharmacyOrderDto>([] as OrgPharmacyOrderDto[]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;

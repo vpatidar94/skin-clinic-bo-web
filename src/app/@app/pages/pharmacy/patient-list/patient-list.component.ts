@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, BOOKING_STATUS, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingUtility, BookingVo, OrderItemVo, OrgBookingCountDto, OrgBookingDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_STATUS, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingUtility, BookingVo, DosageUtility, OrderItemVo, OrgBookingCountDto, OrgBookingDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
 import { catchError, map, of as observableOf, startWith, switchMap, } from 'rxjs';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
@@ -73,9 +73,9 @@ export class PatientListComponent {
                     pharmacyBooking.items[i].item = item;
                     pharmacyBooking.items[i].item = JSON.parse(JSON.stringify(item)) as ProductVo;
                     pharmacyBooking.items[i].priceBase = item.price;
-                    pharmacyBooking.items[i].qty = 1; // TODO: calc Qty
+                    pharmacyBooking.items[i].qty = DosageUtility.getQty(pres.duration, pres.dosage);
                     pharmacyBooking.items[i].name = item.name;
-                    BookingUtility.updateBookingItemAndCalcTotalPharmacy(true, pharmacyBooking as any, item, 1, '');
+                    BookingUtility.updateBookingItemAndCalcTotalPharmacy(true, pharmacyBooking as any, item, pharmacyBooking.items[i].qty, '');
                 }
             });
         }
