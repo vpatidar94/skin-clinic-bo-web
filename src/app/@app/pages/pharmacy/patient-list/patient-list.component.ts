@@ -10,6 +10,8 @@ import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { PrescriptionDialogComponent } from './prescription-dialog/prescription-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-patient-list',
@@ -41,7 +43,9 @@ export class PatientListComponent {
     constructor(private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi,
         private pharmacyApi: PharmacyApi,
-        private bookingApi: BookingApi) {
+        private bookingApi: BookingApi,
+        private dialog: MatDialog
+        ) {
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -82,11 +86,6 @@ export class PatientListComponent {
         this.pharmacyApi.addUpdateOrder(pharmacyBooking).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
             this._init();
         });
-    }
-
-    /* ************************************* Private Methods ******************************************** */
-    private _init(): void {
-        this._getProductList();
     }
 
     public _getProductList(): void {
@@ -131,6 +130,7 @@ export class PatientListComponent {
                 this.bookingList = this.bookingList?.filter(it => it.pharmacyOrderId == null);
                 this.dataSource = new MatTableDataSource(this.bookingList);
                 this.originalDataSource = [...this.bookingList];
+                console.log("jitu",this.originalDataSource);
             });
     }
 
@@ -169,6 +169,26 @@ export class PatientListComponent {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+
+    public viewPrescription(): void {
+        console.log('prescription');
+    }
+
+    public openPrescriptionDialog(enterAnimationDuration: string, exitAnimationDuration: string, booking:OrgBookingDto[]): void {
+        this.dialog.open(PrescriptionDialogComponent, {
+            width: '1200px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+            data:{originalDataSource:this.originalDataSource, booking: booking}
+        });
+    }
+
+    /* ************************************* Private Methods ******************************************** */
+    private _init(): void {
+        this._getProductList();
     }
 
     private getCellValue(data: OrgBookingDto, columnName: string): string | undefined {

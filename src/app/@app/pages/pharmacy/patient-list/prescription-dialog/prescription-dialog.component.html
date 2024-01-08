@@ -1,0 +1,23 @@
+<div class="p-5">
+    <label></label>
+    <app-label>PRESCRIPTION</app-label>
+    
+    <table class="table">
+        <thead class="table-light text-center">
+            <tr>
+                <th>Medicine</th>
+                <th>Dosage</th>
+                <th>Duration</th>
+                <th>Instruction</th>
+            </tr>
+        </thead>
+        <tbody class="text-center" *ngFor="let item of prescription">
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.dosage}}</td>
+                <td>{{item.duration}}</td>
+                <td>{{item.instruction}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
