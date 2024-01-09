@@ -7,6 +7,8 @@ import { ApiResponse, OrgPharmacyOrderCountDto, OrgPharmacyOrderDto } from 'aaya
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { ViewPatientComponent } from '../view-patient/view-patient.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-pharmacy-billing',
@@ -35,7 +37,9 @@ export class PharmacyBillingComponent implements OnInit {
 
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
-        private pharmacyApi: PharmacyApi) {
+        private pharmacyApi: PharmacyApi,
+        private dialog: MatDialog
+        ) {
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -135,6 +139,16 @@ export class PharmacyBillingComponent implements OnInit {
 
     public cancel(): void {
         this._init();
+    }
+
+    public openPrescriptionBilling(enterAnimationDuration: string, exitAnimationDuration: string, booking:any): void {
+        this.dialog.open(ViewPatientComponent, {
+            width: '1600px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+            data:{originalDataSource:this.originalDataSource, booking: booking}
+        });
     }
 
     /* ************************************ Private Methods ************************************ */

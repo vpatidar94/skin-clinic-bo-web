@@ -130,7 +130,6 @@ export class PatientListComponent {
                 this.bookingList = this.bookingList?.filter(it => it.pharmacyOrderId == null);
                 this.dataSource = new MatTableDataSource(this.bookingList);
                 this.originalDataSource = [...this.bookingList];
-                console.log("jitu",this.originalDataSource);
             });
     }
 
@@ -169,11 +168,6 @@ export class PatientListComponent {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
-    }
-
-
-    public viewPrescription(): void {
-        console.log('prescription');
     }
 
     public openPrescriptionDialog(enterAnimationDuration: string, exitAnimationDuration: string, booking:OrgBookingDto[]): void {

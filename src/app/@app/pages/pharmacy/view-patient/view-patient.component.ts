@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { OrgPharmacyOrderDto } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-view-patient',
@@ -15,13 +17,18 @@ export class ViewPatientComponent implements OnInit {
     showSectionBilling!: boolean;
 
     tabValue!: string;
+    prescription!:OrgPharmacyOrderDto[];
 
     /* ************************************* Constructor ******************************************** */
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute,
+        public dialogRef: MatDialogRef<ViewPatientComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any
+        ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
+        this.prescription = this.data.booking
         this._init();
     }
 
