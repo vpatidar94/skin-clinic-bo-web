@@ -25,7 +25,6 @@ export class AddProductDialogComponent implements OnInit {
     //     this.isQtyPerStripActive = this.product.productType === 'Tablet' || this.product.productType === 'Capsule';
     // }
 
-    /* ************************************* Private Methods ******************************************** */
     public ngOnInit(): void {
         const productDetails = {} as ProductVo;
         const orgId = this.keyValueStorageService.getOrgId();
@@ -49,5 +48,8 @@ export class AddProductDialogComponent implements OnInit {
             }
         });
     }
+
+    /* ************************************* Private Methods ******************************************** */
+
 
 }

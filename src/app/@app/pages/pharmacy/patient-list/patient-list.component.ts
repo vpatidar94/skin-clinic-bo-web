@@ -45,7 +45,7 @@ export class PatientListComponent {
         private pharmacyApi: PharmacyApi,
         private bookingApi: BookingApi,
         private dialog: MatDialog
-        ) {
+    ) {
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -170,13 +170,13 @@ export class PatientListComponent {
         }
     }
 
-    public openPrescriptionDialog(enterAnimationDuration: string, exitAnimationDuration: string, booking:OrgBookingDto[]): void {
+    public openPrescriptionDialog(enterAnimationDuration: string, exitAnimationDuration: string, booking: OrgBookingDto[]): void {
         this.dialog.open(PrescriptionDialogComponent, {
             width: '1200px',
             height: '550px',
             enterAnimationDuration,
             exitAnimationDuration,
-            data:{originalDataSource:this.originalDataSource, booking: booking}
+            data: { originalDataSource: this.originalDataSource, booking: booking }
         });
     }
 

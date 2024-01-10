@@ -35,6 +35,8 @@ export class PrescriptionPrintDialogComponent {
   constructor(public dialogRef: MatDialogRef<PrescriptionPrintDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserBookingDto) {
   }
+ 
+  /* ************************************ Public Methods ************************************ */
 
   public print() {
     const printContents = document?.getElementById('receipt-print')?.innerHTML;
@@ -48,7 +50,6 @@ export class PrescriptionPrintDialogComponent {
     this.dialogRef.close();
   }
 
-  /* ************************************ Public Methods ************************************ */
   public onNoClick(): void {
     this.dialogRef.close();
   }

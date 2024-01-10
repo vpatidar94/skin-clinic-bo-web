@@ -76,7 +76,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
         this.staffChange.emit(this.staff);
     }
 
-    onPhotoSelected(event: any) {
+    public onPhotoSelected(event: any) {
         if (event.target.files.length > 0) {
             const actionDto = {
                 action: 'USER_PHOTO_UPLOAD',
@@ -86,7 +86,7 @@ export class UserProfileComponent implements OnInit, OnChanges {
         }
     }
 
-    onIdProofSelected(event: any) {
+    public onIdProofSelected(event: any) {
         if (event.target.files.length > 0) {
             const actionDto = {
                 action: 'USER_ID_PROOF_UPLOAD',

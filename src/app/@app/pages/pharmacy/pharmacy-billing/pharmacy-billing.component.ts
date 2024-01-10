@@ -17,6 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class PharmacyBillingComponent implements OnInit {
+
+    /* ********************************* Static Field *************************************** */
+    /* *********************************** Instance Field *********************************** */
     displayedColumns: string[] = ['appNo', 'date', 'patientName', 'doctorsName', 'amount', "action"];
     dataSource = new MatTableDataSource<OrgPharmacyOrderDto>([] as OrgPharmacyOrderDto[]);
 
@@ -39,7 +42,7 @@ export class PharmacyBillingComponent implements OnInit {
     constructor(private keyValueStorageService: KeyValueStorageService,
         private pharmacyApi: PharmacyApi,
         private dialog: MatDialog
-        ) {
+    ) {
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -116,6 +119,36 @@ export class PharmacyBillingComponent implements OnInit {
         }
     }
 
+    public addNewCustomer(): void {
+        this._resetSection();
+        this.showSectionPharmacyEdit = true;
+    }
+
+    public cancel(): void {
+        this._init();
+    }
+
+    public openPrescriptionBilling(enterAnimationDuration: string, exitAnimationDuration: string, booking: any): void {
+        this.dialog.open(ViewPatientComponent, {
+            width: '1600px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+            data: { originalDataSource: this.originalDataSource, booking: booking }
+        });
+    }
+
+    /* ************************************ Private Methods ************************************ */
+    private _init(): void {
+        this._resetSection();
+        this.showSectionPharmacyBillingList = true;
+    }
+
+    private _resetSection(): void {
+        this.showSectionPharmacyBillingList = false;
+        this.showSectionPharmacyEdit = false;
+    }
+
     private getCellValue(data: OrgPharmacyOrderDto, columnName: string): string | undefined {
         if (columnName === 'appNo' && data.order.no) {
             return data.order.no.toLocaleLowerCase();
@@ -130,35 +163,5 @@ export class PharmacyBillingComponent implements OnInit {
             return data.drDetail?.nameF.toLowerCase();
         }
         return undefined;
-    }
-
-    public addNewCustomer(): void {
-        this._resetSection();
-        this.showSectionPharmacyEdit = true;
-    }
-
-    public cancel(): void {
-        this._init();
-    }
-
-    public openPrescriptionBilling(enterAnimationDuration: string, exitAnimationDuration: string, booking:any): void {
-        this.dialog.open(ViewPatientComponent, {
-            width: '1600px',
-            height: '550px',
-            enterAnimationDuration,
-            exitAnimationDuration,
-            data:{originalDataSource:this.originalDataSource, booking: booking}
-        });
-    }
-
-    /* ************************************ Private Methods ************************************ */
-    private _init(): void {
-        this._resetSection();
-        this.showSectionPharmacyBillingList = true;
-    }
-
-    private _resetSection(): void {
-        this.showSectionPharmacyBillingList = false;
-        this.showSectionPharmacyEdit = false;
     }
 }

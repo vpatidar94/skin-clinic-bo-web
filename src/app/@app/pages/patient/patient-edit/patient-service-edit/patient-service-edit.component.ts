@@ -140,19 +140,6 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         });
     }
 
-    /* ************************************ Private Methods ************************************ */
-    private _init(): void {
-        this._getServiceTypeList();
-    }
-
-    private _formChanged(): void {
-        const actionDto = {
-            action: 'CHANGE_FORM_PATIENT',
-            data: this.serviceForm.invalid
-        } as UiActionDto<boolean>;
-        this.pubSub.emit(actionDto);
-    }
-
     public onServiceSelect(event: any, i: number): void {
         const item = this.serviceItemList?.find((item) => item.item._id === event.target.value);
         if (item && item.item) {
@@ -171,4 +158,19 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         return serviceType ? serviceType.name : '';
     }
 
+
+    /* ************************************ Private Methods ************************************ */
+    private _init(): void {
+        this._getServiceTypeList();
+    }
+
+    private _formChanged(): void {
+        const actionDto = {
+            action: 'CHANGE_FORM_PATIENT',
+            data: this.serviceForm.invalid
+        } as UiActionDto<boolean>;
+        this.pubSub.emit(actionDto);
+    }
+
+    
 }

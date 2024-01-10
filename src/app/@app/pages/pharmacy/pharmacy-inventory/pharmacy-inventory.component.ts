@@ -27,6 +27,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
 
+    /* ********************************* Static Field *************************************** */
+    /* *********************************** Instance Field *********************************** */
+
     showSectionPharmacyInventoryList!: boolean;
     showSectionNewPurchaseEdit!: boolean;
     showSectionItemEdit!: boolean;

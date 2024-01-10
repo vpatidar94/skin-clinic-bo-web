@@ -18,6 +18,8 @@ import { DepartmentApi } from '../../service/remote/department.api';
 })
 
 export class AppointmentComponent implements OnInit, AfterViewInit {
+  /* ************************************* Static Field ********************************************* */
+  /* ************************************* Instance Field ******************************************** */
 
   showSectionAppointmentList: boolean = false;
   showSectionAppointmentEdit: boolean = false;
@@ -161,6 +163,16 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public _getDepartmentList() {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
+      this.departmentList = res.body ?? [] as DepartmentVo[];
+    })
+  }
+
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
     this._resetSection();
@@ -236,16 +248,6 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       }
     }
     );
-  }
-
-  public _getDepartmentList() {
-    const orgId = this.keyValueStorageService.getOrgId();
-    if (!orgId) {
-      return;
-    }
-    this.departmentApi.getOrgDepartmentList(orgId, DEPT.PATIENT_RELATED).subscribe((res: ApiResponse<DepartmentVo[]>) => {
-      this.departmentList = res.body ?? [] as DepartmentVo[];
-    })
   }
 
   private getCellValue(data: OrgBookingDto, columnName: any): any | undefined {

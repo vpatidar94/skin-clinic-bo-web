@@ -325,9 +325,11 @@
                                     <!-- Medicine Type -->
                                     <div class="form-group d-flex justify-content-between align-items-center col-md-2">
                                         <select name="medicine" class="app-single-select-dropdown w-100"
-                                            [(ngModel)]="userBooking.booking.prescription[i].productId" (ngModelChange)="prescriptionChange($event, i)">
+                                            [(ngModel)]="userBooking.booking.prescription[i].productId"
+                                            (ngModelChange)="prescriptionChange($event, i)">
                                             <option [value]="null" [disabled]="true">Select Medicine</option>
-                                            <option *ngFor="let product of productList" [value]="product._id" >{{product.name}}
+                                            <option *ngFor="let product of productList" [value]="product._id">
+                                                {{product.name}}
                                             </option>
                                         </select>
                                         <!-- <mat-icon class="add-icon">add_circle_outline</mat-icon> -->
@@ -337,7 +339,8 @@
                                         <select name="dosage" class="app-single-select-dropdown w-100"
                                             [(ngModel)]="userBooking.booking.prescription[i].dosage">
                                             <option [value]="null" [disabled]="true">Select Medicine</option>
-                                            <option *ngFor="let dosage of dosageList" [value]="dosage.id" >{{dosage.name}}
+                                            <option *ngFor="let dosage of dosageList" [value]="dosage.id">
+                                                {{dosage.name}}
                                             </option>
                                         </select>
                                     </div>

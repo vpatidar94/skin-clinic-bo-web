@@ -20,6 +20,8 @@ const cbcTestData: TestInterface[] = [
 })
 
 export class ReportsComponent implements OnInit {
+    /* ************************************ Static Fields ************************************ */
+  /* ************************************ Instance Fields ************************************ */
 
     cbcReportArray: TestInterface[] = cbcTestData;
 
@@ -27,6 +29,12 @@ export class ReportsComponent implements OnInit {
     cbcReportChecked: boolean = false;
     widalTestChecked: boolean = false;
     lipidProfileChecked: boolean = false;
+
+    /* ************************************ Constructors ************************************ */
+  constructor() {
+    }
+  
+    /* ************************************ Public Methods ************************************ */
 
     public ngOnInit(): void {
         // this.cbcReportArray=cbcTestData;
@@ -81,4 +89,7 @@ export class ReportsComponent implements OnInit {
             // You can replace console.log with actual printing logic
         }
     }
+
+  /* ************************************ Private Methods ************************************ */
+
 }

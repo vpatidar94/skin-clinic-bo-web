@@ -33,13 +33,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     { menu: 'Pharmacy Billing', pages: ['List', 'Add New Customer'] },
     { menu: 'Patient List', pages: ['List'] },
     { menu: 'Pharmacy Inventory', pages: ['List', 'New Purchase'] },
-
-
-
-
-
-
-
 ]
 
 @Component({
@@ -49,17 +42,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class UserPermissionsComponent implements OnInit, AfterViewInit {
-
+    /* ************************************* Instance Field ******************************************** */
+    /* ************************************* Static Field ******************************************** */
     displayedColumns: string[] = ['menu', 'pages'];
 
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
-
+    /* ************************************* Constructor ******************************************** */
     constructor(
     ) { }
 
+    /* ************************************* Public Methods ******************************************** */
 
     public ngAfterViewInit() {
         this.paginator.showFirstLastButtons = false;
@@ -78,4 +73,7 @@ export class UserPermissionsComponent implements OnInit, AfterViewInit {
 
     public ngOnInit(): void {
     }
+
+    /* ************************************* Private Methods ******************************************** */
+
 }

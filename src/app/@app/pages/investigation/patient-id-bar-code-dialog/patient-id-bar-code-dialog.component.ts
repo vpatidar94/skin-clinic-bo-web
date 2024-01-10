@@ -14,12 +14,11 @@ export class PatientIdBarCodeDialogComponent {
   /* ************************************ Static Fields ************************************ */
 
   /* ************************************ Instance Fields ************************************ */
-
-  /* ************************************ Constructors ************************************ */
   // @Input()
   // booking!: OrgBookingDto;
   date = new Date();
 
+  /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<PatientIdBarCodeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }

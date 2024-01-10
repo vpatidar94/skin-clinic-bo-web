@@ -29,12 +29,14 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
     @Input()
     userBookingInvestigationList!: UserBookingInvestigationDto;
 
+    patientTests: any = [];
+    invest: any = [];
+
     /* ************************************ Constructors ************************************ */
     constructor(private dialog: MatDialog) { }
 
     /* ************************************ Public Methods ************************************ */
-    patientTests: any = [];
-    invest: any = [];
+    
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes['userBookingInvestigationList']) {

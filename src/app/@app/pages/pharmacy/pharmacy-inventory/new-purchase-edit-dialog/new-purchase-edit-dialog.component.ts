@@ -30,7 +30,7 @@ export class NewPurchaseEditDialogComponent implements OnInit {
 
     newPurchase!: Array<NewPurchaseInterface>
 
-    isPanelOpen:boolean = true;
+    isPanelOpen: boolean = true;
 
 
     /* ************************************* Constructors ******************************************** */
@@ -66,13 +66,13 @@ export class NewPurchaseEditDialogComponent implements OnInit {
     }
 
 
-  panelOpened() {
-    this.isPanelOpen = false;
-  }
+    public panelOpened() {
+        this.isPanelOpen = false;
+    }
 
-  panelClosed() {
-    this.isPanelOpen = true;
-  }
+    public panelClosed() {
+        this.isPanelOpen = true;
+    }
 
     /* ************************************* Private Methods ******************************************** */
 

@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 export class IdCardDialogComponent implements OnInit {
 
     /* ************************************ Static Fields ************************************ */
-
     /* ************************************ Instance Fields ************************************ */
     staff!: UserEmpDto;
     bucketUrl = environment.bucketUrl;

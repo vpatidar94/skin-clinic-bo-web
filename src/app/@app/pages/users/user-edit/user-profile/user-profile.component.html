@@ -215,7 +215,7 @@
                                 <select class="app-single-select-dropdown w-100" name="userType"
                                     (change)="updateSubRole($event)" [(ngModel)]="staff.acl.userTypeId">
                                     <ng-container *ngIf="filteredUserTypeList && filteredUserTypeList.length > 0">
-                                        <option [value]="null" [disabled]="true" >Select User Type</option>
+                                        <option [value]="null" [disabled]="true">Select User Type</option>
                                         <option *ngFor="let item of filteredUserTypeList" [value]="item.userType._id">
                                             {{item.userType.name}}
                                         </option>

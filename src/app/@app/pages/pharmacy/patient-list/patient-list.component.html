@@ -84,7 +84,9 @@
                 <!-- Action -->
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"> <span class="clickable" (click)="openPrescriptionDialog('0ms', '0ms',row)">View prescription</span> | <span (click)="moveToPharmacy(row)" class="clickable">Move to pharmacy</span>
+                    <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"> <span class="clickable"
+                            (click)="openPrescriptionDialog('0ms', '0ms',row)">View prescription</span> | <span
+                            (click)="moveToPharmacy(row)" class="clickable">Move to pharmacy</span>
 
                     </td>
                 </ng-container>
