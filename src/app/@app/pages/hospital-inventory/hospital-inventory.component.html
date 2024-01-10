@@ -45,7 +45,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">
                         <!-- <a [routerLink]="['/investigation/view-investigation']">{{row.action}}</a> -->
-                        <a>{{row.action}}</a>
+                        <span class="clickable" (click)="openInventoryDialog('0ms','0ms')">{{row.action}}</span>
                     </td>
                 </ng-container>
 

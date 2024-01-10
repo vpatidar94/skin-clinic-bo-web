@@ -26,6 +26,7 @@ import { InventoryRoutingModule } from './hospital-inventory-routing.module';
 import { HospitalInventoryComponent } from './hospital-inventory.component';
 import { InventoryEditComponent } from './inventory-edit/inventory-edit.component';
 import { HospitalInventoryItemEditComponent } from './hospital-inventory-item-edit/hospital-inventory-item-edit.component';
+import { ViewHospitalInventoryComponent } from './view-hospital-inventory/view-hospital-inventory.component';
 
 const MATERIAL_MODULE = [
     MatButtonModule,
@@ -53,6 +54,6 @@ const COMMON_MODULE = [CommonModule, FormsModule];
     imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, InventoryRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
     providers: [],
     exports: [],
-    declarations: [HospitalInventoryComponent, InventoryEditComponent, HospitalInventoryItemEditComponent]
+    declarations: [HospitalInventoryComponent, InventoryEditComponent, HospitalInventoryItemEditComponent, ViewHospitalInventoryComponent]
 })
 export class HospitalInventoryModule { }

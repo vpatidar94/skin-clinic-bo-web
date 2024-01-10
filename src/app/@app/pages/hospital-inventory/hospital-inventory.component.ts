@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { HospitalInventoryItemEditComponent } from "./hospital-inventory-item-edit/hospital-inventory-item-edit.component";
 import { MatDialog } from "@angular/material/dialog";
+import { ViewHospitalInventoryComponent } from "./view-hospital-inventory/view-hospital-inventory.component";
 
 export interface PeriodicElement {
   sNo: number;
@@ -76,6 +77,15 @@ export class HospitalInventoryComponent implements AfterViewInit, OnInit {
 
   public openHospitalInventoryItemEditDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(HospitalInventoryItemEditComponent, {
+      width: '1200px',
+      height: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  public openInventoryDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(ViewHospitalInventoryComponent, {
       width: '1200px',
       height: '500px',
       enterAnimationDuration,
