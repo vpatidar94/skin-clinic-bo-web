@@ -74,7 +74,7 @@
                         <!-- {{row.action}}  -->
                         <!-- <a [routerLink]="['/pharmacy/view-patient']">view</a> </td> -->
                         <span class="clickable"
-                            (click)="openPrescriptionBilling('0ms', '0ms',row.order.items)">Edit</span>
+                            (click)="openPrescriptionBilling(row)">Edit</span>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

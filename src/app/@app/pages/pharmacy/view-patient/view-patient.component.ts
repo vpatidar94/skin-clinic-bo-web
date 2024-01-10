@@ -17,7 +17,6 @@ export class ViewPatientComponent implements OnInit {
     showSectionBilling!: boolean;
 
     tabValue!: string;
-    prescription!:OrgPharmacyOrderDto[];
 
     /* ************************************* Constructor ******************************************** */
 
@@ -28,7 +27,6 @@ export class ViewPatientComponent implements OnInit {
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
-        this.prescription = this.data.booking
         this._init();
     }
 

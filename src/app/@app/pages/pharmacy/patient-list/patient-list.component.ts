@@ -1,17 +1,17 @@
 
 import { Component, ViewChild } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, BOOKING_STATUS, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingUtility, BookingVo, DosageUtility, OrderItemVo, OrgBookingCountDto, OrgBookingDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingUtility, DosageUtility, OrderItemVo, OrgBookingCountDto, OrgBookingDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
 import { catchError, map, of as observableOf, startWith, switchMap, } from 'rxjs';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { PrescriptionDialogComponent } from './prescription-dialog/prescription-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-patient-list',
@@ -63,6 +63,7 @@ export class PatientListComponent {
     public moveToPharmacy(row: OrgBookingDto): void {
         const pharmacyBooking = {} as PharmacyOrderVo;
         const booking = row?.booking;
+        pharmacyBooking.prescription = booking.prescription;
         pharmacyBooking.bookingId = booking?._id?.toString();
         pharmacyBooking.orgId = booking.orgId;
         pharmacyBooking.brId = booking.brId;

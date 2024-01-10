@@ -9,7 +9,7 @@
 
     <section class="section-org-edit">
         <div *ngIf="showSectionPrescription">
-            <app-prescription [prescription]="prescription"></app-prescription>
+            <app-prescription [prescription]="data.pharmacyOrder.order.prescription"></app-prescription>
         </div>
         <div *ngIf="showSectionBilling">
             <app-billing></app-billing>

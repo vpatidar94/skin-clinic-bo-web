@@ -34,14 +34,14 @@ export class PrescriptionComponent{
 
     displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration", "select"];
     // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    dataSource = new MatTableDataSource< OrgPharmacyOrderDto>([] as OrgPharmacyOrderDto[]);
+    dataSource = new MatTableDataSource<PrescriptionVo>([] as PrescriptionVo[]);
 
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
     @Input()
-    prescription!: OrgPharmacyOrderDto[];
+    prescription!: PrescriptionVo[];
 
     /* ************************************* Constructors ******************************************** */
     constructor() {
