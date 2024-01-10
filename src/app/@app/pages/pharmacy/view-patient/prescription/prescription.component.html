@@ -45,7 +45,7 @@
                         <!-- select -->
                         <ng-container matColumnDef="select">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Select </th>
-                            <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><mat-checkbox
+                            <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><mat-checkbox [checked]="selectedMedicine.includes(row.productId)" (change)="medicineSelected($event, row.productId)"
                                     class="large-mat-checkbox"></mat-checkbox></td>
                         </ng-container>
 
@@ -58,7 +58,7 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-end my-2">
                     <div class="col-3">
-                        <button class="common-button">Add to Billing</button>
+                        <button [disabled]="selectedMedicine.length <= 0" (click)="addMedicineToBilling()" class="common-button">Add to Billing</button>
                     </div>
                 </div>
             </mat-card>

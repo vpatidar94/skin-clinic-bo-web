@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, OrgPharmacyOrderDto } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, OrgPharmacyOrderDto, ProductVo, OrderItemVo, BookingUtility, DosageUtility } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 export interface PeriodicElement {
     sno: number;
@@ -27,7 +28,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     styleUrls: ['./prescription.component.scss']
 })
 
-export class PrescriptionComponent{
+export class PrescriptionComponent {
 
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
@@ -43,9 +44,22 @@ export class PrescriptionComponent{
     @Input()
     prescription!: PrescriptionVo[];
 
+    @Input()
+    selectedMedicine!: string[];
+    @Output()
+    selectedMedicineChange = new EventEmitter<string[]>();
+
+    @Input()
+    pharmacyOrder!: OrgPharmacyOrderDto;
+    @Output()
+    pharmacyOrderChange = new EventEmitter<OrgPharmacyOrderDto>();
+
+    @Input()
+    productList!: ProductVo[];
+
     /* ************************************* Constructors ******************************************** */
     constructor() {
-        
+
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -57,12 +71,48 @@ export class PrescriptionComponent{
         this.dataSource = new MatTableDataSource(this.prescription);
     }
 
+    public medicineSelected(e: MatCheckboxChange, productId: string): void {
+        if (e.checked) {
+            this.selectedMedicine.push(productId);
+        } else {
+            const i = this.selectedMedicine.findIndex(it => it === productId);
+            if (i >= 0) { 
+                this.selectedMedicine.splice(i, 1);
+            }
+        }
+        this.selectedMedicine = [...new Set(this.selectedMedicine)];
+        this.selectedMedicineChange.emit(this.selectedMedicine);
+    }
+
     public applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
 
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
+        }
+    }
+
+    public addMedicineToBilling(): void {
+        if (this.prescription?.length > 0) {
+            this.pharmacyOrder.order.items = [] as OrderItemVo[];
+            this.pharmacyOrderChange.emit(this.pharmacyOrder);
+            this.prescription.forEach((pres: PrescriptionVo, i: number) => {
+                if (this.selectedMedicine.includes(pres.productId)) {
+                    const item = this.productList?.find((item) => item._id === pres.productId) as ProductVo;
+                    if (item?._id) {
+                        const oi = {} as OrderItemVo;
+                        oi.item = item;
+                        oi.item = JSON.parse(JSON.stringify(item)) as ProductVo;
+                        oi.priceBase = item.price;
+                        oi.qty = DosageUtility.getQty(pres.duration, pres.dosage);
+                        oi.name = item.name;
+                        this.pharmacyOrder.order.items.push(oi);
+                        BookingUtility.updateBookingItemAndCalcTotalPharmacy(true, this.pharmacyOrder.order, item, oi.qty, '');
+                    }
+                }
+            });
+            this.pharmacyOrderChange.emit(this.pharmacyOrder);
         }
     }
 

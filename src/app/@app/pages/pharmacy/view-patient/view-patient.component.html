@@ -9,10 +9,10 @@
 
     <section class="section-org-edit">
         <div *ngIf="showSectionPrescription">
-            <app-prescription [prescription]="data.pharmacyOrder.order.prescription"></app-prescription>
+            <app-prescription [productList]="data.productList" [(pharmacyOrder)]="data.pharmacyOrder" [(selectedMedicine)]="selectedMedicine" [prescription]="data.pharmacyOrder.order.prescription"></app-prescription>
         </div>
         <div *ngIf="showSectionBilling">
-            <app-billing></app-billing>
+            <app-billing [productList]="data.productList" [selectedMedicine]="selectedMedicine" [pharmacyOrder]="data.pharmacyOrder"></app-billing>
         </div>
     </section>
 </section>

@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { OrgPharmacyOrderDto } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-view-patient',
@@ -18,12 +17,14 @@ export class ViewPatientComponent implements OnInit {
 
     tabValue!: string;
 
+    selectedMedicine!: Array<string>;
+
     /* ************************************* Constructor ******************************************** */
 
     constructor(private route: ActivatedRoute,
         public dialogRef: MatDialogRef<ViewPatientComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any
-        ) { }
+    ) { }
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
@@ -36,6 +37,7 @@ export class ViewPatientComponent implements OnInit {
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
+        this.selectedMedicine = [] as string[];
         this.tabValue = 'PRESCRIPTION'
         this.tabChange();
     }

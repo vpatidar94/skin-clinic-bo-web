@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse, OrgPharmacyOrderDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 //newly added to show table
@@ -48,7 +48,6 @@ export class BillingComponent {
 
     // newly added
     overallDiscount: number = 0;
-    productList!: ProductVo[];
 
     displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration", "packing", "quantity", "rate", "discount", "amount", "action"];
     dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
@@ -57,6 +56,15 @@ export class BillingComponent {
     @ViewChild(MatSort) sort!: MatSort;
     showChequeInbox: boolean = false;
     showInputFields: boolean = false;
+
+    @Input()
+    selectedMedicine!: string[];
+
+    @Input()
+    pharmacyOrder!: OrgPharmacyOrderDto;
+
+    @Input()
+    productList!: ProductVo[];
 
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
@@ -70,15 +78,6 @@ export class BillingComponent {
             this.dataSource.data[this.dataSource.data.length - 1].showInputFields = false;
         }
         this._init();
-    }
-    public _getProductList(): void {
-        const orgId = this.keyValueStorageService.getOrgId();
-        if (!orgId) {
-            return;
-        }
-        this.productApi.getProductList(orgId).subscribe((res: ApiResponse<ProductVo[]>) => {
-            this.productList = res.body ?? [] as ProductVo[];
-        })
     }
 
     public onPaymentModeChange(event: Event) {
@@ -154,7 +153,7 @@ export class BillingComponent {
     /* ************************************* Private Methods ******************************************** */
 
     private _init(): void {
-        this._getProductList();
+        console.log('xx xxx xx ', this.pharmacyOrder.order);
     }
 
 }

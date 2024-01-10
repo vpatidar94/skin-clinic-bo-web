@@ -37,8 +37,6 @@ export class PatientListComponent {
 
     bookingTypeName: any = BOOKING_TYPE_NAME;
 
-    productList!: ProductVo[];
-
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi,
@@ -70,35 +68,10 @@ export class PatientListComponent {
         pharmacyBooking.user = booking.user;
         pharmacyBooking.items = [] as OrderItemVo[];
         pharmacyBooking.status = 'IN_PROGRESS';
-        if (booking?.prescription?.length > 0) {
-            booking.prescription.forEach((pres: PrescriptionVo, i: number) => {
-                const item = this.productList?.find((item) => item._id === pres.productId) as ProductVo;
-                if (item?._id) {
-                    pharmacyBooking.items[i] = {} as OrderItemVo;
-                    pharmacyBooking.items[i].item = item;
-                    pharmacyBooking.items[i].item = JSON.parse(JSON.stringify(item)) as ProductVo;
-                    pharmacyBooking.items[i].priceBase = item.price;
-                    pharmacyBooking.items[i].qty = DosageUtility.getQty(pres.duration, pres.dosage);
-                    pharmacyBooking.items[i].name = item.name;
-                    BookingUtility.updateBookingItemAndCalcTotalPharmacy(true, pharmacyBooking as any, item, pharmacyBooking.items[i].qty, '');
-                }
-            });
-        }
         this.pharmacyApi.addUpdateOrder(pharmacyBooking).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
             this._init();
         });
     }
-
-    public _getProductList(): void {
-        const orgId = this.keyValueStorageService.getOrgId();
-        if (!orgId) {
-            return;
-        }
-        this.productApi.getProductList(orgId).subscribe((res: ApiResponse<ProductVo[]>) => {
-            this.productList = res.body ?? [] as ProductVo[];
-        })
-    }
-
 
     public ngAfterViewInit() {
         const orgId = this.keyValueStorageService.getOrgId();
@@ -183,7 +156,6 @@ export class PatientListComponent {
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {
-        this._getProductList();
     }
 
     private getCellValue(data: OrgBookingDto, columnName: string): string | undefined {

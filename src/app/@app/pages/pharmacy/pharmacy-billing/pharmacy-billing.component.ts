@@ -3,12 +3,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse, OrgPharmacyOrderCountDto, OrgPharmacyOrderDto } from 'aayam-clinic-core';
+import { ApiResponse, OrgPharmacyOrderCountDto, OrgPharmacyOrderDto, ProductVo } from 'aayam-clinic-core';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ViewPatientComponent } from '../view-patient/view-patient.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ProductApi } from 'src/app/@app/service/remote/product.api';
 
 @Component({
     selector: 'app-pharmacy-billing',
@@ -38,10 +39,13 @@ export class PharmacyBillingComponent implements OnInit {
     originalDataSource: OrgPharmacyOrderDto[] = [];
     filteredData: OrgPharmacyOrderDto[] = [];
 
+    productList!: ProductVo[];
+
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
         private pharmacyApi: PharmacyApi,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private productApi: ProductApi
     ) {
     }
 
@@ -132,14 +136,25 @@ export class PharmacyBillingComponent implements OnInit {
         this.dialog.open(ViewPatientComponent, {
             width: '1600px',
             height: '550px',
-            data: { pharmacyOrder }
+            data: { pharmacyOrder, productList: this.productList }
         });
     }
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {
+        this._getProductList();
         this._resetSection();
         this.showSectionPharmacyBillingList = true;
+    }
+
+    private _getProductList(): void {
+        const orgId = this.keyValueStorageService.getOrgId();
+        if (!orgId) {
+            return;
+        }
+        this.productApi.getProductList(orgId).subscribe((res: ApiResponse<ProductVo[]>) => {
+            this.productList = res.body ?? [] as ProductVo[];
+        })
     }
 
     private _resetSection(): void {
