@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { OrderItemVo, ProductVo } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-view-patient',
@@ -40,6 +41,15 @@ export class ViewPatientComponent implements OnInit {
         this.selectedMedicine = [] as string[];
         this.tabValue = 'PRESCRIPTION'
         this.tabChange();
+        // this.selectedMedicine
+        if (this.data.pharmacyOrder?.order?.items?.length > 0) { 
+            this.data.pharmacyOrder.order?.items?.forEach((oi: OrderItemVo) => {
+                const item = oi.item as ProductVo | null;
+                if (item) {
+                    this.selectedMedicine.push(item._id);
+                }
+            });
+        }
     }
 
     private _tabChange(tabValue: string): void {

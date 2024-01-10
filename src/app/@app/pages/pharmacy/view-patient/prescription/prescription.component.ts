@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, OrgPharmacyOrderDto, ProductVo, OrderItemVo, BookingUtility, DosageUtility } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, OrgPharmacyOrderDto, ProductVo, OrderItemVo, BookingUtility, DosageUtility, PharmacyOrderVo, ApiResponse } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
 
 export interface PeriodicElement {
     sno: number;
@@ -58,7 +59,7 @@ export class PrescriptionComponent {
     productList!: ProductVo[];
 
     /* ************************************* Constructors ******************************************** */
-    constructor() {
+    constructor(private pharmacyApi: PharmacyApi) {
 
     }
 
@@ -112,7 +113,12 @@ export class PrescriptionComponent {
                     }
                 }
             });
-            this.pharmacyOrderChange.emit(this.pharmacyOrder);
+            this.pharmacyApi.addUpdateOrder(this.pharmacyOrder.order).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
+                if (res.body) {
+                    this.pharmacyOrder.order = res.body;
+                    this.pharmacyOrderChange.emit(this.pharmacyOrder);
+                }
+            });
         }
     }
 
