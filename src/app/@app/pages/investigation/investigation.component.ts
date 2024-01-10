@@ -53,6 +53,11 @@ export class InvestigationComponent implements OnInit {
         this._resetSection();
         this.showSectionBookingDetail = true;
     }
+    
+    public cancel(): void {
+        this._resetSection();
+        this.showSectionBookingList = true;
+      }
 
     /* ************************************* Private Methods ******************************************** */
     private _init(): void {

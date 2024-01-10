@@ -28,7 +28,7 @@ export class DepartmentWisePermissionsComponent implements OnInit {
 
 
     // newly added all permisson list
-    permissionList: string[]= ['Add Appointement','Show Appointment', 'Add Patient', 'Show Patiet', 'Show Service','Edit Service', 'Show Billing','Edit Billing', 'Prescriptions', 'Observations','Investigations','Pharmcy Billing','Sample Collection', 'Admin Reports'];
+    permissionList: string[]= ['Add Appointement','Show Appointment', 'Add Patient', 'Show Patient', 'Show Service','Edit Service', 'Show Billing','Edit Billing', 'Prescriptions', 'Observations','Investigations','Pharmcy Billing','Sample Collection', 'Admin Reports'];
 
     departmentOptionsList: string[] = ['Reception', 'OPD', 'Pharmacy', 'Pathology', 'Doctor', 'Pathology staff', 'Cleaning staff', 'Security staff','Accounts']
 

@@ -1,13 +1,14 @@
 <section class="section-org">
     <mat-button-toggle-group class="tab-style align-items-center" [(ngModel)]="tabValue" aria-label="Font Style">
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="USERPROFILE">User Profile</mat-button-toggle>
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="ACCOUNTS">Account/Salary</mat-button-toggle>
+        <mat-button-toggle class="user-tab-content" (change)="tabChange()" value="USERPROFILE">User Profile</mat-button-toggle>
+        <mat-button-toggle class="user-tab-content" (change)="tabChange()" value="ACCOUNTS">Account/Salary</mat-button-toggle>
         <!-- newly added for user permissions -->
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="USERPERMISSION">User's Permissions</mat-button-toggle>
+        <mat-button-toggle class="user-tab-content" (change)="tabChange()" value="USERPERMISSION">User's Permissions</mat-button-toggle>
 
-        <mat-button-toggle class="tab-content" (change)="tabChange()" value="ATTENDANCE">Attendance</mat-button-toggle>
+        <mat-button-toggle class="user-tab-content" (change)="tabChange()" value="ATTENDANCE">Attendance</mat-button-toggle>
     </mat-button-toggle-group>
 </section>
+
 
 <section class="section-org-edit">
 

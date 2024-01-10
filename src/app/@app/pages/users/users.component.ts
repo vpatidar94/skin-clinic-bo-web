@@ -170,6 +170,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
     const department = this.departmentList?.find(dep => dep._id === departmentId);
     return department ? department.name : '';
   }
+
+  public cancel(): void {
+    this._resetSection();
+    this.showSectionUserList = true;
+
+  }
+
   /* ************************************* Private Methods ******************************************** */
 
   private _init(): void {
