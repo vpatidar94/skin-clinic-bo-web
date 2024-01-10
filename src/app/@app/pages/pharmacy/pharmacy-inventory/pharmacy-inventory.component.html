@@ -42,7 +42,7 @@
                     <td mat-cell *matCellDef="let row" class="action-style text-ellipsis">
                         <!-- {{row.action}}  -->
                         <!-- <a [routerLink]="['/investigation/view-investigation']">{{row.action}}</a> -->
-                        {{row.action}}
+                        <span class="clickable" (click)="PharmacyInventoryDialog('0ms','0ms')">{{row.action}}</span>
                     </td>
                 </ng-container>
 

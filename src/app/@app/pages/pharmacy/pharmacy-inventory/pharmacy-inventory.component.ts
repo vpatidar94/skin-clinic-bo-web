@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NewPurchaseEditDialogComponent } from "./new-purchase-edit-dialog/new-purchase-edit-dialog.component";
+import { ViewPharmacyInventoryComponent } from "./view-pharmacy-inventory/view-pharmacy-inventory.component";
 
 export interface PeriodicElement {
     itemCode: string;
@@ -85,6 +86,15 @@ export class PharmacyInventoryComponent implements AfterViewInit, OnInit {
 
     public cancel(): void {
         this._init();
+    }
+
+    public PharmacyInventoryDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(ViewPharmacyInventoryComponent, {
+            width: '1200px',
+            height: '550px',
+            enterAnimationDuration,
+            exitAnimationDuration,
+        });
     }
 
     /* ************************************* Private Methods ******************************************** */
