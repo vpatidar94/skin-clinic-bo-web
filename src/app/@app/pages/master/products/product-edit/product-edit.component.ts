@@ -20,6 +20,18 @@ export class ProductEditComponent {
     constructor() { }
 
     /* ************************************* Public Methods ******************************************** */
+    calculateUnitPrice() {
+        if (this.product.qtyPerPackage && this.product.pricePerPackage) {
+          this.product.price = this.product.pricePerPackage / this.product.qtyPerPackage;
+        } else {
+          this.product.price = 0; // or any default value you prefer
+        }
+      }
+
+      onQtyOrPriceChange() {
+        this.calculateUnitPrice();
+      }
+
     // public onProductTypeChange() {
     //     this.isQtyPerStripActive = this.product.productType === 'Tablet' || this.product.productType === 'Capsule';
     // }

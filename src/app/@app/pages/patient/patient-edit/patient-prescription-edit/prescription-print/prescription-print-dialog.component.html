@@ -83,19 +83,19 @@
                             </table>
                         </div>
                         <div class="ps-2 col-3 d-flex flex-column justify-content-between service-list">
-                            <div class="para-style">
+                            <div class="para-style" *ngIf="data.booking.observation.healthParams.length>0">
                                 <span><strong>Parameters</strong></span>
                                 <ul *ngFor="let item of data.booking.observation.healthParams" class="mt-2">
                                     <li class="custom-li">{{item.name}} : <span>{{item.value}}</span></li>
                                 </ul>
                             </div>
-                            <div class="para-style">
+                            <div class="para-style" *ngIf="data.booking.test.length>0">
                                 <span><strong>Investigation</strong></span>
                                 <ul class="mt-2">
                                     <li *ngFor="let test of data.booking.test">{{test}}</li>
                                 </ul>
                             </div>
-                            <div class="para-style">
+                            <div class="para-style" *ngIf="data.booking.instruction.length>0">
                                 <span><strong>Remark</strong></span>
                                 <li class="mt-2">{{data.booking.instruction}}</li>
                             </div>

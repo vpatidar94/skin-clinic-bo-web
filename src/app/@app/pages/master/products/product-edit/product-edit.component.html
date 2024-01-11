@@ -106,7 +106,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="" class="form-control app-input" name="pricePerStrip"
-                                [(ngModel)]="product.pricePerPackage" required appNumberOnly>
+                                [(ngModel)]="product.pricePerPackage" (ngModelChange)="onQtyOrPriceChange()" required>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     <div class="col-md-7">
                         <div class="form-group">
                             <input type="" class="form-control app-input" name="Unit Price" [(ngModel)]="product.price"
-                                required appNumberOnly>
+                            (ngModelChange)="onQtyOrPriceChange()" required>
                         </div>
                     </div>
                 </div>
