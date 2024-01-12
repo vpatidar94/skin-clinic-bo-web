@@ -59,6 +59,7 @@ export class BillingComponent {
     @ViewChild(MatSort) sort!: MatSort;
     showChequeInbox: boolean = false;
     showInputFields: boolean = false;
+    openItem: boolean = false;
 
     @Input()
     selectedMedicine!: string[];
@@ -83,8 +84,7 @@ export class BillingComponent {
     public ngOnInit(): void {
         // Set the flag to true for the last row by default
         if (this.dataSource.data.length > 0) {
-            // this.dataSource.data[this.dataSource.data.length - 1].showInputFields = false;
-            this.showInputFields = false;
+            this.dataSource.data[this.dataSource.data.length - 1].openItem = false;
         }
         this._init();
         this.dataSource = new MatTableDataSource(this.pharmacyItem);
@@ -97,11 +97,7 @@ export class BillingComponent {
         this.showChequeInbox = selectElement.value === 'Cheque';
     }
 
-    // public updateAmount(row: PeriodicElement): void {
-    //     row.amount = row.rate * row.quantity;
-    //     this.getTotalAmount();
-    // }
-
+   
     public updateAmount(row: OrderItemVo): void {
         row.amount = row.priceBase * row.qty;
         this.getTotalAmount();
@@ -118,16 +114,7 @@ export class BillingComponent {
         return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0) - this.overallDiscount;
         // return 1;
     }
-
-    // public deleteRow(row: PeriodicElement): void {
-    //     const index = this.dataSource.data.indexOf(row);
-    //     if (index !== -1) {
-    //         this.dataSource.data.splice(index, 1);
-    //         this.dataSource._updateChangeSubscription();
-    //         this.updateSnoValues(); // Update sno values
-    //         this.getTotalAmount(); // Recalculate total amount
-    //     }
-    // }
+    
 
     public deleteRow(row: OrderItemVo): void {
         const index = this.dataSource.data.indexOf(row);
@@ -148,25 +135,11 @@ export class BillingComponent {
     public addNewRow(): void {
         // Set the flag to false for the previous last row
         if (this.dataSource.data.length > 0) {
-            // this.dataSource.data[this.dataSource.data.length - 1].showInputFields = false;
-            this.showInputFields = false;
+            this.dataSource.data[this.dataSource.data.length - 1].openItem = false;
+
         }
         // Add the new row with input fields visible
-        // const newRow: PeriodicElement = {
         const newRow: OrderItemVo = {
-
-            // sno: this.dataSource.data.length + 1,
-            // medicine: '',
-            // dosage: '',
-            // duration: '',
-            // packing: '',
-            // quantity: 0,
-            // rate: 0,
-            // // newly added
-            // discount: 0,
-            // amount: 0,
-            // action: '',
-            // showInputFields: true, // Set the flag to true for the new row
             item: null,
             qty: 0,
             note: "",
@@ -178,7 +151,7 @@ export class BillingComponent {
             igst: 0,
             cgst: 0,
             sgst: 0,
-            openItem: false,
+            openItem: true,
             name: "",
             sampleCollectDate: null,
 
@@ -186,14 +159,10 @@ export class BillingComponent {
         this.dataSource.data.push(newRow);
         this.dataSource._updateChangeSubscription();
         // // Set the flag to true to show input fields
-        this.showInputFields = false;
-    }
+        this.openItem = true;
 
-    // public isLastRow(row: PeriodicElement): boolean {
-    //     const index = this.dataSource.data.indexOf(row);
-    //     return index === this.dataSource.data.length - 1;
-    //     return true;
-    // }
+    }
+   
     public isLastRow(row: OrderItemVo): boolean {
         const index = this.dataSource.data.indexOf(row);
         return index === this.dataSource.data.length - 1;
@@ -207,7 +176,6 @@ export class BillingComponent {
 
     private _init(): void {
         console.log('xx xxx xx ', this.pharmacyOrder.order.items[0].item);
-        // console.log("NNNNNNN",this.pharmacyItem);
     }
 
 }
