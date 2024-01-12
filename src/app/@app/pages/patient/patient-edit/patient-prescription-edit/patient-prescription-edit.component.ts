@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo, DOSAGE_LIST } from 'aayam-clinic-core';
+import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo, DOSAGE_LIST, UserVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { PrescriptionPrintDialogComponent } from './prescription-print/prescription-print-dialog.component';
 
@@ -45,12 +45,16 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   dosageList = DOSAGE_LIST;
 
+  @Input()
+  doctorList!: UserVo[];
+
   /* ************************************ Constructors ************************************ */
   constructor(private dialog: MatDialog) {
   }
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
+    console.log("doctor is", this.doctorList);
     this._init();
     // @ts-ignore
     this.prescriptionForm?.valueChanges?.subscribe(() => {
@@ -128,7 +132,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   public printPrescription(): void {
     this.dialog.open(PrescriptionPrintDialogComponent, {
       height: '1500px',
-      
+
 
       data: { ...this.userBooking },
     });
@@ -146,14 +150,21 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     }
   }
 
+  public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+    const doctorId = Id;
+    const doctor = this.doctorList?.find(doc => doc._id === doctorId);
+    return doctor ? doctor.nameF + " " + doctor.nameL : "";
+  }
+
+  
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
-    if(this.userBooking.booking.nextVisitDate){
-      this.isNextVisitChecked=true;
-      
+    if (this.userBooking.booking.nextVisitDate) {
+      this.isNextVisitChecked = true;
+
     }
-    else{
-    this.userBooking.booking.nextVisitDate = this.nextVisitDate;
+    else {
+      this.userBooking.booking.nextVisitDate = this.nextVisitDate;
     }
   }
 

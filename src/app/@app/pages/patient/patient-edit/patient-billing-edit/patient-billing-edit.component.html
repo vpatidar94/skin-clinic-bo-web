@@ -8,7 +8,7 @@
                         <span>UHID: <span>{{userBooking.booking.patientNo}}</span></span>
                         <span>Visiting ID: <span>{{userBooking.booking.no}}</span></span>
                         <span>First Name: {{userBooking.user.nameF}}</span>
-                        <span>Doctor's Name: <span>Ram</span></span>
+                        <span>Doctor's Name: <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
                         <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
                     </div>
                 </mat-expansion-panel-header>

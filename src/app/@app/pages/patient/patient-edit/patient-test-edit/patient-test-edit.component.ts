@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { InvestigationVo, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { InvestigationVo, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 
 @Component({
     selector: 'app-patient-test-edit',
@@ -13,6 +13,10 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     investigation!: Array<InvestigationVo>;
+   
+    @Input()
+    doctorList!: UserVo[];
+
     @Input()
     test!: Array<string>;
     @Output()
@@ -72,4 +76,10 @@ export class PatientTestEditComponent implements OnInit, OnChanges {
         }
         ]
     }
+
+    public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+        const doctorId = Id;
+        const doctor = this.doctorList?.find(doc => doc._id === doctorId);
+        return doctor ? doctor.nameF + " " + doctor.nameL : "";
+      }
 }

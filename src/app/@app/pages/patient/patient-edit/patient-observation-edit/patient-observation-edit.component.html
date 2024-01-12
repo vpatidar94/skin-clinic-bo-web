@@ -15,7 +15,7 @@
                             <span>First Name: <span
                                     *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF
                                     ?? ''}} {{userBookingInvestigationList.user.nameL ?? ''}}</span></span>
-                            <span>Doctor's Name: <span>Ram</span></span>
+                            <span>Doctor's Name: <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
                             <span>Date: <span>{{booking.bookingDate | date}}</span></span>
                         </div>
                     </mat-expansion-panel-header>
@@ -38,7 +38,7 @@
                                 <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
                                         ''}}
                                         {{userBooking.user.nameL ?? ''}}</span></span> <span>Doctor's Name:
-                                    <span>M. Patidar</span></span>
+                                            <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
                                 <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
 
                             </div>

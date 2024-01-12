@@ -17,24 +17,24 @@
 
     <div *ngIf="showSectionObservation">
         <app-patient-observation-edit [userBookingInvestigationList]="userBookingInvestigationList"
-            [(userBooking)]="userBooking"></app-patient-observation-edit>
+            [(userBooking)]="userBooking" [doctorList]="docterList"></app-patient-observation-edit >
     </div>
 
     <div *ngIf="showSectionService">
         <app-patient-service-edit [userBookingInvestigationList]="userBookingInvestigationList"
-            [serviceItemList]="serviceItemList" [(userBooking)]="userBooking"></app-patient-service-edit>
+            [serviceItemList]="serviceItemList" [(userBooking)]="userBooking" [doctorList]="docterList"></app-patient-service-edit>
     </div>
 
     <div *ngIf="showSectionTest">
-        <app-patient-test-edit [(test)]="userBooking.booking.test"></app-patient-test-edit>
+        <app-patient-test-edit [(test)]="userBooking.booking.test" [doctorList]="docterList"></app-patient-test-edit>
     </div>
 
     <div *ngIf="showSectionPrescription">
         <app-patient-prescription-edit [userBookingInvestigationList]="userBookingInvestigationList"
-            [(userBooking)]="userBooking" [productList]="productList"></app-patient-prescription-edit>
+            [(userBooking)]="userBooking" [productList]="productList" [doctorList]="docterList"></app-patient-prescription-edit>
     </div>
 
     <div *ngIf="showSectionBilling">
-        <app-patient-billing-edit [(userBooking)]="userBooking"></app-patient-billing-edit>
+        <app-patient-billing-edit [(userBooking)]="userBooking" [doctorList]="docterList"></app-patient-billing-edit>
     </div>
 </section>

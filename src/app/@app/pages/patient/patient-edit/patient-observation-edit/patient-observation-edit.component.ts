@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -17,6 +17,9 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
 
     @Input()
     pastBookingList!: Array<UserBookingDto>;
+
+    @Input()
+    doctorList!: UserVo[];
 
     @Input()
     userBookingInvestigationList!: UserBookingInvestigationDto;
@@ -76,6 +79,12 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
             this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;
         }
     }
+
+    public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+        const doctorId = Id;
+        const doctor = this.doctorList?.find(doc => doc._id === doctorId);
+        return doctor ? doctor.nameF + " " + doctor.nameL : "";
+      }
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {

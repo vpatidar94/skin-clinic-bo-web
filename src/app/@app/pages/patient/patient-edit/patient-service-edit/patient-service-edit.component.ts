@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { ApiResponse, BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingUtility, BookingVo, ItemDetailDto, ItemVo, OrderItemVo, ServiceTypeVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
@@ -17,6 +17,8 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     inValidServiceEditForm!: boolean;
+    @Input()
+    doctorList!: UserVo[];
 
     @Input()
     userBooking!: UserBookingDto;
@@ -158,6 +160,11 @@ export class PatientServiceEditComponent implements OnInit, OnChanges {
         return serviceType ? serviceType.name : '';
     }
 
+    public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+        const doctorId = Id;
+        const doctor = this.doctorList?.find(doc => doc._id === doctorId);
+        return doctor ? doctor.nameF + " " + doctor.nameL : "";
+      }
 
     /* ************************************ Private Methods ************************************ */
     private _init(): void {

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, ResponseStatus, UserBookingDto } from 'aayam-clinic-core';
+import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
@@ -17,6 +17,9 @@ export class PatientBillingEditComponent implements OnInit {
   /* *********************************** Instance Field *********************************** */
   @Input()
   userBooking!: UserBookingDto;
+
+  @Input()
+  doctorList!: UserVo[];
 
   @Input()
   bookingTransaction!: BookingAddTransactionDto;
@@ -44,6 +47,8 @@ export class PatientBillingEditComponent implements OnInit {
   payingAmount!: number;
   newPendingAmount!: number;
   makeAmountEditable: boolean = false;
+
+
 
   /* ************************************ Constructors ************************************ */
   constructor(private transactionApi: TransactionApi,
@@ -128,6 +133,12 @@ export class PatientBillingEditComponent implements OnInit {
   public addServiceItemNew(): void {
     this.showPendingAmount = true;
     this.newPendingAmount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid - this.bookingTransaction.amount;
+  }
+
+  public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+    const doctorId = Id;
+    const doctor = this.doctorList?.find(doc => doc._id === doctorId);
+    return doctor ? doctor.nameF + " " + doctor.nameL : "";
   }
 
   /* ************************************ Private Methods ************************************ */
