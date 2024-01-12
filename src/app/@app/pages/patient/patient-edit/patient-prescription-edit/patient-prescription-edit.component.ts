@@ -110,16 +110,32 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   }
 
   public updateMinNextVisitDate() {
+    // if (this.nextVisitDays >= 0) {
+    //   const today = new Date();
+    //   console.log("today's",today);
+    //   console.log("days",this.nextVisitDays);
+    //   const nextDate = new Date(today);
+    //   console.log('next',nextDate);
+    //   nextDate.setDate(today.getDate() + this.nextVisitDays);
+    //   // this.minNextVisitDate = nextDate.toISOString().split('T')[0];
+    //   // this.nextVisitDate = this.minNextVisitDate; // Update the date input
+    //   console.log('dikakt',nextDate.setDate(today.getDate() + this.nextVisitDays))
+    //   this.minNextVisitDate = nextDate;
+    //   console.log('checkit',this.minNextVisitDate);
+    //   this.nextVisitDate = this.minNextVisitDate; // Update the date input
+    //   this.userBooking.booking.nextVisitDate = this.nextVisitDate;
+    // }
+
     if (this.nextVisitDays >= 0) {
       const today = new Date();
-      const nextDate = new Date(today);
-      nextDate.setDate(today.getDate() + this.nextVisitDays);
-      // this.minNextVisitDate = nextDate.toISOString().split('T')[0];
-      // this.nextVisitDate = this.minNextVisitDate; // Update the date input
+      const nextDate = new Date(today.getTime() + this.nextVisitDays * 24 * 60 * 60 * 1000);
+  
       this.minNextVisitDate = nextDate;
-      this.nextVisitDate = this.minNextVisitDate; // Update the date input
-      this.userBooking.booking.nextVisitDate = this.nextVisitDate;
+  
+      // Update the date in the userBooking object if needed
+      this.userBooking.booking.nextVisitDate = this.minNextVisitDate;
     }
+
   }
 
   // Watch for changes in nextVisitDays
