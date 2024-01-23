@@ -70,6 +70,9 @@
                                         <th class="text-center">Medicine</th>
                                         <th class="dosage-column text-center">Dosage</th>
                                         <th class="duration-column text-center">Duration</th>
+                                        <th class="remark-column text-center">Remark</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,6 +81,7 @@
                                         <td>{{ service.name }}</td>
                                         <td class="dosage-column text-center">{{ service.dosage }}</td>
                                         <td class="duration-column text-center">{{ service.duration }}</td>
+                                        <td class="remark-column text-center">{{service.instruction}}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse, OrgPharmacyOrderDto, PharmacyOrderVo, OrderItemVo } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse, OrgPharmacyOrderDto, PharmacyOrderVo, OrderItemVo, ResponseStatus, OrderAddTransactionDto } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 //newly added to show table
@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
+import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 
 export interface PeriodicElement {
     sno: number;
@@ -73,11 +74,19 @@ export class BillingComponent {
     @Input()
     productList!: ProductVo[];
 
+    orderTransaction!: OrderAddTransactionDto;
+    @Output()
+    orderTransactionChange = new EventEmitter<OrderAddTransactionDto>();
+
+
+    newDiscount! : number;
 
 
     /* ************************************* Constructors ******************************************** */
     constructor(private keyValueStorageService: KeyValueStorageService,
-        private productApi: ProductApi) {
+        private productApi: ProductApi,
+        private transactionApi: TransactionApi,
+    ) {
     }
 
     /* ************************************* Public Methods ******************************************** */
@@ -97,16 +106,20 @@ export class BillingComponent {
         this.showChequeInbox = selectElement.value === 'Cheque';
     }
 
-   
+
     public updateAmount(row: OrderItemVo): void {
-        row.amount = row.priceBase * row.qty;
+        // row.amount = row.priceBase * row.qty;
+        row.amount = this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
+
         this.getTotalAmount();
     }
 
     public getTotalAmount(): number {
         // return this.dataSource.data.reduce((total, row) => total + row.amount, 0);
         // return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0);
-        return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
+        // this.pharmacyItem[0].amount = this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
+        console.log("555",this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0));
+        return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase) - row.discount, 0);
     }
 
     // newly added
@@ -114,7 +127,7 @@ export class BillingComponent {
         return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0) - this.overallDiscount;
         // return 1;
     }
-    
+
 
     public deleteRow(row: OrderItemVo): void {
         const index = this.dataSource.data.indexOf(row);
@@ -154,6 +167,10 @@ export class BillingComponent {
             openItem: true,
             name: "",
             sampleCollectDate: null,
+            discount: 0,
+    duration: "",
+    dosage: "",
+    packing: "",
 
         };
         this.dataSource.data.push(newRow);
@@ -162,7 +179,7 @@ export class BillingComponent {
         this.openItem = true;
 
     }
-   
+
     public isLastRow(row: OrderItemVo): boolean {
         const index = this.dataSource.data.indexOf(row);
         return index === this.dataSource.data.length - 1;
@@ -172,9 +189,24 @@ export class BillingComponent {
     public printData(): void {
     }
 
+    public payPharmacyBill(): void {
+        this.transactionApi.addUpdatePharmacyTransaction(this.orderTransaction).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
+            if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
+                //   this.userBooking.booking = res.body;
+                //   this.userBookingChange.emit(this.userBooking);
+                //   this.showPendingAmount = false;
+            }
+
+        });
+    }
+
     /* ************************************* Private Methods ******************************************** */
 
     private _init(): void {
+        this.orderTransaction = {} as OrderAddTransactionDto;
+        this.orderTransaction.orderId = this.pharmacyOrder.order._id;
+        this.orderTransaction.amount = this.pharmacyOrder.order.totalDue - this.pharmacyOrder.order.totalPaid
+        this.orderTransactionChange.emit(this.orderTransaction);
         console.log('xx xxx xx ', this.pharmacyOrder.order.items[0].item);
     }
 
