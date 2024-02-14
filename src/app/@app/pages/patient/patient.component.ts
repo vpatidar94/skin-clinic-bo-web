@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, DEPT, DEPT_LIST, DepartmentVo, ItemDetailDto, KeyValueVo, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { AddressVo, ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, DEPT, DEPT_LIST, DepartmentVo, ItemDetailDto, KeyValueVo, MessageType, ObservationVo, OrgBookingCountDto, OrgBookingDto, PrescriptionVo, ProductVo, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
@@ -11,6 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 import { ProductApi } from '../../service/remote/product.api';
 import { DepartmentApi } from '../../service/remote/department.api';
+import { AlertMessage } from 'src/app/@shared/dto/alert-message';
+import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 
 @Component({
   selector: 'app-patient',
@@ -61,7 +63,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
     private serviceItemApi: ServiceItemApi,
     private bookingApi: BookingApi,
     private productApi: ProductApi,
-    private departmentApi: DepartmentApi,) { }
+    private departmentApi: DepartmentApi,
+    private glabalEmitterService: GlobalEmitterService) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -128,7 +131,15 @@ export class PatientComponent implements OnInit, AfterViewInit {
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-        this.userBooking = res.body
+        
+        this.userBooking = res.body;
+        // this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatus[ResponseStatus.SUCCESS]);
+        // this.glabalEmitterService.emitAclChangedEmitter();
+        const message = {} as AlertMessage;
+        message.type = MessageType[MessageType.SUCCESS];
+        message.text = 'Added Successfully';
+        this.glabalEmitterService.addAlerMsg(message);
+      
       }
     });
   }

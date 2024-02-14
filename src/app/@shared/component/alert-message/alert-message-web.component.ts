@@ -28,6 +28,7 @@ export class AlertMessageWebComponent {
   private _getMessageEmitter(): void {
     this.globalEmitterService.getAlertMessageEmitter().subscribe(msg => {
       this.message = msg;
+      // console.log("kite",this.message);
     });
   }
 }

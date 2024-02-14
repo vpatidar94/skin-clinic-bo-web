@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, MessageType, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { PdfViewerDialogComponent } from './pdf-viewer-dialog.component';
+import { AlertMessage } from 'src/app/@shared/dto/alert-message';
+import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 
 @Component({
   selector: 'app-patient-billing-edit',
@@ -54,7 +56,8 @@ export class PatientBillingEditComponent implements OnInit {
   constructor(private transactionApi: TransactionApi,
     private bookingApi: BookingApi,
     private zone: NgZone,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private glabalEmitterService: GlobalEmitterService) {
   }
 
 
@@ -83,6 +86,11 @@ export class PatientBillingEditComponent implements OnInit {
         this.userBooking.booking = res.body;
         this.userBookingChange.emit(this.userBooking);
         this.showPendingAmount = false;
+        
+        // const message = {} as AlertMessage;
+        // message.type = MessageType[MessageType.SUCCESS];
+        // message.text = 'Paid Successfully';
+        // this.glabalEmitterService.addAlerMsg(message);
       }
 
     });

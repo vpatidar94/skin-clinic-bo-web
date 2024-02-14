@@ -168,9 +168,9 @@ export class BillingComponent {
             name: "",
             sampleCollectDate: null,
             discount: 0,
-    duration: "",
-    dosage: "",
-    packing: "",
+            duration: "",
+            dosage: "",
+            packing: "",
 
         };
         this.dataSource.data.push(newRow);
