@@ -119,7 +119,9 @@ export class BillingComponent {
         // return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0);
         // this.pharmacyItem[0].amount = this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
         console.log("555",this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0));
-        return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase) - row.discount, 0);
+        // return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase) - row.discount, 0);
+        return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
+
     }
 
     // newly added
@@ -167,10 +169,10 @@ export class BillingComponent {
             openItem: true,
             name: "",
             sampleCollectDate: null,
-            discount: 0,
-            duration: "",
-            dosage: "",
-            packing: "",
+            // discount: 0,
+            // duration: "",
+            // dosage: "",
+            // packing: "",
 
         };
         this.dataSource.data.push(newRow);
