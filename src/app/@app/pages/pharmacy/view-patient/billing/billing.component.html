@@ -42,7 +42,7 @@
                                         </option> -->
                                     <!-- <option>555</option>
                                     </select> -->
-                                    <input matInput class="w-100" [(ngModel)]="row.name">
+                                    <input matInput class="w-100" name="Medicine" [(ngModel)]="row.name">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -52,10 +52,11 @@
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Dosage </th>
                             <td mat-cell *matCellDef="let row" class="text-ellipsis col-1">
                                 <ng-container *ngIf="!row.openItem; else inputDosage">
-                                    ""
+                                    {{prescriptionMap[row.item._id].dosage}}
                                 </ng-container>
                                 <ng-template #inputDosage>
-                                    <input matInput placeholder="Dosage" name="dosage" class="w-100">
+                                    <input [(ngModel)]="prescriptionMap[row.item._id].dosage" matInput
+                                        placeholder="Dosage" name="dosage" class="w-100">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -65,10 +66,11 @@
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Duration </th>
                             <td mat-cell *matCellDef="let row" class="text-ellipsis col-1">
                                 <ng-container *ngIf="!row.openItem; else inputDuration">
-                                    duration
+                                    {{prescriptionMap[row.item._id].duration}}
                                 </ng-container>
                                 <ng-template #inputDuration>
-                                    <input matInput type="number" name="duration" placeholder="Duration" class="w-100">
+                                    <input matInput type="number" [ngModel]="prescriptionMap[row.item._id].duration"
+                                        name="duration" placeholder="Duration" class="w-100">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -78,10 +80,12 @@
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>Packing </th>
                             <td mat-cell *matCellDef="let row" class="text-ellipsis col-1">
                                 <ng-container *ngIf="!row.openItem; else inputPacking">
-                                    pack
+                                    {{productMap[row.item._id].qtyPerPackage}} Per
+                                    {{productMap[row.item._id].packagingType}}
                                 </ng-container>
                                 <ng-template #inputPacking>
-                                    <input matInput type="" name="packing" placeholder="Packing" class="w-100">
+                                    <input matInput [ngModel]="productMap[row.item._id].packagingType" name="packing"
+                                        placeholder="Packing" class="w-100">
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -122,7 +126,8 @@
                             <td mat-cell *matCellDef="let row; let i = index;" class="action-style text-ellipsis col-1">
                                 <!-- <input [defaultValue]="0" matInput [(ngModel)]="row.discount" name="discount" style="width:40px;"> -->
                                 <!-- <input [defaultValue]="0" matInput name="discount" style="width:40px;"> -->
-                                <input [defaultValue]="0" matInput [(ngModel)]="row.discount" name="discount" style="width:40px;">
+                                <input [defaultValue]="0" matInput [(ngModel)]="row.discount" name="discount"
+                                    style="width:40px;">
 
 
                             </td>
@@ -132,7 +137,7 @@
                         <ng-container matColumnDef="amount">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
                             <td mat-cell *matCellDef="let row" class="action-style text-ellipsis col-1">
-                                <ng-container *ngIf="!row.openItem; else inputAmount" [(ngModel)]="row.amount">
+                                <ng-container *ngIf="!row.openItem; else inputAmount">
                                     <!-- <ng-container [(ngModel)]="row.amount"> -->
 
                                     <!-- {{ row.amount }} -->
@@ -147,8 +152,7 @@
                                     <!-- <input matInput [(ngModel)]="row.amount" type="" name="amount" placeholder="Amount"
                                         class="w-100" appNumberOnly disabled> -->
                                     <input matInput type="" name="amount" placeholder="Amount" class="w-100" value="{{ ((row.qty*row.priceBase)-row.discount) | currency }}
-                                    "
-                                        appNumberOnly disabled>
+                                    " appNumberOnly disabled>
                                 </ng-template>
                             </td>
                         </ng-container>
@@ -192,19 +196,42 @@
                 </div>
 
                 <!-- payment Mode -->
-                <div class="d-flex align-items-center my-3">
+                <div class="d-flex align-items-center my-3" *ngIf="pharmacyOrder.order.status == txStatus.PAID">
+                    <div class="pad-r-1">
+                        <span><strong>Paid</strong></span>
+                    </div>
+                    <div *ngIf="showChequeInbox" class="mt-3 w-25">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cheque number</mat-label>
+                            <input [(ngModel)]="orderTransaction.chequeNo" matInput name="cheque" type="text"
+                                placeholder="Cheque number">
+                        </mat-form-field>
+                    </div>
+                    <!-- print btn -->
+                    <span class=" col-md-1 download-button btn btn-info h-25 ms-2" (click)="printData()">Print</span>
+                </div>
+                <div class="d-flex align-items-center my-3" *ngIf="pharmacyOrder.order.status != txStatus.PAID">
                     <div class="pad-r-1">
                         <span><strong>Payment Mode</strong></span>
                     </div>
                     <div class="form-group col-md-2">
                         <!-- <input type="paymentMode" class="form-control pres-input w-100"> -->
-                        <select name="paymentMode" class="app-single-select-dropdown w-100"
+                        <!-- <select name="paymentMode" class="app-single-select-dropdown w-100"
                             (change)="onPaymentModeChange($event)" required>
                             <option>cash</option>
                             <option>Online</option>
                             <option>UPI</option>
                             <option>Card</option>
                             <option>Cheque</option>
+                        </select> -->
+                        <select name="paymentMode" class="app-single-select-dropdown w-100"
+                            (change)="onPaymentModeChange($event)" [(ngModel)]="orderTransaction.paymentMode" required>
+                            <option [ngValue]="undefined" selected>Payment mode</option>
+                            <option value="CASH">Cash</option>
+                            <option value="ONLINE">Online</option>
+                            <option value="UPI">UPI</option>
+                            <option value="CARD">Card</option>
+                            <option value="CHEQUE">Cheque</option>
                         </select>
                     </div>
                     <!-- pay btn -->
@@ -217,7 +244,8 @@
                 <div *ngIf="showChequeInbox" class="mt-3 w-25">
                     <mat-form-field appearance="outline">
                         <mat-label>Cheque number</mat-label>
-                        <input matInput name="cheque" type="text" placeholder="Cheque number">
+                        <input [(ngModel)]="orderTransaction.chequeNo" matInput name="cheque" type="text"
+                            placeholder="Cheque number">
                     </mat-form-field>
                 </div>
             </mat-card>

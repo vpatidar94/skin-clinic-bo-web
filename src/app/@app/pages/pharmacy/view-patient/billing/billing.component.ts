@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse, OrgPharmacyOrderDto, PharmacyOrderVo, OrderItemVo, ResponseStatus, OrderAddTransactionDto } from 'aayam-clinic-core';
+import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse, OrgPharmacyOrderDto, PharmacyOrderVo, OrderItemVo, ResponseStatus, OrderAddTransactionDto, ORDER_TX_STATUS } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 //newly added to show table
@@ -54,7 +54,15 @@ export class BillingComponent {
     // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     dataSource = new MatTableDataSource<OrderItemVo>([] as OrderItemVo[]);
 
+    @Input()
+    prescription!: PrescriptionVo[];
 
+    prescriptionMap!: { [key: string]: PrescriptionVo };
+
+    @Input()
+    productList!: ProductVo[];
+
+    productMap!: { [key: string]: ProductVo };
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -71,15 +79,14 @@ export class BillingComponent {
     @Input()
     pharmacyItem!: OrderItemVo[];
 
-    @Input()
-    productList!: ProductVo[];
-
     orderTransaction!: OrderAddTransactionDto;
     @Output()
     orderTransactionChange = new EventEmitter<OrderAddTransactionDto>();
 
 
-    newDiscount! : number;
+    txStatus = ORDER_TX_STATUS;
+
+    newDiscount!: number;
 
 
     /* ************************************* Constructors ******************************************** */
@@ -91,19 +98,39 @@ export class BillingComponent {
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
+        console.log('xx xx  xxprescription', this.prescription);
         // Set the flag to true for the last row by default
         if (this.dataSource.data.length > 0) {
             this.dataSource.data[this.dataSource.data.length - 1].openItem = false;
         }
         this._init();
         this.dataSource = new MatTableDataSource(this.pharmacyItem);
+    }
 
-
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes['prescription']) {
+            this.prescription = changes['prescription'].currentValue;
+            if (this.prescription?.length > 0) {
+                this.prescriptionMap = {} as { [key: string]: PrescriptionVo };
+                this.prescription.forEach((pres: PrescriptionVo) => {
+                    this.prescriptionMap[pres.productId] = pres;
+                });
+            }
+        }
+        if (changes['productList']) {
+            this.prescription = changes['productList'].currentValue;
+            if (this.productList?.length > 0) {
+                this.productMap = {} as { [key: string]: ProductVo };
+                this.productList.forEach((pr: ProductVo) => {
+                    this.productMap[pr._id] = pr;
+                });
+            }
+        }
     }
 
     public onPaymentModeChange(event: Event) {
         const selectElement = event.target as HTMLSelectElement;
-        this.showChequeInbox = selectElement.value === 'Cheque';
+        this.showChequeInbox = selectElement.value === 'CHEQUE';
     }
 
 
@@ -118,7 +145,6 @@ export class BillingComponent {
         // return this.dataSource.data.reduce((total, row) => total + row.amount, 0);
         // return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0);
         // this.pharmacyItem[0].amount = this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
-        console.log("555",this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0));
         // return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase) - row.discount, 0);
         return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
 
@@ -194,7 +220,7 @@ export class BillingComponent {
     public payPharmacyBill(): void {
         this.transactionApi.addUpdatePharmacyTransaction(this.orderTransaction).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
             if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
-                //   this.userBooking.booking = res.body;
+                this.pharmacyOrder.order = res.body;
                 //   this.userBookingChange.emit(this.userBooking);
                 //   this.showPendingAmount = false;
             }
@@ -209,7 +235,6 @@ export class BillingComponent {
         this.orderTransaction.orderId = this.pharmacyOrder.order._id;
         this.orderTransaction.amount = this.pharmacyOrder.order.totalDue - this.pharmacyOrder.order.totalPaid
         this.orderTransactionChange.emit(this.orderTransaction);
-        console.log('xx xxx xx ', this.pharmacyOrder.order.items[0].item);
     }
 
 }

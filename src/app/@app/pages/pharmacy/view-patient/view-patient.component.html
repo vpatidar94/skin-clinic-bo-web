@@ -12,7 +12,7 @@
             <app-prescription [productList]="data.productList" [(pharmacyOrder)]="data.pharmacyOrder" [(selectedMedicine)]="selectedMedicine" [prescription]="data.pharmacyOrder.order.prescription"></app-prescription>
         </div>
         <div *ngIf="showSectionBilling">
-            <app-billing [productList]="data.productList" [selectedMedicine]="selectedMedicine" [pharmacyOrder]="data.pharmacyOrder"  [pharmacyItem]="data.pharmacyOrder.order.items"></app-billing>
+            <app-billing [productList]="data.productList" [selectedMedicine]="selectedMedicine" [pharmacyOrder]="data.pharmacyOrder"  [pharmacyItem]="data.pharmacyOrder.order.items" [prescription]="data.pharmacyOrder.order.prescription"></app-billing>
         </div>
     </section>
 </section>

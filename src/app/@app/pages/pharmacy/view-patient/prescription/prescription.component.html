@@ -5,11 +5,11 @@
         <mat-expansion-panel class="my-3">
             <mat-expansion-panel-header class="app-expansion">
                 <div class="app-expansion-title col-md-12">
-                    <span>Patient Id: <span>0812</span></span>
-                    <span>Visiting ID: <span>booking_id</span></span>
-                    <span>First Name: <span>Mayank</span></span>
-                    <span>Doctor's Name: <span>M.Patidar</span></span>
-                    <span>Date: <span>02/08/23</span></span>
+                    <!-- <span>Patient Id: <span>{{pharmacyOrder.order.pa}}</span></span> -->
+                    <span>Visiting ID: <span *ngIf="pharmacyOrder.order">{{pharmacyOrder.order.no}}</span></span>
+                    <span>First Name: <span *ngIf="pharmacyOrder.patient">{{pharmacyOrder.patient.nameF}}</span></span>
+                    <span>Doctor's Name: <span *ngIf="pharmacyOrder.drDetail">{{pharmacyOrder.drDetail.nameF}}</span></span>
+                    <span>Date: <span *ngIf="pharmacyOrder.order">{{pharmacyOrder.order.bookingDate | date}}</span></span>
                 </div>
             </mat-expansion-panel-header>
 
@@ -45,7 +45,9 @@
                         <!-- select -->
                         <ng-container matColumnDef="select">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Select </th>
-                            <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><mat-checkbox [checked]="selectedMedicine.includes(row.productId)" (change)="medicineSelected($event, row.productId)"
+                            <td mat-cell *matCellDef="let row" class="action-style text-ellipsis"><mat-checkbox
+                                    [checked]="selectedMedicine.includes(row.productId)"
+                                    (change)="medicineSelected($event, row.productId)"
                                     class="large-mat-checkbox"></mat-checkbox></td>
                         </ng-container>
 
@@ -58,7 +60,8 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-end my-2">
                     <div class="col-3">
-                        <button [disabled]="selectedMedicine.length <= 0" (click)="addMedicineToBilling()" class="common-button">Add to Billing</button>
+                        <button [disabled]="selectedMedicine.length <= 0" (click)="addMedicineToBilling()"
+                            class="common-button">Add to Billing</button>
                     </div>
                 </div>
             </mat-card>

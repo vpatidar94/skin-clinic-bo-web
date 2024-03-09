@@ -135,7 +135,12 @@
                             <div class="col-md-4">
                                 <div *ngIf="showPendingAmount" class="col-md-"><strong>Remaining</strong></div>
                             </div>
-                            <div *ngIf="showChequeInbox" class="col-md-3"></div>
+                            <div *ngIf="showChequeInbox" class="col-md-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Cheque number</mat-label>
+                                    <input [(ngModel)]="bookingTransaction.chequeNo" matInput name="cheque" type="text" placeholder="Cheque number">
+                                </mat-form-field>
+                            </div>
                             <div class="col-md"></div>
                         </div>
 
