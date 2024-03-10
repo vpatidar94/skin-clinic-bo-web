@@ -36,6 +36,8 @@ import { PatientEditComponent } from './patient-list/pharmacy-edit/patient-edit.
 import { AddProductDialogComponent } from './pharmacy-inventory/add-product-dialog/add-product-dialog.component';
 import { PrescriptionDialogComponent } from './patient-list/prescription-dialog/prescription-dialog.component';
 import { ViewPharmacyInventoryComponent } from './pharmacy-inventory/view-pharmacy-inventory/view-pharmacy-inventory.component';
+import { BillingPrintComponent } from './view-patient/billing/billing-print/billing-print.component';
+import { SharedPipeModule } from 'src/app/@shared/pipe/shared-pipe.module';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -60,9 +62,10 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, PharmacyRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot()],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, SharedDirectiveModule, PharmacyRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedPipeModule],
   providers: [],
   exports: [],
-  declarations: [PharmacyComponent, PharmacyEditComponent, PatientListComponent, PatientEditComponent, PharmacyBillingComponent, PrescriptionComponent, BillingComponent, ViewPatientComponent, PharmacyInventoryComponent, NewPurchaseEditDialogComponent, AddProductDialogComponent, PrescriptionDialogComponent,ViewPharmacyInventoryComponent]
+  declarations: [PharmacyComponent, PharmacyEditComponent, PatientListComponent, PatientEditComponent, PharmacyBillingComponent, PrescriptionComponent, BillingComponent, ViewPatientComponent, PharmacyInventoryComponent, NewPurchaseEditDialogComponent, AddProductDialogComponent,
+    PrescriptionDialogComponent, ViewPharmacyInventoryComponent, BillingPrintComponent]
 })
 export class PharmacyModule { }

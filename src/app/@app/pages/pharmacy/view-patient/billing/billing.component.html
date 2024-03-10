@@ -253,7 +253,9 @@
     </mat-accordion>
 
 
-
+    <section [hidden]="true" id="pharmacy-receipt-print">
+        <app-billing-print [prescriptionMap]="prescriptionMap" [productMap]="productMap" [pharmacyItem]="pharmacyItem" [orderTransaction]="orderTransaction" [pharmacyOrder]="pharmacyOrder" ></app-billing-print>
+    </section>
 
     <!-- NEWLY ADDED -->
 

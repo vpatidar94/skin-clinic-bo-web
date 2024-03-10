@@ -1,0 +1,95 @@
+<div class="receipt">
+    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+        <span class="link-style"><span>GSTIN:</span>{{org?.gst}}</span>
+        <span class="link-style"><span>Website:</span>{{org?.domain}}</span>
+    </div>
+    <div class="receipt-head">
+        <img *ngIf="logo" src="{{logo}}" alt="Clinic Logo" class="logo col-2" />
+        <span *ngIf="!logo" class="logo col-2"></span>
+        <div class="col-6 d-flex flex-column align-items-center">
+            <span class="receipt-title col-10">{{org?.name}}</span>
+            <span class="address col-9 mt-1">{{org?.address?.address}}, {{org?.address?.city}}</span>
+            <span class="contact col-10">{{org?.ph}}, {{org?.email}}</span>
+
+        </div>
+        <div class="col-3 bill-no-style">
+            <span>Bill No:</span> <span *ngIf="pharmacyOrder.order">{{pharmacyOrder.order.no}}</span>
+        </div>
+    </div>
+    <hr />
+    <h5 class="text-center heading-style">Receipt</h5>
+    <div class="info row">
+        <span class="col-5"><span class="label-style">Receipt No:</span> <span
+                *ngIf="pharmacyOrder.order">{{pharmacyOrder.order.no}}</span></span>
+        <span class="col-4"><span class="label-style">Patient ID:</span> {{pharmacyOrder.patient.code}}</span>
+        <span class="col-3"><span class="label-style">Visit ID:</span>{{pharmacyOrder.order.no}}</span>
+
+        <span class="col-5"><span class="label-style">Patient Name:</span> {{ pharmacyOrder.patient.nameF }} {{
+            pharmacyOrder.patient.nameL }}</span>
+        <span class="col-4"><span class="label-style">Gender:</span> {{ pharmacyOrder.patient.gender}}</span>
+        <span class="col-3"><span class="label-style">Father Name:</span> {{ pharmacyOrder.patient.fatherName }}</span>
+
+        <span class="col-5"><span class="label-style">Receipt Date:</span> <span *ngIf="tx">{{ tx.date | date }}
+            </span></span>
+        <span class="col-4"><span class="label-style">Payment Mode:</span> <span *ngIf="tx">{{ tx.txType }}
+            </span></span>
+        <span class="col-3"><span class="label-style">Payment status:</span><span *ngIf="tx">{{
+                pharmacyOrder.order.status }} </span> <span *ngIf="!tx">Unpaid</span> </span>
+
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th class="sno-column">Sno</th>
+                <th class="text-center">Medicine</th>
+                <th class="text-center">Dosage</th>
+                <th class="text-center">Duration</th>
+                <th class="text-center">Packaging</th>
+                <th class="text-center">Qty</th>
+                <th class="fee-column text-center">Rate</th>
+                <th class="fee-column text-center">Discount</th>
+                <th class="fee-column text-center">Amount</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr row-style *ngFor="let row of pharmacyItem; let i = index">
+                <td class="sno-column">{{i+1}}</td>
+                <td>{{ row.name }}</td>
+                <td> <span *ngIf="row.item">{{prescriptionMap[row.item._id].dosage}}</span> </td>
+                <td> <span *ngIf="row.item">{{prescriptionMap[row.item._id].duration}}</span> </td>
+                <td>
+                    <span *ngIf="row.item">
+                        {{productMap[row.item._id].qtyPerPackage}} Per
+                        {{productMap[row.item._id].packagingType}}
+                    </span>
+                </td>
+                <td>
+                    {{row.qty}}
+                </td>
+                <td>
+                    {{row.priceBase | currency}}
+                </td>
+                <td>
+                    {{0 | currency}}
+                </td>
+                <td>
+                    {{row.qty*row.priceBase | currency}}
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <span class=" d-flex flex-row mb-0">
+        <span class="col-9 text-start print-date-style style-words">Print Date Time:<span>{{currentDate |
+                date}}</span></span>
+        <span class="col-3 total"><strong>Total:</strong> {{ pharmacyOrder.order.totalDue | currency}}</span>
+    </span>
+    <div class="d-flex flex-row justify-content-between">
+        <span class="style-words">Subjected to {{org?.address?.city}} Juridiction</span>
+        <span class="style-words">IN WORDS [{{pharmacyOrder.order.totalDue | numberToWords | uppercase}} ONLY]</span>
+    </div>
+    <div class="mt-1 text-end">
+        <span class="mb-0 style-for">For {{org?.name}} - {{org?.adminName}}</span>
+    </div>
+</div>
