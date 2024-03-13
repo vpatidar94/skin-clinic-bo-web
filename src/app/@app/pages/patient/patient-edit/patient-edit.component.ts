@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ApiResponse, DepartmentVo, ItemDetailDto, OrgCodeNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { Observable } from 'rxjs';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
@@ -41,6 +42,10 @@ export class PatientEditComponent implements OnInit, OnChanges {
   @Input()
   userBookingInvestigationList!: UserBookingInvestigationDto;
 
+  @Input()
+  subjectChangeTab!: Observable<string>;
+
+
   /* ************************************* Constructors ******************************************** */
   constructor(private orgApi: OrgApi,
     private keyValueStorageService: KeyValueStorageService
@@ -78,9 +83,11 @@ export class PatientEditComponent implements OnInit, OnChanges {
         }
       });
     }
+    this._changeTabOnSave();
   }
 
   private _tabChange(tabValue: string): void {
+    this.keyValueStorageService.savePatientBookingSection(tabValue);
     switch (tabValue) {
       case 'PATIENT':
         this._resetSection();
@@ -116,6 +123,35 @@ export class PatientEditComponent implements OnInit, OnChanges {
     this.showSectionTest = false;
     this.showSectionPrescription = false;
     this.showSectionBilling = false;
+  }
+
+  private _changeTabOnSave(): void { 
+    this.subjectChangeTab.subscribe((msg: string) => { 
+      if (msg === 'CHANGE_TAB') { 
+        const tab = this.keyValueStorageService.getPatientBookingSection();
+        switch (tab) {
+          case 'PATIENT':
+            this.tabValue = 'SERVICE'
+            this.tabChange();
+            break;
+          case 'OBSERVATION':
+            this.tabValue = 'PRESCRIPTION'
+            this.tabChange();
+            break;
+          case 'SERVICE':
+            this.tabValue = 'BILLING'
+            this.tabChange();
+            break;
+          case 'PRESCRIPTION':
+            this.tabValue = 'TEST'
+            this.tabChange();
+            break;
+          case 'BILLING':
+            this.tabValue = 'OBSERVATION'
+            this.tabChange();
+        }
+      }
+    });
   }
 }
 

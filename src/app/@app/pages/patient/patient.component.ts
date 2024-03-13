@@ -8,7 +8,7 @@ import { UserApi } from '../../service/remote/user.api';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
+import { Subject, catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 import { ProductApi } from '../../service/remote/product.api';
 import { DepartmentApi } from '../../service/remote/department.api';
 import { AlertMessage } from 'src/app/@shared/dto/alert-message';
@@ -55,6 +55,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   originalDataSource: OrgBookingDto[] = [];
   filteredData: OrgBookingDto[] = [];
+
+  subjectChangeTab = new Subject<string>();
 
 
   /* ************************************* Constructors ******************************************** */
@@ -131,7 +133,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
-        
+
         this.userBooking = res.body;
         // this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatus[ResponseStatus.SUCCESS]);
         // this.glabalEmitterService.emitAclChangedEmitter();
@@ -139,7 +141,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
         message.type = MessageType[MessageType.SUCCESS];
         message.text = 'Added Successfully';
         this.glabalEmitterService.addAlerMsg(message);
-      
+        this.subjectChangeTab.next('CHANGE_TAB');
       }
     });
   }

@@ -116,7 +116,7 @@
             </svg>
         </div>
         <div>
-            <app-patient-edit [userBookingInvestigationList]="userBookingInvestigationList" [docterList]="doctorList"
+            <app-patient-edit [subjectChangeTab]="subjectChangeTab.asObservable()" [userBookingInvestigationList]="userBookingInvestigationList" [docterList]="doctorList"
                 [serviceItemList]="serviceItemList" [productList]="productList" [departmentList]="departmentList"
                 [(userBooking)]="userBooking"></app-patient-edit>
         </div>

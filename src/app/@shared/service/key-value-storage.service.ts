@@ -44,6 +44,10 @@ export class KeyValueStorageService {
     this._insertOrUpdate(DbKey.ALL_ACCESS, JSON.stringify(entity));
   }
 
+  public savePatientBookingSection(entity: string): void {
+    this._insertOrUpdate(DbKey.PATIENT_BOOKING_SECTION, entity);
+  }
+
   /* ************************************ GET Methods ************************************ */
   public getJwtToken(): string | null {
     return this._get(DbKey.TOKEN_JWT, '');
@@ -55,6 +59,10 @@ export class KeyValueStorageService {
 
   public getRole(): string | null {
     return this._get(DbKey.ROLE, null);
+  }
+
+  public getPatientBookingSection(): string | null {
+    return this._get(DbKey.PATIENT_BOOKING_SECTION, 'PATIENT');
   }
 
   public getOrgId(): string | null {
