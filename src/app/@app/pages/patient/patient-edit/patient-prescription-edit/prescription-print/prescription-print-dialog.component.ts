@@ -33,7 +33,7 @@ export class PrescriptionPrintDialogComponent {
 
   /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<PrescriptionPrintDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserBookingDto) {
+    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any}) {
   }
  
   /* ************************************ Public Methods ************************************ */
@@ -55,4 +55,9 @@ export class PrescriptionPrintDialogComponent {
   }
 
 
+  public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+    const doctorId = Id;
+    const doctor = this.data.doctorList?.find((doc:any) => doc._id === doctorId);
+    return doctor ? doctor.nameF + " " + doctor.nameL : "";
+  }
 }

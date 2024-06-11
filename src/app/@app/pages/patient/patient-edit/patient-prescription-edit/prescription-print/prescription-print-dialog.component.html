@@ -43,25 +43,25 @@
             </div> -->
                 <div class="col-9 receipt-info style-it">
                     <div class="info row">
-                        <span class="col-md-3"><strong>Patient ID:</strong> {{data.booking.patientNo}}</span>
-                        <span class="col-4"><strong>Doctor Name:</strong> {{doctorName}}</span>
+                        <span class="col-md-3"><strong>Patient ID:</strong> {{data.userBooking.booking.patientNo}}</span>
+                        <span class="col-4"><strong>Doctor Name:</strong> {{getDoctorById(data.userBooking.booking.dr)}}</span>
 
-                        <span class="col-4"><strong>Patient Name:</strong> {{ data.user.nameF ?? '' }} {{
-                            data.user.nameL ??
+                        <span class="col-4"><strong>Patient Name:</strong> {{ data.userBooking.user.nameF ?? '' }} {{
+                            data.userBooking.user.nameL ??
                             '' }}</span>
                         <span class="col-3"><strong>Date:</strong> {{currentDate | date}} </span>
-                        <span class="col-4"><strong>Father Name:</strong> {{ data.user.fatherName ?? '' }}</span>
-                        <span class="col-4"><strong>Gender:</strong> <span *ngIf="data.user.gender">{{
-                                genderName[data.user.gender] }}</span></span>
+                        <span class="col-4"><strong>Father Name:</strong> {{ data.userBooking.user.fatherName ?? '' }}</span>
+                        <span class="col-4"><strong>Gender: </strong> <span *ngIf="data.userBooking.user.gender">{{
+                                genderName[data.userBooking.user.gender] }}</span></span>
                         <span class="col-3"><strong>Age:</strong> {{ age }}</span>
                         <!-- <span class="col-10"><strong>Patient Address:</strong> {{ patientAddress }}</span> -->
-                        <span class="col-4"><strong>Referred By:</strong> {{ data.booking.referedBy }}</span>
+                        <span class="col-4"><strong>Referred By:</strong> {{ data.userBooking.booking.referedBy }}</span>
 
                     </div>
                     <div class="d-flex p-2 col-12">
                         <div class="d-flex flex-column col-9 pe-2 prescription-details">
-                            <span class="mb-2"><strong>Patient Complaint: </strong>{{data.booking.complaint}}</span>
-                            <span><strong>Diagnosis: </strong>{{data.booking.diagnosis}}</span>
+                            <span class="mb-2"><strong>Patient Complaint: </strong>{{data.userBooking.booking.complaint}}</span>
+                            <span><strong>Diagnosis: </strong>{{data.userBooking.booking.diagnosis}}</span>
                             <span class="mt-2"><strong>Rx</strong></span>
                             <table>
                                 <thead>
@@ -76,7 +76,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let service of data.booking.prescription; let i = index">
+                                    <tr *ngFor="let service of data.userBooking.booking.prescription; let i = index">
                                         <td class="sno-column">{{i+1}}</td>
                                         <td>{{ service.name }}</td>
                                         <td class="dosage-column text-center">{{ service.dosage }}</td>
@@ -87,25 +87,25 @@
                             </table>
                         </div>
                         <div class="ps-2 col-3 d-flex flex-column justify-content-between service-list">
-                            <div class="para-style" *ngIf="data.booking.observation.healthParams.length>0">
+                            <div class="para-style" *ngIf="data.userBooking.booking.observation.healthParams.length>0">
                                 <span><strong>Parameters</strong></span>
-                                <ul *ngFor="let item of data.booking.observation.healthParams" class="mt-2">
+                                <ul *ngFor="let item of data.userBooking.booking.observation.healthParams" class="mt-2">
                                     <li class="custom-li">{{item.name}} : <span>{{item.value}}</span></li>
                                 </ul>
                             </div>
-                            <div class="para-style" *ngIf="data.booking.test.length>0">
+                            <div class="para-style" *ngIf="data.userBooking.booking.test.length>0">
                                 <span><strong>Investigation</strong></span>
                                 <ul class="mt-2">
-                                    <li *ngFor="let test of data.booking.test">{{test}}</li>
+                                    <li *ngFor="let test of data.userBooking.booking.test">{{test}}</li>
                                 </ul>
                             </div>
-                            <div class="para-style" *ngIf="data.booking.instruction.length>0">
+                            <div class="para-style" *ngIf="data.userBooking.booking.instruction.length>0">
                                 <span><strong>Remark</strong></span>
-                                <li class="mt-2">{{data.booking.instruction}}</li>
+                                <li class="mt-2">{{data.userBooking.booking.instruction}}</li>
                             </div>
                             <div class="">
                                 <span><strong>Next Visit</strong></span>
-                                <p class="mt-2">{{data.booking.nextVisitDate| date}}</p>
+                                <p class="mt-2">{{data.userBooking.booking.nextVisitDate| date}}</p>
                             </div>
                         </div>
                     </div>

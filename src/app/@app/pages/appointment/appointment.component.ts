@@ -274,5 +274,11 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     return undefined;
 
   }
+
+  public getDepartmentById(Id: string|null |undefined ): any {
+    const departmentId = Id;
+    const department = this.departmentList?.find((doc:any) => doc._id === departmentId);
+    return department ? department : "";
+  }
 }
 

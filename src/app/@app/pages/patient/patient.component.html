@@ -22,7 +22,7 @@
                     <!-- App No -->
                     <ng-container matColumnDef="appNo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            <input class="placeholder-style" placeholder="App" name="appNoFilter"
+                            <input class="placeholder-style" placeholder="App No" name="appNoFilter"
                                 (keyup)="applyFilter('appNo', $event)" #appNoInput>
                         </th>
                         <td mat-cell *matCellDef="let row"> {{row.booking.no}} </td>

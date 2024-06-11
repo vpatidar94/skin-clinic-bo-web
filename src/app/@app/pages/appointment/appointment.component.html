@@ -68,10 +68,12 @@
                 <!-- Consultaion For -->
                 <ng-container matColumnDef="consultationFor">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        <input class="placeholder-style" placeholder="Consultation For" name="consultationForFilter"
+                        <input class="placeholder-style" placeholder="Appointment For" name="consultationForFilter"
                             (keyup)="applyFilter('consultationFor', $event)" #consultationForInput>
                     </th>
                     <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{getBookingType(row.booking.type)}} </td>
+                    <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{getDepartmentById(row.booking.departmentId)}} </td> -->
+
 
                 </ng-container>
 

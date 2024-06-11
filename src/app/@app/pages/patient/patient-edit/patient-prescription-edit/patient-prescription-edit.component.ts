@@ -150,7 +150,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       height: '1500px',
 
 
-      data: { ...this.userBooking },
+      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList },
     });
   }
 
@@ -175,6 +175,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
+    console.log("nextVisit",this.nextVisitDays)
     if (this.userBooking.booking.nextVisitDate) {
       this.isNextVisitChecked = true;
 
