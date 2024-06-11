@@ -87,6 +87,7 @@ export const URL = {
     ORG_BOOKING_LIST: MJR_BOOKING + '/list-by-org',
     BOOKING_RECEIPT: MJR_BOOKING + '/receipt-create',
     CONVERT_PATIENT: MJR_BOOKING + '/convert-patient',
+    DELETE_BOOKING: MJR_BOOKING + DELETE,
     
     // ******************************************************************
     // Department API endpoint

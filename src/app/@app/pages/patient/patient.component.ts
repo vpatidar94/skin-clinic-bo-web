@@ -128,6 +128,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   public cancel(): void {
     this._init();
+    this.getBookingList();
   }
 
   public saveBooking(): void {
@@ -154,6 +155,10 @@ export class PatientComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit() {
+    this.getBookingList();
+  }
+
+  public getBookingList() {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {
       return;
@@ -184,7 +189,6 @@ export class PatientComponent implements OnInit, AfterViewInit {
         this.dataSource = new MatTableDataSource(this.bookingList);
         this.originalDataSource = [...this.bookingList];
       });
-
   }
 
   // public applyFilter(event: Event) {
@@ -242,6 +246,13 @@ export class PatientComponent implements OnInit, AfterViewInit {
         userBooking.user = orgBooking.patient;
         this._addEditOrg(userBooking);
       }
+    });
+  }
+
+  public deleteBooking(bookingId: string): void { 
+    this.bookingApi.deleteBooking(bookingId).subscribe(() => {
+      this._init();
+      this.getBookingList();
     });
   }
 

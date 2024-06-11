@@ -37,6 +37,10 @@ export class BookingApi {
         return this.http.get<ApiResponse<null>>(environment.apiUrl + URL.CONVERT_PATIENT, { params: { bookingId, patientType, orgId } });
     }
 
+    public deleteBooking(bookingId: string): Observable<ApiResponse<null>> {
+        return this.http.delete<ApiResponse<null>>(environment.apiUrl + URL.DELETE_BOOKING, { params: { bookingId } });
+    }
+
     public getInvestigationList(orgId: string):Observable<ApiResponse<OrgBookingDto[]>> {
         return this.http.get<ApiResponse<OrgBookingDto[]>>(environment.apiUrl + '/api/core/v1/investigation/patient-list', { params: { orgId } });
 
