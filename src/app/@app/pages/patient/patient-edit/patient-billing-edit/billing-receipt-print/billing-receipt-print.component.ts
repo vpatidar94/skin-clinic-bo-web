@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserBookingDto } from 'aayam-clinic-core';
+import { BookingAddTransactionDto, UserBookingDto } from 'aayam-clinic-core';
 
 @Component({
   selector: 'app-billing-receipt-print',
@@ -32,7 +32,8 @@ export class BillingReceiptPrintComponent {
 
   /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<BillingReceiptPrintComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any}) {
+    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any, paymentMode: any}) {
+        console.log("hey this is the payment mode",data.paymentMode)
   }
   calculateTotal(): number {
     return this.services.reduce((total, service) => total + ((service.price) * (service.qty)), 0);
