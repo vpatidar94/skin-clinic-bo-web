@@ -78,6 +78,7 @@ export const URL = {
     USER_ASSET_UPLOAD: MJR_USER + '/upload-user-asset',
     SEND_OTP: MJR_USER + '/send-otp',
     RESET_PASSWORD_LINK: MJR_USER + '/reset-password-link',
+    DELETE_STAFF: MJR_USER + '/delete',
 
 
     // ******************************************************************

@@ -126,6 +126,16 @@ export class UsersComponent implements OnInit, AfterViewInit {
     return this.roleName[role ?? ''];
   }
 
+  public deleteStaff(userId: string): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.userApi.deleteStaff(orgId, userId).subscribe(() => {
+      this._init();
+    })
+  }
+
   public _getDepartmentList() {
     const orgId = this.keyValueStorageService.getOrgId();
     if (!orgId) {

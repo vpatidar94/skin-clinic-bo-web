@@ -21,6 +21,10 @@ export class UserApi {
         return this.http.get<ApiResponse<UserVo[]>>(environment.apiUrl + URL.STAFF_LIST, { params: { orgId } });
     }
 
+    public deleteStaff(orgId: string, userId: string): Observable<ApiResponse<null>> {
+        return this.http.delete<ApiResponse<null>>(environment.apiUrl + URL.DELETE_STAFF, { params: { orgId, userId } });
+    }
+
     public getUserAllAccessList(): Observable<ApiResponse<UserAccessDetailDto>> {
         return this.http.get<ApiResponse<UserAccessDetailDto>>(environment.apiUrl + URL.ACCESS_LIST);
     }
