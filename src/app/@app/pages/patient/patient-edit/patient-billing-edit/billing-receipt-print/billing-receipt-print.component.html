@@ -1,4 +1,5 @@
-<div class="receipt">
+<section id="billing-print">
+<div class="receipt" >
     <div class="d-flex flex-row align-items-center justify-content-between mb-2">
         <span class="link-style"><span>GSTIN:</span>2388PCA5532R1Z5</span>
         <span class="link-style"><span>Website:</span>aayamskinclinic.com</span>
@@ -86,4 +87,10 @@
         <span class="mb-0 style-note">1. Culture Report: After 2-3 days, Enquire</span>
         <span class="style-note">2. Outside Report: No same day guarantee, Enquire</span>
     </div>
+    
 </div>
+</section>
+<mat-dialog-actions align="end">
+    <button mat-button matDialogClose="no">Cancel</button>
+    <button (click)="print()" mat-button>Print</button>
+</mat-dialog-actions>

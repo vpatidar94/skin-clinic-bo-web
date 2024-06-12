@@ -38,4 +38,17 @@ export class BillingReceiptPrintComponent {
   calculateTotal(): number {
     return this.services.reduce((total, service) => total + ((service.price) * (service.qty)), 0);
   }
+
+  public print() {
+    const printContents = document?.getElementById('billing-print')?.innerHTML;
+    const originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents ?? '';
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+    this.dialogRef.close();
+  }
+
 }
