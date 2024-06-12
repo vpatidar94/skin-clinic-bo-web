@@ -135,12 +135,22 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
         this.userBooking = res.body
+        this._init();
+        this._initView();
       }
+    });
+  }
+
+  public deleteBooking(bookingId: string): void {
+    this.bookingApi.deleteBooking(bookingId).subscribe(() => {
+      this._init();
+      this._initView();
     });
   }
 
   public cancel(): void {
     this._init();
+    this._initView();
   }
 
   public getBookingType(type: string): string {

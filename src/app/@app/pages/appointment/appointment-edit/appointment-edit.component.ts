@@ -106,6 +106,7 @@ export class AppointmentEditComponent {
                 this.userBooking.booking.user = this.userBookingInvestigationList?.user?._id;
                 this.userBooking.user = this.userBookingInvestigationList?.user;
             }
+            this.calculateAge();
             this.userBookingChange.emit(this.userBooking);
         }
     }

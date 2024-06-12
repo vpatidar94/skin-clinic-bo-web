@@ -79,7 +79,7 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="date" class="form-control app-input" name="dateOfBirth"
-                                    [(ngModel)]="userBooking.user.doB" (ngModelChange)="calculateAge()" required>
+                                    [ngModel]="userBooking.user.doB | date: 'yyyy-MM-dd'" (ngModelChange)="userBooking.user.doB = $event;calculateAge()" required>
                             </div>
                         </div>
                     </div>
