@@ -7,7 +7,7 @@
                     <div class="app-expansion-title col-md-12">
                         <span>UHID: <span>{{userBooking.booking.patientNo}}</span></span>
                         <span>Visiting ID: <span>{{userBooking.booking.no}}</span></span>
-                        <span>First Name: {{userBooking.user.nameF}}</span>
+                        <span>First Name: {{userBooking.user.nameF + " " + userBooking.user.nameL}}</span>
                         <span>Doctor's Name: <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
                         <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
                     </div>
@@ -88,8 +88,10 @@
                                 <input type="" class="form-control pres-input w-25 me-5" name="date"
                                     [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required
                                     [readOnly]="true" (ngModelChange)="userBooking.booking.bookingDate = $event">
-                                <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
-                                    (click)="downloadReceipt(i)">Receipt</span>
+                                <!-- <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                    (click)="downloadReceipt(i)">Receipt</span> -->
+                                    <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                    (click)="generateReceipt()">Receipt</span>
                             </div>
                         </div>
 

@@ -8,6 +8,7 @@ import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { PdfViewerDialogComponent } from './pdf-viewer-dialog.component';
 import { AlertMessage } from 'src/app/@shared/dto/alert-message';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
+import { BillingReceiptPrintComponent } from './billing-receipt-print/billing-receipt-print.component';
 
 @Component({
   selector: 'app-patient-billing-edit',
@@ -149,6 +150,17 @@ export class PatientBillingEditComponent implements OnInit {
     return doctor ? doctor.nameF + " " + doctor.nameL : "";
   }
 
+  public generateReceipt(): void {
+    console.log("receipt is generated");
+    this.dialog.open(BillingReceiptPrintComponent, {
+      height: '1500px',
+
+
+      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList },
+    });
+  }
+
+ 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
     this.bookingTransaction = {} as BookingAddTransactionDto;
