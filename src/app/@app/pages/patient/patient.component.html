@@ -1,5 +1,5 @@
 <section class="section-org">
-    <section class="row" *ngIf="showSectionAppointmentList">
+    <section class="row" [hidden]="!showSectionAppointmentList">
         <div class="row">
             <div class="d-flex justify-content-between">
                 <h2>Patient List</h2>

@@ -77,6 +77,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
                     this.filterDoctorByDepartmentId(this.userBooking.booking?.departmentId, true);
                 }
             }
+            this.calculateAge();
             this.userBookingChange.emit(this.userBooking);
         }
         if (changes['departmentList']) {
