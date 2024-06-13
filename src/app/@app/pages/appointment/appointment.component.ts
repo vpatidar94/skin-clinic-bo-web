@@ -10,6 +10,8 @@ import { SUB_ROLE } from '../../const/sub-role.const';
 import { BookingApi } from '../../service/remote/booking.api';
 import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
 import { DepartmentApi } from '../../service/remote/department.api';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-appointment',
@@ -57,7 +59,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     private serviceItemApi: ServiceItemApi,
     private userApi: UserApi,
     private bookingApi: BookingApi,
-    private departmentApi: DepartmentApi
+    private departmentApi: DepartmentApi,
+    private dialog: MatDialog
   ) {
   }
 
@@ -147,6 +150,19 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       this._initView();
     });
   }
+
+public confirmDeleteBooking(bookingId: string): void {
+  const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+    width: '250px',
+    data: { message: 'Are you sure you want to delete this booking?' }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.deleteBooking(bookingId);
+    }
+  });
+}
 
   public cancel(): void {
     this._init();

@@ -11,6 +11,8 @@ import { SUB_ROLE_NAME } from '../../const/sub-role.const';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { UserServiceTimingVo } from 'aayam-clinic-core/dist/vo/user-service-timing.vo';
 import { environment } from 'src/environments/environment';
+import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -58,7 +60,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
   constructor(private keyValueStorageService: KeyValueStorageService,
     private departmentApi: DepartmentApi,
     private userApi: UserApi,
-    private globalEmitterService: GlobalEmitterService
+    private globalEmitterService: GlobalEmitterService,
+    private dialog : MatDialog
   ) {
     globalEmitterService.getAclChangedEmitter().subscribe(() => {
       this._getStaffList();
@@ -134,6 +137,19 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.userApi.deleteStaff(orgId, userId).subscribe(() => {
       this._init();
     })
+  }
+
+  confirmDeleteStaff(userId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '250px',
+      data: { message: 'Are you sure you want to delete this booking?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteStaff(userId);
+      }
+    });
   }
 
   public _getDepartmentList() {
