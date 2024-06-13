@@ -13,6 +13,8 @@ import { ProductApi } from '../../service/remote/product.api';
 import { DepartmentApi } from '../../service/remote/department.api';
 import { AlertMessage } from 'src/app/@shared/dto/alert-message';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-patient',
@@ -66,7 +68,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
     private bookingApi: BookingApi,
     private productApi: ProductApi,
     private departmentApi: DepartmentApi,
-    private glabalEmitterService: GlobalEmitterService) { }
+    private glabalEmitterService: GlobalEmitterService,
+    private dialog: MatDialog) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
@@ -253,6 +256,19 @@ export class PatientComponent implements OnInit, AfterViewInit {
     this.bookingApi.deleteBooking(bookingId).subscribe(() => {
       this._init();
       this.getBookingList();
+    });
+  }
+
+  confirmDeleteBooking(bookingId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '250px',
+      data: { message: 'Are you sure you want to delete this booking?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteBooking(bookingId);
+      }
     });
   }
 
