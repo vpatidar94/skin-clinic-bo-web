@@ -18,7 +18,7 @@ export class NumberToWordsPipe implements PipeTransform {
         }
     }
 
-    private convertToWords(num: number): string {
+    public convertToWords(num: number): string {
         if (num < 10) {
             return this.ones[num];
         } else if (num < 20) {

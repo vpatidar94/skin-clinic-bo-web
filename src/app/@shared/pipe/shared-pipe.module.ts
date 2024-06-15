@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import { NumberToWordsPipe } from './number.to-words.pipe';
+import { NumberToWordsPipe } from './number-to-words.pipe';
 
 
 @NgModule({

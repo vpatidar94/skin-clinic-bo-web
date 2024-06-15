@@ -76,11 +76,12 @@
     <div class="d-flex flex-row justify-content-between">
         <span class="style-words">Subjected to Indore Juridiction</span>
         <!-- <span class="style-words">IN WORDS [ONE THOUSAND SEVENTY FIVE ONLY]</span> -->
-        <span class="style-words">IN WORDS [Total amount]</span>
+        <span class="style-words">IN WORDS [{{data.userBooking.booking.totalPaid| numberToWords}}]</span>
+        <!-- <span class="style-words">numberToWords(num: number)</span> -->
 
     </div>
     <div class="mt-1 text-end">
-        <span class="mb-0 style-for">For Aayam Skin Clinic - Name of staff</span>
+        <span class="mb-0 style-for">For Aayam Skin Clinic - Jai Singh</span>
     </div>
     <!-- <div class="d-flex flex-column">
         <span>Note:</span>

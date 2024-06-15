@@ -38,6 +38,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { PdfViewerDialogComponent } from './patient-edit/patient-billing-edit/pdf-viewer-dialog.component';
 import { PrescriptionPrintDialogComponent } from './patient-edit/patient-prescription-edit/prescription-print/prescription-print-dialog.component';
 import { BillingReceiptPrintComponent } from './patient-edit/patient-billing-edit/billing-receipt-print/billing-receipt-print.component';
+import { SharedPipeModule } from 'src/app/@shared/pipe/shared-pipe.module';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -61,7 +62,7 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, PatientRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, PatientRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule,SharedPipeModule],
   providers: [],
   exports: [],
   declarations: [PatientComponent, PatientEditComponent,
