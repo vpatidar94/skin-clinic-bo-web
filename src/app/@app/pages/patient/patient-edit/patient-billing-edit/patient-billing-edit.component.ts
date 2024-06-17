@@ -53,6 +53,8 @@ export class PatientBillingEditComponent implements OnInit {
 
   paymentMode!: string;
 
+  showPayInfo: boolean = true;
+
 
 
   /* ************************************ Constructors ************************************ */
@@ -96,6 +98,9 @@ export class PatientBillingEditComponent implements OnInit {
         // message.type = MessageType[MessageType.SUCCESS];
         // message.text = 'Paid Successfully';
         // this.glabalEmitterService.addAlerMsg(message);
+      }
+      if((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid)===0){
+        this.showPayInfo = false;
       }
 
     });
