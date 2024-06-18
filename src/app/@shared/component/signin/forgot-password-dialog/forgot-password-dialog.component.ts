@@ -5,6 +5,7 @@ import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { ApiResponse, MessageType } from 'aayam-clinic-core';
 import { AlertMessage } from 'src/app/@shared/dto/alert-message';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
+import { MessageTypeConst } from 'src/app/@shared/const/message-type-const';
 
 @Component({
     selector: 'app-forgot-password-dialog',
@@ -51,7 +52,7 @@ export class ForgotPasswordDialogComponent implements OnInit {
             this.userApi.sendOtp(this.empCode).subscribe((res: ApiResponse<boolean>) => {
                 if (res.body === true) { 
                     const message = {} as AlertMessage;
-                    message.type = MessageType[MessageType.SUCCESS];
+                    message.type = MessageTypeConst.SUCCESS;
                     message.text = 'Otp Sent Successfully';
                     this.glabalEmitterService.addAlerMsg(message);
                     this.dialog.open(VerifyOtpDialogComponent, {

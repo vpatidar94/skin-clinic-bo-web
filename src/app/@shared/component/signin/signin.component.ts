@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../../security/auth.service';
 import { ResponseStatusConst } from '../../const/response-status-const';
+import { MessageTypeConst } from '../../const/message-type-const';
 
 @Component({
   selector: 'app-signin',
@@ -57,7 +58,7 @@ export class SigninComponent implements OnInit {
       })
       .catch((error) => {
         const message = {} as AlertMessage;
-        message.type = MessageType[MessageType.ERROR];
+        message.type = MessageTypeConst.ERROR;
         message.text = 'Invalid credentials';
         this.glabalEmitterService.addAlerMsg(message);
       });
@@ -108,7 +109,7 @@ export class SigninComponent implements OnInit {
         this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatusConst.SUCCESS);
         this.glabalEmitterService.emitAclChangedEmitter();
         const message = {} as AlertMessage;
-        message.type = MessageType[MessageType.SUCCESS];
+        message.type = MessageTypeConst.SUCCESS;
         message.text = 'Sign in Successfully';
         this.glabalEmitterService.addAlerMsg(message);
       }

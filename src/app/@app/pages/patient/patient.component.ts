@@ -16,6 +16,7 @@ import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.ser
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
+import { MessageTypeConst } from 'src/app/@shared/const/message-type-const';
 
 @Component({
   selector: 'app-patient',
@@ -143,7 +144,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
         // this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatusConst.SUCCESS);
         // this.glabalEmitterService.emitAclChangedEmitter();
         const message = {} as AlertMessage;
-        message.type = MessageType[MessageType.SUCCESS];
+        message.type = MessageTypeConst.SUCCESS;
         message.text = 'Added Successfully';
         this.glabalEmitterService.addAlerMsg(message);
         this.subjectChangeTab.next('CHANGE_TAB');

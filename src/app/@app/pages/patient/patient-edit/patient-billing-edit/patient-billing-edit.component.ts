@@ -96,7 +96,7 @@ export class PatientBillingEditComponent implements OnInit {
         this.showPendingAmount = false;
         
         // const message = {} as AlertMessage;
-        // message.type = MessageType[MessageType.SUCCESS];
+        // message.type = MessageTypeConst.SUCCESS;
         // message.text = 'Paid Successfully';
         // this.glabalEmitterService.addAlerMsg(message);
       }
