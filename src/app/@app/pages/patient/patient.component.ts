@@ -45,7 +45,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
   departmentList!: DepartmentVo[];
 
 
-  displayedColumns: string[] = ['appNo', 'date', 'patientName', 'type', 'doctorsName', "time", "action"];
+  displayedColumns: string[] = ['appNo', 'date', 'patientName','mobileNo','type', 'doctorsName', "time", "action"];
   dataSource = new MatTableDataSource<OrgBookingDto>([] as OrgBookingDto[]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -360,6 +360,9 @@ export class PatientComponent implements OnInit, AfterViewInit {
     }
     else if (columnName === 'patientName' && data.patient.nameF) {
       return data.patient.nameF.toLowerCase();
+    }
+    else if (columnName === 'mobileNo' && data.patient.cell) {
+      return data.patient.cell.toLowerCase();
     }
     else if (columnName === 'type' && data.booking.type) {
       return data.booking.type.toLowerCase();

@@ -47,6 +47,15 @@
                         <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patient.nameF ?? ''}}
                             {{row.patient.nameL ?? ''}}</td>
                     </ng-container>
+                   
+                    <!-- MobileNo -->
+                    <ng-container matColumnDef="mobileNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            <input class="placeholder-style" placeholder="Mob No" name="mobileNoFilter"
+                                (keyup)="applyFilter('mobileNo', $event)" #mobileNoInput>
+                        </th>
+                        <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.patient.cell}}</td>
+                    </ng-container>
 
                     <!-- Type -->
                     <ng-container matColumnDef="type">
