@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserTypeVo } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
     selector: 'app-user-type',
@@ -130,7 +131,7 @@ export class UserTypeComponent implements AfterViewInit, OnInit {
 
     public savingUserType(): void {
         this.userApi.addUpdateUserType(this.userType).subscribe((res: ApiResponse<UserTypeVo>) => {
-            if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+            if (res.status === ResponseStatusConst.SUCCESS && res.body) {
                 this.userType = res.body;
                 this._init();
             }

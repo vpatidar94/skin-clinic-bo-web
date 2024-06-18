@@ -8,6 +8,7 @@ import { ApiResponse, BookingVo, ItemVo, OrderItemVo, OrgBookingDto, ResponseSta
 import { PatientIdBarCodeDialogComponent } from '../patient-id-bar-code-dialog/patient-id-bar-code-dialog.component';
 import { TestIdBarCodeDialogComponent } from '../test-id-bar-code-dialog/test-id-bar-code-dialog.component';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
     selector: 'app-test-sample-details',
@@ -90,7 +91,7 @@ export class TestSampleDetailsComponent implements OnInit, OnChanges {
             //TODO: Save booking data
 
             this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
-                if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+                if (res.status === ResponseStatusConst.SUCCESS && res.body) {
                   this.userBooking = res.body
                   this.bookingChange.emit(this.booking);
                 }

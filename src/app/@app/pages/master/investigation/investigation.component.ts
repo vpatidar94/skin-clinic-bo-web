@@ -8,6 +8,7 @@ import { InvestigationApi } from 'src/app/@app/service/remote/investigation.api'
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { APP_CONST } from 'src/app/@app/const/app.const';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 export interface PeriodicElement {
   testCode: string;
@@ -109,7 +110,7 @@ export class InvestigationComponent implements AfterViewInit, OnInit {
 
   public addUpdateItem(): void {
     this.itemApi.addUpdateServiceItem(this.item).subscribe((res: ApiResponse<ItemVo>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status === ResponseStatusConst.SUCCESS) {
         this.item = res.body as ItemVo;
         this._init();
       }

@@ -6,6 +6,7 @@ import { ApiResponse, DepartmentVo, ResponseStatus, ServiceTypeVo } from 'aayam-
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 export interface ExtendedServiceTypeDto extends ServiceTypeVo {
   departmentName: string;    // For Department
@@ -140,7 +141,7 @@ export class ServiceTypeComponent implements AfterViewInit, OnInit {
 
   public savingServiceType(): void {
     this.serviceItemApi.addUpdateServiceType(this.serviceType).subscribe((res: ApiResponse<ServiceTypeVo>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+      if (res.status === ResponseStatusConst.SUCCESS && res.body) {
         this.serviceType = res.body;
         this._init();
       }

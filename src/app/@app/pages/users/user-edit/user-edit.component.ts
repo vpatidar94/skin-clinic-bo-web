@@ -4,6 +4,7 @@ import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { IdCardDialogComponent } from './id-card-dialog/id-card-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
     selector: 'app-user-edit',
@@ -104,7 +105,7 @@ export class UserEditComponent implements OnInit, OnChanges {
 
     public onSavingUserAccount(): void {
         this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res: ApiResponse<UserAccountVo>) => {
-            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+            if (res.status == ResponseStatusConst.SUCCESS) {
             }
         })
     }

@@ -9,6 +9,7 @@ import { PdfViewerDialogComponent } from './pdf-viewer-dialog.component';
 import { AlertMessage } from 'src/app/@shared/dto/alert-message';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { BillingReceiptPrintComponent } from './billing-receipt-print/billing-receipt-print.component';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
   selector: 'app-patient-billing-edit',
@@ -89,7 +90,7 @@ export class PatientBillingEditComponent implements OnInit {
 
   public pay(): void {
     this.transactionApi.addUpdateTransaction(this.bookingTransaction).subscribe((res: ApiResponse<BookingVo>) => {
-      if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
+      if ((res.status === ResponseStatusConst.SUCCESS && res.body)) {
         this.userBooking.booking = res.body;
         this.userBookingChange.emit(this.userBooking);
         this.showPendingAmount = false;

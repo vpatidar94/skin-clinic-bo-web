@@ -6,6 +6,7 @@ import { AddressVo, ApiResponse, AssetPathUtility, OrgVo, ResponseStatus } from 
 import { APP_CONST } from 'src/app/@app/const/app.const';
 import { ORG_STATUS } from 'src/app/@app/const/org-status.const';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -97,7 +98,7 @@ export class OrgComponent implements OnInit {
 
   public saveOrg(): void {
     this.orgApi.addUpdateOrg(this.org).subscribe((res: ApiResponse<OrgVo>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status == ResponseStatusConst.SUCCESS) {
         const orgId = res.body?._id ?? '';
         if (this.fileOrgLogo) {
           this.uploadOrgLogo(orgId);

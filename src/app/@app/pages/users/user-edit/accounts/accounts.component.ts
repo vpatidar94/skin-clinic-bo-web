@@ -5,6 +5,7 @@ import { UserBankDetailVo } from 'aayam-clinic-core/dist/vo/user-bank-detail.vo'
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
     selector: 'app-accounts',
@@ -41,7 +42,7 @@ export class AccountComponent implements OnInit {
 
     public onSavingUserAccount(): void {
         this.userApi.addUpdateUserAccount(this.userAccounts).subscribe((res: ApiResponse<UserAccountVo>) => {
-            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+            if (res.status == ResponseStatusConst.SUCCESS) {
             }
         })
     }

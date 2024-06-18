@@ -4,6 +4,7 @@ import { MatSort, } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiResponse, DEPT_NAME, DepartmentVo, ResponseStatus, } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 
 @Component({
@@ -119,7 +120,7 @@ export class DepartmentComponent implements AfterViewInit, OnInit {
 
     public savingDepartment(): void {
         this.departmentApi.addUpdateDepartment(this.department).subscribe((res: ApiResponse<DepartmentVo>) => {
-            if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+            if (res.status === ResponseStatusConst.SUCCESS && res.body) {
                 this.department = res.body
                 this._init();
             }

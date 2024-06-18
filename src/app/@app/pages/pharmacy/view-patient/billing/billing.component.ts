@@ -11,6 +11,7 @@ import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storag
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { MatDialog } from '@angular/material/dialog';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 export interface PeriodicElement {
     sno: number;
@@ -229,7 +230,7 @@ export class BillingComponent {
 
     public payPharmacyBill(): void {
         this.transactionApi.addUpdatePharmacyTransaction(this.orderTransaction).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
-            if ((res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body)) {
+            if ((res.status === ResponseStatusConst.SUCCESS && res.body)) {
                 this.pharmacyOrder.order = res.body;
             }
 

@@ -6,6 +6,7 @@ import { ApiResponse, ItemDetailDto, ItemVo, ResponseStatus, UserVo } from 'aaya
 import { SUB_ROLE } from 'src/app/@app/const/sub-role.const';
 import { ServiceItemApi } from 'src/app/@app/service/remote/service-item.api';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -87,7 +88,7 @@ export class ServiceItemComponent implements OnInit {
   public saveServiceItem(): void {
     const orgId = this.keyValueStorageService.getOrgId();
     this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status == ResponseStatusConst.SUCCESS) {
         this._init();
       }
     });

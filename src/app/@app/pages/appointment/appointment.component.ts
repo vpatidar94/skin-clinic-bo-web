@@ -12,6 +12,7 @@ import { catchError, map, of as observableOf, startWith, switchMap } from 'rxjs'
 import { DepartmentApi } from '../../service/remote/department.api';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
   selector: 'app-appointment',
@@ -136,7 +137,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+      if (res.status === ResponseStatusConst.SUCCESS && res.body) {
         this.userBooking = res.body
         this._init();
         this._initView();
@@ -183,7 +184,7 @@ public confirmDeleteBooking(bookingId: string): void {
   public addAsPatient(dto: OrgBookingDto): void {
     // TODO: If required select patient type from dialof open and then call this api with select patient type
     this.bookingApi.convertToPatient(dto.booking._id, PATIENT_TYPE.OPD, dto.booking.orgId).subscribe((res: ApiResponse<null>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status == ResponseStatusConst.SUCCESS) {
         this._initView();
       }
     });

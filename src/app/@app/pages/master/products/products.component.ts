@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ApiResponse, ProductVo, ResponseStatus } from 'aayam-clinic-core';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
     selector: 'app-products',
@@ -112,7 +113,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
     public savingProduct(): void {
         this.productApi.addUpdateProduct(this.product).subscribe((res: ApiResponse<ProductVo>) => {
-            if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+            if (res.status === ResponseStatusConst.SUCCESS && res.body) {
                 this.product = res.body
                 this._init();
             }

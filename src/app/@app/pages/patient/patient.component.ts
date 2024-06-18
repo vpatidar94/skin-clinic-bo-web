@@ -15,6 +15,7 @@ import { AlertMessage } from 'src/app/@shared/dto/alert-message';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 @Component({
   selector: 'app-patient',
@@ -136,10 +137,10 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   public saveBooking(): void {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
-      if (res.status === ResponseStatus[ResponseStatus.SUCCESS] && res.body) {
+      if (res.status === ResponseStatusConst.SUCCESS && res.body) {
 
         this.userBooking = res.body;
-        // this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatus[ResponseStatus.SUCCESS]);
+        // this.glabalEmitterService.emitUserSignInEmitter('' + ResponseStatusConst.SUCCESS);
         // this.glabalEmitterService.emitAclChangedEmitter();
         const message = {} as AlertMessage;
         message.type = MessageType[MessageType.SUCCESS];

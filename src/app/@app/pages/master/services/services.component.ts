@@ -8,6 +8,7 @@ import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import { ApiResponse, DepartmentVo, ItemDetailDto, ItemVo, PercentFlatVo, ResponseStatus, ServiceTypeVo, UserVo } from 'aayam-clinic-core';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { SUB_ROLE } from 'src/app/@app/const/sub-role.const';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 
 export interface ExtendedItemDetailDto extends ItemDetailDto {
     serviceTypeName: string;
@@ -115,7 +116,7 @@ export class ServicesComponent implements AfterViewInit, OnInit {
 
     public savingService(): void {
         this.serviceItemApi.addUpdateServiceItem(this.serviceItem).subscribe((res: ApiResponse<ItemVo>) => {
-            if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+            if (res.status == ResponseStatusConst.SUCCESS) {
                 this._init();
             }
         });

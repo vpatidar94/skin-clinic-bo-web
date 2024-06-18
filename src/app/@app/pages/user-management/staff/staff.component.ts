@@ -6,6 +6,7 @@ import { AclVo, AddressVo, ApiResponse, OrgVo, ROLE, ROLE_NAME, ResponseStatus, 
 import { GENDER_NAME } from 'src/app/@app/const/gender.consr';
 import { SUB_ROLE_NAME } from 'src/app/@app/const/sub-role.const';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { GlobalEmitterService } from 'src/app/@shared/service/global-emitter.service';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
@@ -91,7 +92,7 @@ export class StaffComponent implements OnInit {
 
   public saveStaff(): void {
     this.userApi.addUpdateStaff(this.staff).subscribe((res: ApiResponse<UserVo>) => {
-      if (res.status == ResponseStatus[ResponseStatus.SUCCESS]) {
+      if (res.status == ResponseStatusConst.SUCCESS) {
         this._init();
       }
     });
