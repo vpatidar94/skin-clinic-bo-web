@@ -328,12 +328,19 @@
                                             [(ngModel)]="userBooking.booking.prescription[i].productId"
                                             (ngModelChange)="prescriptionChange($event, i)">
                                             <option [value]="null" [disabled]="true">Select Medicine</option>
+                                            <option [value]="Other">OTHER</option>
                                             <option *ngFor="let product of productList" [value]="product._id">
                                                 {{product.name}}
                                             </option>
                                         </select>
                                         <!-- <mat-icon class="add-icon">add_circle_outline</mat-icon> -->
+                                        <input *ngIf="userBooking.booking.prescription[i].productId === 'OTHER'" 
+                                        type="text" 
+                                        [(ngModel)]="userBooking.booking.prescription[i].name" 
+                                        placeholder="Enter Medicine Name" 
+                                        class="form-control ml-2">
                                     </div>
+                                    <!-- <input type="text" *ngIf="showMedicineInput" placeholder="medicine" [(ngModel)]="userBooking.booking.prescription[i].name"> -->
                                     <!-- Dosage -->
                                     <div class="form-group col-md-2">
                                         <select name="dosage" class="app-single-select-dropdown w-100"

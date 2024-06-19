@@ -69,6 +69,9 @@ export class PatientBillingEditComponent implements OnInit {
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
+    if((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid)===0){
+      this.showPayInfo = false;
+    }
     this._init();
   }
 
