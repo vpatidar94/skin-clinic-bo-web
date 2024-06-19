@@ -39,6 +39,7 @@ import { PdfViewerDialogComponent } from './patient-edit/patient-billing-edit/pd
 import { PrescriptionPrintDialogComponent } from './patient-edit/patient-prescription-edit/prescription-print/prescription-print-dialog.component';
 import { BillingReceiptPrintComponent } from './patient-edit/patient-billing-edit/billing-receipt-print/billing-receipt-print.component';
 import { SharedPipeModule } from 'src/app/@shared/pipe/shared-pipe.module';
+import { NgxPrintModule } from 'ngx-print';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -62,7 +63,7 @@ const MATERIAL_MODULE = [
 const COMMON_MODULE = [CommonModule, FormsModule];
 
 @NgModule({
-  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, PatientRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule,SharedPipeModule],
+  imports: [...COMMON_MODULE, ...MATERIAL_MODULE, PatientRoutingModule, AddressModule, DialogModule, LabelModule, NgMultiSelectDropDownModule.forRoot(), SharedDirectiveModule, PdfViewerModule, SharedPipeModule, NgxPrintModule],
   providers: [],
   exports: [],
   declarations: [PatientComponent, PatientEditComponent,

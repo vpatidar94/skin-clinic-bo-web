@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BookingAddTransactionDto, UserBookingDto } from 'aayam-clinic-core';
+import { NgxPrintService, PrintOptions } from 'ngx-print';
 
 @Component({
   selector: 'app-billing-receipt-print',
@@ -32,23 +33,24 @@ export class BillingReceiptPrintComponent {
 
   /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<BillingReceiptPrintComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any, paymentMode: any}) {
+    @Inject(MAT_DIALOG_DATA) public data: { userBooking: UserBookingDto, doctorList: any, paymentMode: any },
+    private printService: NgxPrintService) {
         console.log("hey this is the payment mode",data.paymentMode)
   }
   calculateTotal(): number {
     return this.services.reduce((total, service) => total + ((service.price) * (service.qty)), 0);
   }
 
-  public print() {
-    const printContents = document?.getElementById('billing-print')?.innerHTML;
-    const originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = printContents ?? '';
-
-    window.print();
-
-    document.body.innerHTML = originalContents;
+  print() {
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'billing-print',
+      openNewTab: false,
+      useExistingCss: true,
+      closeWindow: true,
+    });
+    this.printService.print(customPrintOptions);
     this.dialogRef.close();
   }
+
 
 }
