@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo, DOSAGE_LIST, UserVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { PrescriptionPrintDialogComponent } from './prescription-print/prescription-print-dialog.component';
+import { APP_CONST } from 'src/app/@app/const/app.const';
 
 @Component({
   selector: 'app-patient-prescription-edit',
@@ -48,6 +49,9 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   @Input()
   doctorList!: UserVo[];
 
+  // Other: string = "OTHER";
+  Other = APP_CONST.OTHER;
+  showMedicineInput: boolean = false;
   /* ************************************ Constructors ************************************ */
   constructor(private dialog: MatDialog) {
   }
@@ -160,10 +164,27 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   public prescriptionChange(event: any, index: number): void {
     const productId = this.userBooking.booking.prescription[index]?.productId;
-    const product = this.productList.find(it => it._id == productId);
-    if (product && product?._id) {
-      this.userBooking.booking.prescription[index].name = product?.name;
-    }
+    // const product = this.productList.find(it => it._id == productId);
+    // if (product && product?._id) {
+    //   this.userBooking.booking.prescription[index].name = product?.name;
+    // }
+    // if(this.userBooking.booking.prescription[index].productId === "OTHER"){
+    //   console.log("other is selected");
+    //   this.showMedicineInput = true;
+    // }
+
+
+    if (productId === 'Other') {
+      // Clear the name field if "Other" is selected
+      this.userBooking.booking.prescription[index].name = '';
+  } else {
+      // Find the product by its ID
+      const product = this.productList.find(it => it._id === productId);
+      if (product && product._id) {
+          this.userBooking.booking.prescription[index].name = product.name;
+      }
+  }
+    // console.log(event);
   }
 
   public getDoctorById(Id: string|null |undefined ): string|null |undefined {

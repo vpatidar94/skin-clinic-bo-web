@@ -120,7 +120,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
     booking.referedBy = orgBookingDto.booking.referedBy;
     booking.diagnosis = [] as string[];
     booking.drExt = orgBookingDto.booking.drExt;
-    booking.dr = orgBookingDto.booking.dr;
+    // booking.dr = orgBookingDto.booking.dr;
     const orgId = this.keyValueStorageService.getOrgId();
     if (orgId) {
       booking.orgId = orgId;

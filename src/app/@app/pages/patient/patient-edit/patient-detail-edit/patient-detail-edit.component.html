@@ -236,6 +236,7 @@
                                 <select class="app-single-select-dropdown w-100" name="doctorname"
                                     [(ngModel)]="userBooking.booking.dr"
                                     (ngModelChange)="checkDoctor(userBooking.booking.dr)">
+                                    <option [disabled]="true" [value]="null">select</option>
                                     <option *ngFor="let doctor of docterList" [value]="doctor._id">{{doctor.nameF}}
                                         {{doctor.nameL}}</option>
                                 </select>
