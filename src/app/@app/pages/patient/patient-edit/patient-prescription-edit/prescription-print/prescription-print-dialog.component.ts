@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserBookingDto } from 'aayam-clinic-core';
 import { GENDER_NAME } from 'src/app/@app/const/gender.consr';
+import { NgxPrintService, PrintOptions } from 'ngx-print';
 
 @Component({
   selector: 'app-prescription-print-dialog',
@@ -33,20 +34,22 @@ export class PrescriptionPrintDialogComponent {
 
   /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<PrescriptionPrintDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any}) {
+    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any},
+    private printService: NgxPrintService) {
   }
  
   /* ************************************ Public Methods ************************************ */
 
+  
+
   public print() {
-    const printContents = document?.getElementById('receipt-print')?.innerHTML;
-    const originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = printContents ?? '';
-
-    window.print();
-
-    document.body.innerHTML = originalContents;
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'receipt-print',
+      openNewTab: false,
+      useExistingCss: true,
+      closeWindow: true,
+    });
+    this.printService.print(customPrintOptions);
     this.dialogRef.close();
   }
 
