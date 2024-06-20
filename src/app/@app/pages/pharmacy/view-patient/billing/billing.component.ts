@@ -10,8 +10,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
+import { NgxPrintService, PrintOptions } from 'ngx-print';
+import { BillingPrintComponent } from './billing-print/billing-print.component';
 
 export interface PeriodicElement {
     sno: number;
@@ -92,9 +94,11 @@ export class BillingComponent {
 
 
     /* ************************************* Constructors ******************************************** */
-    constructor(private keyValueStorageService: KeyValueStorageService,
+    constructor(public dialogRef: MatDialogRef<BillingPrintComponent>,
+        private keyValueStorageService: KeyValueStorageService,
         private dialog: MatDialog,
         private transactionApi: TransactionApi,
+        private printService: NgxPrintService
     ) {
     }
 
@@ -216,17 +220,31 @@ export class BillingComponent {
         return true;
     }
 
-    public printData(): void {
-        const printContents = document?.getElementById('pharmacy-receipt-print')?.innerHTML;
-        const originalContents = document.body.innerHTML;
+    // public printData(): void {
+    //     const printContents = document?.getElementById('pharmacy-receipt-print')?.innerHTML;
+    //     const originalContents = document.body.innerHTML;
 
-        document.body.innerHTML = printContents ?? '';
+    //     document.body.innerHTML = printContents ?? '';
 
-        window.print();
+    //     window.print();
 
-        document.body.innerHTML = originalContents;
+    //     document.body.innerHTML = originalContents;
         
-    }
+    // }
+
+    public printData() {
+        const customPrintOptions: PrintOptions = new PrintOptions({
+          printSectionId: 'billing-print',
+          openNewTab: false,
+          useExistingCss: true,
+          closeWindow: true,
+        });
+        this.printService.print(customPrintOptions);
+        this.dialogRef.close();
+      }
+
+
+
 
     public payPharmacyBill(): void {
         this.transactionApi.addUpdatePharmacyTransaction(this.orderTransaction).subscribe((res: ApiResponse<PharmacyOrderVo>) => {

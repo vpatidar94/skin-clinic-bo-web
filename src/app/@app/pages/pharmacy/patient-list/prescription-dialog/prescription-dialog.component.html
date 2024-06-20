@@ -3,7 +3,7 @@
     <app-label>PRESCRIPTION</app-label>
     
     <table class="table">
-        <thead class="table-light text-center">
+        <!-- <thead class="table-light text-center">
             <tr>
                 <th>Medicine</th>
                 <th>Dosage</th>
@@ -17,6 +17,25 @@
                 <td>{{item.dosage}}</td>
                 <td>{{item.duration}}</td>
                 <td>{{item.instruction}}</td>
+            </tr>
+        </tbody> -->
+
+        <thead>
+            <tr>
+                <th class="sno-column">Sno</th>
+                <th class="text-center">Medicine</th>
+                <th class="dosage-column text-center">Dosage</th>
+                <th class="duration-column text-center">Duration</th>
+                <th class="remark-column text-center">Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let service of data.booking.booking.prescription; let i = index">
+                <td class="sno-column">{{i+1}}</td>
+                <td>{{ service.name }}</td>
+                <td class="dosage-column text-center">{{ service.dosage }}</td>
+                <td class="duration-column text-center">{{ service.duration }}</td>
+                <td class="remark-column text-center">{{service.instruction}}</td>
             </tr>
         </tbody>
     </table>
