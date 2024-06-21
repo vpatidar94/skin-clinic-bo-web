@@ -125,7 +125,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input"
+                                <!-- <input [readOnly]="!!userBooking.user._id" type="text" class="form-control app-input"
+                                    name="cell1" [(ngModel)]="userBooking.user.cell" required maxlength="10"
+                                    minlength="10" appNumberOnly> -->
+                                    <input type="text" class="form-control app-input"
                                     name="cell1" [(ngModel)]="userBooking.user.cell" required maxlength="10"
                                     minlength="10" appNumberOnly>
                             </div>
