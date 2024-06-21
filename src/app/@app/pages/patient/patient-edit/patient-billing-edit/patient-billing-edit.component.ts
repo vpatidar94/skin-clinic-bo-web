@@ -97,15 +97,16 @@ export class PatientBillingEditComponent implements OnInit {
         this.userBooking.booking = res.body;
         this.userBookingChange.emit(this.userBooking);
         this.showPendingAmount = false;
+        this.showPayInfo = false;
         
         // const message = {} as AlertMessage;
         // message.type = MessageTypeConst.SUCCESS;
         // message.text = 'Paid Successfully';
         // this.glabalEmitterService.addAlerMsg(message);
       }
-      if((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid)===0){
-        this.showPayInfo = false;
-      }
+      // if((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid)===0){
+      //   this.showPayInfo = false;
+      // }
 
     });
   }

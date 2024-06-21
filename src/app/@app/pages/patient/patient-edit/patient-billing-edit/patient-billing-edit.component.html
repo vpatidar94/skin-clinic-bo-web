@@ -124,8 +124,8 @@
                                     <option value="CHEQUE">Cheque</option>
                                 </select>
 
-                                <span class=" col-md-2 download-button btn h-25 ms-2 pay-btn-color"
-                                    (click)="pay()">Pay</span>
+                                <button class=" col-md-2 download-button btn h-25 ms-2 pay-btn-color"
+                                [disabled]="!bookingTransaction.paymentMode" (click)="pay()">Pay</button>
                                 <div>
                                     &nbsp;&nbsp;
                                     <mat-icon (click)="addServiceItem()"
