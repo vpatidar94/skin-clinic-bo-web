@@ -85,6 +85,8 @@
                                 <p class="border border-info rounded p-1 text-align-center me-5">{{i + 1}}</p>
                                 <input class="form-control pres-input w-25 me-5" defaultValue="{{orderItem.amount}}"
                                     readonly>
+                                    <!-- <input class="form-control pres-input w-25 me-5" defaultValue="{{userBooking.booking.totalDue}}"
+                                    readonly> -->
                                 <input type="" class="form-control pres-input w-25 me-5" name="date"
                                     [ngModel]="userBooking.booking.bookingDate | date:'dd-MM-yyyy'" required
                                     [readOnly]="true" (ngModelChange)="userBooking.booking.bookingDate = $event">

@@ -1,95 +1,104 @@
-<section id="billing-print">    
-<div class="receipt" >
-    <div class="d-flex flex-row align-items-center justify-content-end mb-2">
-        <!-- <span class="link-style"><span>GSTIN:</span>2388PCA5532R1Z5</span> -->
-        <span class="link-style"><span>Website:</span>aayamskinclinic.com</span>
-    </div>
-    <div class="receipt-head">
-        <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxZnF-nba-de7h_3B6b5RrH6Z0YGyB-jt4xModq-MOAg&s"
+<section id="billing-print">
+    <div class="receipt">
+        <div class="d-flex flex-row align-items-center justify-content-end mb-2">
+            <!-- <span class="link-style"><span>GSTIN:</span>2388PCA5532R1Z5</span> -->
+            <span class="link-style"><span>Website:</span>aayamskinclinic.com</span>
+        </div>
+        <div class="receipt-head">
+            <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxZnF-nba-de7h_3B6b5RrH6Z0YGyB-jt4xModq-MOAg&s"
             alt="Clinic Logo" class="logo col-2" /> -->
-            <img src="https://aayamskinclinic.com/images/logo.jpg"
-            alt="Clinic Logo" class="logo col-3"/>
-        <div class="col-6 d-flex flex-column align-items-center">
-            <span class="receipt-title col-10">AAYAM SKIN CLINIC</span>
-            <span class="address col-9 mt-1">9/3 Manoramaganj, Near Geeta Bhawan Hospital <br /> Aayam Institute Campus,
-                Indore</span>
-            <span class="contact col-10">95742-04550, aayamskinclinic@gmail.com</span>
+            <img src="https://aayamskinclinic.com/images/logo.jpg" alt="Clinic Logo" class="logo col-3" />
+            <div class="col-6 d-flex flex-column align-items-center">
+                <span class="receipt-title col-10">AAYAM SKIN CLINIC</span>
+                <span class="address col-9 mt-1">9/3 Manoramaganj, Near Geeta Bhawan Hospital <br /> Aayam Institute
+                    Campus,
+                    Indore</span>
+                <span class="contact col-10">95742-04550, aayamskinclinic@gmail.com</span>
+
+            </div>
+            <div class="col-3 bill-no-style">
+                <!-- <span>Bill No: 123456</span> -->
+                <!-- <span>Bill No: Bill No</span> -->
+
+            </div>
+        </div>
+        <hr />
+        <h5 class="text-center heading-style">Receipt</h5>
+        <div class="info row">
+            <!-- <span class="col-5"><span class="label-style">Receipt No:</span> {{ receiptNo }}</span> -->
+            <span class="col-5"><span class="label-style">Receipt No:</span> 001</span>
+
+            <span class="col-3"><span class="label-style">Patient ID:</span>
+                {{data.userBooking.booking.patientNo}}</span>
+            <span class="col-4"><span class="label-style">Visit ID:</span>{{data.userBooking.booking.no}}</span>
+
+            <!-- <span class="col-5"><span class="label-style">Patient Name:</span> {{ patientName }}</span> -->
+            <span class="col-5"><span class="label-style">Patient Name:</span> {{ data.userBooking.user.nameF + " " +
+                data.userBooking.user.nameL }}</span>
+            <span class="col-3"><span class="label-style">Gender/Age:</span> {{
+                data.userBooking.user.gender}}/{{data.userBooking.user.age}}</span>
+            <span class="col-4"><span class="label-style">Father Name:</span> {{ data.userBooking.user.fatherName
+                }}</span>
+
+            <span class="col-5"><span class="label-style">Receipt Date:</span> {{ currentDate | date }}</span>
+            <span class="col-3"><span class="label-style">Payment Mode:</span> {{ data.paymentMode }}</span>
+            <span class="col-4"><span class="label-style">Payment
+                    status:</span>{{data.userBooking.booking.status}}</span>
 
         </div>
-        <div class="col-3 bill-no-style">
-            <!-- <span>Bill No: 123456</span> -->
-            <!-- <span>Bill No: Bill No</span> -->
-
-        </div>
-    </div>
-    <hr/>
-    <h5 class="text-center heading-style">Receipt</h5>
-    <div class="info row">
-        <!-- <span class="col-5"><span class="label-style">Receipt No:</span> {{ receiptNo }}</span> -->
-        <span class="col-5"><span class="label-style">Receipt No:</span> 001</span>
-
-        <span class="col-3"><span class="label-style">Patient ID:</span> {{data.userBooking.booking.patientNo}}</span>
-        <span class="col-4"><span class="label-style">Visit ID:</span>{{data.userBooking.booking.no}}</span>
-
-        <!-- <span class="col-5"><span class="label-style">Patient Name:</span> {{ patientName }}</span> -->
-        <span class="col-5"><span class="label-style">Patient Name:</span> {{ data.userBooking.user.nameF + " " + data.userBooking.user.nameL }}</span>
-        <span class="col-3"><span class="label-style">Gender/Age:</span> {{ data.userBooking.user.gender}}/{{data.userBooking.user.age}}</span>
-        <span class="col-4"><span class="label-style">Father Name:</span> {{ data.userBooking.user.fatherName }}</span>
-
-        <span class="col-5"><span class="label-style">Receipt Date:</span> {{ currentDate | date }}</span>
-        <span class="col-3"><span class="label-style">Payment Mode:</span> {{ data.paymentMode }}</span>
-        <span class="col-4"><span class="label-style">Payment status:</span>{{data.userBooking.booking.status}}</span>
-
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th class="sno-column">Sno</th>
-                <th class="text-center">Service/Packages</th>
-                <th class="text-center">Qty</th>
-                <th class="fee-column text-center">Fee</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- <tr row-style *ngFor="let service of services; let i = index">
+        <table>
+            <thead>
+                <tr>
+                    <th class="sno-column">Sno</th>
+                    <th class="text-center">Service/Packages</th>
+                    <th class="text-center">Qty</th>
+                    <th class="fee-column text-center">Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr row-style *ngFor="let service of services; let i = index">
                 <td class="sno-column">{{i+1}}</td>
                 <td>{{ service.name }}</td>
                 <td class="text-center">{{service.qty}}</td>
                 <td class="fee-column text-center">{{ service.price | currency}}</td>
             </tr> -->
 
-            <tr row-style *ngFor="let service of data.userBooking.booking.items; let i = index">
-                <td class="sno-column">{{i+1}}</td>
-                <td>{{ service.name }}</td>
-                <td class="text-center">{{service.qty}}</td>
-                <td class="fee-column text-center">{{ service.amount | currency}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <span class=" d-flex flex-row mb-0">
-        <span class="col-9 text-start print-date-style style-words">Print Date Time:<span>{{currentDate |
-                date}}</span></span>
-        <!-- <span class="col-3 total"><strong>Total:</strong> {{ calculateTotal() | currency}}</span> -->
-        <span class="col-3 total"><strong>Total:</strong> {{data.userBooking.booking.totalPaid}}</span>
+                <tr row-style *ngFor="let service of data.userBooking.booking.items; let i = index">
+                    <td class="sno-column">{{i+1}}</td>
+                    <td>{{ service.name }}</td>
+                    <td class="text-center">{{service.qty}}</td>
+                    <td class="fee-column text-center">{{ service.amount | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <span class=" d-flex flex-row mb-0">
+            <span class="col-9 text-start print-date-style style-words">Print Date Time:<span>{{currentDate |
+                    date}}</span></span>
+            <!-- <span class="col-3 total"><strong>Total:</strong> {{ calculateTotal() | currency}}</span> -->
+            <span class="d-flex flex-column col-3">
+                <span *ngIf="data.userBooking.booking.discount" class="col-12 total"><strong>Discount:</strong> {{data.userBooking.booking.discount}}</span>
+                <span class="col-12 total"><strong>Total:</strong> {{data.userBooking.booking.totalPaid}}</span>
+            </span>
 
-    </span>
-    <div class="d-flex flex-row justify-content-between">
-        <span class="style-words">Subjected to Indore Juridiction</span>
-        <!-- <span class="style-words">IN WORDS [ONE THOUSAND SEVENTY FIVE ONLY]</span> -->
-        <span class="style-words">IN WORDS [{{data.userBooking.booking.totalPaid| numberToWords | uppercase}} ONLY]</span>
-        <!-- <span class="style-words">numberToWords(num: number)</span> -->
+        </span>
+        <div class="d-flex flex-row justify-content-between">
+            <span class="style-words">Subjected to Indore Juridiction</span>
+            <!-- <span class="style-words">IN WORDS [ONE THOUSAND SEVENTY FIVE ONLY]</span> -->
+            <span class="style-words">IN WORDS [{{data.userBooking.booking.totalPaid| numberToWords | uppercase}}
+                ONLY]</span>
+            <!-- <span class="style-words">numberToWords(num: number)</span> -->
 
-    </div>
-    <div class="mt-1 text-end">
-        <span class="mb-0 style-for">For Aayam Skin Clinic - Pushpa Rajput</span>
-    </div>
-    <!-- <div class="d-flex flex-column">
+        </div>
+        <div class="mt-1 text-end">
+            <span class="mb-0 style-for">For Aayam Skin Clinic - Pushpa Rajput</span>
+        </div>
+        <!-- <div class="d-flex flex-column">
         <span>Note:</span>
         <span class="mb-0 style-note">1. Culture Report: After 2-3 days, Enquire</span>
         <span class="style-note">2. Outside Report: No same day guarantee, Enquire</span>
     </div> -->
-    
-</div>
+
+    </div>
 </section>
 <mat-dialog-actions align="end">
     <button mat-button matDialogClose="no">Cancel</button>
