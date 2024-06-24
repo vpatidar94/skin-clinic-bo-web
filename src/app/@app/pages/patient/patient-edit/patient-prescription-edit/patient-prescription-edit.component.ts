@@ -65,6 +65,12 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       this._formChanged();
     });
     this.showSectionAdd = this.userBooking.booking?.prescription?.length > 0;
+
+
+    if (this.userBooking.booking.nextVisitDate) {
+      this.updateNextVisitDays();
+    }
+
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -138,9 +144,17 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   
       // Update the date in the userBooking object if needed
       this.userBooking.booking.nextVisitDate = this.minNextVisitDate;
+      this.updateNextVisitDays();
     }
 
   }
+
+  private updateNextVisitDays() {
+    const today = new Date();
+    const nextVisitDate = new Date(this.userBooking.booking.nextVisitDate);
+    const timeDiff = nextVisitDate.getTime() - today.getTime();
+    this.nextVisitDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  }    
 
   // Watch for changes in nextVisitDays
   public onDaysChange() {
