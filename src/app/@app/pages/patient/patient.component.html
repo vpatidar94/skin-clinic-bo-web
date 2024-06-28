@@ -18,6 +18,8 @@
             </div> -->
 
             <div class="mat-elevation-z8">
+                <!-- <mat-paginator [length]="resultsLength" pageSize="5" [hidePageSize]="false" [pageSizeOptions]="[5, 10, 25, 100,1000]"
+                    [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator> -->
                 <table mat-table [dataSource]="dataSource" matSort>
                     <!-- App No -->
                     <ng-container matColumnDef="appNo">
@@ -104,8 +106,13 @@
                         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                     </tr> -->
                 </table>
+                <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                            aria-label="Select page of users"></mat-paginator> -->
 
-                <mat-paginator [length]="resultsLength" pageSize="5" [hidePageSize]="true"
+                <!-- <mat-paginator [length]="resultsLength" pageSize="5" [hidePageSize]="false" [pageSizeOptions]="[5, 10, 25, 100,1000]"
+                    [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator> -->
+
+                    <mat-paginator [length]="resultsLength" pageSize="5" [hidePageSize]="false" [pageSizeOptions]="[5, 10, 25, 100,1000]"
                     [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator>
             </div>
         </mat-card>
@@ -140,3 +147,6 @@
         </div>
     </section>
 </section>
+
+<!-- <mat-icon mat-list-icon svgIcon="ic_choice_delete" class="ms-3 clickable" (click)="confirmDeleteBooking(row.booking._id)"></mat-icon>
+        <mat-icon mat-list-icon svgIcon="basic_gear" class="ms-3 clickable" (click)="editDetails(row)"></mat-icon><span>jjjj</span> -->
