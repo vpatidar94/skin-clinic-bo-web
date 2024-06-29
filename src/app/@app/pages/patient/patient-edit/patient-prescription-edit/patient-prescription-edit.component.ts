@@ -168,7 +168,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       height: '1500px',
 
 
-      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList },
+      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList, productList:this.productList },
     });
   }
 

@@ -76,7 +76,7 @@
                                 <tbody>
                                     <tr *ngFor="let service of data.userBooking.booking.prescription; let i = index">
                                         <td class="sno-column">{{i+1}}</td>
-                                        <td>{{ service.name }}</td>
+                                        <td>{{getProductTypeByProductName(service.name)}} - {{ service.name }}</td>
                                         <td class="dosage-column text-center">{{ service.dosage }}</td>
                                         <td class="duration-column text-center">{{ service.duration }}</td>
                                         <td class="remark-column text-center">{{service.instruction}}</td>

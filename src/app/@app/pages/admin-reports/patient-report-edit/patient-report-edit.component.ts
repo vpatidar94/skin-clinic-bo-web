@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PatientDialogDateComponent } from './patient-dialog-date.component';
 import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-import { ApiResponse, BOOKING_TYPE, BookingVo, DEPT, DepartmentVo, OrgBookingCountDto, OrgBookingDto, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, BOOKING_TYPE, BOOKING_TYPE_NAME, BookingVo, DEPT, DepartmentVo, OrgBookingCountDto, OrgBookingDto, UserBookingDto, UserVo } from 'aayam-clinic-core';
 import { DepartmentApi } from 'src/app/@app/service/remote/department.api';
 import * as XLSX from 'xlsx';
 import { Subject, catchError, map, of as observableOf, startWith, switchMap } from 'rxjs';
@@ -79,6 +79,7 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     resultsLength = 0;
     bookingList!: OrgBookingDto[];
     originalDataSource: OrgBookingDto[] = [];
+    bookingTypeName: any = BOOKING_TYPE_NAME    ;
 
     /* ************************************* Constructors ******************************************** */
     constructor(private dialog: MatDialog,
@@ -146,7 +147,7 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
         console.log("original", this.originalDataSource)
         // this.allIncomeData = this.dataSource;
         // this.incomeList = this.dataSource;
-        this.dataSource.data = this.bookingList;
+        this.bookingList = this.dataSource.data;
         console.log("jit",this.dataSource.data);
     }
 
@@ -447,6 +448,7 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
 
     // Update dataSource with the filtered data
     this.dataSource.data = filteredData;
+    console.log("jjjj",filteredData);
 
     // Refresh MatPaginator and MatSort
     this.dataSource.paginator = this.paginator;

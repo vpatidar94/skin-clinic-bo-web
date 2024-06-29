@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserBookingDto } from 'aayam-clinic-core';
+import { ProductVo, UserBookingDto } from 'aayam-clinic-core';
 import { GENDER_NAME } from 'src/app/@app/const/gender.consr';
 import { NgxPrintService, PrintOptions } from 'ngx-print';
 
@@ -34,7 +34,7 @@ export class PrescriptionPrintDialogComponent {
 
   /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<PrescriptionPrintDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any},
+    @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any, productList: any},
     private printService: NgxPrintService) {
   }
  
@@ -63,4 +63,11 @@ export class PrescriptionPrintDialogComponent {
     const doctor = this.data.doctorList?.find((doc:any) => doc._id === doctorId);
     return doctor ? doctor.nameF + " " + doctor.nameL : "";
   }
+
+
+  public getProductTypeByProductName(productName:any): string {
+    const product = productName.name;
+    const productType = this.data.productList?.find((prod:any) => prod.name === productName);
+    return productType ? productType.productType : '';
+  } 
 }
