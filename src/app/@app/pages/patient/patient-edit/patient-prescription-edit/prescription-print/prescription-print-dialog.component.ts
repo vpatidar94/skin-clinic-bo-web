@@ -31,6 +31,8 @@ export class PrescriptionPrintDialogComponent {
   ];
 
   genderName = GENDER_NAME as any;
+  
+  productTypeName!: string;
 
   /* ************************************ Constructors ************************************ */
   constructor(public dialogRef: MatDialogRef<PrescriptionPrintDialogComponent>,
@@ -68,6 +70,39 @@ export class PrescriptionPrintDialogComponent {
   public getProductTypeByProductName(productName:any): string {
     const product = productName.name;
     const productType = this.data.productList?.find((prod:any) => prod.name === productName);
-    return productType ? productType.productType : '';
+    this.productTypeName = productType.productType;
+    // return this.productTypeName ? this.productTypeName : '';
+    return this.convertIntoShort(this.productTypeName);
+
   } 
+
+  public convertIntoShort(productTypeName: string){
+if (productTypeName=="LOTION"){
+  return "Lot-"
+}
+else if (productTypeName=="TABLET"){
+  return "Tab-"
+}
+else if (productTypeName=="SYRUP"){
+  return "Syr-"
+}
+else if (productTypeName=="CAPSULE"){
+  return "Cap-"
+}
+else if (productTypeName=="OINTMENT"){
+  return "Ung-"
+}
+else if (productTypeName=="GEL"){
+  return "Gel-"
+}
+else if (productTypeName=="FACE_WASH"){
+  return "FW-"
+}
+else if (productTypeName=="GENERAL_PRODUCT"){
+  return "Gp-"
+}
+else{
+  return ""
+}
+  }
 }
