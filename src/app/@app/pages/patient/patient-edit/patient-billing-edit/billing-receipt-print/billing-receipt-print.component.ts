@@ -35,7 +35,6 @@ export class BillingReceiptPrintComponent {
   constructor(public dialogRef: MatDialogRef<BillingReceiptPrintComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { userBooking: UserBookingDto, doctorList: any, paymentMode: any },
     private printService: NgxPrintService) {
-        console.log("hey this is the payment mode",data.paymentMode)
   }
   calculateTotal(): number {
     return this.services.reduce((total, service) => total + ((service.price) * (service.qty)), 0);

@@ -79,7 +79,6 @@ export class PatientBillingEditComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     this.showChequeInbox = selectElement.value === 'CHEQUE';
     this.paymentMode = this.bookingTransaction.paymentMode;
-    console.log("mode is ",this.paymentMode);
   }
 
   public getCommaSeparatedServices(): string {
@@ -170,10 +169,9 @@ export class PatientBillingEditComponent implements OnInit {
       height: '1500px',
 
 
-      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList, paymentMode: this.paymentMode },
+      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList, paymentMode: this.bookingTransaction.paymentMode },
     });
-    // console.log("mode",selectElement);
-    console.log("mode2",this.paymentMode)
+    
   }
 
  
