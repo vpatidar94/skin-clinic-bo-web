@@ -245,20 +245,42 @@ export class PatientReportEditComponent implements OnInit, AfterViewInit {
     }
 
 
+    // public exportToExcel() {
+    //     // const data: PeriodicElement[] = this.dataSource.data;
+    //     const data: OrgBookingDto[] = this.dataSource.data;
+
+
+    //     // Create a worksheet
+    //     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+
+    //     // Create a workbook
+    //     const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    //     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    //     // Save the workbook as an Excel file
+    //     XLSX.writeFile(wb, 'report.xlsx');
+    // }
+
     public exportToExcel() {
-        // const data: PeriodicElement[] = this.dataSource.data;
-        const data: OrgBookingDto[] = this.dataSource.data;
-
-
+        // Map data to match displayed columns
+        const data = this.dataSource.data.map(item => ({
+            date: new Date(item.booking.bookingDate).toLocaleDateString(),
+            patientId: item.booking.patientNo,
+            visitId: item.booking.no,
+            patientName: `${item.patient.nameF} ${item.patient.nameL}`,
+            doctorName: `${item.drDetail.nameF} ${item.drDetail.nameL}`
+        }));
+    
         // Create a worksheet
         const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-
+    
         // Create a workbook
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        
         // Save the workbook as an Excel file
         XLSX.writeFile(wb, 'report.xlsx');
     }
+    
 
 
 
