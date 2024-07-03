@@ -56,7 +56,8 @@ export class PatientBillingEditComponent implements OnInit {
 
   showPayInfo: boolean = true;
 
-
+  @Output() saveIt = new EventEmitter<void>();
+  
 
   /* ************************************ Constructors ************************************ */
   constructor(private transactionApi: TransactionApi,
@@ -69,9 +70,12 @@ export class PatientBillingEditComponent implements OnInit {
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
-    if((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid)===0){
+    if ((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid) === 0) {
       this.showPayInfo = false;
     }
+    // if ((this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid + this.userBooking.booking.discount) === 0) {
+    //   this.showPayInfo = false;
+    // }
     this._init();
   }
 
@@ -88,6 +92,12 @@ export class PatientBillingEditComponent implements OnInit {
   public applyDiscount(): void {
     BookingUtility.applyDiscountAndCalPrice(this.userBooking.booking);
     this.userBookingChange.emit(this.userBooking);
+    // this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
+    //   if (res.status === ResponseStatusConst.SUCCESS && res.body) {
+    //     this.userBooking = res.body
+    //   }
+    // });
+    this.saveIt.emit();
   }
 
   public pay(): void {
@@ -97,7 +107,7 @@ export class PatientBillingEditComponent implements OnInit {
         this.userBookingChange.emit(this.userBooking);
         this.showPendingAmount = false;
         this.showPayInfo = false;
-        
+
         // const message = {} as AlertMessage;
         // message.type = MessageTypeConst.SUCCESS;
         // message.text = 'Paid Successfully';
@@ -157,7 +167,7 @@ export class PatientBillingEditComponent implements OnInit {
     this.newPendingAmount = this.userBooking.booking.totalDue - this.userBooking.booking.totalPaid - this.bookingTransaction.amount;
   }
 
-  public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+  public getDoctorById(Id: string | null | undefined): string | null | undefined {
     const doctorId = Id;
     const doctor = this.doctorList?.find(doc => doc._id === doctorId);
     return doctor ? doctor.nameF + " " + doctor.nameL : "";
@@ -169,12 +179,12 @@ export class PatientBillingEditComponent implements OnInit {
       height: '1500px',
 
 
-      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList, paymentMode: this.bookingTransaction.paymentMode },
+      data: { userBooking: { ...this.userBooking }, doctorList: this.doctorList, paymentMode: this.bookingTransaction.paymentMode },
     });
-    
+
   }
 
- 
+
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
     this.bookingTransaction = {} as BookingAddTransactionDto;

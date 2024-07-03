@@ -46,6 +46,8 @@
 
             <span class="col-4"><span class="label-style">Payment
                     status:</span>{{data.userBooking.booking.status}}</span>
+            <!-- <span class="col-4"><span class="label-style">Payment
+                        status:</span>PAID</span> -->
 
         </div>
         <table>
@@ -80,6 +82,8 @@
             <span class="d-flex flex-column col-3">
                 <span *ngIf="data.userBooking.booking.discount" class="col-12 total"><strong>Discount:</strong> {{data.userBooking.booking.discount}}</span>
                 <span class="col-12 total"><strong>Total:</strong> {{data.userBooking.booking.totalPaid}}</span>
+                <!-- <span class="col-12 total"><strong>Total:</strong> {{data.userBooking.booking.totalDue}}</span> -->
+
             </span>
 
         </span>
@@ -87,6 +91,8 @@
             <span class="style-words">Subjected to Indore Juridiction</span>
             <!-- <span class="style-words">IN WORDS [ONE THOUSAND SEVENTY FIVE ONLY]</span> -->
             <span class="style-words">IN WORDS [{{data.userBooking.booking.totalPaid| numberToWords | uppercase}}
+            <!-- <span class="style-words">IN WORDS [{{data.userBooking.booking.totalDue| numberToWords | uppercase}} -->
+
                 ONLY]</span>
             <!-- <span class="style-words">numberToWords(num: number)</span> -->
 

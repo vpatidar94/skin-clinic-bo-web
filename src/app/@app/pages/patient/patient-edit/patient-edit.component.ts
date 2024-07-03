@@ -45,7 +45,7 @@ export class PatientEditComponent implements OnInit, OnChanges {
   @Input()
   subjectChangeTab!: Observable<string>;
 
-
+  @Output() saveIt = new EventEmitter<void>();
   /* ************************************* Constructors ******************************************** */
   constructor(private orgApi: OrgApi,
     private keyValueStorageService: KeyValueStorageService
@@ -69,6 +69,10 @@ export class PatientEditComponent implements OnInit, OnChanges {
     }
   }
 
+
+  onBillingEditSave() {
+    this.saveIt.emit();
+  }
   /* ************************************* Private Methods ******************************************** */
   private _init(): void {
     this.tabValue = 'PATIENT'

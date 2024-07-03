@@ -35,6 +35,6 @@
     </div>
 
     <div *ngIf="showSectionBilling">
-        <app-patient-billing-edit [(userBooking)]="userBooking" [doctorList]="docterList"></app-patient-billing-edit>
+        <app-patient-billing-edit [(userBooking)]="userBooking" [doctorList]="docterList"  (saveIt)="onBillingEditSave()"></app-patient-billing-edit>
     </div>
 </section>
