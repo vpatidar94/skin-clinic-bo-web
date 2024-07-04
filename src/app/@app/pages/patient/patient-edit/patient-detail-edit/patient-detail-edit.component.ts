@@ -31,6 +31,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     @ViewChild('patientForm', { static: true })
     patientForm!: NgForm;
+    @Output() formValidityChange:EventEmitter<boolean> = new EventEmitter<boolean>();
 
     docterList!: UserVo[];
 
@@ -51,6 +52,10 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
 
     showOnlySelectedTimeSlot: boolean = false;
 
+   
+
+    
+
     /* ************************************ Constructors ************************************ */
     constructor(
         private userApi: UserApi,
@@ -63,10 +68,19 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
         this._init();
         // @ts-ignore
         this.patientForm.valueChanges.subscribe(() => {
-            this._formChanged();
+            // this._formChanged();
+            this.onFormChange(this.patientForm);
         });
     }
 
+    onFormChange(form: NgForm) {
+        // this.formValidityChange.emit(form.valid);
+        const isValid: boolean = !!form.valid;
+        console.log('Grandchild form validity:', isValid)
+    this.formValidityChange.emit(isValid);
+    
+      }
+      
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes['userBookingInvestigationList']) {
             this.userBookingInvestigationList = changes['userBookingInvestigationList'].currentValue as UserBookingInvestigationDto;

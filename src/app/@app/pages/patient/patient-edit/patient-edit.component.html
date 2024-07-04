@@ -12,7 +12,7 @@
 
     <div *ngIf="showSectionPatient">
         <app-patient-detail-edit [userBookingInvestigationList]="userBookingInvestigationList"
-            [(userBooking)]="userBooking" [departmentList]="departmentList"></app-patient-detail-edit>
+            [(userBooking)]="userBooking" [departmentList]="departmentList" (formValidityChange)="onPatientDetailEditFormValidityChange($event)"></app-patient-detail-edit>
     </div>
 
     <div *ngIf="showSectionObservation">

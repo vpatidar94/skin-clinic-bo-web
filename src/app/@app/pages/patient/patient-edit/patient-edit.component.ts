@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ApiResponse, DepartmentVo, ItemDetailDto, OrgCodeNoDto, ProductVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
 import { OrgApi } from 'src/app/@app/service/remote/org.api';
 import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
+import { PatientDetailEditComponent } from './patient-detail-edit/patient-detail-edit.component';
 
 @Component({
   selector: 'app-patient-edit',
@@ -46,6 +47,11 @@ export class PatientEditComponent implements OnInit, OnChanges {
   subjectChangeTab!: Observable<string>;
 
   @Output() saveIt = new EventEmitter<void>();
+
+  // for the patient-detail-edit form validation
+  @Output() formValidityChange = new EventEmitter<boolean>();
+
+  
   /* ************************************* Constructors ******************************************** */
   constructor(private orgApi: OrgApi,
     private keyValueStorageService: KeyValueStorageService
@@ -56,6 +62,10 @@ export class PatientEditComponent implements OnInit, OnChanges {
     this._init();
   }
 
+  onPatientDetailEditFormValidityChange(isValid: boolean) {
+    console.log('Child received grandchild form validity:', isValid);
+    this.formValidityChange.emit(isValid);
+  }
   public tabChange(): void {
     this._tabChange(this.tabValue);
   }

@@ -134,12 +134,12 @@
         <div>
             <app-patient-edit [subjectChangeTab]="subjectChangeTab.asObservable()" [userBookingInvestigationList]="userBookingInvestigationList" [docterList]="doctorList"
                 [serviceItemList]="serviceItemList" [productList]="productList" [departmentList]="departmentList"
-                [(userBooking)]="userBooking" (saveIt)="saveBooking()"></app-patient-edit>
+                [(userBooking)]="userBooking" (saveIt)="saveBooking()" (formValidityChange)="onPatientDetailFormValidityChange($event)"></app-patient-edit>
         </div>
 
         <div class="d-flex align-items-center justify-content-center mb-4">
             <div class="col-1">
-                <button (click)="saveBooking()" class="common-button">{{'save'}}</button>
+                <button  (click)="saveBooking()" class="common-button">{{'save'}}</button>
             </div>
             <div class="col-1">
                 <button (click)="cancel()" class="cancel-button">{{'cancel'}}</button>

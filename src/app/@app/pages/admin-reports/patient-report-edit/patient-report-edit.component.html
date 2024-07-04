@@ -110,7 +110,11 @@
                             <!-- Doctor Name -->
                             <ng-container matColumnDef="doctorName">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</th>
-                                <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.drDetail.nameF ?? ''}} {{row.drDetail.nameL ?? ''}} </td>
+                                <!-- <td mat-cell *matCellDef="let row" class="text-ellipsis"> {{row.drDetail.nameF ?? ''}} {{row.drDetail.nameL ?? ''}} </td> -->
+                                <td mat-cell *matCellDef="let row" class="text-ellipsis"><span
+                                    *ngIf="row.drDetail">{{row.drDetail.nameF ?? ''}} {{row.drDetail.nameL ?? ''}}</span>
+                            </td>
+
                             </ng-container>
                             
 
@@ -130,13 +134,15 @@
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                             <!-- Row shown when there is no matching data. -->
-                            <tr class="mat-row" *matNoDataRow>
+                            <!-- <tr class="mat-row" *matNoDataRow>
                                 <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                            </tr>
+                            </tr> -->
                         </table>
 
-                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
-                            aria-label="Select page of users"></mat-paginator>
+                        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                            aria-label="Select page of users"></mat-paginator> -->
+                            <mat-paginator [length]="resultsLength" pageSize="5" [hidePageSize]="false" [pageSizeOptions]="[5, 10, 25, 100,1000]"
+                    [showFirstLastButtons]="false" aria-label="Select page of users"></mat-paginator>
                     </div>
                 </mat-card>
             </section>

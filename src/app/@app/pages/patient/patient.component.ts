@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/confirm-delete-dialog.component';
 import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { MessageTypeConst } from 'src/app/@shared/const/message-type-const';
+import { PatientDetailEditComponent } from './patient-edit/patient-detail-edit/patient-detail-edit.component';
 
 @Component({
   selector: 'app-patient',
@@ -62,6 +63,12 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   subjectChangeTab = new Subject<string>();
 
+  // // newly added for the form validation of patient detail edit component
+  // @ViewChild(PatientDetailEditComponent) patientDetailEditComponent!: PatientDetailEditComponent;
+  // isFormValid: boolean = false;
+  isFormValid: boolean = false;
+  
+
 
   /* ************************************* Constructors ******************************************** */
   constructor(private userApi: UserApi,
@@ -77,7 +84,10 @@ export class PatientComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     this._init();
   }
-
+  onPatientDetailFormValidityChange(isValid: boolean) {
+    console.log('Parent received child form validity:', isValid);                             
+    this.isFormValid = isValid;
+  }
   public addAppointment(): void {
     const userBooking = {} as UserBookingDto;
     const booking = {} as BookingVo;
@@ -137,6 +147,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
   }
 
   public saveBooking(): void {
+    if (this.isFormValid) {
     this.bookingApi.addUpdateBooking(this.userBooking).subscribe((res: ApiResponse<UserBookingDto>) => {
       if (res.status === ResponseStatusConst.SUCCESS && res.body) {
 
@@ -150,7 +161,15 @@ export class PatientComponent implements OnInit, AfterViewInit {
         this.subjectChangeTab.next('CHANGE_TAB');
       }
     });
+  } else {
+    console.log('Form is invalid, cannot save.');
+    const message = {} as AlertMessage;
+    message.type = MessageTypeConst.ERROR;
+    message.text = 'first name, last name, contact number, doctor name, department must be entered to save the form';
+    this.glabalEmitterService.addAlerMsg(message);
+  
   }
+}
 
   public getBookingType(type: string): string {
     if (!type) {

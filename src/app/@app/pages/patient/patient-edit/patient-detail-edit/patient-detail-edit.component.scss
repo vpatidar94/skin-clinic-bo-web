@@ -18,4 +18,15 @@
     color: white; /* Change this to your desired text color */
     cursor: pointer; /* Make the cursor change to a pointer on hover */
   }
+
+  .style-star{
+    color: red;
+  }
+  input.ng-invalid.ng-dirty, input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
   
+  .error {
+    color: red;
+    font-size: 12px;
+  }
