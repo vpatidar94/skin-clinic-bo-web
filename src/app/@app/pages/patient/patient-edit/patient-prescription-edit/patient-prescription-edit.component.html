@@ -341,7 +341,7 @@
                                         placeholder="Enter Medicine Name" 
                                         class="form-control ml-2"> -->
 
-                                        <ng-multiselect-dropdown [placeholder]="'Select Medicine'"
+                                        <ng-multiselect-dropdown [placeholder]="'Select Medicine'" class="app-single-select-dropdown w-100"
                                         name="medicine{{i}}"
                                             [settings]="dropdownSettings" [data]="genderSelectList"
                                             (onDeSelect)="onGenderSelect($event, i)"
@@ -351,9 +351,9 @@
                                             
                                         </ng-multiselect-dropdown>
 
-                                        <input *ngIf="userBooking.booking.prescription[i].productId === 'OTHER'"
+                                        <!-- <input *ngIf="userBooking.booking.prescription[i].productId === 'OTHER'"
                                             type="text" [(ngModel)]="userBooking.booking.prescription[i].name"
-                                            placeholder="Enter Medicine Name" class="form-control ml-2">
+                                            placeholder="Enter Medicine Name" class="form-control ml-2"> -->
 
                                     </div>
 
