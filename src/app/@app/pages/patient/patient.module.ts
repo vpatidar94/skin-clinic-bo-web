@@ -40,6 +40,8 @@ import { PrescriptionPrintDialogComponent } from './patient-edit/patient-prescri
 import { BillingReceiptPrintComponent } from './patient-edit/patient-billing-edit/billing-receipt-print/billing-receipt-print.component';
 import { SharedPipeModule } from 'src/app/@shared/pipe/shared-pipe.module';
 import { NgxPrintModule } from 'ngx-print';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AddOtherProductDialogComponent } from './patient-edit/patient-prescription-edit/add-other-product-dialog/add-other-product-dialog.component';
 
 const MATERIAL_MODULE = [
   MatButtonModule,
@@ -58,6 +60,7 @@ const MATERIAL_MODULE = [
   MatPaginatorModule,
   MatDialogModule,
   MatSortModule,
+  MatAutocompleteModule,
 ];
 
 const COMMON_MODULE = [CommonModule, FormsModule];
@@ -70,7 +73,7 @@ const COMMON_MODULE = [CommonModule, FormsModule];
     PatientDetailEditComponent, ServiceItemEditComponent, ServiceItemComponent,
     PatientObservationEditComponent, PatientTestEditComponent, PatientServiceEditComponent,
     PatientPrescriptionEditComponent, BillingComponent, PatientBillingEditComponent,
-    PdfViewerDialogComponent, PrescriptionPrintDialogComponent,BillingReceiptPrintComponent],
+    PdfViewerDialogComponent, PrescriptionPrintDialogComponent,BillingReceiptPrintComponent, AddOtherProductDialogComponent],
 })
 export class PatientModule { }
 

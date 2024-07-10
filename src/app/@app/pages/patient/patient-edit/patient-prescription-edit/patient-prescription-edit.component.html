@@ -323,8 +323,9 @@
                                         </p>
                                     </div>
                                     <!-- Medicine Type -->
+
                                     <div class="form-group d-flex justify-content-between align-items-center col-md-3">
-                                        <select name="medicine" class="app-single-select-dropdown w-100"
+                                        <!-- <select name="medicine" class="app-single-select-dropdown w-100"
                                             [(ngModel)]="userBooking.booking.prescription[i].productId"
                                             (ngModelChange)="prescriptionChange($event, i)">
                                             <option [value]="null" [disabled]="true">Select Medicine</option>
@@ -333,13 +334,81 @@
                                                 {{product.name}}
                                             </option>
                                         </select>
-                                        <!-- <mat-icon class="add-icon">add_circle_outline</mat-icon> -->
+                                        
                                         <input *ngIf="userBooking.booking.prescription[i].productId === 'OTHER'" 
                                         type="text" 
                                         [(ngModel)]="userBooking.booking.prescription[i].name" 
                                         placeholder="Enter Medicine Name" 
-                                        class="form-control ml-2">
+                                        class="form-control ml-2"> -->
+
+
+
+
+                                        <!-- <ng-multiselect-dropdown [placeholder]="'Select Gender'" type="" name="gender{i}"
+                                    [settings]="dropdownSettings" [data]="genderSelectList"
+                                    (onDeSelect)="onGenderSelect($event,i)" (onSelect)="onGenderSelect($event,i)"
+                                    [(ngModel)]="userBooking.booking.prescription[i].name">
+                                </ng-multiselect-dropdown> -->
+
+
+
+                                        <!-- <ng-multiselect-dropdown [placeholder]="'Select Medicine'" class="app-single-select-dropdown w-100"
+                                            [settings]="dropdownSettings" [data]="genderSelectList"
+                                            (onDeSelect)="onGenderSelect($event, i)"
+                                            (onSelect)="onGenderSelect($event, i)" [(ngModel)]="selectedMedicine[i]">
+                                        </ng-multiselect-dropdown>
+
+                                        <input *ngIf="userBooking.booking.prescription[i].productId === 'OTHER'"
+                                            type="text" [(ngModel)]="userBooking.booking.prescription[i].name"
+                                            placeholder="Enter Medicine Name" class="form-control ml-2"> -->
+
+                                        <ng-multiselect-dropdown [placeholder]="'Select Medicine'"
+                                        name="medicine{{i}}"
+                                            [settings]="dropdownSettings" [data]="genderSelectList"
+                                            (onDeSelect)="onGenderSelect($event, i)"
+                                            (onSelect)="onGenderSelect($event, i)"
+                                            [(ngModel)]="userBooking.booking.prescription[i].productId"
+                                            (ngModelChange)="prescriptionChange($event, i)">
+                                            
+                                        </ng-multiselect-dropdown>
+
+                                        <input *ngIf="userBooking.booking.prescription[i].productId === 'OTHER'"
+                                            type="text" [(ngModel)]="userBooking.booking.prescription[i].name"
+                                            placeholder="Enter Medicine Name" class="form-control ml-2">
+
                                     </div>
+
+                                    <!-- <ng-multiselect-dropdown >
+                                        <option [value]="null" [disabled]="true">Select Medicine</option>
+                                            <option [value]="Other">OTHER</option>
+                                            <option *ngFor="let product of productList" [value]="product._id">
+                                                {{product.name}}
+                                            </option>
+                                    </ng-multiselect-dropdown> -->
+
+
+
+
+                                    <!-- <div class="form-group d-flex justify-content-between align-items-center col-md-3">
+                                        <mat-form-field class="w-100">
+                                          <input type="text"
+                                                 placeholder="Select Medicine"
+                                                 aria-label="Medicine"
+                                                 matInput
+                                                 [(ngModel)]="userBooking.booking.prescription[i].name"
+                                                 [matAutocomplete]="auto"
+                                                 (ngModelChange)="onMedicineChange($event)">
+                                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" class="custom-autocomplete">
+                                            <mat-option *ngFor="let product of filteredProducts | async" [value]="product.name">
+                                              {{ product.name }}
+                                            </mat-option>
+                                          </mat-autocomplete>
+                                        </mat-form-field>
+                                      </div> -->
+
+
+
+
                                     <!-- <input type="text" *ngIf="showMedicineInput" placeholder="medicine" [(ngModel)]="userBooking.booking.prescription[i].name"> -->
                                     <!-- Dosage -->
                                     <div class="form-group col-md-2">

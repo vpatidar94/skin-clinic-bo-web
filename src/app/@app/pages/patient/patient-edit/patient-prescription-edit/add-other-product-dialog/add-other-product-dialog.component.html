@@ -1,0 +1,136 @@
+<section class="section-org-edit p-5">
+    <div class="row mb-3">
+        <div class=" d-flex justify-content-between">
+            <h2>Add Product</h2>
+        </div>
+    </div>
+
+    <form>
+        <div class="row">
+            <!-- Product Name -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Product Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="productName"
+                                [(ngModel)]="product.name" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Type -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Product Type</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <select name="ProductType" class="app-single-select-dropdown w-100"
+                                [(ngModel)]="product.productType" required>
+                                <option [value]="null" [disabled]="true">Select Product Type</option>
+                                <option *ngFor="let type of productTypeList" [value]="type.value">{{type.label}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Company -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Company</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="company"
+                                [(ngModel)]="product.company" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Drug -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Drug</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="text" class="form-control app-input" name="drug" [(ngModel)]="product.drug"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Qty per unit/strip/pack -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Packaging</label>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input class="form-control app-input" name="qtyPerStrip" [(ngModel)]="product.qtyPerPackage"
+                                required appNumberOnly>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="app-single-select-dropdown w-100" [(ngModel)]="product.packagingType" name="packagingType">
+                            <option [value]="null" [disabled]="true">Select Packaging Type</option>
+                            <option *ngFor="let type of productPackTypeList" [value]="type.value">{{type.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price per unit/strip/pack-->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Price/Packaging</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="" class="form-control app-input" name="pricePerStrip"
+                                [(ngModel)]="product.pricePerPackage" required appAmountOnly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- price of single medicine -->
+            <div class="col-md-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="col-md-3">
+                        <label class="app-label">Unit Price</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <input type="" class="form-control app-input" name="Unit Price" [(ngModel)]="product.price"
+                                required appAmountOnly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center mt-3">
+            <button (click)="savingProduct()" class="common-button">{{'save'}}</button>
+        </div>
+
+    </form>
+</section>

@@ -65,10 +65,10 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <input type="text" class="form-control app-input" name="nameL"
-                                    [(ngModel)]="userBooking.user.nameL" #name="ngModel"
-                                    [ngClass]="{'invalid': name.invalid && (name.dirty || name.touched)}" required>
+                                    [(ngModel)]="userBooking.user.nameL" #lastName="ngModel"
+                                    [ngClass]="{'invalid': lastName.invalid && (lastName.dirty || lastName.touched)}" required>
                             </div>
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error">
                                Last Name is required.
                               </div>
                         </div>
@@ -138,10 +138,10 @@
                                     minlength="10" appNumberOnly> -->
                                     <input type="text" class="form-control app-input"
                                     name="cell1" [(ngModel)]="userBooking.user.cell" required maxlength="10"
-                                    minlength="10" appNumberOnly #name="ngModel"
-                                    [ngClass]="{'invalid': name.invalid && (name.dirty || name.touched)}">
+                                    minlength="10" appNumberOnly #contact="ngModel"
+                                    [ngClass]="{'invalid': contact.invalid && (contact.dirty || contact.touched)}">
                             </div>
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                            <div *ngIf="contact.invalid && (contact.dirty || contact.touched)" class="error">
                                 Contact number is required.
                                </div>
                         </div>
@@ -225,15 +225,15 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select class="app-single-select-dropdown w-100" name="department" required #name="ngModel"
-                                [ngClass]="{'invalid': name.invalid && (name.dirty || name.touched)}"
+                                <select class="app-single-select-dropdown w-100" name="department" required #department="ngModel"
+                                [ngClass]="{'invalid': department.invalid && (department.dirty || department.touched)}"
                                     [(ngModel)]="userBooking.booking.departmentId"
                                     (ngModelChange)="filterDoctorByDepartmentId(userBooking.booking.departmentId)">
                                     <option *ngFor="let item of departmentList" [value]="item._id">{{item.name}}
                                     </option>
                                 </select>
                             </div>
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                            <div *ngIf="department.invalid && (department.dirty || department.touched)" class="error">
                                 Department is required.
                                </div>
                         </div>
@@ -252,8 +252,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <select class="app-single-select-dropdown w-100" name="doctorname" required #name="ngModel"
-                                [ngClass]="{'invalid': name.invalid && (name.dirty || name.touched)}"
+                                <select class="app-single-select-dropdown w-100" name="doctorname" required #doctor="ngModel"
+                                [ngClass]="{'invalid': doctor.invalid && (doctor.dirty || doctor.touched)}"
                                     [(ngModel)]="userBooking.booking.dr"
                                     (ngModelChange)="checkDoctor(userBooking.booking.dr)">
                                     <option [disabled]="true" [value]="null">select</option>
@@ -261,7 +261,7 @@
                                         {{doctor.nameL}}</option>
                                 </select>
                             </div>
-                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                            <div *ngIf="doctor.invalid && (doctor.dirty || doctor.touched)" class="error">
                                 Doctor is required.
                                </div>
                         </div>

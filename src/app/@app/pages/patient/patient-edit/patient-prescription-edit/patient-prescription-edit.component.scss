@@ -6,3 +6,32 @@
     font-size: 18px;
     font-weight: 500;
 }
+
+// ::ng-deep .mat-autocomplete-panel .mat-option {
+//     color: black !important; /* Change this to your desired text color */
+//   }
+  
+//   ::ng-deep .mat-autocomplete-panel .mat-option:hover {
+//     background-color: red !important; /* Change this to your desired hover background color */
+//   }
+  
+//   ::ng-deep .mat-autocomplete-panel .mat-option.mat-active {
+//     background-color: black !important; /* Change this to your desired active background color */
+//     color: yellow !important; /* Change this to your desired active text color */
+//   }
+
+.custom-autocomplete .mat-autocomplete-panel .mat-option {
+    color: black !important; /* Text color for options */
+}
+
+.custom-autocomplete .mat-autocomplete-panel .mat-option:hover {
+    background-color: red !important; /* Hover background color */
+}
+
+.custom-autocomplete .mat-autocomplete-panel .mat-option.mat-active {
+    background-color: black !important; /* Active background color */
+    color: yellow !important; /* Active text color */
+}
+
+
+  

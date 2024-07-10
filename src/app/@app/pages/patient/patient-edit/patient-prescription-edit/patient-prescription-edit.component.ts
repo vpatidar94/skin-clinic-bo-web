@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PrescriptionVo, UserBookingDto, UserBookingInvestigationDto, ProductVo, DOSAGE_LIST, UserVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 import { PrescriptionPrintDialogComponent } from './prescription-print/prescription-print-dialog.component';
 import { APP_CONST } from 'src/app/@app/const/app.const';
+import { Observable, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { AddOtherProductDialogComponent } from './add-other-product-dialog/add-other-product-dialog.component';
 
 @Component({
   selector: 'app-patient-prescription-edit',
@@ -52,14 +55,47 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   // Other: string = "OTHER";
   Other = APP_CONST.OTHER;
   showMedicineInput: boolean = false;
+
+
+  filteredProducts!: Observable<{ name: string }[]>;
+
+
+  // newly added 
+  selectedMedicine: { [key: number]: any } = {};
+  genderSelectList: Array<any> = [];
+  selectedGender: string = "";
+  // dropdownSettings = {
+  //     singleSelection: true,
+  //     // idField: 'item_id',
+  //     textField: 'item_text',
+  //     itemsShowLimit: 3,
+  //     allowSearchFilter: true,
+  //     enableCheckAll: false,
+  //     maxHeight: 100
+  // };
+
+
+  dropdownSettings = {
+    singleSelection: true,
+    textField: 'item_text',
+    idField: 'item_id',
+    itemsShowLimit: 8,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+    maxHeight: 100,
+    minWidth: 350
+  };
   /* ************************************ Constructors ************************************ */
   constructor(private dialog: MatDialog) {
+    console.log("prod", this.productList)
   }
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
     console.log("doctor is", this.doctorList);
     this._init();
+
+    this.addOtherOption();
     // @ts-ignore
     this.prescriptionForm?.valueChanges?.subscribe(() => {
       this._formChanged();
@@ -139,9 +175,9 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     if (this.nextVisitDays >= 0) {
       const today = new Date();
       const nextDate = new Date(today.getTime() + this.nextVisitDays * 24 * 60 * 60 * 1000);
-  
+
       this.minNextVisitDate = nextDate;
-  
+
       // Update the date in the userBooking object if needed
       this.userBooking.booking.nextVisitDate = this.minNextVisitDate;
       this.updateNextVisitDays();
@@ -154,7 +190,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     const nextVisitDate = new Date(this.userBooking.booking.nextVisitDate);
     const timeDiff = nextVisitDate.getTime() - today.getTime();
     this.nextVisitDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  }    
+  }
 
   // Watch for changes in nextVisitDays
   public onDaysChange() {
@@ -168,7 +204,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       height: '1500px',
 
 
-      data: { userBooking:{...this.userBooking}, doctorList:this.doctorList, productList:this.productList },
+      data: { userBooking: { ...this.userBooking }, doctorList: this.doctorList, productList: this.productList },
     });
   }
 
@@ -188,29 +224,35 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     // }
 
 
-    if (productId === 'Other') {
+    if (productId === 'OTHER') {
       // Clear the name field if "Other" is selected
-      this.userBooking.booking.prescription[index].name = '';
-  } else {
+      this.dialog.open(AddOtherProductDialogComponent, {
+        width: '1200px',
+        height: '550px',
+        
+    });
+    } else {
       // Find the product by its ID
       const product = this.productList.find(it => it._id === productId);
       if (product && product._id) {
-          this.userBooking.booking.prescription[index].name = product.name;
+        this.userBooking.booking.prescription[index].name = product.name;
       }
-  }
+    }
     // console.log(event);
   }
 
-  public getDoctorById(Id: string|null |undefined ): string|null |undefined {
+  public getDoctorById(Id: string | null | undefined): string | null | undefined {
     const doctorId = Id;
     const doctor = this.doctorList?.find(doc => doc._id === doctorId);
     return doctor ? doctor.nameF + " " + doctor.nameL : "";
   }
 
-  
+
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
-    console.log("nextVisit",this.nextVisitDays)
+    // console.log("hey",this.productList);
+    // this.genderSelectList=this.productList;
+    console.log("nextVisit", this.nextVisitDays)
     if (this.userBooking.booking.nextVisitDate) {
       this.isNextVisitChecked = true;
 
@@ -218,6 +260,10 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     else {
       this.userBooking.booking.nextVisitDate = this.nextVisitDate;
     }
+    this.genderSelectList = this.productList?.map((item: any) => {
+      const selected = { item_id: item.id, item_text: item.name };
+      return selected;
+    });
   }
 
   private _formChanged(): void {
@@ -226,5 +272,78 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       data: this.prescriptionForm.invalid
     } as UiActionDto<boolean>;
     this.pubSub.emit(actionDto);
+  }
+
+
+
+
+  // onMedicineChange(value: string) {
+  //   this.filteredProducts = of(this._filter(value));
+  // }
+
+  // private _filter(value: string): { name: string }[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.productList.filter(product => product.name.toLowerCase().includes(filterValue));
+  // }
+
+  // displayFn(productName?: any): any | undefined {
+  //   return productName ? productName : undefined;
+  // }
+
+
+  //   public onGenderSelect(item: any,index:any) {
+  //     // this.userBooking.booking.prescription[index].name == item;
+  //     // this.userBooking.booking.prescription[index].name == this.selectedGender?.map((it: any) => {
+  //     //     return {
+  //     //         key: it.item_id,
+  //     //         name: it.item_text,
+  //     //         value: ''
+  //     //     } as any;
+  //     // });
+  // }
+
+
+  public onGenderSelect(item: any, index: number): void {
+    this.selectedMedicine[index] = item.item_text;
+    this.userBooking.booking.prescription[index].name = item.item_text;
+    this.userBooking.booking.prescription[index].productId = item.item_id;
+
+  }
+
+  private addOtherOption(): void {
+    const otherOption: Partial<ProductVo> = { _id: 'OTHER', name: 'OTHER' } as ProductVo;
+    this.productList = [otherOption as ProductVo, ...this.productList];
+
+    this.genderSelectList = this.productList.map(item => {
+      return { item_id: item._id, item_text: item.name };
+    });
+    //   // const otherOption = { _id: 'OTHER', name: 'OTHER' };
+    //   const otherOption= {
+    //   _id: 'OTHER',
+    //   orgId: '',
+    //   brId: '',
+    //   name: "OTHER",
+    //   code: '',
+    //   drug: '',
+    //   productType: '',
+    //   company: '',
+    //   packagingType: '',
+    //   price: 0,
+    //   qtyPerPackage: 0,
+    //   pricePerPackage: 0,
+    //   purchaseDate: new Date(),
+    //   expirtyDate: new Date(),
+    //   status: '',
+    //   del: false,
+    //   modBy: new Date(),
+    //   crtBy: new Date(),
+    //   modified: new Date(),
+    //   created: new Date()}
+    //   this.productList = [otherOption, ...this.productList];
+
+    //   this.genderSelectList = this.productList?.map((item: any) => {
+    //     return { item_id: item._id, item_text: item.name };
+    //   });
+    // }
   }
 }

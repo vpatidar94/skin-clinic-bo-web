@@ -38,6 +38,7 @@ export class PrescriptionPrintDialogComponent {
   constructor(public dialogRef: MatDialogRef<PrescriptionPrintDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {userBooking:UserBookingDto, doctorList: any, productList: any},
     private printService: NgxPrintService) {
+      console.log("prescription",data.userBooking.booking.prescription[0])
   }
  
   /* ************************************ Public Methods ************************************ */
@@ -68,9 +69,11 @@ export class PrescriptionPrintDialogComponent {
 
 
   public getProductTypeByProductName(productName:any): string {
-    const product = productName.name;
+    const product = productName;
+    console.log("here",product);
     const productType = this.data.productList?.find((prod:any) => prod.name === productName);
-    this.productTypeName = productType.productType;
+    this.productTypeName = productType?.productType;
+    console.log("yelo",this.productTypeName);
     // return this.productTypeName ? this.productTypeName : '';
     return this.convertIntoShort(this.productTypeName);
 
