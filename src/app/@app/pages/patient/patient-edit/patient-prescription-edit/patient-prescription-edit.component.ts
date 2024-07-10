@@ -33,10 +33,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   showSectionAdd = false;
   isNextVisitChecked: boolean = false;
 
-  // nextVisitDays: number = 0; // Default value
-  // nextVisitDate: string = ''; // Default value
-  // minNextVisitDate: string = ''; // Minimum date
-
   nextVisitDays: number = 0; // Default value
   nextVisitDate!: Date; // Default value
   minNextVisitDate!: Date; // Minimum date
@@ -64,17 +60,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   selectedMedicine: { [key: number]: any } = {};
   genderSelectList: Array<any> = [];
   selectedGender: string = "";
-  // dropdownSettings = {
-  //     singleSelection: true,
-  //     // idField: 'item_id',
-  //     textField: 'item_text',
-  //     itemsShowLimit: 3,
-  //     allowSearchFilter: true,
-  //     enableCheckAll: false,
-  //     maxHeight: 100
-  // };
-
-
   dropdownSettings = {
     singleSelection: true,
     textField: 'item_text',
@@ -156,22 +141,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   }
 
   public updateMinNextVisitDate() {
-    // if (this.nextVisitDays >= 0) {
-    //   const today = new Date();
-    //   console.log("today's",today);
-    //   console.log("days",this.nextVisitDays);
-    //   const nextDate = new Date(today);
-    //   console.log('next',nextDate);
-    //   nextDate.setDate(today.getDate() + this.nextVisitDays);
-    //   // this.minNextVisitDate = nextDate.toISOString().split('T')[0];
-    //   // this.nextVisitDate = this.minNextVisitDate; // Update the date input
-    //   console.log('dikakt',nextDate.setDate(today.getDate() + this.nextVisitDays))
-    //   this.minNextVisitDate = nextDate;
-    //   console.log('checkit',this.minNextVisitDate);
-    //   this.nextVisitDate = this.minNextVisitDate; // Update the date input
-    //   this.userBooking.booking.nextVisitDate = this.nextVisitDate;
-    // }
-
     if (this.nextVisitDays >= 0) {
       const today = new Date();
       const nextDate = new Date(today.getTime() + this.nextVisitDays * 24 * 60 * 60 * 1000);
@@ -214,23 +183,13 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   public prescriptionChange(event: any, index: number): void {
     const productId = this.userBooking.booking.prescription[index]?.productId;
-    // const product = this.productList.find(it => it._id == productId);
-    // if (product && product?._id) {
-    //   this.userBooking.booking.prescription[index].name = product?.name;
-    // }
-    // if(this.userBooking.booking.prescription[index].productId === "OTHER"){
-    //   console.log("other is selected");
-    //   this.showMedicineInput = true;
-    // }
-
 
     if (productId === 'OTHER') {
-      // Clear the name field if "Other" is selected
       this.dialog.open(AddOtherProductDialogComponent, {
         width: '1200px',
         height: '550px',
-        
-    });
+
+      });
     } else {
       // Find the product by its ID
       const product = this.productList.find(it => it._id === productId);
@@ -250,8 +209,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   /* ************************************ Private Methods ************************************ */
   private _init(): void {
-    // console.log("hey",this.productList);
-    // this.genderSelectList=this.productList;
     console.log("nextVisit", this.nextVisitDays)
     if (this.userBooking.booking.nextVisitDate) {
       this.isNextVisitChecked = true;
@@ -274,35 +231,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     this.pubSub.emit(actionDto);
   }
 
-
-
-
-  // onMedicineChange(value: string) {
-  //   this.filteredProducts = of(this._filter(value));
-  // }
-
-  // private _filter(value: string): { name: string }[] {
-  //   const filterValue = value.toLowerCase();
-  //   return this.productList.filter(product => product.name.toLowerCase().includes(filterValue));
-  // }
-
-  // displayFn(productName?: any): any | undefined {
-  //   return productName ? productName : undefined;
-  // }
-
-
-  //   public onGenderSelect(item: any,index:any) {
-  //     // this.userBooking.booking.prescription[index].name == item;
-  //     // this.userBooking.booking.prescription[index].name == this.selectedGender?.map((it: any) => {
-  //     //     return {
-  //     //         key: it.item_id,
-  //     //         name: it.item_text,
-  //     //         value: ''
-  //     //     } as any;
-  //     // });
-  // }
-
-
   public onGenderSelect(item: any, index: number): void {
     this.selectedMedicine[index] = item.item_text;
     this.userBooking.booking.prescription[index].name = item.item_text;
@@ -317,33 +245,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     this.genderSelectList = this.productList.map(item => {
       return { item_id: item._id, item_text: item.name };
     });
-    //   // const otherOption = { _id: 'OTHER', name: 'OTHER' };
-    //   const otherOption= {
-    //   _id: 'OTHER',
-    //   orgId: '',
-    //   brId: '',
-    //   name: "OTHER",
-    //   code: '',
-    //   drug: '',
-    //   productType: '',
-    //   company: '',
-    //   packagingType: '',
-    //   price: 0,
-    //   qtyPerPackage: 0,
-    //   pricePerPackage: 0,
-    //   purchaseDate: new Date(),
-    //   expirtyDate: new Date(),
-    //   status: '',
-    //   del: false,
-    //   modBy: new Date(),
-    //   crtBy: new Date(),
-    //   modified: new Date(),
-    //   created: new Date()}
-    //   this.productList = [otherOption, ...this.productList];
 
-    //   this.genderSelectList = this.productList?.map((item: any) => {
-    //     return { item_id: item._id, item_text: item.name };
-    //   });
-    // }
   }
 }
