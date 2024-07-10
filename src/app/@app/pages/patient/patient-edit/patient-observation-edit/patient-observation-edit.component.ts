@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
@@ -7,7 +7,7 @@ import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
     selector: 'app-patient-observation-edit',
     templateUrl: './patient-observation-edit.component.html'
 })
-export class PatientObservationEditComponent implements OnInit, OnChanges {
+export class PatientObservationEditComponent implements OnInit, OnChanges,AfterViewInit {
     /* ********************************* Static Field *************************************** */
     /* *********************************** Instance Field *********************************** */
     @Input()
@@ -45,6 +45,12 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
         maxHeight: 500
     };
 
+
+    //newly added for photo addition
+    videoElement!: ElementRef<HTMLVideoElement>;
+    showCamera = false;
+    photo: string | null = null;
+
     /* ************************************ Constructors ************************************ */
     constructor() {
     }
@@ -71,6 +77,13 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
                 value: ''
             } as KeyValueVo;
         });
+
+        // newly added for the photo addition
+        if (item.item_text === 'Sugar') {
+            this.startCamera();
+        } else {
+            this.stopCamera();
+        }
         this.userBookingChange.emit(this.userBooking);
     }
 
@@ -99,6 +112,65 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
             data: this.observationForm.invalid
         } as UiActionDto<boolean>;
         this.pubSub.emit(actionDto);
+    }
+
+    // newly added for the photo addition
+    public capturePhoto(): void {
+        if (!this.videoElement) return;
+        const video: HTMLVideoElement = this.videoElement.nativeElement;
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const context = canvas.getContext('2d');
+        context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+        this.photo = canvas.toDataURL('image/png');
+        this.stopCamera();
+    }
+
+    private async startCamera(): Promise<void> {
+        // this.showCamera = true;
+        // try {
+        //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        //     this.videoElement.nativeElement.srcObject = stream;
+        // } catch (error) {
+        //     console.error('Error accessing camera: ', error);
+        // }
+        this.showCamera = true;
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            if (this.videoElement) {
+                this.videoElement.nativeElement.srcObject = stream;
+            }
+        } catch (error) {
+            console.error('Error accessing camera: ', error);
+        }
+    }
+
+    private stopCamera(): void {
+        // this.showCamera = false;
+        // const video: HTMLVideoElement = this.videoElement.nativeElement;
+        // const stream = video.srcObject as MediaStream;
+        // if (stream) {
+        //     const tracks = stream.getTracks();
+        //     tracks.forEach(track => track.stop());
+        // }
+        // video.srcObject = null;
+
+        if (!this.videoElement) return;
+
+        this.showCamera = false;
+        const video: HTMLVideoElement = this.videoElement.nativeElement;
+        const stream = video.srcObject as MediaStream;
+        if (stream) {
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+        }
+        video.srcObject = null;
+    }
+    
+
+    public ngAfterViewInit(): void {
+        // videoElement should now be defined
     }
 
 }
