@@ -47,6 +47,7 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
 
 
     //newly added for photo addition
+    @ViewChild('videoElement', { static: false })
     videoElement!: ElementRef<HTMLVideoElement>;
     showCamera = false;
     photo: string | null = null;
@@ -65,6 +66,9 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
         this.showSectionAdd = this.userBooking.booking.observation?.healthParams?.length > 0;
     }
 
+    public ngAfterViewInit(): void {
+        // videoElement should now be defined
+    }
     public addNewObservation(): void {
         this.showSectionAdd = true;
     }
@@ -122,8 +126,13 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         const context = canvas.getContext('2d');
-        context?.drawImage(video, 0, 0, canvas.width, canvas.height);
-        this.photo = canvas.toDataURL('image/png');
+        // context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+        // this.photo = canvas.toDataURL('image/png');
+        // this.stopCamera();
+        if (context) {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            this.photo = canvas.toDataURL('image/png');
+        }
         this.stopCamera();
     }
 
@@ -140,6 +149,7 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             if (this.videoElement) {
                 this.videoElement.nativeElement.srcObject = stream;
+                this.videoElement.nativeElement.play();
             }
         } catch (error) {
             console.error('Error accessing camera: ', error);
@@ -169,8 +179,6 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
     }
     
 
-    public ngAfterViewInit(): void {
-        // videoElement should now be defined
-    }
+    
 
 }
