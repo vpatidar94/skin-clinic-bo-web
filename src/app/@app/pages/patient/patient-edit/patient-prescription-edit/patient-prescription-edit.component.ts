@@ -58,8 +58,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   // newly added 
   selectedMedicine: { [key: number]: any } = {};
-  genderSelectList: Array<any> = [];
-  selectedGender: string = "";
+  medicineSelectList: Array<any> = [];
   dropdownSettings = {
     singleSelection: true,
     textField: 'item_text',
@@ -68,7 +67,8 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     allowSearchFilter: true,
     enableCheckAll: false,
     maxHeight: 100,
-    minWidth: 350
+    minWidth: 350,
+    closeDropDownOnSelection: true
   };
   /* ************************************ Constructors ************************************ */
   constructor(private dialog: MatDialog) {
@@ -77,7 +77,6 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
 
   /* ************************************ Public Methods ************************************ */
   public ngOnInit(): void {
-    console.log("doctor is", this.doctorList);
     this._init();
 
     this.addOtherOption();
@@ -86,7 +85,13 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
       this._formChanged();
     });
     this.showSectionAdd = this.userBooking.booking?.prescription?.length > 0;
-
+    if (this.showSectionAdd) {
+      this.userBooking.booking?.prescription?.forEach((item: PrescriptionVo, i: number) => {
+        this.selectedMedicine[i] = [{
+          item_id: item.productId, item_text: item.name
+        }];
+      });
+    }
 
     if (this.userBooking.booking.nextVisitDate) {
       this.updateNextVisitDays();
@@ -182,13 +187,26 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
   }
 
   public prescriptionChange(event: any, index: number): void {
-    const productId = this.userBooking.booking.prescription[index]?.productId;
+    if (!this.selectedMedicine || !this.selectedMedicine[index]) {
+      return;
+    }
+    const productId = this.selectedMedicine[index][0].item_id;
+    this.userBooking.booking.prescription[index].productId = productId; 
 
     if (productId === 'OTHER') {
-      this.dialog.open(AddOtherProductDialogComponent, {
+      const dialogRef = this.dialog.open(AddOtherProductDialogComponent, {
         width: '1200px',
         height: '550px',
 
+      });
+      dialogRef.afterClosed().subscribe((result: ProductVo) => {
+        if (result && result._id && result._id != 'OTHER') {
+          this.productList.push(result);
+          this.selectedMedicine[index] = [{
+            item_id: result._id, item_text: result.name
+          }];
+          this.userBooking.booking.prescription[index].productId = result._id; 
+        }
       });
     } else {
       // Find the product by its ID
@@ -217,7 +235,7 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     else {
       this.userBooking.booking.nextVisitDate = this.nextVisitDate;
     }
-    this.genderSelectList = this.productList?.map((item: any) => {
+    this.medicineSelectList = this.productList?.map((item: any) => {
       const selected = { item_id: item.id, item_text: item.name };
       return selected;
     });
@@ -231,18 +249,13 @@ export class PatientPrescriptionEditComponent implements OnInit, OnChanges {
     this.pubSub.emit(actionDto);
   }
 
-  public onGenderSelect(item: any, index: number): void {
-    this.selectedMedicine[index] = item.item_text;
-    this.userBooking.booking.prescription[index].name = item.item_text;
-    this.userBooking.booking.prescription[index].productId = item.item_id;
 
-  }
 
   private addOtherOption(): void {
     const otherOption: Partial<ProductVo> = { _id: 'OTHER', name: 'OTHER' } as ProductVo;
     this.productList = [otherOption as ProductVo, ...this.productList];
 
-    this.genderSelectList = this.productList.map(item => {
+    this.medicineSelectList = this.productList.map(item => {
       return { item_id: item._id, item_text: item.name };
     });
 

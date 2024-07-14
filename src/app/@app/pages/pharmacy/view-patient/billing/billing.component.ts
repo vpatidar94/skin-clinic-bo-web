@@ -1,45 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { PrescriptionVo, BookingVo, UserBookingDto, ProductVo, ApiResponse, OrgPharmacyOrderDto, PharmacyOrderVo, OrderItemVo, ResponseStatus, OrderAddTransactionDto, ORDER_TX_STATUS } from 'aayam-clinic-core';
-import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ApiResponse, ORDER_TX_STATUS, OrderAddTransactionDto, OrderItemVo, OrgPharmacyOrderDto, PharmacyOrderVo, PrescriptionVo, ProductVo } from 'aayam-clinic-core';
 
 //newly added to show table
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { KeyValueStorageService } from 'src/app/@shared/service/key-value-storage.service';
-import { ProductApi } from 'src/app/@app/service/remote/product.api';
-import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { NgxPrintService, PrintOptions } from 'ngx-print';
+import { PharmacyApi } from 'src/app/@app/service/remote/pharmacy.api';
+import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
+import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { BillingPrintComponent } from './billing-print/billing-print.component';
 
-export interface PeriodicElement {
-    sno: number;
-    medicine: string;
-    dosage: string;
-    duration: string;
-    packing: string;
-    quantity: number;
-    rate: number;
-    // discount is newly added 
-    discount: number;
-    amount: number;
-    action: string;
-    showInputFields?: boolean;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    { sno: 1, medicine: 'Tab Acifin p 500mg', dosage: 'BD', duration: '5 days', packing: "1 * 3", quantity: 8, rate: 60.20, discount: 0, amount: 0, action: '' },
-    { sno: 2, medicine: 'Tab Azee 500mg', dosage: 'OD', duration: '2 days', packing: "1 * 4", quantity: 5, rate: 60, discount: 0, amount: 0, action: '' },
-    { sno: 3, medicine: 'Sy Cherycof', dosage: 'OD', duration: '5 days', packing: "1 * 9", quantity: 5, rate: 60, discount: 0, amount: 0, action: '' },
-    { sno: 4, medicine: 'Tab Azithromycin 650mg', dosage: 'OD', duration: '15 days', packing: "1 * 9", quantity: 10, rate: 60, discount: 0, amount: 0, action: '' },
-
-]
-ELEMENT_DATA.forEach(item => {
-    item.amount = item.rate * item.quantity; // Calculate the amount for each item
-});
 
 @Component({
     selector: 'app-billing',
@@ -55,7 +27,6 @@ export class BillingComponent {
     overallDiscount: number = 0;
 
     displayedColumns: string[] = ['sno', 'medicine', 'dosage', "duration", "packing", "quantity", "rate", "discount", "amount", "action"];
-    // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     dataSource = new MatTableDataSource<OrderItemVo>([] as OrderItemVo[]);
 
     @Input()
@@ -72,16 +43,16 @@ export class BillingComponent {
     @ViewChild(MatSort) sort!: MatSort;
     showChequeInbox: boolean = false;
     showInputFields: boolean = false;
-    openItem: boolean = false;
 
     @Input()
     selectedMedicine!: string[];
+    @Output()
+    selectedMedicineChange = new EventEmitter<string[]>();
 
     @Input()
     pharmacyOrder!: OrgPharmacyOrderDto;
-
-    @Input()
-    pharmacyItem!: OrderItemVo[];
+    @Output()
+    pharmacyOrderChange = new EventEmitter<OrgPharmacyOrderDto>();
 
     orderTransaction!: OrderAddTransactionDto;
     @Output()
@@ -95,7 +66,7 @@ export class BillingComponent {
 
     /* ************************************* Constructors ******************************************** */
     constructor(public dialogRef: MatDialogRef<BillingPrintComponent>,
-        private keyValueStorageService: KeyValueStorageService,
+        private pharmacyApi: PharmacyApi,
         private dialog: MatDialog,
         private transactionApi: TransactionApi,
         private printService: NgxPrintService
@@ -104,13 +75,7 @@ export class BillingComponent {
 
     /* ************************************* Public Methods ******************************************** */
     public ngOnInit(): void {
-        console.log('xx xx  xxprescription', this.prescription);
-        // Set the flag to true for the last row by default
-        if (this.dataSource.data.length > 0) {
-            this.dataSource.data[this.dataSource.data.length - 1].openItem = false;
-        }
         this._init();
-        this.dataSource = new MatTableDataSource(this.pharmacyItem);
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -140,53 +105,58 @@ export class BillingComponent {
     }
 
 
-    public updateAmount(row: OrderItemVo): void {
-        // row.amount = row.priceBase * row.qty;
-        row.amount = this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
+    public updateAmount(row: OrderItemVo | any): void {
+        row.amount = ((row.priceBase ?? 0) * (row.qty ?? 0)) - (row.discount ?? 0);
+        this.pharmacyOrder.order.discount = this.pharmacyOrder.order.discount ?? 0;
+        this.calcAmount();
+    }
 
-        this.getTotalAmount();
+    public calcAmount(): void {
+        let subttotal = 0;
+        this.pharmacyOrder.order.items.forEach((oi: OrderItemVo) => {
+            subttotal += oi.amount;
+        });
+        this.pharmacyOrder.order.subTotal = subttotal;
+        this.pharmacyOrder.order.totalDue = this.pharmacyOrder.order.subTotal - this.pharmacyOrder.order.discount;
+        this.pharmacyOrderChange.emit(this.pharmacyOrder);
+    }
+
+    public applyOverallDiscount(): void {
+        this.pharmacyOrder.order.totalDue = (this.pharmacyOrder.order.subTotal ?? 0) - (this.pharmacyOrder.order.discount ?? 0);
+        this.pharmacyOrderChange.emit(this.pharmacyOrder);
     }
 
     public getTotalAmount(): number {
-        // return this.dataSource.data.reduce((total, row) => total + row.amount, 0);
-        // return this.dataSource.data.reduce((total, row) => total + (row.quantity * row.rate) - row.discount, 0);
-        // this.pharmacyItem[0].amount = this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
-        // return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase) - row.discount, 0);
-        return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0);
-
+        return (this.pharmacyOrder.order.totalDue ?? 0) + (this.pharmacyOrder.order.discount ?? 0);
     }
 
-    // newly added
-    public getFinalAmount(): number {
-        return this.dataSource.data.reduce((total, row) => total + (row.qty * row.priceBase), 0) - this.overallDiscount;
-        // return 1;
+    public updateOrder(): void {
+        this.pharmacyApi.addUpdateOrder(this.pharmacyOrder.order).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
+            if (res.body) {
+                this.pharmacyOrder.order = res.body;
+                this.pharmacyOrderChange.emit(this.pharmacyOrder);
+            }
+        });
     }
 
-
-    public deleteRow(row: OrderItemVo): void {
-        const index = this.dataSource.data.indexOf(row);
-        if (index !== -1) {
-            this.dataSource.data.splice(index, 1);
-            this.dataSource._updateChangeSubscription();
-            this.updateSnoValues(); // Update sno values
-            this.getTotalAmount(); // Recalculate total amount
+    public deleteRow(row: OrderItemVo, i: number): void {
+        let index = i;
+        if (!row.openItem && row.item?._id) {
+            index = this.pharmacyOrder.order.items?.findIndex(oi => oi.item?._id === row.item?._id);
         }
-    }
-
-    public updateSnoValues(): void {
-        // this.dataSource.data.forEach((row, index) => {
-        //     row.sno = index + 1;
-        // });
+        this.pharmacyOrder.order.items.splice(index, 1);
+        const indexSelectedMedicine = this.selectedMedicine?.findIndex(m => m === row.item?._id);
+        if (indexSelectedMedicine >= 0) {
+            this.selectedMedicine.splice(indexSelectedMedicine, 1);
+            this.selectedMedicineChange.emit(this.selectedMedicine);
+        }
+        this.calcAmount();
+        this._initTable();
+        this.updateOrder();
     }
 
     public addNewRow(): void {
-        // Set the flag to false for the previous last row
-        if (this.dataSource.data.length > 0) {
-            this.dataSource.data[this.dataSource.data.length - 1].openItem = false;
-
-        }
-        // Add the new row with input fields visible
-        const newRow: OrderItemVo = {
+        const oi: OrderItemVo | any = {
             item: null,
             qty: 0,
             note: "",
@@ -195,29 +165,20 @@ export class BillingComponent {
             priceBase: 0,
             tax: 0,
             amount: 0,
+            discount: 0,
             igst: 0,
             cgst: 0,
             sgst: 0,
             openItem: true,
             name: "",
             sampleCollectDate: null,
-            // discount: 0,
-            // duration: "",
-            // dosage: "",
-            // packing: "",
-
         };
-        this.dataSource.data.push(newRow);
-        this.dataSource._updateChangeSubscription();
-        // // Set the flag to true to show input fields
-        this.openItem = true;
-
+        this.pharmacyOrder.order.items.push(oi);
+        this._initTable();
     }
 
-    public isLastRow(row: OrderItemVo): boolean {
-        const index = this.dataSource.data.indexOf(row);
-        return index === this.dataSource.data.length - 1;
-        return true;
+    public isLastRow(i: number): boolean {
+        return i === this.pharmacyOrder.order.items.length - 1;
     }
 
     // public printData(): void {
@@ -229,24 +190,24 @@ export class BillingComponent {
     //     window.print();
 
     //     document.body.innerHTML = originalContents;
-        
+
     // }
 
     public printData() {
         const customPrintOptions: PrintOptions = new PrintOptions({
-          printSectionId: 'billing-print',
-          openNewTab: false,
-          useExistingCss: true,
-          closeWindow: true,
+            printSectionId: 'billing-print',
+            openNewTab: false,
+            useExistingCss: true,
+            closeWindow: true,
         });
         this.printService.print(customPrintOptions);
         this.dialogRef.close();
-      }
-
-
-
+    }
 
     public payPharmacyBill(): void {
+        this.orderTransaction = {} as OrderAddTransactionDto;
+        this.orderTransaction.orderId = this.pharmacyOrder.order._id;
+        this.orderTransaction.amount = this.pharmacyOrder.order.totalDue - this.pharmacyOrder.order.totalPaid;
         this.transactionApi.addUpdatePharmacyTransaction(this.orderTransaction).subscribe((res: ApiResponse<PharmacyOrderVo>) => {
             if ((res.status === ResponseStatusConst.SUCCESS && res.body)) {
                 this.pharmacyOrder.order = res.body;
@@ -262,6 +223,11 @@ export class BillingComponent {
         this.orderTransaction.orderId = this.pharmacyOrder.order._id;
         this.orderTransaction.amount = this.pharmacyOrder.order.totalDue - this.pharmacyOrder.order.totalPaid
         this.orderTransactionChange.emit(this.orderTransaction);
+        this._initTable();
+    }
+
+    private _initTable() {
+        this.dataSource = new MatTableDataSource(this.pharmacyOrder.order.items);
     }
 
 }

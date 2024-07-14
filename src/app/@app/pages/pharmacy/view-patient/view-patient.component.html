@@ -6,13 +6,12 @@
             <mat-button-toggle class="tab-content" (change)="tabChange()" value="BILLING">Billing</mat-button-toggle>
         </mat-button-toggle-group>
     </section>
-
     <section class="section-org-edit">
         <div *ngIf="showSectionPrescription">
             <app-prescription [productList]="data.productList" [(pharmacyOrder)]="data.pharmacyOrder" [(selectedMedicine)]="selectedMedicine" [prescription]="data.pharmacyOrder.order.prescription"></app-prescription>
         </div>
         <div *ngIf="showSectionBilling">
-            <app-billing [productList]="data.productList" [selectedMedicine]="selectedMedicine" [pharmacyOrder]="data.pharmacyOrder"  [pharmacyItem]="data.pharmacyOrder.order.items" [prescription]="data.pharmacyOrder.order.prescription"></app-billing>
+            <app-billing [productList]="data.productList" [(selectedMedicine)]="selectedMedicine" [(pharmacyOrder)]="data.pharmacyOrder"  [prescription]="data.pharmacyOrder.order.prescription"></app-billing>
         </div>
     </section>
 </section>

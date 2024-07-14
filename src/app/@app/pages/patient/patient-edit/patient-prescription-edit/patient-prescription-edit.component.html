@@ -343,10 +343,8 @@
 
                                         <ng-multiselect-dropdown [placeholder]="'Select Medicine'" class="app-single-select-dropdown w-100"
                                         name="medicine{{i}}"
-                                            [settings]="dropdownSettings" [data]="genderSelectList"
-                                            (onDeSelect)="onGenderSelect($event, i)"
-                                            (onSelect)="onGenderSelect($event, i)"
-                                            [(ngModel)]="userBooking.booking.prescription[i].productId"
+                                            [settings]="dropdownSettings" [data]="medicineSelectList"
+                                            [(ngModel)]="selectedMedicine[i]"
                                             (ngModelChange)="prescriptionChange($event, i)">
                                             
                                         </ng-multiselect-dropdown>

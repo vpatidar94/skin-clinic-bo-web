@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApiResponse, PRODUCT_PACK_TYPE_LIST, PRODUCT_TYPE_LIST, ProductVo, ResponseStatus } from 'aayam-clinic-core';
 import { ProductApi } from 'src/app/@app/service/remote/product.api';
 import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
@@ -18,7 +19,9 @@ export class AddOtherProductDialogComponent implements OnInit {
     // isQtyPerStripActive: boolean = false;
 
     /* ************************************* Constructors ******************************************** */
-    constructor(private keyValueStorageService: KeyValueStorageService,
+    constructor(public dialogRef: MatDialogRef<AddOtherProductDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: ProductVo,
+        private keyValueStorageService: KeyValueStorageService,
         private productApi: ProductApi) { }
 
     /* ************************************* Public Methods ******************************************** */
@@ -33,6 +36,7 @@ export class AddOtherProductDialogComponent implements OnInit {
             productDetails.orgId = orgId;
             productDetails.brId = orgId;
         }
+        productDetails.price = 0;
         this._addEditProduct(productDetails);
     }
 
@@ -41,11 +45,10 @@ export class AddOtherProductDialogComponent implements OnInit {
 
     }
 
-    public savingProduct(): void {
+    public saveProduct(): void {
         this.productApi.addUpdateProduct(this.product).subscribe((res: ApiResponse<ProductVo>) => {
             if (res.status === ResponseStatusConst.SUCCESS && res.body) {
-                this.product = res.body
-                // this._init();
+                this.dialogRef.close(res.body); 
             }
         });
     }

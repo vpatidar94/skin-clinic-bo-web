@@ -216,9 +216,11 @@ mat-list-item.section-title {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     transition: background-color 0.3s ease;
 }
-.common-button:hover{
-    background-color:$warn;
+
+.common-button:hover {
+    background-color: $warn;
 }
+
 .cancel-button {
     background-color: $white;
     color: $black;
@@ -228,28 +230,31 @@ mat-list-item.section-title {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     transition: background-color 0.3s ease;
 }
-.cancel-button:hover{
-    background-color:$warn;
+
+.cancel-button:hover {
+    background-color: $warn;
 }
+
 //---------------------------------------TAB STYLES ---------------------------------------------//
-.tab-style{
-    height:40px;
+.tab-style {
+    height: 40px;
     // width:60%;
-    width:auto;
+    width: auto;
     margin-bottom: 10px;
 }
 
-.tab-content{
+.tab-content {
     // width:16.66%;
-    width:110px;
+    width: 110px;
 
 }
 
-.user-tab-content{
+.user-tab-content {
     // width:16.66%;
-    width:140px;
+    width: 140px;
 
 }
+
 //  ------------------------------------ flex css classes start  ------------------------------------ //
 .flex-row {
     display: flex !important;
@@ -282,17 +287,19 @@ mat-form-field {
 .app-input {
     height: 50px;
 }
+
 // style for input box of prescription forms
 .pres-input {
     height: 40px;
 }
+
 //style for label of forms 
 .app-label {
     font-size: 18px;
 }
 
 // style for add and delete icon 
-.add-icon{
+.add-icon {
     cursor: pointer;
     align-self: center;
     // font-size: 30px;
@@ -314,6 +321,12 @@ mat-form-field {
         background-clip: padding-box !important;
         border: solid 1px #dee2e6 !important;
         border-radius: 0.375em !important;
+
+        .selected-item-container {
+            .selected-item {
+                max-width: 300px !important;
+            }
+        }
     }
 
     .dropdown-multiselect__caret {
@@ -326,6 +339,7 @@ mat-form-field {
     height: 40px;
     border-radius: 6px;
     border-color: $lightGray;
+
 }
 
 .min-height-300 {
@@ -371,84 +385,94 @@ mat-form-field {
 //************************* mat expansion panel css end *************************//
 
 //------------------------------------mat table common css ---------------------------------------------//
-.table-card-style{
+.table-card-style {
     // background-color:azure;
-    padding:20px;
-    margin-top:20px;
-  }
-  
-  table {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+table {
     border-style: solid;
     border-width: 1px;
     border-color: black;
     width: 100%;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     // margin-top:20px;
     /* text-align: center; */
-  }
-  
-  .mat-mdc-form-field {
+}
+
+.mat-mdc-form-field {
     font-size: 14px;
     width: 100%;
-  }
-  tbody{
+}
+
+tbody {
     border-width: 1px;
-  }
-  .mat-elevation-z8{
+}
+
+.mat-elevation-z8 {
     box-shadow: none !important;
-  }
-  td, th {
+}
+
+td,
+th {
     min-width: 25%;
-    max-width:50%;
+    max-width: 50%;
     border-style: solid;
     border-width: 1px;
     border-color: black;
     /* text-align: center;
     align-self: center; */
-  }
-  
-  .filter-input-style{
+}
+
+.filter-input-style {
     margin-top: 20px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     background-color: transparent;
-    width:10%;
+    width: 10%;
     padding-top: 10px;
     color: transparent;
-    margin-left:20px;
+    margin-left: 20px;
     border-style: solid;
     border-width: 1px;
-    border-color:black;
-  }
-  
-  .action-style{
-    color:blue !important;
+    border-color: black;
+}
+
+.action-style {
+    color: blue !important;
     font-size: 14px;
-  }
-  .search-input-style{
+}
+
+.search-input-style {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 12px;
-    height:30px;
-  }
-  .input-style{
-    border-radius: 12px;
-  }
-  .mdc-data-table__cell, .mdc-data-table__header-cell{
-      border-bottom-color: black !important;
+    height: 30px;
 }
+
+.input-style {
+    border-radius: 12px;
+}
+
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+    border-bottom-color: black !important;
+}
+
 // ************************************ mat table commom css end *************************************//
 
 //************************* mat calender css start *************************//
 ::ng-deep .mat-calendar-header .mat-calendar-period-button {
     background-color: rgb(32, 184, 32);
-  }
-
-  ::ng-deep .mat-calendar-header .mat-calendar-previous-button,
-::ng-deep .mat-calendar-header .mat-calendar-next-button {
-  color: black; /* Change the font color of the navigation buttons */
 }
-  
-.calendar-card{
+
+::ng-deep .mat-calendar-header .mat-calendar-previous-button,
+::ng-deep .mat-calendar-header .mat-calendar-next-button {
+    color: black;
+    /* Change the font color of the navigation buttons */
+}
+
+.calendar-card {
     border: 2px solid rgb(35, 241, 187);
 }
 
@@ -492,5 +516,3 @@ mat-form-field {
         padding-right: 1rem !important;
     }
 }
-
-
