@@ -9,6 +9,12 @@
 <div *ngIf="photo">
     <img [src]="photo" alt="Captured photo" width="640" height="480"/>
 </div>
+
+<div *ngFor="let image of images">
+    <img [src]="image" alt="Image from DigitalOcean Space" />
+  </div>
+
+
 <!-- <div>
     <img *ngIf="photo" class="avatar" [src]="bucketUrl + observationImg"/>
 </div>
@@ -20,9 +26,9 @@
     </div>
 </div> -->
 
-<div *ngFor="let image of images">
+<!-- <div *ngFor="let image of images">
     <img [src]="image" alt="Image from DigitalOcean Space" />
-  </div>
+  </div> -->
 
 <!-- https://aayam-clinic-storage.blr1.cdn.digitaloceanspaces.com/EMP/287/PHOTO/287_1721046413737.png
 https://aayam-clinic-storage.blr1.cdn.digitaloceanspaces.com/ -->

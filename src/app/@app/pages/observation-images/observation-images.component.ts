@@ -20,6 +20,8 @@ export class ObservationImagesComponent implements OnInit  {
     
     images: string[] = [];
     folder = 'OBSERVATION/295/';
+
+    private isUsingBackCamera: boolean = true;
     
 
 //newly added for photo addition
@@ -39,7 +41,8 @@ constructor(
 
 
 ngOnInit(): void {
-    this.userApi.getImages(this.folder).subscribe(
+    // this.userApi.getImages(this.folder).subscribe(
+        this.userApi.getImages(this.folder).subscribe(
       (data) => {
         this.images = data;
         console.log("data",data);
@@ -53,7 +56,30 @@ ngOnInit(): void {
     );
   }
 
+  public async toggleCamera(): Promise<void> {
+    this.isUsingBackCamera = !this.isUsingBackCamera;
+    await this.startCamera(this.isUsingBackCamera);
+}
 
+// await this.startCamera(true);
+
+private async startCamera(useBackCamera: boolean = true): Promise<void> {
+    this.showCamera = true;
+    try {
+        const constraints = {
+            video: {
+                facingMode: useBackCamera ? { exact: "environment" } : "user"
+            }
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        if (this.videoElement) {
+            this.videoElement.nativeElement.srcObject = stream;
+            this.videoElement.nativeElement.play();
+        }
+    } catch (error) {
+        console.error('Error accessing camera: ', error);
+    }
+}
 
 onCamera(): void {
     console.log("camera is on ")
@@ -133,25 +159,25 @@ onCamera(): void {
 
 
 
-    private async startCamera(): Promise<void> {
-        // this.showCamera = true;
-        // try {
-        //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        //     this.videoElement.nativeElement.srcObject = stream;
-        // } catch (error) {
-        //     console.error('Error accessing camera: ', error);
-        // }
-        this.showCamera = true;
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            if (this.videoElement) {
-                this.videoElement.nativeElement.srcObject = stream;
-                this.videoElement.nativeElement.play();
-            }
-        } catch (error) {
-            console.error('Error accessing camera: ', error);
-        }
-    }
+    // private async startCamera(): Promise<void> {
+    //     // this.showCamera = true;
+    //     // try {
+    //     //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    //     //     this.videoElement.nativeElement.srcObject = stream;
+    //     // } catch (error) {
+    //     //     console.error('Error accessing camera: ', error);
+    //     // }
+    //     this.showCamera = true;
+    //     try {
+    //         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    //         if (this.videoElement) {
+    //             this.videoElement.nativeElement.srcObject = stream;
+    //             this.videoElement.nativeElement.play();
+    //         }
+    //     } catch (error) {
+    //         console.error('Error accessing camera: ', error);
+    //     }
+    // }
 
     private stopCamera(): void {
         // this.showCamera = false;
