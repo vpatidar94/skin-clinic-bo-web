@@ -7,7 +7,6 @@ import { URL } from '../../const/url';
 
 @Injectable()
 export class UserApi {
-
     /* ************************************ Constructors ************************************ */
     constructor(private http: HttpClient) {
     }
@@ -58,7 +57,7 @@ export class UserApi {
         formdata.append('assetId', empId);
         formdata.append('assetIdentity', assetIdentity);
 
-        const req = new HttpRequest('POST', environment.apiUrl + URL.SEND_OTP, formdata, {
+        const req = new HttpRequest('POST', environment.apiUrl + URL.USER_ASSET_UPLOAD, formdata, {
             reportProgress: true,
             responseType: 'text'
         });
@@ -66,12 +65,68 @@ export class UserApi {
         return this.http.request(req);
     }
 
+
+    public uploadObservationImage = (file: File, empId: string, fileName: string, assetIdentity: string):Observable<HttpEvent<ApiResponse<string>>> => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('assetId', empId);
+        formData.append('fileName', fileName);
+        formData.append('assetIdentity', assetIdentity);
+
+        // const req = new HttpRequest('POST', environment.apiUrl + URL.USER_ASSET_UPLOAD, formData, {
+            const req = new HttpRequest('POST', environment.apiUrl + URL.OBSERVATION_IMAGES_UPLOAD, formData, {
+                    reportProgress: true,
+                    responseType: 'text'
+                });
+        
+                return this.http.request(req);
+    
+        // return this.http.post(`${environment.apiUrl + URL.USER_ASSET_UPLOAD}`, formData);
+    };
+    
+
     public sendOtp(empCode: string): Observable<ApiResponse<boolean>> {
         return this.http.get<ApiResponse<boolean>>(environment.apiUrl + URL.SEND_OTP, { params: { empCode } });
     }
 
     public resetPassword(empCode: string, otp: string): Observable<ApiResponse<string>> {
         return this.http.get<ApiResponse<string>>(environment.apiUrl + URL.RESET_PASSWORD_LINK, { params: { empCode, otp } });
+    }
+
+
+    public getImages(folder: string): Observable<string[]> {
+        // return this.http.get<string[]>(`https://aayam-clinic-storage.blr1.digitaloceanspaces.com/${folder}`);
+        return this.http.get<string[]>(`${environment.apiUrl}/api/core/v1/user/list-images?folder=${folder}`);
+      }
+
+
+
+
+
+
+
+    public uploadObservationImages(formData: FormData, visitId: string, assetIdentity: string): Observable<HttpEvent<ApiResponse<string[]>>> {
+        formData.append('assetId', visitId);
+        formData.append('assetIdentity', assetIdentity);
+    
+        // const req = new HttpRequest('POST', environment.apiUrl + URL.OBSERVATION_ASSET_UPLOAD, formData, {
+            const req = new HttpRequest('POST', environment.apiUrl + URL.USER_ASSET_UPLOAD, formData, {
+
+            reportProgress: true,
+            responseType: 'json'
+        });
+    
+        return this.http.request(req);
+    }
+    
+    // public getObservationImages(visitId: string): Observable<HttpEvent<ApiResponse<string[]>>> {
+    //     // return this.http.get<ApiResponse<string[]>>(`${environment.apiUrl}${URL.OBSERVATION_ASSET_IMAGES}/${visitId}`);
+    //     return this.http.get<ApiResponse<string[]>>(`${environment.apiUrl}${URL.USER_ASSET_UPLOAD}/${visitId}`);
+
+    // }
+
+    public getObservationImages(visitId: string): Observable<ApiResponse<string[]>> {
+        return this.http.get<ApiResponse<string[]>>(`${environment.apiUrl}${URL.USER_ASSET_UPLOAD}/${visitId}`);
     }
 }
 

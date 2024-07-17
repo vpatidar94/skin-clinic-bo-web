@@ -76,6 +76,7 @@ export const URL = {
     ADD_UPDATE_STAFF: MJR_USER + '/staff-add-update',
     ACCESS_LIST: MJR_USER + '/access-list',
     USER_ASSET_UPLOAD: MJR_USER + '/upload-user-asset',
+    OBSERVATION_IMAGES_UPLOAD: MJR_USER + '/upload-observation-images',
     SEND_OTP: MJR_USER + '/send-otp',
     RESET_PASSWORD_LINK: MJR_USER + '/reset-password-link',
     DELETE_STAFF: MJR_USER + '/delete',

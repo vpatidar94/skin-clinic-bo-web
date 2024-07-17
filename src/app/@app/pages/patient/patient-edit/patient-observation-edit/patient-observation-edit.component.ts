@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HEALTH_PARAMS_LIST, KeyValueVo, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
+import { UserApi } from 'src/app/@app/service/remote/user.api';
 import { UiActionDto } from 'src/app/@shared/dto/ui-action.dto';
 
 @Component({
@@ -52,8 +53,13 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
     showCamera = false;
     photo: string | null = null;
 
+    folder = 'OBSERVATION/295/';
+
+    images: string[] = [];
+
+
     /* ************************************ Constructors ************************************ */
-    constructor() {
+    constructor(private userApi: UserApi,) {
     }
 
     /* ************************************ Public Methods ************************************ */
@@ -64,6 +70,20 @@ export class PatientObservationEditComponent implements OnInit, OnChanges,AfterV
             this._formChanged();
         });
         this.showSectionAdd = this.userBooking.booking.observation?.healthParams?.length > 0;
+
+        
+        this.userApi.getImages("OBSERVATION"+"/"+this.userBooking.booking.patientNo).subscribe(
+            (data) => {
+              this.images = data;
+              console.log("data",data);
+      
+              console.log("data",this.images);
+      
+            },
+            (error) => {
+              console.error('Failed to fetch images', error);
+            }
+          );
     }
 
     public ngAfterViewInit(): void {

@@ -1,5 +1,5 @@
 <section class="section-org-edit">
-
+<!-- <app-observation-photo-upload></app-observation-photo-upload> -->
     <div class="container">
         <div class="row mt-4">
             <app-label>Observations</app-label>
@@ -100,4 +100,8 @@
             </mat-accordion>
         </div>
     </div>
+
+    <div *ngFor="let image of images">
+        <img [src]="image" alt="Image from DigitalOcean Space"/>
+      </div>
 </section>

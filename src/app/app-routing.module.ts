@@ -46,6 +46,11 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./@app/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
+
+      {
+        path: 'observation-images',
+        redirectTo: '/@app/pages/patient/patient-edit/observation-photo-upload'
+      },
       // {
       //   path: 'user',
       //   loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
@@ -93,6 +98,13 @@ const routes: Routes = [
         path: 'admin-reports',
         loadChildren: () => import('./@app/pages/admin-reports/admin-reports.module').then(m => m.AdminReportsModule)
       },
+
+      {
+        path: 'observation-image',
+        loadChildren: () => import('./@app/pages/observation-images/observation-images.module').then(m => m.ObservationImagesModule)
+      },
+
+      
     ]
   }
 ];

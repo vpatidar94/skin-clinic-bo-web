@@ -1,0 +1,42 @@
+<h1>here is the observation {{title}}</h1>
+<input type="text" class="input-style"  [(ngModel)]="visitId">
+<button class="button-style" (click)="onCamera()">Go</button>
+
+<div *ngIf="showCamera">
+    <video #videoElement width="640" height="480" autoplay></video>
+    <button type="button" (click)="capturePhoto()" class="common-button">Capture Photo</button>
+</div>
+<div *ngIf="photo">
+    <img [src]="photo" alt="Captured photo" width="640" height="480"/>
+</div>
+<!-- <div>
+    <img *ngIf="photo" class="avatar" [src]="bucketUrl + observationImg"/>
+</div>
+<img src="https://aayam-clinic-storage.blr1.cdn.digitaloceanspaces.com/EMP/285/PHOTO.png"/> -->
+
+<!-- <div *ngIf="observationImg">
+    <div *ngFor="let img of observationImg">
+        <img [src]="bucketUrl + img" alt="Captured photo" width="640" height="480"/>
+    </div>
+</div> -->
+
+<div *ngFor="let image of images">
+    <img [src]="image" alt="Image from DigitalOcean Space" />
+  </div>
+
+<!-- https://aayam-clinic-storage.blr1.cdn.digitaloceanspaces.com/EMP/287/PHOTO/287_1721046413737.png
+https://aayam-clinic-storage.blr1.cdn.digitaloceanspaces.com/ -->
+<!-- <h1>Here is the observation {{title}}</h1>
+<input type="text" class="input-style" [(ngModel)]="visitId">
+<button class="button-style" (click)="onCamera()">Go</button>
+
+<div *ngIf="showCamera">
+    <video #videoElement width="640" height="480" autoplay></video>
+    <button type="button" (click)="capturePhoto()" class="common-button">Capture Photo</button>
+</div>
+<div *ngIf="photo">
+    <img [src]="photo" alt="Captured photo" width="640" height="480"/>
+</div>
+<div *ngIf="observationImgs && observationImgs.length > 0">
+    <img *ngFor="let img of observationImgs" class="avatar" [src]="bucketUrl + img" />
+</div> -->
