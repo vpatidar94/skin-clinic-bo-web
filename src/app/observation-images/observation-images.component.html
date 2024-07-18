@@ -28,11 +28,19 @@
 
 <!-- <div *ngIf="photo">
     <img [src]="photo" alt="Captured photo" width="640" height="480"/>
-</div>
+</div> -->
 
-<div *ngFor="let image of images">
-    <img [src]="image" alt="Image from DigitalOcean Space" />
+<!-- <div *ngFor="let image of images"  >
+    <div class="style-images">
+    <img [src]="image" alt="Image from DigitalOcean Space" /></div>
   </div> -->
+
+
+  <div class="image-gallery">
+    <div *ngFor="let image of images" class="image-container">
+      <img [src]="image" alt="Image from DigitalOcean Space" class="styled-image" />
+    </div>
+  </div>
 <!-- <div>
     <img *ngIf="photo" class="avatar" [src]="bucketUrl + observationImg"/>
 </div>

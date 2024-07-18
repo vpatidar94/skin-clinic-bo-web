@@ -41,7 +41,6 @@ constructor(
 
 
 ngOnInit(): void {
-    // this.userApi.getImages(this.folder).subscribe(
         this.userApi.getImages(this.folder).subscribe(
       (data) => {
         this.images = data;
@@ -145,6 +144,19 @@ onCamera(): void {
             .catch(error => console.error('Error converting to file: ', error));
         }
         this.stopCamera();
+
+        this.userApi.getImages("OBSERVATION"+"/"+this.visitId).subscribe(
+            (data) => {
+              this.images = data;
+              console.log("data",data);
+      
+              console.log("data",this.images);
+      
+            },
+            (error) => {
+              console.error('Failed to fetch images', error);
+            }
+          );
     }
     
     public uploadObservationImage(visitId: string, fileName: string): void {
