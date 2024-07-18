@@ -41,18 +41,18 @@ constructor(
 
 
 ngOnInit(): void {
-        this.userApi.getImages(this.folder).subscribe(
-      (data) => {
-        this.images = data;
-        console.log("data",data);
+    //     this.userApi.getImages("OBSERVATION"+"/"+this.visitId).subscribe(
+    //   (data) => {
+    //     this.images = data;
+    //     console.log("data",data);
 
-        console.log("data",this.images);
+    //     console.log("data",this.images);
 
-      },
-      (error) => {
-        console.error('Failed to fetch images', error);
-      }
-    );
+    //   },
+    //   (error) => {
+    //     console.error('Failed to fetch images', error);
+    //   }
+    // );
   }
 
   public async toggleCamera(): Promise<void> {
@@ -144,7 +144,7 @@ onCamera(): void {
             .catch(error => console.error('Error converting to file: ', error));
         }
         this.stopCamera();
-
+// the below is to get the images 
         this.userApi.getImages("OBSERVATION"+"/"+this.visitId).subscribe(
             (data) => {
               this.images = data;
