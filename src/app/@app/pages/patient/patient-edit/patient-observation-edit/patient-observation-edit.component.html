@@ -1,5 +1,5 @@
 <section class="section-org-edit">
-<!-- <app-observation-photo-upload></app-observation-photo-upload> -->
+    <!-- <app-observation-photo-upload></app-observation-photo-upload> -->
     <div class="container">
         <div class="row mt-4">
             <app-label>Observations</app-label>
@@ -38,7 +38,7 @@
                                 <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
                                         ''}}
                                         {{userBooking.user.nameL ?? ''}}</span></span> <span>Doctor's Name:
-                                            <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
+                                    <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
                                 <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>
 
                             </div>
@@ -85,23 +85,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div *ngIf="showCamera">
-                                <video #videoElement width="640" height="480" autoplay></video>
-                                <button type="button" (click)="capturePhoto()" class="common-button">Capture Photo</button>
-                            </div>
-                            <div *ngIf="photo">
-                                <img [src]="photo" alt="Captured photo" width="640" height="480"/>
-                            </div>
-
                         </form>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
     </div>
-
     <div *ngFor="let image of images">
-        <img [src]="image" alt="Image from DigitalOcean Space"/>
-      </div>
+        <img [src]="image" alt="Image from DigitalOcean Space" />
+    </div>
 </section>
