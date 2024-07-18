@@ -20,6 +20,7 @@ import { ReceiptModule } from './receipt/receipt.module';
 import { PrescriptionPrintModule } from './prescription-print/prescription-print.module';
 import { AppointmentModule } from './@app/pages/appointment/appointment.module';
 import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/excel-file-upload.module';
+import { ObservationImagesModule } from './observation-images/observation-images.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ExcelFileUploadModule } from './@shared/component/excel-file-upload/exc
     LayoutModule,
     ReceiptModule,
     PrescriptionPrintModule,
+    ObservationImagesModule,
     HttpClientModule,
     SigninModule,
     ExcelFileUploadModule,

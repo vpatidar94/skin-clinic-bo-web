@@ -6,6 +6,7 @@ import { AuthGuard } from './@shared/security/auth.guard';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { PrescriptionPrintComponent } from './prescription-print/prescription-print.component';
 import { ExcelFileUpload } from './@shared/component/excel-file-upload/excel-file-upload.component';
+import { ObservationImagesComponent } from './observation-images/observation-images.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,11 @@ const routes: Routes = [
   // },
 
   {
+    path: 'observation-image',
+    component: ObservationImagesComponent
+  },
+
+  {
     path: '',
     component: LayoutComponent,
     canActivate: [AuthGuard], // CanActivate executes before Resolve
@@ -47,10 +53,10 @@ const routes: Routes = [
         loadChildren: () => import('./@app/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
 
-      {
-        path: 'observation-images',
-        redirectTo: '/@app/pages/patient/patient-edit/observation-photo-upload'
-      },
+      // {
+      //   path: 'observation-images',
+      //   redirectTo: '/@app/pages/patient/patient-edit/observation-photo-upload'
+      // },
       // {
       //   path: 'user',
       //   loadChildren: () => import('./@app/pages/user-management/user-management.module').then(m => m.UserManagementModule)
@@ -99,10 +105,10 @@ const routes: Routes = [
         loadChildren: () => import('./@app/pages/admin-reports/admin-reports.module').then(m => m.AdminReportsModule)
       },
 
-      {
-        path: 'observation-image',
-        loadChildren: () => import('./@app/pages/observation-images/observation-images.module').then(m => m.ObservationImagesModule)
-      },
+      // {
+      //   path: 'observation-image',
+      //   loadChildren: () => import('./@app/observation-images/observation-images.module').then(m => m.ObservationImagesModule)
+      // },
 
       
     ]

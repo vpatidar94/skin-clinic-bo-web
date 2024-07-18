@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 @Component ( {
     selector: 'app-observation-images',
     templateUrl: './observation-images.component.html',
-    // styleUrls: ['./patient-detail-edit.component.scss'],
+    styleUrls: ['./observation-images.component.scss'],
 })
 
 export class ObservationImagesComponent implements OnInit  {
