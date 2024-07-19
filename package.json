@@ -34,7 +34,6 @@
     "ng-multiselect-dropdown": "^1.0.0",
     "ng2-pdf-viewer": "^10.0.0",
     "ngx-barcode6": "^1.0.23",
-    "ngx-image-compress": "^15.1.6",
     "ngx-print": "^1.5.1",
     "ngx-webstorage": "^12.0.0",
     "rxjs": "~7.8.0",

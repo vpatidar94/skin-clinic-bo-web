@@ -164,7 +164,7 @@
 
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { AssetPathUtility } from "aayam-clinic-core";
-import { NgxImageCompressService } from "ngx-image-compress";
+// import { NgxImageCompressService } from "ngx-image-compress";
 import { UserApi } from "src/app/@app/service/remote/user.api";
 import { environment } from "src/environments/environment";
 
@@ -187,7 +187,7 @@ export class ObservationImagesComponent implements OnInit {
     fileInput!: ElementRef<HTMLInputElement>;
 
     constructor(private userApi: UserApi,
-        private imageCompress: NgxImageCompressService
+        // private imageCompress: NgxImageCompressService
     ) {}
 
     ngOnInit(): void {
@@ -214,43 +214,43 @@ export class ObservationImagesComponent implements OnInit {
         const input = event.target as HTMLInputElement;
         if (input.files && input.files.length > 0) {
             const file = input.files[0];
-            // this.fileEmpImg = file;
-            // const uniqueName = `${this.visitId}_${Date.now()}.png`;
-            // this.uploadObservationImage(this.visitId, uniqueName);
-            this.compressImage(file);
+            this.fileEmpImg = file;
+            const uniqueName = `${this.visitId}_${Date.now()}.png`;
+            this.uploadObservationImage(this.visitId, uniqueName);
+            // this.compressImage(file);
         }
     }
 
 // newly added to compress image start
-compressImage(file: File): void {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        const imgBase64Path = reader.result as string;
-        this.imageCompress.compressFile(imgBase64Path, -1, 50, 50).then(
-            compressedImage => {
-                // Convert the compressed base64 image back to a file
-                const blob = this.dataURItoBlob(compressedImage.split(',')[1]);
-                const compressedFile = new File([blob], file.name, { type: file.type });
+// compressImage(file: File): void {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => {
+//         const imgBase64Path = reader.result as string;
+//         this.imageCompress.compressFile(imgBase64Path, -1, 50, 50).then(
+//             compressedImage => {
+//                 // Convert the compressed base64 image back to a file
+//                 const blob = this.dataURItoBlob(compressedImage.split(',')[1]);
+//                 const compressedFile = new File([blob], file.name, { type: file.type });
 
-                // Proceed with the upload
-                this.fileEmpImg = compressedFile;
-                const uniqueName = `${this.visitId}_${Date.now()}.png`;
-                this.uploadObservationImage(this.visitId, uniqueName);
-            }
-        );
-    };
-}
+//                 // Proceed with the upload
+//                 this.fileEmpImg = compressedFile;
+//                 const uniqueName = `${this.visitId}_${Date.now()}.png`;
+//                 this.uploadObservationImage(this.visitId, uniqueName);
+//             }
+//         );
+//     };
+// }
 
-dataURItoBlob(dataURI: string): Blob {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const intArray = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-        intArray[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([intArray], { type: 'image/png' });
-}
+// dataURItoBlob(dataURI: string): Blob {
+//     const byteString = window.atob(dataURI);
+//     const arrayBuffer = new ArrayBuffer(byteString.length);
+//     const intArray = new Uint8Array(arrayBuffer);
+//     for (let i = 0; i < byteString.length; i++) {
+//         intArray[i] = byteString.charCodeAt(i);
+//     }
+//     return new Blob([intArray], { type: 'image/png' });
+// }
 //newly added to compress image end
 
 

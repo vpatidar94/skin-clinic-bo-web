@@ -20,6 +20,7 @@ import { MatTableModule } from "@angular/material/table";
 // import { DashboardComponent } from './dashboard.component';
 import { ObservationImagesComponent } from './observation-images.component';
 import { ObservationImagesRoutingModule } from './observation-images-routing.module';
+// import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 const MATERIAL_MODULE = [
