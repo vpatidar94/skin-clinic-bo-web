@@ -23,8 +23,16 @@
 
 
 
-<div class="container">
+
+
+<!-- <div class="container">
     <input type="text" class="input-style" [(ngModel)]="visitId" placeholder="Enter Visit ID">
     <button class="button-style primary-button" (click)="onFileInputClick()">Choose File</button>
     <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*">
+</div> -->
+
+<div class="container">
+    <input type="text" class="input-style" [(ngModel)]="visitId" placeholder="Enter Visit ID">
+    <button class="button-style primary-button" (click)="onFileInputClick()">Choose File</button>
+    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*" capture="environment">
 </div>
