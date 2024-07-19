@@ -214,10 +214,10 @@ export class ObservationImagesComponent implements OnInit {
         const input = event.target as HTMLInputElement;
         if (input.files && input.files.length > 0) {
             const file = input.files[0];
-            this.fileEmpImg = file;
-            const uniqueName = `${this.visitId}_${Date.now()}.png`;
-            this.uploadObservationImage(this.visitId, uniqueName);
-            // this.compressImage(file);
+            // this.fileEmpImg = file;
+            // const uniqueName = `${this.visitId}_${Date.now()}.png`;
+            // this.uploadObservationImage(this.visitId, uniqueName);
+            this.compressImage(file);
         }
     }
 
@@ -252,6 +252,73 @@ export class ObservationImagesComponent implements OnInit {
 //     return new Blob([intArray], { type: 'image/png' });
 // }
 //newly added to compress image end
+
+compressImage(file: File): void {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const maxWidth = 800;
+            const maxHeight = 800;
+            let width = img.width;
+            let height = img.height;
+
+            // Calculate the new dimensions while maintaining aspect ratio
+            if (width > height) {
+                if (width > maxWidth) {
+                    height = Math.round((height *= maxWidth / width));
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width = Math.round((width *= maxHeight / height));
+                    height = maxHeight;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            if (ctx) {
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Compress the image to JPEG with quality of 0.7
+                const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+
+                // Convert the data URL to a file
+                const blob = this.dataURItoBlob(compressedDataUrl);
+                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
+
+                // Proceed with the upload
+                this.fileEmpImg = compressedFile;
+                const uniqueName = `${this.visitId}_${Date.now()}.jpeg`;
+                this.uploadObservationImage(this.visitId, uniqueName);
+            }
+        };
+    };
+}
+
+dataURItoBlob(dataURI: string): Blob {
+    const byteString = atob(dataURI.split(',')[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const intArray = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+        intArray[i] = byteString.charCodeAt(i);
+    }
+    // return new Blob([intArray], { type: 'image/jpeg' });
+    return new Blob([intArray], { type: 'image/png' });
+
+}
+
+
+
+
+
 
 
     public uploadObservationImage(visitId: string, fileName: string): void {
