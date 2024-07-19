@@ -288,15 +288,15 @@ compressImage(file: File): void {
                 ctx.drawImage(img, 0, 0, width, height);
 
                 // Compress the image to JPEG with quality of 0.7
-                const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                const compressedDataUrl = canvas.toDataURL('image/png', 0.9);
 
                 // Convert the data URL to a file
                 const blob = this.dataURItoBlob(compressedDataUrl);
-                const compressedFile = new File([blob], file.name, { type: 'image/jpeg' });
+                const compressedFile = new File([blob], file.name, { type: 'image/png' });
 
                 // Proceed with the upload
                 this.fileEmpImg = compressedFile;
-                const uniqueName = `${this.visitId}_${Date.now()}.jpeg`;
+                const uniqueName = `${this.visitId}_${Date.now()}.png`;
                 this.uploadObservationImage(this.visitId, uniqueName);
             }
         };
