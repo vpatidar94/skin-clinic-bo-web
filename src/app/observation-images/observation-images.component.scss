@@ -102,8 +102,10 @@ margin-top: 10px;
 // }
 
 .styled-image {
-    max-width: 100%;
-    height: auto;
+    // max-width: 100%;
+    width: 160px;
+    // height: auto;
+    height: 160px;
     border: 1px solid #ccc;
     border-radius: 5px;
   }
