@@ -42,6 +42,7 @@
 <div class="image-gallery">
     <div *ngFor="let image of images; let last = last" class="image-container">
         <img [src]="image" alt="Image from DigitalOcean Space" class="styled-image" />
+        <button class="delete-button" (click)="onDeleteImage(image)">&#10006;</button>
         <!-- <button *ngIf="last" class="add-button">+</button> -->
     </div>
 </div>

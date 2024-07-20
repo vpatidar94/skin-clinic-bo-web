@@ -206,6 +206,28 @@ export class ObservationImagesComponent implements OnInit {
         );
     }
 
+    // newly added to delete particular observation image start
+    onDeleteImage(image: string): void {
+        if (confirm('Are you sure you want to delete this image?')) {
+          const key = this.extractKeyFromUrl(image);
+          this.userApi.deleteImage(key).subscribe(
+            () => {
+              this.images = this.images.filter(img => img !== image);
+            },
+            (error) => {
+              console.error('Failed to delete image', error);
+            }
+          );
+        }
+        this.loadImages();
+      }
+    
+      private extractKeyFromUrl(url: string): string {
+        const parts = url.split('/');
+        return parts.slice(parts.length - 3).join('/'); // Adjust if needed based on URL structure
+      }
+    // newly added to delete particular observation image end
+
     onFileInputClick(): void {
         this.fileInput.nativeElement.click();
     }
@@ -288,7 +310,7 @@ compressImage(file: File): void {
                 ctx.drawImage(img, 0, 0, width, height);
 
                 // Compress the image to JPEG with quality of 0.7
-                const compressedDataUrl = canvas.toDataURL('image/png', 0.9);
+                const compressedDataUrl = canvas.toDataURL('image/png', 0.8);
 
                 // Convert the data URL to a file
                 const blob = this.dataURItoBlob(compressedDataUrl);

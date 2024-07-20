@@ -99,6 +99,11 @@ export class UserApi {
         return this.http.get<string[]>(`${environment.apiUrl}/api/core/v1/user/list-images?folder=${folder}`);
       }
 
+    // newly added to delete particular observation-image
+    public deleteImage(key: string): Observable<void> {
+        return this.http.delete<void>(`${environment.apiUrl}/api/core/v1/user/delete-image?key=${key}`);
+      }
+
 
 
 
