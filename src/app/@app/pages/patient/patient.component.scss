@@ -81,12 +81,15 @@ table {
     font-weight: 700;
     width: 90%;
   }
-  
-  .style-hover:hover {
-      // color: $warn;
-      color: rgb(164, 27, 27);
 
-    
-  }
+  .style-hover {
+    display: inline-block; /* Ensure the element is treated as a block-level element */
+    transition: transform 0.3s, color 0.3s; /* Add transition for smooth effect */
+}
+
+.style-hover:hover {
+    transform: translateY(-5px); /* Adjust the value as needed to move the icon upwards */
+    color: rgb(164, 27, 27); /* Your hover color */
+}
   
   
