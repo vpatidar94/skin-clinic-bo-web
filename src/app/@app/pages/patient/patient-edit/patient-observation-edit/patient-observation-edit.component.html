@@ -37,7 +37,7 @@
                                 <span>UHID: <span>{{userBookingInvestigationList.bookingList[0].patientNo}}</span></span>
 
                                 <!-- <span>Visiting ID: <span>{{userBooking.booking.patientNo}}</span></span> -->
-                                <span>Visiting ID: <span>{{userBookingInvestigationList.bookingList[0].no}}</span></span>
+                                <span>Visiting ID: <span>{{userBookingInvestigationList.bookingList[userBookingInvestigationList.bookingList.length-1].no}}</span></span>
 
                                 <span>Name: <span *ngIf="userBookingInvestigationList?.user">{{userBooking.user.nameF ??
                                         ''}}
