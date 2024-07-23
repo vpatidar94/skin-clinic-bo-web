@@ -5,8 +5,12 @@
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header class="app-expansion ">
                     <div class="app-expansion-title col-md-12">
-                        <span>UHID: <span>{{userBooking.booking.patientNo}}</span></span>
-                        <span>Visiting ID: <span>{{userBooking.booking.no}}</span></span>
+                        <!-- <span>UHID: <span>{{userBooking.booking.patientNo}}</span></span> -->
+                        <span>UHID: <span>{{userBookingInvestigationList.bookingList[0].patientNo}}</span></span>
+
+                        <!-- <span>Visiting ID: <span>{{userBooking.booking.no}}</span></span> -->
+                        <span>Visiting ID: <span>{{userBookingInvestigationList.bookingList[0].no}}</span></span>
+
                         <span>First Name: {{userBooking.user.nameF + " " + userBooking.user.nameL}}</span>
                         <span>Doctor's Name: <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
                         <span>Date: <span>{{userBooking.booking.bookingDate | date}}</span></span>

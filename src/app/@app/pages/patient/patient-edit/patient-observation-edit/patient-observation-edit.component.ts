@@ -61,7 +61,8 @@ export class PatientObservationEditComponent implements OnInit, OnChanges {
         });
         this.showSectionAdd = this.userBooking.booking.observation?.healthParams?.length > 0;
 
-        this.userApi.getImages("OBSERVATION" + "/" + this.userBooking.booking.patientNo).subscribe(
+        // this.userApi.getImages("OBSERVATION" + "/" + this.userBooking.booking.patientNo).subscribe(
+        this.userApi.getImages("OBSERVATION" + "/" + this.userBookingInvestigationList.bookingList[0].patientNo).subscribe(
             (data) => {
                 this.images = data;
                 console.log("data", data);

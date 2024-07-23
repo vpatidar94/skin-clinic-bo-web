@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, MessageType, ResponseStatus, UserBookingDto, UserVo } from 'aayam-clinic-core';
+import { ApiResponse, BookingAddTransactionDto, BookingUtility, BookingVo, MessageType, ResponseStatus, UserBookingDto, UserBookingInvestigationDto, UserVo } from 'aayam-clinic-core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import { BookingApi } from 'src/app/@app/service/remote/booking.api';
 import { TransactionApi } from 'src/app/@app/service/remote/transaction.api';
@@ -57,6 +57,9 @@ export class PatientBillingEditComponent implements OnInit {
   showPayInfo: boolean = true;
 
   @Output() saveIt = new EventEmitter<void>();
+
+  @Input()
+    userBookingInvestigationList!: UserBookingInvestigationDto;
   
 
   /* ************************************ Constructors ************************************ */
@@ -179,7 +182,7 @@ export class PatientBillingEditComponent implements OnInit {
       height: '1500px',
 
 
-      data: { userBooking: { ...this.userBooking }, doctorList: this.doctorList, paymentMode: this.bookingTransaction.paymentMode },
+      data: { userBooking: { ...this.userBooking }, doctorList: this.doctorList, paymentMode: this.bookingTransaction.paymentMode, userBookingInvestigationList: this.userBookingInvestigationList },
     });
 
   }
