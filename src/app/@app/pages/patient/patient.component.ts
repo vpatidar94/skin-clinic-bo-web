@@ -85,7 +85,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
     this._init();
   }
   onPatientDetailFormValidityChange(isValid: boolean) {
-    console.log('Parent received child form validity:', isValid);                             
+    // console.log('Parent received child form validity:', isValid);                             
     this.isFormValid = isValid;
   }
   public addAppointment(): void {
@@ -94,7 +94,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
     booking.type = BOOKING_TYPE.PATIENT; // TODO change if appointment
     booking.observation = {} as ObservationVo;
     booking.observation.date = new Date();
-    booking.observation.healthParams = [] as Array<KeyValueVo>
+    booking.observation.healthParams = [] as Array<KeyValueVo>;
     booking.prescription = [] as PrescriptionVo[];
     booking.instruction = [] as string[];
     booking.test = [] as string[];
@@ -121,7 +121,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
     booking.type = BOOKING_TYPE.PATIENT; // TODO change if appointment
     booking.observation = {} as ObservationVo;
     booking.observation.date = new Date();
-    booking.observation.healthParams = [] as Array<KeyValueVo>
+    booking.observation.healthParams = [] as Array<KeyValueVo>;
     booking.prescription = [] as PrescriptionVo[];
     booking.instruction = [] as string[];
     booking.test = [] as string[];
@@ -162,7 +162,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
       }
     });
   } else {
-    console.log('Form is invalid, cannot save.');
+    // console.log('Form is invalid, cannot save.');
     const message = {} as AlertMessage;
     message.type = MessageTypeConst.ERROR;
     message.text = 'first name, last name, contact number, doctor name, department must be entered to save the form';

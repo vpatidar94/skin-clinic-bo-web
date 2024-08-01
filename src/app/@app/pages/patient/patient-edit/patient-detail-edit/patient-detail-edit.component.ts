@@ -76,7 +76,7 @@ export class PatientDetailEditComponent implements OnInit, OnChanges {
     onFormChange(form: NgForm) {
         // this.formValidityChange.emit(form.valid);
         const isValid: boolean = !!form.valid;
-        console.log('Grandchild form validity:', isValid)
+        // console.log('Grandchild form validity:', isValid)
     this.formValidityChange.emit(isValid);
     
       }

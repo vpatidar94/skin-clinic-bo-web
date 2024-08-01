@@ -63,7 +63,7 @@ export class PatientEditComponent implements OnInit, OnChanges {
   }
 
   onPatientDetailEditFormValidityChange(isValid: boolean) {
-    console.log('Child received grandchild form validity:', isValid);
+    // console.log('Child received grandchild form validity:', isValid);
     this.formValidityChange.emit(isValid);
   }
   public tabChange(): void {

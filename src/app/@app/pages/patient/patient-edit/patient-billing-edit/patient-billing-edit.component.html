@@ -1,6 +1,160 @@
 <section class="section-org-edit">
     <mat-list class="row">
         <app-label>Billing</app-label>
+
+        <!-- <mat-accordion *ngFor="let booking of userBookingInvestigationList?.bookingList">
+            <mat-expansion-panel class="my-3" *ngIf="booking._id != userBooking.booking?._id">
+                <mat-expansion-panel-header class="app-expansion ">
+                    <div class="app-expansion-title col-md-12">
+                        <span>UHID: <span>{{booking.patientNo}}</span></span>
+                        <span>Visiting ID: <span>{{booking.no}}</span></span>
+                        <span>First Name: <span
+                                *ngIf="userBookingInvestigationList?.user">{{userBookingInvestigationList.user.nameF ??
+                                ''}}
+                                {{userBookingInvestigationList.user.nameL ?? ''}}</span></span>
+                        <span>Doctor's Name: <span>{{getDoctorById(userBooking.booking.dr)}}</span></span>
+                        <span>Date: <span>{{booking.bookingDate | date}}</span></span>
+                    </div>
+                </mat-expansion-panel-header>
+                <div class="border border-info rounded p-3 mt-4">
+                    <div class="row">
+                        <div class="col-md-1"><strong>Sno.</strong></div>
+                        <div class="col-md-3"><strong>Service</strong></div>
+                        <div class="col-md-2"><strong>Total Amount</strong></div>
+                        <div class="col-md-2"><strong>Discount</strong></div>
+                        <div class="col-md-2"><strong>Net Amount</strong></div>
+                        <div class="col-md-1"><strong>Status</strong></div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-1 pres-input text-center">
+                            <p class="border border-info rounded p-1 text-align-center">1</p>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <input type="text" class="form-control pres-input w-100"
+                                [value]="getCommaSeparatedServices()" readonly>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <input type="" class="form-control pres-input w-100" name="totalAmount"
+                                [(ngModel)]="booking.subTotal" readOnly>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <input type="" class="form-control pres-input w-100" name="discount"
+                                [(ngModel)]="booking.discount" (change)="applyDiscount()" placeholder="0">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <input type="" class="form-control pres-input w-100" name="totalAmount"
+                                [(ngModel)]="booking.totalDue" readOnly>
+                        </div>
+
+                        <div class="col-md-1">
+                            <span>{{booking.status}}</span>
+                        </div>
+
+                        <hr class="mt-4" />
+
+                        
+                        <div class="row">
+                            <div class="col-md-3 mb-4"><strong>Details</strong></div>
+                            <div class="col-md"></div>
+                        </div>
+
+                        <div class="form-group col-md- d-flex flex-column"
+                            *ngFor="let orderItem of booking.tx; let i = index;">
+                            <div class="d-flex col-md-">
+                                <p class="border border-info rounded p-1 text-align-center me-5">{{i + 1}}</p>
+                                <input class="form-control pres-input w-25 me-5" defaultValue="{{orderItem.amount}}"
+                                    readonly>
+                                    
+                                <input type="" class="form-control pres-input w-25 me-5" name="date"
+                                    [ngModel]="booking.bookingDate | date:'dd-MM-yyyy'" required
+                                    [readOnly]="true" (ngModelChange)="booking.bookingDate = $event">
+                                    <span class=" col-md-2 download-button btn btn-info h-25 ms-2"
+                                    (click)="generateReceipt()">Receipt</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md"></div>
+                        </div>
+
+                        <div class="form-group col-md- d-flex flex-column">
+                            <div class="d-flex col-md-" *ngIf="showPayInfo">
+                                <p class="border border-info rounded p-1 text-align-center me-5">
+                                    {{booking.tx.length
+                                    + 1}}</p>
+
+                                <input appNumberOnly [disabled]="!makeAmountEditable"
+                                    [value]="booking.totalDue - booking.totalPaid"
+                                    class="form-control pres-input w-25 me-5" name="totaldue"
+                                    [(ngModel)]="bookingTransaction.amount" (ngModelChange)="addServiceItemNew()">
+
+                                <select name="paymentMode" class="app-single-select-dropdown w-25 me-5"
+                                    (change)="onPaymentModeChange($event)" [(ngModel)]="bookingTransaction.paymentMode"
+                                    required>
+                                    <option [ngValue]="undefined" selected>Payment mode</option>
+                                    <option value="CASH">Cash</option>
+                                    <option value="ONLINE">Online</option>
+                                    <option value="UPI">UPI</option>
+                                    <option value="CARD">Card</option>
+                                    <option value="CHEQUE">Cheque</option>
+                                </select>
+
+                                <button class=" col-md-2 download-button btn h-25 ms-2 pay-btn-color"
+                                [disabled]="!bookingTransaction.paymentMode" (click)="pay()">Pay</button>
+                                <div>
+                                    &nbsp;&nbsp;
+                                    <mat-icon (click)="addServiceItem()"
+                                        class="add-icon clickable ms-4 mt-1">add_circle_outline</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1"><strong></strong></div>
+                            <div class="col-md-4">
+                                <div *ngIf="showPendingAmount" class="col-md-"><strong>Remaining</strong></div>
+                            </div>
+                            <div *ngIf="showChequeInbox" class="col-md-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Cheque number</mat-label>
+                                    <input [(ngModel)]="bookingTransaction.chequeNo" matInput name="cheque" type="text" placeholder="Cheque number">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md"></div>
+                        </div>
+
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-3 d-flex flex-row">
+                            <div *ngIf="showPendingAmount" class="form-group col-md-8">
+                                <input appNumberOnly [defaultValue]="booking.totalDue -
+                                booking.totalPaid | currency" class="form-control pres-input w-80"
+                                    name="totaldue" [(ngModel)]="newPendingAmount" readonly>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div *ngIf="showPendingAmount" class="col-md-12 ms-0 mt-2">
+                                &nbsp;&nbsp;
+                                <mat-icon (click)="removeServiceItem()"
+                                    class="remove-icon clickable">remove_circle_outline</mat-icon>
+                            </div>
+                        </div>
+
+                        <div *ngIf="showChequeInbox" class="mt-2 ms-4 col-md-3">
+                            <input class="form-control pres-input w-100 me-5" matInput name="cheque" type="text"
+                                placeholder="Cheque number">
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion> -->
+
+
         <mat-accordion>
             <mat-expansion-panel class="my-3">
                 <mat-expansion-panel-header class="app-expansion ">
