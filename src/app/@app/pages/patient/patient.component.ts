@@ -18,6 +18,9 @@ import { ConfirmDeleteDialogComponent } from 'src/app/@shared/component/dialog/c
 import { ResponseStatusConst } from 'src/app/@shared/const/response-status-const';
 import { MessageTypeConst } from 'src/app/@shared/const/message-type-const';
 import { PatientDetailEditComponent } from './patient-edit/patient-detail-edit/patient-detail-edit.component';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { URL } from '../../const/url';
 
 @Component({
   selector: 'app-patient',
@@ -67,6 +70,11 @@ export class PatientComponent implements OnInit, AfterViewInit {
   // @ViewChild(PatientDetailEditComponent) patientDetailEditComponent!: PatientDetailEditComponent;
   // isFormValid: boolean = false;
   isFormValid: boolean = false;
+
+  bookings: OrgBookingDto[] = [];
+  searchQuery: string = '';
+
+  searchResults: any[] = [];
   
 
 
@@ -78,12 +86,60 @@ export class PatientComponent implements OnInit, AfterViewInit {
     private productApi: ProductApi,
     private departmentApi: DepartmentApi,
     private glabalEmitterService: GlobalEmitterService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private http: HttpClient) { }
 
   /* ************************************* Public Methods ******************************************** */
   public ngOnInit(): void {
     this._init();
+
+    // this.loadBookings();
   }
+
+  // search(query: string) {
+  //   this.http.get<any[]>(`${environment.apiUrl+URL.SEARCH_LIST}?q=${query}`).subscribe(results => {
+      
+  //     this.searchResults = results;
+  //   });
+  // }
+  // onInput(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   if (inputElement) {
+  //     this.search(inputElement.value);
+  //   }
+  // }
+
+  // search(query: string) {
+  //   this.http.get<any[]>(`${environment.apiUrl + URL.SEARCH_LIST}?q=${query}`).subscribe(results => {
+  //     console.log('Search results:', results); // Debug log
+  //     this.searchResults = results;
+  //   });
+  // }
+  
+  search(query: string) {
+    // this.http.get<any[]>(`${environment.apiUrl + URL.SEARCH_LIST}?q=${query}`).subscribe(results => {
+    //   console.log('Search query:', query);
+    //   console.log('Search results:', results);
+    //   this.searchResults = results;
+    // });
+    const orgId = '65682edbf126f7bf2500a5ea'; // Replace with actual orgId value
+  this.http.get<any[]>(`${environment.apiUrl + URL.SEARCH_LIST}?q=${query}&orgId=${orgId}`).subscribe(results => {
+    console.log('Search query:', query);
+    console.log('Search results:', results);
+    this.searchResults = results;
+    // this.bookingList = dto?.orgBooking ?? [] as OrgBookingDto[];
+        this.dataSource = new MatTableDataSource(this.searchResults);
+        this.originalDataSource = [...this.searchResults];
+  });
+  }
+  onInput(event: Event) {
+    const inputElement = event.target as any;
+    if (inputElement) {
+      this.search(inputElement.value);
+    }
+  }
+
+
   onPatientDetailFormValidityChange(isValid: boolean) {
     // console.log('Parent received child form validity:', isValid);                             
     this.isFormValid = isValid;
@@ -394,6 +450,40 @@ export class PatientComponent implements OnInit, AfterViewInit {
     }
     return undefined;
 
+  }
+
+
+  // onSearchChange(query: string): void {
+  //   this.searchQuery = query;
+  //   this.loadBookings();
+  // }
+
+  onSearchChange(event: Event): void {
+    const input = event.target as HTMLInputElement; // Type assertion to HTMLInputElement
+    this.searchQuery = input?.value || ''; // Safely access the value
+    this.loadBookings(); // Call the method to load bookings based on searchQuery
+  }
+
+  // loadBookings(): void {
+  //   this.serviceItemApi.searchOrgBooking('orgId', this.searchQuery, 0, 100) // Adjust 'orgId' and pagination as needed
+  //     .subscribe(data => {
+  //       this.bookings = data;
+  //       // this.orgBooking = data;
+  //     });
+  // }
+
+  loadBookings(): void {
+    const orgId = this.keyValueStorageService.getOrgId();
+    if (!orgId) {
+      return;
+    }
+    this.serviceItemApi.searchOrgBooking(orgId, this.searchQuery, 1, 100)
+      .subscribe(data => {
+        // this.bookings = data;
+        this.bookingList = data;
+      }, error => {
+        console.error('Error fetching bookings', error);
+      });
   }
 
 }

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponse, ItemDetailDto, ItemVo, ServiceTypeVo } from 'aayam-clinic-core';
+import { ApiResponse, ItemDetailDto, ItemVo, OrgBookingDto, ServiceTypeVo } from 'aayam-clinic-core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { URL } from '../../const/url';
@@ -36,6 +36,32 @@ export class ServiceItemApi {
     public deleteByItemId(itemId: string): Observable<ApiResponse<boolean>> {
         return this.http.get<ApiResponse<boolean>>(environment.apiUrl + URL.DELETE_ITEM, { params: { itemId } });
     }
+
+
+    // public searchOrgBooking(
+    //     orgId: string,
+    //     query: string,
+    //     limit: number,
+    //     offset: number
+    //   ): Observable<OrgBookingDto[]> {
+    //     const url = `${environment.apiUrl}/api/core/v1/booking/search-booking`; // Adjust the URL based on your API route
+    //     return this.http.post<OrgBookingDto[]>(url, {
+    //       orgId,
+    //       query,
+    //       limit,
+    //       offset,
+    //     });
+    //   }
+
+    searchOrgBooking(orgId: string, searchQuery: string, page: number, size: number): Observable<any> {
+        const params = new HttpParams()
+          .set('orgId', orgId)
+          .set('query', searchQuery)
+          .set('pageNumber', page.toString())
+          .set('maxRecord', size.toString());
+      
+        return this.http.get<any>(`${environment.apiUrl}/api/core/v1/booking/search-booking`, { params });
+      }
 
 }
 

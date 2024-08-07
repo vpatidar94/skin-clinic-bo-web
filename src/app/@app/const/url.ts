@@ -90,6 +90,8 @@ export const URL = {
     BOOKING_RECEIPT: MJR_BOOKING + '/receipt-create',
     CONVERT_PATIENT: MJR_BOOKING + '/convert-patient',
     DELETE_BOOKING: MJR_BOOKING + DELETE,
+    //newlyadded
+    SEARCH_LIST: MJR_BOOKING + '/search',
     
     // ******************************************************************
     // Department API endpoint
